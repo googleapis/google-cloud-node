@@ -25,9026 +25,6861 @@ import * as gdchardwaremanagementModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1alpha.GDCHardwareManagementClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'gdchardwaremanagement.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient
-            .servicePath;
-        assert.strictEqual(servicePath, 'gdchardwaremanagement.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'gdchardwaremanagement.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gdchardwaremanagement.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gdchardwaremanagement.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'gdchardwaremanagement.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'gdchardwaremanagement.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient(
-              {universeDomain: 'configured.example.com'}
+        it('has universeDomain', () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient.servicePath;
+                assert.strictEqual(servicePath, 'gdchardwaremanagement.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'gdchardwaremanagement.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gdchardwaremanagement.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gdchardwaremanagement.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gdchardwaremanagement.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gdchardwaremanagement.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.gDCHardwareManagementStub, undefined);
+            await client.initialize();
+            assert(client.gDCHardwareManagementStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.gDCHardwareManagementStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.gDCHardwareManagementStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('getOrder', () => {
+        it('invokes getOrder without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
             );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'gdchardwaremanagement.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
+            );
+            client.innerApiCalls.getOrder = stubSimpleCall(expectedResponse);
+            const [response] = await client.getOrder(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        it('invokes getOrder without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
+            );
+            client.innerApiCalls.getOrder = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getOrder(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
+
+        it('invokes getOrder with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getOrder = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getOrder(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getOrder with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getOrder(request), expectedError);
+        });
     });
 
-    it('has port', () => {
-      const port =
-        gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient.port;
-      assert(port);
-      assert(typeof port === 'number');
+    describe('getSite', () => {
+        it('invokes getSite without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
+            );
+            client.innerApiCalls.getSite = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSite(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSite without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
+            );
+            client.innerApiCalls.getSite = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSite(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISite|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSite with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSite = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSite(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSite with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSite(request), expectedError);
+        });
     });
 
-    it('should create a client with no option', () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient();
-      assert(client);
+    describe('getHardwareGroup', () => {
+        it('invokes getHardwareGroup without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
+            );
+            client.innerApiCalls.getHardwareGroup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getHardwareGroup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHardwareGroup without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
+            );
+            client.innerApiCalls.getHardwareGroup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getHardwareGroup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHardwareGroup with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getHardwareGroup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getHardwareGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHardwareGroup with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getHardwareGroup(request), expectedError);
+        });
     });
 
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          fallback: true,
+    describe('getHardware', () => {
+        it('invokes getHardware without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
+            );
+            client.innerApiCalls.getHardware = stubSimpleCall(expectedResponse);
+            const [response] = await client.getHardware(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      assert(client);
+
+        it('invokes getHardware without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
+            );
+            client.innerApiCalls.getHardware = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getHardware(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHardware with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getHardware = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getHardware(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHardware with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getHardware(request), expectedError);
+        });
     });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getComment', () => {
+        it('invokes getComment without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
+            );
+            client.innerApiCalls.getComment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getComment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      assert.strictEqual(client.gDCHardwareManagementStub, undefined);
-      await client.initialize();
-      assert(client.gDCHardwareManagementStub);
+
+        it('invokes getComment without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
+            );
+            client.innerApiCalls.getComment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getComment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getComment with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getComment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getComment with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getComment(request), expectedError);
+        });
     });
 
-    it('has close method for the initialized client', done => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('recordActionOnComment', () => {
+        it('invokes recordActionOnComment without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
+            );
+            client.innerApiCalls.recordActionOnComment = stubSimpleCall(expectedResponse);
+            const [response] = await client.recordActionOnComment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.recordActionOnComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.recordActionOnComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.gDCHardwareManagementStub);
-      client.close().then(() => {
-        done();
-      });
+
+        it('invokes recordActionOnComment without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
+            );
+            client.innerApiCalls.recordActionOnComment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.recordActionOnComment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.recordActionOnComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.recordActionOnComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes recordActionOnComment with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.recordActionOnComment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.recordActionOnComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.recordActionOnComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.recordActionOnComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes recordActionOnComment with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.recordActionOnComment(request), expectedError);
+        });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getChangeLogEntry', () => {
+        it('invokes getChangeLogEntry without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
+            );
+            client.innerApiCalls.getChangeLogEntry = stubSimpleCall(expectedResponse);
+            const [response] = await client.getChangeLogEntry(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getChangeLogEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getChangeLogEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      assert.strictEqual(client.gDCHardwareManagementStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+
+        it('invokes getChangeLogEntry without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
+            );
+            client.innerApiCalls.getChangeLogEntry = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getChangeLogEntry(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getChangeLogEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getChangeLogEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getChangeLogEntry with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getChangeLogEntry = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getChangeLogEntry(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getChangeLogEntry as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getChangeLogEntry as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getChangeLogEntry with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getChangeLogEntry(request), expectedError);
+        });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getSku', () => {
+        it('invokes getSku without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
+            );
+            client.innerApiCalls.getSku = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSku(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSku as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSku as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+
+        it('invokes getSku without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
+            );
+            client.innerApiCalls.getSku = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSku(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISku|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSku as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSku as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSku with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSku = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSku(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSku as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSku as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSku with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSku(request), expectedError);
+        });
     });
 
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getZone', () => {
+        it('invokes getZone without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
+            );
+            client.innerApiCalls.getZone = stubSimpleCall(expectedResponse);
+            const [response] = await client.getZone(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('getOrder', () => {
-    it('invokes getOrder without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes getZone without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
+            );
+            client.innerApiCalls.getZone = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getZone(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IZone|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-      );
-      client.innerApiCalls.getOrder = stubSimpleCall(expectedResponse);
-      const [response] = await client.getOrder(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+
+        it('invokes getZone with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getZone with closed client', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getZone(request), expectedError);
+        });
     });
 
-    it('invokes getOrder without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('createOrder', () => {
+        it('invokes createOrder without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOrder = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createOrder(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-      );
-      client.innerApiCalls.getOrder =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getOrder(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes createOrder without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createOrder = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createOrder(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOrder with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOrder = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createOrder(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createOrder with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createOrder = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createOrder(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateOrderProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateOrderProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateOrderProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateOrderProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateOrder', () => {
+        it('invokes updateOrder without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
+            );
+            request.order ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest', ['order', 'name']);
+            request.order.name = defaultValue1;
+            const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateOrder = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateOrder(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateOrder without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
+            );
+            request.order ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest', ['order', 'name']);
+            request.order.name = defaultValue1;
+            const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateOrder = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateOrder(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateOrder with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
+            );
+            request.order ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest', ['order', 'name']);
+            request.order.name = defaultValue1;
+            const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateOrder = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateOrder(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateOrder with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
+            );
+            request.order ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest', ['order', 'name']);
+            request.order.name = defaultValue1;
+            const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateOrder = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateOrder(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateOrderProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateOrderProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateOrderProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateOrderProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteOrder', () => {
+        it('invokes deleteOrder without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOrder = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteOrder(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOrder without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteOrder = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteOrder(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOrder with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOrder = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteOrder(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteOrder with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteOrder = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteOrder(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteOrderProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteOrderProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteOrderProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteOrderProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('submitOrder', () => {
+        it('invokes submitOrder without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.submitOrder = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.submitOrder(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitOrder without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.submitOrder = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.submitOrder(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitOrder with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.submitOrder = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.submitOrder(request), expectedError);
+            const actualRequest = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes submitOrder with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.submitOrder = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.submitOrder(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.submitOrder as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkSubmitOrderProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkSubmitOrderProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkSubmitOrderProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkSubmitOrderProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createSite', () => {
+        it('invokes createSite without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createSite = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createSite(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSite without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createSite = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSite(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSite with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSite = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createSite(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSite with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSite = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createSite(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateSiteProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateSiteProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateSiteProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateSiteProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateSite', () => {
+        it('invokes updateSite without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
+            );
+            request.site ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest', ['site', 'name']);
+            request.site.name = defaultValue1;
+            const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSite = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateSite(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSite without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
+            );
+            request.site ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest', ['site', 'name']);
+            request.site.name = defaultValue1;
+            const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSite = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSite(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSite with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
+            );
+            request.site ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest', ['site', 'name']);
+            request.site.name = defaultValue1;
+            const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSite = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateSite(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSite with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
+            );
+            request.site ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest', ['site', 'name']);
+            request.site.name = defaultValue1;
+            const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSite = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateSite(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateSiteProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateSiteProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateSiteProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateSiteProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteSite', () => {
+        it('invokes deleteSite without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteSite = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteSite(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSite without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteSite = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSite(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSite with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSite = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteSite(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSite with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSite = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteSite(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSite as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteSiteProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteSiteProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteSiteProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteSiteProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createHardwareGroup', () => {
+        it('invokes createHardwareGroup without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHardwareGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createHardwareGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHardwareGroup without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHardwareGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createHardwareGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHardwareGroup with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHardwareGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createHardwareGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHardwareGroup with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHardwareGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createHardwareGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateHardwareGroupProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateHardwareGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateHardwareGroupProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateHardwareGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateHardwareGroup', () => {
+        it('invokes updateHardwareGroup without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
+            );
+            request.hardwareGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest', ['hardwareGroup', 'name']);
+            request.hardwareGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHardwareGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateHardwareGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHardwareGroup without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
+            );
+            request.hardwareGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest', ['hardwareGroup', 'name']);
+            request.hardwareGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHardwareGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateHardwareGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHardwareGroup with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
+            );
+            request.hardwareGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest', ['hardwareGroup', 'name']);
+            request.hardwareGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHardwareGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateHardwareGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHardwareGroup with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
+            );
+            request.hardwareGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest', ['hardwareGroup', 'name']);
+            request.hardwareGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHardwareGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateHardwareGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateHardwareGroupProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateHardwareGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateHardwareGroupProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateHardwareGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteHardwareGroup', () => {
+        it('invokes deleteHardwareGroup without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHardwareGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteHardwareGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHardwareGroup without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHardwareGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteHardwareGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHardwareGroup with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHardwareGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteHardwareGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHardwareGroup with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHardwareGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteHardwareGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardwareGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteHardwareGroupProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteHardwareGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteHardwareGroupProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteHardwareGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createHardware', () => {
+        it('invokes createHardware without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHardware = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createHardware(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHardware without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHardware = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createHardware(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHardware with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHardware = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createHardware(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHardware with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHardware = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createHardware(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateHardwareProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateHardwareProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateHardwareProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateHardwareProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateHardware', () => {
+        it('invokes updateHardware without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
+            );
+            request.hardware ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest', ['hardware', 'name']);
+            request.hardware.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHardware = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateHardware(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHardware without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
+            );
+            request.hardware ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest', ['hardware', 'name']);
+            request.hardware.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHardware = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateHardware(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHardware with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
+            );
+            request.hardware ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest', ['hardware', 'name']);
+            request.hardware.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHardware = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateHardware(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHardware with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
+            );
+            request.hardware ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest', ['hardware', 'name']);
+            request.hardware.name = defaultValue1;
+            const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHardware = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateHardware(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateHardwareProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateHardwareProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateHardwareProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateHardwareProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteHardware', () => {
+        it('invokes deleteHardware without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHardware = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteHardware(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHardware without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHardware = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteHardware(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHardware with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHardware = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteHardware(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHardware with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHardware = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteHardware(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteHardwareProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteHardwareProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteHardwareProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteHardwareProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createComment', () => {
+        it('invokes createComment without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createComment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createComment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createComment without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createComment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createComment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createComment with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createComment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createComment with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createComment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createComment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateCommentProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateCommentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateCommentProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateCommentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createZone', () => {
+        it('invokes createZone without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createZone = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createZone(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createZone without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createZone = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createZone(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createZone with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createZone = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createZone with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createZone = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createZone(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateZoneProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateZoneProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateZoneProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateZoneProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateZone', () => {
+        it('invokes updateZone without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateZone = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateZone(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateZone without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateZone = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateZone(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateZone with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateZone = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateZone with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
+            );
+            request.zone ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest', ['zone', 'name']);
+            request.zone.name = defaultValue1;
+            const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateZone = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateZone(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateZoneProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateZoneProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateZoneProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateZoneProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteZone', () => {
+        it('invokes deleteZone without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteZone = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteZone(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteZone without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteZone = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteZone(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteZone with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteZone = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteZone(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteZone with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteZone = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteZone(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteZone as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteZoneProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteZoneProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteZoneProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteZoneProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('signalZoneState', () => {
+        it('invokes signalZoneState without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.signalZoneState = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.signalZoneState(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes signalZoneState without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.signalZoneState = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.signalZoneState(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes signalZoneState with call error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.signalZoneState = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.signalZoneState(request), expectedError);
+            const actualRequest = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes signalZoneState with LRO error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.signalZoneState = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.signalZoneState(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.signalZoneState as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkSignalZoneStateProgress without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkSignalZoneStateProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkSignalZoneStateProgress with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkSignalZoneStateProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listOrders', () => {
+        it('invokes listOrders without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+            ];
+            client.innerApiCalls.listOrders = stubSimpleCall(expectedResponse);
+            const [response] = await client.listOrders(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrders as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrders as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOrders without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+            ];
+            client.innerApiCalls.listOrders = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listOrders(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listOrders as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrders as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOrders with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listOrders = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listOrders(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listOrders as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listOrders as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listOrdersStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+            ];
+            client.descriptors.page.listOrders.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listOrdersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Order[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Order) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listOrders.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrders, request));
+            assert(
+                (client.descriptors.page.listOrders.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listOrdersStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrders.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listOrdersStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Order[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Order) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listOrders.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listOrders, request));
+            assert(
+                (client.descriptors.page.listOrders.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listOrders without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()),
+            ];
+            client.descriptors.page.listOrders.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[] = [];
+            const iterable = client.listOrdersAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrders.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrders.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listOrders with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listOrders.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listOrdersAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listOrders.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listOrders.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getOrder with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listSites', () => {
+        it('invokes listSites without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+            ];
+            client.innerApiCalls.listSites = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSites(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSites as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSites as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getOrder = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getOrder(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getOrder with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSites without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+            ];
+            client.innerApiCalls.listSites = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSites(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSites as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSites as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getOrder(request), expectedError);
-    });
-  });
 
-  describe('getSite', () => {
-    it('invokes getSite without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSites with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSites = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSites(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSites as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSites as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-      );
-      client.innerApiCalls.getSite = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSite(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getSite as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getSite without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSitesStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+            ];
+            client.descriptors.page.listSites.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSitesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Site[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Site) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSites.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSites, request));
+            assert(
+                (client.descriptors.page.listSites.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-      );
-      client.innerApiCalls.getSite =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSite(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISite | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes listSitesStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSites.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSitesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Site[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Site) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSites.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSites, request));
+            assert(
+                (client.descriptors.page.listSites.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSites without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()),
+            ];
+            client.descriptors.page.listSites.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[] = [];
+            const iterable = client.listSitesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getSite as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSites.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSites.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSites with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSites.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSitesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSites.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSites.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getSite with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listHardwareGroups', () => {
+        it('invokes listHardwareGroups without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+            ];
+            client.innerApiCalls.listHardwareGroups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listHardwareGroups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHardwareGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHardwareGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSite = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSite(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getSite as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getSite with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listHardwareGroups without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+            ];
+            client.innerApiCalls.listHardwareGroups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listHardwareGroups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHardwareGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHardwareGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getSite(request), expectedError);
-    });
-  });
 
-  describe('getHardwareGroup', () => {
-    it('invokes getHardwareGroup without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listHardwareGroups with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listHardwareGroups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listHardwareGroups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listHardwareGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHardwareGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-      );
-      client.innerApiCalls.getHardwareGroup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getHardwareGroup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getHardwareGroup without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listHardwareGroupsStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+            ];
+            client.descriptors.page.listHardwareGroups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listHardwareGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listHardwareGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHardwareGroups, request));
+            assert(
+                (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-      );
-      client.innerApiCalls.getHardwareGroup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getHardwareGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes listHardwareGroupsStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHardwareGroups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listHardwareGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listHardwareGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHardwareGroups, request));
+            assert(
+                (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listHardwareGroups without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()),
+            ];
+            client.descriptors.page.listHardwareGroups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[] = [];
+            const iterable = client.listHardwareGroupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listHardwareGroups with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHardwareGroups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listHardwareGroupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getHardwareGroup with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listHardware', () => {
+        it('invokes listHardware without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+            ];
+            client.innerApiCalls.listHardware = stubSimpleCall(expectedResponse);
+            const [response] = await client.listHardware(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getHardwareGroup = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getHardwareGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getHardwareGroup with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listHardware without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+            ];
+            client.innerApiCalls.listHardware = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listHardware(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getHardwareGroup(request), expectedError);
-    });
-  });
 
-  describe('getHardware', () => {
-    it('invokes getHardware without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listHardware with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listHardware = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listHardware(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listHardware as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHardware as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-      );
-      client.innerApiCalls.getHardware = stubSimpleCall(expectedResponse);
-      const [response] = await client.getHardware(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getHardware without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listHardwareStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+            ];
+            client.descriptors.page.listHardware.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listHardwareStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listHardware.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHardware, request));
+            assert(
+                (client.descriptors.page.listHardware.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-      );
-      client.innerApiCalls.getHardware =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getHardware(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes listHardwareStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHardware.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listHardwareStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listHardware.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHardware, request));
+            assert(
+                (client.descriptors.page.listHardware.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listHardware without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()),
+            ];
+            client.descriptors.page.listHardware.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[] = [];
+            const iterable = client.listHardwareAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHardware.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHardware.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listHardware with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHardware.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listHardwareAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHardware.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHardware.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getHardware with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listComments', () => {
+        it('invokes listComments without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+            ];
+            client.innerApiCalls.listComments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listComments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getHardware = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getHardware(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getHardware with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listComments without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+            ];
+            client.innerApiCalls.listComments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listComments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getHardware(request), expectedError);
-    });
-  });
 
-  describe('getComment', () => {
-    it('invokes getComment without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listComments with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listComments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listComments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-      );
-      client.innerApiCalls.getComment = stubSimpleCall(expectedResponse);
-      const [response] = await client.getComment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getComment without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listCommentsStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+            ];
+            client.descriptors.page.listComments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listComments, request));
+            assert(
+                (client.descriptors.page.listComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-      );
-      client.innerApiCalls.getComment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getComment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes listCommentsStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listComments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listComments, request));
+            assert(
+                (client.descriptors.page.listComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listComments without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()),
+            ];
+            client.descriptors.page.listComments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[] = [];
+            const iterable = client.listCommentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listComments with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listComments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCommentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getComment with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listChangeLogEntries', () => {
+        it('invokes listChangeLogEntries without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+            ];
+            client.innerApiCalls.listChangeLogEntries = stubSimpleCall(expectedResponse);
+            const [response] = await client.listChangeLogEntries(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listChangeLogEntries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listChangeLogEntries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getComment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getComment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getComment with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listChangeLogEntries without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+            ];
+            client.innerApiCalls.listChangeLogEntries = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listChangeLogEntries(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listChangeLogEntries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listChangeLogEntries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getComment(request), expectedError);
-    });
-  });
 
-  describe('recordActionOnComment', () => {
-    it('invokes recordActionOnComment without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listChangeLogEntries with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listChangeLogEntries = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listChangeLogEntries(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listChangeLogEntries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listChangeLogEntries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-      );
-      client.innerApiCalls.recordActionOnComment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.recordActionOnComment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.recordActionOnComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.recordActionOnComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes recordActionOnComment without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listChangeLogEntriesStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+            ];
+            client.descriptors.page.listChangeLogEntries.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listChangeLogEntriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listChangeLogEntries, request));
+            assert(
+                (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-      );
-      client.innerApiCalls.recordActionOnComment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.recordActionOnComment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes listChangeLogEntriesStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listChangeLogEntries.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listChangeLogEntriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listChangeLogEntries, request));
+            assert(
+                (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listChangeLogEntries without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()),
+            ];
+            client.descriptors.page.listChangeLogEntries.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[] = [];
+            const iterable = client.listChangeLogEntriesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.recordActionOnComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.recordActionOnComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listChangeLogEntries with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listChangeLogEntries.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listChangeLogEntriesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes recordActionOnComment with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listSkus', () => {
+        it('invokes listSkus without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+            ];
+            client.innerApiCalls.listSkus = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSkus(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSkus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSkus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.recordActionOnComment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.recordActionOnComment(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.recordActionOnComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.recordActionOnComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes recordActionOnComment with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSkus without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+            ];
+            client.innerApiCalls.listSkus = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSkus(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSkus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSkus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.recordActionOnComment(request),
-        expectedError
-      );
-    });
-  });
 
-  describe('getChangeLogEntry', () => {
-    it('invokes getChangeLogEntry without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSkus with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSkus = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSkus(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSkus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSkus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-      );
-      client.innerApiCalls.getChangeLogEntry = stubSimpleCall(expectedResponse);
-      const [response] = await client.getChangeLogEntry(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getChangeLogEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getChangeLogEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getChangeLogEntry without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSkusStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+            ];
+            client.descriptors.page.listSkus.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSkusStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSkus.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSkus, request));
+            assert(
+                (client.descriptors.page.listSkus.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-      );
-      client.innerApiCalls.getChangeLogEntry =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getChangeLogEntry(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes listSkusStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSkus.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSkusStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSkus.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSkus, request));
+            assert(
+                (client.descriptors.page.listSkus.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listSkus without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()),
+            ];
+            client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[] = [];
+            const iterable = client.listSkusAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getChangeLogEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getChangeLogEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSkus.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSkus.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSkus with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSkusAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSkus.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSkus.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes getChangeLogEntry with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listZones', () => {
+        it('invokes listZones without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+            ];
+            client.innerApiCalls.listZones = stubSimpleCall(expectedResponse);
+            const [response] = await client.listZones(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getChangeLogEntry = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getChangeLogEntry(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getChangeLogEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getChangeLogEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getChangeLogEntry with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listZones without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+            ];
+            client.innerApiCalls.listZones = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listZones(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getChangeLogEntry(request), expectedError);
-    });
-  });
 
-  describe('getSku', () => {
-    it('invokes getSku without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listZones with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listZones(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listZones as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-      );
-      client.innerApiCalls.getSku = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSku(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getSku as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSku as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getSku without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listZonesStream without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+            ];
+            client.descriptors.page.listZones.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listZonesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listZones.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listZones, request));
+            assert(
+                (client.descriptors.page.listZones.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-      );
-      client.innerApiCalls.getSku =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSku(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISku | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes listZonesStream with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listZones.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listZonesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone[] = [];
+                stream.on('data', (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listZones.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listZones, request));
+            assert(
+                (client.descriptors.page.listZones.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listZones without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+              generateSampleMessage(new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()),
+            ];
+            client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[] = [];
+            const iterable = client.listZonesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getSku as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSku as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSku with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSku = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSku(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getSku as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSku as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes getSku with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listZones with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listZonesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listZones.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getSku(request), expectedError);
     });
-  });
-
-  describe('getZone', () => {
-    it('invokes getZone without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-      );
-      client.innerApiCalls.getZone = stubSimpleCall(expectedResponse);
-      const [response] = await client.getZone(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes getLocation without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-
-    it('invokes getZone without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-      );
-      client.innerApiCalls.getZone =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getZone(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gdchardwaremanagement.v1alpha.IZone | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getZone with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getZone(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getZone with closed client', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getZone(request), expectedError);
     });
-  });
-
-  describe('createOrder', () => {
-    it('invokes createOrder without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createOrder = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createOrder(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes getOperation without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-
-    it('invokes createOrder without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createOrder =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createOrder(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOrder with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createOrder = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createOrder(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createOrder with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createOrder = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createOrder(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateOrderProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateOrderProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateOrderProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateOrderProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateOrder', () => {
-    it('invokes updateOrder without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
-      );
-      request.order ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest',
-        ['order', 'name']
-      );
-      request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateOrder = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateOrder(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateOrder without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
-      );
-      request.order ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest',
-        ['order', 'name']
-      );
-      request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateOrder =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateOrder(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateOrder with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
-      );
-      request.order ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest',
-        ['order', 'name']
-      );
-      request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateOrder = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateOrder(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateOrder with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
-      );
-      request.order ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest',
-        ['order', 'name']
-      );
-      request.order.name = defaultValue1;
-      const expectedHeaderRequestParams = `order.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateOrder = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateOrder(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateOrderProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateOrderProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateOrderProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateOrderProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteOrder', () => {
-    it('invokes deleteOrder without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteOrder = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteOrder(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteOrder without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteOrder =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteOrder(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteOrder with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteOrder = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteOrder(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteOrder with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteOrder = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteOrder(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteOrderProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteOrderProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteOrderProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteOrderProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('submitOrder', () => {
-    it('invokes submitOrder without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.submitOrder = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.submitOrder(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes submitOrder without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.submitOrder =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.submitOrder(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes submitOrder with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.submitOrder = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.submitOrder(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes submitOrder with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.submitOrder = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.submitOrder(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.submitOrder as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkSubmitOrderProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkSubmitOrderProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkSubmitOrderProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkSubmitOrderProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createSite', () => {
-    it('invokes createSite without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSite = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createSite(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSite without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSite =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSite(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSite with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSite = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSite(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSite with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSite = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createSite(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateSiteProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateSiteProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateSiteProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateSiteProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateSite', () => {
-    it('invokes updateSite without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
-      );
-      request.site ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest',
-        ['site', 'name']
-      );
-      request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSite = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateSite(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSite without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
-      );
-      request.site ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest',
-        ['site', 'name']
-      );
-      request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSite =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSite(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSite with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
-      );
-      request.site ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest',
-        ['site', 'name']
-      );
-      request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSite = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSite(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSite with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
-      );
-      request.site ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest',
-        ['site', 'name']
-      );
-      request.site.name = defaultValue1;
-      const expectedHeaderRequestParams = `site.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSite = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateSite(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateSiteProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateSiteProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateSiteProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateSiteProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteSite', () => {
-    it('invokes deleteSite without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSite = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteSite(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSite without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSite =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSite(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSite with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSite = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSite(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSite with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSite = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteSite(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteSiteProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteSiteProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteSiteProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteSiteProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createHardwareGroup', () => {
-    it('invokes createHardwareGroup without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createHardwareGroup =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createHardwareGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createHardwareGroup without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createHardwareGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createHardwareGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createHardwareGroup with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createHardwareGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createHardwareGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createHardwareGroup with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createHardwareGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createHardwareGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateHardwareGroupProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateHardwareGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateHardwareGroupProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateHardwareGroupProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateHardwareGroup', () => {
-    it('invokes updateHardwareGroup without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
-      );
-      request.hardwareGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest',
-        ['hardwareGroup', 'name']
-      );
-      request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateHardwareGroup =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateHardwareGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHardwareGroup without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
-      );
-      request.hardwareGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest',
-        ['hardwareGroup', 'name']
-      );
-      request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateHardwareGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateHardwareGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHardwareGroup with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
-      );
-      request.hardwareGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest',
-        ['hardwareGroup', 'name']
-      );
-      request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateHardwareGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateHardwareGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHardwareGroup with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
-      );
-      request.hardwareGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest',
-        ['hardwareGroup', 'name']
-      );
-      request.hardwareGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware_group.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateHardwareGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateHardwareGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateHardwareGroupProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateHardwareGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateHardwareGroupProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateHardwareGroupProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteHardwareGroup', () => {
-    it('invokes deleteHardwareGroup without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteHardwareGroup =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteHardwareGroup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteHardwareGroup without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteHardwareGroup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteHardwareGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteHardwareGroup with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteHardwareGroup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteHardwareGroup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteHardwareGroup with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteHardwareGroup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteHardwareGroup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardwareGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteHardwareGroupProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteHardwareGroupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteHardwareGroupProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteHardwareGroupProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createHardware', () => {
-    it('invokes createHardware without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createHardware =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createHardware(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createHardware without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createHardware =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createHardware(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createHardware with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createHardware = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createHardware(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createHardware with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createHardware = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createHardware(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateHardwareProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateHardwareProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateHardwareProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateHardwareProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateHardware', () => {
-    it('invokes updateHardware without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
-      );
-      request.hardware ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest',
-        ['hardware', 'name']
-      );
-      request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateHardware =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateHardware(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHardware without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
-      );
-      request.hardware ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest',
-        ['hardware', 'name']
-      );
-      request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateHardware =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateHardware(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHardware with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
-      );
-      request.hardware ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest',
-        ['hardware', 'name']
-      );
-      request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateHardware = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateHardware(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateHardware with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
-      );
-      request.hardware ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest',
-        ['hardware', 'name']
-      );
-      request.hardware.name = defaultValue1;
-      const expectedHeaderRequestParams = `hardware.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateHardware = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateHardware(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateHardwareProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateHardwareProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateHardwareProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateHardwareProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteHardware', () => {
-    it('invokes deleteHardware without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteHardware =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteHardware(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteHardware without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteHardware =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteHardware(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteHardware with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteHardware = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteHardware(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteHardware with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteHardware = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteHardware(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteHardwareProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteHardwareProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteHardwareProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteHardwareProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createComment', () => {
-    it('invokes createComment without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createComment =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createComment(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createComment without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createComment =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createComment(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createComment with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createComment = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createComment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createComment with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createComment = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createComment(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateCommentProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateCommentProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateCommentProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateCommentProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createZone', () => {
-    it('invokes createZone without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createZone = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createZone(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createZone without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createZone =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createZone(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createZone with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createZone = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createZone(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createZone with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createZone = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createZone(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateZoneProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateZoneProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateZoneProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateZoneProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateZone', () => {
-    it('invokes updateZone without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateZone = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateZone(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateZone without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateZone =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateZone(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateZone with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateZone = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateZone(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateZone with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
-      );
-      request.zone ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest',
-        ['zone', 'name']
-      );
-      request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateZone = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateZone(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateZoneProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateZoneProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateZoneProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateZoneProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteZone', () => {
-    it('invokes deleteZone without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteZone = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteZone(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteZone without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteZone =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteZone(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteZone with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteZone = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteZone(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteZone with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteZone = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteZone(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteZone as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteZoneProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteZoneProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteZoneProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteZoneProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('signalZoneState', () => {
-    it('invokes signalZoneState without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.signalZoneState =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.signalZoneState(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes signalZoneState without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.signalZoneState =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.signalZoneState(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-              protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes signalZoneState with call error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.signalZoneState = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.signalZoneState(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes signalZoneState with LRO error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.signalZoneState = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.signalZoneState(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.signalZoneState as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkSignalZoneStateProgress without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkSignalZoneStateProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkSignalZoneStateProgress with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkSignalZoneStateProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listOrders', () => {
-    it('invokes listOrders without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-      ];
-      client.innerApiCalls.listOrders = stubSimpleCall(expectedResponse);
-      const [response] = await client.listOrders(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrders as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrders as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrders without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-      ];
-      client.innerApiCalls.listOrders =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listOrders(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listOrders as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrders as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrders with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listOrders = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listOrders(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listOrders as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listOrders as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listOrdersStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-      ];
-      client.descriptors.page.listOrders.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listOrdersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Order[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Order
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listOrders.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrders, request)
-      );
-      assert(
-        (client.descriptors.page.listOrders.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listOrdersStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrders.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listOrdersStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Order[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Order
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listOrders.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOrders, request)
-      );
-      assert(
-        (client.descriptors.page.listOrders.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listOrders without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Order()
-        ),
-      ];
-      client.descriptors.page.listOrders.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[] =
-        [];
-      const iterable = client.listOrdersAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listOrders.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listOrders.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listOrders with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOrders.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listOrdersAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listOrders.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listOrders.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listSites', () => {
-    it('invokes listSites without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-      ];
-      client.innerApiCalls.listSites = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSites(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSites without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-      ];
-      client.innerApiCalls.listSites =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSites(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSites with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSites = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listSites(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSitesStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-      ];
-      client.descriptors.page.listSites.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSitesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Site[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Site
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSites.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSites, request)
-      );
-      assert(
-        (client.descriptors.page.listSites.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listSitesStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSites.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSitesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Site[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Site
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSites.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSites, request)
-      );
-      assert(
-        (client.descriptors.page.listSites.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSites without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Site()
-        ),
-      ];
-      client.descriptors.page.listSites.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[] =
-        [];
-      const iterable = client.listSitesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSites.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSites.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSites with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSites.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSitesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSites.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSites.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listHardwareGroups', () => {
-    it('invokes listHardwareGroups without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-      ];
-      client.innerApiCalls.listHardwareGroups =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listHardwareGroups(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listHardwareGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHardwareGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHardwareGroups without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-      ];
-      client.innerApiCalls.listHardwareGroups =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listHardwareGroups(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listHardwareGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHardwareGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHardwareGroups with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listHardwareGroups = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listHardwareGroups(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listHardwareGroups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHardwareGroups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHardwareGroupsStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-      ];
-      client.descriptors.page.listHardwareGroups.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listHardwareGroupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listHardwareGroups, request)
-      );
-      assert(
-        (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listHardwareGroupsStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listHardwareGroups.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listHardwareGroupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listHardwareGroups, request)
-      );
-      assert(
-        (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listHardwareGroups without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup()
-        ),
-      ];
-      client.descriptors.page.listHardwareGroups.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[] =
-        [];
-      const iterable = client.listHardwareGroupsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listHardwareGroups with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listHardwareGroups.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listHardwareGroupsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listHardware', () => {
-    it('invokes listHardware without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-      ];
-      client.innerApiCalls.listHardware = stubSimpleCall(expectedResponse);
-      const [response] = await client.listHardware(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHardware without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-      ];
-      client.innerApiCalls.listHardware =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listHardware(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHardware with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listHardware = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listHardware(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listHardware as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listHardware as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listHardwareStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-      ];
-      client.descriptors.page.listHardware.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listHardwareStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listHardware.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listHardware, request)
-      );
-      assert(
-        (client.descriptors.page.listHardware.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listHardwareStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listHardware.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listHardwareStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listHardware.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listHardware, request)
-      );
-      assert(
-        (client.descriptors.page.listHardware.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listHardware without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware()
-        ),
-      ];
-      client.descriptors.page.listHardware.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[] =
-        [];
-      const iterable = client.listHardwareAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listHardware.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listHardware.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listHardware with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listHardware.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listHardwareAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listHardware.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listHardware.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listComments', () => {
-    it('invokes listComments without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-      ];
-      client.innerApiCalls.listComments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listComments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listComments without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-      ];
-      client.innerApiCalls.listComments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listComments(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listComments with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listComments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listComments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCommentsStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-      ];
-      client.descriptors.page.listComments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCommentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listComments, request)
-      );
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listCommentsStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listComments.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listCommentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Comment
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listComments, request)
-      );
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listComments without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Comment()
-        ),
-      ];
-      client.descriptors.page.listComments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[] =
-        [];
-      const iterable = client.listCommentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listComments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listComments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listComments with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listComments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listCommentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listComments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listComments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listChangeLogEntries', () => {
-    it('invokes listChangeLogEntries without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-      ];
-      client.innerApiCalls.listChangeLogEntries =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listChangeLogEntries(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listChangeLogEntries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChangeLogEntries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChangeLogEntries without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-      ];
-      client.innerApiCalls.listChangeLogEntries =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listChangeLogEntries(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listChangeLogEntries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChangeLogEntries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChangeLogEntries with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listChangeLogEntries = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listChangeLogEntries(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listChangeLogEntries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChangeLogEntries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChangeLogEntriesStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-      ];
-      client.descriptors.page.listChangeLogEntries.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listChangeLogEntriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listChangeLogEntries, request)
-      );
-      assert(
-        (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listChangeLogEntriesStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listChangeLogEntries.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listChangeLogEntriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listChangeLogEntries, request)
-      );
-      assert(
-        (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listChangeLogEntries without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry()
-        ),
-      ];
-      client.descriptors.page.listChangeLogEntries.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[] =
-        [];
-      const iterable = client.listChangeLogEntriesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listChangeLogEntries with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listChangeLogEntries.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listChangeLogEntriesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listSkus', () => {
-    it('invokes listSkus without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-      ];
-      client.innerApiCalls.listSkus = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSkus(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSkus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSkus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSkus without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-      ];
-      client.innerApiCalls.listSkus =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSkus(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSkus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSkus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSkus with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSkus = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listSkus(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSkus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSkus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSkusStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-      ];
-      client.descriptors.page.listSkus.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSkusStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSkus.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSkus, request)
-      );
-      assert(
-        (client.descriptors.page.listSkus.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listSkusStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSkus.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSkusStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gdchardwaremanagement.v1alpha.Sku) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSkus.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSkus, request)
-      );
-      assert(
-        (client.descriptors.page.listSkus.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSkus without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Sku()
-        ),
-      ];
-      client.descriptors.page.listSkus.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[] =
-        [];
-      const iterable = client.listSkusAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSkus.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSkus.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSkus with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSkusAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSkus.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSkus.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listZones', () => {
-    it('invokes listZones without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-      ];
-      client.innerApiCalls.listZones = stubSimpleCall(expectedResponse);
-      const [response] = await client.listZones(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZones without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-      ];
-      client.innerApiCalls.listZones =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listZones(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZones with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listZones(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listZones as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listZonesStream without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-      ];
-      client.descriptors.page.listZones.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listZonesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listZones, request)
-      );
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listZonesStream with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listZones.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listZonesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.gdchardwaremanagement.v1alpha.Zone
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listZones, request)
-      );
-      assert(
-        (client.descriptors.page.listZones.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listZones without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gdchardwaremanagement.v1alpha.Zone()
-        ),
-      ];
-      client.descriptors.page.listZones.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[] =
-        [];
-      const iterable = client.listZonesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listZones with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listZonesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listZones.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('changeLogEntry', async () => {
-      const fakePath = '/rendered/path/changeLogEntry';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        order: 'orderValue',
-        change_log_entry: 'changeLogEntryValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.changeLogEntryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.changeLogEntryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('changeLogEntryPath', () => {
-        const result = client.changeLogEntryPath(
-          'projectValue',
-          'locationValue',
-          'orderValue',
-          'changeLogEntryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.changeLogEntryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromChangeLogEntryName', () => {
-        const result = client.matchProjectFromChangeLogEntryName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromChangeLogEntryName', () => {
-        const result = client.matchLocationFromChangeLogEntryName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOrderFromChangeLogEntryName', () => {
-        const result = client.matchOrderFromChangeLogEntryName(fakePath);
-        assert.strictEqual(result, 'orderValue');
-        assert(
-          (client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChangeLogEntryFromChangeLogEntryName', () => {
-        const result =
-          client.matchChangeLogEntryFromChangeLogEntryName(fakePath);
-        assert.strictEqual(result, 'changeLogEntryValue');
-        assert(
-          (client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('comment', async () => {
-      const fakePath = '/rendered/path/comment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        order: 'orderValue',
-        comment: 'commentValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.commentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.commentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('commentPath', () => {
-        const result = client.commentPath(
-          'projectValue',
-          'locationValue',
-          'orderValue',
-          'commentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.commentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCommentName', () => {
-        const result = client.matchProjectFromCommentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.commentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCommentName', () => {
-        const result = client.matchLocationFromCommentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.commentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOrderFromCommentName', () => {
-        const result = client.matchOrderFromCommentName(fakePath);
-        assert.strictEqual(result, 'orderValue');
-        assert(
-          (client.pathTemplates.commentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCommentFromCommentName', () => {
-        const result = client.matchCommentFromCommentName(fakePath);
-        assert.strictEqual(result, 'commentValue');
-        assert(
-          (client.pathTemplates.commentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('hardware', async () => {
-      const fakePath = '/rendered/path/hardware';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        hardware: 'hardwareValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.hardwarePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.hardwarePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('hardwarePath', () => {
-        const result = client.hardwarePath(
-          'projectValue',
-          'locationValue',
-          'hardwareValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.hardwarePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromHardwareName', () => {
-        const result = client.matchProjectFromHardwareName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.hardwarePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromHardwareName', () => {
-        const result = client.matchLocationFromHardwareName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.hardwarePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchHardwareFromHardwareName', () => {
-        const result = client.matchHardwareFromHardwareName(fakePath);
-        assert.strictEqual(result, 'hardwareValue');
-        assert(
-          (client.pathTemplates.hardwarePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('hardwareGroup', async () => {
-      const fakePath = '/rendered/path/hardwareGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        order: 'orderValue',
-        hardware_group: 'hardwareGroupValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.hardwareGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.hardwareGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('hardwareGroupPath', () => {
-        const result = client.hardwareGroupPath(
-          'projectValue',
-          'locationValue',
-          'orderValue',
-          'hardwareGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.hardwareGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromHardwareGroupName', () => {
-        const result = client.matchProjectFromHardwareGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromHardwareGroupName', () => {
-        const result = client.matchLocationFromHardwareGroupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOrderFromHardwareGroupName', () => {
-        const result = client.matchOrderFromHardwareGroupName(fakePath);
-        assert.strictEqual(result, 'orderValue');
-        assert(
-          (client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchHardwareGroupFromHardwareGroupName', () => {
-        const result = client.matchHardwareGroupFromHardwareGroupName(fakePath);
-        assert.strictEqual(result, 'hardwareGroupValue');
-        assert(
-          (client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('order', async () => {
-      const fakePath = '/rendered/path/order';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        order: 'orderValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.orderPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.orderPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('orderPath', () => {
-        const result = client.orderPath(
-          'projectValue',
-          'locationValue',
-          'orderValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.orderPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromOrderName', () => {
-        const result = client.matchProjectFromOrderName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.orderPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromOrderName', () => {
-        const result = client.matchLocationFromOrderName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.orderPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchOrderFromOrderName', () => {
-        const result = client.matchOrderFromOrderName(fakePath);
-        assert.strictEqual(result, 'orderValue');
-        assert(
-          (client.pathTemplates.orderPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('site', async () => {
-      const fakePath = '/rendered/path/site';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        site: 'siteValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.sitePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.sitePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('sitePath', () => {
-        const result = client.sitePath(
-          'projectValue',
-          'locationValue',
-          'siteValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.sitePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSiteName', () => {
-        const result = client.matchProjectFromSiteName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.sitePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSiteName', () => {
-        const result = client.matchLocationFromSiteName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.sitePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSiteFromSiteName', () => {
-        const result = client.matchSiteFromSiteName(fakePath);
-        assert.strictEqual(result, 'siteValue');
-        assert(
-          (client.pathTemplates.sitePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('sku', async () => {
-      const fakePath = '/rendered/path/sku';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        sku: 'skuValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.skuPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.skuPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('skuPath', () => {
-        const result = client.skuPath(
-          'projectValue',
-          'locationValue',
-          'skuValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.skuPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSkuName', () => {
-        const result = client.matchProjectFromSkuName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.skuPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSkuName', () => {
-        const result = client.matchLocationFromSkuName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.skuPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSkuFromSkuName', () => {
-        const result = client.matchSkuFromSkuName(fakePath);
-        assert.strictEqual(result, 'skuValue');
-        assert(
-          (client.pathTemplates.skuPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('zone', async () => {
-      const fakePath = '/rendered/path/zone';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        zone: 'zoneValue',
-      };
-      const client =
-        new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('changeLogEntry', async () => {
+            const fakePath = "/rendered/path/changeLogEntry";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                order: "orderValue",
+                change_log_entry: "changeLogEntryValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.changeLogEntryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.changeLogEntryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('changeLogEntryPath', () => {
+                const result = client.changeLogEntryPath("projectValue", "locationValue", "orderValue", "changeLogEntryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.changeLogEntryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromChangeLogEntryName', () => {
+                const result = client.matchProjectFromChangeLogEntryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromChangeLogEntryName', () => {
+                const result = client.matchLocationFromChangeLogEntryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrderFromChangeLogEntryName', () => {
+                const result = client.matchOrderFromChangeLogEntryName(fakePath);
+                assert.strictEqual(result, "orderValue");
+                assert((client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChangeLogEntryFromChangeLogEntryName', () => {
+                const result = client.matchChangeLogEntryFromChangeLogEntryName(fakePath);
+                assert.strictEqual(result, "changeLogEntryValue");
+                assert((client.pathTemplates.changeLogEntryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('comment', async () => {
+            const fakePath = "/rendered/path/comment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                order: "orderValue",
+                comment: "commentValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.commentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.commentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('commentPath', () => {
+                const result = client.commentPath("projectValue", "locationValue", "orderValue", "commentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.commentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCommentName', () => {
+                const result = client.matchProjectFromCommentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.commentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCommentName', () => {
+                const result = client.matchLocationFromCommentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.commentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrderFromCommentName', () => {
+                const result = client.matchOrderFromCommentName(fakePath);
+                assert.strictEqual(result, "orderValue");
+                assert((client.pathTemplates.commentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCommentFromCommentName', () => {
+                const result = client.matchCommentFromCommentName(fakePath);
+                assert.strictEqual(result, "commentValue");
+                assert((client.pathTemplates.commentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('hardware', async () => {
+            const fakePath = "/rendered/path/hardware";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                hardware: "hardwareValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.hardwarePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.hardwarePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('hardwarePath', () => {
+                const result = client.hardwarePath("projectValue", "locationValue", "hardwareValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.hardwarePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromHardwareName', () => {
+                const result = client.matchProjectFromHardwareName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.hardwarePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromHardwareName', () => {
+                const result = client.matchLocationFromHardwareName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.hardwarePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchHardwareFromHardwareName', () => {
+                const result = client.matchHardwareFromHardwareName(fakePath);
+                assert.strictEqual(result, "hardwareValue");
+                assert((client.pathTemplates.hardwarePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('hardwareGroup', async () => {
+            const fakePath = "/rendered/path/hardwareGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                order: "orderValue",
+                hardware_group: "hardwareGroupValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.hardwareGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.hardwareGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('hardwareGroupPath', () => {
+                const result = client.hardwareGroupPath("projectValue", "locationValue", "orderValue", "hardwareGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.hardwareGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromHardwareGroupName', () => {
+                const result = client.matchProjectFromHardwareGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromHardwareGroupName', () => {
+                const result = client.matchLocationFromHardwareGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrderFromHardwareGroupName', () => {
+                const result = client.matchOrderFromHardwareGroupName(fakePath);
+                assert.strictEqual(result, "orderValue");
+                assert((client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchHardwareGroupFromHardwareGroupName', () => {
+                const result = client.matchHardwareGroupFromHardwareGroupName(fakePath);
+                assert.strictEqual(result, "hardwareGroupValue");
+                assert((client.pathTemplates.hardwareGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('order', async () => {
+            const fakePath = "/rendered/path/order";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                order: "orderValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.orderPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.orderPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('orderPath', () => {
+                const result = client.orderPath("projectValue", "locationValue", "orderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.orderPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOrderName', () => {
+                const result = client.matchProjectFromOrderName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.orderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrderName', () => {
+                const result = client.matchLocationFromOrderName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.orderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrderFromOrderName', () => {
+                const result = client.matchOrderFromOrderName(fakePath);
+                assert.strictEqual(result, "orderValue");
+                assert((client.pathTemplates.orderPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('site', async () => {
+            const fakePath = "/rendered/path/site";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                site: "siteValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sitePath', () => {
+                const result = client.sitePath("projectValue", "locationValue", "siteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSiteName', () => {
+                const result = client.matchProjectFromSiteName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSiteName', () => {
+                const result = client.matchLocationFromSiteName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSiteFromSiteName', () => {
+                const result = client.matchSiteFromSiteName(fakePath);
+                assert.strictEqual(result, "siteValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sku', async () => {
+            const fakePath = "/rendered/path/sku";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                sku: "skuValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.skuPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.skuPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('skuPath', () => {
+                const result = client.skuPath("projectValue", "locationValue", "skuValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.skuPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSkuName', () => {
+                const result = client.matchProjectFromSkuName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.skuPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSkuName', () => {
+                const result = client.matchLocationFromSkuName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.skuPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSkuFromSkuName', () => {
+                const result = client.matchSkuFromSkuName(fakePath);
+                assert.strictEqual(result, "skuValue");
+                assert((client.pathTemplates.skuPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('zone', async () => {
+            const fakePath = "/rendered/path/zone";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                zone: "zoneValue",
+            };
+            const client = new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.zonePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.zonePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('zonePath', () => {
+                const result = client.zonePath("projectValue", "locationValue", "zoneValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.zonePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromZoneName', () => {
+                const result = client.matchProjectFromZoneName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.zonePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromZoneName', () => {
+                const result = client.matchLocationFromZoneName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.zonePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchZoneFromZoneName', () => {
+                const result = client.matchZoneFromZoneName(fakePath);
+                assert.strictEqual(result, "zoneValue");
+                assert((client.pathTemplates.zonePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.zonePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.zonePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('zonePath', () => {
-        const result = client.zonePath(
-          'projectValue',
-          'locationValue',
-          'zoneValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.zonePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromZoneName', () => {
-        const result = client.matchProjectFromZoneName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.zonePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromZoneName', () => {
-        const result = client.matchLocationFromZoneName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.zonePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchZoneFromZoneName', () => {
-        const result = client.matchZoneFromZoneName(fakePath);
-        assert.strictEqual(result, 'zoneValue');
-        assert(
-          (client.pathTemplates.zonePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
     });
-  });
 });

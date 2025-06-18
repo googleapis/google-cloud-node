@@ -15,7 +15,7 @@
     "test": "mocha test --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/video-intelligence": "^6.0.1",
+    "@google-cloud/video-intelligence": "^6.1.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {

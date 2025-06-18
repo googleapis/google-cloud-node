@@ -78,7 +78,7 @@
     "compile": "npm run compile:esm && rm -rf esm/src/json-helper.d.cts && npm run compile:cjs && rm -rf build/protos && cp -r protos build/protos"
   },
   "dependencies": {
-    "google-gax": "^5.0.0-rc.3"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",

@@ -18,18 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -113,41 +102,20 @@ export class DeveloperConnectClient {
    *     const client = new DeveloperConnectClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DeveloperConnectClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'developerconnect.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +141,7 @@ export class DeveloperConnectClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,9 +157,13 @@ export class DeveloperConnectClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -239,26 +211,14 @@ export class DeveloperConnectClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConnections: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'connections'
-      ),
-      listGitRepositoryLinks: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'gitRepositoryLinks'
-      ),
-      fetchLinkableGitRepositories: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'linkableGitRepositories'
-      ),
-      fetchGitRefs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'refNames'
-      ),
+      listConnections:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'connections'),
+      listGitRepositoryLinks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'gitRepositoryLinks'),
+      fetchLinkableGitRepositories:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'linkableGitRepositories'),
+      fetchGitRefs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'refNames')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -267,115 +227,61 @@ export class DeveloperConnectClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createConnectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.Connection'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.Connection') as gax.protobuf.Type;
     const createConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
     const updateConnectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.Connection'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.Connection') as gax.protobuf.Type;
     const updateConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteConnectionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
     const createGitRepositoryLinkResponse = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.GitRepositoryLink'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.GitRepositoryLink') as gax.protobuf.Type;
     const createGitRepositoryLinkMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteGitRepositoryLinkResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteGitRepositoryLinkMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createConnectionResponse.decode.bind(createConnectionResponse),
-        createConnectionMetadata.decode.bind(createConnectionMetadata)
-      ),
+        createConnectionMetadata.decode.bind(createConnectionMetadata)),
       updateConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateConnectionResponse.decode.bind(updateConnectionResponse),
-        updateConnectionMetadata.decode.bind(updateConnectionMetadata)
-      ),
+        updateConnectionMetadata.decode.bind(updateConnectionMetadata)),
       deleteConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteConnectionResponse.decode.bind(deleteConnectionResponse),
-        deleteConnectionMetadata.decode.bind(deleteConnectionMetadata)
-      ),
+        deleteConnectionMetadata.decode.bind(deleteConnectionMetadata)),
       createGitRepositoryLink: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createGitRepositoryLinkResponse.decode.bind(
-          createGitRepositoryLinkResponse
-        ),
-        createGitRepositoryLinkMetadata.decode.bind(
-          createGitRepositoryLinkMetadata
-        )
-      ),
+        createGitRepositoryLinkResponse.decode.bind(createGitRepositoryLinkResponse),
+        createGitRepositoryLinkMetadata.decode.bind(createGitRepositoryLinkMetadata)),
       deleteGitRepositoryLink: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteGitRepositoryLinkResponse.decode.bind(
-          deleteGitRepositoryLinkResponse
-        ),
-        deleteGitRepositoryLinkMetadata.decode.bind(
-          deleteGitRepositoryLinkMetadata
-        )
-      ),
+        deleteGitRepositoryLinkResponse.decode.bind(deleteGitRepositoryLinkResponse),
+        deleteGitRepositoryLinkMetadata.decode.bind(deleteGitRepositoryLinkMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.developerconnect.v1.DeveloperConnect',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.developerconnect.v1.DeveloperConnect', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -406,49 +312,28 @@ export class DeveloperConnectClient {
     // Put together the "service stub" for
     // google.cloud.developerconnect.v1.DeveloperConnect.
     this.developerConnectStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.developerconnect.v1.DeveloperConnect'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.developerconnect.v1
-            .DeveloperConnect,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.developerconnect.v1.DeveloperConnect') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.developerconnect.v1.DeveloperConnect,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const developerConnectStubMethods = [
-      'listConnections',
-      'getConnection',
-      'createConnection',
-      'updateConnection',
-      'deleteConnection',
-      'createGitRepositoryLink',
-      'deleteGitRepositoryLink',
-      'listGitRepositoryLinks',
-      'getGitRepositoryLink',
-      'fetchReadWriteToken',
-      'fetchReadToken',
-      'fetchLinkableGitRepositories',
-      'fetchGitHubInstallations',
-      'fetchGitRefs',
-    ];
+    const developerConnectStubMethods =
+        ['listConnections', 'getConnection', 'createConnection', 'updateConnection', 'deleteConnection', 'createGitRepositoryLink', 'deleteGitRepositoryLink', 'listGitRepositoryLinks', 'getGitRepositoryLink', 'fetchReadWriteToken', 'fetchReadToken', 'fetchLinkableGitRepositories', 'fetchGitHubInstallations', 'fetchGitRefs'];
     for (const methodName of developerConnectStubMethods) {
       const callPromise = this.developerConnectStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -473,14 +358,8 @@ export class DeveloperConnectClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'developerconnect.googleapis.com';
   }
@@ -491,14 +370,8 @@ export class DeveloperConnectClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'developerconnect.googleapis.com';
   }
@@ -529,7 +402,9 @@ export class DeveloperConnectClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -538,9 +413,8 @@ export class DeveloperConnectClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -551,1715 +425,1191 @@ export class DeveloperConnectClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.get_connection.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_GetConnection_async
-   */
+/**
+ * Gets details of a single Connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.get_connection.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_GetConnection_async
+ */
   getConnection(
-    request?: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IConnection,
-      protos.google.cloud.developerconnect.v1.IGetConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IConnection,
+        protos.google.cloud.developerconnect.v1.IGetConnectionRequest|undefined, {}|undefined
+      ]>;
   getConnection(
-    request: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IConnection,
-      | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IConnection,
-      | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request?: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.developerconnect.v1.IConnection,
-          | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.developerconnect.v1.IConnection,
-      | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IConnection,
-      protos.google.cloud.developerconnect.v1.IGetConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IConnection,
+          protos.google.cloud.developerconnect.v1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request?: protos.google.cloud.developerconnect.v1.IGetConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IConnection,
+          protos.google.cloud.developerconnect.v1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IConnection,
+          protos.google.cloud.developerconnect.v1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IConnection,
+        protos.google.cloud.developerconnect.v1.IGetConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.developerconnect.v1.IConnection,
-          | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IConnection,
+        protos.google.cloud.developerconnect.v1.IGetConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.developerconnect.v1.IConnection,
-          (
-            | protos.google.cloud.developerconnect.v1.IGetConnectionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConnection response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IConnection,
+        protos.google.cloud.developerconnect.v1.IGetConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConnection response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a single GitRepositoryLink.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.get_git_repository_link.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_GetGitRepositoryLink_async
-   */
+/**
+ * Gets details of a single GitRepositoryLink.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.get_git_repository_link.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_GetGitRepositoryLink_async
+ */
   getGitRepositoryLink(
-    request?: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-      (
-        | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+        protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|undefined, {}|undefined
+      ]>;
   getGitRepositoryLink(
-    request: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-      | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGitRepositoryLink(
-    request: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-      | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGitRepositoryLink(
-    request?: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-          | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-      | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-      (
-        | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGitRepositoryLink(
+      request: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+          protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGitRepositoryLink(
+      request?: protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+          protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+          protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+        protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGitRepositoryLink request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-          | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+        protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGitRepositoryLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGitRepositoryLink(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-          (
-            | protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getGitRepositoryLink response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getGitRepositoryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
+        protos.google.cloud.developerconnect.v1.IGetGitRepositoryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGitRepositoryLink response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Fetches read/write token of a given gitRepositoryLink.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.gitRepositoryLink
-   *   Required. The resource name of the gitRepositoryLink in the format
-   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchReadWriteTokenResponse|FetchReadWriteTokenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.fetch_read_write_token.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchReadWriteToken_async
-   */
+/**
+ * Fetches read/write token of a given gitRepositoryLink.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.gitRepositoryLink
+ *   Required. The resource name of the gitRepositoryLink in the format
+ *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchReadWriteTokenResponse|FetchReadWriteTokenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.fetch_read_write_token.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchReadWriteToken_async
+ */
   fetchReadWriteToken(
-    request?: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-      (
-        | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|undefined, {}|undefined
+      ]>;
   fetchReadWriteToken(
-    request: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadWriteToken(
-    request: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadWriteToken(
-    request?: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-          | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-      (
-        | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadWriteToken(
+      request: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadWriteToken(
+      request?: protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        git_repository_link: request.gitRepositoryLink ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'git_repository_link': request.gitRepositoryLink ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchReadWriteToken request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-          | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchReadWriteToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchReadWriteToken(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
-          (
-            | protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchReadWriteToken response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.fetchReadWriteToken(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadWriteTokenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchReadWriteToken response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Fetches read token of a given gitRepositoryLink.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.gitRepositoryLink
-   *   Required. The resource name of the gitRepositoryLink in the format
-   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchReadTokenResponse|FetchReadTokenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.fetch_read_token.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchReadToken_async
-   */
+/**
+ * Fetches read token of a given gitRepositoryLink.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.gitRepositoryLink
+ *   Required. The resource name of the gitRepositoryLink in the format
+ *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchReadTokenResponse|FetchReadTokenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.fetch_read_token.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchReadToken_async
+ */
   fetchReadToken(
-    request?: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-      (
-        | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|undefined, {}|undefined
+      ]>;
   fetchReadToken(
-    request: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadToken(
-    request: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadToken(
-    request?: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-          | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-      (
-        | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadToken(
+      request: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadToken(
+      request?: protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+          protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        git_repository_link: request.gitRepositoryLink ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'git_repository_link': request.gitRepositoryLink ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchReadToken request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-          | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchReadToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchReadToken(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
-          (
-            | protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchReadToken response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.fetchReadToken(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenResponse,
+        protos.google.cloud.developerconnect.v1.IFetchReadTokenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchReadToken response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * FetchGitHubInstallations returns the list of GitHub Installations that
-   * are available to be added to a Connection.
-   * For github.com, only installations accessible to the authorizer token
-   * are returned. For GitHub Enterprise, all installations are returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.connection
-   *   Required. The resource name of the connection in the format
-   *   `projects/* /locations/* /connections/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse|FetchGitHubInstallationsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_hub_installations.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitHubInstallations_async
-   */
+/**
+ * FetchGitHubInstallations returns the list of GitHub Installations that
+ * are available to be added to a Connection.
+ * For github.com, only installations accessible to the authorizer token
+ * are returned. For GitHub Enterprise, all installations are returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.connection
+ *   Required. The resource name of the connection in the format
+ *   `projects/* /locations/* /connections/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse|FetchGitHubInstallationsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_hub_installations.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitHubInstallations_async
+ */
   fetchGitHubInstallations(
-    request?: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-      (
-        | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|undefined, {}|undefined
+      ]>;
   fetchGitHubInstallations(
-    request: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchGitHubInstallations(
-    request: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
-    callback: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchGitHubInstallations(
-    request?: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-          | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-      | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-      (
-        | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchGitHubInstallations(
+      request: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
+      callback: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchGitHubInstallations(
+      request?: protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        connection: request.connection ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection': request.connection ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchGitHubInstallations request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-          | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchGitHubInstallations response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchGitHubInstallations(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
-          (
-            | protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchGitHubInstallations response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.fetchGitHubInstallations(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsResponse,
+        protos.google.cloud.developerconnect.v1.IFetchGitHubInstallationsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchGitHubInstallations response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates a new Connection in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.connectionId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   connection_id from the method_signature of Create RPC
-   * @param {google.cloud.developerconnect.v1.Connection} request.connection
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request, but do not actually post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.create_connection.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateConnection_async
-   */
+/**
+ * Creates a new Connection in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.connectionId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   connection_id from the method_signature of Create RPC
+ * @param {google.cloud.developerconnect.v1.Connection} request.connection
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.create_connection.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateConnection_async
+ */
   createConnection(
-    request?: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createConnection(
-    request: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnection(
-    request: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnection(
-    request?: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IConnection,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.developerconnect.v1.ICreateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IConnection,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createConnection request %j', request);
-    return this.innerApiCalls
-      .createConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IConnection,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.create_connection.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateConnection_async
-   */
-  async checkCreateConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.developerconnect.v1.Connection,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.create_connection.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateConnection_async
+ */
+  async checkCreateConnectionProgress(name: string): Promise<LROperation<protos.google.cloud.developerconnect.v1.Connection, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
     this._log.info('createConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.developerconnect.v1.Connection,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.Connection, protos.google.cloud.developerconnect.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Connection resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.developerconnect.v1.Connection} request.connection
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.allowMissing]
-   *   Optional. If set to true, and the connection is not found a new connection
-   *   will be created. In this situation `update_mask` is ignored.
-   *   The creation will succeed only if the input connection has all the
-   *   necessary information (e.g a github_config with both  user_oauth_token and
-   *   installation_id properties).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request, but do not actually post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.update_connection.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_UpdateConnection_async
-   */
+/**
+ * Updates the parameters of a single Connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Connection resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.developerconnect.v1.Connection} request.connection
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true, and the connection is not found a new connection
+ *   will be created. In this situation `update_mask` is ignored.
+ *   The creation will succeed only if the input connection has all the
+ *   necessary information (e.g a github_config with both  user_oauth_token and
+ *   installation_id properties).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.update_connection.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_UpdateConnection_async
+ */
   updateConnection(
-    request?: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateConnection(
-    request: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateConnection(
-    request: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateConnection(
-    request?: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IConnection,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IConnection,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.developerconnect.v1.IUpdateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'connection.name': request.connection!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection.name': request.connection!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IConnection,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateConnection request %j', request);
-    return this.innerApiCalls
-      .updateConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IConnection,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.developerconnect.v1.IConnection, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.update_connection.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_UpdateConnection_async
-   */
-  async checkUpdateConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.developerconnect.v1.Connection,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.update_connection.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_UpdateConnection_async
+ */
+  async checkUpdateConnectionProgress(name: string): Promise<LROperation<protos.google.cloud.developerconnect.v1.Connection, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
     this._log.info('updateConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.developerconnect.v1.Connection,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.Connection, protos.google.cloud.developerconnect.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request, but do not actually post it.
-   * @param {string} [request.etag]
-   *   Optional. The current etag of the Connection.
-   *   If an etag is provided and does not match the current etag of the
-   *   Connection, deletion will be blocked and an ABORTED error will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.delete_connection.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteConnection_async
-   */
+/**
+ * Deletes a single Connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {string} [request.etag]
+ *   Optional. The current etag of the Connection.
+ *   If an etag is provided and does not match the current etag of the
+ *   Connection, deletion will be blocked and an ABORTED error will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_connection.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteConnection_async
+ */
   deleteConnection(
-    request?: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteConnection(
-    request: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnection(
-    request: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnection(
-    request?: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.developerconnect.v1.IDeleteConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteConnection request %j', request);
-    return this.innerApiCalls
-      .deleteConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.delete_connection.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteConnection_async
-   */
-  async checkDeleteConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_connection.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteConnection_async
+ */
+  async checkDeleteConnectionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
     this._log.info('deleteConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>;
   }
-  /**
-   * Creates a GitRepositoryLink. Upon linking a Git Repository, Developer
-   * Connect will configure the Git Repository to send webhook events to
-   * Developer Connect. Connections that use Firebase GitHub Application will
-   * have events forwarded to the Firebase service. All other Connections will
-   * have events forwarded to Cloud Build.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {google.cloud.developerconnect.v1.GitRepositoryLink} request.gitRepositoryLink
-   *   Required. The resource being created
-   * @param {string} request.gitRepositoryLinkId
-   *   Required. The ID to use for the repository, which will become the final
-   *   component of the repository's resource name. This ID should be unique in
-   *   the connection. Allows alphanumeric characters and any of
-   *   -._~%!$&'()*+,;=@.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request, but do not actually post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.create_git_repository_link.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateGitRepositoryLink_async
-   */
+/**
+ * Creates a GitRepositoryLink. Upon linking a Git Repository, Developer
+ * Connect will configure the Git Repository to send webhook events to
+ * Developer Connect. Connections that use Firebase GitHub Application will
+ * have events forwarded to the Firebase service. All other Connections will
+ * have events forwarded to Cloud Build.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {google.cloud.developerconnect.v1.GitRepositoryLink} request.gitRepositoryLink
+ *   Required. The resource being created
+ * @param {string} request.gitRepositoryLinkId
+ *   Required. The ID to use for the repository, which will become the final
+ *   component of the repository's resource name. This ID should be unique in
+ *   the connection. Allows alphanumeric characters and any of
+ *   -._~%!$&'()*+,;=@.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.create_git_repository_link.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateGitRepositoryLink_async
+ */
   createGitRepositoryLink(
-    request?: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createGitRepositoryLink(
-    request: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGitRepositoryLink(
-    request: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGitRepositoryLink(
-    request?: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.developerconnect.v1.ICreateGitRepositoryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createGitRepositoryLink response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createGitRepositoryLink request %j', request);
-    return this.innerApiCalls
-      .createGitRepositoryLink(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.developerconnect.v1.IGitRepositoryLink,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createGitRepositoryLink response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createGitRepositoryLink(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.developerconnect.v1.IGitRepositoryLink, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createGitRepositoryLink response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createGitRepositoryLink()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.create_git_repository_link.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateGitRepositoryLink_async
-   */
-  async checkCreateGitRepositoryLinkProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.developerconnect.v1.GitRepositoryLink,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createGitRepositoryLink()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.create_git_repository_link.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_CreateGitRepositoryLink_async
+ */
+  async checkCreateGitRepositoryLinkProgress(name: string): Promise<LROperation<protos.google.cloud.developerconnect.v1.GitRepositoryLink, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
     this._log.info('createGitRepositoryLink long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createGitRepositoryLink,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.developerconnect.v1.GitRepositoryLink,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createGitRepositoryLink, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.GitRepositoryLink, protos.google.cloud.developerconnect.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single GitRepositoryLink.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request, but do not actually post it.
-   * @param {string} [request.etag]
-   *   Optional. This checksum is computed by the server based on the value of
-   *   other fields, and may be sent on update and delete requests to ensure the
-   *   client has an up-to-date value before proceeding.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.delete_git_repository_link.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteGitRepositoryLink_async
-   */
+/**
+ * Deletes a single GitRepositoryLink.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validate the request, but do not actually post it.
+ * @param {string} [request.etag]
+ *   Optional. This checksum is computed by the server based on the value of
+ *   other fields, and may be sent on update and delete requests to ensure the
+ *   client has an up-to-date value before proceeding.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_git_repository_link.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteGitRepositoryLink_async
+ */
   deleteGitRepositoryLink(
-    request?: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteGitRepositoryLink(
-    request: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGitRepositoryLink(
-    request: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGitRepositoryLink(
-    request?: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.developerconnect.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.developerconnect.v1.IDeleteGitRepositoryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteGitRepositoryLink response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteGitRepositoryLink request %j', request);
-    return this.innerApiCalls
-      .deleteGitRepositoryLink(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.developerconnect.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteGitRepositoryLink response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteGitRepositoryLink(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteGitRepositoryLink response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteGitRepositoryLink()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.delete_git_repository_link.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteGitRepositoryLink_async
-   */
-  async checkDeleteGitRepositoryLinkProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteGitRepositoryLink()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.delete_git_repository_link.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_DeleteGitRepositoryLink_async
+ */
+  async checkDeleteGitRepositoryLinkProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
     this._log.info('deleteGitRepositoryLink long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteGitRepositoryLink,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.developerconnect.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteGitRepositoryLink, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>;
   }
-  /**
-   * Lists Connections in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListConnectionsRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.Connection|Connection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Connections in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListConnectionsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.Connection|Connection}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnections(
-    request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IConnection[],
-      protos.google.cloud.developerconnect.v1.IListConnectionsRequest | null,
-      protos.google.cloud.developerconnect.v1.IListConnectionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IConnection[],
+        protos.google.cloud.developerconnect.v1.IListConnectionsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListConnectionsResponse
+      ]>;
   listConnections(
-    request: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-      | protos.google.cloud.developerconnect.v1.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.IConnection
-    >
-  ): void;
-  listConnections(
-    request: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-      | protos.google.cloud.developerconnect.v1.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.IConnection
-    >
-  ): void;
-  listConnections(
-    request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-          | protos.google.cloud.developerconnect.v1.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.developerconnect.v1.IConnection
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-      | protos.google.cloud.developerconnect.v1.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.IConnection
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IConnection[],
-      protos.google.cloud.developerconnect.v1.IListConnectionsRequest | null,
-      protos.google.cloud.developerconnect.v1.IListConnectionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IConnection>): void;
+  listConnections(
+      request: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+          protos.google.cloud.developerconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IConnection>): void;
+  listConnections(
+      request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+          protos.google.cloud.developerconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IConnection>,
+      callback?: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+          protos.google.cloud.developerconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IConnection>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IConnection[],
+        protos.google.cloud.developerconnect.v1.IListConnectionsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListConnectionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-          | protos.google.cloud.developerconnect.v1.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.developerconnect.v1.IConnection
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+      protos.google.cloud.developerconnect.v1.IListConnectionsResponse|null|undefined,
+      protos.google.cloud.developerconnect.v1.IConnection>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2268,61 +1618,58 @@ export class DeveloperConnectClient {
     this._log.info('listConnections request %j', request);
     return this.innerApiCalls
       .listConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.developerconnect.v1.IConnection[],
-          protos.google.cloud.developerconnect.v1.IListConnectionsRequest | null,
-          protos.google.cloud.developerconnect.v1.IListConnectionsResponse,
-        ]) => {
-          this._log.info('listConnections values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.developerconnect.v1.IConnection[],
+        protos.google.cloud.developerconnect.v1.IListConnectionsRequest|null,
+        protos.google.cloud.developerconnect.v1.IListConnectionsResponse
+      ]) => {
+        this._log.info('listConnections values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListConnectionsRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.Connection|Connection} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConnections`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListConnectionsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.Connection|Connection} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectionsStream(
-    request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -2331,52 +1678,51 @@ export class DeveloperConnectClient {
     );
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListConnectionsRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.developerconnect.v1.Connection|Connection}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.list_connections.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_ListConnections_async
-   */
+/**
+ * Equivalent to `listConnections`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListConnectionsRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.developerconnect.v1.Connection|Connection}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.list_connections.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_ListConnections_async
+ */
   listConnectionsAsync(
-    request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.developerconnect.v1.IConnection> {
+      request?: protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.developerconnect.v1.IConnection>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
@@ -2384,117 +1730,92 @@ export class DeveloperConnectClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IConnection>;
   }
-  /**
-   * Lists GitRepositoryLinks in a given project, location, and connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListGitRepositoryLinksRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGitRepositoryLinksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists GitRepositoryLinks in a given project, location, and connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListGitRepositoryLinksRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGitRepositoryLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGitRepositoryLinks(
-    request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink[],
-      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest | null,
-      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IGitRepositoryLink[],
+        protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest|null,
+        protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
+      ]>;
   listGitRepositoryLinks(
-    request: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-      | protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink
-    >
-  ): void;
-  listGitRepositoryLinks(
-    request: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-      | protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink
-    >
-  ): void;
-  listGitRepositoryLinks(
-    request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-          | protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
-          | null
-          | undefined,
-          protos.google.cloud.developerconnect.v1.IGitRepositoryLink
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-      | protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.IGitRepositoryLink[],
-      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest | null,
-      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink>): void;
+  listGitRepositoryLinks(
+      request: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink>): void;
+  listGitRepositoryLinks(
+      request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink>,
+      callback?: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.IGitRepositoryLink>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.IGitRepositoryLink[],
+        protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest|null,
+        protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-          | protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
-          | null
-          | undefined,
-          protos.google.cloud.developerconnect.v1.IGitRepositoryLink
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+      protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse|null|undefined,
+      protos.google.cloud.developerconnect.v1.IGitRepositoryLink>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGitRepositoryLinks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2503,61 +1824,58 @@ export class DeveloperConnectClient {
     this._log.info('listGitRepositoryLinks request %j', request);
     return this.innerApiCalls
       .listGitRepositoryLinks(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.developerconnect.v1.IGitRepositoryLink[],
-          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest | null,
-          protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse,
-        ]) => {
-          this._log.info('listGitRepositoryLinks values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.developerconnect.v1.IGitRepositoryLink[],
+        protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest|null,
+        protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksResponse
+      ]) => {
+        this._log.info('listGitRepositoryLinks values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listGitRepositoryLinks`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListGitRepositoryLinksRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGitRepositoryLinksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGitRepositoryLinks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListGitRepositoryLinksRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGitRepositoryLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGitRepositoryLinksStream(
-    request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGitRepositoryLinks stream %j', request);
     return this.descriptors.page.listGitRepositoryLinks.createStream(
       this.innerApiCalls.listGitRepositoryLinks as GaxCall,
@@ -2566,52 +1884,51 @@ export class DeveloperConnectClient {
     );
   }
 
-  /**
-   * Equivalent to `listGitRepositoryLinks`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListGitRepositoryLinksRequest
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.list_git_repository_links.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_ListGitRepositoryLinks_async
-   */
+/**
+ * Equivalent to `listGitRepositoryLinks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListGitRepositoryLinksRequest
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.developerconnect.v1.GitRepositoryLink|GitRepositoryLink}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.list_git_repository_links.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_ListGitRepositoryLinks_async
+ */
   listGitRepositoryLinksAsync(
-    request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.developerconnect.v1.IGitRepositoryLink> {
+      request?: protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.developerconnect.v1.IGitRepositoryLink>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGitRepositoryLinks iterate %j', request);
     return this.descriptors.page.listGitRepositoryLinks.asyncIterate(
       this.innerApiCalls['listGitRepositoryLinks'] as GaxCall,
@@ -2619,114 +1936,89 @@ export class DeveloperConnectClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IGitRepositoryLink>;
   }
-  /**
-   * FetchLinkableGitRepositories returns a list of git repositories from an SCM
-   * that are available to be added to a Connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.connection
-   *   Required. The name of the Connection.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results to return in the list. Defaults to 20.
-   * @param {string} [request.pageToken]
-   *   Optional. Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.LinkableGitRepository|LinkableGitRepository}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchLinkableGitRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * FetchLinkableGitRepositories returns a list of git repositories from an SCM
+ * that are available to be added to a Connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.connection
+ *   Required. The name of the Connection.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results to return in the list. Defaults to 20.
+ * @param {string} [request.pageToken]
+ *   Optional. Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.LinkableGitRepository|LinkableGitRepository}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchLinkableGitRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchLinkableGitRepositories(
-    request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.ILinkableGitRepository[],
-      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest | null,
-      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.ILinkableGitRepository[],
+        protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest|null,
+        protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
+      ]>;
   fetchLinkableGitRepositories(
-    request: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-      | protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.ILinkableGitRepository
-    >
-  ): void;
-  fetchLinkableGitRepositories(
-    request: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-      | protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.ILinkableGitRepository
-    >
-  ): void;
-  fetchLinkableGitRepositories(
-    request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-          | protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.developerconnect.v1.ILinkableGitRepository
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-      | protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.developerconnect.v1.ILinkableGitRepository
-    >
-  ): Promise<
-    [
-      protos.google.cloud.developerconnect.v1.ILinkableGitRepository[],
-      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest | null,
-      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.ILinkableGitRepository>): void;
+  fetchLinkableGitRepositories(
+      request: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.ILinkableGitRepository>): void;
+  fetchLinkableGitRepositories(
+      request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.ILinkableGitRepository>,
+      callback?: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse|null|undefined,
+          protos.google.cloud.developerconnect.v1.ILinkableGitRepository>):
+      Promise<[
+        protos.google.cloud.developerconnect.v1.ILinkableGitRepository[],
+        protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest|null,
+        protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        connection: request.connection ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection': request.connection ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-          | protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.developerconnect.v1.ILinkableGitRepository
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+      protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse|null|undefined,
+      protos.google.cloud.developerconnect.v1.ILinkableGitRepository>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchLinkableGitRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2735,57 +2027,54 @@ export class DeveloperConnectClient {
     this._log.info('fetchLinkableGitRepositories request %j', request);
     return this.innerApiCalls
       .fetchLinkableGitRepositories(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.developerconnect.v1.ILinkableGitRepository[],
-          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest | null,
-          protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse,
-        ]) => {
-          this._log.info('fetchLinkableGitRepositories values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.developerconnect.v1.ILinkableGitRepository[],
+        protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest|null,
+        protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesResponse
+      ]) => {
+        this._log.info('fetchLinkableGitRepositories values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `fetchLinkableGitRepositories`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.connection
-   *   Required. The name of the Connection.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results to return in the list. Defaults to 20.
-   * @param {string} [request.pageToken]
-   *   Optional. Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.LinkableGitRepository|LinkableGitRepository} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `fetchLinkableGitRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `fetchLinkableGitRepositories`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.connection
+ *   Required. The name of the Connection.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results to return in the list. Defaults to 20.
+ * @param {string} [request.pageToken]
+ *   Optional. Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.LinkableGitRepository|LinkableGitRepository} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchLinkableGitRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchLinkableGitRepositoriesStream(
-    request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        connection: request.connection ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection': request.connection ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchLinkableGitRepositories stream %j', request);
     return this.descriptors.page.fetchLinkableGitRepositories.createStream(
       this.innerApiCalls.fetchLinkableGitRepositories as GaxCall,
@@ -2794,48 +2083,47 @@ export class DeveloperConnectClient {
     );
   }
 
-  /**
-   * Equivalent to `fetchLinkableGitRepositories`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.connection
-   *   Required. The name of the Connection.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results to return in the list. Defaults to 20.
-   * @param {string} [request.pageToken]
-   *   Optional. Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.developerconnect.v1.LinkableGitRepository|LinkableGitRepository}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.fetch_linkable_git_repositories.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchLinkableGitRepositories_async
-   */
+/**
+ * Equivalent to `fetchLinkableGitRepositories`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.connection
+ *   Required. The name of the Connection.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results to return in the list. Defaults to 20.
+ * @param {string} [request.pageToken]
+ *   Optional. Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.developerconnect.v1.LinkableGitRepository|LinkableGitRepository}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.fetch_linkable_git_repositories.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchLinkableGitRepositories_async
+ */
   fetchLinkableGitRepositoriesAsync(
-    request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.developerconnect.v1.ILinkableGitRepository> {
+      request?: protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.developerconnect.v1.ILinkableGitRepository>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        connection: request.connection ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection': request.connection ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchLinkableGitRepositories iterate %j', request);
     return this.descriptors.page.fetchLinkableGitRepositories.asyncIterate(
       this.innerApiCalls['fetchLinkableGitRepositories'] as GaxCall,
@@ -2843,115 +2131,90 @@ export class DeveloperConnectClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.developerconnect.v1.ILinkableGitRepository>;
   }
-  /**
-   * Fetch the list of branches or tags for a given repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.gitRepositoryLink
-   *   Required. The resource name of GitRepositoryLink in the format
-   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
-   * @param {google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType} request.refType
-   *   Required. Type of refs to fetch.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results to return in the list. Default to 20.
-   * @param {string} [request.pageToken]
-   *   Optional. Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of string.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchGitRefsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Fetch the list of branches or tags for a given repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.gitRepositoryLink
+ *   Required. The resource name of GitRepositoryLink in the format
+ *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+ * @param {google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType} request.refType
+ *   Required. Type of refs to fetch.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results to return in the list. Default to 20.
+ * @param {string} [request.pageToken]
+ *   Optional. Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of string.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchGitRefsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchGitRefs(
-    request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      string[],
-      protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest | null,
-      protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+      options?: CallOptions):
+      Promise<[
+        string[],
+        protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest|null,
+        protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
+      ]>;
   fetchGitRefs(
-    request: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-      | protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
-      | null
-      | undefined,
-      string
-    >
-  ): void;
-  fetchGitRefs(
-    request: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-      | protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
-      | null
-      | undefined,
-      string
-    >
-  ): void;
-  fetchGitRefs(
-    request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-          | protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
-          | null
-          | undefined,
-          string
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-      | protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
-      | null
-      | undefined,
-      string
-    >
-  ): Promise<
-    [
-      string[],
-      protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest | null,
-      protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse,
-    ]
-  > | void {
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse|null|undefined,
+          string>): void;
+  fetchGitRefs(
+      request: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse|null|undefined,
+          string>): void;
+  fetchGitRefs(
+      request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse|null|undefined,
+          string>,
+      callback?: PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+          protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse|null|undefined,
+          string>):
+      Promise<[
+        string[],
+        protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest|null,
+        protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        git_repository_link: request.gitRepositoryLink ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'git_repository_link': request.gitRepositoryLink ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-          | protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
-          | null
-          | undefined,
-          string
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+      protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse|null|undefined,
+      string>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchGitRefs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2960,59 +2223,56 @@ export class DeveloperConnectClient {
     this._log.info('fetchGitRefs request %j', request);
     return this.innerApiCalls
       .fetchGitRefs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          string[],
-          protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest | null,
-          protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse,
-        ]) => {
-          this._log.info('fetchGitRefs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        string[],
+        protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest|null,
+        protos.google.cloud.developerconnect.v1.IFetchGitRefsResponse
+      ]) => {
+        this._log.info('fetchGitRefs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `fetchGitRefs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.gitRepositoryLink
-   *   Required. The resource name of GitRepositoryLink in the format
-   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
-   * @param {google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType} request.refType
-   *   Required. Type of refs to fetch.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results to return in the list. Default to 20.
-   * @param {string} [request.pageToken]
-   *   Optional. Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing string on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `fetchGitRefsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `fetchGitRefs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.gitRepositoryLink
+ *   Required. The resource name of GitRepositoryLink in the format
+ *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+ * @param {google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType} request.refType
+ *   Required. Type of refs to fetch.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results to return in the list. Default to 20.
+ * @param {string} [request.pageToken]
+ *   Optional. Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing string on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchGitRefsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchGitRefsStream(
-    request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        git_repository_link: request.gitRepositoryLink ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'git_repository_link': request.gitRepositoryLink ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchGitRefs stream %j', request);
     return this.descriptors.page.fetchGitRefs.createStream(
       this.innerApiCalls.fetchGitRefs as GaxCall,
@@ -3021,50 +2281,49 @@ export class DeveloperConnectClient {
     );
   }
 
-  /**
-   * Equivalent to `fetchGitRefs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.gitRepositoryLink
-   *   Required. The resource name of GitRepositoryLink in the format
-   *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
-   * @param {google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType} request.refType
-   *   Required. Type of refs to fetch.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results to return in the list. Default to 20.
-   * @param {string} [request.pageToken]
-   *   Optional. Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   string. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_refs.js</caption>
-   * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitRefs_async
-   */
+/**
+ * Equivalent to `fetchGitRefs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.gitRepositoryLink
+ *   Required. The resource name of GitRepositoryLink in the format
+ *   `projects/* /locations/* /connections/* /gitRepositoryLinks/*`.
+ * @param {google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType} request.refType
+ *   Required. Type of refs to fetch.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results to return in the list. Default to 20.
+ * @param {string} [request.pageToken]
+ *   Optional. Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   string. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/developer_connect.fetch_git_refs.js</caption>
+ * region_tag:developerconnect_v1_generated_DeveloperConnect_FetchGitRefs_async
+ */
   fetchGitRefsAsync(
-    request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
-    options?: CallOptions
-  ): AsyncIterable<string> {
+      request?: protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
+      options?: CallOptions):
+    AsyncIterable<string>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        git_repository_link: request.gitRepositoryLink ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'git_repository_link': request.gitRepositoryLink ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchGitRefs iterate %j', request);
     return this.descriptors.page.fetchGitRefs.asyncIterate(
       this.innerApiCalls['fetchGitRefs'] as GaxCall,
@@ -3072,7 +2331,7 @@ export class DeveloperConnectClient {
       callSettings
     ) as AsyncIterable<string>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3112,7 +2371,7 @@ export class DeveloperConnectClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3150,7 +2409,7 @@ export class DeveloperConnectClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3195,20 +2454,20 @@ export class DeveloperConnectClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3245,13 +2504,13 @@ export class DeveloperConnectClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3285,7 +2544,7 @@ export class DeveloperConnectClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3300,20 +2559,20 @@ export class DeveloperConnectClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3357,20 +2616,20 @@ export class DeveloperConnectClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3386,7 +2645,7 @@ export class DeveloperConnectClient {
    * @param {string} connection
    * @returns {string} Resource name string.
    */
-  connectionPath(project: string, location: string, connection: string) {
+  connectionPath(project:string,location:string,connection:string) {
     return this.pathTemplates.connectionPathTemplate.render({
       project: project,
       location: location,
@@ -3402,8 +2661,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .project;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).project;
   }
 
   /**
@@ -3414,8 +2672,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .location;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).location;
   }
 
   /**
@@ -3426,8 +2683,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the connection.
    */
   matchConnectionFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .connection;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).connection;
   }
 
   /**
@@ -3439,12 +2695,7 @@ export class DeveloperConnectClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -3461,8 +2712,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
   }
 
   /**
@@ -3473,8 +2723,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
   }
 
   /**
@@ -3485,8 +2734,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
   }
 
   /**
@@ -3497,8 +2745,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
   }
 
   /**
@@ -3510,12 +2757,7 @@ export class DeveloperConnectClient {
    * @param {string} git_repository_link
    * @returns {string} Resource name string.
    */
-  gitRepositoryLinkPath(
-    project: string,
-    location: string,
-    connection: string,
-    gitRepositoryLink: string
-  ) {
+  gitRepositoryLinkPath(project:string,location:string,connection:string,gitRepositoryLink:string) {
     return this.pathTemplates.gitRepositoryLinkPathTemplate.render({
       project: project,
       location: location,
@@ -3532,9 +2774,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
-      gitRepositoryLinkName
-    ).project;
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).project;
   }
 
   /**
@@ -3545,9 +2785,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
-      gitRepositoryLinkName
-    ).location;
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).location;
   }
 
   /**
@@ -3558,9 +2796,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the connection.
    */
   matchConnectionFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
-      gitRepositoryLinkName
-    ).connection;
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).connection;
   }
 
   /**
@@ -3570,12 +2806,8 @@ export class DeveloperConnectClient {
    *   A fully-qualified path representing GitRepositoryLink resource.
    * @returns {string} A string representing the git_repository_link.
    */
-  matchGitRepositoryLinkFromGitRepositoryLinkName(
-    gitRepositoryLinkName: string
-  ) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
-      gitRepositoryLinkName
-    ).git_repository_link;
+  matchGitRepositoryLinkFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).git_repository_link;
   }
 
   /**
@@ -3585,7 +2817,7 @@ export class DeveloperConnectClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3620,7 +2852,7 @@ export class DeveloperConnectClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3645,7 +2877,7 @@ export class DeveloperConnectClient {
    * @param {string} secret_version
    * @returns {string} Resource name string.
    */
-  secretVersionPath(project: string, secret: string, secretVersion: string) {
+  secretVersionPath(project:string,secret:string,secretVersion:string) {
     return this.pathTemplates.secretVersionPathTemplate.render({
       project: project,
       secret: secret,
@@ -3661,8 +2893,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .project;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).project;
   }
 
   /**
@@ -3673,8 +2904,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the secret.
    */
   matchSecretFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .secret;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).secret;
   }
 
   /**
@@ -3685,8 +2915,7 @@ export class DeveloperConnectClient {
    * @returns {string} A string representing the secret_version.
    */
   matchSecretVersionFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .secret_version;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).secret_version;
   }
 
   /**
@@ -3698,12 +2927,7 @@ export class DeveloperConnectClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(
-    project: string,
-    location: string,
-    namespace: string,
-    service: string
-  ) {
+  servicePath(project:string,location:string,namespace:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -3768,8 +2992,8 @@ export class DeveloperConnectClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

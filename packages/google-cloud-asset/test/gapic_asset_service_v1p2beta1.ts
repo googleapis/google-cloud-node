@@ -193,9 +193,14 @@ describe('v1p2beta1.AssetServiceClient', () => {
         throw err;
       });
       assert(client.assetServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -204,9 +209,14 @@ describe('v1p2beta1.AssetServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.assetServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -369,7 +379,9 @@ describe('v1p2beta1.AssetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createFeed(request), expectedError);
     });
   });
@@ -496,7 +508,9 @@ describe('v1p2beta1.AssetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getFeed(request), expectedError);
     });
   });
@@ -623,7 +637,9 @@ describe('v1p2beta1.AssetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listFeeds(request), expectedError);
     });
   });
@@ -757,7 +773,9 @@ describe('v1p2beta1.AssetServiceClient', () => {
       );
       request.feed.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateFeed(request), expectedError);
     });
   });
@@ -887,7 +905,9 @@ describe('v1p2beta1.AssetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteFeed(request), expectedError);
     });
   });

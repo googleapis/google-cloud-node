@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/discoveryengine",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Discovery Engine API client for Node.js",
   "repository": {
     "type": "git",
@@ -41,12 +41,12 @@
     "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
-    "samples-test": "echo 'removing sample tests because they take too long'",
-    "system-test": "echo 'removing system tests because they take too long'",
-    "test": "echo 'removing unit tests because they take too long'"
+    "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "c8 mocha build/system-test",
+    "test": "NODE_OPTIONS=--max-old-space-size=16384 c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

@@ -29,4700 +29,3358 @@ import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v3beta1.PlaybooksClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = playbooksModule.v3beta1.PlaybooksClient.servicePath;
-        assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = playbooksModule.v3beta1.PlaybooksClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'dialogflow.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'dialogflow.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new playbooksModule.v3beta1.PlaybooksClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'dialogflow.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new playbooksModule.v3beta1.PlaybooksClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'dialogflow.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new playbooksModule.v3beta1.PlaybooksClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = playbooksModule.v3beta1.PlaybooksClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = playbooksModule.v3beta1.PlaybooksClient.servicePath;
+                assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.playbooksStub, undefined);
-      await client.initialize();
-      assert(client.playbooksStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.playbooksStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.playbooksStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createPlaybook', () => {
-    it('invokes createPlaybook without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-      );
-      client.innerApiCalls.createPlaybook = stubSimpleCall(expectedResponse);
-      const [response] = await client.createPlaybook(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPlaybook without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-      );
-      client.innerApiCalls.createPlaybook =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPlaybook(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPlaybook with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPlaybook = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createPlaybook(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createPlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPlaybook with closed client', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createPlaybook(request), expectedError);
-    });
-  });
-
-  describe('deletePlaybook', () => {
-    it('invokes deletePlaybook without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePlaybook = stubSimpleCall(expectedResponse);
-      const [response] = await client.deletePlaybook(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePlaybook without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePlaybook =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePlaybook(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePlaybook with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePlaybook = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deletePlaybook(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deletePlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePlaybook with closed client', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deletePlaybook(request), expectedError);
-    });
-  });
-
-  describe('getPlaybook', () => {
-    it('invokes getPlaybook without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-      );
-      client.innerApiCalls.getPlaybook = stubSimpleCall(expectedResponse);
-      const [response] = await client.getPlaybook(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPlaybook without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-      );
-      client.innerApiCalls.getPlaybook =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPlaybook(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPlaybook with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPlaybook = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPlaybook(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPlaybook with closed client', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getPlaybook(request), expectedError);
-    });
-  });
-
-  describe('updatePlaybook', () => {
-    it('invokes updatePlaybook without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
-      );
-      request.playbook ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest',
-        ['playbook', 'name']
-      );
-      request.playbook.name = defaultValue1;
-      const expectedHeaderRequestParams = `playbook.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-      );
-      client.innerApiCalls.updatePlaybook = stubSimpleCall(expectedResponse);
-      const [response] = await client.updatePlaybook(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePlaybook without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
-      );
-      request.playbook ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest',
-        ['playbook', 'name']
-      );
-      request.playbook.name = defaultValue1;
-      const expectedHeaderRequestParams = `playbook.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-      );
-      client.innerApiCalls.updatePlaybook =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updatePlaybook(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updatePlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePlaybook with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
-      );
-      request.playbook ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest',
-        ['playbook', 'name']
-      );
-      request.playbook.name = defaultValue1;
-      const expectedHeaderRequestParams = `playbook.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updatePlaybook = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updatePlaybook(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updatePlaybook as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updatePlaybook as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updatePlaybook with closed client', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
-      );
-      request.playbook ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest',
-        ['playbook', 'name']
-      );
-      request.playbook.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updatePlaybook(request), expectedError);
-    });
-  });
-
-  describe('createPlaybookVersion', () => {
-    it('invokes createPlaybookVersion without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-      );
-      client.innerApiCalls.createPlaybookVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createPlaybookVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPlaybookVersion without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-      );
-      client.innerApiCalls.createPlaybookVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createPlaybookVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createPlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPlaybookVersion with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createPlaybookVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createPlaybookVersion(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createPlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createPlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createPlaybookVersion with closed client', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.createPlaybookVersion(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getPlaybookVersion', () => {
-    it('invokes getPlaybookVersion without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-      );
-      client.innerApiCalls.getPlaybookVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getPlaybookVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPlaybookVersion without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-      );
-      client.innerApiCalls.getPlaybookVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getPlaybookVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getPlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPlaybookVersion with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getPlaybookVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getPlaybookVersion(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getPlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getPlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getPlaybookVersion with closed client', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getPlaybookVersion(request), expectedError);
-    });
-  });
-
-  describe('deletePlaybookVersion', () => {
-    it('invokes deletePlaybookVersion without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePlaybookVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deletePlaybookVersion(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePlaybookVersion without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deletePlaybookVersion =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deletePlaybookVersion(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deletePlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePlaybookVersion with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deletePlaybookVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deletePlaybookVersion(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deletePlaybookVersion as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deletePlaybookVersion as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deletePlaybookVersion with closed client', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.deletePlaybookVersion(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listPlaybooks', () => {
-    it('invokes listPlaybooks without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-      ];
-      client.innerApiCalls.listPlaybooks = stubSimpleCall(expectedResponse);
-      const [response] = await client.listPlaybooks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPlaybooks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPlaybooks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPlaybooks without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-      ];
-      client.innerApiCalls.listPlaybooks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPlaybooks(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPlaybooks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPlaybooks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPlaybooks with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPlaybooks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPlaybooks(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPlaybooks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPlaybooks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPlaybooksStream without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-      ];
-      client.descriptors.page.listPlaybooks.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPlaybooksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.Playbook[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dialogflow.cx.v3beta1.Playbook) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPlaybooks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPlaybooks, request)
-      );
-      assert(
-        (client.descriptors.page.listPlaybooks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listPlaybooksStream with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPlaybooks.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPlaybooksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.Playbook[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dialogflow.cx.v3beta1.Playbook) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPlaybooks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPlaybooks, request)
-      );
-      assert(
-        (client.descriptors.page.listPlaybooks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listPlaybooks without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
-        ),
-      ];
-      client.descriptors.page.listPlaybooks.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook[] =
-        [];
-      const iterable = client.listPlaybooksAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPlaybooks.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listPlaybooks with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPlaybooks.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPlaybooksAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = playbooksModule.v3beta1.PlaybooksClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPlaybooks.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listPlaybookVersions', () => {
-    it('invokes listPlaybookVersions without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-      ];
-      client.innerApiCalls.listPlaybookVersions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listPlaybookVersions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPlaybookVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPlaybookVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPlaybookVersions without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-      ];
-      client.innerApiCalls.listPlaybookVersions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listPlaybookVersions(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listPlaybookVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPlaybookVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPlaybookVersions with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listPlaybookVersions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listPlaybookVersions(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listPlaybookVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listPlaybookVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listPlaybookVersionsStream without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-      ];
-      client.descriptors.page.listPlaybookVersions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listPlaybookVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'dialogflow.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPlaybookVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listPlaybookVersionsStream with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPlaybookVersions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listPlaybookVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'dialogflow.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listPlaybookVersions, request)
-      );
-      assert(
-        (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listPlaybookVersions without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
-        ),
-      ];
-      client.descriptors.page.listPlaybookVersions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion[] =
-        [];
-      const iterable = client.listPlaybookVersionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new playbooksModule.v3beta1.PlaybooksClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'dialogflow.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listPlaybookVersions with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listPlaybookVersions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listPlaybookVersionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new playbooksModule.v3beta1.PlaybooksClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'dialogflow.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new playbooksModule.v3beta1.PlaybooksClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = playbooksModule.v3beta1.PlaybooksClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.playbooksStub, undefined);
+            await client.initialize();
+            assert(client.playbooksStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.playbooksStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.playbooksStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+
+    describe('createPlaybook', () => {
+        it('invokes createPlaybook without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
+            );
+            client.innerApiCalls.createPlaybook = stubSimpleCall(expectedResponse);
+            const [response] = await client.createPlaybook(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlaybook without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
+            );
+            client.innerApiCalls.createPlaybook = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPlaybook(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlaybook with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPlaybook = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createPlaybook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlaybook with closed client', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createPlaybook(request), expectedError);
+        });
     });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('deletePlaybook', () => {
+        it('invokes deletePlaybook without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePlaybook = stubSimpleCall(expectedResponse);
+            const [response] = await client.deletePlaybook(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlaybook without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePlaybook = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePlaybook(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlaybook with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePlaybook = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deletePlaybook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlaybook with closed client', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deletePlaybook(request), expectedError);
+        });
+    });
+
+    describe('getPlaybook', () => {
+        it('invokes getPlaybook without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
+            );
+            client.innerApiCalls.getPlaybook = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPlaybook(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPlaybook without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
+            );
+            client.innerApiCalls.getPlaybook = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPlaybook(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPlaybook with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPlaybook = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPlaybook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPlaybook with closed client', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPlaybook(request), expectedError);
+        });
+    });
+
+    describe('updatePlaybook', () => {
+        it('invokes updatePlaybook without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
+            );
+            request.playbook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest', ['playbook', 'name']);
+            request.playbook.name = defaultValue1;
+            const expectedHeaderRequestParams = `playbook.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
+            );
+            client.innerApiCalls.updatePlaybook = stubSimpleCall(expectedResponse);
+            const [response] = await client.updatePlaybook(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePlaybook without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
+            );
+            request.playbook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest', ['playbook', 'name']);
+            request.playbook.name = defaultValue1;
+            const expectedHeaderRequestParams = `playbook.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()
+            );
+            client.innerApiCalls.updatePlaybook = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePlaybook(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePlaybook with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
+            );
+            request.playbook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest', ['playbook', 'name']);
+            request.playbook.name = defaultValue1;
+            const expectedHeaderRequestParams = `playbook.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePlaybook = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updatePlaybook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePlaybook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePlaybook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePlaybook with closed client', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest()
+            );
+            request.playbook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.UpdatePlaybookRequest', ['playbook', 'name']);
+            request.playbook.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updatePlaybook(request), expectedError);
+        });
+    });
+
+    describe('createPlaybookVersion', () => {
+        it('invokes createPlaybookVersion without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
+            );
+            client.innerApiCalls.createPlaybookVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.createPlaybookVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlaybookVersion without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
+            );
+            client.innerApiCalls.createPlaybookVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPlaybookVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlaybookVersion with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPlaybookVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createPlaybookVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPlaybookVersion with closed client', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.CreatePlaybookVersionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createPlaybookVersion(request), expectedError);
+        });
+    });
+
+    describe('getPlaybookVersion', () => {
+        it('invokes getPlaybookVersion without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
+            );
+            client.innerApiCalls.getPlaybookVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPlaybookVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPlaybookVersion without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()
+            );
+            client.innerApiCalls.getPlaybookVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPlaybookVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPlaybookVersion with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPlaybookVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPlaybookVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPlaybookVersion with closed client', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.GetPlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPlaybookVersion(request), expectedError);
+        });
+    });
+
+    describe('deletePlaybookVersion', () => {
+        it('invokes deletePlaybookVersion without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePlaybookVersion = stubSimpleCall(expectedResponse);
+            const [response] = await client.deletePlaybookVersion(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlaybookVersion without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deletePlaybookVersion = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePlaybookVersion(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlaybookVersion with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePlaybookVersion = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deletePlaybookVersion(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePlaybookVersion as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePlaybookVersion as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePlaybookVersion with closed client', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.DeletePlaybookVersionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deletePlaybookVersion(request), expectedError);
+        });
+    });
+
+    describe('listPlaybooks', () => {
+        it('invokes listPlaybooks without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+            ];
+            client.innerApiCalls.listPlaybooks = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPlaybooks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPlaybooks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlaybooks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPlaybooks without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+            ];
+            client.innerApiCalls.listPlaybooks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPlaybooks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPlaybooks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlaybooks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPlaybooks with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPlaybooks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPlaybooks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPlaybooks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlaybooks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPlaybooksStream without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+            ];
+            client.descriptors.page.listPlaybooks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPlaybooksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dialogflow.cx.v3beta1.Playbook[] = [];
+                stream.on('data', (response: protos.google.cloud.dialogflow.cx.v3beta1.Playbook) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPlaybooks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPlaybooks, request));
+            assert(
+                (client.descriptors.page.listPlaybooks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPlaybooksStream with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPlaybooks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPlaybooksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dialogflow.cx.v3beta1.Playbook[] = [];
+                stream.on('data', (response: protos.google.cloud.dialogflow.cx.v3beta1.Playbook) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPlaybooks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPlaybooks, request));
+            assert(
+                (client.descriptors.page.listPlaybooks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPlaybooks without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.Playbook()),
+            ];
+            client.descriptors.page.listPlaybooks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook[] = [];
+            const iterable = client.listPlaybooksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('Path templates', () => {
-    describe('agent', async () => {
-      const fakePath = '/rendered/path/agent';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.agentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.agentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('agentPath', () => {
-        const result = client.agentPath(
-          'projectValue',
-          'locationValue',
-          'agentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.agentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromAgentName', () => {
-        const result = client.matchProjectFromAgentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.agentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromAgentName', () => {
-        const result = client.matchLocationFromAgentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.agentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromAgentName', () => {
-        const result = client.matchAgentFromAgentName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.agentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('uses async iteration with listPlaybooks with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPlaybooks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPlaybooksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPlaybooks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('agentGenerativeSettings', async () => {
-      const fakePath = '/rendered/path/agentGenerativeSettings';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.agentGenerativeSettingsPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listPlaybookVersions', () => {
+        it('invokes listPlaybookVersions without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+            ];
+            client.innerApiCalls.listPlaybookVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPlaybookVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPlaybookVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlaybookVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('agentGenerativeSettingsPath', () => {
-        const result = client.agentGenerativeSettingsPath(
-          'projectValue',
-          'locationValue',
-          'agentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.agentGenerativeSettingsPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listPlaybookVersions without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+            ];
+            client.innerApiCalls.listPlaybookVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPlaybookVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPlaybookVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlaybookVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromAgentGenerativeSettingsName', () => {
-        const result =
-          client.matchProjectFromAgentGenerativeSettingsName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.agentGenerativeSettingsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listPlaybookVersions with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPlaybookVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPlaybookVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPlaybookVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPlaybookVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromAgentGenerativeSettingsName', () => {
-        const result =
-          client.matchLocationFromAgentGenerativeSettingsName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.agentGenerativeSettingsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listPlaybookVersionsStream without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+            ];
+            client.descriptors.page.listPlaybookVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPlaybookVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPlaybookVersions, request));
+            assert(
+                (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-      it('matchAgentFromAgentGenerativeSettingsName', () => {
-        const result =
-          client.matchAgentFromAgentGenerativeSettingsName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates.agentGenerativeSettingsPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listPlaybookVersionsStream with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPlaybookVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPlaybookVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion[] = [];
+                stream.on('data', (response: protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPlaybookVersions, request));
+            assert(
+                (client.descriptors.page.listPlaybookVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPlaybookVersions without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+              generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3beta1.PlaybookVersion()),
+            ];
+            client.descriptors.page.listPlaybookVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion[] = [];
+            const iterable = client.listPlaybookVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPlaybookVersions with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPlaybookVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPlaybookVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPlaybookVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('agentValidationResult', async () => {
-      const fakePath = '/rendered/path/agentValidationResult';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.agentValidationResultPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.agentValidationResultPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('agentValidationResultPath', () => {
-        const result = client.agentValidationResultPath(
-          'projectValue',
-          'locationValue',
-          'agentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.agentValidationResultPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('agent', async () => {
+            const fakePath = "/rendered/path/agent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.agentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.agentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromAgentValidationResultName', () => {
-        const result =
-          client.matchProjectFromAgentValidationResultName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.agentValidationResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('agentPath', () => {
+                const result = client.agentPath("projectValue", "locationValue", "agentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.agentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromAgentValidationResultName', () => {
-        const result =
-          client.matchLocationFromAgentValidationResultName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.agentValidationResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromAgentName', () => {
+                const result = client.matchProjectFromAgentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.agentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchAgentFromAgentValidationResultName', () => {
-        const result = client.matchAgentFromAgentValidationResultName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates.agentValidationResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromAgentName', () => {
+                const result = client.matchLocationFromAgentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.agentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromAgentName', () => {
+                const result = client.matchAgentFromAgentName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.agentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('agentGenerativeSettings', async () => {
+            const fakePath = "/rendered/path/agentGenerativeSettings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.agentGenerativeSettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.agentGenerativeSettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('agentGenerativeSettingsPath', () => {
+                const result = client.agentGenerativeSettingsPath("projectValue", "locationValue", "agentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.agentGenerativeSettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAgentGenerativeSettingsName', () => {
+                const result = client.matchProjectFromAgentGenerativeSettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.agentGenerativeSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAgentGenerativeSettingsName', () => {
+                const result = client.matchLocationFromAgentGenerativeSettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.agentGenerativeSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromAgentGenerativeSettingsName', () => {
+                const result = client.matchAgentFromAgentGenerativeSettingsName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.agentGenerativeSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('agentValidationResult', async () => {
+            const fakePath = "/rendered/path/agentValidationResult";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.agentValidationResultPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.agentValidationResultPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('agentValidationResultPath', () => {
+                const result = client.agentValidationResultPath("projectValue", "locationValue", "agentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.agentValidationResultPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAgentValidationResultName', () => {
+                const result = client.matchProjectFromAgentValidationResultName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.agentValidationResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAgentValidationResultName', () => {
+                const result = client.matchLocationFromAgentValidationResultName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.agentValidationResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromAgentValidationResultName', () => {
+                const result = client.matchAgentFromAgentValidationResultName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.agentValidationResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('changelog', async () => {
+            const fakePath = "/rendered/path/changelog";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                changelog: "changelogValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.changelogPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.changelogPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('changelogPath', () => {
+                const result = client.changelogPath("projectValue", "locationValue", "agentValue", "changelogValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.changelogPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromChangelogName', () => {
+                const result = client.matchProjectFromChangelogName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.changelogPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromChangelogName', () => {
+                const result = client.matchLocationFromChangelogName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.changelogPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromChangelogName', () => {
+                const result = client.matchAgentFromChangelogName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.changelogPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChangelogFromChangelogName', () => {
+                const result = client.matchChangelogFromChangelogName(fakePath);
+                assert.strictEqual(result, "changelogValue");
+                assert((client.pathTemplates.changelogPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('continuousTestResult', async () => {
+            const fakePath = "/rendered/path/continuousTestResult";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                environment: "environmentValue",
+                continuous_test_result: "continuousTestResultValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.continuousTestResultPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.continuousTestResultPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('continuousTestResultPath', () => {
+                const result = client.continuousTestResultPath("projectValue", "locationValue", "agentValue", "environmentValue", "continuousTestResultValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.continuousTestResultPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromContinuousTestResultName', () => {
+                const result = client.matchProjectFromContinuousTestResultName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.continuousTestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromContinuousTestResultName', () => {
+                const result = client.matchLocationFromContinuousTestResultName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.continuousTestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromContinuousTestResultName', () => {
+                const result = client.matchAgentFromContinuousTestResultName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.continuousTestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromContinuousTestResultName', () => {
+                const result = client.matchEnvironmentFromContinuousTestResultName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.continuousTestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContinuousTestResultFromContinuousTestResultName', () => {
+                const result = client.matchContinuousTestResultFromContinuousTestResultName(fakePath);
+                assert.strictEqual(result, "continuousTestResultValue");
+                assert((client.pathTemplates.continuousTestResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('conversation', async () => {
+            const fakePath = "/rendered/path/conversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                conversation: "conversationValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.conversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.conversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('conversationPath', () => {
+                const result = client.conversationPath("projectValue", "locationValue", "agentValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.conversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromConversationName', () => {
+                const result = client.matchProjectFromConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromConversationName', () => {
+                const result = client.matchLocationFromConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromConversationName', () => {
+                const result = client.matchAgentFromConversationName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromConversationName', () => {
+                const result = client.matchConversationFromConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deployment', async () => {
+            const fakePath = "/rendered/path/deployment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                environment: "environmentValue",
+                deployment: "deploymentValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deploymentPath', () => {
+                const result = client.deploymentPath("projectValue", "locationValue", "agentValue", "environmentValue", "deploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDeploymentName', () => {
+                const result = client.matchProjectFromDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDeploymentName', () => {
+                const result = client.matchLocationFromDeploymentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromDeploymentName', () => {
+                const result = client.matchAgentFromDeploymentName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromDeploymentName', () => {
+                const result = client.matchEnvironmentFromDeploymentName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentFromDeploymentName', () => {
+                const result = client.matchDeploymentFromDeploymentName(fakePath);
+                assert.strictEqual(result, "deploymentValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('entityType', async () => {
+            const fakePath = "/rendered/path/entityType";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                entity_type: "entityTypeValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entityTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entityTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entityTypePath', () => {
+                const result = client.entityTypePath("projectValue", "locationValue", "agentValue", "entityTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entityTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntityTypeName', () => {
+                const result = client.matchProjectFromEntityTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntityTypeName', () => {
+                const result = client.matchLocationFromEntityTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromEntityTypeName', () => {
+                const result = client.matchAgentFromEntityTypeName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityTypeFromEntityTypeName', () => {
+                const result = client.matchEntityTypeFromEntityTypeName(fakePath);
+                assert.strictEqual(result, "entityTypeValue");
+                assert((client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('environment', async () => {
+            const fakePath = "/rendered/path/environment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                environment: "environmentValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.environmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.environmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('environmentPath', () => {
+                const result = client.environmentPath("projectValue", "locationValue", "agentValue", "environmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.environmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEnvironmentName', () => {
+                const result = client.matchProjectFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEnvironmentName', () => {
+                const result = client.matchLocationFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromEnvironmentName', () => {
+                const result = client.matchAgentFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromEnvironmentName', () => {
+                const result = client.matchEnvironmentFromEnvironmentName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('example', async () => {
+            const fakePath = "/rendered/path/example";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                playbook: "playbookValue",
+                example: "exampleValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.examplePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.examplePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('examplePath', () => {
+                const result = client.examplePath("projectValue", "locationValue", "agentValue", "playbookValue", "exampleValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.examplePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromExampleName', () => {
+                const result = client.matchProjectFromExampleName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.examplePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromExampleName', () => {
+                const result = client.matchLocationFromExampleName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.examplePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromExampleName', () => {
+                const result = client.matchAgentFromExampleName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.examplePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPlaybookFromExampleName', () => {
+                const result = client.matchPlaybookFromExampleName(fakePath);
+                assert.strictEqual(result, "playbookValue");
+                assert((client.pathTemplates.examplePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExampleFromExampleName', () => {
+                const result = client.matchExampleFromExampleName(fakePath);
+                assert.strictEqual(result, "exampleValue");
+                assert((client.pathTemplates.examplePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('experiment', async () => {
+            const fakePath = "/rendered/path/experiment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                environment: "environmentValue",
+                experiment: "experimentValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.experimentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.experimentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('experimentPath', () => {
+                const result = client.experimentPath("projectValue", "locationValue", "agentValue", "environmentValue", "experimentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.experimentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromExperimentName', () => {
+                const result = client.matchProjectFromExperimentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.experimentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromExperimentName', () => {
+                const result = client.matchLocationFromExperimentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.experimentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromExperimentName', () => {
+                const result = client.matchAgentFromExperimentName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.experimentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromExperimentName', () => {
+                const result = client.matchEnvironmentFromExperimentName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.experimentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchExperimentFromExperimentName', () => {
+                const result = client.matchExperimentFromExperimentName(fakePath);
+                assert.strictEqual(result, "experimentValue");
+                assert((client.pathTemplates.experimentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('flow', async () => {
+            const fakePath = "/rendered/path/flow";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                flow: "flowValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.flowPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.flowPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('flowPath', () => {
+                const result = client.flowPath("projectValue", "locationValue", "agentValue", "flowValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.flowPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromFlowName', () => {
+                const result = client.matchProjectFromFlowName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.flowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFlowName', () => {
+                const result = client.matchLocationFromFlowName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.flowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromFlowName', () => {
+                const result = client.matchAgentFromFlowName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.flowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFlowFromFlowName', () => {
+                const result = client.matchFlowFromFlowName(fakePath);
+                assert.strictEqual(result, "flowValue");
+                assert((client.pathTemplates.flowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('flowValidationResult', async () => {
+            const fakePath = "/rendered/path/flowValidationResult";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                flow: "flowValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.flowValidationResultPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.flowValidationResultPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('flowValidationResultPath', () => {
+                const result = client.flowValidationResultPath("projectValue", "locationValue", "agentValue", "flowValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.flowValidationResultPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromFlowValidationResultName', () => {
+                const result = client.matchProjectFromFlowValidationResultName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.flowValidationResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFlowValidationResultName', () => {
+                const result = client.matchLocationFromFlowValidationResultName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.flowValidationResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromFlowValidationResultName', () => {
+                const result = client.matchAgentFromFlowValidationResultName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.flowValidationResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFlowFromFlowValidationResultName', () => {
+                const result = client.matchFlowFromFlowValidationResultName(fakePath);
+                assert.strictEqual(result, "flowValue");
+                assert((client.pathTemplates.flowValidationResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('generator', async () => {
+            const fakePath = "/rendered/path/generator";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                generator: "generatorValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.generatorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.generatorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('generatorPath', () => {
+                const result = client.generatorPath("projectValue", "locationValue", "agentValue", "generatorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.generatorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGeneratorName', () => {
+                const result = client.matchProjectFromGeneratorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGeneratorName', () => {
+                const result = client.matchLocationFromGeneratorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromGeneratorName', () => {
+                const result = client.matchAgentFromGeneratorName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGeneratorFromGeneratorName', () => {
+                const result = client.matchGeneratorFromGeneratorName(fakePath);
+                assert.strictEqual(result, "generatorValue");
+                assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('intent', async () => {
+            const fakePath = "/rendered/path/intent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                intent: "intentValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.intentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.intentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('intentPath', () => {
+                const result = client.intentPath("projectValue", "locationValue", "agentValue", "intentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.intentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromIntentName', () => {
+                const result = client.matchProjectFromIntentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromIntentName', () => {
+                const result = client.matchLocationFromIntentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromIntentName', () => {
+                const result = client.matchAgentFromIntentName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchIntentFromIntentName', () => {
+                const result = client.matchIntentFromIntentName(fakePath);
+                assert.strictEqual(result, "intentValue");
+                assert((client.pathTemplates.intentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('page', async () => {
+            const fakePath = "/rendered/path/page";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                flow: "flowValue",
+                page: "pageValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.pagePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.pagePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('pagePath', () => {
+                const result = client.pagePath("projectValue", "locationValue", "agentValue", "flowValue", "pageValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.pagePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPageName', () => {
+                const result = client.matchProjectFromPageName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.pagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPageName', () => {
+                const result = client.matchLocationFromPageName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.pagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromPageName', () => {
+                const result = client.matchAgentFromPageName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.pagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFlowFromPageName', () => {
+                const result = client.matchFlowFromPageName(fakePath);
+                assert.strictEqual(result, "flowValue");
+                assert((client.pathTemplates.pagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPageFromPageName', () => {
+                const result = client.matchPageFromPageName(fakePath);
+                assert.strictEqual(result, "pageValue");
+                assert((client.pathTemplates.pagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('playbook', async () => {
+            const fakePath = "/rendered/path/playbook";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                playbook: "playbookValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.playbookPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.playbookPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('playbookPath', () => {
+                const result = client.playbookPath("projectValue", "locationValue", "agentValue", "playbookValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.playbookPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPlaybookName', () => {
+                const result = client.matchProjectFromPlaybookName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.playbookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPlaybookName', () => {
+                const result = client.matchLocationFromPlaybookName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.playbookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromPlaybookName', () => {
+                const result = client.matchAgentFromPlaybookName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.playbookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPlaybookFromPlaybookName', () => {
+                const result = client.matchPlaybookFromPlaybookName(fakePath);
+                assert.strictEqual(result, "playbookValue");
+                assert((client.pathTemplates.playbookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('playbookVersion', async () => {
+            const fakePath = "/rendered/path/playbookVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                playbook: "playbookValue",
+                version: "versionValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.playbookVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.playbookVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('playbookVersionPath', () => {
+                const result = client.playbookVersionPath("projectValue", "locationValue", "agentValue", "playbookValue", "versionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.playbookVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPlaybookVersionName', () => {
+                const result = client.matchProjectFromPlaybookVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPlaybookVersionName', () => {
+                const result = client.matchLocationFromPlaybookVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromPlaybookVersionName', () => {
+                const result = client.matchAgentFromPlaybookVersionName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPlaybookFromPlaybookVersionName', () => {
+                const result = client.matchPlaybookFromPlaybookVersionName(fakePath);
+                assert.strictEqual(result, "playbookValue");
+                assert((client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVersionFromPlaybookVersionName', () => {
+                const result = client.matchVersionFromPlaybookVersionName(fakePath);
+                assert.strictEqual(result, "versionValue");
+                assert((client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAgentEnvironmentSessionEntityType', async () => {
+            const fakePath = "/rendered/path/projectLocationAgentEnvironmentSessionEntityType";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                environment: "environmentValue",
+                session: "sessionValue",
+                entity_type: "entityTypeValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAgentEnvironmentSessionEntityTypePath', () => {
+                const result = client.projectLocationAgentEnvironmentSessionEntityTypePath("projectValue", "locationValue", "agentValue", "environmentValue", "sessionValue", "entityTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
+                const result = client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
+                const result = client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
+                const result = client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
+                const result = client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "environmentValue");
+                assert((client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
+                const result = client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
+                const result = client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "entityTypeValue");
+                assert((client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAgentFlowTransitionRouteGroup', async () => {
+            const fakePath = "/rendered/path/projectLocationAgentFlowTransitionRouteGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                flow: "flowValue",
+                transition_route_group: "transitionRouteGroupValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAgentFlowTransitionRouteGroupPath', () => {
+                const result = client.projectLocationAgentFlowTransitionRouteGroupPath("projectValue", "locationValue", "agentValue", "flowValue", "transitionRouteGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+                const result = client.matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+                const result = client.matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+                const result = client.matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+                const result = client.matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "flowValue");
+                assert((client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+                const result = client.matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "transitionRouteGroupValue");
+                assert((client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAgentSessionEntityType', async () => {
+            const fakePath = "/rendered/path/projectLocationAgentSessionEntityType";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                session: "sessionValue",
+                entity_type: "entityTypeValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAgentSessionEntityTypePath', () => {
+                const result = client.projectLocationAgentSessionEntityTypePath("projectValue", "locationValue", "agentValue", "sessionValue", "entityTypeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAgentSessionEntityTypeName', () => {
+                const result = client.matchProjectFromProjectLocationAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAgentSessionEntityTypeName', () => {
+                const result = client.matchLocationFromProjectLocationAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromProjectLocationAgentSessionEntityTypeName', () => {
+                const result = client.matchAgentFromProjectLocationAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromProjectLocationAgentSessionEntityTypeName', () => {
+                const result = client.matchSessionFromProjectLocationAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntityTypeFromProjectLocationAgentSessionEntityTypeName', () => {
+                const result = client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(fakePath);
+                assert.strictEqual(result, "entityTypeValue");
+                assert((client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationAgentTransitionRouteGroup', async () => {
+            const fakePath = "/rendered/path/projectLocationAgentTransitionRouteGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                transition_route_group: "transitionRouteGroupValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationAgentTransitionRouteGroupPath', () => {
+                const result = client.projectLocationAgentTransitionRouteGroupPath("projectValue", "locationValue", "agentValue", "transitionRouteGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationAgentTransitionRouteGroupName', () => {
+                const result = client.matchProjectFromProjectLocationAgentTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationAgentTransitionRouteGroupName', () => {
+                const result = client.matchLocationFromProjectLocationAgentTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromProjectLocationAgentTransitionRouteGroupName', () => {
+                const result = client.matchAgentFromProjectLocationAgentTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName', () => {
+                const result = client.matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(fakePath);
+                assert.strictEqual(result, "transitionRouteGroupValue");
+                assert((client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('securitySettings', async () => {
+            const fakePath = "/rendered/path/securitySettings";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                security_settings: "securitySettingsValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.securitySettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.securitySettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('securitySettingsPath', () => {
+                const result = client.securitySettingsPath("projectValue", "locationValue", "securitySettingsValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.securitySettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSecuritySettingsName', () => {
+                const result = client.matchProjectFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSecuritySettingsName', () => {
+                const result = client.matchLocationFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSecuritySettingsFromSecuritySettingsName', () => {
+                const result = client.matchSecuritySettingsFromSecuritySettingsName(fakePath);
+                assert.strictEqual(result, "securitySettingsValue");
+                assert((client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('testCase', async () => {
+            const fakePath = "/rendered/path/testCase";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                test_case: "testCaseValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.testCasePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.testCasePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('testCasePath', () => {
+                const result = client.testCasePath("projectValue", "locationValue", "agentValue", "testCaseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.testCasePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTestCaseName', () => {
+                const result = client.matchProjectFromTestCaseName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.testCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTestCaseName', () => {
+                const result = client.matchLocationFromTestCaseName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.testCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromTestCaseName', () => {
+                const result = client.matchAgentFromTestCaseName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.testCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTestCaseFromTestCaseName', () => {
+                const result = client.matchTestCaseFromTestCaseName(fakePath);
+                assert.strictEqual(result, "testCaseValue");
+                assert((client.pathTemplates.testCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('testCaseResult', async () => {
+            const fakePath = "/rendered/path/testCaseResult";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                test_case: "testCaseValue",
+                result: "resultValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.testCaseResultPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.testCaseResultPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('testCaseResultPath', () => {
+                const result = client.testCaseResultPath("projectValue", "locationValue", "agentValue", "testCaseValue", "resultValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.testCaseResultPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTestCaseResultName', () => {
+                const result = client.matchProjectFromTestCaseResultName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTestCaseResultName', () => {
+                const result = client.matchLocationFromTestCaseResultName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromTestCaseResultName', () => {
+                const result = client.matchAgentFromTestCaseResultName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTestCaseFromTestCaseResultName', () => {
+                const result = client.matchTestCaseFromTestCaseResultName(fakePath);
+                assert.strictEqual(result, "testCaseValue");
+                assert((client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchResultFromTestCaseResultName', () => {
+                const result = client.matchResultFromTestCaseResultName(fakePath);
+                assert.strictEqual(result, "resultValue");
+                assert((client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tool', async () => {
+            const fakePath = "/rendered/path/tool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                tool: "toolValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.toolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.toolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('toolPath', () => {
+                const result = client.toolPath("projectValue", "locationValue", "agentValue", "toolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.toolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromToolName', () => {
+                const result = client.matchProjectFromToolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromToolName', () => {
+                const result = client.matchLocationFromToolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromToolName', () => {
+                const result = client.matchAgentFromToolName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchToolFromToolName', () => {
+                const result = client.matchToolFromToolName(fakePath);
+                assert.strictEqual(result, "toolValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('toolVersion', async () => {
+            const fakePath = "/rendered/path/toolVersion";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                tool: "toolValue",
+                version: "versionValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.toolVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.toolVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('toolVersionPath', () => {
+                const result = client.toolVersionPath("projectValue", "locationValue", "agentValue", "toolValue", "versionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.toolVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromToolVersionName', () => {
+                const result = client.matchProjectFromToolVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromToolVersionName', () => {
+                const result = client.matchLocationFromToolVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromToolVersionName', () => {
+                const result = client.matchAgentFromToolVersionName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchToolFromToolVersionName', () => {
+                const result = client.matchToolFromToolVersionName(fakePath);
+                assert.strictEqual(result, "toolValue");
+                assert((client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVersionFromToolVersionName', () => {
+                const result = client.matchVersionFromToolVersionName(fakePath);
+                assert.strictEqual(result, "versionValue");
+                assert((client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('version', async () => {
+            const fakePath = "/rendered/path/version";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                flow: "flowValue",
+                version: "versionValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.versionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.versionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('versionPath', () => {
+                const result = client.versionPath("projectValue", "locationValue", "agentValue", "flowValue", "versionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.versionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVersionName', () => {
+                const result = client.matchProjectFromVersionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.versionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVersionName', () => {
+                const result = client.matchLocationFromVersionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.versionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromVersionName', () => {
+                const result = client.matchAgentFromVersionName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.versionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFlowFromVersionName', () => {
+                const result = client.matchFlowFromVersionName(fakePath);
+                assert.strictEqual(result, "flowValue");
+                assert((client.pathTemplates.versionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVersionFromVersionName', () => {
+                const result = client.matchVersionFromVersionName(fakePath);
+                assert.strictEqual(result, "versionValue");
+                assert((client.pathTemplates.versionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('webhook', async () => {
+            const fakePath = "/rendered/path/webhook";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                webhook: "webhookValue",
+            };
+            const client = new playbooksModule.v3beta1.PlaybooksClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.webhookPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.webhookPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('webhookPath', () => {
+                const result = client.webhookPath("projectValue", "locationValue", "agentValue", "webhookValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.webhookPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWebhookName', () => {
+                const result = client.matchProjectFromWebhookName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.webhookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWebhookName', () => {
+                const result = client.matchLocationFromWebhookName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.webhookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromWebhookName', () => {
+                const result = client.matchAgentFromWebhookName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.webhookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWebhookFromWebhookName', () => {
+                const result = client.matchWebhookFromWebhookName(fakePath);
+                assert.strictEqual(result, "webhookValue");
+                assert((client.pathTemplates.webhookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('changelog', async () => {
-      const fakePath = '/rendered/path/changelog';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        changelog: 'changelogValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.changelogPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.changelogPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('changelogPath', () => {
-        const result = client.changelogPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'changelogValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.changelogPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromChangelogName', () => {
-        const result = client.matchProjectFromChangelogName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromChangelogName', () => {
-        const result = client.matchLocationFromChangelogName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromChangelogName', () => {
-        const result = client.matchAgentFromChangelogName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChangelogFromChangelogName', () => {
-        const result = client.matchChangelogFromChangelogName(fakePath);
-        assert.strictEqual(result, 'changelogValue');
-        assert(
-          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('continuousTestResult', async () => {
-      const fakePath = '/rendered/path/continuousTestResult';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        environment: 'environmentValue',
-        continuous_test_result: 'continuousTestResultValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.continuousTestResultPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.continuousTestResultPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('continuousTestResultPath', () => {
-        const result = client.continuousTestResultPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'environmentValue',
-          'continuousTestResultValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.continuousTestResultPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromContinuousTestResultName', () => {
-        const result =
-          client.matchProjectFromContinuousTestResultName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.continuousTestResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromContinuousTestResultName', () => {
-        const result =
-          client.matchLocationFromContinuousTestResultName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.continuousTestResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromContinuousTestResultName', () => {
-        const result = client.matchAgentFromContinuousTestResultName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates.continuousTestResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromContinuousTestResultName', () => {
-        const result =
-          client.matchEnvironmentFromContinuousTestResultName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (
-            client.pathTemplates.continuousTestResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchContinuousTestResultFromContinuousTestResultName', () => {
-        const result =
-          client.matchContinuousTestResultFromContinuousTestResultName(
-            fakePath
-          );
-        assert.strictEqual(result, 'continuousTestResultValue');
-        assert(
-          (
-            client.pathTemplates.continuousTestResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('conversation', async () => {
-      const fakePath = '/rendered/path/conversation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        conversation: 'conversationValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.conversationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.conversationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('conversationPath', () => {
-        const result = client.conversationPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'conversationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.conversationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConversationName', () => {
-        const result = client.matchProjectFromConversationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConversationName', () => {
-        const result = client.matchLocationFromConversationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromConversationName', () => {
-        const result = client.matchAgentFromConversationName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromConversationName', () => {
-        const result = client.matchConversationFromConversationName(fakePath);
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('deployment', async () => {
-      const fakePath = '/rendered/path/deployment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        environment: 'environmentValue',
-        deployment: 'deploymentValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.deploymentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.deploymentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('deploymentPath', () => {
-        const result = client.deploymentPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'environmentValue',
-          'deploymentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromDeploymentName', () => {
-        const result = client.matchProjectFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromDeploymentName', () => {
-        const result = client.matchLocationFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromDeploymentName', () => {
-        const result = client.matchAgentFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromDeploymentName', () => {
-        const result = client.matchEnvironmentFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDeploymentFromDeploymentName', () => {
-        const result = client.matchDeploymentFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'deploymentValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('entityType', async () => {
-      const fakePath = '/rendered/path/entityType';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        entity_type: 'entityTypeValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.entityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.entityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('entityTypePath', () => {
-        const result = client.entityTypePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'entityTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEntityTypeName', () => {
-        const result = client.matchProjectFromEntityTypeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEntityTypeName', () => {
-        const result = client.matchLocationFromEntityTypeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromEntityTypeName', () => {
-        const result = client.matchAgentFromEntityTypeName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntityTypeFromEntityTypeName', () => {
-        const result = client.matchEntityTypeFromEntityTypeName(fakePath);
-        assert.strictEqual(result, 'entityTypeValue');
-        assert(
-          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('environment', async () => {
-      const fakePath = '/rendered/path/environment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        environment: 'environmentValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.environmentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.environmentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('environmentPath', () => {
-        const result = client.environmentPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'environmentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.environmentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromEnvironmentName', () => {
-        const result = client.matchProjectFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromEnvironmentName', () => {
-        const result = client.matchLocationFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromEnvironmentName', () => {
-        const result = client.matchAgentFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromEnvironmentName', () => {
-        const result = client.matchEnvironmentFromEnvironmentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.environmentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('example', async () => {
-      const fakePath = '/rendered/path/example';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        playbook: 'playbookValue',
-        example: 'exampleValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.examplePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.examplePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('examplePath', () => {
-        const result = client.examplePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'playbookValue',
-          'exampleValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.examplePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromExampleName', () => {
-        const result = client.matchProjectFromExampleName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.examplePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromExampleName', () => {
-        const result = client.matchLocationFromExampleName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.examplePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromExampleName', () => {
-        const result = client.matchAgentFromExampleName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.examplePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPlaybookFromExampleName', () => {
-        const result = client.matchPlaybookFromExampleName(fakePath);
-        assert.strictEqual(result, 'playbookValue');
-        assert(
-          (client.pathTemplates.examplePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExampleFromExampleName', () => {
-        const result = client.matchExampleFromExampleName(fakePath);
-        assert.strictEqual(result, 'exampleValue');
-        assert(
-          (client.pathTemplates.examplePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('experiment', async () => {
-      const fakePath = '/rendered/path/experiment';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        environment: 'environmentValue',
-        experiment: 'experimentValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.experimentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.experimentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('experimentPath', () => {
-        const result = client.experimentPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'environmentValue',
-          'experimentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.experimentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromExperimentName', () => {
-        const result = client.matchProjectFromExperimentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromExperimentName', () => {
-        const result = client.matchLocationFromExperimentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromExperimentName', () => {
-        const result = client.matchAgentFromExperimentName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromExperimentName', () => {
-        const result = client.matchEnvironmentFromExperimentName(fakePath);
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchExperimentFromExperimentName', () => {
-        const result = client.matchExperimentFromExperimentName(fakePath);
-        assert.strictEqual(result, 'experimentValue');
-        assert(
-          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('flow', async () => {
-      const fakePath = '/rendered/path/flow';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        flow: 'flowValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.flowPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.flowPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('flowPath', () => {
-        const result = client.flowPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'flowValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.flowPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromFlowName', () => {
-        const result = client.matchProjectFromFlowName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.flowPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFlowName', () => {
-        const result = client.matchLocationFromFlowName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.flowPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromFlowName', () => {
-        const result = client.matchAgentFromFlowName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.flowPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFlowFromFlowName', () => {
-        const result = client.matchFlowFromFlowName(fakePath);
-        assert.strictEqual(result, 'flowValue');
-        assert(
-          (client.pathTemplates.flowPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('flowValidationResult', async () => {
-      const fakePath = '/rendered/path/flowValidationResult';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        flow: 'flowValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.flowValidationResultPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.flowValidationResultPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('flowValidationResultPath', () => {
-        const result = client.flowValidationResultPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'flowValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.flowValidationResultPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromFlowValidationResultName', () => {
-        const result =
-          client.matchProjectFromFlowValidationResultName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.flowValidationResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromFlowValidationResultName', () => {
-        const result =
-          client.matchLocationFromFlowValidationResultName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.flowValidationResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromFlowValidationResultName', () => {
-        const result = client.matchAgentFromFlowValidationResultName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates.flowValidationResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFlowFromFlowValidationResultName', () => {
-        const result = client.matchFlowFromFlowValidationResultName(fakePath);
-        assert.strictEqual(result, 'flowValue');
-        assert(
-          (
-            client.pathTemplates.flowValidationResultPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('generator', async () => {
-      const fakePath = '/rendered/path/generator';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        generator: 'generatorValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.generatorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.generatorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('generatorPath', () => {
-        const result = client.generatorPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'generatorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.generatorPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromGeneratorName', () => {
-        const result = client.matchProjectFromGeneratorName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromGeneratorName', () => {
-        const result = client.matchLocationFromGeneratorName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromGeneratorName', () => {
-        const result = client.matchAgentFromGeneratorName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGeneratorFromGeneratorName', () => {
-        const result = client.matchGeneratorFromGeneratorName(fakePath);
-        assert.strictEqual(result, 'generatorValue');
-        assert(
-          (client.pathTemplates.generatorPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('intent', async () => {
-      const fakePath = '/rendered/path/intent';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        intent: 'intentValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.intentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.intentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('intentPath', () => {
-        const result = client.intentPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'intentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.intentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromIntentName', () => {
-        const result = client.matchProjectFromIntentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.intentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromIntentName', () => {
-        const result = client.matchLocationFromIntentName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.intentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromIntentName', () => {
-        const result = client.matchAgentFromIntentName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.intentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchIntentFromIntentName', () => {
-        const result = client.matchIntentFromIntentName(fakePath);
-        assert.strictEqual(result, 'intentValue');
-        assert(
-          (client.pathTemplates.intentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('page', async () => {
-      const fakePath = '/rendered/path/page';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        flow: 'flowValue',
-        page: 'pageValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.pagePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.pagePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('pagePath', () => {
-        const result = client.pagePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'flowValue',
-          'pageValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.pagePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPageName', () => {
-        const result = client.matchProjectFromPageName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.pagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPageName', () => {
-        const result = client.matchLocationFromPageName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.pagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromPageName', () => {
-        const result = client.matchAgentFromPageName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.pagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFlowFromPageName', () => {
-        const result = client.matchFlowFromPageName(fakePath);
-        assert.strictEqual(result, 'flowValue');
-        assert(
-          (client.pathTemplates.pagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPageFromPageName', () => {
-        const result = client.matchPageFromPageName(fakePath);
-        assert.strictEqual(result, 'pageValue');
-        assert(
-          (client.pathTemplates.pagePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('playbook', async () => {
-      const fakePath = '/rendered/path/playbook';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        playbook: 'playbookValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.playbookPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.playbookPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('playbookPath', () => {
-        const result = client.playbookPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'playbookValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.playbookPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPlaybookName', () => {
-        const result = client.matchProjectFromPlaybookName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.playbookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPlaybookName', () => {
-        const result = client.matchLocationFromPlaybookName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.playbookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromPlaybookName', () => {
-        const result = client.matchAgentFromPlaybookName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.playbookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPlaybookFromPlaybookName', () => {
-        const result = client.matchPlaybookFromPlaybookName(fakePath);
-        assert.strictEqual(result, 'playbookValue');
-        assert(
-          (client.pathTemplates.playbookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('playbookVersion', async () => {
-      const fakePath = '/rendered/path/playbookVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        playbook: 'playbookValue',
-        version: 'versionValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.playbookVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.playbookVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('playbookVersionPath', () => {
-        const result = client.playbookVersionPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'playbookValue',
-          'versionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.playbookVersionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromPlaybookVersionName', () => {
-        const result = client.matchProjectFromPlaybookVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromPlaybookVersionName', () => {
-        const result = client.matchLocationFromPlaybookVersionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromPlaybookVersionName', () => {
-        const result = client.matchAgentFromPlaybookVersionName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchPlaybookFromPlaybookVersionName', () => {
-        const result = client.matchPlaybookFromPlaybookVersionName(fakePath);
-        assert.strictEqual(result, 'playbookValue');
-        assert(
-          (client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVersionFromPlaybookVersionName', () => {
-        const result = client.matchVersionFromPlaybookVersionName(fakePath);
-        assert.strictEqual(result, 'versionValue');
-        assert(
-          (client.pathTemplates.playbookVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationAgentEnvironmentSessionEntityType', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationAgentEnvironmentSessionEntityType';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        environment: 'environmentValue',
-        session: 'sessionValue',
-        entity_type: 'entityTypeValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationAgentEnvironmentSessionEntityTypePath', () => {
-        const result =
-          client.projectLocationAgentEnvironmentSessionEntityTypePath(
-            'projectValue',
-            'locationValue',
-            'agentValue',
-            'environmentValue',
-            'sessionValue',
-            'entityTypeValue'
-          );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result =
-          client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result =
-          client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result =
-          client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result =
-          client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'environmentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result =
-          client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result =
-          client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'entityTypeValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationAgentFlowTransitionRouteGroup', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationAgentFlowTransitionRouteGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        flow: 'flowValue',
-        transition_route_group: 'transitionRouteGroupValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationAgentFlowTransitionRouteGroupPath', () => {
-        const result = client.projectLocationAgentFlowTransitionRouteGroupPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'flowValue',
-          'transitionRouteGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
-        const result =
-          client.matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
-        const result =
-          client.matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
-        const result =
-          client.matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
-        const result =
-          client.matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'flowValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
-        const result =
-          client.matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'transitionRouteGroupValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationAgentSessionEntityType', async () => {
-      const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        session: 'sessionValue',
-        entity_type: 'entityTypeValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationAgentSessionEntityTypePath', () => {
-        const result = client.projectLocationAgentSessionEntityTypePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'sessionValue',
-          'entityTypeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentSessionEntityTypePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result =
-          client.matchProjectFromProjectLocationAgentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result =
-          client.matchLocationFromProjectLocationAgentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result =
-          client.matchAgentFromProjectLocationAgentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSessionFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result =
-          client.matchSessionFromProjectLocationAgentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'sessionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntityTypeFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result =
-          client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
-            fakePath
-          );
-        assert.strictEqual(result, 'entityTypeValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentSessionEntityTypePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectLocationAgentTransitionRouteGroup', async () => {
-      const fakePath =
-        '/rendered/path/projectLocationAgentTransitionRouteGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        transition_route_group: 'transitionRouteGroupValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationAgentTransitionRouteGroupPath', () => {
-        const result = client.projectLocationAgentTransitionRouteGroupPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'transitionRouteGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentTransitionRouteGroupPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationAgentTransitionRouteGroupName', () => {
-        const result =
-          client.matchProjectFromProjectLocationAgentTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationAgentTransitionRouteGroupName', () => {
-        const result =
-          client.matchLocationFromProjectLocationAgentTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromProjectLocationAgentTransitionRouteGroupName', () => {
-        const result =
-          client.matchAgentFromProjectLocationAgentTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName', () => {
-        const result =
-          client.matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'transitionRouteGroupValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationAgentTransitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('securitySettings', async () => {
-      const fakePath = '/rendered/path/securitySettings';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        security_settings: 'securitySettingsValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.securitySettingsPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.securitySettingsPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('securitySettingsPath', () => {
-        const result = client.securitySettingsPath(
-          'projectValue',
-          'locationValue',
-          'securitySettingsValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.securitySettingsPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSecuritySettingsName', () => {
-        const result = client.matchProjectFromSecuritySettingsName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromSecuritySettingsName', () => {
-        const result = client.matchLocationFromSecuritySettingsName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSecuritySettingsFromSecuritySettingsName', () => {
-        const result =
-          client.matchSecuritySettingsFromSecuritySettingsName(fakePath);
-        assert.strictEqual(result, 'securitySettingsValue');
-        assert(
-          (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('testCase', async () => {
-      const fakePath = '/rendered/path/testCase';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        test_case: 'testCaseValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.testCasePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.testCasePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('testCasePath', () => {
-        const result = client.testCasePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'testCaseValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.testCasePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTestCaseName', () => {
-        const result = client.matchProjectFromTestCaseName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTestCaseName', () => {
-        const result = client.matchLocationFromTestCaseName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromTestCaseName', () => {
-        const result = client.matchAgentFromTestCaseName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTestCaseFromTestCaseName', () => {
-        const result = client.matchTestCaseFromTestCaseName(fakePath);
-        assert.strictEqual(result, 'testCaseValue');
-        assert(
-          (client.pathTemplates.testCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('testCaseResult', async () => {
-      const fakePath = '/rendered/path/testCaseResult';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        test_case: 'testCaseValue',
-        result: 'resultValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.testCaseResultPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.testCaseResultPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('testCaseResultPath', () => {
-        const result = client.testCaseResultPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'testCaseValue',
-          'resultValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.testCaseResultPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTestCaseResultName', () => {
-        const result = client.matchProjectFromTestCaseResultName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTestCaseResultName', () => {
-        const result = client.matchLocationFromTestCaseResultName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromTestCaseResultName', () => {
-        const result = client.matchAgentFromTestCaseResultName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTestCaseFromTestCaseResultName', () => {
-        const result = client.matchTestCaseFromTestCaseResultName(fakePath);
-        assert.strictEqual(result, 'testCaseValue');
-        assert(
-          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchResultFromTestCaseResultName', () => {
-        const result = client.matchResultFromTestCaseResultName(fakePath);
-        assert.strictEqual(result, 'resultValue');
-        assert(
-          (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('tool', async () => {
-      const fakePath = '/rendered/path/tool';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        tool: 'toolValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.toolPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.toolPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('toolPath', () => {
-        const result = client.toolPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'toolValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.toolPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromToolName', () => {
-        const result = client.matchProjectFromToolName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.toolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromToolName', () => {
-        const result = client.matchLocationFromToolName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.toolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromToolName', () => {
-        const result = client.matchAgentFromToolName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.toolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchToolFromToolName', () => {
-        const result = client.matchToolFromToolName(fakePath);
-        assert.strictEqual(result, 'toolValue');
-        assert(
-          (client.pathTemplates.toolPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('toolVersion', async () => {
-      const fakePath = '/rendered/path/toolVersion';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        tool: 'toolValue',
-        version: 'versionValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.toolVersionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.toolVersionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('toolVersionPath', () => {
-        const result = client.toolVersionPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'toolValue',
-          'versionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.toolVersionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromToolVersionName', () => {
-        const result = client.matchProjectFromToolVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromToolVersionName', () => {
-        const result = client.matchLocationFromToolVersionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromToolVersionName', () => {
-        const result = client.matchAgentFromToolVersionName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchToolFromToolVersionName', () => {
-        const result = client.matchToolFromToolVersionName(fakePath);
-        assert.strictEqual(result, 'toolValue');
-        assert(
-          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVersionFromToolVersionName', () => {
-        const result = client.matchVersionFromToolVersionName(fakePath);
-        assert.strictEqual(result, 'versionValue');
-        assert(
-          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('version', async () => {
-      const fakePath = '/rendered/path/version';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        flow: 'flowValue',
-        version: 'versionValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.versionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.versionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('versionPath', () => {
-        const result = client.versionPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'flowValue',
-          'versionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.versionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVersionName', () => {
-        const result = client.matchProjectFromVersionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.versionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVersionName', () => {
-        const result = client.matchLocationFromVersionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.versionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromVersionName', () => {
-        const result = client.matchAgentFromVersionName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.versionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFlowFromVersionName', () => {
-        const result = client.matchFlowFromVersionName(fakePath);
-        assert.strictEqual(result, 'flowValue');
-        assert(
-          (client.pathTemplates.versionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVersionFromVersionName', () => {
-        const result = client.matchVersionFromVersionName(fakePath);
-        assert.strictEqual(result, 'versionValue');
-        assert(
-          (client.pathTemplates.versionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('webhook', async () => {
-      const fakePath = '/rendered/path/webhook';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        webhook: 'webhookValue',
-      };
-      const client = new playbooksModule.v3beta1.PlaybooksClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.webhookPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.webhookPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('webhookPath', () => {
-        const result = client.webhookPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'webhookValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.webhookPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromWebhookName', () => {
-        const result = client.matchProjectFromWebhookName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.webhookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromWebhookName', () => {
-        const result = client.matchLocationFromWebhookName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.webhookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromWebhookName', () => {
-        const result = client.matchAgentFromWebhookName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (client.pathTemplates.webhookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWebhookFromWebhookName', () => {
-        const result = client.matchWebhookFromWebhookName(fakePath);
-        assert.strictEqual(result, 'webhookValue');
-        assert(
-          (client.pathTemplates.webhookPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

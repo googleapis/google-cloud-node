@@ -5,6 +5,1414 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "d3382f59-e182-4880-b1f6-48534663f567",
+      "createTime": "2025-06-03T00:17:24.409Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b7052e7df5bc607a577ed9b122ab50f43112b676",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6291"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "f6efac94-ecc6-46d3-aa34-dc2916e04498",
+      "createTime": "2025-06-03T00:17:24.389Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "b95b674d-750d-476b-861e-a139eb721a41",
+      "createTime": "2025-06-03T00:17:24.358Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6306"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "92986cde-a3df-4d2c-8f2c-5ba336490fe1",
+      "createTime": "2025-06-03T00:17:24.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "ce59ac34-188a-454c-b1cf-5747291af590",
+      "createTime": "2025-06-03T00:17:24.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6d7aab56caabb08b8ff2ee68f599d6c63112622e",
+          "message": "[merchantapi] A new method_signature `parent,online_return_policy` is added to method `CreateOnlineReturnPolicy` in service `OnlineReturnPolicyService`",
+          "issues": [
+            "6367"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "86db9bd2-f9f3-4a1e-9fb3-8348ff28a12f",
+      "createTime": "2025-06-03T00:17:24.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "a9fe57ff-f253-4bca-a44b-c39aea922e9a",
+      "createTime": "2025-06-03T00:17:24.269Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6306"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "9955972c-857a-48e9-9578-26a9b0e4fbed",
+      "createTime": "2025-06-03T00:17:24.241Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "660ac3a5-f56d-4842-ac07-93277040446a",
+      "createTime": "2025-06-03T00:17:24.218Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0e789bac8803a06904ec0870f3a8c35826c1f161",
+          "message": "[managedkafka] add Managed Kafka ACL API",
+          "issues": [
+            "6372"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "2779a695-bf27-4488-83d4-2dc1f2c0625d",
+      "createTime": "2025-06-03T00:17:24.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6306"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "4428955c-75d0-41de-8b88-25a3f40d916c",
+      "createTime": "2025-06-03T00:17:24.179Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "1884c5ca-e296-4ec7-9461-a3f792315f46",
+      "createTime": "2025-06-03T00:17:24.092Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "e3946d1a-1b9c-436a-841a-8dbb5b660c3d",
+      "createTime": "2025-06-03T00:17:24.056Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6306"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "86c2fe9c-b2f2-4334-8954-42408f50d437",
+      "createTime": "2025-06-03T00:17:24.034Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "128e7801-79d0-46c9-8982-46e146ebe75f",
+      "createTime": "2025-06-03T00:17:24.017Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b8f69297ff6e1eb3df0590f633947a337e30a406",
+          "message": "[storagetransfer] support Azure federated identity",
+          "issues": [
+            "6375"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6306"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "efdba2cb-d153-4835-b768-c0a35628d20a",
+      "createTime": "2025-06-03T00:17:23.996Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0a4221eb6787f427f82b835b6bd27c7fd5363b41",
+          "message": "[dlp] add Dataplex Catalog action for discovery configs",
+          "issues": [
+            "6381"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "0a4221eb6787f427f82b835b6bd27c7fd5363b41",
+          "message": "Add a project ID to table reference so that org parents can create single table discovery configs.",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "0a4221eb6787f427f82b835b6bd27c7fd5363b41",
+          "message": "New fields for data profile finding.",
+          "issues": []
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "d2f96287-85aa-4e83-8def-d831e806b549",
+      "createTime": "2025-06-03T00:17:23.977Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "d2bfae5c-934f-434e-b879-05e6531db8d5",
+      "createTime": "2025-06-03T00:17:23.960Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "4fb5072b-862d-49e2-9d88-29e9cdc8f87a",
+      "createTime": "2025-06-03T00:17:23.938Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "2855aecb-dfe3-4f25-8d60-98cf54a6ace6",
+      "createTime": "2025-06-03T00:17:23.920Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "25a97d40-ea0b-4829-a814-e1ba23fa9587",
+      "createTime": "2025-06-03T00:17:23.902Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "a32b76a2-c589-46c7-a29f-1495ae1b8a3c",
+      "createTime": "2025-06-03T00:17:23.881Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "049911de-8abe-451c-882a-4eebc1b886bb",
+      "createTime": "2025-06-03T00:17:23.862Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "f9afdf83-96af-4d8d-8f6b-59b337d5b439",
+      "createTime": "2025-06-03T00:17:23.842Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "1e691bba-10bc-4aca-85aa-bbadf3e51015",
+      "createTime": "2025-06-03T00:17:23.819Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "be704a91-c86c-48f2-93cf-0490149cda12",
+      "createTime": "2025-06-03T00:17:23.801Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "d1e27195-4805-4476-a77f-8638f7063941",
+      "createTime": "2025-06-03T00:17:23.783Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "c6e73e6a-02fb-484f-be62-2347ff0ea28d",
+      "createTime": "2025-06-03T00:17:23.756Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "f48c45b4-286a-4a7d-854e-5b371dea4899",
+      "createTime": "2025-06-03T00:17:23.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "8b6480f4-8c4a-4bf1-a648-053557d7c5e7",
+      "createTime": "2025-06-03T00:17:23.720Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "6bd92f6c-7966-4395-8f54-702b4749407e",
+      "createTime": "2025-06-03T00:17:23.700Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "8a407442-da8d-48ae-b953-c69eca27f609",
+      "createTime": "2025-06-03T00:17:23.682Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "233d2de3-3717-47af-91da-f81579d52ff8",
+      "createTime": "2025-06-03T00:17:23.662Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "010d361c-6dc0-4075-996c-6bb3480e0891",
+      "createTime": "2025-06-03T00:17:23.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "132240fbf6cb29b309b76c1d60f0611720590847",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6304"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "4d5e5315-f89d-4160-a474-3d160e809b4f",
+      "createTime": "2025-06-03T00:17:23.623Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "f502a266-3697-4e8d-b774-b08340901896",
+      "createTime": "2025-06-03T00:17:23.606Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "1eaa8ac9-4bd6-4c88-af0c-ae10dbec635f",
+      "createTime": "2025-06-03T00:17:23.585Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "b85af889-fadd-446e-8244-b15fb68ac867",
+      "createTime": "2025-06-03T00:17:23.566Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "6d6a16e6-eb64-4813-b79c-bff623f6f55c",
+      "createTime": "2025-06-03T00:17:23.541Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "32862f33-a2ae-4eb4-8dad-b3c94b1a005f",
+      "createTime": "2025-06-03T00:17:23.522Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "fd65f0ce-2554-4ea6-8ec5-03b1d7377244",
+      "createTime": "2025-06-03T00:17:23.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "1d101d04-0bc5-46d2-bfa7-4eabc2e1a584",
+      "createTime": "2025-06-03T00:17:23.486Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "676856bd-d1e5-4a0f-904f-a0efc1e6b112",
+      "createTime": "2025-06-03T00:17:23.465Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "9b8d0391-b440-4013-bb17-6a23c65b86f3",
+      "createTime": "2025-06-03T00:17:23.447Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "674d0260-7528-4a0a-8909-a545a5829f22",
+      "createTime": "2025-06-03T00:17:23.428Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "2c2ec69f-ecbc-4f6c-9136-4f7830539b9f",
+      "createTime": "2025-06-03T00:17:23.406Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "92eb3438-1377-4c61-accf-d61ce66a3b90",
+      "createTime": "2025-06-03T00:17:23.386Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "01ff3825-9cbd-42b6-bf06-21a0de1ec5a4",
+      "createTime": "2025-06-03T00:17:23.366Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "e849763c-95c0-417b-894e-09088252a87a",
+      "createTime": "2025-06-03T00:17:23.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abc35be4817709467e6c6b2a12ac4e749ffed72d",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6302"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "b50370eb-1c86-4ecb-8f0a-c6b6a4ad0182",
+      "createTime": "2025-06-03T00:17:23.325Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "a2006469-6cba-4722-9c38-7ff4e593a27d",
+      "createTime": "2025-06-03T00:17:23.308Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "6ec39690-08fa-44d4-9911-2b0d38837fa8",
+      "createTime": "2025-06-03T00:17:23.284Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "3e92e6ce-68d3-4929-862f-1bbe4a9516eb",
+      "createTime": "2025-06-03T00:17:23.267Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "b498e747-d945-4cd8-8aee-92370ce8c27e",
+      "createTime": "2025-06-03T00:17:23.237Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "d9712aba-e55e-44ce-8847-4440bbdc602f",
+      "createTime": "2025-06-03T00:17:23.216Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "d2939ad1-4c83-45fe-9d9d-ea6b5a317a98",
+      "createTime": "2025-06-03T00:17:23.198Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "68155d63-cff6-4a3d-bc5d-2895d6d5eca5",
+      "createTime": "2025-06-03T00:17:23.181Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "eb47d36a-19a5-4608-b22e-727a35d2a775",
+      "createTime": "2025-06-03T00:17:23.161Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "54dd8875-e994-48bd-81be-a6adba86aaa7",
+      "createTime": "2025-06-03T00:17:23.142Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "a2b21522-2716-47ef-9867-515876a99c94",
+      "createTime": "2025-06-03T00:17:23.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "d25b5298-3028-4a37-baf8-8f7b5c64375e",
+      "createTime": "2025-06-03T00:17:23.102Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "11709f26-36f8-4c8d-9ca4-f26c41249778",
+      "createTime": "2025-06-03T00:17:23.076Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "61fee5de-f751-4073-b44b-1073f355a07a",
+      "createTime": "2025-06-03T00:17:23.050Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "ffa6a078-fb78-4902-95e5-77f351fede94",
+      "createTime": "2025-06-03T00:17:23.027Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42754a72b34a01d201341428b4a358ff781b0612",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": [
+            "6301"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "f6b735cb-110e-4122-a9b7-84861c279f49",
+      "createTime": "2025-06-03T00:17:23.010Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "88a2ba05-09a2-4c33-9181-0e0c02929cd0",
+      "createTime": "2025-06-03T00:17:22.992Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "378ae655-3d2b-4411-b8da-35923211c761",
+      "createTime": "2025-06-03T00:17:22.953Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "1b4fcd2f-db27-452b-8a24-68d821f2b7b6",
+      "createTime": "2025-06-03T00:17:22.897Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "f0333b8a-f203-45da-8d44-b1b314c8d5ae",
+      "createTime": "2025-06-03T00:17:22.880Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "bac67148-e551-409f-af3f-ae7578f7a8a8",
+      "createTime": "2025-06-03T00:17:22.862Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "cd56aec6-7e0c-43dc-9fa2-fecfd1bd3328",
+      "createTime": "2025-06-03T00:17:22.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4c3a92160aafd066212afb113a6f014dcdc9af7",
+          "message": "[gkebackup] Add BackupChannel field in BackupPlan",
+          "issues": [
+            "6290"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "564b8175-b16b-42e5-8bb9-d5f786c1068e",
+      "createTime": "2025-06-03T00:17:22.817Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "55fa3aef-a1dd-42d1-9294-404cde0d895f",
+      "createTime": "2025-06-03T00:17:22.798Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "5e8b8721-6dc6-4142-abbe-bb28aca78f2d",
+      "createTime": "2025-06-03T00:17:22.777Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "100d9313-7650-45b3-8988-0866cd5bd4fd",
+      "createTime": "2025-06-03T00:17:22.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "f943e46e-c27d-4d1f-9a68-8b5c8dde366e",
+      "createTime": "2025-06-03T00:17:22.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "b41e95fb-645c-4025-8422-58a305338048",
+      "createTime": "2025-06-03T00:17:22.705Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "52990a12-c2f2-4ed3-bea6-65b7fd4acd2d",
+      "createTime": "2025-06-03T00:17:22.688Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "97c5dd56-c4ed-4784-a4f0-cacc7a17079e",
+      "createTime": "2025-06-03T00:17:22.668Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "18185f8a2318aeac3207c8daebe020dcbaa9bbb0",
+          "message": "[documentai] Added config options to enable table annotation and image extraction",
+          "issues": [
+            "6287"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "9280dcd0-3eae-4752-b8a3-9d246180d7a5",
+      "createTime": "2025-06-03T00:17:22.633Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "ed083d50-3de6-48fc-91e0-b63238ced1dc",
+      "createTime": "2025-06-03T00:17:22.615Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "725a619d-5148-407c-a091-80aa019395dc",
+      "createTime": "2025-06-03T00:17:22.597Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3bd921a30b15a632d8e8495b91723d314c23c71",
+          "message": "Add protobufjs 2023 edition support",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "6ff4a499-8eb6-4da5-9d5a-185f74473eca",
+      "createTime": "2025-06-03T00:17:22.575Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "22155222919286135360dd822df1d4f8b5a3f656",
+          "message": "[cloudcommerceconsumerprocurement] An existing google.api.http annotation `http_uri` is changed for method `UpdateLicensePool` in service `LicenseManagementService`",
+          "issues": [
+            "6373"
+          ]
+        }
+      ],
+      "version": "0.6.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "783e766f-5935-4910-940e-c88b56d7629e",
+      "createTime": "2025-06-03T00:17:22.547Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
           "message": "Multiple ai-platform updates",
           "issues": []
@@ -50723,5 +52131,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-05-20T15:49:29.910Z"
+  "updateTime": "2025-06-03T00:17:24.409Z"
 }

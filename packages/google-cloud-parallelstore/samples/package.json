@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/parallelstore": "^0.9.0"
+    "@google-cloud/parallelstore": "^0.10.0"
   },
   "devDependencies": {
     "c8": "^8.0.0",

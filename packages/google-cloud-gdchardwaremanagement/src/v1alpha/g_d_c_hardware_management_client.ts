@@ -18,18 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -113,42 +102,20 @@ export class GDCHardwareManagementClient {
    *     const client = new GDCHardwareManagementClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof GDCHardwareManagementClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof GDCHardwareManagementClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'gdchardwaremanagement.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +141,7 @@ export class GDCHardwareManagementClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +157,13 @@ export class GDCHardwareManagementClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -249,46 +220,22 @@ export class GDCHardwareManagementClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listOrders: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'orders'
-      ),
-      listSites: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'sites'
-      ),
-      listHardwareGroups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'hardwareGroups'
-      ),
-      listHardware: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'hardware'
-      ),
-      listComments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'comments'
-      ),
-      listChangeLogEntries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'changeLogEntries'
-      ),
-      listSkus: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'skus'
-      ),
-      listZones: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'zones'
-      ),
+      listOrders:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'orders'),
+      listSites:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sites'),
+      listHardwareGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'hardwareGroups'),
+      listHardware:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'hardware'),
+      listComments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'comments'),
+      listChangeLogEntries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'changeLogEntries'),
+      listSkus:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'skus'),
+      listZones:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'zones')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -297,250 +244,165 @@ export class GDCHardwareManagementClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1alpha/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1alpha/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1alpha/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1alpha/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createOrderResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Order'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Order') as gax.protobuf.Type;
     const createOrderMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const updateOrderResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Order'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Order') as gax.protobuf.Type;
     const updateOrderMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const deleteOrderResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteOrderMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const submitOrderResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Order'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Order') as gax.protobuf.Type;
     const submitOrderMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const createSiteResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Site'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Site') as gax.protobuf.Type;
     const createSiteMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const updateSiteResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Site'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Site') as gax.protobuf.Type;
     const updateSiteMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const deleteSiteResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteSiteMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const createHardwareGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup') as gax.protobuf.Type;
     const createHardwareGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const updateHardwareGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup') as gax.protobuf.Type;
     const updateHardwareGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const deleteHardwareGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteHardwareGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const createHardwareResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Hardware'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Hardware') as gax.protobuf.Type;
     const createHardwareMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const updateHardwareResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Hardware'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Hardware') as gax.protobuf.Type;
     const updateHardwareMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const deleteHardwareResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteHardwareMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const createCommentResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Comment'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Comment') as gax.protobuf.Type;
     const createCommentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const createZoneResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Zone'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Zone') as gax.protobuf.Type;
     const createZoneMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const updateZoneResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Zone'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Zone') as gax.protobuf.Type;
     const updateZoneMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const deleteZoneResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteZoneMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
     const signalZoneStateResponse = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.Zone'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.Zone') as gax.protobuf.Type;
     const signalZoneStateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createOrder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createOrderResponse.decode.bind(createOrderResponse),
-        createOrderMetadata.decode.bind(createOrderMetadata)
-      ),
+        createOrderMetadata.decode.bind(createOrderMetadata)),
       updateOrder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateOrderResponse.decode.bind(updateOrderResponse),
-        updateOrderMetadata.decode.bind(updateOrderMetadata)
-      ),
+        updateOrderMetadata.decode.bind(updateOrderMetadata)),
       deleteOrder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteOrderResponse.decode.bind(deleteOrderResponse),
-        deleteOrderMetadata.decode.bind(deleteOrderMetadata)
-      ),
+        deleteOrderMetadata.decode.bind(deleteOrderMetadata)),
       submitOrder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         submitOrderResponse.decode.bind(submitOrderResponse),
-        submitOrderMetadata.decode.bind(submitOrderMetadata)
-      ),
+        submitOrderMetadata.decode.bind(submitOrderMetadata)),
       createSite: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSiteResponse.decode.bind(createSiteResponse),
-        createSiteMetadata.decode.bind(createSiteMetadata)
-      ),
+        createSiteMetadata.decode.bind(createSiteMetadata)),
       updateSite: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateSiteResponse.decode.bind(updateSiteResponse),
-        updateSiteMetadata.decode.bind(updateSiteMetadata)
-      ),
+        updateSiteMetadata.decode.bind(updateSiteMetadata)),
       deleteSite: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSiteResponse.decode.bind(deleteSiteResponse),
-        deleteSiteMetadata.decode.bind(deleteSiteMetadata)
-      ),
+        deleteSiteMetadata.decode.bind(deleteSiteMetadata)),
       createHardwareGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createHardwareGroupResponse.decode.bind(createHardwareGroupResponse),
-        createHardwareGroupMetadata.decode.bind(createHardwareGroupMetadata)
-      ),
+        createHardwareGroupMetadata.decode.bind(createHardwareGroupMetadata)),
       updateHardwareGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateHardwareGroupResponse.decode.bind(updateHardwareGroupResponse),
-        updateHardwareGroupMetadata.decode.bind(updateHardwareGroupMetadata)
-      ),
+        updateHardwareGroupMetadata.decode.bind(updateHardwareGroupMetadata)),
       deleteHardwareGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteHardwareGroupResponse.decode.bind(deleteHardwareGroupResponse),
-        deleteHardwareGroupMetadata.decode.bind(deleteHardwareGroupMetadata)
-      ),
+        deleteHardwareGroupMetadata.decode.bind(deleteHardwareGroupMetadata)),
       createHardware: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createHardwareResponse.decode.bind(createHardwareResponse),
-        createHardwareMetadata.decode.bind(createHardwareMetadata)
-      ),
+        createHardwareMetadata.decode.bind(createHardwareMetadata)),
       updateHardware: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateHardwareResponse.decode.bind(updateHardwareResponse),
-        updateHardwareMetadata.decode.bind(updateHardwareMetadata)
-      ),
+        updateHardwareMetadata.decode.bind(updateHardwareMetadata)),
       deleteHardware: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteHardwareResponse.decode.bind(deleteHardwareResponse),
-        deleteHardwareMetadata.decode.bind(deleteHardwareMetadata)
-      ),
+        deleteHardwareMetadata.decode.bind(deleteHardwareMetadata)),
       createComment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createCommentResponse.decode.bind(createCommentResponse),
-        createCommentMetadata.decode.bind(createCommentMetadata)
-      ),
+        createCommentMetadata.decode.bind(createCommentMetadata)),
       createZone: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createZoneResponse.decode.bind(createZoneResponse),
-        createZoneMetadata.decode.bind(createZoneMetadata)
-      ),
+        createZoneMetadata.decode.bind(createZoneMetadata)),
       updateZone: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateZoneResponse.decode.bind(updateZoneResponse),
-        updateZoneMetadata.decode.bind(updateZoneMetadata)
-      ),
+        updateZoneMetadata.decode.bind(updateZoneMetadata)),
       deleteZone: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteZoneResponse.decode.bind(deleteZoneResponse),
-        deleteZoneMetadata.decode.bind(deleteZoneMetadata)
-      ),
+        deleteZoneMetadata.decode.bind(deleteZoneMetadata)),
       signalZoneState: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         signalZoneStateResponse.decode.bind(signalZoneStateResponse),
-        signalZoneStateMetadata.decode.bind(signalZoneStateMetadata)
-      ),
+        signalZoneStateMetadata.decode.bind(signalZoneStateMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -571,70 +433,28 @@ export class GDCHardwareManagementClient {
     // Put together the "service stub" for
     // google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.
     this.gDCHardwareManagementStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.gdchardwaremanagement.v1alpha
-            .GDCHardwareManagement,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const gDCHardwareManagementStubMethods = [
-      'listOrders',
-      'getOrder',
-      'createOrder',
-      'updateOrder',
-      'deleteOrder',
-      'submitOrder',
-      'listSites',
-      'getSite',
-      'createSite',
-      'updateSite',
-      'deleteSite',
-      'listHardwareGroups',
-      'getHardwareGroup',
-      'createHardwareGroup',
-      'updateHardwareGroup',
-      'deleteHardwareGroup',
-      'listHardware',
-      'getHardware',
-      'createHardware',
-      'updateHardware',
-      'deleteHardware',
-      'listComments',
-      'getComment',
-      'createComment',
-      'recordActionOnComment',
-      'listChangeLogEntries',
-      'getChangeLogEntry',
-      'listSkus',
-      'getSku',
-      'listZones',
-      'getZone',
-      'createZone',
-      'updateZone',
-      'deleteZone',
-      'signalZoneState',
-    ];
+    const gDCHardwareManagementStubMethods =
+        ['listOrders', 'getOrder', 'createOrder', 'updateOrder', 'deleteOrder', 'submitOrder', 'listSites', 'getSite', 'createSite', 'updateSite', 'deleteSite', 'listHardwareGroups', 'getHardwareGroup', 'createHardwareGroup', 'updateHardwareGroup', 'deleteHardwareGroup', 'listHardware', 'getHardware', 'createHardware', 'updateHardware', 'deleteHardware', 'listComments', 'getComment', 'createComment', 'recordActionOnComment', 'listChangeLogEntries', 'getChangeLogEntry', 'listSkus', 'getSku', 'listZones', 'getZone', 'createZone', 'updateZone', 'deleteZone', 'signalZoneState'];
     for (const methodName of gDCHardwareManagementStubMethods) {
       const callPromise = this.gDCHardwareManagementStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -659,14 +479,8 @@ export class GDCHardwareManagementClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'gdchardwaremanagement.googleapis.com';
   }
@@ -677,14 +491,8 @@ export class GDCHardwareManagementClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'gdchardwaremanagement.googleapis.com';
   }
@@ -715,7 +523,9 @@ export class GDCHardwareManagementClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -724,9 +534,8 @@ export class GDCHardwareManagementClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -737,4503 +546,3011 @@ export class GDCHardwareManagementClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetOrder_async
-   */
+/**
+ * Gets details of an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetOrder_async
+ */
   getOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|undefined, {}|undefined
+      ]>;
   getOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrder(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrder(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOrder request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOrder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOrder(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getOrder response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getOrder(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetOrderRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOrder response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a site.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the site.
-   *   Format: `projects/{project}/locations/{location}/sites/{site}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_site.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSite_async
-   */
+/**
+ * Gets details of a site.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the site.
+ *   Format: `projects/{project}/locations/{location}/sites/{site}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_site.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSite_async
+ */
   getSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|undefined, {}|undefined
+      ]>;
   getSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSite(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSite(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSite request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSite response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSite(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSite response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getSite(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSiteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSite response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a hardware group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the hardware group.
-   *   Format:
-   *   `projects/{project}/locations/{location}/orders/{order}/hardwareGroups/{hardware_group}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_hardware_group.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardwareGroup_async
-   */
+/**
+ * Gets details of a hardware group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the hardware group.
+ *   Format:
+ *   `projects/{project}/locations/{location}/orders/{order}/hardwareGroups/{hardware_group}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_hardware_group.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardwareGroup_async
+ */
   getHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|undefined, {}|undefined
+      ]>;
   getHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHardwareGroup(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHardwareGroup(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getHardwareGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getHardwareGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getHardwareGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getHardwareGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getHardwareGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getHardwareGroup response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets hardware details.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the hardware.
-   *   Format: `projects/{project}/locations/{location}/hardware/{hardware}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardware_async
-   */
+/**
+ * Gets hardware details.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the hardware.
+ *   Format: `projects/{project}/locations/{location}/hardware/{hardware}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardware_async
+ */
   getHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|undefined, {}|undefined
+      ]>;
   getHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHardware(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHardware(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getHardware request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getHardware response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getHardware(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getHardware response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getHardware(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetHardwareRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getHardware response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the content of a comment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the comment.
-   *   Format:
-   *   `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_comment.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetComment_async
-   */
+/**
+ * Gets the content of a comment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the comment.
+ *   Format:
+ *   `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_comment.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetComment_async
+ */
   getComment(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|undefined, {}|undefined
+      ]>;
   getComment(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getComment(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getComment(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getComment(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getComment(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getComment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getComment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getComment response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getComment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetCommentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getComment response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Record Action on a Comment. If the Action specified in the request is READ,
-   * the viewed time in the comment is set to the time the request was received.
-   * If the comment is already marked as read, subsequent calls will be ignored.
-   * If the Action is UNREAD, the viewed time is cleared from the comment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the comment.
-   *   Format:
-   *   `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType} request.actionType
-   *   Required. The action type of the recorded action.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async
-   */
+/**
+ * Record Action on a Comment. If the Action specified in the request is READ,
+ * the viewed time in the comment is set to the time the request was received.
+ * If the comment is already marked as read, subsequent calls will be ignored.
+ * If the Action is UNREAD, the viewed time is cleared from the comment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the comment.
+ *   Format:
+ *   `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType} request.actionType
+ *   Required. The action type of the recorded action.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async
+ */
   recordActionOnComment(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|undefined, {}|undefined
+      ]>;
   recordActionOnComment(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  recordActionOnComment(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  recordActionOnComment(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|null|undefined,
+          {}|null|undefined>): void;
+  recordActionOnComment(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|null|undefined,
+          {}|null|undefined>): void;
+  recordActionOnComment(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('recordActionOnComment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('recordActionOnComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .recordActionOnComment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('recordActionOnComment response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.recordActionOnComment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('recordActionOnComment response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a change to an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the change log entry.
-   *   Format:
-   *   `projects/{project}/locations/{location}/orders/{order}/changeLogEntries/{change_log_entry}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_change_log_entry.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetChangeLogEntry_async
-   */
+/**
+ * Gets details of a change to an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the change log entry.
+ *   Format:
+ *   `projects/{project}/locations/{location}/orders/{order}/changeLogEntries/{change_log_entry}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_change_log_entry.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetChangeLogEntry_async
+ */
   getChangeLogEntry(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|undefined, {}|undefined
+      ]>;
   getChangeLogEntry(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getChangeLogEntry(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getChangeLogEntry(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getChangeLogEntry(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getChangeLogEntry(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getChangeLogEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getChangeLogEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getChangeLogEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getChangeLogEntry response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getChangeLogEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetChangeLogEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getChangeLogEntry response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of an SKU.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the SKU.
-   *   Format: `projects/{project}/locations/{location}/skus/{sku}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_sku.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSku_async
-   */
+/**
+ * Gets details of an SKU.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the SKU.
+ *   Format: `projects/{project}/locations/{location}/skus/{sku}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_sku.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSku_async
+ */
   getSku(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|undefined, {}|undefined
+      ]>;
   getSku(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSku(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSku(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSku(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSku(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSku request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSku response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSku(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSku response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getSku(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISku,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetSkuRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSku response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the zone.
-   *   Format: `projects/{project}/locations/{location}/zones/{zone}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_zone.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetZone_async
-   */
+/**
+ * Gets details of a zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the zone.
+ *   Format: `projects/{project}/locations/{location}/zones/{zone}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.get_zone.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetZone_async
+ */
   getZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|undefined, {}|undefined
+      ]>;
   getZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
-    callback: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-      (
-        | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|null|undefined,
+          {}|null|undefined>): void;
+  getZone(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
+      callback: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|null|undefined,
+          {}|null|undefined>): void;
+  getZone(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getZone request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getZone response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getZone(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-          (
-            | protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getZone response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getZone(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IGetZoneRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getZone response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates a new order in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to create the order in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.orderId]
-   *   Optional. ID used to uniquely identify the Order within its parent scope.
-   *   This field should contain at most 63 characters and must start with
-   *   lowercase characters.
-   *   Only lowercase characters, numbers and `-` are accepted.
-   *   The `-` character cannot be the first or the last one.
-   *   A system generated ID will be used if the field is not set.
-   *
-   *   The order.name field in the request will be ignored.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Order} request.order
-   *   Required. The order to create.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateOrder_async
-   */
+/**
+ * Creates a new order in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to create the order in.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} [request.orderId]
+ *   Optional. ID used to uniquely identify the Order within its parent scope.
+ *   This field should contain at most 63 characters and must start with
+ *   lowercase characters.
+ *   Only lowercase characters, numbers and `-` are accepted.
+ *   The `-` character cannot be the first or the last one.
+ *   A system generated ID will be used if the field is not set.
+ *
+ *   The order.name field in the request will be ignored.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Order} request.order
+ *   Required. The order to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateOrder_async
+ */
   createOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createOrder request %j', request);
-    return this.innerApiCalls
-      .createOrder(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createOrder response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createOrder(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createOrder response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createOrder()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateOrder_async
-   */
-  async checkCreateOrderProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Order,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createOrder()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateOrder_async
+ */
+  async checkCreateOrderProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('createOrder long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createOrder,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Order,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createOrder, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A mask to specify the fields in the Order to overwrite with this
-   *   update. The fields specified in the update_mask are relative to the order,
-   *   not the full request. A field will be overwritten if it is in the mask. If
-   *   you don't provide a mask then all fields will be overwritten.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Order} request.order
-   *   Required. The order to update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateOrder_async
-   */
+/**
+ * Updates the parameters of an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A mask to specify the fields in the Order to overwrite with this
+ *   update. The fields specified in the update_mask are relative to the order,
+ *   not the full request. A field will be overwritten if it is in the mask. If
+ *   you don't provide a mask then all fields will be overwritten.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Order} request.order
+ *   Required. The order to update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateOrder_async
+ */
   updateOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'order.name': request.order!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'order.name': request.order!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateOrder request %j', request);
-    return this.innerApiCalls
-      .updateOrder(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateOrder response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateOrder(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateOrder response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateOrder()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateOrder_async
-   */
-  async checkUpdateOrderProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Order,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateOrder()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateOrder_async
+ */
+  async checkUpdateOrderProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('updateOrder long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateOrder,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Order,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateOrder, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Deletes an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the order.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {boolean} [request.force]
-   *   Optional. An option to delete any nested resources in the Order, such as a
-   *   HardwareGroup. If true, any nested resources for this Order will also be
-   *   deleted. Otherwise, the request will only succeed if the Order has no
-   *   nested resources.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteOrder_async
-   */
+/**
+ * Deletes an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the order.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {boolean} [request.force]
+ *   Optional. An option to delete any nested resources in the Order, such as a
+ *   HardwareGroup. If true, any nested resources for this Order will also be
+ *   deleted. Otherwise, the request will only succeed if the Order has no
+ *   nested resources.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteOrder_async
+ */
   deleteOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteOrder request %j', request);
-    return this.innerApiCalls
-      .deleteOrder(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteOrder response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteOrder(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteOrder response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteOrder()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteOrder_async
-   */
-  async checkDeleteOrderProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteOrder()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteOrder_async
+ */
+  async checkDeleteOrderProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('deleteOrder long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteOrder,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteOrder, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Submits an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the order.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type} [request.type]
-   *   Optional. Type of this request. If unset, the request type is assumed to be
-   *   `INFO_PENDING`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.submit_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async
-   */
+/**
+ * Submits an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the order.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type} [request.type]
+ *   Optional. Type of this request. If unset, the request type is assumed to be
+ *   `INFO_PENDING`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.submit_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async
+ */
   submitOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   submitOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   submitOrder(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   submitOrder(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('submitOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('submitOrder request %j', request);
-    return this.innerApiCalls
-      .submitOrder(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('submitOrder response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.submitOrder(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('submitOrder response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `submitOrder()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.submit_order.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async
-   */
-  async checkSubmitOrderProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Order,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `submitOrder()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.submit_order.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async
+ */
+  async checkSubmitOrderProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('submitOrder long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.submitOrder,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Order,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.submitOrder, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Order, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Creates a new site in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to create the site in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.siteId]
-   *   Optional. ID used to uniquely identify the Site within its parent scope.
-   *   This field should contain at most 63 characters and must start with
-   *   lowercase characters.
-   *   Only lowercase characters, numbers and `-` are accepted.
-   *   The `-` character cannot be the first or the last one.
-   *   A system generated ID will be used if the field is not set.
-   *
-   *   The site.name field in the request will be ignored.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Site} request.site
-   *   Required. The site to create.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_site.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateSite_async
-   */
+/**
+ * Creates a new site in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to create the site in.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} [request.siteId]
+ *   Optional. ID used to uniquely identify the Site within its parent scope.
+ *   This field should contain at most 63 characters and must start with
+ *   lowercase characters.
+ *   Only lowercase characters, numbers and `-` are accepted.
+ *   The `-` character cannot be the first or the last one.
+ *   A system generated ID will be used if the field is not set.
+ *
+ *   The site.name field in the request will be ignored.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Site} request.site
+ *   Required. The site to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_site.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateSite_async
+ */
   createSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateSiteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSite response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSite request %j', request);
-    return this.innerApiCalls
-      .createSite(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createSite response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createSite(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createSite response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createSite()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_site.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateSite_async
-   */
-  async checkCreateSiteProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Site,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createSite()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_site.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateSite_async
+ */
+  async checkCreateSiteProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Site, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('createSite long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createSite,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Site,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSite, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Site, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a site.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A mask to specify the fields in the Site to overwrite with this
-   *   update. The fields specified in the update_mask are relative to the site,
-   *   not the full request. A field will be overwritten if it is in the mask. If
-   *   you don't provide a mask then all fields will be overwritten.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Site} request.site
-   *   Required. The site to update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_site.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateSite_async
-   */
+/**
+ * Updates the parameters of a site.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A mask to specify the fields in the Site to overwrite with this
+ *   update. The fields specified in the update_mask are relative to the site,
+ *   not the full request. A field will be overwritten if it is in the mask. If
+ *   you don't provide a mask then all fields will be overwritten.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Site} request.site
+ *   Required. The site to update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_site.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateSite_async
+ */
   updateSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'site.name': request.site!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'site.name': request.site!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSite response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSite request %j', request);
-    return this.innerApiCalls
-      .updateSite(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.ISite,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSite response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateSite(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateSite response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateSite()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_site.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateSite_async
-   */
-  async checkUpdateSiteProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Site,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateSite()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_site.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateSite_async
+ */
+  async checkUpdateSiteProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Site, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('updateSite long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSite,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Site,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSite, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Site, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Deletes a site.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the site.
-   *   Format: `projects/{project}/locations/{location}/sites/{site}`
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
-   */
+/**
+ * Deletes a site.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the site.
+ *   Format: `projects/{project}/locations/{location}/sites/{site}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
+ */
   deleteSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSite(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSite(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSite response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSite request %j', request);
-    return this.innerApiCalls
-      .deleteSite(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSite response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteSite(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteSite response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteSite()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
-   */
-  async checkDeleteSiteProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteSite()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_site.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async
+ */
+  async checkDeleteSiteProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('deleteSite long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteSite,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSite, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Creates a new hardware group in a given order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to create the hardware group in.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {string} [request.hardwareGroupId]
-   *   Optional. ID used to uniquely identify the HardwareGroup within its parent
-   *   scope. This field should contain at most 63 characters and must start with
-   *   lowercase characters.
-   *   Only lowercase characters, numbers and `-` are accepted.
-   *   The `-` character cannot be the first or the last one.
-   *   A system generated ID will be used if the field is not set.
-   *
-   *   The hardware_group.name field in the request will be ignored.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup} request.hardwareGroup
-   *   Required. The hardware group to create.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware_group.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardwareGroup_async
-   */
+/**
+ * Creates a new hardware group in a given order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to create the hardware group in.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {string} [request.hardwareGroupId]
+ *   Optional. ID used to uniquely identify the HardwareGroup within its parent
+ *   scope. This field should contain at most 63 characters and must start with
+ *   lowercase characters.
+ *   Only lowercase characters, numbers and `-` are accepted.
+ *   The `-` character cannot be the first or the last one.
+ *   A system generated ID will be used if the field is not set.
+ *
+ *   The hardware_group.name field in the request will be ignored.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup} request.hardwareGroup
+ *   Required. The hardware group to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware_group.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardwareGroup_async
+ */
   createHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createHardwareGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createHardwareGroup request %j', request);
-    return this.innerApiCalls
-      .createHardwareGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createHardwareGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createHardwareGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createHardwareGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createHardwareGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware_group.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardwareGroup_async
-   */
-  async checkCreateHardwareGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createHardwareGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware_group.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardwareGroup_async
+ */
+  async checkCreateHardwareGroupProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('createHardwareGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createHardwareGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createHardwareGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a hardware group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A mask to specify the fields in the HardwareGroup to overwrite
-   *   with this update. The fields specified in the update_mask are relative to
-   *   the hardware group, not the full request. A field will be overwritten if it
-   *   is in the mask. If you don't provide a mask then all fields will be
-   *   overwritten.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup} request.hardwareGroup
-   *   Required. The hardware group to update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware_group.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardwareGroup_async
-   */
+/**
+ * Updates the parameters of a hardware group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A mask to specify the fields in the HardwareGroup to overwrite
+ *   with this update. The fields specified in the update_mask are relative to
+ *   the hardware group, not the full request. A field will be overwritten if it
+ *   is in the mask. If you don't provide a mask then all fields will be
+ *   overwritten.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup} request.hardwareGroup
+ *   Required. The hardware group to update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware_group.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardwareGroup_async
+ */
   updateHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'hardware_group.name': request.hardwareGroup!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'hardware_group.name': request.hardwareGroup!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateHardwareGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateHardwareGroup request %j', request);
-    return this.innerApiCalls
-      .updateHardwareGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateHardwareGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateHardwareGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateHardwareGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateHardwareGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware_group.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardwareGroup_async
-   */
-  async checkUpdateHardwareGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateHardwareGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware_group.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardwareGroup_async
+ */
+  async checkUpdateHardwareGroupProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('updateHardwareGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateHardwareGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateHardwareGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Deletes a hardware group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the hardware group.
-   *   Format:
-   *   `projects/{project}/locations/{location}/orders/{order}/hardwareGroups/{hardware_group}`
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware_group.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardwareGroup_async
-   */
+/**
+ * Deletes a hardware group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the hardware group.
+ *   Format:
+ *   `projects/{project}/locations/{location}/orders/{order}/hardwareGroups/{hardware_group}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware_group.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardwareGroup_async
+ */
   deleteHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteHardwareGroup(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteHardwareGroup(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteHardwareGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteHardwareGroup request %j', request);
-    return this.innerApiCalls
-      .deleteHardwareGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteHardwareGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteHardwareGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteHardwareGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteHardwareGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware_group.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardwareGroup_async
-   */
-  async checkDeleteHardwareGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteHardwareGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware_group.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardwareGroup_async
+ */
+  async checkDeleteHardwareGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('deleteHardwareGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteHardwareGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteHardwareGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Creates new hardware in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to create hardware in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.hardwareId]
-   *   Optional. ID used to uniquely identify the Hardware within its parent
-   *   scope. This field should contain at most 63 characters and must start with
-   *   lowercase characters.
-   *   Only lowercase characters, numbers and `-` are accepted.
-   *   The `-` character cannot be the first or the last one.
-   *   A system generated ID will be used if the field is not set.
-   *
-   *   The hardware.name field in the request will be ignored.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware} request.hardware
-   *   Required. The resource to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardware_async
-   */
+/**
+ * Creates new hardware in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to create hardware in.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} [request.hardwareId]
+ *   Optional. ID used to uniquely identify the Hardware within its parent
+ *   scope. This field should contain at most 63 characters and must start with
+ *   lowercase characters.
+ *   Only lowercase characters, numbers and `-` are accepted.
+ *   The `-` character cannot be the first or the last one.
+ *   A system generated ID will be used if the field is not set.
+ *
+ *   The hardware.name field in the request will be ignored.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware} request.hardware
+ *   Required. The resource to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardware_async
+ */
   createHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateHardwareRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createHardware response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createHardware request %j', request);
-    return this.innerApiCalls
-      .createHardware(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createHardware response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createHardware(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createHardware response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createHardware()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardware_async
-   */
-  async checkCreateHardwareProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createHardware()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardware_async
+ */
+  async checkCreateHardwareProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('createHardware long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createHardware,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createHardware, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Updates hardware parameters.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A mask to specify the fields in the Hardware to overwrite with
-   *   this update. The fields specified in the update_mask are relative to the
-   *   hardware, not the full request. A field will be overwritten if it is in the
-   *   mask. If you don't provide a mask then all fields will be overwritten.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware} request.hardware
-   *   Required. The hardware to update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardware_async
-   */
+/**
+ * Updates hardware parameters.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A mask to specify the fields in the Hardware to overwrite with
+ *   this update. The fields specified in the update_mask are relative to the
+ *   hardware, not the full request. A field will be overwritten if it is in the
+ *   mask. If you don't provide a mask then all fields will be overwritten.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Hardware} request.hardware
+ *   Required. The hardware to update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardware_async
+ */
   updateHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateHardwareRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'hardware.name': request.hardware!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'hardware.name': request.hardware!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateHardware response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateHardware request %j', request);
-    return this.innerApiCalls
-      .updateHardware(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateHardware response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateHardware(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateHardware response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateHardware()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardware_async
-   */
-  async checkUpdateHardwareProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateHardware()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardware_async
+ */
+  async checkUpdateHardwareProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('updateHardware long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateHardware,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateHardware, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Deletes hardware.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the hardware.
-   *   Format: `projects/{project}/locations/{location}/hardware/{hardware}`
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardware_async
-   */
+/**
+ * Deletes hardware.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the hardware.
+ *   Format: `projects/{project}/locations/{location}/hardware/{hardware}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardware_async
+ */
   deleteHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteHardwareRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteHardware response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteHardware request %j', request);
-    return this.innerApiCalls
-      .deleteHardware(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteHardware response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteHardware(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteHardware response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteHardware()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardware_async
-   */
-  async checkDeleteHardwareProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteHardware()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardware_async
+ */
+  async checkDeleteHardwareProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('deleteHardware long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteHardware,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteHardware, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Creates a new comment on an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to create the comment on.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {string} [request.commentId]
-   *   Optional. ID used to uniquely identify the Comment within its parent scope.
-   *   This field should contain at most 63 characters and must start with
-   *   lowercase characters.
-   *   Only lowercase characters, numbers and `-` are accepted.
-   *   The `-` character cannot be the first or the last one.
-   *   A system generated ID will be used if the field is not set.
-   *
-   *   The comment.name field in the request will be ignored.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Comment} request.comment
-   *   Required. The comment to create.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_comment.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateComment_async
-   */
+/**
+ * Creates a new comment on an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to create the comment on.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {string} [request.commentId]
+ *   Optional. ID used to uniquely identify the Comment within its parent scope.
+ *   This field should contain at most 63 characters and must start with
+ *   lowercase characters.
+ *   Only lowercase characters, numbers and `-` are accepted.
+ *   The `-` character cannot be the first or the last one.
+ *   A system generated ID will be used if the field is not set.
+ *
+ *   The comment.name field in the request will be ignored.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Comment} request.comment
+ *   Required. The comment to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_comment.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateComment_async
+ */
   createComment(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createComment(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createComment(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createComment(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createComment request %j', request);
-    return this.innerApiCalls
-      .createComment(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createComment response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createComment(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createComment response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createComment()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_comment.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateComment_async
-   */
-  async checkCreateCommentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Comment,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createComment()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_comment.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateComment_async
+ */
+  async checkCreateCommentProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Comment, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('createComment long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createComment,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Comment,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createComment, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Comment, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Creates a new zone in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to create the zone in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.zoneId]
-   *   Optional. ID used to uniquely identify the Zone within its parent scope.
-   *   This field should contain at most 63 characters and must start with
-   *   lowercase characters.
-   *   Only lowercase characters, numbers and `-` are accepted.
-   *   The `-` character cannot be the first or the last one.
-   *   A system generated ID will be used if the field is not set.
-   *
-   *   The zone.name field in the request will be ignored.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Zone} request.zone
-   *   Required. The zone to create.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_zone.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateZone_async
-   */
+/**
+ * Creates a new zone in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to create the zone in.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} [request.zoneId]
+ *   Optional. ID used to uniquely identify the Zone within its parent scope.
+ *   This field should contain at most 63 characters and must start with
+ *   lowercase characters.
+ *   Only lowercase characters, numbers and `-` are accepted.
+ *   The `-` character cannot be the first or the last one.
+ *   A system generated ID will be used if the field is not set.
+ *
+ *   The zone.name field in the request will be ignored.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Zone} request.zone
+ *   Required. The zone to create.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_zone.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateZone_async
+ */
   createZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ICreateZoneRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createZone response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createZone request %j', request);
-    return this.innerApiCalls
-      .createZone(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createZone response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createZone(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createZone response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createZone()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_zone.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateZone_async
-   */
-  async checkCreateZoneProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Zone,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createZone()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.create_zone.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateZone_async
+ */
+  async checkCreateZoneProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Zone, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('createZone long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createZone,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Zone,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createZone, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Zone, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. A mask to specify the fields in the Zone to overwrite with this
-   *   update. The fields specified in the update_mask are relative to the zone,
-   *   not the full request. A field will be overwritten if it is in the mask. If
-   *   you don't provide a mask then all fields will be overwritten.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.Zone} request.zone
-   *   Required. The zone to update.
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_zone.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateZone_async
-   */
+/**
+ * Updates the parameters of a zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. A mask to specify the fields in the Zone to overwrite with this
+ *   update. The fields specified in the update_mask are relative to the zone,
+ *   not the full request. A field will be overwritten if it is in the mask. If
+ *   you don't provide a mask then all fields will be overwritten.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.Zone} request.zone
+ *   Required. The zone to update.
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_zone.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateZone_async
+ */
   updateZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IUpdateZoneRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'zone.name': request.zone!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'zone.name': request.zone!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateZone response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateZone request %j', request);
-    return this.innerApiCalls
-      .updateZone(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateZone response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateZone(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateZone response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateZone()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_zone.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateZone_async
-   */
-  async checkUpdateZoneProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Zone,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateZone()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.update_zone.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateZone_async
+ */
+  async checkUpdateZoneProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Zone, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('updateZone long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateZone,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Zone,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateZone, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Zone, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Deletes a zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the zone.
-   *   Format: `projects/{project}/locations/{location}/zones/{zone}`
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_zone.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteZone_async
-   */
+/**
+ * Deletes a zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the zone.
+ *   Format: `projects/{project}/locations/{location}/zones/{zone}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_zone.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteZone_async
+ */
   deleteZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteZone(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteZone(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IDeleteZoneRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteZone response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteZone request %j', request);
-    return this.innerApiCalls
-      .deleteZone(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteZone response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteZone(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteZone response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteZone()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_zone.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteZone_async
-   */
-  async checkDeleteZoneProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteZone()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.delete_zone.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteZone_async
+ */
+  async checkDeleteZoneProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('deleteZone long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteZone,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteZone, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Signals the state of a zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the zone.
-   *   Format: `projects/{project}/locations/{location}/zones/{zone}`
-   * @param {string} [request.requestId]
-   *   Optional. An optional unique identifier for this request. See
-   *   [AIP-155](https://google.aip.dev/155).
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal} [request.stateSignal]
-   *   Optional. The state signal to send for this zone. Either state_signal or
-   *   provisioning_state_signal must be set, but not both.
-   * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal} [request.provisioningStateSignal]
-   *   Optional. The provisioning state signal to send for this zone. Either
-   *   state_signal or provisioning_state_signal must be set, but not both.
-   * @param {string} [request.step]
-   *   Optional. The step being executed. Provides a finer grained status when the
-   *   state_signal is FACTORY_TURNUP_CHECKS_STARTED or
-   *   FACTORY_TURNUP_CHECKS_FAILED.
-   * @param {string} [request.details]
-   *   Optional. Additional details, such as an error message when state_signal is
-   *   FACTORY_TURNUP_CHECKS_FAILED.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.signal_zone_state.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_async
-   */
+/**
+ * Signals the state of a zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the zone.
+ *   Format: `projects/{project}/locations/{location}/zones/{zone}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional unique identifier for this request. See
+ *   [AIP-155](https://google.aip.dev/155).
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal} [request.stateSignal]
+ *   Optional. The state signal to send for this zone. Either state_signal or
+ *   provisioning_state_signal must be set, but not both.
+ * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal} [request.provisioningStateSignal]
+ *   Optional. The provisioning state signal to send for this zone. Either
+ *   state_signal or provisioning_state_signal must be set, but not both.
+ * @param {string} [request.step]
+ *   Optional. The step being executed. Provides a finer grained status when the
+ *   state_signal is FACTORY_TURNUP_CHECKS_STARTED or
+ *   FACTORY_TURNUP_CHECKS_FAILED.
+ * @param {string} [request.details]
+ *   Optional. Additional details, such as an error message when state_signal is
+ *   FACTORY_TURNUP_CHECKS_FAILED.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.signal_zone_state.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_async
+ */
   signalZoneState(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   signalZoneState(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   signalZoneState(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   signalZoneState(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-        protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('signalZoneState response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('signalZoneState request %j', request);
-    return this.innerApiCalls
-      .signalZoneState(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IZone,
-            protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('signalZoneState response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.signalZoneState(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone, protos.google.cloud.gdchardwaremanagement.v1alpha.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('signalZoneState response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `signalZoneState()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.signal_zone_state.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_async
-   */
-  async checkSignalZoneStateProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Zone,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `signalZoneState()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.signal_zone_state.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_async
+ */
+  async checkSignalZoneStateProgress(name: string): Promise<LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Zone, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>>{
     this._log.info('signalZoneState long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.signalZoneState,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.Zone,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.signalZoneState, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.gdchardwaremanagement.v1alpha.Zone, protos.google.cloud.gdchardwaremanagement.v1alpha.OperationMetadata>;
   }
-  /**
-   * Lists orders in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list orders in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list orders across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOrdersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists orders in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list orders in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list orders across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOrdersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrders(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
+      ]>;
   listOrders(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder
-    >
-  ): void;
-  listOrders(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder
-    >
-  ): void;
-  listOrders(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder>): void;
+  listOrders(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder>): void;
+  listOrders(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOrders values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5242,66 +3559,63 @@ export class GDCHardwareManagementClient {
     this._log.info('listOrders request %j', request);
     return this.innerApiCalls
       .listOrders(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse,
-        ]) => {
-          this._log.info('listOrders values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersResponse
+      ]) => {
+        this._log.info('listOrders values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listOrders`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list orders in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list orders across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listOrdersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listOrders`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list orders in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list orders across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOrdersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrdersStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
@@ -5310,57 +3624,56 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listOrders`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list orders in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list orders across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_orders.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListOrders_async
-   */
+/**
+ * Equivalent to `listOrders`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list orders in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list orders across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Order|Order}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_orders.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListOrders_async
+ */
   listOrdersAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
@@ -5368,122 +3681,97 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder>;
   }
-  /**
-   * Lists sites in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list sites in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list sites across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSitesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists sites in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list sites in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list sites across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSitesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSites(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
+      ]>;
   listSites(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite
-    >
-  ): void;
-  listSites(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite
-    >
-  ): void;
-  listSites(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite>): void;
+  listSites(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite>): void;
+  listSites(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.ISite>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSites values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5492,66 +3780,63 @@ export class GDCHardwareManagementClient {
     this._log.info('listSites request %j', request);
     return this.innerApiCalls
       .listSites(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse,
-        ]) => {
-          this._log.info('listSites values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesResponse
+      ]) => {
+        this._log.info('listSites values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSites`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list sites in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list sites across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSitesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSites`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list sites in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list sites across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSitesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSitesStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSites stream %j', request);
     return this.descriptors.page.listSites.createStream(
       this.innerApiCalls.listSites as GaxCall,
@@ -5560,57 +3845,56 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listSites`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list sites in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list sites across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_sites.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSites_async
-   */
+/**
+ * Equivalent to `listSites`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list sites in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list sites across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Site|Site}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_sites.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSites_async
+ */
   listSitesAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSites iterate %j', request);
     return this.descriptors.page.listSites.asyncIterate(
       this.innerApiCalls['listSites'] as GaxCall,
@@ -5618,118 +3902,93 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.ISite>;
   }
-  /**
-   * Lists hardware groups in a given order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list hardware groups in.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listHardwareGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists hardware groups in a given order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list hardware groups in.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listHardwareGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHardwareGroups(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
+      ]>;
   listHardwareGroups(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup
-    >
-  ): void;
-  listHardwareGroups(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup
-    >
-  ): void;
-  listHardwareGroups(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup>): void;
+  listHardwareGroups(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup>): void;
+  listHardwareGroups(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listHardwareGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5738,62 +3997,59 @@ export class GDCHardwareManagementClient {
     this._log.info('listHardwareGroups request %j', request);
     return this.innerApiCalls
       .listHardwareGroups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse,
-        ]) => {
-          this._log.info('listHardwareGroups values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsResponse
+      ]) => {
+        this._log.info('listHardwareGroups values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listHardwareGroups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list hardware groups in.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listHardwareGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listHardwareGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list hardware groups in.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listHardwareGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHardwareGroupsStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHardwareGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHardwareGroups stream %j', request);
     return this.descriptors.page.listHardwareGroups.createStream(
       this.innerApiCalls.listHardwareGroups as GaxCall,
@@ -5802,53 +4058,52 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listHardwareGroups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list hardware groups in.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_hardware_groups.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardwareGroups_async
-   */
+/**
+ * Equivalent to `listHardwareGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list hardware groups in.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup|HardwareGroup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_hardware_groups.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardwareGroups_async
+ */
   listHardwareGroupsAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHardwareGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHardwareGroups iterate %j', request);
     return this.descriptors.page.listHardwareGroups.asyncIterate(
       this.innerApiCalls['listHardwareGroups'] as GaxCall,
@@ -5856,122 +4111,97 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardwareGroup>;
   }
-  /**
-   * Lists hardware in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list hardware in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list hardware across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listHardwareAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists hardware in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list hardware in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list hardware across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listHardwareAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
+      ]>;
   listHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware
-    >
-  ): void;
-  listHardware(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware
-    >
-  ): void;
-  listHardware(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware>): void;
+  listHardware(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware>): void;
+  listHardware(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listHardware values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5980,66 +4210,63 @@ export class GDCHardwareManagementClient {
     this._log.info('listHardware request %j', request);
     return this.innerApiCalls
       .listHardware(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse,
-        ]) => {
-          this._log.info('listHardware values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareResponse
+      ]) => {
+        this._log.info('listHardware values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listHardware`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list hardware in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list hardware across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listHardwareAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listHardware`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list hardware in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list hardware across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listHardwareAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHardwareStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHardware'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHardware stream %j', request);
     return this.descriptors.page.listHardware.createStream(
       this.innerApiCalls.listHardware as GaxCall,
@@ -6048,57 +4275,56 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listHardware`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list hardware in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list hardware across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_hardware.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardware_async
-   */
+/**
+ * Equivalent to `listHardware`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list hardware in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list hardware across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Hardware|Hardware}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_hardware.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardware_async
+ */
   listHardwareAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHardware'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHardware iterate %j', request);
     return this.descriptors.page.listHardware.asyncIterate(
       this.innerApiCalls['listHardware'] as GaxCall,
@@ -6106,118 +4332,93 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IHardware>;
   }
-  /**
-   * Lists the comments on an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list comments on.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCommentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the comments on an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list comments on.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCommentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listComments(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
+      ]>;
   listComments(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment
-    >
-  ): void;
-  listComments(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment
-    >
-  ): void;
-  listComments(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment>): void;
+  listComments(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment>): void;
+  listComments(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listComments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6226,62 +4427,59 @@ export class GDCHardwareManagementClient {
     this._log.info('listComments request %j', request);
     return this.innerApiCalls
       .listComments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse,
-        ]) => {
-          this._log.info('listComments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IComment[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsResponse
+      ]) => {
+        this._log.info('listComments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listComments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list comments on.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCommentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listComments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list comments on.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCommentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCommentsStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listComments stream %j', request);
     return this.descriptors.page.listComments.createStream(
       this.innerApiCalls.listComments as GaxCall,
@@ -6290,53 +4488,52 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listComments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list comments on.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_comments.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListComments_async
-   */
+/**
+ * Equivalent to `listComments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list comments on.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_comments.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListComments_async
+ */
   listCommentsAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listComments iterate %j', request);
     return this.descriptors.page.listComments.asyncIterate(
       this.innerApiCalls['listComments'] as GaxCall,
@@ -6344,118 +4541,93 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IComment>;
   }
-  /**
-   * Lists the changes made to an order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list change log entries for.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listChangeLogEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the changes made to an order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list change log entries for.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listChangeLogEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listChangeLogEntries(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
+      ]>;
   listChangeLogEntries(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry
-    >
-  ): void;
-  listChangeLogEntries(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry
-    >
-  ): void;
-  listChangeLogEntries(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry>): void;
+  listChangeLogEntries(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry>): void;
+  listChangeLogEntries(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listChangeLogEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6464,62 +4636,59 @@ export class GDCHardwareManagementClient {
     this._log.info('listChangeLogEntries request %j', request);
     return this.innerApiCalls
       .listChangeLogEntries(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse,
-        ]) => {
-          this._log.info('listChangeLogEntries values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesResponse
+      ]) => {
+        this._log.info('listChangeLogEntries values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listChangeLogEntries`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list change log entries for.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listChangeLogEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listChangeLogEntries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list change log entries for.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listChangeLogEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listChangeLogEntriesStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listChangeLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listChangeLogEntries stream %j', request);
     return this.descriptors.page.listChangeLogEntries.createStream(
       this.innerApiCalls.listChangeLogEntries as GaxCall,
@@ -6528,53 +4697,52 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listChangeLogEntries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The order to list change log entries for.
-   *   Format: `projects/{project}/locations/{location}/orders/{order}`
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_change_log_entries.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListChangeLogEntries_async
-   */
+/**
+ * Equivalent to `listChangeLogEntries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The order to list change log entries for.
+ *   Format: `projects/{project}/locations/{location}/orders/{order}`
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry|ChangeLogEntry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_change_log_entries.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListChangeLogEntries_async
+ */
   listChangeLogEntriesAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listChangeLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listChangeLogEntries iterate %j', request);
     return this.descriptors.page.listChangeLogEntries.asyncIterate(
       this.innerApiCalls['listChangeLogEntries'] as GaxCall,
@@ -6582,122 +4750,97 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IChangeLogEntry>;
   }
-  /**
-   * Lists SKUs for a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list SKUs in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list SKUs across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSkusAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists SKUs for a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list SKUs in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list SKUs across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSkusAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSkus(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
+      ]>;
   listSkus(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku
-    >
-  ): void;
-  listSkus(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku
-    >
-  ): void;
-  listSkus(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku>): void;
+  listSkus(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku>): void;
+  listSkus(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.ISku>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSkus values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6706,66 +4849,63 @@ export class GDCHardwareManagementClient {
     this._log.info('listSkus request %j', request);
     return this.innerApiCalls
       .listSkus(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse,
-        ]) => {
-          this._log.info('listSkus values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusResponse
+      ]) => {
+        this._log.info('listSkus values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSkus`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list SKUs in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list SKUs across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSkusAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSkus`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list SKUs in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list SKUs across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSkusAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSkusStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSkus stream %j', request);
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as GaxCall,
@@ -6774,57 +4914,56 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listSkus`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list SKUs in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list SKUs across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_skus.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSkus_async
-   */
+/**
+ * Equivalent to `listSkus`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list SKUs in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list SKUs across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Sku|Sku}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_skus.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSkus_async
+ */
   listSkusAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.ISku> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.ISku>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSkus iterate %j', request);
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
@@ -6832,122 +4971,97 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.ISku>;
   }
-  /**
-   * Lists zones in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list zones in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list zones across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listZonesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists zones in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list zones in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list zones across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listZonesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listZones(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
+      ]>;
   listZones(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone
-    >
-  ): void;
-  listZones(
-    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone
-    >
-  ): void;
-  listZones(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-      | protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
-      | null
-      | undefined,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[],
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest | null,
-      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse,
-    ]
-  > | void {
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone>): void;
+  listZones(
+      request: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone>): void;
+  listZones(
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone>,
+      callback?: PaginationCallback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse|null|undefined,
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone>):
+      Promise<[
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-          | protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
-          | null
-          | undefined,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse|null|undefined,
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IZone>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listZones values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6956,66 +5070,63 @@ export class GDCHardwareManagementClient {
     this._log.info('listZones request %j', request);
     return this.innerApiCalls
       .listZones(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[],
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest | null,
-          protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse,
-        ]) => {
-          this._log.info('listZones values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[],
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest|null,
+        protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesResponse
+      ]) => {
+        this._log.info('listZones values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listZones`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list zones in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list zones across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listZonesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listZones`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list zones in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list zones across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listZonesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listZonesStream(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listZones stream %j', request);
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
@@ -7024,57 +5135,56 @@ export class GDCHardwareManagementClient {
     );
   }
 
-  /**
-   * Equivalent to `listZones`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to list zones in.
-   *   Format: `projects/{project}/locations/{location}`
-   *
-   *   To list zones across all locations, substitute `-` (the hyphen or
-   *   dash character) for the location and check the unreachable field in
-   *   the response message.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {string} [request.filter]
-   *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_zones.js</caption>
-   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListZones_async
-   */
+/**
+ * Equivalent to `listZones`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to list zones in.
+ *   Format: `projects/{project}/locations/{location}`
+ *
+ *   To list zones across all locations, substitute `-` (the hyphen or
+ *   dash character) for the location and check the unreachable field in
+ *   the response message.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {string} [request.filter]
+ *   Optional. Filtering condition. See [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Zone|Zone}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.list_zones.js</caption>
+ * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListZones_async
+ */
   listZonesAsync(
-    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone> {
+      request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listZones iterate %j', request);
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
@@ -7082,7 +5192,7 @@ export class GDCHardwareManagementClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.gdchardwaremanagement.v1alpha.IZone>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -7122,7 +5232,7 @@ export class GDCHardwareManagementClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -7160,7 +5270,7 @@ export class GDCHardwareManagementClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -7205,20 +5315,20 @@ export class GDCHardwareManagementClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7255,13 +5365,13 @@ export class GDCHardwareManagementClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -7295,7 +5405,7 @@ export class GDCHardwareManagementClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -7310,20 +5420,20 @@ export class GDCHardwareManagementClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -7367,20 +5477,20 @@ export class GDCHardwareManagementClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -7397,12 +5507,7 @@ export class GDCHardwareManagementClient {
    * @param {string} change_log_entry
    * @returns {string} Resource name string.
    */
-  changeLogEntryPath(
-    project: string,
-    location: string,
-    order: string,
-    changeLogEntry: string
-  ) {
+  changeLogEntryPath(project:string,location:string,order:string,changeLogEntry:string) {
     return this.pathTemplates.changeLogEntryPathTemplate.render({
       project: project,
       location: location,
@@ -7419,9 +5524,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangeLogEntryName(changeLogEntryName: string) {
-    return this.pathTemplates.changeLogEntryPathTemplate.match(
-      changeLogEntryName
-    ).project;
+    return this.pathTemplates.changeLogEntryPathTemplate.match(changeLogEntryName).project;
   }
 
   /**
@@ -7432,9 +5535,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangeLogEntryName(changeLogEntryName: string) {
-    return this.pathTemplates.changeLogEntryPathTemplate.match(
-      changeLogEntryName
-    ).location;
+    return this.pathTemplates.changeLogEntryPathTemplate.match(changeLogEntryName).location;
   }
 
   /**
@@ -7445,9 +5546,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the order.
    */
   matchOrderFromChangeLogEntryName(changeLogEntryName: string) {
-    return this.pathTemplates.changeLogEntryPathTemplate.match(
-      changeLogEntryName
-    ).order;
+    return this.pathTemplates.changeLogEntryPathTemplate.match(changeLogEntryName).order;
   }
 
   /**
@@ -7458,9 +5557,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the change_log_entry.
    */
   matchChangeLogEntryFromChangeLogEntryName(changeLogEntryName: string) {
-    return this.pathTemplates.changeLogEntryPathTemplate.match(
-      changeLogEntryName
-    ).change_log_entry;
+    return this.pathTemplates.changeLogEntryPathTemplate.match(changeLogEntryName).change_log_entry;
   }
 
   /**
@@ -7472,12 +5569,7 @@ export class GDCHardwareManagementClient {
    * @param {string} comment
    * @returns {string} Resource name string.
    */
-  commentPath(
-    project: string,
-    location: string,
-    order: string,
-    comment: string
-  ) {
+  commentPath(project:string,location:string,order:string,comment:string) {
     return this.pathTemplates.commentPathTemplate.render({
       project: project,
       location: location,
@@ -7538,7 +5630,7 @@ export class GDCHardwareManagementClient {
    * @param {string} hardware
    * @returns {string} Resource name string.
    */
-  hardwarePath(project: string, location: string, hardware: string) {
+  hardwarePath(project:string,location:string,hardware:string) {
     return this.pathTemplates.hardwarePathTemplate.render({
       project: project,
       location: location,
@@ -7588,12 +5680,7 @@ export class GDCHardwareManagementClient {
    * @param {string} hardware_group
    * @returns {string} Resource name string.
    */
-  hardwareGroupPath(
-    project: string,
-    location: string,
-    order: string,
-    hardwareGroup: string
-  ) {
+  hardwareGroupPath(project:string,location:string,order:string,hardwareGroup:string) {
     return this.pathTemplates.hardwareGroupPathTemplate.render({
       project: project,
       location: location,
@@ -7610,8 +5697,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromHardwareGroupName(hardwareGroupName: string) {
-    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName)
-      .project;
+    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName).project;
   }
 
   /**
@@ -7622,8 +5708,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromHardwareGroupName(hardwareGroupName: string) {
-    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName)
-      .location;
+    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName).location;
   }
 
   /**
@@ -7634,8 +5719,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the order.
    */
   matchOrderFromHardwareGroupName(hardwareGroupName: string) {
-    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName)
-      .order;
+    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName).order;
   }
 
   /**
@@ -7646,8 +5730,7 @@ export class GDCHardwareManagementClient {
    * @returns {string} A string representing the hardware_group.
    */
   matchHardwareGroupFromHardwareGroupName(hardwareGroupName: string) {
-    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName)
-      .hardware_group;
+    return this.pathTemplates.hardwareGroupPathTemplate.match(hardwareGroupName).hardware_group;
   }
 
   /**
@@ -7657,7 +5740,7 @@ export class GDCHardwareManagementClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -7694,7 +5777,7 @@ export class GDCHardwareManagementClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(project: string, location: string, order: string) {
+  orderPath(project:string,location:string,order:string) {
     return this.pathTemplates.orderPathTemplate.render({
       project: project,
       location: location,
@@ -7741,7 +5824,7 @@ export class GDCHardwareManagementClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -7766,7 +5849,7 @@ export class GDCHardwareManagementClient {
    * @param {string} site
    * @returns {string} Resource name string.
    */
-  sitePath(project: string, location: string, site: string) {
+  sitePath(project:string,location:string,site:string) {
     return this.pathTemplates.sitePathTemplate.render({
       project: project,
       location: location,
@@ -7815,7 +5898,7 @@ export class GDCHardwareManagementClient {
    * @param {string} sku
    * @returns {string} Resource name string.
    */
-  skuPath(project: string, location: string, sku: string) {
+  skuPath(project:string,location:string,sku:string) {
     return this.pathTemplates.skuPathTemplate.render({
       project: project,
       location: location,
@@ -7864,7 +5947,7 @@ export class GDCHardwareManagementClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project: string, location: string, zone: string) {
+  zonePath(project:string,location:string,zone:string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -7917,8 +6000,8 @@ export class GDCHardwareManagementClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

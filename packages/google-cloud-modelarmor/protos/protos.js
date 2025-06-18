@@ -13126,6 +13126,13292 @@
                     return v1;
                 })();
     
+                modelarmor.v1beta = (function() {
+    
+                    /**
+                     * Namespace v1beta.
+                     * @memberof google.cloud.modelarmor
+                     * @namespace
+                     */
+                    var v1beta = {};
+    
+                    v1beta.ModelArmor = (function() {
+    
+                        /**
+                         * Constructs a new ModelArmor service.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a ModelArmor
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function ModelArmor(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (ModelArmor.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ModelArmor;
+    
+                        /**
+                         * Creates new ModelArmor service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {ModelArmor} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        ModelArmor.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|listTemplates}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef ListTemplatesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.ListTemplatesResponse} [response] ListTemplatesResponse
+                         */
+    
+                        /**
+                         * Calls ListTemplates.
+                         * @function listTemplates
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesRequest} request ListTemplatesRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.ListTemplatesCallback} callback Node-style callback called with the error, if any, and ListTemplatesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.listTemplates = function listTemplates(request, callback) {
+                            return this.rpcCall(listTemplates, $root.google.cloud.modelarmor.v1beta.ListTemplatesRequest, $root.google.cloud.modelarmor.v1beta.ListTemplatesResponse, request, callback);
+                        }, "name", { value: "ListTemplates" });
+    
+                        /**
+                         * Calls ListTemplates.
+                         * @function listTemplates
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesRequest} request ListTemplatesRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.ListTemplatesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|getTemplate}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef GetTemplateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.Template} [response] Template
+                         */
+    
+                        /**
+                         * Calls GetTemplate.
+                         * @function getTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IGetTemplateRequest} request GetTemplateRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.GetTemplateCallback} callback Node-style callback called with the error, if any, and Template
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.getTemplate = function getTemplate(request, callback) {
+                            return this.rpcCall(getTemplate, $root.google.cloud.modelarmor.v1beta.GetTemplateRequest, $root.google.cloud.modelarmor.v1beta.Template, request, callback);
+                        }, "name", { value: "GetTemplate" });
+    
+                        /**
+                         * Calls GetTemplate.
+                         * @function getTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IGetTemplateRequest} request GetTemplateRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.Template>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|createTemplate}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef CreateTemplateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.Template} [response] Template
+                         */
+    
+                        /**
+                         * Calls CreateTemplate.
+                         * @function createTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ICreateTemplateRequest} request CreateTemplateRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.CreateTemplateCallback} callback Node-style callback called with the error, if any, and Template
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.createTemplate = function createTemplate(request, callback) {
+                            return this.rpcCall(createTemplate, $root.google.cloud.modelarmor.v1beta.CreateTemplateRequest, $root.google.cloud.modelarmor.v1beta.Template, request, callback);
+                        }, "name", { value: "CreateTemplate" });
+    
+                        /**
+                         * Calls CreateTemplate.
+                         * @function createTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ICreateTemplateRequest} request CreateTemplateRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.Template>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|updateTemplate}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef UpdateTemplateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.Template} [response] Template
+                         */
+    
+                        /**
+                         * Calls UpdateTemplate.
+                         * @function updateTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateTemplateRequest} request UpdateTemplateRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.UpdateTemplateCallback} callback Node-style callback called with the error, if any, and Template
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.updateTemplate = function updateTemplate(request, callback) {
+                            return this.rpcCall(updateTemplate, $root.google.cloud.modelarmor.v1beta.UpdateTemplateRequest, $root.google.cloud.modelarmor.v1beta.Template, request, callback);
+                        }, "name", { value: "UpdateTemplate" });
+    
+                        /**
+                         * Calls UpdateTemplate.
+                         * @function updateTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateTemplateRequest} request UpdateTemplateRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.Template>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|deleteTemplate}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef DeleteTemplateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteTemplate.
+                         * @function deleteTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IDeleteTemplateRequest} request DeleteTemplateRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.DeleteTemplateCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.deleteTemplate = function deleteTemplate(request, callback) {
+                            return this.rpcCall(deleteTemplate, $root.google.cloud.modelarmor.v1beta.DeleteTemplateRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteTemplate" });
+    
+                        /**
+                         * Calls DeleteTemplate.
+                         * @function deleteTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IDeleteTemplateRequest} request DeleteTemplateRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|getFloorSetting}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef GetFloorSettingCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.FloorSetting} [response] FloorSetting
+                         */
+    
+                        /**
+                         * Calls GetFloorSetting.
+                         * @function getFloorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IGetFloorSettingRequest} request GetFloorSettingRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.GetFloorSettingCallback} callback Node-style callback called with the error, if any, and FloorSetting
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.getFloorSetting = function getFloorSetting(request, callback) {
+                            return this.rpcCall(getFloorSetting, $root.google.cloud.modelarmor.v1beta.GetFloorSettingRequest, $root.google.cloud.modelarmor.v1beta.FloorSetting, request, callback);
+                        }, "name", { value: "GetFloorSetting" });
+    
+                        /**
+                         * Calls GetFloorSetting.
+                         * @function getFloorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IGetFloorSettingRequest} request GetFloorSettingRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.FloorSetting>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|updateFloorSetting}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef UpdateFloorSettingCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.FloorSetting} [response] FloorSetting
+                         */
+    
+                        /**
+                         * Calls UpdateFloorSetting.
+                         * @function updateFloorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest} request UpdateFloorSettingRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.UpdateFloorSettingCallback} callback Node-style callback called with the error, if any, and FloorSetting
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.updateFloorSetting = function updateFloorSetting(request, callback) {
+                            return this.rpcCall(updateFloorSetting, $root.google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest, $root.google.cloud.modelarmor.v1beta.FloorSetting, request, callback);
+                        }, "name", { value: "UpdateFloorSetting" });
+    
+                        /**
+                         * Calls UpdateFloorSetting.
+                         * @function updateFloorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest} request UpdateFloorSettingRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.FloorSetting>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|sanitizeUserPrompt}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef SanitizeUserPromptCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse} [response] SanitizeUserPromptResponse
+                         */
+    
+                        /**
+                         * Calls SanitizeUserPrompt.
+                         * @function sanitizeUserPrompt
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest} request SanitizeUserPromptRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.SanitizeUserPromptCallback} callback Node-style callback called with the error, if any, and SanitizeUserPromptResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.sanitizeUserPrompt = function sanitizeUserPrompt(request, callback) {
+                            return this.rpcCall(sanitizeUserPrompt, $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest, $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse, request, callback);
+                        }, "name", { value: "SanitizeUserPrompt" });
+    
+                        /**
+                         * Calls SanitizeUserPrompt.
+                         * @function sanitizeUserPrompt
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest} request SanitizeUserPromptRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|sanitizeModelResponse}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef SanitizeModelResponseCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse} [response] SanitizeModelResponseResponse
+                         */
+    
+                        /**
+                         * Calls SanitizeModelResponse.
+                         * @function sanitizeModelResponse
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest} request SanitizeModelResponseRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.SanitizeModelResponseCallback} callback Node-style callback called with the error, if any, and SanitizeModelResponseResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.sanitizeModelResponse = function sanitizeModelResponse(request, callback) {
+                            return this.rpcCall(sanitizeModelResponse, $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest, $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse, request, callback);
+                        }, "name", { value: "SanitizeModelResponse" });
+    
+                        /**
+                         * Calls SanitizeModelResponse.
+                         * @function sanitizeModelResponse
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest} request SanitizeModelResponseRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return ModelArmor;
+                    })();
+    
+                    /**
+                     * FilterMatchState enum.
+                     * @name google.cloud.modelarmor.v1beta.FilterMatchState
+                     * @enum {number}
+                     * @property {number} FILTER_MATCH_STATE_UNSPECIFIED=0 FILTER_MATCH_STATE_UNSPECIFIED value
+                     * @property {number} NO_MATCH_FOUND=1 NO_MATCH_FOUND value
+                     * @property {number} MATCH_FOUND=2 MATCH_FOUND value
+                     */
+                    v1beta.FilterMatchState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FILTER_MATCH_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NO_MATCH_FOUND"] = 1;
+                        values[valuesById[2] = "MATCH_FOUND"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * FilterExecutionState enum.
+                     * @name google.cloud.modelarmor.v1beta.FilterExecutionState
+                     * @enum {number}
+                     * @property {number} FILTER_EXECUTION_STATE_UNSPECIFIED=0 FILTER_EXECUTION_STATE_UNSPECIFIED value
+                     * @property {number} EXECUTION_SUCCESS=1 EXECUTION_SUCCESS value
+                     * @property {number} EXECUTION_SKIPPED=2 EXECUTION_SKIPPED value
+                     */
+                    v1beta.FilterExecutionState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FILTER_EXECUTION_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EXECUTION_SUCCESS"] = 1;
+                        values[valuesById[2] = "EXECUTION_SKIPPED"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * RaiFilterType enum.
+                     * @name google.cloud.modelarmor.v1beta.RaiFilterType
+                     * @enum {number}
+                     * @property {number} RAI_FILTER_TYPE_UNSPECIFIED=0 RAI_FILTER_TYPE_UNSPECIFIED value
+                     * @property {number} SEXUALLY_EXPLICIT=2 SEXUALLY_EXPLICIT value
+                     * @property {number} HATE_SPEECH=3 HATE_SPEECH value
+                     * @property {number} HARASSMENT=6 HARASSMENT value
+                     * @property {number} DANGEROUS=17 DANGEROUS value
+                     */
+                    v1beta.RaiFilterType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "RAI_FILTER_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "SEXUALLY_EXPLICIT"] = 2;
+                        values[valuesById[3] = "HATE_SPEECH"] = 3;
+                        values[valuesById[6] = "HARASSMENT"] = 6;
+                        values[valuesById[17] = "DANGEROUS"] = 17;
+                        return values;
+                    })();
+    
+                    /**
+                     * DetectionConfidenceLevel enum.
+                     * @name google.cloud.modelarmor.v1beta.DetectionConfidenceLevel
+                     * @enum {number}
+                     * @property {number} DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED=0 DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED value
+                     * @property {number} LOW_AND_ABOVE=1 LOW_AND_ABOVE value
+                     * @property {number} MEDIUM_AND_ABOVE=2 MEDIUM_AND_ABOVE value
+                     * @property {number} HIGH=3 HIGH value
+                     */
+                    v1beta.DetectionConfidenceLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LOW_AND_ABOVE"] = 1;
+                        values[valuesById[2] = "MEDIUM_AND_ABOVE"] = 2;
+                        values[valuesById[3] = "HIGH"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * SdpFindingLikelihood enum.
+                     * @name google.cloud.modelarmor.v1beta.SdpFindingLikelihood
+                     * @enum {number}
+                     * @property {number} SDP_FINDING_LIKELIHOOD_UNSPECIFIED=0 SDP_FINDING_LIKELIHOOD_UNSPECIFIED value
+                     * @property {number} VERY_UNLIKELY=1 VERY_UNLIKELY value
+                     * @property {number} UNLIKELY=2 UNLIKELY value
+                     * @property {number} POSSIBLE=3 POSSIBLE value
+                     * @property {number} LIKELY=4 LIKELY value
+                     * @property {number} VERY_LIKELY=5 VERY_LIKELY value
+                     */
+                    v1beta.SdpFindingLikelihood = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SDP_FINDING_LIKELIHOOD_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "VERY_UNLIKELY"] = 1;
+                        values[valuesById[2] = "UNLIKELY"] = 2;
+                        values[valuesById[3] = "POSSIBLE"] = 3;
+                        values[valuesById[4] = "LIKELY"] = 4;
+                        values[valuesById[5] = "VERY_LIKELY"] = 5;
+                        return values;
+                    })();
+    
+                    /**
+                     * InvocationResult enum.
+                     * @name google.cloud.modelarmor.v1beta.InvocationResult
+                     * @enum {number}
+                     * @property {number} INVOCATION_RESULT_UNSPECIFIED=0 INVOCATION_RESULT_UNSPECIFIED value
+                     * @property {number} SUCCESS=1 SUCCESS value
+                     * @property {number} PARTIAL=2 PARTIAL value
+                     * @property {number} FAILURE=3 FAILURE value
+                     */
+                    v1beta.InvocationResult = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "INVOCATION_RESULT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SUCCESS"] = 1;
+                        values[valuesById[2] = "PARTIAL"] = 2;
+                        values[valuesById[3] = "FAILURE"] = 3;
+                        return values;
+                    })();
+    
+                    v1beta.Template = (function() {
+    
+                        /**
+                         * Properties of a Template.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ITemplate
+                         * @property {string|null} [name] Template name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Template createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Template updateTime
+                         * @property {Object.<string,string>|null} [labels] Template labels
+                         * @property {google.cloud.modelarmor.v1beta.IFilterConfig|null} [filterConfig] Template filterConfig
+                         * @property {google.cloud.modelarmor.v1beta.Template.ITemplateMetadata|null} [templateMetadata] Template templateMetadata
+                         */
+    
+                        /**
+                         * Constructs a new Template.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a Template.
+                         * @implements ITemplate
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ITemplate=} [properties] Properties to set
+                         */
+                        function Template(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Template name.
+                         * @member {string} name
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @instance
+                         */
+                        Template.prototype.name = "";
+    
+                        /**
+                         * Template createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @instance
+                         */
+                        Template.prototype.createTime = null;
+    
+                        /**
+                         * Template updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @instance
+                         */
+                        Template.prototype.updateTime = null;
+    
+                        /**
+                         * Template labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @instance
+                         */
+                        Template.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Template filterConfig.
+                         * @member {google.cloud.modelarmor.v1beta.IFilterConfig|null|undefined} filterConfig
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @instance
+                         */
+                        Template.prototype.filterConfig = null;
+    
+                        /**
+                         * Template templateMetadata.
+                         * @member {google.cloud.modelarmor.v1beta.Template.ITemplateMetadata|null|undefined} templateMetadata
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @instance
+                         */
+                        Template.prototype.templateMetadata = null;
+    
+                        /**
+                         * Creates a new Template instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ITemplate=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.Template} Template instance
+                         */
+                        Template.create = function create(properties) {
+                            return new Template(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Template message. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ITemplate} message Template message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Template.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.filterConfig != null && Object.hasOwnProperty.call(message, "filterConfig"))
+                                $root.google.cloud.modelarmor.v1beta.FilterConfig.encode(message.filterConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.templateMetadata != null && Object.hasOwnProperty.call(message, "templateMetadata"))
+                                $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.encode(message.templateMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Template message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ITemplate} message Template message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Template.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Template message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.Template} Template
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Template.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.Template(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filterConfig = $root.google.cloud.modelarmor.v1beta.FilterConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.templateMetadata = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Template message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.Template} Template
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Template.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Template message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Template.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.filterConfig != null && message.hasOwnProperty("filterConfig")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.FilterConfig.verify(message.filterConfig);
+                                if (error)
+                                    return "filterConfig." + error;
+                            }
+                            if (message.templateMetadata != null && message.hasOwnProperty("templateMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.verify(message.templateMetadata);
+                                if (error)
+                                    return "templateMetadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Template message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.Template} Template
+                         */
+                        Template.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.Template)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.Template();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.Template.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.Template.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.Template.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.filterConfig != null) {
+                                if (typeof object.filterConfig !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.Template.filterConfig: object expected");
+                                message.filterConfig = $root.google.cloud.modelarmor.v1beta.FilterConfig.fromObject(object.filterConfig);
+                            }
+                            if (object.templateMetadata != null) {
+                                if (typeof object.templateMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.Template.templateMetadata: object expected");
+                                message.templateMetadata = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.fromObject(object.templateMetadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Template message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.Template} message Template
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Template.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.filterConfig = null;
+                                object.templateMetadata = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.filterConfig != null && message.hasOwnProperty("filterConfig"))
+                                object.filterConfig = $root.google.cloud.modelarmor.v1beta.FilterConfig.toObject(message.filterConfig, options);
+                            if (message.templateMetadata != null && message.hasOwnProperty("templateMetadata"))
+                                object.templateMetadata = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.toObject(message.templateMetadata, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Template to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Template.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Template
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.Template
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Template.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.Template";
+                        };
+    
+                        Template.TemplateMetadata = (function() {
+    
+                            /**
+                             * Properties of a TemplateMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.Template
+                             * @interface ITemplateMetadata
+                             * @property {boolean|null} [ignorePartialInvocationFailures] TemplateMetadata ignorePartialInvocationFailures
+                             * @property {number|null} [customPromptSafetyErrorCode] TemplateMetadata customPromptSafetyErrorCode
+                             * @property {string|null} [customPromptSafetyErrorMessage] TemplateMetadata customPromptSafetyErrorMessage
+                             * @property {number|null} [customLlmResponseSafetyErrorCode] TemplateMetadata customLlmResponseSafetyErrorCode
+                             * @property {string|null} [customLlmResponseSafetyErrorMessage] TemplateMetadata customLlmResponseSafetyErrorMessage
+                             * @property {boolean|null} [logTemplateOperations] TemplateMetadata logTemplateOperations
+                             * @property {boolean|null} [logSanitizeOperations] TemplateMetadata logSanitizeOperations
+                             */
+    
+                            /**
+                             * Constructs a new TemplateMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.Template
+                             * @classdesc Represents a TemplateMetadata.
+                             * @implements ITemplateMetadata
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.Template.ITemplateMetadata=} [properties] Properties to set
+                             */
+                            function TemplateMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TemplateMetadata ignorePartialInvocationFailures.
+                             * @member {boolean} ignorePartialInvocationFailures
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.ignorePartialInvocationFailures = false;
+    
+                            /**
+                             * TemplateMetadata customPromptSafetyErrorCode.
+                             * @member {number} customPromptSafetyErrorCode
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.customPromptSafetyErrorCode = 0;
+    
+                            /**
+                             * TemplateMetadata customPromptSafetyErrorMessage.
+                             * @member {string} customPromptSafetyErrorMessage
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.customPromptSafetyErrorMessage = "";
+    
+                            /**
+                             * TemplateMetadata customLlmResponseSafetyErrorCode.
+                             * @member {number} customLlmResponseSafetyErrorCode
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.customLlmResponseSafetyErrorCode = 0;
+    
+                            /**
+                             * TemplateMetadata customLlmResponseSafetyErrorMessage.
+                             * @member {string} customLlmResponseSafetyErrorMessage
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.customLlmResponseSafetyErrorMessage = "";
+    
+                            /**
+                             * TemplateMetadata logTemplateOperations.
+                             * @member {boolean} logTemplateOperations
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.logTemplateOperations = false;
+    
+                            /**
+                             * TemplateMetadata logSanitizeOperations.
+                             * @member {boolean} logSanitizeOperations
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.logSanitizeOperations = false;
+    
+                            /**
+                             * Creates a new TemplateMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.Template.ITemplateMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata} TemplateMetadata instance
+                             */
+                            TemplateMetadata.create = function create(properties) {
+                                return new TemplateMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TemplateMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.Template.ITemplateMetadata} message TemplateMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TemplateMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.ignorePartialInvocationFailures != null && Object.hasOwnProperty.call(message, "ignorePartialInvocationFailures"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.ignorePartialInvocationFailures);
+                                if (message.customPromptSafetyErrorCode != null && Object.hasOwnProperty.call(message, "customPromptSafetyErrorCode"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.customPromptSafetyErrorCode);
+                                if (message.customPromptSafetyErrorMessage != null && Object.hasOwnProperty.call(message, "customPromptSafetyErrorMessage"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.customPromptSafetyErrorMessage);
+                                if (message.customLlmResponseSafetyErrorCode != null && Object.hasOwnProperty.call(message, "customLlmResponseSafetyErrorCode"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.customLlmResponseSafetyErrorCode);
+                                if (message.customLlmResponseSafetyErrorMessage != null && Object.hasOwnProperty.call(message, "customLlmResponseSafetyErrorMessage"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.customLlmResponseSafetyErrorMessage);
+                                if (message.logTemplateOperations != null && Object.hasOwnProperty.call(message, "logTemplateOperations"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.logTemplateOperations);
+                                if (message.logSanitizeOperations != null && Object.hasOwnProperty.call(message, "logSanitizeOperations"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.logSanitizeOperations);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TemplateMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.Template.ITemplateMetadata} message TemplateMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TemplateMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TemplateMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata} TemplateMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TemplateMetadata.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.ignorePartialInvocationFailures = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.customPromptSafetyErrorCode = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.customPromptSafetyErrorMessage = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.customLlmResponseSafetyErrorCode = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.customLlmResponseSafetyErrorMessage = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.logTemplateOperations = reader.bool();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.logSanitizeOperations = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TemplateMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata} TemplateMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TemplateMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TemplateMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TemplateMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
+                                    if (typeof message.ignorePartialInvocationFailures !== "boolean")
+                                        return "ignorePartialInvocationFailures: boolean expected";
+                                if (message.customPromptSafetyErrorCode != null && message.hasOwnProperty("customPromptSafetyErrorCode"))
+                                    if (!$util.isInteger(message.customPromptSafetyErrorCode))
+                                        return "customPromptSafetyErrorCode: integer expected";
+                                if (message.customPromptSafetyErrorMessage != null && message.hasOwnProperty("customPromptSafetyErrorMessage"))
+                                    if (!$util.isString(message.customPromptSafetyErrorMessage))
+                                        return "customPromptSafetyErrorMessage: string expected";
+                                if (message.customLlmResponseSafetyErrorCode != null && message.hasOwnProperty("customLlmResponseSafetyErrorCode"))
+                                    if (!$util.isInteger(message.customLlmResponseSafetyErrorCode))
+                                        return "customLlmResponseSafetyErrorCode: integer expected";
+                                if (message.customLlmResponseSafetyErrorMessage != null && message.hasOwnProperty("customLlmResponseSafetyErrorMessage"))
+                                    if (!$util.isString(message.customLlmResponseSafetyErrorMessage))
+                                        return "customLlmResponseSafetyErrorMessage: string expected";
+                                if (message.logTemplateOperations != null && message.hasOwnProperty("logTemplateOperations"))
+                                    if (typeof message.logTemplateOperations !== "boolean")
+                                        return "logTemplateOperations: boolean expected";
+                                if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
+                                    if (typeof message.logSanitizeOperations !== "boolean")
+                                        return "logSanitizeOperations: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TemplateMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata} TemplateMetadata
+                             */
+                            TemplateMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata();
+                                if (object.ignorePartialInvocationFailures != null)
+                                    message.ignorePartialInvocationFailures = Boolean(object.ignorePartialInvocationFailures);
+                                if (object.customPromptSafetyErrorCode != null)
+                                    message.customPromptSafetyErrorCode = object.customPromptSafetyErrorCode | 0;
+                                if (object.customPromptSafetyErrorMessage != null)
+                                    message.customPromptSafetyErrorMessage = String(object.customPromptSafetyErrorMessage);
+                                if (object.customLlmResponseSafetyErrorCode != null)
+                                    message.customLlmResponseSafetyErrorCode = object.customLlmResponseSafetyErrorCode | 0;
+                                if (object.customLlmResponseSafetyErrorMessage != null)
+                                    message.customLlmResponseSafetyErrorMessage = String(object.customLlmResponseSafetyErrorMessage);
+                                if (object.logTemplateOperations != null)
+                                    message.logTemplateOperations = Boolean(object.logTemplateOperations);
+                                if (object.logSanitizeOperations != null)
+                                    message.logSanitizeOperations = Boolean(object.logSanitizeOperations);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TemplateMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata} message TemplateMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TemplateMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.ignorePartialInvocationFailures = false;
+                                    object.customPromptSafetyErrorCode = 0;
+                                    object.customPromptSafetyErrorMessage = "";
+                                    object.customLlmResponseSafetyErrorCode = 0;
+                                    object.customLlmResponseSafetyErrorMessage = "";
+                                    object.logTemplateOperations = false;
+                                    object.logSanitizeOperations = false;
+                                }
+                                if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
+                                    object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
+                                if (message.customPromptSafetyErrorCode != null && message.hasOwnProperty("customPromptSafetyErrorCode"))
+                                    object.customPromptSafetyErrorCode = message.customPromptSafetyErrorCode;
+                                if (message.customPromptSafetyErrorMessage != null && message.hasOwnProperty("customPromptSafetyErrorMessage"))
+                                    object.customPromptSafetyErrorMessage = message.customPromptSafetyErrorMessage;
+                                if (message.customLlmResponseSafetyErrorCode != null && message.hasOwnProperty("customLlmResponseSafetyErrorCode"))
+                                    object.customLlmResponseSafetyErrorCode = message.customLlmResponseSafetyErrorCode;
+                                if (message.customLlmResponseSafetyErrorMessage != null && message.hasOwnProperty("customLlmResponseSafetyErrorMessage"))
+                                    object.customLlmResponseSafetyErrorMessage = message.customLlmResponseSafetyErrorMessage;
+                                if (message.logTemplateOperations != null && message.hasOwnProperty("logTemplateOperations"))
+                                    object.logTemplateOperations = message.logTemplateOperations;
+                                if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
+                                    object.logSanitizeOperations = message.logSanitizeOperations;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TemplateMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TemplateMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TemplateMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TemplateMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.Template.TemplateMetadata";
+                            };
+    
+                            return TemplateMetadata;
+                        })();
+    
+                        return Template;
+                    })();
+    
+                    v1beta.FloorSetting = (function() {
+    
+                        /**
+                         * Properties of a FloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IFloorSetting
+                         * @property {string|null} [name] FloorSetting name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] FloorSetting createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] FloorSetting updateTime
+                         * @property {google.cloud.modelarmor.v1beta.IFilterConfig|null} [filterConfig] FloorSetting filterConfig
+                         * @property {boolean|null} [enableFloorSettingEnforcement] FloorSetting enableFloorSettingEnforcement
+                         */
+    
+                        /**
+                         * Constructs a new FloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a FloorSetting.
+                         * @implements IFloorSetting
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IFloorSetting=} [properties] Properties to set
+                         */
+                        function FloorSetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FloorSetting name.
+                         * @member {string} name
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.name = "";
+    
+                        /**
+                         * FloorSetting createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.createTime = null;
+    
+                        /**
+                         * FloorSetting updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.updateTime = null;
+    
+                        /**
+                         * FloorSetting filterConfig.
+                         * @member {google.cloud.modelarmor.v1beta.IFilterConfig|null|undefined} filterConfig
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.filterConfig = null;
+    
+                        /**
+                         * FloorSetting enableFloorSettingEnforcement.
+                         * @member {boolean|null|undefined} enableFloorSettingEnforcement
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.enableFloorSettingEnforcement = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FloorSetting _enableFloorSettingEnforcement.
+                         * @member {"enableFloorSettingEnforcement"|undefined} _enableFloorSettingEnforcement
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        Object.defineProperty(FloorSetting.prototype, "_enableFloorSettingEnforcement", {
+                            get: $util.oneOfGetter($oneOfFields = ["enableFloorSettingEnforcement"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FloorSetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFloorSetting=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.FloorSetting} FloorSetting instance
+                         */
+                        FloorSetting.create = function create(properties) {
+                            return new FloorSetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFloorSetting} message FloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FloorSetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.filterConfig != null && Object.hasOwnProperty.call(message, "filterConfig"))
+                                $root.google.cloud.modelarmor.v1beta.FilterConfig.encode(message.filterConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.enableFloorSettingEnforcement != null && Object.hasOwnProperty.call(message, "enableFloorSettingEnforcement"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableFloorSettingEnforcement);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFloorSetting} message FloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FloorSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FloorSetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.FloorSetting} FloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FloorSetting.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.FloorSetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filterConfig = $root.google.cloud.modelarmor.v1beta.FilterConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.enableFloorSettingEnforcement = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FloorSetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.FloorSetting} FloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FloorSetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FloorSetting message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FloorSetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.filterConfig != null && message.hasOwnProperty("filterConfig")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.FilterConfig.verify(message.filterConfig);
+                                if (error)
+                                    return "filterConfig." + error;
+                            }
+                            if (message.enableFloorSettingEnforcement != null && message.hasOwnProperty("enableFloorSettingEnforcement")) {
+                                properties._enableFloorSettingEnforcement = 1;
+                                if (typeof message.enableFloorSettingEnforcement !== "boolean")
+                                    return "enableFloorSettingEnforcement: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FloorSetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.FloorSetting} FloorSetting
+                         */
+                        FloorSetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.FloorSetting)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.FloorSetting();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.filterConfig != null) {
+                                if (typeof object.filterConfig !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.filterConfig: object expected");
+                                message.filterConfig = $root.google.cloud.modelarmor.v1beta.FilterConfig.fromObject(object.filterConfig);
+                            }
+                            if (object.enableFloorSettingEnforcement != null)
+                                message.enableFloorSettingEnforcement = Boolean(object.enableFloorSettingEnforcement);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FloorSetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.FloorSetting} message FloorSetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FloorSetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.filterConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.filterConfig != null && message.hasOwnProperty("filterConfig"))
+                                object.filterConfig = $root.google.cloud.modelarmor.v1beta.FilterConfig.toObject(message.filterConfig, options);
+                            if (message.enableFloorSettingEnforcement != null && message.hasOwnProperty("enableFloorSettingEnforcement")) {
+                                object.enableFloorSettingEnforcement = message.enableFloorSettingEnforcement;
+                                if (options.oneofs)
+                                    object._enableFloorSettingEnforcement = "enableFloorSettingEnforcement";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FloorSetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FloorSetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FloorSetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FloorSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FloorSetting";
+                        };
+    
+                        return FloorSetting;
+                    })();
+    
+                    v1beta.ListTemplatesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListTemplatesRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IListTemplatesRequest
+                         * @property {string|null} [parent] ListTemplatesRequest parent
+                         * @property {number|null} [pageSize] ListTemplatesRequest pageSize
+                         * @property {string|null} [pageToken] ListTemplatesRequest pageToken
+                         * @property {string|null} [filter] ListTemplatesRequest filter
+                         * @property {string|null} [orderBy] ListTemplatesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListTemplatesRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a ListTemplatesRequest.
+                         * @implements IListTemplatesRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesRequest=} [properties] Properties to set
+                         */
+                        function ListTemplatesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTemplatesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @instance
+                         */
+                        ListTemplatesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListTemplatesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @instance
+                         */
+                        ListTemplatesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListTemplatesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @instance
+                         */
+                        ListTemplatesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListTemplatesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @instance
+                         */
+                        ListTemplatesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListTemplatesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @instance
+                         */
+                        ListTemplatesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListTemplatesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesRequest} ListTemplatesRequest instance
+                         */
+                        ListTemplatesRequest.create = function create(properties) {
+                            return new ListTemplatesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTemplatesRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesRequest} message ListTemplatesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTemplatesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesRequest} message ListTemplatesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTemplatesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTemplatesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesRequest} ListTemplatesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTemplatesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.ListTemplatesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTemplatesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesRequest} ListTemplatesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTemplatesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTemplatesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTemplatesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesRequest} ListTemplatesRequest
+                         */
+                        ListTemplatesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.ListTemplatesRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.ListTemplatesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTemplatesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ListTemplatesRequest} message ListTemplatesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTemplatesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTemplatesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTemplatesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListTemplatesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListTemplatesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.ListTemplatesRequest";
+                        };
+    
+                        return ListTemplatesRequest;
+                    })();
+    
+                    v1beta.ListTemplatesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListTemplatesResponse.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IListTemplatesResponse
+                         * @property {Array.<google.cloud.modelarmor.v1beta.ITemplate>|null} [templates] ListTemplatesResponse templates
+                         * @property {string|null} [nextPageToken] ListTemplatesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListTemplatesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListTemplatesResponse.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a ListTemplatesResponse.
+                         * @implements IListTemplatesResponse
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesResponse=} [properties] Properties to set
+                         */
+                        function ListTemplatesResponse(properties) {
+                            this.templates = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTemplatesResponse templates.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.ITemplate>} templates
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @instance
+                         */
+                        ListTemplatesResponse.prototype.templates = $util.emptyArray;
+    
+                        /**
+                         * ListTemplatesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @instance
+                         */
+                        ListTemplatesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListTemplatesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @instance
+                         */
+                        ListTemplatesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListTemplatesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesResponse} ListTemplatesResponse instance
+                         */
+                        ListTemplatesResponse.create = function create(properties) {
+                            return new ListTemplatesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTemplatesResponse message. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesResponse} message ListTemplatesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTemplatesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.templates != null && message.templates.length)
+                                for (var i = 0; i < message.templates.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.Template.encode(message.templates[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.ListTemplatesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IListTemplatesResponse} message ListTemplatesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTemplatesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTemplatesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesResponse} ListTemplatesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTemplatesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.ListTemplatesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.templates && message.templates.length))
+                                            message.templates = [];
+                                        message.templates.push($root.google.cloud.modelarmor.v1beta.Template.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTemplatesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesResponse} ListTemplatesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTemplatesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTemplatesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTemplatesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.templates != null && message.hasOwnProperty("templates")) {
+                                if (!Array.isArray(message.templates))
+                                    return "templates: array expected";
+                                for (var i = 0; i < message.templates.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.Template.verify(message.templates[i]);
+                                    if (error)
+                                        return "templates." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.ListTemplatesResponse} ListTemplatesResponse
+                         */
+                        ListTemplatesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.ListTemplatesResponse)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.ListTemplatesResponse();
+                            if (object.templates) {
+                                if (!Array.isArray(object.templates))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.ListTemplatesResponse.templates: array expected");
+                                message.templates = [];
+                                for (var i = 0; i < object.templates.length; ++i) {
+                                    if (typeof object.templates[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.ListTemplatesResponse.templates: object expected");
+                                    message.templates[i] = $root.google.cloud.modelarmor.v1beta.Template.fromObject(object.templates[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.ListTemplatesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTemplatesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ListTemplatesResponse} message ListTemplatesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTemplatesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.templates = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.templates && message.templates.length) {
+                                object.templates = [];
+                                for (var j = 0; j < message.templates.length; ++j)
+                                    object.templates[j] = $root.google.cloud.modelarmor.v1beta.Template.toObject(message.templates[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTemplatesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTemplatesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListTemplatesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.ListTemplatesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListTemplatesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.ListTemplatesResponse";
+                        };
+    
+                        return ListTemplatesResponse;
+                    })();
+    
+                    v1beta.GetTemplateRequest = (function() {
+    
+                        /**
+                         * Properties of a GetTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IGetTemplateRequest
+                         * @property {string|null} [name] GetTemplateRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a GetTemplateRequest.
+                         * @implements IGetTemplateRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IGetTemplateRequest=} [properties] Properties to set
+                         */
+                        function GetTemplateRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetTemplateRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @instance
+                         */
+                        GetTemplateRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetTemplateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IGetTemplateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.GetTemplateRequest} GetTemplateRequest instance
+                         */
+                        GetTemplateRequest.create = function create(properties) {
+                            return new GetTemplateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetTemplateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IGetTemplateRequest} message GetTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetTemplateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetTemplateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IGetTemplateRequest} message GetTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetTemplateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.GetTemplateRequest} GetTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetTemplateRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.GetTemplateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.GetTemplateRequest} GetTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetTemplateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetTemplateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.GetTemplateRequest} GetTemplateRequest
+                         */
+                        GetTemplateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.GetTemplateRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.GetTemplateRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetTemplateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.GetTemplateRequest} message GetTemplateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetTemplateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetTemplateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetTemplateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetTemplateRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.GetTemplateRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.GetTemplateRequest";
+                        };
+    
+                        return GetTemplateRequest;
+                    })();
+    
+                    v1beta.CreateTemplateRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ICreateTemplateRequest
+                         * @property {string|null} [parent] CreateTemplateRequest parent
+                         * @property {string|null} [templateId] CreateTemplateRequest templateId
+                         * @property {google.cloud.modelarmor.v1beta.ITemplate|null} [template] CreateTemplateRequest template
+                         * @property {string|null} [requestId] CreateTemplateRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a CreateTemplateRequest.
+                         * @implements ICreateTemplateRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ICreateTemplateRequest=} [properties] Properties to set
+                         */
+                        function CreateTemplateRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateTemplateRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @instance
+                         */
+                        CreateTemplateRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateTemplateRequest templateId.
+                         * @member {string} templateId
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @instance
+                         */
+                        CreateTemplateRequest.prototype.templateId = "";
+    
+                        /**
+                         * CreateTemplateRequest template.
+                         * @member {google.cloud.modelarmor.v1beta.ITemplate|null|undefined} template
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @instance
+                         */
+                        CreateTemplateRequest.prototype.template = null;
+    
+                        /**
+                         * CreateTemplateRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @instance
+                         */
+                        CreateTemplateRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateTemplateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ICreateTemplateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.CreateTemplateRequest} CreateTemplateRequest instance
+                         */
+                        CreateTemplateRequest.create = function create(properties) {
+                            return new CreateTemplateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.CreateTemplateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ICreateTemplateRequest} message CreateTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTemplateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.templateId != null && Object.hasOwnProperty.call(message, "templateId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.templateId);
+                            if (message.template != null && Object.hasOwnProperty.call(message, "template"))
+                                $root.google.cloud.modelarmor.v1beta.Template.encode(message.template, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.CreateTemplateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ICreateTemplateRequest} message CreateTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateTemplateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.CreateTemplateRequest} CreateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTemplateRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.CreateTemplateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.templateId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.template = $root.google.cloud.modelarmor.v1beta.Template.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.CreateTemplateRequest} CreateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateTemplateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateTemplateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.templateId != null && message.hasOwnProperty("templateId"))
+                                if (!$util.isString(message.templateId))
+                                    return "templateId: string expected";
+                            if (message.template != null && message.hasOwnProperty("template")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.Template.verify(message.template);
+                                if (error)
+                                    return "template." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.CreateTemplateRequest} CreateTemplateRequest
+                         */
+                        CreateTemplateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.CreateTemplateRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.CreateTemplateRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.templateId != null)
+                                message.templateId = String(object.templateId);
+                            if (object.template != null) {
+                                if (typeof object.template !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.CreateTemplateRequest.template: object expected");
+                                message.template = $root.google.cloud.modelarmor.v1beta.Template.fromObject(object.template);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateTemplateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.CreateTemplateRequest} message CreateTemplateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateTemplateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.templateId = "";
+                                object.template = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.templateId != null && message.hasOwnProperty("templateId"))
+                                object.templateId = message.templateId;
+                            if (message.template != null && message.hasOwnProperty("template"))
+                                object.template = $root.google.cloud.modelarmor.v1beta.Template.toObject(message.template, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateTemplateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateTemplateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateTemplateRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.CreateTemplateRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.CreateTemplateRequest";
+                        };
+    
+                        return CreateTemplateRequest;
+                    })();
+    
+                    v1beta.UpdateTemplateRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IUpdateTemplateRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateTemplateRequest updateMask
+                         * @property {google.cloud.modelarmor.v1beta.ITemplate|null} [template] UpdateTemplateRequest template
+                         * @property {string|null} [requestId] UpdateTemplateRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents an UpdateTemplateRequest.
+                         * @implements IUpdateTemplateRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateTemplateRequest=} [properties] Properties to set
+                         */
+                        function UpdateTemplateRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateTemplateRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @instance
+                         */
+                        UpdateTemplateRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateTemplateRequest template.
+                         * @member {google.cloud.modelarmor.v1beta.ITemplate|null|undefined} template
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @instance
+                         */
+                        UpdateTemplateRequest.prototype.template = null;
+    
+                        /**
+                         * UpdateTemplateRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @instance
+                         */
+                        UpdateTemplateRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateTemplateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateTemplateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateTemplateRequest} UpdateTemplateRequest instance
+                         */
+                        UpdateTemplateRequest.create = function create(properties) {
+                            return new UpdateTemplateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateTemplateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateTemplateRequest} message UpdateTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateTemplateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.template != null && Object.hasOwnProperty.call(message, "template"))
+                                $root.google.cloud.modelarmor.v1beta.Template.encode(message.template, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateTemplateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateTemplateRequest} message UpdateTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateTemplateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateTemplateRequest} UpdateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateTemplateRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.UpdateTemplateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.template = $root.google.cloud.modelarmor.v1beta.Template.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateTemplateRequest} UpdateTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateTemplateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateTemplateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.template != null && message.hasOwnProperty("template")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.Template.verify(message.template);
+                                if (error)
+                                    return "template." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateTemplateRequest} UpdateTemplateRequest
+                         */
+                        UpdateTemplateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.UpdateTemplateRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.UpdateTemplateRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.UpdateTemplateRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.template != null) {
+                                if (typeof object.template !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.UpdateTemplateRequest.template: object expected");
+                                message.template = $root.google.cloud.modelarmor.v1beta.Template.fromObject(object.template);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateTemplateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.UpdateTemplateRequest} message UpdateTemplateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateTemplateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.template = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.template != null && message.hasOwnProperty("template"))
+                                object.template = $root.google.cloud.modelarmor.v1beta.Template.toObject(message.template, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateTemplateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateTemplateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateTemplateRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateTemplateRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.UpdateTemplateRequest";
+                        };
+    
+                        return UpdateTemplateRequest;
+                    })();
+    
+                    v1beta.DeleteTemplateRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IDeleteTemplateRequest
+                         * @property {string|null} [name] DeleteTemplateRequest name
+                         * @property {string|null} [requestId] DeleteTemplateRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteTemplateRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a DeleteTemplateRequest.
+                         * @implements IDeleteTemplateRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IDeleteTemplateRequest=} [properties] Properties to set
+                         */
+                        function DeleteTemplateRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteTemplateRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @instance
+                         */
+                        DeleteTemplateRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteTemplateRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @instance
+                         */
+                        DeleteTemplateRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteTemplateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IDeleteTemplateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.DeleteTemplateRequest} DeleteTemplateRequest instance
+                         */
+                        DeleteTemplateRequest.create = function create(properties) {
+                            return new DeleteTemplateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTemplateRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.DeleteTemplateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IDeleteTemplateRequest} message DeleteTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTemplateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.DeleteTemplateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IDeleteTemplateRequest} message DeleteTemplateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteTemplateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.DeleteTemplateRequest} DeleteTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTemplateRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.DeleteTemplateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteTemplateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.DeleteTemplateRequest} DeleteTemplateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteTemplateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteTemplateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.DeleteTemplateRequest} DeleteTemplateRequest
+                         */
+                        DeleteTemplateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.DeleteTemplateRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.DeleteTemplateRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteTemplateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.DeleteTemplateRequest} message DeleteTemplateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteTemplateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteTemplateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteTemplateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteTemplateRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.DeleteTemplateRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.DeleteTemplateRequest";
+                        };
+    
+                        return DeleteTemplateRequest;
+                    })();
+    
+                    v1beta.GetFloorSettingRequest = (function() {
+    
+                        /**
+                         * Properties of a GetFloorSettingRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IGetFloorSettingRequest
+                         * @property {string|null} [name] GetFloorSettingRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetFloorSettingRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a GetFloorSettingRequest.
+                         * @implements IGetFloorSettingRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IGetFloorSettingRequest=} [properties] Properties to set
+                         */
+                        function GetFloorSettingRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetFloorSettingRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @instance
+                         */
+                        GetFloorSettingRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetFloorSettingRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IGetFloorSettingRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.GetFloorSettingRequest} GetFloorSettingRequest instance
+                         */
+                        GetFloorSettingRequest.create = function create(properties) {
+                            return new GetFloorSettingRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetFloorSettingRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetFloorSettingRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IGetFloorSettingRequest} message GetFloorSettingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFloorSettingRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetFloorSettingRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.GetFloorSettingRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IGetFloorSettingRequest} message GetFloorSettingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFloorSettingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetFloorSettingRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.GetFloorSettingRequest} GetFloorSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFloorSettingRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.GetFloorSettingRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetFloorSettingRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.GetFloorSettingRequest} GetFloorSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFloorSettingRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetFloorSettingRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetFloorSettingRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetFloorSettingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.GetFloorSettingRequest} GetFloorSettingRequest
+                         */
+                        GetFloorSettingRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.GetFloorSettingRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.GetFloorSettingRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetFloorSettingRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.GetFloorSettingRequest} message GetFloorSettingRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetFloorSettingRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetFloorSettingRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetFloorSettingRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetFloorSettingRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.GetFloorSettingRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetFloorSettingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.GetFloorSettingRequest";
+                        };
+    
+                        return GetFloorSettingRequest;
+                    })();
+    
+                    v1beta.UpdateFloorSettingRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateFloorSettingRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IUpdateFloorSettingRequest
+                         * @property {google.cloud.modelarmor.v1beta.IFloorSetting|null} [floorSetting] UpdateFloorSettingRequest floorSetting
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateFloorSettingRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateFloorSettingRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents an UpdateFloorSettingRequest.
+                         * @implements IUpdateFloorSettingRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest=} [properties] Properties to set
+                         */
+                        function UpdateFloorSettingRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateFloorSettingRequest floorSetting.
+                         * @member {google.cloud.modelarmor.v1beta.IFloorSetting|null|undefined} floorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @instance
+                         */
+                        UpdateFloorSettingRequest.prototype.floorSetting = null;
+    
+                        /**
+                         * UpdateFloorSettingRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @instance
+                         */
+                        UpdateFloorSettingRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateFloorSettingRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest} UpdateFloorSettingRequest instance
+                         */
+                        UpdateFloorSettingRequest.create = function create(properties) {
+                            return new UpdateFloorSettingRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFloorSettingRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest} message UpdateFloorSettingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFloorSettingRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.floorSetting != null && Object.hasOwnProperty.call(message, "floorSetting"))
+                                $root.google.cloud.modelarmor.v1beta.FloorSetting.encode(message.floorSetting, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFloorSettingRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IUpdateFloorSettingRequest} message UpdateFloorSettingRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFloorSettingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateFloorSettingRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest} UpdateFloorSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFloorSettingRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.floorSetting = $root.google.cloud.modelarmor.v1beta.FloorSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateFloorSettingRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest} UpdateFloorSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFloorSettingRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateFloorSettingRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateFloorSettingRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.floorSetting != null && message.hasOwnProperty("floorSetting")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.FloorSetting.verify(message.floorSetting);
+                                if (error)
+                                    return "floorSetting." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateFloorSettingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest} UpdateFloorSettingRequest
+                         */
+                        UpdateFloorSettingRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest();
+                            if (object.floorSetting != null) {
+                                if (typeof object.floorSetting !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest.floorSetting: object expected");
+                                message.floorSetting = $root.google.cloud.modelarmor.v1beta.FloorSetting.fromObject(object.floorSetting);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateFloorSettingRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest} message UpdateFloorSettingRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateFloorSettingRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.floorSetting = null;
+                                object.updateMask = null;
+                            }
+                            if (message.floorSetting != null && message.hasOwnProperty("floorSetting"))
+                                object.floorSetting = $root.google.cloud.modelarmor.v1beta.FloorSetting.toObject(message.floorSetting, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateFloorSettingRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateFloorSettingRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateFloorSettingRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateFloorSettingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.UpdateFloorSettingRequest";
+                        };
+    
+                        return UpdateFloorSettingRequest;
+                    })();
+    
+                    v1beta.FilterConfig = (function() {
+    
+                        /**
+                         * Properties of a FilterConfig.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IFilterConfig
+                         * @property {google.cloud.modelarmor.v1beta.IRaiFilterSettings|null} [raiSettings] FilterConfig raiSettings
+                         * @property {google.cloud.modelarmor.v1beta.ISdpFilterSettings|null} [sdpSettings] FilterConfig sdpSettings
+                         * @property {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings|null} [piAndJailbreakFilterSettings] FilterConfig piAndJailbreakFilterSettings
+                         * @property {google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings|null} [maliciousUriFilterSettings] FilterConfig maliciousUriFilterSettings
+                         */
+    
+                        /**
+                         * Constructs a new FilterConfig.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a FilterConfig.
+                         * @implements IFilterConfig
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IFilterConfig=} [properties] Properties to set
+                         */
+                        function FilterConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FilterConfig raiSettings.
+                         * @member {google.cloud.modelarmor.v1beta.IRaiFilterSettings|null|undefined} raiSettings
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @instance
+                         */
+                        FilterConfig.prototype.raiSettings = null;
+    
+                        /**
+                         * FilterConfig sdpSettings.
+                         * @member {google.cloud.modelarmor.v1beta.ISdpFilterSettings|null|undefined} sdpSettings
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @instance
+                         */
+                        FilterConfig.prototype.sdpSettings = null;
+    
+                        /**
+                         * FilterConfig piAndJailbreakFilterSettings.
+                         * @member {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings|null|undefined} piAndJailbreakFilterSettings
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @instance
+                         */
+                        FilterConfig.prototype.piAndJailbreakFilterSettings = null;
+    
+                        /**
+                         * FilterConfig maliciousUriFilterSettings.
+                         * @member {google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings|null|undefined} maliciousUriFilterSettings
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @instance
+                         */
+                        FilterConfig.prototype.maliciousUriFilterSettings = null;
+    
+                        /**
+                         * Creates a new FilterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFilterConfig=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.FilterConfig} FilterConfig instance
+                         */
+                        FilterConfig.create = function create(properties) {
+                            return new FilterConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FilterConfig message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFilterConfig} message FilterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.raiSettings != null && Object.hasOwnProperty.call(message, "raiSettings"))
+                                $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.encode(message.raiSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.sdpSettings != null && Object.hasOwnProperty.call(message, "sdpSettings"))
+                                $root.google.cloud.modelarmor.v1beta.SdpFilterSettings.encode(message.sdpSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.piAndJailbreakFilterSettings != null && Object.hasOwnProperty.call(message, "piAndJailbreakFilterSettings"))
+                                $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.encode(message.piAndJailbreakFilterSettings, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.maliciousUriFilterSettings != null && Object.hasOwnProperty.call(message, "maliciousUriFilterSettings"))
+                                $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.encode(message.maliciousUriFilterSettings, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FilterConfig message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFilterConfig} message FilterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FilterConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.FilterConfig} FilterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.FilterConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.raiSettings = $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sdpSettings = $root.google.cloud.modelarmor.v1beta.SdpFilterSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.piAndJailbreakFilterSettings = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.maliciousUriFilterSettings = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FilterConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.FilterConfig} FilterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FilterConfig message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FilterConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.raiSettings != null && message.hasOwnProperty("raiSettings")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.verify(message.raiSettings);
+                                if (error)
+                                    return "raiSettings." + error;
+                            }
+                            if (message.sdpSettings != null && message.hasOwnProperty("sdpSettings")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.SdpFilterSettings.verify(message.sdpSettings);
+                                if (error)
+                                    return "sdpSettings." + error;
+                            }
+                            if (message.piAndJailbreakFilterSettings != null && message.hasOwnProperty("piAndJailbreakFilterSettings")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.verify(message.piAndJailbreakFilterSettings);
+                                if (error)
+                                    return "piAndJailbreakFilterSettings." + error;
+                            }
+                            if (message.maliciousUriFilterSettings != null && message.hasOwnProperty("maliciousUriFilterSettings")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.verify(message.maliciousUriFilterSettings);
+                                if (error)
+                                    return "maliciousUriFilterSettings." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FilterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.FilterConfig} FilterConfig
+                         */
+                        FilterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.FilterConfig)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.FilterConfig();
+                            if (object.raiSettings != null) {
+                                if (typeof object.raiSettings !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterConfig.raiSettings: object expected");
+                                message.raiSettings = $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.fromObject(object.raiSettings);
+                            }
+                            if (object.sdpSettings != null) {
+                                if (typeof object.sdpSettings !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterConfig.sdpSettings: object expected");
+                                message.sdpSettings = $root.google.cloud.modelarmor.v1beta.SdpFilterSettings.fromObject(object.sdpSettings);
+                            }
+                            if (object.piAndJailbreakFilterSettings != null) {
+                                if (typeof object.piAndJailbreakFilterSettings !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterConfig.piAndJailbreakFilterSettings: object expected");
+                                message.piAndJailbreakFilterSettings = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.fromObject(object.piAndJailbreakFilterSettings);
+                            }
+                            if (object.maliciousUriFilterSettings != null) {
+                                if (typeof object.maliciousUriFilterSettings !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterConfig.maliciousUriFilterSettings: object expected");
+                                message.maliciousUriFilterSettings = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.fromObject(object.maliciousUriFilterSettings);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FilterConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.FilterConfig} message FilterConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FilterConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.raiSettings = null;
+                                object.sdpSettings = null;
+                                object.piAndJailbreakFilterSettings = null;
+                                object.maliciousUriFilterSettings = null;
+                            }
+                            if (message.raiSettings != null && message.hasOwnProperty("raiSettings"))
+                                object.raiSettings = $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.toObject(message.raiSettings, options);
+                            if (message.sdpSettings != null && message.hasOwnProperty("sdpSettings"))
+                                object.sdpSettings = $root.google.cloud.modelarmor.v1beta.SdpFilterSettings.toObject(message.sdpSettings, options);
+                            if (message.piAndJailbreakFilterSettings != null && message.hasOwnProperty("piAndJailbreakFilterSettings"))
+                                object.piAndJailbreakFilterSettings = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.toObject(message.piAndJailbreakFilterSettings, options);
+                            if (message.maliciousUriFilterSettings != null && message.hasOwnProperty("maliciousUriFilterSettings"))
+                                object.maliciousUriFilterSettings = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.toObject(message.maliciousUriFilterSettings, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FilterConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FilterConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FilterConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.FilterConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilterConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FilterConfig";
+                        };
+    
+                        return FilterConfig;
+                    })();
+    
+                    v1beta.PiAndJailbreakFilterSettings = (function() {
+    
+                        /**
+                         * Properties of a PiAndJailbreakFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IPiAndJailbreakFilterSettings
+                         * @property {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement|null} [filterEnforcement] PiAndJailbreakFilterSettings filterEnforcement
+                         * @property {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null} [confidenceLevel] PiAndJailbreakFilterSettings confidenceLevel
+                         */
+    
+                        /**
+                         * Constructs a new PiAndJailbreakFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a PiAndJailbreakFilterSettings.
+                         * @implements IPiAndJailbreakFilterSettings
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings=} [properties] Properties to set
+                         */
+                        function PiAndJailbreakFilterSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PiAndJailbreakFilterSettings filterEnforcement.
+                         * @member {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement} filterEnforcement
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @instance
+                         */
+                        PiAndJailbreakFilterSettings.prototype.filterEnforcement = 0;
+    
+                        /**
+                         * PiAndJailbreakFilterSettings confidenceLevel.
+                         * @member {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel} confidenceLevel
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @instance
+                         */
+                        PiAndJailbreakFilterSettings.prototype.confidenceLevel = 0;
+    
+                        /**
+                         * Creates a new PiAndJailbreakFilterSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings} PiAndJailbreakFilterSettings instance
+                         */
+                        PiAndJailbreakFilterSettings.create = function create(properties) {
+                            return new PiAndJailbreakFilterSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PiAndJailbreakFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings} message PiAndJailbreakFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PiAndJailbreakFilterSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filterEnforcement != null && Object.hasOwnProperty.call(message, "filterEnforcement"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.filterEnforcement);
+                            if (message.confidenceLevel != null && Object.hasOwnProperty.call(message, "confidenceLevel"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.confidenceLevel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PiAndJailbreakFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterSettings} message PiAndJailbreakFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PiAndJailbreakFilterSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PiAndJailbreakFilterSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings} PiAndJailbreakFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PiAndJailbreakFilterSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.filterEnforcement = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.confidenceLevel = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PiAndJailbreakFilterSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings} PiAndJailbreakFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PiAndJailbreakFilterSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PiAndJailbreakFilterSettings message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PiAndJailbreakFilterSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filterEnforcement != null && message.hasOwnProperty("filterEnforcement"))
+                                switch (message.filterEnforcement) {
+                                default:
+                                    return "filterEnforcement: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                switch (message.confidenceLevel) {
+                                default:
+                                    return "confidenceLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PiAndJailbreakFilterSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings} PiAndJailbreakFilterSettings
+                         */
+                        PiAndJailbreakFilterSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings();
+                            switch (object.filterEnforcement) {
+                            default:
+                                if (typeof object.filterEnforcement === "number") {
+                                    message.filterEnforcement = object.filterEnforcement;
+                                    break;
+                                }
+                                break;
+                            case "PI_AND_JAILBREAK_FILTER_ENFORCEMENT_UNSPECIFIED":
+                            case 0:
+                                message.filterEnforcement = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.filterEnforcement = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.filterEnforcement = 2;
+                                break;
+                            }
+                            switch (object.confidenceLevel) {
+                            default:
+                                if (typeof object.confidenceLevel === "number") {
+                                    message.confidenceLevel = object.confidenceLevel;
+                                    break;
+                                }
+                                break;
+                            case "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.confidenceLevel = 0;
+                                break;
+                            case "LOW_AND_ABOVE":
+                            case 1:
+                                message.confidenceLevel = 1;
+                                break;
+                            case "MEDIUM_AND_ABOVE":
+                            case 2:
+                                message.confidenceLevel = 2;
+                                break;
+                            case "HIGH":
+                            case 3:
+                                message.confidenceLevel = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PiAndJailbreakFilterSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings} message PiAndJailbreakFilterSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PiAndJailbreakFilterSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.filterEnforcement = options.enums === String ? "PI_AND_JAILBREAK_FILTER_ENFORCEMENT_UNSPECIFIED" : 0;
+                                object.confidenceLevel = options.enums === String ? "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.filterEnforcement != null && message.hasOwnProperty("filterEnforcement"))
+                                object.filterEnforcement = options.enums === String ? $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement[message.filterEnforcement] === undefined ? message.filterEnforcement : $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement[message.filterEnforcement] : message.filterEnforcement;
+                            if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                object.confidenceLevel = options.enums === String ? $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] === undefined ? message.confidenceLevel : $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] : message.confidenceLevel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PiAndJailbreakFilterSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PiAndJailbreakFilterSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PiAndJailbreakFilterSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PiAndJailbreakFilterSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings";
+                        };
+    
+                        /**
+                         * PiAndJailbreakFilterEnforcement enum.
+                         * @name google.cloud.modelarmor.v1beta.PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement
+                         * @enum {number}
+                         * @property {number} PI_AND_JAILBREAK_FILTER_ENFORCEMENT_UNSPECIFIED=0 PI_AND_JAILBREAK_FILTER_ENFORCEMENT_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} DISABLED=2 DISABLED value
+                         */
+                        PiAndJailbreakFilterSettings.PiAndJailbreakFilterEnforcement = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PI_AND_JAILBREAK_FILTER_ENFORCEMENT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        return PiAndJailbreakFilterSettings;
+                    })();
+    
+                    v1beta.MaliciousUriFilterSettings = (function() {
+    
+                        /**
+                         * Properties of a MaliciousUriFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IMaliciousUriFilterSettings
+                         * @property {google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement|null} [filterEnforcement] MaliciousUriFilterSettings filterEnforcement
+                         */
+    
+                        /**
+                         * Constructs a new MaliciousUriFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a MaliciousUriFilterSettings.
+                         * @implements IMaliciousUriFilterSettings
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings=} [properties] Properties to set
+                         */
+                        function MaliciousUriFilterSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaliciousUriFilterSettings filterEnforcement.
+                         * @member {google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement} filterEnforcement
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @instance
+                         */
+                        MaliciousUriFilterSettings.prototype.filterEnforcement = 0;
+    
+                        /**
+                         * Creates a new MaliciousUriFilterSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings} MaliciousUriFilterSettings instance
+                         */
+                        MaliciousUriFilterSettings.create = function create(properties) {
+                            return new MaliciousUriFilterSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaliciousUriFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings} message MaliciousUriFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaliciousUriFilterSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filterEnforcement != null && Object.hasOwnProperty.call(message, "filterEnforcement"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.filterEnforcement);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaliciousUriFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterSettings} message MaliciousUriFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaliciousUriFilterSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaliciousUriFilterSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings} MaliciousUriFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaliciousUriFilterSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.filterEnforcement = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaliciousUriFilterSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings} MaliciousUriFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaliciousUriFilterSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaliciousUriFilterSettings message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaliciousUriFilterSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filterEnforcement != null && message.hasOwnProperty("filterEnforcement"))
+                                switch (message.filterEnforcement) {
+                                default:
+                                    return "filterEnforcement: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaliciousUriFilterSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings} MaliciousUriFilterSettings
+                         */
+                        MaliciousUriFilterSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings();
+                            switch (object.filterEnforcement) {
+                            default:
+                                if (typeof object.filterEnforcement === "number") {
+                                    message.filterEnforcement = object.filterEnforcement;
+                                    break;
+                                }
+                                break;
+                            case "MALICIOUS_URI_FILTER_ENFORCEMENT_UNSPECIFIED":
+                            case 0:
+                                message.filterEnforcement = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.filterEnforcement = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.filterEnforcement = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaliciousUriFilterSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings} message MaliciousUriFilterSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaliciousUriFilterSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.filterEnforcement = options.enums === String ? "MALICIOUS_URI_FILTER_ENFORCEMENT_UNSPECIFIED" : 0;
+                            if (message.filterEnforcement != null && message.hasOwnProperty("filterEnforcement"))
+                                object.filterEnforcement = options.enums === String ? $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement[message.filterEnforcement] === undefined ? message.filterEnforcement : $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement[message.filterEnforcement] : message.filterEnforcement;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaliciousUriFilterSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaliciousUriFilterSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaliciousUriFilterSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaliciousUriFilterSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings";
+                        };
+    
+                        /**
+                         * MaliciousUriFilterEnforcement enum.
+                         * @name google.cloud.modelarmor.v1beta.MaliciousUriFilterSettings.MaliciousUriFilterEnforcement
+                         * @enum {number}
+                         * @property {number} MALICIOUS_URI_FILTER_ENFORCEMENT_UNSPECIFIED=0 MALICIOUS_URI_FILTER_ENFORCEMENT_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} DISABLED=2 DISABLED value
+                         */
+                        MaliciousUriFilterSettings.MaliciousUriFilterEnforcement = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MALICIOUS_URI_FILTER_ENFORCEMENT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        return MaliciousUriFilterSettings;
+                    })();
+    
+                    v1beta.RaiFilterSettings = (function() {
+    
+                        /**
+                         * Properties of a RaiFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IRaiFilterSettings
+                         * @property {Array.<google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter>|null} [raiFilters] RaiFilterSettings raiFilters
+                         */
+    
+                        /**
+                         * Constructs a new RaiFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a RaiFilterSettings.
+                         * @implements IRaiFilterSettings
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterSettings=} [properties] Properties to set
+                         */
+                        function RaiFilterSettings(properties) {
+                            this.raiFilters = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RaiFilterSettings raiFilters.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter>} raiFilters
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @instance
+                         */
+                        RaiFilterSettings.prototype.raiFilters = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RaiFilterSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterSettings=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings} RaiFilterSettings instance
+                         */
+                        RaiFilterSettings.create = function create(properties) {
+                            return new RaiFilterSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RaiFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterSettings} message RaiFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RaiFilterSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.raiFilters != null && message.raiFilters.length)
+                                for (var i = 0; i < message.raiFilters.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.encode(message.raiFilters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RaiFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterSettings} message RaiFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RaiFilterSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RaiFilterSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings} RaiFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RaiFilterSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.RaiFilterSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.raiFilters && message.raiFilters.length))
+                                            message.raiFilters = [];
+                                        message.raiFilters.push($root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RaiFilterSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings} RaiFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RaiFilterSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RaiFilterSettings message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RaiFilterSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.raiFilters != null && message.hasOwnProperty("raiFilters")) {
+                                if (!Array.isArray(message.raiFilters))
+                                    return "raiFilters: array expected";
+                                for (var i = 0; i < message.raiFilters.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.verify(message.raiFilters[i]);
+                                    if (error)
+                                        return "raiFilters." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RaiFilterSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings} RaiFilterSettings
+                         */
+                        RaiFilterSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.RaiFilterSettings)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.RaiFilterSettings();
+                            if (object.raiFilters) {
+                                if (!Array.isArray(object.raiFilters))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.RaiFilterSettings.raiFilters: array expected");
+                                message.raiFilters = [];
+                                for (var i = 0; i < object.raiFilters.length; ++i) {
+                                    if (typeof object.raiFilters[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.RaiFilterSettings.raiFilters: object expected");
+                                    message.raiFilters[i] = $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.fromObject(object.raiFilters[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RaiFilterSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.RaiFilterSettings} message RaiFilterSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RaiFilterSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.raiFilters = [];
+                            if (message.raiFilters && message.raiFilters.length) {
+                                object.raiFilters = [];
+                                for (var j = 0; j < message.raiFilters.length; ++j)
+                                    object.raiFilters[j] = $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.toObject(message.raiFilters[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RaiFilterSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RaiFilterSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RaiFilterSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RaiFilterSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.RaiFilterSettings";
+                        };
+    
+                        RaiFilterSettings.RaiFilter = (function() {
+    
+                            /**
+                             * Properties of a RaiFilter.
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                             * @interface IRaiFilter
+                             * @property {google.cloud.modelarmor.v1beta.RaiFilterType|null} [filterType] RaiFilter filterType
+                             * @property {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null} [confidenceLevel] RaiFilter confidenceLevel
+                             */
+    
+                            /**
+                             * Constructs a new RaiFilter.
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings
+                             * @classdesc Represents a RaiFilter.
+                             * @implements IRaiFilter
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter=} [properties] Properties to set
+                             */
+                            function RaiFilter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RaiFilter filterType.
+                             * @member {google.cloud.modelarmor.v1beta.RaiFilterType} filterType
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @instance
+                             */
+                            RaiFilter.prototype.filterType = 0;
+    
+                            /**
+                             * RaiFilter confidenceLevel.
+                             * @member {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel} confidenceLevel
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @instance
+                             */
+                            RaiFilter.prototype.confidenceLevel = 0;
+    
+                            /**
+                             * Creates a new RaiFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter} RaiFilter instance
+                             */
+                            RaiFilter.create = function create(properties) {
+                                return new RaiFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RaiFilter message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter} message RaiFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RaiFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.filterType != null && Object.hasOwnProperty.call(message, "filterType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.filterType);
+                                if (message.confidenceLevel != null && Object.hasOwnProperty.call(message, "confidenceLevel"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.confidenceLevel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RaiFilter message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterSettings.IRaiFilter} message RaiFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RaiFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RaiFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter} RaiFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RaiFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.filterType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.confidenceLevel = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RaiFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter} RaiFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RaiFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RaiFilter message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RaiFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.filterType != null && message.hasOwnProperty("filterType"))
+                                    switch (message.filterType) {
+                                    default:
+                                        return "filterType: enum value expected";
+                                    case 0:
+                                    case 2:
+                                    case 3:
+                                    case 6:
+                                    case 17:
+                                        break;
+                                    }
+                                if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                    switch (message.confidenceLevel) {
+                                    default:
+                                        return "confidenceLevel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RaiFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter} RaiFilter
+                             */
+                            RaiFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter();
+                                switch (object.filterType) {
+                                default:
+                                    if (typeof object.filterType === "number") {
+                                        message.filterType = object.filterType;
+                                        break;
+                                    }
+                                    break;
+                                case "RAI_FILTER_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.filterType = 0;
+                                    break;
+                                case "SEXUALLY_EXPLICIT":
+                                case 2:
+                                    message.filterType = 2;
+                                    break;
+                                case "HATE_SPEECH":
+                                case 3:
+                                    message.filterType = 3;
+                                    break;
+                                case "HARASSMENT":
+                                case 6:
+                                    message.filterType = 6;
+                                    break;
+                                case "DANGEROUS":
+                                case 17:
+                                    message.filterType = 17;
+                                    break;
+                                }
+                                switch (object.confidenceLevel) {
+                                default:
+                                    if (typeof object.confidenceLevel === "number") {
+                                        message.confidenceLevel = object.confidenceLevel;
+                                        break;
+                                    }
+                                    break;
+                                case "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED":
+                                case 0:
+                                    message.confidenceLevel = 0;
+                                    break;
+                                case "LOW_AND_ABOVE":
+                                case 1:
+                                    message.confidenceLevel = 1;
+                                    break;
+                                case "MEDIUM_AND_ABOVE":
+                                case 2:
+                                    message.confidenceLevel = 2;
+                                    break;
+                                case "HIGH":
+                                case 3:
+                                    message.confidenceLevel = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RaiFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter} message RaiFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RaiFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.filterType = options.enums === String ? "RAI_FILTER_TYPE_UNSPECIFIED" : 0;
+                                    object.confidenceLevel = options.enums === String ? "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED" : 0;
+                                }
+                                if (message.filterType != null && message.hasOwnProperty("filterType"))
+                                    object.filterType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.RaiFilterType[message.filterType] === undefined ? message.filterType : $root.google.cloud.modelarmor.v1beta.RaiFilterType[message.filterType] : message.filterType;
+                                if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                    object.confidenceLevel = options.enums === String ? $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] === undefined ? message.confidenceLevel : $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] : message.confidenceLevel;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RaiFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RaiFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RaiFilter
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RaiFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.RaiFilterSettings.RaiFilter";
+                            };
+    
+                            return RaiFilter;
+                        })();
+    
+                        return RaiFilterSettings;
+                    })();
+    
+                    v1beta.SdpFilterSettings = (function() {
+    
+                        /**
+                         * Properties of a SdpFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISdpFilterSettings
+                         * @property {google.cloud.modelarmor.v1beta.ISdpBasicConfig|null} [basicConfig] SdpFilterSettings basicConfig
+                         * @property {google.cloud.modelarmor.v1beta.ISdpAdvancedConfig|null} [advancedConfig] SdpFilterSettings advancedConfig
+                         */
+    
+                        /**
+                         * Constructs a new SdpFilterSettings.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SdpFilterSettings.
+                         * @implements ISdpFilterSettings
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterSettings=} [properties] Properties to set
+                         */
+                        function SdpFilterSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpFilterSettings basicConfig.
+                         * @member {google.cloud.modelarmor.v1beta.ISdpBasicConfig|null|undefined} basicConfig
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @instance
+                         */
+                        SdpFilterSettings.prototype.basicConfig = null;
+    
+                        /**
+                         * SdpFilterSettings advancedConfig.
+                         * @member {google.cloud.modelarmor.v1beta.ISdpAdvancedConfig|null|undefined} advancedConfig
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @instance
+                         */
+                        SdpFilterSettings.prototype.advancedConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SdpFilterSettings sdpConfiguration.
+                         * @member {"basicConfig"|"advancedConfig"|undefined} sdpConfiguration
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @instance
+                         */
+                        Object.defineProperty(SdpFilterSettings.prototype, "sdpConfiguration", {
+                            get: $util.oneOfGetter($oneOfFields = ["basicConfig", "advancedConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SdpFilterSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterSettings=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterSettings} SdpFilterSettings instance
+                         */
+                        SdpFilterSettings.create = function create(properties) {
+                            return new SdpFilterSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterSettings} message SdpFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpFilterSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.basicConfig != null && Object.hasOwnProperty.call(message, "basicConfig"))
+                                $root.google.cloud.modelarmor.v1beta.SdpBasicConfig.encode(message.basicConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.advancedConfig != null && Object.hasOwnProperty.call(message, "advancedConfig"))
+                                $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig.encode(message.advancedConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterSettings} message SdpFilterSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpFilterSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpFilterSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterSettings} SdpFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpFilterSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpFilterSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.basicConfig = $root.google.cloud.modelarmor.v1beta.SdpBasicConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.advancedConfig = $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpFilterSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterSettings} SdpFilterSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpFilterSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpFilterSettings message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpFilterSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.basicConfig != null && message.hasOwnProperty("basicConfig")) {
+                                properties.sdpConfiguration = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.SdpBasicConfig.verify(message.basicConfig);
+                                    if (error)
+                                        return "basicConfig." + error;
+                                }
+                            }
+                            if (message.advancedConfig != null && message.hasOwnProperty("advancedConfig")) {
+                                if (properties.sdpConfiguration === 1)
+                                    return "sdpConfiguration: multiple values";
+                                properties.sdpConfiguration = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig.verify(message.advancedConfig);
+                                    if (error)
+                                        return "advancedConfig." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpFilterSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterSettings} SdpFilterSettings
+                         */
+                        SdpFilterSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpFilterSettings)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SdpFilterSettings();
+                            if (object.basicConfig != null) {
+                                if (typeof object.basicConfig !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpFilterSettings.basicConfig: object expected");
+                                message.basicConfig = $root.google.cloud.modelarmor.v1beta.SdpBasicConfig.fromObject(object.basicConfig);
+                            }
+                            if (object.advancedConfig != null) {
+                                if (typeof object.advancedConfig !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpFilterSettings.advancedConfig: object expected");
+                                message.advancedConfig = $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig.fromObject(object.advancedConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpFilterSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SdpFilterSettings} message SdpFilterSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpFilterSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.basicConfig != null && message.hasOwnProperty("basicConfig")) {
+                                object.basicConfig = $root.google.cloud.modelarmor.v1beta.SdpBasicConfig.toObject(message.basicConfig, options);
+                                if (options.oneofs)
+                                    object.sdpConfiguration = "basicConfig";
+                            }
+                            if (message.advancedConfig != null && message.hasOwnProperty("advancedConfig")) {
+                                object.advancedConfig = $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig.toObject(message.advancedConfig, options);
+                                if (options.oneofs)
+                                    object.sdpConfiguration = "advancedConfig";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpFilterSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpFilterSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpFilterSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpFilterSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpFilterSettings";
+                        };
+    
+                        return SdpFilterSettings;
+                    })();
+    
+                    v1beta.SdpBasicConfig = (function() {
+    
+                        /**
+                         * Properties of a SdpBasicConfig.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISdpBasicConfig
+                         * @property {google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement|null} [filterEnforcement] SdpBasicConfig filterEnforcement
+                         */
+    
+                        /**
+                         * Constructs a new SdpBasicConfig.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SdpBasicConfig.
+                         * @implements ISdpBasicConfig
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISdpBasicConfig=} [properties] Properties to set
+                         */
+                        function SdpBasicConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpBasicConfig filterEnforcement.
+                         * @member {google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement} filterEnforcement
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @instance
+                         */
+                        SdpBasicConfig.prototype.filterEnforcement = 0;
+    
+                        /**
+                         * Creates a new SdpBasicConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpBasicConfig=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SdpBasicConfig} SdpBasicConfig instance
+                         */
+                        SdpBasicConfig.create = function create(properties) {
+                            return new SdpBasicConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpBasicConfig message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpBasicConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpBasicConfig} message SdpBasicConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpBasicConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filterEnforcement != null && Object.hasOwnProperty.call(message, "filterEnforcement"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.filterEnforcement);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpBasicConfig message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpBasicConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpBasicConfig} message SdpBasicConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpBasicConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpBasicConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SdpBasicConfig} SdpBasicConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpBasicConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpBasicConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.filterEnforcement = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpBasicConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SdpBasicConfig} SdpBasicConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpBasicConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpBasicConfig message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpBasicConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filterEnforcement != null && message.hasOwnProperty("filterEnforcement"))
+                                switch (message.filterEnforcement) {
+                                default:
+                                    return "filterEnforcement: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpBasicConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SdpBasicConfig} SdpBasicConfig
+                         */
+                        SdpBasicConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpBasicConfig)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SdpBasicConfig();
+                            switch (object.filterEnforcement) {
+                            default:
+                                if (typeof object.filterEnforcement === "number") {
+                                    message.filterEnforcement = object.filterEnforcement;
+                                    break;
+                                }
+                                break;
+                            case "SDP_BASIC_CONFIG_ENFORCEMENT_UNSPECIFIED":
+                            case 0:
+                                message.filterEnforcement = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.filterEnforcement = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.filterEnforcement = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpBasicConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SdpBasicConfig} message SdpBasicConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpBasicConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.filterEnforcement = options.enums === String ? "SDP_BASIC_CONFIG_ENFORCEMENT_UNSPECIFIED" : 0;
+                            if (message.filterEnforcement != null && message.hasOwnProperty("filterEnforcement"))
+                                object.filterEnforcement = options.enums === String ? $root.google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement[message.filterEnforcement] === undefined ? message.filterEnforcement : $root.google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement[message.filterEnforcement] : message.filterEnforcement;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpBasicConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpBasicConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpBasicConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SdpBasicConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpBasicConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpBasicConfig";
+                        };
+    
+                        /**
+                         * SdpBasicConfigEnforcement enum.
+                         * @name google.cloud.modelarmor.v1beta.SdpBasicConfig.SdpBasicConfigEnforcement
+                         * @enum {number}
+                         * @property {number} SDP_BASIC_CONFIG_ENFORCEMENT_UNSPECIFIED=0 SDP_BASIC_CONFIG_ENFORCEMENT_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} DISABLED=2 DISABLED value
+                         */
+                        SdpBasicConfig.SdpBasicConfigEnforcement = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SDP_BASIC_CONFIG_ENFORCEMENT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        return SdpBasicConfig;
+                    })();
+    
+                    v1beta.SdpAdvancedConfig = (function() {
+    
+                        /**
+                         * Properties of a SdpAdvancedConfig.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISdpAdvancedConfig
+                         * @property {string|null} [inspectTemplate] SdpAdvancedConfig inspectTemplate
+                         * @property {string|null} [deidentifyTemplate] SdpAdvancedConfig deidentifyTemplate
+                         */
+    
+                        /**
+                         * Constructs a new SdpAdvancedConfig.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SdpAdvancedConfig.
+                         * @implements ISdpAdvancedConfig
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISdpAdvancedConfig=} [properties] Properties to set
+                         */
+                        function SdpAdvancedConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpAdvancedConfig inspectTemplate.
+                         * @member {string} inspectTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @instance
+                         */
+                        SdpAdvancedConfig.prototype.inspectTemplate = "";
+    
+                        /**
+                         * SdpAdvancedConfig deidentifyTemplate.
+                         * @member {string} deidentifyTemplate
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @instance
+                         */
+                        SdpAdvancedConfig.prototype.deidentifyTemplate = "";
+    
+                        /**
+                         * Creates a new SdpAdvancedConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpAdvancedConfig=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SdpAdvancedConfig} SdpAdvancedConfig instance
+                         */
+                        SdpAdvancedConfig.create = function create(properties) {
+                            return new SdpAdvancedConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpAdvancedConfig message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpAdvancedConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpAdvancedConfig} message SdpAdvancedConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpAdvancedConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inspectTemplate != null && Object.hasOwnProperty.call(message, "inspectTemplate"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.inspectTemplate);
+                            if (message.deidentifyTemplate != null && Object.hasOwnProperty.call(message, "deidentifyTemplate"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deidentifyTemplate);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpAdvancedConfig message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpAdvancedConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpAdvancedConfig} message SdpAdvancedConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpAdvancedConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpAdvancedConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SdpAdvancedConfig} SdpAdvancedConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpAdvancedConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inspectTemplate = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deidentifyTemplate = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpAdvancedConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SdpAdvancedConfig} SdpAdvancedConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpAdvancedConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpAdvancedConfig message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpAdvancedConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                if (!$util.isString(message.inspectTemplate))
+                                    return "inspectTemplate: string expected";
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                if (!$util.isString(message.deidentifyTemplate))
+                                    return "deidentifyTemplate: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpAdvancedConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SdpAdvancedConfig} SdpAdvancedConfig
+                         */
+                        SdpAdvancedConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SdpAdvancedConfig();
+                            if (object.inspectTemplate != null)
+                                message.inspectTemplate = String(object.inspectTemplate);
+                            if (object.deidentifyTemplate != null)
+                                message.deidentifyTemplate = String(object.deidentifyTemplate);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpAdvancedConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SdpAdvancedConfig} message SdpAdvancedConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpAdvancedConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.inspectTemplate = "";
+                                object.deidentifyTemplate = "";
+                            }
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                object.inspectTemplate = message.inspectTemplate;
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                object.deidentifyTemplate = message.deidentifyTemplate;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpAdvancedConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpAdvancedConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpAdvancedConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SdpAdvancedConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpAdvancedConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpAdvancedConfig";
+                        };
+    
+                        return SdpAdvancedConfig;
+                    })();
+    
+                    v1beta.SanitizeUserPromptRequest = (function() {
+    
+                        /**
+                         * Properties of a SanitizeUserPromptRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISanitizeUserPromptRequest
+                         * @property {string|null} [name] SanitizeUserPromptRequest name
+                         * @property {google.cloud.modelarmor.v1beta.IDataItem|null} [userPromptData] SanitizeUserPromptRequest userPromptData
+                         */
+    
+                        /**
+                         * Constructs a new SanitizeUserPromptRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SanitizeUserPromptRequest.
+                         * @implements ISanitizeUserPromptRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest=} [properties] Properties to set
+                         */
+                        function SanitizeUserPromptRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SanitizeUserPromptRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.name = "";
+    
+                        /**
+                         * SanitizeUserPromptRequest userPromptData.
+                         * @member {google.cloud.modelarmor.v1beta.IDataItem|null|undefined} userPromptData
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.userPromptData = null;
+    
+                        /**
+                         * Creates a new SanitizeUserPromptRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest} SanitizeUserPromptRequest instance
+                         */
+                        SanitizeUserPromptRequest.create = function create(properties) {
+                            return new SanitizeUserPromptRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeUserPromptRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest} message SanitizeUserPromptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeUserPromptRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.userPromptData != null && Object.hasOwnProperty.call(message, "userPromptData"))
+                                $root.google.cloud.modelarmor.v1beta.DataItem.encode(message.userPromptData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeUserPromptRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest} message SanitizeUserPromptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeUserPromptRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SanitizeUserPromptRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest} SanitizeUserPromptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeUserPromptRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SanitizeUserPromptRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest} SanitizeUserPromptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeUserPromptRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SanitizeUserPromptRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SanitizeUserPromptRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.userPromptData != null && message.hasOwnProperty("userPromptData")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.DataItem.verify(message.userPromptData);
+                                if (error)
+                                    return "userPromptData." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SanitizeUserPromptRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest} SanitizeUserPromptRequest
+                         */
+                        SanitizeUserPromptRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.userPromptData != null) {
+                                if (typeof object.userPromptData !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.userPromptData: object expected");
+                                message.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.fromObject(object.userPromptData);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SanitizeUserPromptRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest} message SanitizeUserPromptRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SanitizeUserPromptRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.userPromptData = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.userPromptData != null && message.hasOwnProperty("userPromptData"))
+                                object.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.toObject(message.userPromptData, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SanitizeUserPromptRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SanitizeUserPromptRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SanitizeUserPromptRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SanitizeUserPromptRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest";
+                        };
+    
+                        return SanitizeUserPromptRequest;
+                    })();
+    
+                    v1beta.SanitizeModelResponseRequest = (function() {
+    
+                        /**
+                         * Properties of a SanitizeModelResponseRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISanitizeModelResponseRequest
+                         * @property {string|null} [name] SanitizeModelResponseRequest name
+                         * @property {google.cloud.modelarmor.v1beta.IDataItem|null} [modelResponseData] SanitizeModelResponseRequest modelResponseData
+                         * @property {string|null} [userPrompt] SanitizeModelResponseRequest userPrompt
+                         * @property {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeModelResponseRequest multiLanguageDetectionMetadata
+                         */
+    
+                        /**
+                         * Constructs a new SanitizeModelResponseRequest.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SanitizeModelResponseRequest.
+                         * @implements ISanitizeModelResponseRequest
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest=} [properties] Properties to set
+                         */
+                        function SanitizeModelResponseRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SanitizeModelResponseRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.name = "";
+    
+                        /**
+                         * SanitizeModelResponseRequest modelResponseData.
+                         * @member {google.cloud.modelarmor.v1beta.IDataItem|null|undefined} modelResponseData
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.modelResponseData = null;
+    
+                        /**
+                         * SanitizeModelResponseRequest userPrompt.
+                         * @member {string} userPrompt
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.userPrompt = "";
+    
+                        /**
+                         * SanitizeModelResponseRequest multiLanguageDetectionMetadata.
+                         * @member {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null|undefined} multiLanguageDetectionMetadata
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.multiLanguageDetectionMetadata = null;
+    
+                        /**
+                         * Creates a new SanitizeModelResponseRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest} SanitizeModelResponseRequest instance
+                         */
+                        SanitizeModelResponseRequest.create = function create(properties) {
+                            return new SanitizeModelResponseRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeModelResponseRequest message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest} message SanitizeModelResponseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeModelResponseRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.modelResponseData != null && Object.hasOwnProperty.call(message, "modelResponseData"))
+                                $root.google.cloud.modelarmor.v1beta.DataItem.encode(message.modelResponseData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.userPrompt != null && Object.hasOwnProperty.call(message, "userPrompt"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.userPrompt);
+                            if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
+                                $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeModelResponseRequest message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest} message SanitizeModelResponseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeModelResponseRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SanitizeModelResponseRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest} SanitizeModelResponseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeModelResponseRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.modelResponseData = $root.google.cloud.modelarmor.v1beta.DataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.userPrompt = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SanitizeModelResponseRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest} SanitizeModelResponseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeModelResponseRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SanitizeModelResponseRequest message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SanitizeModelResponseRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.modelResponseData != null && message.hasOwnProperty("modelResponseData")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.DataItem.verify(message.modelResponseData);
+                                if (error)
+                                    return "modelResponseData." + error;
+                            }
+                            if (message.userPrompt != null && message.hasOwnProperty("userPrompt"))
+                                if (!$util.isString(message.userPrompt))
+                                    return "userPrompt: string expected";
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
+                                if (error)
+                                    return "multiLanguageDetectionMetadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SanitizeModelResponseRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest} SanitizeModelResponseRequest
+                         */
+                        SanitizeModelResponseRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.modelResponseData != null) {
+                                if (typeof object.modelResponseData !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest.modelResponseData: object expected");
+                                message.modelResponseData = $root.google.cloud.modelarmor.v1beta.DataItem.fromObject(object.modelResponseData);
+                            }
+                            if (object.userPrompt != null)
+                                message.userPrompt = String(object.userPrompt);
+                            if (object.multiLanguageDetectionMetadata != null) {
+                                if (typeof object.multiLanguageDetectionMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest.multiLanguageDetectionMetadata: object expected");
+                                message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SanitizeModelResponseRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest} message SanitizeModelResponseRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SanitizeModelResponseRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.modelResponseData = null;
+                                object.userPrompt = "";
+                                object.multiLanguageDetectionMetadata = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.modelResponseData != null && message.hasOwnProperty("modelResponseData"))
+                                object.modelResponseData = $root.google.cloud.modelarmor.v1beta.DataItem.toObject(message.modelResponseData, options);
+                            if (message.userPrompt != null && message.hasOwnProperty("userPrompt"))
+                                object.userPrompt = message.userPrompt;
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
+                                object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SanitizeModelResponseRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SanitizeModelResponseRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SanitizeModelResponseRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SanitizeModelResponseRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest";
+                        };
+    
+                        return SanitizeModelResponseRequest;
+                    })();
+    
+                    v1beta.SanitizeUserPromptResponse = (function() {
+    
+                        /**
+                         * Properties of a SanitizeUserPromptResponse.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISanitizeUserPromptResponse
+                         * @property {google.cloud.modelarmor.v1beta.ISanitizationResult|null} [sanitizationResult] SanitizeUserPromptResponse sanitizationResult
+                         */
+    
+                        /**
+                         * Constructs a new SanitizeUserPromptResponse.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SanitizeUserPromptResponse.
+                         * @implements ISanitizeUserPromptResponse
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse=} [properties] Properties to set
+                         */
+                        function SanitizeUserPromptResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SanitizeUserPromptResponse sanitizationResult.
+                         * @member {google.cloud.modelarmor.v1beta.ISanitizationResult|null|undefined} sanitizationResult
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @instance
+                         */
+                        SanitizeUserPromptResponse.prototype.sanitizationResult = null;
+    
+                        /**
+                         * Creates a new SanitizeUserPromptResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse} SanitizeUserPromptResponse instance
+                         */
+                        SanitizeUserPromptResponse.create = function create(properties) {
+                            return new SanitizeUserPromptResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeUserPromptResponse message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse} message SanitizeUserPromptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeUserPromptResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sanitizationResult != null && Object.hasOwnProperty.call(message, "sanitizationResult"))
+                                $root.google.cloud.modelarmor.v1beta.SanitizationResult.encode(message.sanitizationResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeUserPromptResponse message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptResponse} message SanitizeUserPromptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeUserPromptResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SanitizeUserPromptResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse} SanitizeUserPromptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeUserPromptResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sanitizationResult = $root.google.cloud.modelarmor.v1beta.SanitizationResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SanitizeUserPromptResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse} SanitizeUserPromptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeUserPromptResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SanitizeUserPromptResponse message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SanitizeUserPromptResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sanitizationResult != null && message.hasOwnProperty("sanitizationResult")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.SanitizationResult.verify(message.sanitizationResult);
+                                if (error)
+                                    return "sanitizationResult." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SanitizeUserPromptResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse} SanitizeUserPromptResponse
+                         */
+                        SanitizeUserPromptResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse();
+                            if (object.sanitizationResult != null) {
+                                if (typeof object.sanitizationResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse.sanitizationResult: object expected");
+                                message.sanitizationResult = $root.google.cloud.modelarmor.v1beta.SanitizationResult.fromObject(object.sanitizationResult);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SanitizeUserPromptResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse} message SanitizeUserPromptResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SanitizeUserPromptResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.sanitizationResult = null;
+                            if (message.sanitizationResult != null && message.hasOwnProperty("sanitizationResult"))
+                                object.sanitizationResult = $root.google.cloud.modelarmor.v1beta.SanitizationResult.toObject(message.sanitizationResult, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SanitizeUserPromptResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SanitizeUserPromptResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SanitizeUserPromptResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SanitizeUserPromptResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse";
+                        };
+    
+                        return SanitizeUserPromptResponse;
+                    })();
+    
+                    v1beta.SanitizeModelResponseResponse = (function() {
+    
+                        /**
+                         * Properties of a SanitizeModelResponseResponse.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISanitizeModelResponseResponse
+                         * @property {google.cloud.modelarmor.v1beta.ISanitizationResult|null} [sanitizationResult] SanitizeModelResponseResponse sanitizationResult
+                         */
+    
+                        /**
+                         * Constructs a new SanitizeModelResponseResponse.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SanitizeModelResponseResponse.
+                         * @implements ISanitizeModelResponseResponse
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse=} [properties] Properties to set
+                         */
+                        function SanitizeModelResponseResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SanitizeModelResponseResponse sanitizationResult.
+                         * @member {google.cloud.modelarmor.v1beta.ISanitizationResult|null|undefined} sanitizationResult
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @instance
+                         */
+                        SanitizeModelResponseResponse.prototype.sanitizationResult = null;
+    
+                        /**
+                         * Creates a new SanitizeModelResponseResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse} SanitizeModelResponseResponse instance
+                         */
+                        SanitizeModelResponseResponse.create = function create(properties) {
+                            return new SanitizeModelResponseResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeModelResponseResponse message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse} message SanitizeModelResponseResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeModelResponseResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sanitizationResult != null && Object.hasOwnProperty.call(message, "sanitizationResult"))
+                                $root.google.cloud.modelarmor.v1beta.SanitizationResult.encode(message.sanitizationResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizeModelResponseResponse message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseResponse} message SanitizeModelResponseResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizeModelResponseResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SanitizeModelResponseResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse} SanitizeModelResponseResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeModelResponseResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sanitizationResult = $root.google.cloud.modelarmor.v1beta.SanitizationResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SanitizeModelResponseResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse} SanitizeModelResponseResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizeModelResponseResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SanitizeModelResponseResponse message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SanitizeModelResponseResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sanitizationResult != null && message.hasOwnProperty("sanitizationResult")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.SanitizationResult.verify(message.sanitizationResult);
+                                if (error)
+                                    return "sanitizationResult." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SanitizeModelResponseResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse} SanitizeModelResponseResponse
+                         */
+                        SanitizeModelResponseResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse();
+                            if (object.sanitizationResult != null) {
+                                if (typeof object.sanitizationResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse.sanitizationResult: object expected");
+                                message.sanitizationResult = $root.google.cloud.modelarmor.v1beta.SanitizationResult.fromObject(object.sanitizationResult);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SanitizeModelResponseResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse} message SanitizeModelResponseResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SanitizeModelResponseResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.sanitizationResult = null;
+                            if (message.sanitizationResult != null && message.hasOwnProperty("sanitizationResult"))
+                                object.sanitizationResult = $root.google.cloud.modelarmor.v1beta.SanitizationResult.toObject(message.sanitizationResult, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SanitizeModelResponseResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SanitizeModelResponseResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SanitizeModelResponseResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SanitizeModelResponseResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse";
+                        };
+    
+                        return SanitizeModelResponseResponse;
+                    })();
+    
+                    v1beta.SanitizationResult = (function() {
+    
+                        /**
+                         * Properties of a SanitizationResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISanitizationResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [filterMatchState] SanitizationResult filterMatchState
+                         * @property {Object.<string,google.cloud.modelarmor.v1beta.IFilterResult>|null} [filterResults] SanitizationResult filterResults
+                         * @property {google.cloud.modelarmor.v1beta.InvocationResult|null} [invocationResult] SanitizationResult invocationResult
+                         * @property {google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata|null} [sanitizationMetadata] SanitizationResult sanitizationMetadata
+                         */
+    
+                        /**
+                         * Constructs a new SanitizationResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SanitizationResult.
+                         * @implements ISanitizationResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizationResult=} [properties] Properties to set
+                         */
+                        function SanitizationResult(properties) {
+                            this.filterResults = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SanitizationResult filterMatchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} filterMatchState
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @instance
+                         */
+                        SanitizationResult.prototype.filterMatchState = 0;
+    
+                        /**
+                         * SanitizationResult filterResults.
+                         * @member {Object.<string,google.cloud.modelarmor.v1beta.IFilterResult>} filterResults
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @instance
+                         */
+                        SanitizationResult.prototype.filterResults = $util.emptyObject;
+    
+                        /**
+                         * SanitizationResult invocationResult.
+                         * @member {google.cloud.modelarmor.v1beta.InvocationResult} invocationResult
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @instance
+                         */
+                        SanitizationResult.prototype.invocationResult = 0;
+    
+                        /**
+                         * SanitizationResult sanitizationMetadata.
+                         * @member {google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata|null|undefined} sanitizationMetadata
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @instance
+                         */
+                        SanitizationResult.prototype.sanitizationMetadata = null;
+    
+                        /**
+                         * Creates a new SanitizationResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizationResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizationResult} SanitizationResult instance
+                         */
+                        SanitizationResult.create = function create(properties) {
+                            return new SanitizationResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizationResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizationResult} message SanitizationResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizationResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filterMatchState != null && Object.hasOwnProperty.call(message, "filterMatchState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.filterMatchState);
+                            if (message.filterResults != null && Object.hasOwnProperty.call(message, "filterResults"))
+                                for (var keys = Object.keys(message.filterResults), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.modelarmor.v1beta.FilterResult.encode(message.filterResults[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.sanitizationMetadata != null && Object.hasOwnProperty.call(message, "sanitizationMetadata"))
+                                $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.encode(message.sanitizationMetadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.invocationResult != null && Object.hasOwnProperty.call(message, "invocationResult"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.invocationResult);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SanitizationResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizationResult} message SanitizationResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SanitizationResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SanitizationResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizationResult} SanitizationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizationResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SanitizationResult(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.filterMatchState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.filterResults === $util.emptyObject)
+                                            message.filterResults = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.modelarmor.v1beta.FilterResult.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.filterResults[key] = value;
+                                        break;
+                                    }
+                                case 4: {
+                                        message.invocationResult = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sanitizationMetadata = $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SanitizationResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizationResult} SanitizationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SanitizationResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SanitizationResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SanitizationResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filterMatchState != null && message.hasOwnProperty("filterMatchState"))
+                                switch (message.filterMatchState) {
+                                default:
+                                    return "filterMatchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.filterResults != null && message.hasOwnProperty("filterResults")) {
+                                if (!$util.isObject(message.filterResults))
+                                    return "filterResults: object expected";
+                                var key = Object.keys(message.filterResults);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.FilterResult.verify(message.filterResults[key[i]]);
+                                    if (error)
+                                        return "filterResults." + error;
+                                }
+                            }
+                            if (message.invocationResult != null && message.hasOwnProperty("invocationResult"))
+                                switch (message.invocationResult) {
+                                default:
+                                    return "invocationResult: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.sanitizationMetadata != null && message.hasOwnProperty("sanitizationMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.verify(message.sanitizationMetadata);
+                                if (error)
+                                    return "sanitizationMetadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SanitizationResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SanitizationResult} SanitizationResult
+                         */
+                        SanitizationResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SanitizationResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SanitizationResult();
+                            switch (object.filterMatchState) {
+                            default:
+                                if (typeof object.filterMatchState === "number") {
+                                    message.filterMatchState = object.filterMatchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.filterMatchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.filterMatchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.filterMatchState = 2;
+                                break;
+                            }
+                            if (object.filterResults) {
+                                if (typeof object.filterResults !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizationResult.filterResults: object expected");
+                                message.filterResults = {};
+                                for (var keys = Object.keys(object.filterResults), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.filterResults[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.SanitizationResult.filterResults: object expected");
+                                    message.filterResults[keys[i]] = $root.google.cloud.modelarmor.v1beta.FilterResult.fromObject(object.filterResults[keys[i]]);
+                                }
+                            }
+                            switch (object.invocationResult) {
+                            default:
+                                if (typeof object.invocationResult === "number") {
+                                    message.invocationResult = object.invocationResult;
+                                    break;
+                                }
+                                break;
+                            case "INVOCATION_RESULT_UNSPECIFIED":
+                            case 0:
+                                message.invocationResult = 0;
+                                break;
+                            case "SUCCESS":
+                            case 1:
+                                message.invocationResult = 1;
+                                break;
+                            case "PARTIAL":
+                            case 2:
+                                message.invocationResult = 2;
+                                break;
+                            case "FAILURE":
+                            case 3:
+                                message.invocationResult = 3;
+                                break;
+                            }
+                            if (object.sanitizationMetadata != null) {
+                                if (typeof object.sanitizationMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizationResult.sanitizationMetadata: object expected");
+                                message.sanitizationMetadata = $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.fromObject(object.sanitizationMetadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SanitizationResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SanitizationResult} message SanitizationResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SanitizationResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.filterResults = {};
+                            if (options.defaults) {
+                                object.filterMatchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                                object.sanitizationMetadata = null;
+                                object.invocationResult = options.enums === String ? "INVOCATION_RESULT_UNSPECIFIED" : 0;
+                            }
+                            if (message.filterMatchState != null && message.hasOwnProperty("filterMatchState"))
+                                object.filterMatchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.filterMatchState] === undefined ? message.filterMatchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.filterMatchState] : message.filterMatchState;
+                            var keys2;
+                            if (message.filterResults && (keys2 = Object.keys(message.filterResults)).length) {
+                                object.filterResults = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.filterResults[keys2[j]] = $root.google.cloud.modelarmor.v1beta.FilterResult.toObject(message.filterResults[keys2[j]], options);
+                            }
+                            if (message.sanitizationMetadata != null && message.hasOwnProperty("sanitizationMetadata"))
+                                object.sanitizationMetadata = $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.toObject(message.sanitizationMetadata, options);
+                            if (message.invocationResult != null && message.hasOwnProperty("invocationResult"))
+                                object.invocationResult = options.enums === String ? $root.google.cloud.modelarmor.v1beta.InvocationResult[message.invocationResult] === undefined ? message.invocationResult : $root.google.cloud.modelarmor.v1beta.InvocationResult[message.invocationResult] : message.invocationResult;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SanitizationResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SanitizationResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SanitizationResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SanitizationResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SanitizationResult";
+                        };
+    
+                        SanitizationResult.SanitizationMetadata = (function() {
+    
+                            /**
+                             * Properties of a SanitizationMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                             * @interface ISanitizationMetadata
+                             * @property {number|Long|null} [errorCode] SanitizationMetadata errorCode
+                             * @property {string|null} [errorMessage] SanitizationMetadata errorMessage
+                             * @property {boolean|null} [ignorePartialInvocationFailures] SanitizationMetadata ignorePartialInvocationFailures
+                             */
+    
+                            /**
+                             * Constructs a new SanitizationMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult
+                             * @classdesc Represents a SanitizationMetadata.
+                             * @implements ISanitizationMetadata
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata=} [properties] Properties to set
+                             */
+                            function SanitizationMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SanitizationMetadata errorCode.
+                             * @member {number|Long} errorCode
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @instance
+                             */
+                            SanitizationMetadata.prototype.errorCode = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * SanitizationMetadata errorMessage.
+                             * @member {string} errorMessage
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @instance
+                             */
+                            SanitizationMetadata.prototype.errorMessage = "";
+    
+                            /**
+                             * SanitizationMetadata ignorePartialInvocationFailures.
+                             * @member {boolean} ignorePartialInvocationFailures
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @instance
+                             */
+                            SanitizationMetadata.prototype.ignorePartialInvocationFailures = false;
+    
+                            /**
+                             * Creates a new SanitizationMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata} SanitizationMetadata instance
+                             */
+                            SanitizationMetadata.create = function create(properties) {
+                                return new SanitizationMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SanitizationMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata} message SanitizationMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SanitizationMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.errorCode != null && Object.hasOwnProperty.call(message, "errorCode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.errorCode);
+                                if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
+                                if (message.ignorePartialInvocationFailures != null && Object.hasOwnProperty.call(message, "ignorePartialInvocationFailures"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.ignorePartialInvocationFailures);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SanitizationMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SanitizationResult.ISanitizationMetadata} message SanitizationMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SanitizationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SanitizationMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata} SanitizationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SanitizationMetadata.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.errorCode = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.errorMessage = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ignorePartialInvocationFailures = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SanitizationMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata} SanitizationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SanitizationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SanitizationMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SanitizationMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                    if (!$util.isInteger(message.errorCode) && !(message.errorCode && $util.isInteger(message.errorCode.low) && $util.isInteger(message.errorCode.high)))
+                                        return "errorCode: integer|Long expected";
+                                if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                    if (!$util.isString(message.errorMessage))
+                                        return "errorMessage: string expected";
+                                if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
+                                    if (typeof message.ignorePartialInvocationFailures !== "boolean")
+                                        return "ignorePartialInvocationFailures: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SanitizationMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata} SanitizationMetadata
+                             */
+                            SanitizationMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata();
+                                if (object.errorCode != null)
+                                    if ($util.Long)
+                                        (message.errorCode = $util.Long.fromValue(object.errorCode)).unsigned = false;
+                                    else if (typeof object.errorCode === "string")
+                                        message.errorCode = parseInt(object.errorCode, 10);
+                                    else if (typeof object.errorCode === "number")
+                                        message.errorCode = object.errorCode;
+                                    else if (typeof object.errorCode === "object")
+                                        message.errorCode = new $util.LongBits(object.errorCode.low >>> 0, object.errorCode.high >>> 0).toNumber();
+                                if (object.errorMessage != null)
+                                    message.errorMessage = String(object.errorMessage);
+                                if (object.ignorePartialInvocationFailures != null)
+                                    message.ignorePartialInvocationFailures = Boolean(object.ignorePartialInvocationFailures);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SanitizationMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata} message SanitizationMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SanitizationMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.errorCode = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.errorCode = options.longs === String ? "0" : 0;
+                                    object.errorMessage = "";
+                                    object.ignorePartialInvocationFailures = false;
+                                }
+                                if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                    if (typeof message.errorCode === "number")
+                                        object.errorCode = options.longs === String ? String(message.errorCode) : message.errorCode;
+                                    else
+                                        object.errorCode = options.longs === String ? $util.Long.prototype.toString.call(message.errorCode) : options.longs === Number ? new $util.LongBits(message.errorCode.low >>> 0, message.errorCode.high >>> 0).toNumber() : message.errorCode;
+                                if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                    object.errorMessage = message.errorMessage;
+                                if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
+                                    object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SanitizationMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SanitizationMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SanitizationMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SanitizationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SanitizationResult.SanitizationMetadata";
+                            };
+    
+                            return SanitizationMetadata;
+                        })();
+    
+                        return SanitizationResult;
+                    })();
+    
+                    v1beta.MultiLanguageDetectionMetadata = (function() {
+    
+                        /**
+                         * Properties of a MultiLanguageDetectionMetadata.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IMultiLanguageDetectionMetadata
+                         */
+    
+                        /**
+                         * Constructs a new MultiLanguageDetectionMetadata.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a MultiLanguageDetectionMetadata.
+                         * @implements IMultiLanguageDetectionMetadata
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata=} [properties] Properties to set
+                         */
+                        function MultiLanguageDetectionMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new MultiLanguageDetectionMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata instance
+                         */
+                        MultiLanguageDetectionMetadata.create = function create(properties) {
+                            return new MultiLanguageDetectionMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiLanguageDetectionMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiLanguageDetectionMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiLanguageDetectionMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiLanguageDetectionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiLanguageDetectionMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiLanguageDetectionMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiLanguageDetectionMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiLanguageDetectionMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiLanguageDetectionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         */
+                        MultiLanguageDetectionMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata)
+                                return object;
+                            return new $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiLanguageDetectionMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiLanguageDetectionMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this MultiLanguageDetectionMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiLanguageDetectionMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiLanguageDetectionMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiLanguageDetectionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata";
+                        };
+    
+                        return MultiLanguageDetectionMetadata;
+                    })();
+    
+                    v1beta.FilterResult = (function() {
+    
+                        /**
+                         * Properties of a FilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.IRaiFilterResult|null} [raiFilterResult] FilterResult raiFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.ISdpFilterResult|null} [sdpFilterResult] FilterResult sdpFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult|null} [piAndJailbreakFilterResult] FilterResult piAndJailbreakFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult|null} [maliciousUriFilterResult] FilterResult maliciousUriFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.ICsamFilterResult|null} [csamFilterFilterResult] FilterResult csamFilterFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.IVirusScanFilterResult|null} [virusScanFilterResult] FilterResult virusScanFilterResult
+                         */
+    
+                        /**
+                         * Constructs a new FilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a FilterResult.
+                         * @implements IFilterResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IFilterResult=} [properties] Properties to set
+                         */
+                        function FilterResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FilterResult raiFilterResult.
+                         * @member {google.cloud.modelarmor.v1beta.IRaiFilterResult|null|undefined} raiFilterResult
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         */
+                        FilterResult.prototype.raiFilterResult = null;
+    
+                        /**
+                         * FilterResult sdpFilterResult.
+                         * @member {google.cloud.modelarmor.v1beta.ISdpFilterResult|null|undefined} sdpFilterResult
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         */
+                        FilterResult.prototype.sdpFilterResult = null;
+    
+                        /**
+                         * FilterResult piAndJailbreakFilterResult.
+                         * @member {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult|null|undefined} piAndJailbreakFilterResult
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         */
+                        FilterResult.prototype.piAndJailbreakFilterResult = null;
+    
+                        /**
+                         * FilterResult maliciousUriFilterResult.
+                         * @member {google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult|null|undefined} maliciousUriFilterResult
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         */
+                        FilterResult.prototype.maliciousUriFilterResult = null;
+    
+                        /**
+                         * FilterResult csamFilterFilterResult.
+                         * @member {google.cloud.modelarmor.v1beta.ICsamFilterResult|null|undefined} csamFilterFilterResult
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         */
+                        FilterResult.prototype.csamFilterFilterResult = null;
+    
+                        /**
+                         * FilterResult virusScanFilterResult.
+                         * @member {google.cloud.modelarmor.v1beta.IVirusScanFilterResult|null|undefined} virusScanFilterResult
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         */
+                        FilterResult.prototype.virusScanFilterResult = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FilterResult filterResult.
+                         * @member {"raiFilterResult"|"sdpFilterResult"|"piAndJailbreakFilterResult"|"maliciousUriFilterResult"|"csamFilterFilterResult"|"virusScanFilterResult"|undefined} filterResult
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         */
+                        Object.defineProperty(FilterResult.prototype, "filterResult", {
+                            get: $util.oneOfGetter($oneOfFields = ["raiFilterResult", "sdpFilterResult", "piAndJailbreakFilterResult", "maliciousUriFilterResult", "csamFilterFilterResult", "virusScanFilterResult"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FilterResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFilterResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.FilterResult} FilterResult instance
+                         */
+                        FilterResult.create = function create(properties) {
+                            return new FilterResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFilterResult} message FilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.raiFilterResult != null && Object.hasOwnProperty.call(message, "raiFilterResult"))
+                                $root.google.cloud.modelarmor.v1beta.RaiFilterResult.encode(message.raiFilterResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.sdpFilterResult != null && Object.hasOwnProperty.call(message, "sdpFilterResult"))
+                                $root.google.cloud.modelarmor.v1beta.SdpFilterResult.encode(message.sdpFilterResult, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.piAndJailbreakFilterResult != null && Object.hasOwnProperty.call(message, "piAndJailbreakFilterResult"))
+                                $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.encode(message.piAndJailbreakFilterResult, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.maliciousUriFilterResult != null && Object.hasOwnProperty.call(message, "maliciousUriFilterResult"))
+                                $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.encode(message.maliciousUriFilterResult, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.csamFilterFilterResult != null && Object.hasOwnProperty.call(message, "csamFilterFilterResult"))
+                                $root.google.cloud.modelarmor.v1beta.CsamFilterResult.encode(message.csamFilterFilterResult, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.virusScanFilterResult != null && Object.hasOwnProperty.call(message, "virusScanFilterResult"))
+                                $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult.encode(message.virusScanFilterResult, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FilterResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IFilterResult} message FilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FilterResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.FilterResult} FilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.FilterResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.raiFilterResult = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sdpFilterResult = $root.google.cloud.modelarmor.v1beta.SdpFilterResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.piAndJailbreakFilterResult = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.maliciousUriFilterResult = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.csamFilterFilterResult = $root.google.cloud.modelarmor.v1beta.CsamFilterResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.virusScanFilterResult = $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FilterResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.FilterResult} FilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FilterResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FilterResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.raiFilterResult != null && message.hasOwnProperty("raiFilterResult")) {
+                                properties.filterResult = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.verify(message.raiFilterResult);
+                                    if (error)
+                                        return "raiFilterResult." + error;
+                                }
+                            }
+                            if (message.sdpFilterResult != null && message.hasOwnProperty("sdpFilterResult")) {
+                                if (properties.filterResult === 1)
+                                    return "filterResult: multiple values";
+                                properties.filterResult = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.SdpFilterResult.verify(message.sdpFilterResult);
+                                    if (error)
+                                        return "sdpFilterResult." + error;
+                                }
+                            }
+                            if (message.piAndJailbreakFilterResult != null && message.hasOwnProperty("piAndJailbreakFilterResult")) {
+                                if (properties.filterResult === 1)
+                                    return "filterResult: multiple values";
+                                properties.filterResult = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.verify(message.piAndJailbreakFilterResult);
+                                    if (error)
+                                        return "piAndJailbreakFilterResult." + error;
+                                }
+                            }
+                            if (message.maliciousUriFilterResult != null && message.hasOwnProperty("maliciousUriFilterResult")) {
+                                if (properties.filterResult === 1)
+                                    return "filterResult: multiple values";
+                                properties.filterResult = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.verify(message.maliciousUriFilterResult);
+                                    if (error)
+                                        return "maliciousUriFilterResult." + error;
+                                }
+                            }
+                            if (message.csamFilterFilterResult != null && message.hasOwnProperty("csamFilterFilterResult")) {
+                                if (properties.filterResult === 1)
+                                    return "filterResult: multiple values";
+                                properties.filterResult = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.CsamFilterResult.verify(message.csamFilterFilterResult);
+                                    if (error)
+                                        return "csamFilterFilterResult." + error;
+                                }
+                            }
+                            if (message.virusScanFilterResult != null && message.hasOwnProperty("virusScanFilterResult")) {
+                                if (properties.filterResult === 1)
+                                    return "filterResult: multiple values";
+                                properties.filterResult = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult.verify(message.virusScanFilterResult);
+                                    if (error)
+                                        return "virusScanFilterResult." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FilterResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.FilterResult} FilterResult
+                         */
+                        FilterResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.FilterResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.FilterResult();
+                            if (object.raiFilterResult != null) {
+                                if (typeof object.raiFilterResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterResult.raiFilterResult: object expected");
+                                message.raiFilterResult = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.fromObject(object.raiFilterResult);
+                            }
+                            if (object.sdpFilterResult != null) {
+                                if (typeof object.sdpFilterResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterResult.sdpFilterResult: object expected");
+                                message.sdpFilterResult = $root.google.cloud.modelarmor.v1beta.SdpFilterResult.fromObject(object.sdpFilterResult);
+                            }
+                            if (object.piAndJailbreakFilterResult != null) {
+                                if (typeof object.piAndJailbreakFilterResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterResult.piAndJailbreakFilterResult: object expected");
+                                message.piAndJailbreakFilterResult = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.fromObject(object.piAndJailbreakFilterResult);
+                            }
+                            if (object.maliciousUriFilterResult != null) {
+                                if (typeof object.maliciousUriFilterResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterResult.maliciousUriFilterResult: object expected");
+                                message.maliciousUriFilterResult = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.fromObject(object.maliciousUriFilterResult);
+                            }
+                            if (object.csamFilterFilterResult != null) {
+                                if (typeof object.csamFilterFilterResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterResult.csamFilterFilterResult: object expected");
+                                message.csamFilterFilterResult = $root.google.cloud.modelarmor.v1beta.CsamFilterResult.fromObject(object.csamFilterFilterResult);
+                            }
+                            if (object.virusScanFilterResult != null) {
+                                if (typeof object.virusScanFilterResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FilterResult.virusScanFilterResult: object expected");
+                                message.virusScanFilterResult = $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult.fromObject(object.virusScanFilterResult);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FilterResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.FilterResult} message FilterResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FilterResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.raiFilterResult != null && message.hasOwnProperty("raiFilterResult")) {
+                                object.raiFilterResult = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.toObject(message.raiFilterResult, options);
+                                if (options.oneofs)
+                                    object.filterResult = "raiFilterResult";
+                            }
+                            if (message.sdpFilterResult != null && message.hasOwnProperty("sdpFilterResult")) {
+                                object.sdpFilterResult = $root.google.cloud.modelarmor.v1beta.SdpFilterResult.toObject(message.sdpFilterResult, options);
+                                if (options.oneofs)
+                                    object.filterResult = "sdpFilterResult";
+                            }
+                            if (message.piAndJailbreakFilterResult != null && message.hasOwnProperty("piAndJailbreakFilterResult")) {
+                                object.piAndJailbreakFilterResult = $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.toObject(message.piAndJailbreakFilterResult, options);
+                                if (options.oneofs)
+                                    object.filterResult = "piAndJailbreakFilterResult";
+                            }
+                            if (message.maliciousUriFilterResult != null && message.hasOwnProperty("maliciousUriFilterResult")) {
+                                object.maliciousUriFilterResult = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.toObject(message.maliciousUriFilterResult, options);
+                                if (options.oneofs)
+                                    object.filterResult = "maliciousUriFilterResult";
+                            }
+                            if (message.csamFilterFilterResult != null && message.hasOwnProperty("csamFilterFilterResult")) {
+                                object.csamFilterFilterResult = $root.google.cloud.modelarmor.v1beta.CsamFilterResult.toObject(message.csamFilterFilterResult, options);
+                                if (options.oneofs)
+                                    object.filterResult = "csamFilterFilterResult";
+                            }
+                            if (message.virusScanFilterResult != null && message.hasOwnProperty("virusScanFilterResult")) {
+                                object.virusScanFilterResult = $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult.toObject(message.virusScanFilterResult, options);
+                                if (options.oneofs)
+                                    object.filterResult = "virusScanFilterResult";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FilterResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FilterResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FilterResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.FilterResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilterResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FilterResult";
+                        };
+    
+                        return FilterResult;
+                    })();
+    
+                    v1beta.RaiFilterResult = (function() {
+    
+                        /**
+                         * Properties of a RaiFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IRaiFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterExecutionState|null} [executionState] RaiFilterResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IMessageItem>|null} [messageItems] RaiFilterResult messageItems
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] RaiFilterResult matchState
+                         * @property {Object.<string,google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult>|null} [raiFilterTypeResults] RaiFilterResult raiFilterTypeResults
+                         */
+    
+                        /**
+                         * Constructs a new RaiFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a RaiFilterResult.
+                         * @implements IRaiFilterResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterResult=} [properties] Properties to set
+                         */
+                        function RaiFilterResult(properties) {
+                            this.messageItems = [];
+                            this.raiFilterTypeResults = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RaiFilterResult executionState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @instance
+                         */
+                        RaiFilterResult.prototype.executionState = 0;
+    
+                        /**
+                         * RaiFilterResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @instance
+                         */
+                        RaiFilterResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * RaiFilterResult matchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @instance
+                         */
+                        RaiFilterResult.prototype.matchState = 0;
+    
+                        /**
+                         * RaiFilterResult raiFilterTypeResults.
+                         * @member {Object.<string,google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult>} raiFilterTypeResults
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @instance
+                         */
+                        RaiFilterResult.prototype.raiFilterTypeResults = $util.emptyObject;
+    
+                        /**
+                         * Creates a new RaiFilterResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult} RaiFilterResult instance
+                         */
+                        RaiFilterResult.create = function create(properties) {
+                            return new RaiFilterResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RaiFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterResult} message RaiFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RaiFilterResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            if (message.raiFilterTypeResults != null && Object.hasOwnProperty.call(message, "raiFilterTypeResults"))
+                                for (var keys = Object.keys(message.raiFilterTypeResults), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.encode(message.raiFilterTypeResults[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RaiFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRaiFilterResult} message RaiFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RaiFilterResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RaiFilterResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult} RaiFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RaiFilterResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.RaiFilterResult(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1beta.MessageItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.raiFilterTypeResults === $util.emptyObject)
+                                            message.raiFilterTypeResults = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.raiFilterTypeResults[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RaiFilterResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult} RaiFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RaiFilterResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RaiFilterResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RaiFilterResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MessageItem.verify(message.messageItems[i]);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.raiFilterTypeResults != null && message.hasOwnProperty("raiFilterTypeResults")) {
+                                if (!$util.isObject(message.raiFilterTypeResults))
+                                    return "raiFilterTypeResults: object expected";
+                                var key = Object.keys(message.raiFilterTypeResults);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.verify(message.raiFilterTypeResults[key[i]]);
+                                    if (error)
+                                        return "raiFilterTypeResults." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RaiFilterResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult} RaiFilterResult
+                         */
+                        RaiFilterResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.RaiFilterResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.RaiFilterResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.RaiFilterResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.RaiFilterResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1beta.MessageItem.fromObject(object.messageItems[i]);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            if (object.raiFilterTypeResults) {
+                                if (typeof object.raiFilterTypeResults !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.RaiFilterResult.raiFilterTypeResults: object expected");
+                                message.raiFilterTypeResults = {};
+                                for (var keys = Object.keys(object.raiFilterTypeResults), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.raiFilterTypeResults[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.RaiFilterResult.raiFilterTypeResults: object expected");
+                                    message.raiFilterTypeResults[keys[i]] = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.fromObject(object.raiFilterTypeResults[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RaiFilterResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.RaiFilterResult} message RaiFilterResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RaiFilterResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.messageItems = [];
+                            if (options.objects || options.defaults)
+                                object.raiFilterTypeResults = {};
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1beta.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                            var keys2;
+                            if (message.raiFilterTypeResults && (keys2 = Object.keys(message.raiFilterTypeResults)).length) {
+                                object.raiFilterTypeResults = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.raiFilterTypeResults[keys2[j]] = $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.toObject(message.raiFilterTypeResults[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RaiFilterResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RaiFilterResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RaiFilterResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RaiFilterResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.RaiFilterResult";
+                        };
+    
+                        RaiFilterResult.RaiFilterTypeResult = (function() {
+    
+                            /**
+                             * Properties of a RaiFilterTypeResult.
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                             * @interface IRaiFilterTypeResult
+                             * @property {google.cloud.modelarmor.v1beta.RaiFilterType|null} [filterType] RaiFilterTypeResult filterType
+                             * @property {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null} [confidenceLevel] RaiFilterTypeResult confidenceLevel
+                             * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] RaiFilterTypeResult matchState
+                             */
+    
+                            /**
+                             * Constructs a new RaiFilterTypeResult.
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult
+                             * @classdesc Represents a RaiFilterTypeResult.
+                             * @implements IRaiFilterTypeResult
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult=} [properties] Properties to set
+                             */
+                            function RaiFilterTypeResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RaiFilterTypeResult filterType.
+                             * @member {google.cloud.modelarmor.v1beta.RaiFilterType} filterType
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @instance
+                             */
+                            RaiFilterTypeResult.prototype.filterType = 0;
+    
+                            /**
+                             * RaiFilterTypeResult confidenceLevel.
+                             * @member {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel} confidenceLevel
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @instance
+                             */
+                            RaiFilterTypeResult.prototype.confidenceLevel = 0;
+    
+                            /**
+                             * RaiFilterTypeResult matchState.
+                             * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @instance
+                             */
+                            RaiFilterTypeResult.prototype.matchState = 0;
+    
+                            /**
+                             * Creates a new RaiFilterTypeResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult} RaiFilterTypeResult instance
+                             */
+                            RaiFilterTypeResult.create = function create(properties) {
+                                return new RaiFilterTypeResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RaiFilterTypeResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult} message RaiFilterTypeResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RaiFilterTypeResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.filterType != null && Object.hasOwnProperty.call(message, "filterType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.filterType);
+                                if (message.confidenceLevel != null && Object.hasOwnProperty.call(message, "confidenceLevel"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.confidenceLevel);
+                                if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RaiFilterTypeResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterResult.IRaiFilterTypeResult} message RaiFilterTypeResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RaiFilterTypeResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RaiFilterTypeResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult} RaiFilterTypeResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RaiFilterTypeResult.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.filterType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.confidenceLevel = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.matchState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RaiFilterTypeResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult} RaiFilterTypeResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RaiFilterTypeResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RaiFilterTypeResult message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RaiFilterTypeResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.filterType != null && message.hasOwnProperty("filterType"))
+                                    switch (message.filterType) {
+                                    default:
+                                        return "filterType: enum value expected";
+                                    case 0:
+                                    case 2:
+                                    case 3:
+                                    case 6:
+                                    case 17:
+                                        break;
+                                    }
+                                if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                    switch (message.confidenceLevel) {
+                                    default:
+                                        return "confidenceLevel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                    switch (message.matchState) {
+                                    default:
+                                        return "matchState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RaiFilterTypeResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult} RaiFilterTypeResult
+                             */
+                            RaiFilterTypeResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult();
+                                switch (object.filterType) {
+                                default:
+                                    if (typeof object.filterType === "number") {
+                                        message.filterType = object.filterType;
+                                        break;
+                                    }
+                                    break;
+                                case "RAI_FILTER_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.filterType = 0;
+                                    break;
+                                case "SEXUALLY_EXPLICIT":
+                                case 2:
+                                    message.filterType = 2;
+                                    break;
+                                case "HATE_SPEECH":
+                                case 3:
+                                    message.filterType = 3;
+                                    break;
+                                case "HARASSMENT":
+                                case 6:
+                                    message.filterType = 6;
+                                    break;
+                                case "DANGEROUS":
+                                case 17:
+                                    message.filterType = 17;
+                                    break;
+                                }
+                                switch (object.confidenceLevel) {
+                                default:
+                                    if (typeof object.confidenceLevel === "number") {
+                                        message.confidenceLevel = object.confidenceLevel;
+                                        break;
+                                    }
+                                    break;
+                                case "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED":
+                                case 0:
+                                    message.confidenceLevel = 0;
+                                    break;
+                                case "LOW_AND_ABOVE":
+                                case 1:
+                                    message.confidenceLevel = 1;
+                                    break;
+                                case "MEDIUM_AND_ABOVE":
+                                case 2:
+                                    message.confidenceLevel = 2;
+                                    break;
+                                case "HIGH":
+                                case 3:
+                                    message.confidenceLevel = 3;
+                                    break;
+                                }
+                                switch (object.matchState) {
+                                default:
+                                    if (typeof object.matchState === "number") {
+                                        message.matchState = object.matchState;
+                                        break;
+                                    }
+                                    break;
+                                case "FILTER_MATCH_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.matchState = 0;
+                                    break;
+                                case "NO_MATCH_FOUND":
+                                case 1:
+                                    message.matchState = 1;
+                                    break;
+                                case "MATCH_FOUND":
+                                case 2:
+                                    message.matchState = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RaiFilterTypeResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult} message RaiFilterTypeResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RaiFilterTypeResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.filterType = options.enums === String ? "RAI_FILTER_TYPE_UNSPECIFIED" : 0;
+                                    object.confidenceLevel = options.enums === String ? "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED" : 0;
+                                    object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.filterType != null && message.hasOwnProperty("filterType"))
+                                    object.filterType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.RaiFilterType[message.filterType] === undefined ? message.filterType : $root.google.cloud.modelarmor.v1beta.RaiFilterType[message.filterType] : message.filterType;
+                                if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                    object.confidenceLevel = options.enums === String ? $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] === undefined ? message.confidenceLevel : $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] : message.confidenceLevel;
+                                if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                    object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RaiFilterTypeResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RaiFilterTypeResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RaiFilterTypeResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RaiFilterTypeResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.RaiFilterResult.RaiFilterTypeResult";
+                            };
+    
+                            return RaiFilterTypeResult;
+                        })();
+    
+                        return RaiFilterResult;
+                    })();
+    
+                    v1beta.SdpFilterResult = (function() {
+    
+                        /**
+                         * Properties of a SdpFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISdpFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.ISdpInspectResult|null} [inspectResult] SdpFilterResult inspectResult
+                         * @property {google.cloud.modelarmor.v1beta.ISdpDeidentifyResult|null} [deidentifyResult] SdpFilterResult deidentifyResult
+                         */
+    
+                        /**
+                         * Constructs a new SdpFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SdpFilterResult.
+                         * @implements ISdpFilterResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterResult=} [properties] Properties to set
+                         */
+                        function SdpFilterResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpFilterResult inspectResult.
+                         * @member {google.cloud.modelarmor.v1beta.ISdpInspectResult|null|undefined} inspectResult
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @instance
+                         */
+                        SdpFilterResult.prototype.inspectResult = null;
+    
+                        /**
+                         * SdpFilterResult deidentifyResult.
+                         * @member {google.cloud.modelarmor.v1beta.ISdpDeidentifyResult|null|undefined} deidentifyResult
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @instance
+                         */
+                        SdpFilterResult.prototype.deidentifyResult = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SdpFilterResult result.
+                         * @member {"inspectResult"|"deidentifyResult"|undefined} result
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @instance
+                         */
+                        Object.defineProperty(SdpFilterResult.prototype, "result", {
+                            get: $util.oneOfGetter($oneOfFields = ["inspectResult", "deidentifyResult"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SdpFilterResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterResult} SdpFilterResult instance
+                         */
+                        SdpFilterResult.create = function create(properties) {
+                            return new SdpFilterResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterResult} message SdpFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpFilterResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inspectResult != null && Object.hasOwnProperty.call(message, "inspectResult"))
+                                $root.google.cloud.modelarmor.v1beta.SdpInspectResult.encode(message.inspectResult, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.deidentifyResult != null && Object.hasOwnProperty.call(message, "deidentifyResult"))
+                                $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult.encode(message.deidentifyResult, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFilterResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFilterResult} message SdpFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpFilterResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpFilterResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterResult} SdpFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpFilterResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpFilterResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inspectResult = $root.google.cloud.modelarmor.v1beta.SdpInspectResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deidentifyResult = $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpFilterResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterResult} SdpFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpFilterResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpFilterResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpFilterResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inspectResult != null && message.hasOwnProperty("inspectResult")) {
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.SdpInspectResult.verify(message.inspectResult);
+                                    if (error)
+                                        return "inspectResult." + error;
+                                }
+                            }
+                            if (message.deidentifyResult != null && message.hasOwnProperty("deidentifyResult")) {
+                                if (properties.result === 1)
+                                    return "result: multiple values";
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult.verify(message.deidentifyResult);
+                                    if (error)
+                                        return "deidentifyResult." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpFilterResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFilterResult} SdpFilterResult
+                         */
+                        SdpFilterResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpFilterResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SdpFilterResult();
+                            if (object.inspectResult != null) {
+                                if (typeof object.inspectResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpFilterResult.inspectResult: object expected");
+                                message.inspectResult = $root.google.cloud.modelarmor.v1beta.SdpInspectResult.fromObject(object.inspectResult);
+                            }
+                            if (object.deidentifyResult != null) {
+                                if (typeof object.deidentifyResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpFilterResult.deidentifyResult: object expected");
+                                message.deidentifyResult = $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult.fromObject(object.deidentifyResult);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpFilterResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SdpFilterResult} message SdpFilterResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpFilterResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.inspectResult != null && message.hasOwnProperty("inspectResult")) {
+                                object.inspectResult = $root.google.cloud.modelarmor.v1beta.SdpInspectResult.toObject(message.inspectResult, options);
+                                if (options.oneofs)
+                                    object.result = "inspectResult";
+                            }
+                            if (message.deidentifyResult != null && message.hasOwnProperty("deidentifyResult")) {
+                                object.deidentifyResult = $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult.toObject(message.deidentifyResult, options);
+                                if (options.oneofs)
+                                    object.result = "deidentifyResult";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpFilterResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpFilterResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpFilterResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFilterResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpFilterResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpFilterResult";
+                        };
+    
+                        return SdpFilterResult;
+                    })();
+    
+                    v1beta.SdpInspectResult = (function() {
+    
+                        /**
+                         * Properties of a SdpInspectResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISdpInspectResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterExecutionState|null} [executionState] SdpInspectResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IMessageItem>|null} [messageItems] SdpInspectResult messageItems
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] SdpInspectResult matchState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.ISdpFinding>|null} [findings] SdpInspectResult findings
+                         * @property {boolean|null} [findingsTruncated] SdpInspectResult findingsTruncated
+                         */
+    
+                        /**
+                         * Constructs a new SdpInspectResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SdpInspectResult.
+                         * @implements ISdpInspectResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISdpInspectResult=} [properties] Properties to set
+                         */
+                        function SdpInspectResult(properties) {
+                            this.messageItems = [];
+                            this.findings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpInspectResult executionState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @instance
+                         */
+                        SdpInspectResult.prototype.executionState = 0;
+    
+                        /**
+                         * SdpInspectResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @instance
+                         */
+                        SdpInspectResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * SdpInspectResult matchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @instance
+                         */
+                        SdpInspectResult.prototype.matchState = 0;
+    
+                        /**
+                         * SdpInspectResult findings.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.ISdpFinding>} findings
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @instance
+                         */
+                        SdpInspectResult.prototype.findings = $util.emptyArray;
+    
+                        /**
+                         * SdpInspectResult findingsTruncated.
+                         * @member {boolean} findingsTruncated
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @instance
+                         */
+                        SdpInspectResult.prototype.findingsTruncated = false;
+    
+                        /**
+                         * Creates a new SdpInspectResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpInspectResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SdpInspectResult} SdpInspectResult instance
+                         */
+                        SdpInspectResult.create = function create(properties) {
+                            return new SdpInspectResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpInspectResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpInspectResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpInspectResult} message SdpInspectResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpInspectResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            if (message.findings != null && message.findings.length)
+                                for (var i = 0; i < message.findings.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.SdpFinding.encode(message.findings[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.findingsTruncated != null && Object.hasOwnProperty.call(message, "findingsTruncated"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.findingsTruncated);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpInspectResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpInspectResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpInspectResult} message SdpInspectResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpInspectResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpInspectResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SdpInspectResult} SdpInspectResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpInspectResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpInspectResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1beta.MessageItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.findings && message.findings.length))
+                                            message.findings = [];
+                                        message.findings.push($root.google.cloud.modelarmor.v1beta.SdpFinding.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.findingsTruncated = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpInspectResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SdpInspectResult} SdpInspectResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpInspectResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpInspectResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpInspectResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MessageItem.verify(message.messageItems[i]);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.findings != null && message.hasOwnProperty("findings")) {
+                                if (!Array.isArray(message.findings))
+                                    return "findings: array expected";
+                                for (var i = 0; i < message.findings.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.SdpFinding.verify(message.findings[i]);
+                                    if (error)
+                                        return "findings." + error;
+                                }
+                            }
+                            if (message.findingsTruncated != null && message.hasOwnProperty("findingsTruncated"))
+                                if (typeof message.findingsTruncated !== "boolean")
+                                    return "findingsTruncated: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpInspectResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SdpInspectResult} SdpInspectResult
+                         */
+                        SdpInspectResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpInspectResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SdpInspectResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpInspectResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.SdpInspectResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1beta.MessageItem.fromObject(object.messageItems[i]);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            if (object.findings) {
+                                if (!Array.isArray(object.findings))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpInspectResult.findings: array expected");
+                                message.findings = [];
+                                for (var i = 0; i < object.findings.length; ++i) {
+                                    if (typeof object.findings[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.SdpInspectResult.findings: object expected");
+                                    message.findings[i] = $root.google.cloud.modelarmor.v1beta.SdpFinding.fromObject(object.findings[i]);
+                                }
+                            }
+                            if (object.findingsTruncated != null)
+                                message.findingsTruncated = Boolean(object.findingsTruncated);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpInspectResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SdpInspectResult} message SdpInspectResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpInspectResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.messageItems = [];
+                                object.findings = [];
+                            }
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                                object.findingsTruncated = false;
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1beta.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                            if (message.findings && message.findings.length) {
+                                object.findings = [];
+                                for (var j = 0; j < message.findings.length; ++j)
+                                    object.findings[j] = $root.google.cloud.modelarmor.v1beta.SdpFinding.toObject(message.findings[j], options);
+                            }
+                            if (message.findingsTruncated != null && message.hasOwnProperty("findingsTruncated"))
+                                object.findingsTruncated = message.findingsTruncated;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpInspectResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpInspectResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpInspectResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SdpInspectResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpInspectResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpInspectResult";
+                        };
+    
+                        return SdpInspectResult;
+                    })();
+    
+                    v1beta.DataItem = (function() {
+    
+                        /**
+                         * Properties of a DataItem.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IDataItem
+                         * @property {string|null} [text] DataItem text
+                         * @property {google.cloud.modelarmor.v1beta.IByteDataItem|null} [byteItem] DataItem byteItem
+                         */
+    
+                        /**
+                         * Constructs a new DataItem.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a DataItem.
+                         * @implements IDataItem
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IDataItem=} [properties] Properties to set
+                         */
+                        function DataItem(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataItem text.
+                         * @member {string|null|undefined} text
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @instance
+                         */
+                        DataItem.prototype.text = null;
+    
+                        /**
+                         * DataItem byteItem.
+                         * @member {google.cloud.modelarmor.v1beta.IByteDataItem|null|undefined} byteItem
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @instance
+                         */
+                        DataItem.prototype.byteItem = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DataItem dataItem.
+                         * @member {"text"|"byteItem"|undefined} dataItem
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @instance
+                         */
+                        Object.defineProperty(DataItem.prototype, "dataItem", {
+                            get: $util.oneOfGetter($oneOfFields = ["text", "byteItem"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DataItem instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IDataItem=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.DataItem} DataItem instance
+                         */
+                        DataItem.create = function create(properties) {
+                            return new DataItem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.DataItem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IDataItem} message DataItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataItem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                            if (message.byteItem != null && Object.hasOwnProperty.call(message, "byteItem"))
+                                $root.google.cloud.modelarmor.v1beta.ByteDataItem.encode(message.byteItem, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.DataItem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IDataItem} message DataItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataItem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataItem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.DataItem} DataItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataItem.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.DataItem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.text = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.byteItem = $root.google.cloud.modelarmor.v1beta.ByteDataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataItem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.DataItem} DataItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataItem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataItem message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataItem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                properties.dataItem = 1;
+                                if (!$util.isString(message.text))
+                                    return "text: string expected";
+                            }
+                            if (message.byteItem != null && message.hasOwnProperty("byteItem")) {
+                                if (properties.dataItem === 1)
+                                    return "dataItem: multiple values";
+                                properties.dataItem = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.ByteDataItem.verify(message.byteItem);
+                                    if (error)
+                                        return "byteItem." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataItem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.DataItem} DataItem
+                         */
+                        DataItem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.DataItem)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.DataItem();
+                            if (object.text != null)
+                                message.text = String(object.text);
+                            if (object.byteItem != null) {
+                                if (typeof object.byteItem !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.DataItem.byteItem: object expected");
+                                message.byteItem = $root.google.cloud.modelarmor.v1beta.ByteDataItem.fromObject(object.byteItem);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataItem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.DataItem} message DataItem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataItem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                object.text = message.text;
+                                if (options.oneofs)
+                                    object.dataItem = "text";
+                            }
+                            if (message.byteItem != null && message.hasOwnProperty("byteItem")) {
+                                object.byteItem = $root.google.cloud.modelarmor.v1beta.ByteDataItem.toObject(message.byteItem, options);
+                                if (options.oneofs)
+                                    object.dataItem = "byteItem";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataItem to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataItem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataItem
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.DataItem
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.DataItem";
+                        };
+    
+                        return DataItem;
+                    })();
+    
+                    v1beta.ByteDataItem = (function() {
+    
+                        /**
+                         * Properties of a ByteDataItem.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IByteDataItem
+                         * @property {google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|null} [byteDataType] ByteDataItem byteDataType
+                         * @property {Uint8Array|null} [byteData] ByteDataItem byteData
+                         */
+    
+                        /**
+                         * Constructs a new ByteDataItem.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a ByteDataItem.
+                         * @implements IByteDataItem
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IByteDataItem=} [properties] Properties to set
+                         */
+                        function ByteDataItem(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ByteDataItem byteDataType.
+                         * @member {google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType} byteDataType
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @instance
+                         */
+                        ByteDataItem.prototype.byteDataType = 0;
+    
+                        /**
+                         * ByteDataItem byteData.
+                         * @member {Uint8Array} byteData
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @instance
+                         */
+                        ByteDataItem.prototype.byteData = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new ByteDataItem instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IByteDataItem=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.ByteDataItem} ByteDataItem instance
+                         */
+                        ByteDataItem.create = function create(properties) {
+                            return new ByteDataItem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ByteDataItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.ByteDataItem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IByteDataItem} message ByteDataItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ByteDataItem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.byteDataType != null && Object.hasOwnProperty.call(message, "byteDataType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.byteDataType);
+                            if (message.byteData != null && Object.hasOwnProperty.call(message, "byteData"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.byteData);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ByteDataItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.ByteDataItem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IByteDataItem} message ByteDataItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ByteDataItem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ByteDataItem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.ByteDataItem} ByteDataItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ByteDataItem.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.ByteDataItem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.byteDataType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.byteData = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ByteDataItem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.ByteDataItem} ByteDataItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ByteDataItem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ByteDataItem message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ByteDataItem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.byteDataType != null && message.hasOwnProperty("byteDataType"))
+                                switch (message.byteDataType) {
+                                default:
+                                    return "byteDataType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.byteData != null && message.hasOwnProperty("byteData"))
+                                if (!(message.byteData && typeof message.byteData.length === "number" || $util.isString(message.byteData)))
+                                    return "byteData: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ByteDataItem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.ByteDataItem} ByteDataItem
+                         */
+                        ByteDataItem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.ByteDataItem)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.ByteDataItem();
+                            switch (object.byteDataType) {
+                            default:
+                                if (typeof object.byteDataType === "number") {
+                                    message.byteDataType = object.byteDataType;
+                                    break;
+                                }
+                                break;
+                            case "BYTE_ITEM_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.byteDataType = 0;
+                                break;
+                            case "PLAINTEXT_UTF8":
+                            case 1:
+                                message.byteDataType = 1;
+                                break;
+                            case "PDF":
+                            case 2:
+                                message.byteDataType = 2;
+                                break;
+                            case "WORD_DOCUMENT":
+                            case 3:
+                                message.byteDataType = 3;
+                                break;
+                            case "EXCEL_DOCUMENT":
+                            case 4:
+                                message.byteDataType = 4;
+                                break;
+                            case "POWERPOINT_DOCUMENT":
+                            case 5:
+                                message.byteDataType = 5;
+                                break;
+                            case "TXT":
+                            case 6:
+                                message.byteDataType = 6;
+                                break;
+                            case "CSV":
+                            case 7:
+                                message.byteDataType = 7;
+                                break;
+                            }
+                            if (object.byteData != null)
+                                if (typeof object.byteData === "string")
+                                    $util.base64.decode(object.byteData, message.byteData = $util.newBuffer($util.base64.length(object.byteData)), 0);
+                                else if (object.byteData.length >= 0)
+                                    message.byteData = object.byteData;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ByteDataItem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ByteDataItem} message ByteDataItem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ByteDataItem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.byteDataType = options.enums === String ? "BYTE_ITEM_TYPE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.byteData = "";
+                                else {
+                                    object.byteData = [];
+                                    if (options.bytes !== Array)
+                                        object.byteData = $util.newBuffer(object.byteData);
+                                }
+                            }
+                            if (message.byteDataType != null && message.hasOwnProperty("byteDataType"))
+                                object.byteDataType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType[message.byteDataType] === undefined ? message.byteDataType : $root.google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType[message.byteDataType] : message.byteDataType;
+                            if (message.byteData != null && message.hasOwnProperty("byteData"))
+                                object.byteData = options.bytes === String ? $util.base64.encode(message.byteData, 0, message.byteData.length) : options.bytes === Array ? Array.prototype.slice.call(message.byteData) : message.byteData;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ByteDataItem to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ByteDataItem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ByteDataItem
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ByteDataItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.ByteDataItem";
+                        };
+    
+                        /**
+                         * ByteItemType enum.
+                         * @name google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType
+                         * @enum {number}
+                         * @property {number} BYTE_ITEM_TYPE_UNSPECIFIED=0 BYTE_ITEM_TYPE_UNSPECIFIED value
+                         * @property {number} PLAINTEXT_UTF8=1 PLAINTEXT_UTF8 value
+                         * @property {number} PDF=2 PDF value
+                         * @property {number} WORD_DOCUMENT=3 WORD_DOCUMENT value
+                         * @property {number} EXCEL_DOCUMENT=4 EXCEL_DOCUMENT value
+                         * @property {number} POWERPOINT_DOCUMENT=5 POWERPOINT_DOCUMENT value
+                         * @property {number} TXT=6 TXT value
+                         * @property {number} CSV=7 CSV value
+                         */
+                        ByteDataItem.ByteItemType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BYTE_ITEM_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PLAINTEXT_UTF8"] = 1;
+                            values[valuesById[2] = "PDF"] = 2;
+                            values[valuesById[3] = "WORD_DOCUMENT"] = 3;
+                            values[valuesById[4] = "EXCEL_DOCUMENT"] = 4;
+                            values[valuesById[5] = "POWERPOINT_DOCUMENT"] = 5;
+                            values[valuesById[6] = "TXT"] = 6;
+                            values[valuesById[7] = "CSV"] = 7;
+                            return values;
+                        })();
+    
+                        return ByteDataItem;
+                    })();
+    
+                    v1beta.SdpDeidentifyResult = (function() {
+    
+                        /**
+                         * Properties of a SdpDeidentifyResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISdpDeidentifyResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterExecutionState|null} [executionState] SdpDeidentifyResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IMessageItem>|null} [messageItems] SdpDeidentifyResult messageItems
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] SdpDeidentifyResult matchState
+                         * @property {google.cloud.modelarmor.v1beta.IDataItem|null} [data] SdpDeidentifyResult data
+                         * @property {number|Long|null} [transformedBytes] SdpDeidentifyResult transformedBytes
+                         * @property {Array.<string>|null} [infoTypes] SdpDeidentifyResult infoTypes
+                         */
+    
+                        /**
+                         * Constructs a new SdpDeidentifyResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SdpDeidentifyResult.
+                         * @implements ISdpDeidentifyResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISdpDeidentifyResult=} [properties] Properties to set
+                         */
+                        function SdpDeidentifyResult(properties) {
+                            this.messageItems = [];
+                            this.infoTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpDeidentifyResult executionState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @instance
+                         */
+                        SdpDeidentifyResult.prototype.executionState = 0;
+    
+                        /**
+                         * SdpDeidentifyResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @instance
+                         */
+                        SdpDeidentifyResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * SdpDeidentifyResult matchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @instance
+                         */
+                        SdpDeidentifyResult.prototype.matchState = 0;
+    
+                        /**
+                         * SdpDeidentifyResult data.
+                         * @member {google.cloud.modelarmor.v1beta.IDataItem|null|undefined} data
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @instance
+                         */
+                        SdpDeidentifyResult.prototype.data = null;
+    
+                        /**
+                         * SdpDeidentifyResult transformedBytes.
+                         * @member {number|Long} transformedBytes
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @instance
+                         */
+                        SdpDeidentifyResult.prototype.transformedBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * SdpDeidentifyResult infoTypes.
+                         * @member {Array.<string>} infoTypes
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @instance
+                         */
+                        SdpDeidentifyResult.prototype.infoTypes = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SdpDeidentifyResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpDeidentifyResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SdpDeidentifyResult} SdpDeidentifyResult instance
+                         */
+                        SdpDeidentifyResult.create = function create(properties) {
+                            return new SdpDeidentifyResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpDeidentifyResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpDeidentifyResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpDeidentifyResult} message SdpDeidentifyResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpDeidentifyResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                $root.google.cloud.modelarmor.v1beta.DataItem.encode(message.data, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.transformedBytes != null && Object.hasOwnProperty.call(message, "transformedBytes"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.transformedBytes);
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.infoTypes[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpDeidentifyResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpDeidentifyResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpDeidentifyResult} message SdpDeidentifyResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpDeidentifyResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpDeidentifyResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SdpDeidentifyResult} SdpDeidentifyResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpDeidentifyResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1beta.MessageItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.data = $root.google.cloud.modelarmor.v1beta.DataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.transformedBytes = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpDeidentifyResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SdpDeidentifyResult} SdpDeidentifyResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpDeidentifyResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpDeidentifyResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpDeidentifyResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MessageItem.verify(message.messageItems[i]);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.data != null && message.hasOwnProperty("data")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.DataItem.verify(message.data);
+                                if (error)
+                                    return "data." + error;
+                            }
+                            if (message.transformedBytes != null && message.hasOwnProperty("transformedBytes"))
+                                if (!$util.isInteger(message.transformedBytes) && !(message.transformedBytes && $util.isInteger(message.transformedBytes.low) && $util.isInteger(message.transformedBytes.high)))
+                                    return "transformedBytes: integer|Long expected";
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    if (!$util.isString(message.infoTypes[i]))
+                                        return "infoTypes: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpDeidentifyResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SdpDeidentifyResult} SdpDeidentifyResult
+                         */
+                        SdpDeidentifyResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SdpDeidentifyResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpDeidentifyResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.SdpDeidentifyResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1beta.MessageItem.fromObject(object.messageItems[i]);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            if (object.data != null) {
+                                if (typeof object.data !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpDeidentifyResult.data: object expected");
+                                message.data = $root.google.cloud.modelarmor.v1beta.DataItem.fromObject(object.data);
+                            }
+                            if (object.transformedBytes != null)
+                                if ($util.Long)
+                                    (message.transformedBytes = $util.Long.fromValue(object.transformedBytes)).unsigned = false;
+                                else if (typeof object.transformedBytes === "string")
+                                    message.transformedBytes = parseInt(object.transformedBytes, 10);
+                                else if (typeof object.transformedBytes === "number")
+                                    message.transformedBytes = object.transformedBytes;
+                                else if (typeof object.transformedBytes === "object")
+                                    message.transformedBytes = new $util.LongBits(object.transformedBytes.low >>> 0, object.transformedBytes.high >>> 0).toNumber();
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpDeidentifyResult.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i)
+                                    message.infoTypes[i] = String(object.infoTypes[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpDeidentifyResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SdpDeidentifyResult} message SdpDeidentifyResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpDeidentifyResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.messageItems = [];
+                                object.infoTypes = [];
+                            }
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                                object.data = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.transformedBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.transformedBytes = options.longs === String ? "0" : 0;
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1beta.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = $root.google.cloud.modelarmor.v1beta.DataItem.toObject(message.data, options);
+                            if (message.transformedBytes != null && message.hasOwnProperty("transformedBytes"))
+                                if (typeof message.transformedBytes === "number")
+                                    object.transformedBytes = options.longs === String ? String(message.transformedBytes) : message.transformedBytes;
+                                else
+                                    object.transformedBytes = options.longs === String ? $util.Long.prototype.toString.call(message.transformedBytes) : options.longs === Number ? new $util.LongBits(message.transformedBytes.low >>> 0, message.transformedBytes.high >>> 0).toNumber() : message.transformedBytes;
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = message.infoTypes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpDeidentifyResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpDeidentifyResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpDeidentifyResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SdpDeidentifyResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpDeidentifyResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpDeidentifyResult";
+                        };
+    
+                        return SdpDeidentifyResult;
+                    })();
+    
+                    v1beta.SdpFinding = (function() {
+    
+                        /**
+                         * Properties of a SdpFinding.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ISdpFinding
+                         * @property {string|null} [infoType] SdpFinding infoType
+                         * @property {google.cloud.modelarmor.v1beta.SdpFindingLikelihood|null} [likelihood] SdpFinding likelihood
+                         * @property {google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation|null} [location] SdpFinding location
+                         */
+    
+                        /**
+                         * Constructs a new SdpFinding.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a SdpFinding.
+                         * @implements ISdpFinding
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFinding=} [properties] Properties to set
+                         */
+                        function SdpFinding(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SdpFinding infoType.
+                         * @member {string} infoType
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @instance
+                         */
+                        SdpFinding.prototype.infoType = "";
+    
+                        /**
+                         * SdpFinding likelihood.
+                         * @member {google.cloud.modelarmor.v1beta.SdpFindingLikelihood} likelihood
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @instance
+                         */
+                        SdpFinding.prototype.likelihood = 0;
+    
+                        /**
+                         * SdpFinding location.
+                         * @member {google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation|null|undefined} location
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @instance
+                         */
+                        SdpFinding.prototype.location = null;
+    
+                        /**
+                         * Creates a new SdpFinding instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFinding=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFinding} SdpFinding instance
+                         */
+                        SdpFinding.create = function create(properties) {
+                            return new SdpFinding(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SdpFinding message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFinding} message SdpFinding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpFinding.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.infoType != null && Object.hasOwnProperty.call(message, "infoType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.infoType);
+                            if (message.likelihood != null && Object.hasOwnProperty.call(message, "likelihood"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.likelihood);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.encode(message.location, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SdpFinding message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ISdpFinding} message SdpFinding message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SdpFinding.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SdpFinding message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFinding} SdpFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpFinding.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpFinding();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.infoType = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.likelihood = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.location = $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SdpFinding message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFinding} SdpFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SdpFinding.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SdpFinding message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SdpFinding.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.infoType != null && message.hasOwnProperty("infoType"))
+                                if (!$util.isString(message.infoType))
+                                    return "infoType: string expected";
+                            if (message.likelihood != null && message.hasOwnProperty("likelihood"))
+                                switch (message.likelihood) {
+                                default:
+                                    return "likelihood: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.location != null && message.hasOwnProperty("location")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.verify(message.location);
+                                if (error)
+                                    return "location." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SdpFinding message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.SdpFinding} SdpFinding
+                         */
+                        SdpFinding.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpFinding)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.SdpFinding();
+                            if (object.infoType != null)
+                                message.infoType = String(object.infoType);
+                            switch (object.likelihood) {
+                            default:
+                                if (typeof object.likelihood === "number") {
+                                    message.likelihood = object.likelihood;
+                                    break;
+                                }
+                                break;
+                            case "SDP_FINDING_LIKELIHOOD_UNSPECIFIED":
+                            case 0:
+                                message.likelihood = 0;
+                                break;
+                            case "VERY_UNLIKELY":
+                            case 1:
+                                message.likelihood = 1;
+                                break;
+                            case "UNLIKELY":
+                            case 2:
+                                message.likelihood = 2;
+                                break;
+                            case "POSSIBLE":
+                            case 3:
+                                message.likelihood = 3;
+                                break;
+                            case "LIKELY":
+                            case 4:
+                                message.likelihood = 4;
+                                break;
+                            case "VERY_LIKELY":
+                            case 5:
+                                message.likelihood = 5;
+                                break;
+                            }
+                            if (object.location != null) {
+                                if (typeof object.location !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SdpFinding.location: object expected");
+                                message.location = $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.fromObject(object.location);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SdpFinding message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.SdpFinding} message SdpFinding
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SdpFinding.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.infoType = "";
+                                object.likelihood = options.enums === String ? "SDP_FINDING_LIKELIHOOD_UNSPECIFIED" : 0;
+                                object.location = null;
+                            }
+                            if (message.infoType != null && message.hasOwnProperty("infoType"))
+                                object.infoType = message.infoType;
+                            if (message.likelihood != null && message.hasOwnProperty("likelihood"))
+                                object.likelihood = options.enums === String ? $root.google.cloud.modelarmor.v1beta.SdpFindingLikelihood[message.likelihood] === undefined ? message.likelihood : $root.google.cloud.modelarmor.v1beta.SdpFindingLikelihood[message.likelihood] : message.likelihood;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.toObject(message.location, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SdpFinding to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SdpFinding.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SdpFinding
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SdpFinding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpFinding";
+                        };
+    
+                        SdpFinding.SdpFindingLocation = (function() {
+    
+                            /**
+                             * Properties of a SdpFindingLocation.
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                             * @interface ISdpFindingLocation
+                             * @property {google.cloud.modelarmor.v1beta.IRangeInfo|null} [byteRange] SdpFindingLocation byteRange
+                             * @property {google.cloud.modelarmor.v1beta.IRangeInfo|null} [codepointRange] SdpFindingLocation codepointRange
+                             */
+    
+                            /**
+                             * Constructs a new SdpFindingLocation.
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding
+                             * @classdesc Represents a SdpFindingLocation.
+                             * @implements ISdpFindingLocation
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation=} [properties] Properties to set
+                             */
+                            function SdpFindingLocation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SdpFindingLocation byteRange.
+                             * @member {google.cloud.modelarmor.v1beta.IRangeInfo|null|undefined} byteRange
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @instance
+                             */
+                            SdpFindingLocation.prototype.byteRange = null;
+    
+                            /**
+                             * SdpFindingLocation codepointRange.
+                             * @member {google.cloud.modelarmor.v1beta.IRangeInfo|null|undefined} codepointRange
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @instance
+                             */
+                            SdpFindingLocation.prototype.codepointRange = null;
+    
+                            /**
+                             * Creates a new SdpFindingLocation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation} SdpFindingLocation instance
+                             */
+                            SdpFindingLocation.create = function create(properties) {
+                                return new SdpFindingLocation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SdpFindingLocation message. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation} message SdpFindingLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SdpFindingLocation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.byteRange != null && Object.hasOwnProperty.call(message, "byteRange"))
+                                    $root.google.cloud.modelarmor.v1beta.RangeInfo.encode(message.byteRange, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.codepointRange != null && Object.hasOwnProperty.call(message, "codepointRange"))
+                                    $root.google.cloud.modelarmor.v1beta.RangeInfo.encode(message.codepointRange, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SdpFindingLocation message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SdpFinding.ISdpFindingLocation} message SdpFindingLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SdpFindingLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SdpFindingLocation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation} SdpFindingLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SdpFindingLocation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.byteRange = $root.google.cloud.modelarmor.v1beta.RangeInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.codepointRange = $root.google.cloud.modelarmor.v1beta.RangeInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SdpFindingLocation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation} SdpFindingLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SdpFindingLocation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SdpFindingLocation message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SdpFindingLocation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.byteRange != null && message.hasOwnProperty("byteRange")) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.RangeInfo.verify(message.byteRange);
+                                    if (error)
+                                        return "byteRange." + error;
+                                }
+                                if (message.codepointRange != null && message.hasOwnProperty("codepointRange")) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.RangeInfo.verify(message.codepointRange);
+                                    if (error)
+                                        return "codepointRange." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SdpFindingLocation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation} SdpFindingLocation
+                             */
+                            SdpFindingLocation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation();
+                                if (object.byteRange != null) {
+                                    if (typeof object.byteRange !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.byteRange: object expected");
+                                    message.byteRange = $root.google.cloud.modelarmor.v1beta.RangeInfo.fromObject(object.byteRange);
+                                }
+                                if (object.codepointRange != null) {
+                                    if (typeof object.codepointRange !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation.codepointRange: object expected");
+                                    message.codepointRange = $root.google.cloud.modelarmor.v1beta.RangeInfo.fromObject(object.codepointRange);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SdpFindingLocation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation} message SdpFindingLocation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SdpFindingLocation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.byteRange = null;
+                                    object.codepointRange = null;
+                                }
+                                if (message.byteRange != null && message.hasOwnProperty("byteRange"))
+                                    object.byteRange = $root.google.cloud.modelarmor.v1beta.RangeInfo.toObject(message.byteRange, options);
+                                if (message.codepointRange != null && message.hasOwnProperty("codepointRange"))
+                                    object.codepointRange = $root.google.cloud.modelarmor.v1beta.RangeInfo.toObject(message.codepointRange, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SdpFindingLocation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SdpFindingLocation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SdpFindingLocation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SdpFindingLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.SdpFinding.SdpFindingLocation";
+                            };
+    
+                            return SdpFindingLocation;
+                        })();
+    
+                        return SdpFinding;
+                    })();
+    
+                    v1beta.PiAndJailbreakFilterResult = (function() {
+    
+                        /**
+                         * Properties of a PiAndJailbreakFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IPiAndJailbreakFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterExecutionState|null} [executionState] PiAndJailbreakFilterResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IMessageItem>|null} [messageItems] PiAndJailbreakFilterResult messageItems
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] PiAndJailbreakFilterResult matchState
+                         * @property {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel|null} [confidenceLevel] PiAndJailbreakFilterResult confidenceLevel
+                         */
+    
+                        /**
+                         * Constructs a new PiAndJailbreakFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a PiAndJailbreakFilterResult.
+                         * @implements IPiAndJailbreakFilterResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult=} [properties] Properties to set
+                         */
+                        function PiAndJailbreakFilterResult(properties) {
+                            this.messageItems = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PiAndJailbreakFilterResult executionState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @instance
+                         */
+                        PiAndJailbreakFilterResult.prototype.executionState = 0;
+    
+                        /**
+                         * PiAndJailbreakFilterResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @instance
+                         */
+                        PiAndJailbreakFilterResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * PiAndJailbreakFilterResult matchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @instance
+                         */
+                        PiAndJailbreakFilterResult.prototype.matchState = 0;
+    
+                        /**
+                         * PiAndJailbreakFilterResult confidenceLevel.
+                         * @member {google.cloud.modelarmor.v1beta.DetectionConfidenceLevel} confidenceLevel
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @instance
+                         */
+                        PiAndJailbreakFilterResult.prototype.confidenceLevel = 0;
+    
+                        /**
+                         * Creates a new PiAndJailbreakFilterResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult} PiAndJailbreakFilterResult instance
+                         */
+                        PiAndJailbreakFilterResult.create = function create(properties) {
+                            return new PiAndJailbreakFilterResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PiAndJailbreakFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult} message PiAndJailbreakFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PiAndJailbreakFilterResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            if (message.confidenceLevel != null && Object.hasOwnProperty.call(message, "confidenceLevel"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.confidenceLevel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PiAndJailbreakFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IPiAndJailbreakFilterResult} message PiAndJailbreakFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PiAndJailbreakFilterResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PiAndJailbreakFilterResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult} PiAndJailbreakFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PiAndJailbreakFilterResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1beta.MessageItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.confidenceLevel = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PiAndJailbreakFilterResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult} PiAndJailbreakFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PiAndJailbreakFilterResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PiAndJailbreakFilterResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PiAndJailbreakFilterResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MessageItem.verify(message.messageItems[i]);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                switch (message.confidenceLevel) {
+                                default:
+                                    return "confidenceLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PiAndJailbreakFilterResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult} PiAndJailbreakFilterResult
+                         */
+                        PiAndJailbreakFilterResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1beta.MessageItem.fromObject(object.messageItems[i]);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            switch (object.confidenceLevel) {
+                            default:
+                                if (typeof object.confidenceLevel === "number") {
+                                    message.confidenceLevel = object.confidenceLevel;
+                                    break;
+                                }
+                                break;
+                            case "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.confidenceLevel = 0;
+                                break;
+                            case "LOW_AND_ABOVE":
+                            case 1:
+                                message.confidenceLevel = 1;
+                                break;
+                            case "MEDIUM_AND_ABOVE":
+                            case 2:
+                                message.confidenceLevel = 2;
+                                break;
+                            case "HIGH":
+                            case 3:
+                                message.confidenceLevel = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PiAndJailbreakFilterResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult} message PiAndJailbreakFilterResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PiAndJailbreakFilterResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.messageItems = [];
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                                object.confidenceLevel = options.enums === String ? "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1beta.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                            if (message.confidenceLevel != null && message.hasOwnProperty("confidenceLevel"))
+                                object.confidenceLevel = options.enums === String ? $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] === undefined ? message.confidenceLevel : $root.google.cloud.modelarmor.v1beta.DetectionConfidenceLevel[message.confidenceLevel] : message.confidenceLevel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PiAndJailbreakFilterResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PiAndJailbreakFilterResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PiAndJailbreakFilterResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PiAndJailbreakFilterResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.PiAndJailbreakFilterResult";
+                        };
+    
+                        return PiAndJailbreakFilterResult;
+                    })();
+    
+                    v1beta.MaliciousUriFilterResult = (function() {
+    
+                        /**
+                         * Properties of a MaliciousUriFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IMaliciousUriFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterExecutionState|null} [executionState] MaliciousUriFilterResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IMessageItem>|null} [messageItems] MaliciousUriFilterResult messageItems
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] MaliciousUriFilterResult matchState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem>|null} [maliciousUriMatchedItems] MaliciousUriFilterResult maliciousUriMatchedItems
+                         */
+    
+                        /**
+                         * Constructs a new MaliciousUriFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a MaliciousUriFilterResult.
+                         * @implements IMaliciousUriFilterResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult=} [properties] Properties to set
+                         */
+                        function MaliciousUriFilterResult(properties) {
+                            this.messageItems = [];
+                            this.maliciousUriMatchedItems = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaliciousUriFilterResult executionState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @instance
+                         */
+                        MaliciousUriFilterResult.prototype.executionState = 0;
+    
+                        /**
+                         * MaliciousUriFilterResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @instance
+                         */
+                        MaliciousUriFilterResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * MaliciousUriFilterResult matchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @instance
+                         */
+                        MaliciousUriFilterResult.prototype.matchState = 0;
+    
+                        /**
+                         * MaliciousUriFilterResult maliciousUriMatchedItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem>} maliciousUriMatchedItems
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @instance
+                         */
+                        MaliciousUriFilterResult.prototype.maliciousUriMatchedItems = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MaliciousUriFilterResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult} MaliciousUriFilterResult instance
+                         */
+                        MaliciousUriFilterResult.create = function create(properties) {
+                            return new MaliciousUriFilterResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaliciousUriFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult} message MaliciousUriFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaliciousUriFilterResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            if (message.maliciousUriMatchedItems != null && message.maliciousUriMatchedItems.length)
+                                for (var i = 0; i < message.maliciousUriMatchedItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.encode(message.maliciousUriMatchedItems[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaliciousUriFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMaliciousUriFilterResult} message MaliciousUriFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaliciousUriFilterResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaliciousUriFilterResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult} MaliciousUriFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaliciousUriFilterResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1beta.MessageItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.maliciousUriMatchedItems && message.maliciousUriMatchedItems.length))
+                                            message.maliciousUriMatchedItems = [];
+                                        message.maliciousUriMatchedItems.push($root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaliciousUriFilterResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult} MaliciousUriFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaliciousUriFilterResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaliciousUriFilterResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaliciousUriFilterResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MessageItem.verify(message.messageItems[i]);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.maliciousUriMatchedItems != null && message.hasOwnProperty("maliciousUriMatchedItems")) {
+                                if (!Array.isArray(message.maliciousUriMatchedItems))
+                                    return "maliciousUriMatchedItems: array expected";
+                                for (var i = 0; i < message.maliciousUriMatchedItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.verify(message.maliciousUriMatchedItems[i]);
+                                    if (error)
+                                        return "maliciousUriMatchedItems." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaliciousUriFilterResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult} MaliciousUriFilterResult
+                         */
+                        MaliciousUriFilterResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1beta.MessageItem.fromObject(object.messageItems[i]);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            if (object.maliciousUriMatchedItems) {
+                                if (!Array.isArray(object.maliciousUriMatchedItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.maliciousUriMatchedItems: array expected");
+                                message.maliciousUriMatchedItems = [];
+                                for (var i = 0; i < object.maliciousUriMatchedItems.length; ++i) {
+                                    if (typeof object.maliciousUriMatchedItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.maliciousUriMatchedItems: object expected");
+                                    message.maliciousUriMatchedItems[i] = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.fromObject(object.maliciousUriMatchedItems[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaliciousUriFilterResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult} message MaliciousUriFilterResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaliciousUriFilterResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.messageItems = [];
+                                object.maliciousUriMatchedItems = [];
+                            }
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1beta.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                            if (message.maliciousUriMatchedItems && message.maliciousUriMatchedItems.length) {
+                                object.maliciousUriMatchedItems = [];
+                                for (var j = 0; j < message.maliciousUriMatchedItems.length; ++j)
+                                    object.maliciousUriMatchedItems[j] = $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.toObject(message.maliciousUriMatchedItems[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaliciousUriFilterResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaliciousUriFilterResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaliciousUriFilterResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaliciousUriFilterResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.MaliciousUriFilterResult";
+                        };
+    
+                        MaliciousUriFilterResult.MaliciousUriMatchedItem = (function() {
+    
+                            /**
+                             * Properties of a MaliciousUriMatchedItem.
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                             * @interface IMaliciousUriMatchedItem
+                             * @property {string|null} [uri] MaliciousUriMatchedItem uri
+                             * @property {Array.<google.cloud.modelarmor.v1beta.IRangeInfo>|null} [locations] MaliciousUriMatchedItem locations
+                             */
+    
+                            /**
+                             * Constructs a new MaliciousUriMatchedItem.
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult
+                             * @classdesc Represents a MaliciousUriMatchedItem.
+                             * @implements IMaliciousUriMatchedItem
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem=} [properties] Properties to set
+                             */
+                            function MaliciousUriMatchedItem(properties) {
+                                this.locations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MaliciousUriMatchedItem uri.
+                             * @member {string} uri
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @instance
+                             */
+                            MaliciousUriMatchedItem.prototype.uri = "";
+    
+                            /**
+                             * MaliciousUriMatchedItem locations.
+                             * @member {Array.<google.cloud.modelarmor.v1beta.IRangeInfo>} locations
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @instance
+                             */
+                            MaliciousUriMatchedItem.prototype.locations = $util.emptyArray;
+    
+                            /**
+                             * Creates a new MaliciousUriMatchedItem instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem} MaliciousUriMatchedItem instance
+                             */
+                            MaliciousUriMatchedItem.create = function create(properties) {
+                                return new MaliciousUriMatchedItem(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MaliciousUriMatchedItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem} message MaliciousUriMatchedItem message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MaliciousUriMatchedItem.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.locations != null && message.locations.length)
+                                    for (var i = 0; i < message.locations.length; ++i)
+                                        $root.google.cloud.modelarmor.v1beta.RangeInfo.encode(message.locations[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MaliciousUriMatchedItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.IMaliciousUriMatchedItem} message MaliciousUriMatchedItem message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MaliciousUriMatchedItem.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MaliciousUriMatchedItem message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem} MaliciousUriMatchedItem
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MaliciousUriMatchedItem.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.locations && message.locations.length))
+                                                message.locations = [];
+                                            message.locations.push($root.google.cloud.modelarmor.v1beta.RangeInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MaliciousUriMatchedItem message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem} MaliciousUriMatchedItem
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MaliciousUriMatchedItem.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MaliciousUriMatchedItem message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MaliciousUriMatchedItem.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                if (message.locations != null && message.hasOwnProperty("locations")) {
+                                    if (!Array.isArray(message.locations))
+                                        return "locations: array expected";
+                                    for (var i = 0; i < message.locations.length; ++i) {
+                                        var error = $root.google.cloud.modelarmor.v1beta.RangeInfo.verify(message.locations[i]);
+                                        if (error)
+                                            return "locations." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MaliciousUriMatchedItem message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem} MaliciousUriMatchedItem
+                             */
+                            MaliciousUriMatchedItem.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                if (object.locations) {
+                                    if (!Array.isArray(object.locations))
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.locations: array expected");
+                                    message.locations = [];
+                                    for (var i = 0; i < object.locations.length; ++i) {
+                                        if (typeof object.locations[i] !== "object")
+                                            throw TypeError(".google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem.locations: object expected");
+                                        message.locations[i] = $root.google.cloud.modelarmor.v1beta.RangeInfo.fromObject(object.locations[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MaliciousUriMatchedItem message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem} message MaliciousUriMatchedItem
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MaliciousUriMatchedItem.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.locations = [];
+                                if (options.defaults)
+                                    object.uri = "";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                if (message.locations && message.locations.length) {
+                                    object.locations = [];
+                                    for (var j = 0; j < message.locations.length; ++j)
+                                        object.locations[j] = $root.google.cloud.modelarmor.v1beta.RangeInfo.toObject(message.locations[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MaliciousUriMatchedItem to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MaliciousUriMatchedItem.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MaliciousUriMatchedItem
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MaliciousUriMatchedItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.MaliciousUriFilterResult.MaliciousUriMatchedItem";
+                            };
+    
+                            return MaliciousUriMatchedItem;
+                        })();
+    
+                        return MaliciousUriFilterResult;
+                    })();
+    
+                    v1beta.VirusScanFilterResult = (function() {
+    
+                        /**
+                         * Properties of a VirusScanFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IVirusScanFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterExecutionState|null} [executionState] VirusScanFilterResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IMessageItem>|null} [messageItems] VirusScanFilterResult messageItems
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] VirusScanFilterResult matchState
+                         * @property {google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType|null} [scannedContentType] VirusScanFilterResult scannedContentType
+                         * @property {number|Long|null} [scannedSize] VirusScanFilterResult scannedSize
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IVirusDetail>|null} [virusDetails] VirusScanFilterResult virusDetails
+                         */
+    
+                        /**
+                         * Constructs a new VirusScanFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a VirusScanFilterResult.
+                         * @implements IVirusScanFilterResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IVirusScanFilterResult=} [properties] Properties to set
+                         */
+                        function VirusScanFilterResult(properties) {
+                            this.messageItems = [];
+                            this.virusDetails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VirusScanFilterResult executionState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         */
+                        VirusScanFilterResult.prototype.executionState = 0;
+    
+                        /**
+                         * VirusScanFilterResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         */
+                        VirusScanFilterResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * VirusScanFilterResult matchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         */
+                        VirusScanFilterResult.prototype.matchState = 0;
+    
+                        /**
+                         * VirusScanFilterResult scannedContentType.
+                         * @member {google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType} scannedContentType
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         */
+                        VirusScanFilterResult.prototype.scannedContentType = 0;
+    
+                        /**
+                         * VirusScanFilterResult scannedSize.
+                         * @member {number|Long|null|undefined} scannedSize
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         */
+                        VirusScanFilterResult.prototype.scannedSize = null;
+    
+                        /**
+                         * VirusScanFilterResult virusDetails.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IVirusDetail>} virusDetails
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         */
+                        VirusScanFilterResult.prototype.virusDetails = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * VirusScanFilterResult _scannedSize.
+                         * @member {"scannedSize"|undefined} _scannedSize
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         */
+                        Object.defineProperty(VirusScanFilterResult.prototype, "_scannedSize", {
+                            get: $util.oneOfGetter($oneOfFields = ["scannedSize"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new VirusScanFilterResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IVirusScanFilterResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.VirusScanFilterResult} VirusScanFilterResult instance
+                         */
+                        VirusScanFilterResult.create = function create(properties) {
+                            return new VirusScanFilterResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VirusScanFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusScanFilterResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IVirusScanFilterResult} message VirusScanFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VirusScanFilterResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            if (message.scannedContentType != null && Object.hasOwnProperty.call(message, "scannedContentType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.scannedContentType);
+                            if (message.scannedSize != null && Object.hasOwnProperty.call(message, "scannedSize"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.scannedSize);
+                            if (message.virusDetails != null && message.virusDetails.length)
+                                for (var i = 0; i < message.virusDetails.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.VirusDetail.encode(message.virusDetails[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VirusScanFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusScanFilterResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IVirusScanFilterResult} message VirusScanFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VirusScanFilterResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VirusScanFilterResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.VirusScanFilterResult} VirusScanFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VirusScanFilterResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1beta.MessageItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.scannedContentType = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.scannedSize = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.virusDetails && message.virusDetails.length))
+                                            message.virusDetails = [];
+                                        message.virusDetails.push($root.google.cloud.modelarmor.v1beta.VirusDetail.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VirusScanFilterResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.VirusScanFilterResult} VirusScanFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VirusScanFilterResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VirusScanFilterResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VirusScanFilterResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MessageItem.verify(message.messageItems[i]);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.scannedContentType != null && message.hasOwnProperty("scannedContentType"))
+                                switch (message.scannedContentType) {
+                                default:
+                                    return "scannedContentType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.scannedSize != null && message.hasOwnProperty("scannedSize")) {
+                                properties._scannedSize = 1;
+                                if (!$util.isInteger(message.scannedSize) && !(message.scannedSize && $util.isInteger(message.scannedSize.low) && $util.isInteger(message.scannedSize.high)))
+                                    return "scannedSize: integer|Long expected";
+                            }
+                            if (message.virusDetails != null && message.hasOwnProperty("virusDetails")) {
+                                if (!Array.isArray(message.virusDetails))
+                                    return "virusDetails: array expected";
+                                for (var i = 0; i < message.virusDetails.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.VirusDetail.verify(message.virusDetails[i]);
+                                    if (error)
+                                        return "virusDetails." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VirusScanFilterResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.VirusScanFilterResult} VirusScanFilterResult
+                         */
+                        VirusScanFilterResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.VirusScanFilterResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.VirusScanFilterResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1beta.MessageItem.fromObject(object.messageItems[i]);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            switch (object.scannedContentType) {
+                            default:
+                                if (typeof object.scannedContentType === "number") {
+                                    message.scannedContentType = object.scannedContentType;
+                                    break;
+                                }
+                                break;
+                            case "SCANNED_CONTENT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.scannedContentType = 0;
+                                break;
+                            case "UNKNOWN":
+                            case 1:
+                                message.scannedContentType = 1;
+                                break;
+                            case "PLAINTEXT":
+                            case 2:
+                                message.scannedContentType = 2;
+                                break;
+                            case "PDF":
+                            case 3:
+                                message.scannedContentType = 3;
+                                break;
+                            }
+                            if (object.scannedSize != null)
+                                if ($util.Long)
+                                    (message.scannedSize = $util.Long.fromValue(object.scannedSize)).unsigned = false;
+                                else if (typeof object.scannedSize === "string")
+                                    message.scannedSize = parseInt(object.scannedSize, 10);
+                                else if (typeof object.scannedSize === "number")
+                                    message.scannedSize = object.scannedSize;
+                                else if (typeof object.scannedSize === "object")
+                                    message.scannedSize = new $util.LongBits(object.scannedSize.low >>> 0, object.scannedSize.high >>> 0).toNumber();
+                            if (object.virusDetails) {
+                                if (!Array.isArray(object.virusDetails))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.VirusScanFilterResult.virusDetails: array expected");
+                                message.virusDetails = [];
+                                for (var i = 0; i < object.virusDetails.length; ++i) {
+                                    if (typeof object.virusDetails[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.VirusScanFilterResult.virusDetails: object expected");
+                                    message.virusDetails[i] = $root.google.cloud.modelarmor.v1beta.VirusDetail.fromObject(object.virusDetails[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VirusScanFilterResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.VirusScanFilterResult} message VirusScanFilterResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VirusScanFilterResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.messageItems = [];
+                                object.virusDetails = [];
+                            }
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                                object.scannedContentType = options.enums === String ? "SCANNED_CONTENT_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1beta.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                            if (message.scannedContentType != null && message.hasOwnProperty("scannedContentType"))
+                                object.scannedContentType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType[message.scannedContentType] === undefined ? message.scannedContentType : $root.google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType[message.scannedContentType] : message.scannedContentType;
+                            if (message.scannedSize != null && message.hasOwnProperty("scannedSize")) {
+                                if (typeof message.scannedSize === "number")
+                                    object.scannedSize = options.longs === String ? String(message.scannedSize) : message.scannedSize;
+                                else
+                                    object.scannedSize = options.longs === String ? $util.Long.prototype.toString.call(message.scannedSize) : options.longs === Number ? new $util.LongBits(message.scannedSize.low >>> 0, message.scannedSize.high >>> 0).toNumber() : message.scannedSize;
+                                if (options.oneofs)
+                                    object._scannedSize = "scannedSize";
+                            }
+                            if (message.virusDetails && message.virusDetails.length) {
+                                object.virusDetails = [];
+                                for (var j = 0; j < message.virusDetails.length; ++j)
+                                    object.virusDetails[j] = $root.google.cloud.modelarmor.v1beta.VirusDetail.toObject(message.virusDetails[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VirusScanFilterResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VirusScanFilterResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VirusScanFilterResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.VirusScanFilterResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VirusScanFilterResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.VirusScanFilterResult";
+                        };
+    
+                        /**
+                         * ScannedContentType enum.
+                         * @name google.cloud.modelarmor.v1beta.VirusScanFilterResult.ScannedContentType
+                         * @enum {number}
+                         * @property {number} SCANNED_CONTENT_TYPE_UNSPECIFIED=0 SCANNED_CONTENT_TYPE_UNSPECIFIED value
+                         * @property {number} UNKNOWN=1 UNKNOWN value
+                         * @property {number} PLAINTEXT=2 PLAINTEXT value
+                         * @property {number} PDF=3 PDF value
+                         */
+                        VirusScanFilterResult.ScannedContentType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCANNED_CONTENT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UNKNOWN"] = 1;
+                            values[valuesById[2] = "PLAINTEXT"] = 2;
+                            values[valuesById[3] = "PDF"] = 3;
+                            return values;
+                        })();
+    
+                        return VirusScanFilterResult;
+                    })();
+    
+                    v1beta.VirusDetail = (function() {
+    
+                        /**
+                         * Properties of a VirusDetail.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IVirusDetail
+                         * @property {string|null} [vendor] VirusDetail vendor
+                         * @property {Array.<string>|null} [names] VirusDetail names
+                         * @property {google.cloud.modelarmor.v1beta.VirusDetail.ThreatType|null} [threatType] VirusDetail threatType
+                         */
+    
+                        /**
+                         * Constructs a new VirusDetail.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a VirusDetail.
+                         * @implements IVirusDetail
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IVirusDetail=} [properties] Properties to set
+                         */
+                        function VirusDetail(properties) {
+                            this.names = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VirusDetail vendor.
+                         * @member {string} vendor
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @instance
+                         */
+                        VirusDetail.prototype.vendor = "";
+    
+                        /**
+                         * VirusDetail names.
+                         * @member {Array.<string>} names
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @instance
+                         */
+                        VirusDetail.prototype.names = $util.emptyArray;
+    
+                        /**
+                         * VirusDetail threatType.
+                         * @member {google.cloud.modelarmor.v1beta.VirusDetail.ThreatType} threatType
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @instance
+                         */
+                        VirusDetail.prototype.threatType = 0;
+    
+                        /**
+                         * Creates a new VirusDetail instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IVirusDetail=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.VirusDetail} VirusDetail instance
+                         */
+                        VirusDetail.create = function create(properties) {
+                            return new VirusDetail(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VirusDetail message. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusDetail.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IVirusDetail} message VirusDetail message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VirusDetail.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vendor != null && Object.hasOwnProperty.call(message, "vendor"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.vendor);
+                            if (message.names != null && message.names.length)
+                                for (var i = 0; i < message.names.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                            if (message.threatType != null && Object.hasOwnProperty.call(message, "threatType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.threatType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VirusDetail message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.VirusDetail.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IVirusDetail} message VirusDetail message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VirusDetail.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VirusDetail message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.VirusDetail} VirusDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VirusDetail.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.VirusDetail();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.vendor = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.names && message.names.length))
+                                            message.names = [];
+                                        message.names.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.threatType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VirusDetail message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.VirusDetail} VirusDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VirusDetail.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VirusDetail message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VirusDetail.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vendor != null && message.hasOwnProperty("vendor"))
+                                if (!$util.isString(message.vendor))
+                                    return "vendor: string expected";
+                            if (message.names != null && message.hasOwnProperty("names")) {
+                                if (!Array.isArray(message.names))
+                                    return "names: array expected";
+                                for (var i = 0; i < message.names.length; ++i)
+                                    if (!$util.isString(message.names[i]))
+                                        return "names: string[] expected";
+                            }
+                            if (message.threatType != null && message.hasOwnProperty("threatType"))
+                                switch (message.threatType) {
+                                default:
+                                    return "threatType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VirusDetail message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.VirusDetail} VirusDetail
+                         */
+                        VirusDetail.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.VirusDetail)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.VirusDetail();
+                            if (object.vendor != null)
+                                message.vendor = String(object.vendor);
+                            if (object.names) {
+                                if (!Array.isArray(object.names))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.VirusDetail.names: array expected");
+                                message.names = [];
+                                for (var i = 0; i < object.names.length; ++i)
+                                    message.names[i] = String(object.names[i]);
+                            }
+                            switch (object.threatType) {
+                            default:
+                                if (typeof object.threatType === "number") {
+                                    message.threatType = object.threatType;
+                                    break;
+                                }
+                                break;
+                            case "THREAT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.threatType = 0;
+                                break;
+                            case "UNKNOWN":
+                            case 1:
+                                message.threatType = 1;
+                                break;
+                            case "VIRUS_OR_WORM":
+                            case 2:
+                                message.threatType = 2;
+                                break;
+                            case "MALICIOUS_PROGRAM":
+                            case 3:
+                                message.threatType = 3;
+                                break;
+                            case "POTENTIALLY_HARMFUL_CONTENT":
+                            case 4:
+                                message.threatType = 4;
+                                break;
+                            case "POTENTIALLY_UNWANTED_CONTENT":
+                            case 5:
+                                message.threatType = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VirusDetail message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.VirusDetail} message VirusDetail
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VirusDetail.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.names = [];
+                            if (options.defaults) {
+                                object.vendor = "";
+                                object.threatType = options.enums === String ? "THREAT_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.vendor != null && message.hasOwnProperty("vendor"))
+                                object.vendor = message.vendor;
+                            if (message.names && message.names.length) {
+                                object.names = [];
+                                for (var j = 0; j < message.names.length; ++j)
+                                    object.names[j] = message.names[j];
+                            }
+                            if (message.threatType != null && message.hasOwnProperty("threatType"))
+                                object.threatType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.VirusDetail.ThreatType[message.threatType] === undefined ? message.threatType : $root.google.cloud.modelarmor.v1beta.VirusDetail.ThreatType[message.threatType] : message.threatType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VirusDetail to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VirusDetail.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VirusDetail
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.VirusDetail
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VirusDetail.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.VirusDetail";
+                        };
+    
+                        /**
+                         * ThreatType enum.
+                         * @name google.cloud.modelarmor.v1beta.VirusDetail.ThreatType
+                         * @enum {number}
+                         * @property {number} THREAT_TYPE_UNSPECIFIED=0 THREAT_TYPE_UNSPECIFIED value
+                         * @property {number} UNKNOWN=1 UNKNOWN value
+                         * @property {number} VIRUS_OR_WORM=2 VIRUS_OR_WORM value
+                         * @property {number} MALICIOUS_PROGRAM=3 MALICIOUS_PROGRAM value
+                         * @property {number} POTENTIALLY_HARMFUL_CONTENT=4 POTENTIALLY_HARMFUL_CONTENT value
+                         * @property {number} POTENTIALLY_UNWANTED_CONTENT=5 POTENTIALLY_UNWANTED_CONTENT value
+                         */
+                        VirusDetail.ThreatType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "THREAT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UNKNOWN"] = 1;
+                            values[valuesById[2] = "VIRUS_OR_WORM"] = 2;
+                            values[valuesById[3] = "MALICIOUS_PROGRAM"] = 3;
+                            values[valuesById[4] = "POTENTIALLY_HARMFUL_CONTENT"] = 4;
+                            values[valuesById[5] = "POTENTIALLY_UNWANTED_CONTENT"] = 5;
+                            return values;
+                        })();
+    
+                        return VirusDetail;
+                    })();
+    
+                    v1beta.CsamFilterResult = (function() {
+    
+                        /**
+                         * Properties of a CsamFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface ICsamFilterResult
+                         * @property {google.cloud.modelarmor.v1beta.FilterExecutionState|null} [executionState] CsamFilterResult executionState
+                         * @property {Array.<google.cloud.modelarmor.v1beta.IMessageItem>|null} [messageItems] CsamFilterResult messageItems
+                         * @property {google.cloud.modelarmor.v1beta.FilterMatchState|null} [matchState] CsamFilterResult matchState
+                         */
+    
+                        /**
+                         * Constructs a new CsamFilterResult.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a CsamFilterResult.
+                         * @implements ICsamFilterResult
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.ICsamFilterResult=} [properties] Properties to set
+                         */
+                        function CsamFilterResult(properties) {
+                            this.messageItems = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CsamFilterResult executionState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterExecutionState} executionState
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @instance
+                         */
+                        CsamFilterResult.prototype.executionState = 0;
+    
+                        /**
+                         * CsamFilterResult messageItems.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.IMessageItem>} messageItems
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @instance
+                         */
+                        CsamFilterResult.prototype.messageItems = $util.emptyArray;
+    
+                        /**
+                         * CsamFilterResult matchState.
+                         * @member {google.cloud.modelarmor.v1beta.FilterMatchState} matchState
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @instance
+                         */
+                        CsamFilterResult.prototype.matchState = 0;
+    
+                        /**
+                         * Creates a new CsamFilterResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ICsamFilterResult=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.CsamFilterResult} CsamFilterResult instance
+                         */
+                        CsamFilterResult.create = function create(properties) {
+                            return new CsamFilterResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CsamFilterResult message. Does not implicitly {@link google.cloud.modelarmor.v1beta.CsamFilterResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ICsamFilterResult} message CsamFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CsamFilterResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionState != null && Object.hasOwnProperty.call(message, "executionState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.executionState);
+                            if (message.messageItems != null && message.messageItems.length)
+                                for (var i = 0; i < message.messageItems.length; ++i)
+                                    $root.google.cloud.modelarmor.v1beta.MessageItem.encode(message.messageItems[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.matchState != null && Object.hasOwnProperty.call(message, "matchState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CsamFilterResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.CsamFilterResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.ICsamFilterResult} message CsamFilterResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CsamFilterResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CsamFilterResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.CsamFilterResult} CsamFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CsamFilterResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.CsamFilterResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.executionState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.messageItems && message.messageItems.length))
+                                            message.messageItems = [];
+                                        message.messageItems.push($root.google.cloud.modelarmor.v1beta.MessageItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchState = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CsamFilterResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.CsamFilterResult} CsamFilterResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CsamFilterResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CsamFilterResult message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CsamFilterResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                switch (message.executionState) {
+                                default:
+                                    return "executionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.messageItems != null && message.hasOwnProperty("messageItems")) {
+                                if (!Array.isArray(message.messageItems))
+                                    return "messageItems: array expected";
+                                for (var i = 0; i < message.messageItems.length; ++i) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.MessageItem.verify(message.messageItems[i]);
+                                    if (error)
+                                        return "messageItems." + error;
+                                }
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                switch (message.matchState) {
+                                default:
+                                    return "matchState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CsamFilterResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.CsamFilterResult} CsamFilterResult
+                         */
+                        CsamFilterResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.CsamFilterResult)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.CsamFilterResult();
+                            switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_EXECUTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.executionState = 0;
+                                break;
+                            case "EXECUTION_SUCCESS":
+                            case 1:
+                                message.executionState = 1;
+                                break;
+                            case "EXECUTION_SKIPPED":
+                            case 2:
+                                message.executionState = 2;
+                                break;
+                            }
+                            if (object.messageItems) {
+                                if (!Array.isArray(object.messageItems))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.CsamFilterResult.messageItems: array expected");
+                                message.messageItems = [];
+                                for (var i = 0; i < object.messageItems.length; ++i) {
+                                    if (typeof object.messageItems[i] !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.CsamFilterResult.messageItems: object expected");
+                                    message.messageItems[i] = $root.google.cloud.modelarmor.v1beta.MessageItem.fromObject(object.messageItems[i]);
+                                }
+                            }
+                            switch (object.matchState) {
+                            default:
+                                if (typeof object.matchState === "number") {
+                                    message.matchState = object.matchState;
+                                    break;
+                                }
+                                break;
+                            case "FILTER_MATCH_STATE_UNSPECIFIED":
+                            case 0:
+                                message.matchState = 0;
+                                break;
+                            case "NO_MATCH_FOUND":
+                            case 1:
+                                message.matchState = 1;
+                                break;
+                            case "MATCH_FOUND":
+                            case 2:
+                                message.matchState = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CsamFilterResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.CsamFilterResult} message CsamFilterResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CsamFilterResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.messageItems = [];
+                            if (options.defaults) {
+                                object.executionState = options.enums === String ? "FILTER_EXECUTION_STATE_UNSPECIFIED" : 0;
+                                object.matchState = options.enums === String ? "FILTER_MATCH_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.executionState != null && message.hasOwnProperty("executionState"))
+                                object.executionState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.modelarmor.v1beta.FilterExecutionState[message.executionState] : message.executionState;
+                            if (message.messageItems && message.messageItems.length) {
+                                object.messageItems = [];
+                                for (var j = 0; j < message.messageItems.length; ++j)
+                                    object.messageItems[j] = $root.google.cloud.modelarmor.v1beta.MessageItem.toObject(message.messageItems[j], options);
+                            }
+                            if (message.matchState != null && message.hasOwnProperty("matchState"))
+                                object.matchState = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] === undefined ? message.matchState : $root.google.cloud.modelarmor.v1beta.FilterMatchState[message.matchState] : message.matchState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CsamFilterResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CsamFilterResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CsamFilterResult
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.CsamFilterResult
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CsamFilterResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.CsamFilterResult";
+                        };
+    
+                        return CsamFilterResult;
+                    })();
+    
+                    v1beta.MessageItem = (function() {
+    
+                        /**
+                         * Properties of a MessageItem.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IMessageItem
+                         * @property {google.cloud.modelarmor.v1beta.MessageItem.MessageType|null} [messageType] MessageItem messageType
+                         * @property {string|null} [message] MessageItem message
+                         */
+    
+                        /**
+                         * Constructs a new MessageItem.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a MessageItem.
+                         * @implements IMessageItem
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IMessageItem=} [properties] Properties to set
+                         */
+                        function MessageItem(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MessageItem messageType.
+                         * @member {google.cloud.modelarmor.v1beta.MessageItem.MessageType} messageType
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @instance
+                         */
+                        MessageItem.prototype.messageType = 0;
+    
+                        /**
+                         * MessageItem message.
+                         * @member {string} message
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @instance
+                         */
+                        MessageItem.prototype.message = "";
+    
+                        /**
+                         * Creates a new MessageItem instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMessageItem=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.MessageItem} MessageItem instance
+                         */
+                        MessageItem.create = function create(properties) {
+                            return new MessageItem(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MessageItem message. Does not implicitly {@link google.cloud.modelarmor.v1beta.MessageItem.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMessageItem} message MessageItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MessageItem.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.messageType != null && Object.hasOwnProperty.call(message, "messageType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.messageType);
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MessageItem message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.MessageItem.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMessageItem} message MessageItem message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MessageItem.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MessageItem message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.MessageItem} MessageItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MessageItem.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.MessageItem();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.messageType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MessageItem message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.MessageItem} MessageItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MessageItem.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MessageItem message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MessageItem.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.messageType != null && message.hasOwnProperty("messageType"))
+                                switch (message.messageType) {
+                                default:
+                                    return "messageType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MessageItem message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.MessageItem} MessageItem
+                         */
+                        MessageItem.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.MessageItem)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.MessageItem();
+                            switch (object.messageType) {
+                            default:
+                                if (typeof object.messageType === "number") {
+                                    message.messageType = object.messageType;
+                                    break;
+                                }
+                                break;
+                            case "MESSAGE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.messageType = 0;
+                                break;
+                            case "INFO":
+                            case 1:
+                                message.messageType = 1;
+                                break;
+                            case "WARNING":
+                            case 2:
+                                message.messageType = 2;
+                                break;
+                            case "ERROR":
+                            case 3:
+                                message.messageType = 3;
+                                break;
+                            }
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MessageItem message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.MessageItem} message MessageItem
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MessageItem.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.messageType = options.enums === String ? "MESSAGE_TYPE_UNSPECIFIED" : 0;
+                                object.message = "";
+                            }
+                            if (message.messageType != null && message.hasOwnProperty("messageType"))
+                                object.messageType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.MessageItem.MessageType[message.messageType] === undefined ? message.messageType : $root.google.cloud.modelarmor.v1beta.MessageItem.MessageType[message.messageType] : message.messageType;
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MessageItem to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MessageItem.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MessageItem
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.MessageItem
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MessageItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.MessageItem";
+                        };
+    
+                        /**
+                         * MessageType enum.
+                         * @name google.cloud.modelarmor.v1beta.MessageItem.MessageType
+                         * @enum {number}
+                         * @property {number} MESSAGE_TYPE_UNSPECIFIED=0 MESSAGE_TYPE_UNSPECIFIED value
+                         * @property {number} INFO=1 INFO value
+                         * @property {number} WARNING=2 WARNING value
+                         * @property {number} ERROR=3 ERROR value
+                         */
+                        MessageItem.MessageType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MESSAGE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INFO"] = 1;
+                            values[valuesById[2] = "WARNING"] = 2;
+                            values[valuesById[3] = "ERROR"] = 3;
+                            return values;
+                        })();
+    
+                        return MessageItem;
+                    })();
+    
+                    v1beta.RangeInfo = (function() {
+    
+                        /**
+                         * Properties of a RangeInfo.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IRangeInfo
+                         * @property {number|Long|null} [start] RangeInfo start
+                         * @property {number|Long|null} [end] RangeInfo end
+                         */
+    
+                        /**
+                         * Constructs a new RangeInfo.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a RangeInfo.
+                         * @implements IRangeInfo
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IRangeInfo=} [properties] Properties to set
+                         */
+                        function RangeInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RangeInfo start.
+                         * @member {number|Long|null|undefined} start
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @instance
+                         */
+                        RangeInfo.prototype.start = null;
+    
+                        /**
+                         * RangeInfo end.
+                         * @member {number|Long|null|undefined} end
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @instance
+                         */
+                        RangeInfo.prototype.end = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RangeInfo _start.
+                         * @member {"start"|undefined} _start
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RangeInfo.prototype, "_start", {
+                            get: $util.oneOfGetter($oneOfFields = ["start"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RangeInfo _end.
+                         * @member {"end"|undefined} _end
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @instance
+                         */
+                        Object.defineProperty(RangeInfo.prototype, "_end", {
+                            get: $util.oneOfGetter($oneOfFields = ["end"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RangeInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRangeInfo=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.RangeInfo} RangeInfo instance
+                         */
+                        RangeInfo.create = function create(properties) {
+                            return new RangeInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RangeInfo message. Does not implicitly {@link google.cloud.modelarmor.v1beta.RangeInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRangeInfo} message RangeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RangeInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.start != null && Object.hasOwnProperty.call(message, "start"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.start);
+                            if (message.end != null && Object.hasOwnProperty.call(message, "end"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.end);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RangeInfo message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.RangeInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IRangeInfo} message RangeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RangeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RangeInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.RangeInfo} RangeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RangeInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.RangeInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.start = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.end = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RangeInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.RangeInfo} RangeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RangeInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RangeInfo message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RangeInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.start != null && message.hasOwnProperty("start")) {
+                                properties._start = 1;
+                                if (!$util.isInteger(message.start) && !(message.start && $util.isInteger(message.start.low) && $util.isInteger(message.start.high)))
+                                    return "start: integer|Long expected";
+                            }
+                            if (message.end != null && message.hasOwnProperty("end")) {
+                                properties._end = 1;
+                                if (!$util.isInteger(message.end) && !(message.end && $util.isInteger(message.end.low) && $util.isInteger(message.end.high)))
+                                    return "end: integer|Long expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RangeInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.RangeInfo} RangeInfo
+                         */
+                        RangeInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.RangeInfo)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.RangeInfo();
+                            if (object.start != null)
+                                if ($util.Long)
+                                    (message.start = $util.Long.fromValue(object.start)).unsigned = false;
+                                else if (typeof object.start === "string")
+                                    message.start = parseInt(object.start, 10);
+                                else if (typeof object.start === "number")
+                                    message.start = object.start;
+                                else if (typeof object.start === "object")
+                                    message.start = new $util.LongBits(object.start.low >>> 0, object.start.high >>> 0).toNumber();
+                            if (object.end != null)
+                                if ($util.Long)
+                                    (message.end = $util.Long.fromValue(object.end)).unsigned = false;
+                                else if (typeof object.end === "string")
+                                    message.end = parseInt(object.end, 10);
+                                else if (typeof object.end === "number")
+                                    message.end = object.end;
+                                else if (typeof object.end === "object")
+                                    message.end = new $util.LongBits(object.end.low >>> 0, object.end.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RangeInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.RangeInfo} message RangeInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RangeInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.start != null && message.hasOwnProperty("start")) {
+                                if (typeof message.start === "number")
+                                    object.start = options.longs === String ? String(message.start) : message.start;
+                                else
+                                    object.start = options.longs === String ? $util.Long.prototype.toString.call(message.start) : options.longs === Number ? new $util.LongBits(message.start.low >>> 0, message.start.high >>> 0).toNumber() : message.start;
+                                if (options.oneofs)
+                                    object._start = "start";
+                            }
+                            if (message.end != null && message.hasOwnProperty("end")) {
+                                if (typeof message.end === "number")
+                                    object.end = options.longs === String ? String(message.end) : message.end;
+                                else
+                                    object.end = options.longs === String ? $util.Long.prototype.toString.call(message.end) : options.longs === Number ? new $util.LongBits(message.end.low >>> 0, message.end.high >>> 0).toNumber() : message.end;
+                                if (options.oneofs)
+                                    object._end = "end";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RangeInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RangeInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RangeInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.RangeInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RangeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.RangeInfo";
+                        };
+    
+                        return RangeInfo;
+                    })();
+    
+                    return v1beta;
+                })();
+    
                 return modelarmor;
             })();
     

@@ -54,47 +54,7 @@ type VersionsClient = v3.VersionsClient;
 const WebhooksClient = v3.WebhooksClient;
 type WebhooksClient = v3.WebhooksClient;
 
-export {
-  v3,
-  v3beta1,
-  AgentsClient,
-  ChangelogsClient,
-  DeploymentsClient,
-  EntityTypesClient,
-  EnvironmentsClient,
-  ExperimentsClient,
-  FlowsClient,
-  GeneratorsClient,
-  IntentsClient,
-  PagesClient,
-  SecuritySettingsServiceClient,
-  SessionEntityTypesClient,
-  SessionsClient,
-  TestCasesClient,
-  TransitionRouteGroupsClient,
-  VersionsClient,
-  WebhooksClient,
-};
-export default {
-  v3,
-  v3beta1,
-  AgentsClient,
-  ChangelogsClient,
-  DeploymentsClient,
-  EntityTypesClient,
-  EnvironmentsClient,
-  ExperimentsClient,
-  FlowsClient,
-  GeneratorsClient,
-  IntentsClient,
-  PagesClient,
-  SecuritySettingsServiceClient,
-  SessionEntityTypesClient,
-  SessionsClient,
-  TestCasesClient,
-  TransitionRouteGroupsClient,
-  VersionsClient,
-  WebhooksClient,
-};
+export {v3, v3beta1, AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient};
+export default {v3, v3beta1, AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient};
 import * as protos from '../protos/protos';
 export {protos};

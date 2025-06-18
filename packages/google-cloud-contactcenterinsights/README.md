@@ -72,7 +72,13 @@ const client = new ContactCenterInsightsClient();
 async function listConversations() {
   const conversations = await client.listConversations({
     parent: `projects/${projectId}/locations/${location}`,
-  });
+      pageSize: PAGE_SIZE,
+    },
+    {
+      autopaginate: false,
+      maxResults: MAX_RESULTS,
+    },
+  );
   console.info(conversations);
 }
 listConversations();

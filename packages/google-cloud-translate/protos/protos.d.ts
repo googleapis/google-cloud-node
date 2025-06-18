@@ -717,12 +717,6 @@ export namespace google {
                     /** AdaptiveMtTranslateRequest glossaryConfig. */
                     public glossaryConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig|null);
 
-                    /** AdaptiveMtTranslateRequest _referenceSentenceConfig. */
-                    public _referenceSentenceConfig?: "referenceSentenceConfig";
-
-                    /** AdaptiveMtTranslateRequest _glossaryConfig. */
-                    public _glossaryConfig?: "glossaryConfig";
-
                     /**
                      * Creates a new AdaptiveMtTranslateRequest instance using the specified properties.
                      * @param [properties] Properties to set

@@ -259,9 +259,14 @@ describe('v1.ParameterManagerClient', () => {
         throw err;
       });
       assert(client.parameterManagerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1.ParameterManagerClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.parameterManagerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -435,7 +445,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getParameter(request), expectedError);
     });
   });
@@ -565,7 +577,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createParameter(request), expectedError);
     });
   });
@@ -699,7 +713,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parameter.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateParameter(request), expectedError);
     });
   });
@@ -829,7 +845,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteParameter(request), expectedError);
     });
   });
@@ -960,7 +978,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getParameterVersion(request), expectedError);
     });
   });
@@ -1094,7 +1114,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.renderParameterVersion(request),
         expectedError
@@ -1231,7 +1253,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createParameterVersion(request),
         expectedError
@@ -1372,7 +1396,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.parameterVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateParameterVersion(request),
         expectedError
@@ -1509,7 +1535,9 @@ describe('v1.ParameterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteParameterVersion(request),
         expectedError

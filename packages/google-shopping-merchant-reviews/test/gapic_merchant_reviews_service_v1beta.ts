@@ -269,9 +269,14 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
         throw err;
       });
       assert(client.merchantReviewsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -281,9 +286,14 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.merchantReviewsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -452,7 +462,9 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMerchantReview(request), expectedError);
     });
   });
@@ -587,7 +599,9 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insertMerchantReview(request), expectedError);
     });
   });
@@ -722,7 +736,9 @@ describe('v1beta.MerchantReviewsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteMerchantReview(request), expectedError);
     });
   });

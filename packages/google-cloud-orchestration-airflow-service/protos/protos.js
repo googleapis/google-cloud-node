@@ -1007,14 +1007,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CreateEnvironmentRequest.decode = function decode(reader, length, error) {
+                                CreateEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.CreateEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -1230,14 +1228,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GetEnvironmentRequest.decode = function decode(reader, length, error) {
+                                GetEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.GetEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -1457,14 +1453,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListEnvironmentsRequest.decode = function decode(reader, length, error) {
+                                ListEnvironmentsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -1700,14 +1694,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListEnvironmentsResponse.decode = function decode(reader, length, error) {
+                                ListEnvironmentsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListEnvironmentsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.environments && message.environments.length))
@@ -1937,14 +1929,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeleteEnvironmentRequest.decode = function decode(reader, length, error) {
+                                DeleteEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.DeleteEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -2164,14 +2154,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UpdateEnvironmentRequest.decode = function decode(reader, length, error) {
+                                UpdateEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.UpdateEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 2: {
                                                 message.name = reader.string();
@@ -2439,14 +2427,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ExecuteAirflowCommandRequest.decode = function decode(reader, length, error) {
+                                ExecuteAirflowCommandRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -2729,14 +2715,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ExecuteAirflowCommandResponse.decode = function decode(reader, length, error) {
+                                ExecuteAirflowCommandResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ExecuteAirflowCommandResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.executionId = reader.string();
@@ -3015,14 +2999,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StopAirflowCommandRequest.decode = function decode(reader, length, error) {
+                                StopAirflowCommandRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -3282,14 +3264,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StopAirflowCommandResponse.decode = function decode(reader, length, error) {
+                                StopAirflowCommandResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.StopAirflowCommandResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.isDone = reader.bool();
@@ -3558,14 +3538,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PollAirflowCommandRequest.decode = function decode(reader, length, error) {
+                                PollAirflowCommandRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -3836,14 +3814,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PollAirflowCommandResponse.decode = function decode(reader, length, error) {
+                                PollAirflowCommandResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.output && message.output.length))
@@ -4099,14 +4075,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    Line.decode = function decode(reader, length, error) {
+                                    Line.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse.Line();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.lineNumber = reader.int32();
@@ -4328,14 +4302,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ExitInfo.decode = function decode(reader, length, error) {
+                                    ExitInfo.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse.ExitInfo();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.exitCode = reader.int32();
@@ -4560,14 +4532,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CreateUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                CreateUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -4783,14 +4753,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GetUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                GetUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -5010,14 +4978,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsSecretsRequest.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsSecretsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -5240,14 +5206,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UpdateUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                UpdateUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.userWorkloadsSecret = $root.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret.decode(reader, reader.uint32());
@@ -5450,14 +5414,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeleteUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                DeleteUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -5666,14 +5628,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CreateUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                CreateUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -5889,14 +5849,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GetUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                GetUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -6116,14 +6074,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsConfigMapsRequest.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsConfigMapsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -6346,14 +6302,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UpdateUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                UpdateUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.userWorkloadsConfigMap = $root.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap.decode(reader, reader.uint32());
@@ -6556,14 +6510,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeleteUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                DeleteUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -6774,14 +6726,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UserWorkloadsSecret.decode = function decode(reader, length, error) {
+                                UserWorkloadsSecret.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -7038,14 +6988,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsSecretsResponse.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsSecretsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.userWorkloadsSecrets && message.userWorkloadsSecrets.length))
@@ -7288,14 +7236,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UserWorkloadsConfigMap.decode = function decode(reader, length, error) {
+                                UserWorkloadsConfigMap.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -7552,14 +7498,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsConfigMapsResponse.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsConfigMapsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.userWorkloadsConfigMaps && message.userWorkloadsConfigMaps.length))
@@ -7822,14 +7766,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListWorkloadsRequest.decode = function decode(reader, length, error) {
+                                ListWorkloadsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -8077,14 +8019,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListWorkloadsResponse.decode = function decode(reader, length, error) {
+                                ListWorkloadsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.workloads && message.workloads.length))
@@ -8333,14 +8273,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ComposerWorkload.decode = function decode(reader, length, error) {
+                                    ComposerWorkload.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.name = reader.string();
@@ -8672,14 +8610,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ComposerWorkloadStatus.decode = function decode(reader, length, error) {
+                                    ComposerWorkloadStatus.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.state = reader.int32();
@@ -8984,14 +8920,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SaveSnapshotRequest.decode = function decode(reader, length, error) {
+                                SaveSnapshotRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -9202,14 +9136,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SaveSnapshotResponse.decode = function decode(reader, length, error) {
+                                SaveSnapshotResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.snapshotPath = reader.string();
@@ -9462,14 +9394,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LoadSnapshotRequest.decode = function decode(reader, length, error) {
+                                LoadSnapshotRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -9717,14 +9647,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LoadSnapshotResponse.decode = function decode(reader, length, error) {
+                                LoadSnapshotResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -9905,14 +9833,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DatabaseFailoverRequest.decode = function decode(reader, length, error) {
+                                DatabaseFailoverRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -10099,14 +10025,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DatabaseFailoverResponse.decode = function decode(reader, length, error) {
+                                DatabaseFailoverResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.DatabaseFailoverResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -10287,14 +10211,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                FetchDatabasePropertiesRequest.decode = function decode(reader, length, error) {
+                                FetchDatabasePropertiesRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -10514,14 +10436,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                FetchDatabasePropertiesResponse.decode = function decode(reader, length, error) {
+                                FetchDatabasePropertiesResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.FetchDatabasePropertiesResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.primaryGceZone = reader.string();
@@ -10744,14 +10664,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StorageConfig.decode = function decode(reader, length, error) {
+                                StorageConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.StorageConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.bucket = reader.string();
@@ -11147,14 +11065,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                EnvironmentConfig.decode = function decode(reader, length, error) {
+                                EnvironmentConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.EnvironmentConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.gkeCluster = reader.string();
@@ -11711,14 +11627,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WebServerNetworkAccessControl.decode = function decode(reader, length, error) {
+                                WebServerNetworkAccessControl.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WebServerNetworkAccessControl();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.allowedIpRanges && message.allowedIpRanges.length))
@@ -11943,14 +11857,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    AllowedIpRange.decode = function decode(reader, length, error) {
+                                    AllowedIpRange.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WebServerNetworkAccessControl.AllowedIpRange();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.value = reader.string();
@@ -12175,14 +12087,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DatabaseConfig.decode = function decode(reader, length, error) {
+                                DatabaseConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.DatabaseConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.machineType = reader.string();
@@ -12393,14 +12303,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WebServerConfig.decode = function decode(reader, length, error) {
+                                WebServerConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WebServerConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.machineType = reader.string();
@@ -12598,14 +12506,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                EncryptionConfig.decode = function decode(reader, length, error) {
+                                EncryptionConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.EncryptionConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.kmsKeyName = reader.string();
@@ -12825,14 +12731,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                MaintenanceWindow.decode = function decode(reader, length, error) {
+                                MaintenanceWindow.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -13148,14 +13052,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SoftwareConfig.decode = function decode(reader, length, error) {
+                                SoftwareConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.SoftwareConfig(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.imageVersion = reader.string();
@@ -13651,14 +13553,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                IPAllocationPolicy.decode = function decode(reader, length, error) {
+                                IPAllocationPolicy.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.useIpAliases = reader.bool();
@@ -14050,14 +13950,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                NodeConfig.decode = function decode(reader, length, error) {
+                                NodeConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.NodeConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.location = reader.string();
@@ -14445,14 +14343,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PrivateClusterConfig.decode = function decode(reader, length, error) {
+                                PrivateClusterConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.PrivateClusterConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enablePrivateEndpoint = reader.bool();
@@ -14675,14 +14571,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                NetworkingConfig.decode = function decode(reader, length, error) {
+                                NetworkingConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.connectionType = reader.int32();
@@ -15030,14 +14924,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PrivateEnvironmentConfig.decode = function decode(reader, length, error) {
+                                PrivateEnvironmentConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enablePrivateEnvironment = reader.bool();
@@ -15410,14 +15302,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WorkloadsConfig.decode = function decode(reader, length, error) {
+                                WorkloadsConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.scheduler = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.decode(reader, reader.uint32());
@@ -15719,14 +15609,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    SchedulerResource.decode = function decode(reader, length, error) {
+                                    SchedulerResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -15983,14 +15871,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    WebServerResource.decode = function decode(reader, length, error) {
+                                    WebServerResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -16257,14 +16143,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    WorkerResource.decode = function decode(reader, length, error) {
+                                    WorkerResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -16533,14 +16417,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    TriggererResource.decode = function decode(reader, length, error) {
+                                    TriggererResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.count = reader.int32();
@@ -16796,14 +16678,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    DagProcessorResource.decode = function decode(reader, length, error) {
+                                    DagProcessorResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -17041,14 +16921,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RecoveryConfig.decode = function decode(reader, length, error) {
+                                RecoveryConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.decode(reader, reader.uint32());
@@ -17284,14 +17162,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ScheduledSnapshotsConfig.decode = function decode(reader, length, error) {
+                                ScheduledSnapshotsConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enabled = reader.bool();
@@ -17539,14 +17415,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                MasterAuthorizedNetworksConfig.decode = function decode(reader, length, error) {
+                                MasterAuthorizedNetworksConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enabled = reader.bool();
@@ -17784,14 +17658,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    CidrBlock.decode = function decode(reader, length, error) {
+                                    CidrBlock.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.displayName = reader.string();
@@ -18005,14 +17877,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CloudDataLineageIntegration.decode = function decode(reader, length, error) {
+                                CloudDataLineageIntegration.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enabled = reader.bool();
@@ -18311,14 +18181,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Environment.decode = function decode(reader, length, error) {
+                                Environment.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.Environment(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -18751,14 +18619,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CheckUpgradeRequest.decode = function decode(reader, length, error) {
+                                CheckUpgradeRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -19015,14 +18881,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CheckUpgradeResponse.decode = function decode(reader, length, error) {
+                                CheckUpgradeResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.CheckUpgradeResponse(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.buildLogUri = reader.string();
@@ -19354,14 +19218,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DataRetentionConfig.decode = function decode(reader, length, error) {
+                                DataRetentionConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.DataRetentionConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.airflowMetadataRetentionConfig = $root.google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig.decode(reader, reader.uint32());
@@ -19582,14 +19444,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                TaskLogsRetentionConfig.decode = function decode(reader, length, error) {
+                                TaskLogsRetentionConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 2: {
                                                 message.storageMode = reader.int32();
@@ -19838,14 +19698,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                AirflowMetadataRetentionPolicyConfig.decode = function decode(reader, length, error) {
+                                AirflowMetadataRetentionPolicyConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.retentionMode = reader.int32();
@@ -20151,14 +20009,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                OperationMetadata.decode = function decode(reader, length, error) {
+                                OperationMetadata.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.OperationMetadata();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.state = reader.int32();
@@ -20664,14 +20520,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListImageVersionsRequest.decode = function decode(reader, length, error) {
+                                ListImageVersionsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -20919,14 +20773,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListImageVersionsResponse.decode = function decode(reader, length, error) {
+                                ListImageVersionsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ListImageVersionsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.imageVersions && message.imageVersions.length))
@@ -21213,14 +21065,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ImageVersion.decode = function decode(reader, length, error) {
+                                ImageVersion.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ImageVersion();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.imageVersionId = reader.string();
@@ -22382,14 +22232,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CreateEnvironmentRequest.decode = function decode(reader, length, error) {
+                                CreateEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -22605,14 +22453,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GetEnvironmentRequest.decode = function decode(reader, length, error) {
+                                GetEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -22832,14 +22678,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListEnvironmentsRequest.decode = function decode(reader, length, error) {
+                                ListEnvironmentsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -23075,14 +22919,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListEnvironmentsResponse.decode = function decode(reader, length, error) {
+                                ListEnvironmentsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.environments && message.environments.length))
@@ -23312,14 +23154,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeleteEnvironmentRequest.decode = function decode(reader, length, error) {
+                                DeleteEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -23539,14 +23379,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UpdateEnvironmentRequest.decode = function decode(reader, length, error) {
+                                UpdateEnvironmentRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 2: {
                                                 message.name = reader.string();
@@ -23779,14 +23617,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RestartWebServerRequest.decode = function decode(reader, length, error) {
+                                RestartWebServerRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -24019,14 +23855,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ExecuteAirflowCommandRequest.decode = function decode(reader, length, error) {
+                                ExecuteAirflowCommandRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -24309,14 +24143,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ExecuteAirflowCommandResponse.decode = function decode(reader, length, error) {
+                                ExecuteAirflowCommandResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.executionId = reader.string();
@@ -24595,14 +24427,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StopAirflowCommandRequest.decode = function decode(reader, length, error) {
+                                StopAirflowCommandRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -24862,14 +24692,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StopAirflowCommandResponse.decode = function decode(reader, length, error) {
+                                StopAirflowCommandResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.StopAirflowCommandResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.isDone = reader.bool();
@@ -25138,14 +24966,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PollAirflowCommandRequest.decode = function decode(reader, length, error) {
+                                PollAirflowCommandRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -25416,14 +25242,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PollAirflowCommandResponse.decode = function decode(reader, length, error) {
+                                PollAirflowCommandResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.output && message.output.length))
@@ -25679,14 +25503,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    Line.decode = function decode(reader, length, error) {
+                                    Line.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.lineNumber = reader.int32();
@@ -25908,14 +25730,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ExitInfo.decode = function decode(reader, length, error) {
+                                    ExitInfo.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.exitCode = reader.int32();
@@ -26140,14 +25960,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CreateUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                CreateUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -26363,14 +26181,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GetUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                GetUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -26590,14 +26406,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsSecretsRequest.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsSecretsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -26820,14 +26634,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UpdateUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                UpdateUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.userWorkloadsSecret = $root.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret.decode(reader, reader.uint32());
@@ -27030,14 +26842,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeleteUserWorkloadsSecretRequest.decode = function decode(reader, length, error) {
+                                DeleteUserWorkloadsSecretRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -27246,14 +27056,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CreateUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                CreateUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -27469,14 +27277,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GetUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                GetUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -27696,14 +27502,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsConfigMapsRequest.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsConfigMapsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -27926,14 +27730,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UpdateUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                UpdateUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.userWorkloadsConfigMap = $root.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap.decode(reader, reader.uint32());
@@ -28136,14 +27938,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeleteUserWorkloadsConfigMapRequest.decode = function decode(reader, length, error) {
+                                DeleteUserWorkloadsConfigMapRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -28354,14 +28154,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UserWorkloadsSecret.decode = function decode(reader, length, error) {
+                                UserWorkloadsSecret.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -28618,14 +28416,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsSecretsResponse.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsSecretsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.userWorkloadsSecrets && message.userWorkloadsSecrets.length))
@@ -28868,14 +28664,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                UserWorkloadsConfigMap.decode = function decode(reader, length, error) {
+                                UserWorkloadsConfigMap.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -29132,14 +28926,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListUserWorkloadsConfigMapsResponse.decode = function decode(reader, length, error) {
+                                ListUserWorkloadsConfigMapsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.userWorkloadsConfigMaps && message.userWorkloadsConfigMaps.length))
@@ -29402,14 +29194,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListWorkloadsRequest.decode = function decode(reader, length, error) {
+                                ListWorkloadsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -29657,14 +29447,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListWorkloadsResponse.decode = function decode(reader, length, error) {
+                                ListWorkloadsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.workloads && message.workloads.length))
@@ -29913,14 +29701,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ComposerWorkload.decode = function decode(reader, length, error) {
+                                    ComposerWorkload.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.name = reader.string();
@@ -30252,14 +30038,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ComposerWorkloadStatus.decode = function decode(reader, length, error) {
+                                    ComposerWorkloadStatus.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.state = reader.int32();
@@ -30564,14 +30348,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SaveSnapshotRequest.decode = function decode(reader, length, error) {
+                                SaveSnapshotRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -30782,14 +30564,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SaveSnapshotResponse.decode = function decode(reader, length, error) {
+                                SaveSnapshotResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.snapshotPath = reader.string();
@@ -31042,14 +30822,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LoadSnapshotRequest.decode = function decode(reader, length, error) {
+                                LoadSnapshotRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -31297,14 +31075,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LoadSnapshotResponse.decode = function decode(reader, length, error) {
+                                LoadSnapshotResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -31485,14 +31261,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DatabaseFailoverRequest.decode = function decode(reader, length, error) {
+                                DatabaseFailoverRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -31679,14 +31453,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DatabaseFailoverResponse.decode = function decode(reader, length, error) {
+                                DatabaseFailoverResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.DatabaseFailoverResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -31867,14 +31639,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                FetchDatabasePropertiesRequest.decode = function decode(reader, length, error) {
+                                FetchDatabasePropertiesRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -32094,14 +31864,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                FetchDatabasePropertiesResponse.decode = function decode(reader, length, error) {
+                                FetchDatabasePropertiesResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.FetchDatabasePropertiesResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.primaryGceZone = reader.string();
@@ -32522,14 +32290,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                EnvironmentConfig.decode = function decode(reader, length, error) {
+                                EnvironmentConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.gkeCluster = reader.string();
@@ -33086,14 +32852,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WebServerNetworkAccessControl.decode = function decode(reader, length, error) {
+                                WebServerNetworkAccessControl.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WebServerNetworkAccessControl();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.allowedIpRanges && message.allowedIpRanges.length))
@@ -33318,14 +33082,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    AllowedIpRange.decode = function decode(reader, length, error) {
+                                    AllowedIpRange.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WebServerNetworkAccessControl.AllowedIpRange();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.value = reader.string();
@@ -33622,14 +33384,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SoftwareConfig.decode = function decode(reader, length, error) {
+                                SoftwareConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.imageVersion = reader.string();
@@ -34100,14 +33860,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                IPAllocationPolicy.decode = function decode(reader, length, error) {
+                                IPAllocationPolicy.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.IPAllocationPolicy();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.useIpAliases = reader.bool();
@@ -34490,14 +34248,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                NodeConfig.decode = function decode(reader, length, error) {
+                                NodeConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.NodeConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.location = reader.string();
@@ -34897,14 +34653,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PrivateClusterConfig.decode = function decode(reader, length, error) {
+                                PrivateClusterConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PrivateClusterConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enablePrivateEndpoint = reader.bool();
@@ -35127,14 +34881,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                NetworkingConfig.decode = function decode(reader, length, error) {
+                                NetworkingConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.connectionType = reader.int32();
@@ -35482,14 +35234,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PrivateEnvironmentConfig.decode = function decode(reader, length, error) {
+                                PrivateEnvironmentConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PrivateEnvironmentConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enablePrivateEnvironment = reader.bool();
@@ -35829,14 +35579,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DatabaseConfig.decode = function decode(reader, length, error) {
+                                DatabaseConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.DatabaseConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.machineType = reader.string();
@@ -36047,14 +35795,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WebServerConfig.decode = function decode(reader, length, error) {
+                                WebServerConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WebServerConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.machineType = reader.string();
@@ -36252,14 +35998,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                EncryptionConfig.decode = function decode(reader, length, error) {
+                                EncryptionConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.EncryptionConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.kmsKeyName = reader.string();
@@ -36479,14 +36223,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                MaintenanceWindow.decode = function decode(reader, length, error) {
+                                MaintenanceWindow.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.MaintenanceWindow();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -36763,14 +36505,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WorkloadsConfig.decode = function decode(reader, length, error) {
+                                WorkloadsConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.scheduler = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.SchedulerResource.decode(reader, reader.uint32());
@@ -37072,14 +36812,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    SchedulerResource.decode = function decode(reader, length, error) {
+                                    SchedulerResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.SchedulerResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -37336,14 +37074,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    WebServerResource.decode = function decode(reader, length, error) {
+                                    WebServerResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WebServerResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -37610,14 +37346,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    WorkerResource.decode = function decode(reader, length, error) {
+                                    WorkerResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WorkerResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -37886,14 +37620,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    TriggererResource.decode = function decode(reader, length, error) {
+                                    TriggererResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.count = reader.int32();
@@ -38149,14 +37881,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    DagProcessorResource.decode = function decode(reader, length, error) {
+                                    DagProcessorResource.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.cpu = reader.float();
@@ -38416,14 +38146,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DataRetentionConfig.decode = function decode(reader, length, error) {
+                                DataRetentionConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.airflowDatabaseRetentionDays = reader.int32();
@@ -38656,14 +38384,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                TaskLogsRetentionConfig.decode = function decode(reader, length, error) {
+                                TaskLogsRetentionConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 2: {
                                                 message.storageMode = reader.int32();
@@ -38912,14 +38638,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                AirflowMetadataRetentionPolicyConfig.decode = function decode(reader, length, error) {
+                                AirflowMetadataRetentionPolicyConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.retentionMode = reader.int32();
@@ -39170,14 +38894,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StorageConfig.decode = function decode(reader, length, error) {
+                                StorageConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.StorageConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.bucket = reader.string();
@@ -39375,14 +39097,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RecoveryConfig.decode = function decode(reader, length, error) {
+                                RecoveryConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.decode(reader, reader.uint32());
@@ -39618,14 +39338,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ScheduledSnapshotsConfig.decode = function decode(reader, length, error) {
+                                ScheduledSnapshotsConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enabled = reader.bool();
@@ -39873,14 +39591,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                MasterAuthorizedNetworksConfig.decode = function decode(reader, length, error) {
+                                MasterAuthorizedNetworksConfig.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enabled = reader.bool();
@@ -40118,14 +39834,12 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    CidrBlock.decode = function decode(reader, length, error) {
+                                    CidrBlock.decode = function decode(reader, length) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
-                                            if (tag === error)
-                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.displayName = reader.string();
@@ -40339,14 +40053,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CloudDataLineageIntegration.decode = function decode(reader, length, error) {
+                                CloudDataLineageIntegration.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enabled = reader.bool();
@@ -40645,14 +40357,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Environment.decode = function decode(reader, length, error) {
+                                Environment.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.Environment(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.name = reader.string();
@@ -41085,14 +40795,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CheckUpgradeRequest.decode = function decode(reader, length, error) {
+                                CheckUpgradeRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.environment = reader.string();
@@ -41349,14 +41057,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CheckUpgradeResponse.decode = function decode(reader, length, error) {
+                                CheckUpgradeResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeResponse(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.buildLogUri = reader.string();
@@ -41732,14 +41438,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                OperationMetadata.decode = function decode(reader, length, error) {
+                                OperationMetadata.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.state = reader.int32();
@@ -42238,14 +41942,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListImageVersionsRequest.decode = function decode(reader, length, error) {
+                                ListImageVersionsRequest.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.parent = reader.string();
@@ -42493,14 +42195,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListImageVersionsResponse.decode = function decode(reader, length, error) {
+                                ListImageVersionsResponse.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsResponse();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.imageVersions && message.imageVersions.length))
@@ -42787,14 +42487,12 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ImageVersion.decode = function decode(reader, length, error) {
+                                ImageVersion.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
-                                        if (tag === error)
-                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.imageVersionId = reader.string();
@@ -43110,14 +42808,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length, error) {
+                Http.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -43462,14 +43158,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length, error) {
+                HttpRule.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -43848,14 +43542,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length, error) {
+                CustomHttpPattern.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -44082,14 +43774,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length, error) {
+                CommonLanguageSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -44453,14 +44143,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length, error) {
+                ClientLibrarySettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -44799,7 +44487,6 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
-                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -44901,14 +44588,6 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
-                 * Publishing restReferenceDocumentationUri.
-                 * @member {string} restReferenceDocumentationUri
-                 * @memberof google.api.Publishing
-                 * @instance
-                 */
-                Publishing.prototype.restReferenceDocumentationUri = "";
-    
-                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -44955,8 +44634,6 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
-                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
-                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -44984,14 +44661,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length, error) {
+                Publishing.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -45037,10 +44712,6 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
-                                break;
-                            }
-                        case 111: {
-                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -45135,9 +44806,6 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        if (!$util.isString(message.restReferenceDocumentationUri))
-                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -45232,8 +44900,6 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
-                    if (object.restReferenceDocumentationUri != null)
-                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -45263,7 +44929,6 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
-                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -45294,8 +44959,6 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -45437,14 +45100,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length, error) {
+                JavaSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -45706,14 +45367,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length, error) {
+                CppSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45916,14 +45575,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length, error) {
+                PhpSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -46126,14 +45783,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length, error) {
+                PythonSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -46336,14 +45991,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length, error) {
+                NodeSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -46611,14 +46264,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length, error) {
+                DotnetSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -46992,14 +46643,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length, error) {
+                RubySettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -47202,14 +46851,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length, error) {
+                GoSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -47436,14 +47083,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length, error) {
+                MethodSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -47716,14 +47361,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length, error) {
+                    LongRunning.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -48145,14 +47788,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length, error) {
+                ResourceDescriptor.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -48542,14 +48183,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length, error) {
+                ResourceReference.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -48774,14 +48413,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length, error) {
+                FileDescriptorSet.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -49176,14 +48813,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length, error) {
+                FileDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -49845,14 +49480,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length, error) {
+                DescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -50332,14 +49965,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length, error) {
+                    ExtensionRange.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -50578,14 +50209,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length, error) {
+                    ReservedRange.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -50836,14 +50465,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length, error) {
+                ExtensionRangeOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -51183,14 +50810,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length, error) {
+                    Declaration.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -51564,14 +51189,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length, error) {
+                FieldDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -52091,14 +51714,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length, error) {
+                OneofDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -52364,14 +51985,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length, error) {
+                EnumDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -52685,14 +52304,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length, error) {
+                    EnumReservedRange.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -52928,14 +52545,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
+                EnumValueDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -53187,14 +52802,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length, error) {
+                ServiceDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -53497,14 +53110,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length, error) {
+                MethodDescriptorProto.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -54003,14 +53614,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length, error) {
+                FileOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -54625,14 +54234,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length, error) {
+                MessageOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -55075,9 +54682,12 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -55107,14 +54717,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length, error) {
+                FieldOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -55840,14 +55448,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length, error) {
+                    EditionDefault.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -56138,14 +55744,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length, error) {
+                OneofOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -56426,14 +56030,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length, error) {
+                EnumOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -56740,14 +56342,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length, error) {
+                EnumValueOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -56933,7 +56533,6 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
-                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -56993,14 +56592,6 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
-                 * ServiceOptions .google.api.apiVersion.
-                 * @member {string} .google.api.apiVersion
-                 * @memberof google.protobuf.ServiceOptions
-                 * @instance
-                 */
-                ServiceOptions.prototype[".google.api.apiVersion"] = "";
-    
-                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -57035,8 +56626,6 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
-                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
-                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -57064,14 +56653,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length, error) {
+                ServiceOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -57093,10 +56680,6 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
-                                break;
-                            }
-                        case 525000001: {
-                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -57157,9 +56740,6 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        if (!$util.isString(message[".google.api.apiVersion"]))
-                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -57196,8 +56776,6 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
-                    if (object[".google.api.apiVersion"] != null)
-                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -57221,7 +56799,6 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
-                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -57236,8 +56813,6 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -57425,14 +57000,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length, error) {
+                MethodOptions.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -57861,14 +57434,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length, error) {
+                UninterpretedOption.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -58202,14 +57773,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length, error) {
+                    NamePart.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -58480,14 +58049,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length, error) {
+                FeatureSet.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -59017,14 +58584,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length, error) {
+                FeatureSetDefaults.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -59403,14 +58968,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -59695,14 +59258,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length, error) {
+                SourceCodeInfo.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -59972,14 +59533,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length, error) {
+                    Location.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -60285,14 +59844,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length, error) {
+                GeneratedCodeInfo.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -60555,14 +60112,12 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length, error) {
+                    Annotation.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
-                            if (tag === error)
-                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -60883,14 +60438,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length, error) {
+                Duration.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -61126,14 +60679,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length, error) {
+                Timestamp.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -61369,14 +60920,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length, error) {
+                Any.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -61585,14 +61134,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length, error) {
+                Empty.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -61775,14 +61322,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length, error) {
+                FieldMask.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -62264,14 +61809,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length, error) {
+                Operation.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62546,14 +62089,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length, error) {
+                GetOperationRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62784,14 +62325,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length, error) {
+                ListOperationsRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -63039,14 +62578,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length, error) {
+                ListOperationsResponse.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -63276,14 +62813,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length, error) {
+                CancelOperationRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63481,14 +63016,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length, error) {
+                DeleteOperationRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63697,14 +63230,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length, error) {
+                WaitOperationRequest.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63931,14 +63462,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length, error) {
+                OperationInfo.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -64185,14 +63714,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length, error) {
+                Status.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();
@@ -64469,14 +63996,12 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Date.decode = function decode(reader, length, error) {
+                Date.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
-                        if (tag === error)
-                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.year = reader.int32();

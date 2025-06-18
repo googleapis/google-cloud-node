@@ -60,7 +60,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Recaptcha_enterprise_service.add_ip_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js,samples/README.md)
 
@@ -77,7 +77,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.annotate_assessment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js,samples/README.md)
 
@@ -94,7 +94,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.create_assessment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_assessment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_assessment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_assessment.js,samples/README.md)
 
@@ -111,7 +111,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.create_firewall_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_firewall_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_firewall_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_firewall_policy.js,samples/README.md)
 
@@ -128,7 +128,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.create_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.create_key.js,samples/README.md)
 
@@ -145,7 +145,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.delete_firewall_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.delete_firewall_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.delete_firewall_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.delete_firewall_policy.js,samples/README.md)
 
@@ -162,7 +162,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.delete_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.delete_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.delete_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.delete_key.js,samples/README.md)
 
@@ -179,7 +179,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.get_firewall_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_firewall_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_firewall_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_firewall_policy.js,samples/README.md)
 
@@ -196,7 +196,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.get_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_key.js,samples/README.md)
 
@@ -213,7 +213,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.get_metrics
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_metrics.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_metrics.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.get_metrics.js,samples/README.md)
 
@@ -230,7 +230,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.list_firewall_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_firewall_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_firewall_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_firewall_policies.js,samples/README.md)
 
@@ -247,7 +247,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.list_ip_overrides
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_ip_overrides.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_ip_overrides.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_ip_overrides.js,samples/README.md)
 
@@ -264,7 +264,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.list_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_keys.js,samples/README.md)
 
@@ -281,7 +281,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.list_related_account_group_memberships
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js,samples/README.md)
 
@@ -298,7 +298,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.list_related_account_groups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js,samples/README.md)
 
@@ -315,7 +315,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.migrate_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.migrate_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.migrate_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.migrate_key.js,samples/README.md)
 
@@ -332,7 +332,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.remove_ip_override
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.remove_ip_override.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.remove_ip_override.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.remove_ip_override.js,samples/README.md)
 
@@ -349,7 +349,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.reorder_firewall_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js,samples/README.md)
 
@@ -366,7 +366,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.retrieve_legacy_secret_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js,samples/README.md)
 
@@ -383,7 +383,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.search_related_account_group_memberships
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js,samples/README.md)
 
@@ -400,7 +400,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.update_firewall_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_firewall_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_firewall_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_firewall_policy.js,samples/README.md)
 
@@ -417,7 +417,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service.update_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_key.js,samples/README.md)
 
@@ -434,7 +434,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service_v1_beta1.annotate_assessment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.annotate_assessment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.annotate_assessment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.annotate_assessment.js,samples/README.md)
 
@@ -451,7 +451,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service_v1_beta1.create_assessment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_assessment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_assessment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_assessment.js,samples/README.md)
 
@@ -468,7 +468,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service_v1_beta1.create_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_key.js,samples/README.md)
 
@@ -485,7 +485,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service_v1_beta1.delete_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.delete_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.delete_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.delete_key.js,samples/README.md)
 
@@ -502,7 +502,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service_v1_beta1.get_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.get_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.get_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.get_key.js,samples/README.md)
 
@@ -519,7 +519,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service_v1_beta1.list_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.list_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.list_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.list_keys.js,samples/README.md)
 
@@ -536,7 +536,7 @@ __Usage:__
 
 ### Recaptcha_enterprise_service_v1_beta1.update_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.update_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.update_key.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.update_key.js,samples/README.md)
 
@@ -553,7 +553,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-recaptchaenterprise/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/quickstart.js,samples/README.md)
 

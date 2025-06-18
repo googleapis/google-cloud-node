@@ -2120,12 +2120,6 @@ export namespace google {
                             /** CaOptions maxIssuerPathLength. */
                             public maxIssuerPathLength?: (number|null);
 
-                            /** CaOptions _isCa. */
-                            public _isCa?: "isCa";
-
-                            /** CaOptions _maxIssuerPathLength. */
-                            public _maxIssuerPathLength?: "maxIssuerPathLength";
-
                             /**
                              * Creates a new CaOptions instance using the specified properties.
                              * @param [properties] Properties to set
@@ -2560,7 +2554,7 @@ export namespace google {
                     interface IPublicKey {
 
                         /** PublicKey key */
-                        key?: (Uint8Array|string|null);
+                        key?: (Uint8Array|Buffer|string|null);
 
                         /** PublicKey format */
                         format?: (google.cloud.security.privateca.v1.PublicKey.KeyFormat|keyof typeof google.cloud.security.privateca.v1.PublicKey.KeyFormat|null);
@@ -2576,7 +2570,7 @@ export namespace google {
                         constructor(properties?: google.cloud.security.privateca.v1.IPublicKey);
 
                         /** PublicKey key. */
-                        public key: (Uint8Array|string);
+                        public key: (Uint8Array|Buffer|string);
 
                         /** PublicKey format. */
                         public format: (google.cloud.security.privateca.v1.PublicKey.KeyFormat|keyof typeof google.cloud.security.privateca.v1.PublicKey.KeyFormat);
@@ -3556,7 +3550,7 @@ export namespace google {
                         critical?: (boolean|null);
 
                         /** X509Extension value */
-                        value?: (Uint8Array|string|null);
+                        value?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents a X509Extension. */
@@ -3575,7 +3569,7 @@ export namespace google {
                         public critical: boolean;
 
                         /** X509Extension value. */
-                        public value: (Uint8Array|string);
+                        public value: (Uint8Array|Buffer|string);
 
                         /**
                          * Creates a new X509Extension instance using the specified properties.
@@ -4329,12 +4323,6 @@ export namespace google {
 
                         /** CertificateIdentityConstraints allowSubjectAltNamesPassthrough. */
                         public allowSubjectAltNamesPassthrough?: (boolean|null);
-
-                        /** CertificateIdentityConstraints _allowSubjectPassthrough. */
-                        public _allowSubjectPassthrough?: "allowSubjectPassthrough";
-
-                        /** CertificateIdentityConstraints _allowSubjectAltNamesPassthrough. */
-                        public _allowSubjectAltNamesPassthrough?: "allowSubjectAltNamesPassthrough";
 
                         /**
                          * Creates a new CertificateIdentityConstraints instance using the specified properties.
@@ -11558,7 +11546,7 @@ export namespace google {
                         type?: (google.cloud.security.privateca.v1beta1.PublicKey.KeyType|keyof typeof google.cloud.security.privateca.v1beta1.PublicKey.KeyType|null);
 
                         /** PublicKey key */
-                        key?: (Uint8Array|string|null);
+                        key?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents a PublicKey. */
@@ -11574,7 +11562,7 @@ export namespace google {
                         public type: (google.cloud.security.privateca.v1beta1.PublicKey.KeyType|keyof typeof google.cloud.security.privateca.v1beta1.PublicKey.KeyType);
 
                         /** PublicKey key. */
-                        public key: (Uint8Array|string);
+                        public key: (Uint8Array|Buffer|string);
 
                         /**
                          * Creates a new PublicKey instance using the specified properties.
@@ -12461,7 +12449,7 @@ export namespace google {
                         critical?: (boolean|null);
 
                         /** X509Extension value */
-                        value?: (Uint8Array|string|null);
+                        value?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents a X509Extension. */
@@ -12480,7 +12468,7 @@ export namespace google {
                         public critical: boolean;
 
                         /** X509Extension value. */
-                        public value: (Uint8Array|string);
+                        public value: (Uint8Array|Buffer|string);
 
                         /**
                          * Creates a new X509Extension instance using the specified properties.
@@ -17407,6 +17395,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -17447,6 +17438,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -21400,6 +21394,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -21651,7 +21648,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -21682,7 +21679,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -22924,7 +22921,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -22940,7 +22937,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -23988,7 +23985,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -24001,7 +23998,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

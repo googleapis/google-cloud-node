@@ -301,9 +301,14 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         throw err;
       });
       assert(client.artifactRegistryStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -312,9 +317,14 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.artifactRegistryStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -477,7 +487,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRepository(request), expectedError);
     });
   });
@@ -611,7 +623,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.repository.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateRepository(request), expectedError);
     });
   });
@@ -741,7 +755,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPackage(request), expectedError);
     });
   });
@@ -871,7 +887,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getVersion(request), expectedError);
     });
   });
@@ -998,7 +1016,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getFile(request), expectedError);
     });
   });
@@ -1125,7 +1145,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTag(request), expectedError);
     });
   });
@@ -1252,7 +1274,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createTag(request), expectedError);
     });
   });
@@ -1383,7 +1407,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.tag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateTag(request), expectedError);
     });
   });
@@ -1510,7 +1536,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteTag(request), expectedError);
     });
   });
@@ -1640,7 +1668,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1770,7 +1800,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1901,7 +1933,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -2032,7 +2066,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProjectSettings(request), expectedError);
     });
   });
@@ -2170,7 +2206,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.projectSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateProjectSettings(request),
         expectedError

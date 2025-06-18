@@ -259,9 +259,14 @@ describe('v1.CloudSchedulerClient', () => {
         throw err;
       });
       assert(client.cloudSchedulerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1.CloudSchedulerClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudSchedulerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -432,7 +442,9 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getJob(request), expectedError);
     });
   });
@@ -559,7 +571,9 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createJob(request), expectedError);
     });
   });
@@ -690,7 +704,9 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.job.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateJob(request), expectedError);
     });
   });
@@ -817,7 +833,9 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteJob(request), expectedError);
     });
   });
@@ -944,7 +962,9 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.pauseJob(request), expectedError);
     });
   });
@@ -1071,7 +1091,9 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.resumeJob(request), expectedError);
     });
   });
@@ -1198,7 +1220,9 @@ describe('v1.CloudSchedulerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.runJob(request), expectedError);
     });
   });

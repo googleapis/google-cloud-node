@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.1.0...discoveryengine-v2.2.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.0.1...discoveryengine-v2.1.0) (2025-05-09)
 
 

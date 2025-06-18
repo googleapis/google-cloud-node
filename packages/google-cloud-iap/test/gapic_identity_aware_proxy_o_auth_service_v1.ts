@@ -29,1876 +29,1351 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'iap.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          identityawareproxyoauthserviceModule.v1
-            .IdentityAwareProxyOAuthServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'iap.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          identityawareproxyoauthserviceModule.v1
-            .IdentityAwareProxyOAuthServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'iap.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {universeDomain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'iap.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {universe_domain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'iap.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'iap.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'iap.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'iap.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        identityawareproxyoauthserviceModule.v1
-          .IdentityAwareProxyOAuthServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'iap.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            fallback: true,
-          }
-        );
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
-      await client.initialize();
-      assert(client.identityAwareProxyOAuthServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.identityAwareProxyOAuthServiceStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('listBrands', () => {
-    it('invokes listBrands without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListBrandsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListBrandsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListBrandsResponse()
-      );
-      client.innerApiCalls.listBrands = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBrands(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBrands as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBrands as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBrands without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListBrandsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListBrandsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListBrandsResponse()
-      );
-      client.innerApiCalls.listBrands =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBrands(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.iap.v1.IListBrandsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBrands as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBrands as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBrands with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListBrandsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListBrandsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBrands = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBrands(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBrands as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBrands as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBrands with closed client', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListBrandsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListBrandsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.listBrands(request), expectedError);
-    });
-  });
-
-  describe('createBrand', () => {
-    it('invokes createBrand without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateBrandRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.Brand()
-      );
-      client.innerApiCalls.createBrand = stubSimpleCall(expectedResponse);
-      const [response] = await client.createBrand(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBrand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBrand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBrand without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateBrandRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.Brand()
-      );
-      client.innerApiCalls.createBrand =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBrand(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.iap.v1.IBrand | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBrand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBrand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBrand with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateBrandRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBrand = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBrand(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBrand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBrand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBrand with closed client', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateBrandRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createBrand(request), expectedError);
-    });
-  });
-
-  describe('getBrand', () => {
-    it('invokes getBrand without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetBrandRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.Brand()
-      );
-      client.innerApiCalls.getBrand = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBrand(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBrand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBrand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBrand without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetBrandRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.Brand()
-      );
-      client.innerApiCalls.getBrand =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBrand(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.iap.v1.IBrand | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBrand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBrand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBrand with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetBrandRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBrand = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getBrand(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBrand as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBrand as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBrand with closed client', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetBrandRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetBrandRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getBrand(request), expectedError);
-    });
-  });
-
-  describe('createIdentityAwareProxyClient', () => {
-    it('invokes createIdentityAwareProxyClient without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-      );
-      client.innerApiCalls.createIdentityAwareProxyClient =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createIdentityAwareProxyClient(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createIdentityAwareProxyClient without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-      );
-      client.innerApiCalls.createIdentityAwareProxyClient =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createIdentityAwareProxyClient(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.iap.v1.IIdentityAwareProxyClient | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createIdentityAwareProxyClient with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createIdentityAwareProxyClient = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createIdentityAwareProxyClient(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createIdentityAwareProxyClient with closed client', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.createIdentityAwareProxyClient(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getIdentityAwareProxyClient', () => {
-    it('invokes getIdentityAwareProxyClient without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-      );
-      client.innerApiCalls.getIdentityAwareProxyClient =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getIdentityAwareProxyClient(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIdentityAwareProxyClient without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-      );
-      client.innerApiCalls.getIdentityAwareProxyClient =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getIdentityAwareProxyClient(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.iap.v1.IIdentityAwareProxyClient | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIdentityAwareProxyClient with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getIdentityAwareProxyClient = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getIdentityAwareProxyClient(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getIdentityAwareProxyClient with closed client', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.getIdentityAwareProxyClient(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('resetIdentityAwareProxyClientSecret', () => {
-    it('invokes resetIdentityAwareProxyClientSecret without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-      );
-      client.innerApiCalls.resetIdentityAwareProxyClientSecret =
-        stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.resetIdentityAwareProxyClientSecret(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resetIdentityAwareProxyClientSecret without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-      );
-      client.innerApiCalls.resetIdentityAwareProxyClientSecret =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.resetIdentityAwareProxyClientSecret(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.iap.v1.IIdentityAwareProxyClient | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resetIdentityAwareProxyClientSecret with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resetIdentityAwareProxyClientSecret = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.resetIdentityAwareProxyClientSecret(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resetIdentityAwareProxyClientSecret with closed client', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.resetIdentityAwareProxyClientSecret(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('deleteIdentityAwareProxyClient', () => {
-    it('invokes deleteIdentityAwareProxyClient without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteIdentityAwareProxyClient =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteIdentityAwareProxyClient(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteIdentityAwareProxyClient without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteIdentityAwareProxyClient =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteIdentityAwareProxyClient(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteIdentityAwareProxyClient with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteIdentityAwareProxyClient = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteIdentityAwareProxyClient(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteIdentityAwareProxyClient with closed client', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.deleteIdentityAwareProxyClient(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listIdentityAwareProxyClients', () => {
-    it('invokes listIdentityAwareProxyClients without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-      ];
-      client.innerApiCalls.listIdentityAwareProxyClients =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listIdentityAwareProxyClients(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listIdentityAwareProxyClients as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listIdentityAwareProxyClients as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listIdentityAwareProxyClients without error using callback', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-      ];
-      client.innerApiCalls.listIdentityAwareProxyClients =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listIdentityAwareProxyClients(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.iap.v1.IIdentityAwareProxyClient[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listIdentityAwareProxyClients as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listIdentityAwareProxyClients as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listIdentityAwareProxyClients with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listIdentityAwareProxyClients = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listIdentityAwareProxyClients(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listIdentityAwareProxyClients as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listIdentityAwareProxyClients as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listIdentityAwareProxyClientsStream without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-      ];
-      client.descriptors.page.listIdentityAwareProxyClients.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listIdentityAwareProxyClientsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.iap.v1.IdentityAwareProxyClient[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.iap.v1.IdentityAwareProxyClient) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(
-            client.innerApiCalls.listIdentityAwareProxyClients,
-            request
-          )
-      );
-      assert(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listIdentityAwareProxyClientsStream with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listIdentityAwareProxyClients.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listIdentityAwareProxyClientsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.iap.v1.IdentityAwareProxyClient[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.iap.v1.IdentityAwareProxyClient) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(
-            client.innerApiCalls.listIdentityAwareProxyClients,
-            request
-          )
-      );
-      assert(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listIdentityAwareProxyClients without error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
-        ),
-      ];
-      client.descriptors.page.listIdentityAwareProxyClients.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.iap.v1.IIdentityAwareProxyClient[] =
-        [];
-      const iterable = client.listIdentityAwareProxyClientsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listIdentityAwareProxyClients with error', async () => {
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listIdentityAwareProxyClients.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listIdentityAwareProxyClientsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.iap.v1.IIdentityAwareProxyClient[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'iap.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listIdentityAwareProxyClients
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'iap.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'iap.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'iap.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'iap.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
+            await client.initialize();
+            assert(client.identityAwareProxyOAuthServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.identityAwareProxyOAuthServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.identityAwareProxyOAuthServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
 
-  describe('Path templates', () => {
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listBrands', () => {
+        it('invokes listBrands without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListBrandsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListBrandsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListBrandsResponse()
+            );
+            client.innerApiCalls.listBrands = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBrands(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBrands as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBrands as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listBrands without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListBrandsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListBrandsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListBrandsResponse()
+            );
+            client.innerApiCalls.listBrands = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBrands(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.iap.v1.IListBrandsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBrands as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBrands as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listBrands with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListBrandsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListBrandsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBrands = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBrands(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBrands as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBrands as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBrands with closed client', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListBrandsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListBrandsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.listBrands(request), expectedError);
+        });
     });
 
-    describe('tunnelDestGroup', async () => {
-      const fakePath = '/rendered/path/tunnelDestGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        dest_group: 'destGroupValue',
-      };
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.tunnelDestGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tunnelDestGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createBrand', () => {
+        it('invokes createBrand without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateBrandRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.Brand()
+            );
+            client.innerApiCalls.createBrand = stubSimpleCall(expectedResponse);
+            const [response] = await client.createBrand(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBrand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBrand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tunnelDestGroupPath', () => {
-        const result = client.tunnelDestGroupPath(
-          'projectValue',
-          'locationValue',
-          'destGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tunnelDestGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createBrand without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateBrandRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.Brand()
+            );
+            client.innerApiCalls.createBrand = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBrand(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.iap.v1.IBrand|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBrand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBrand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromTunnelDestGroupName', () => {
-        const result = client.matchProjectFromTunnelDestGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createBrand with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateBrandRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBrand = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createBrand(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBrand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBrand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromTunnelDestGroupName', () => {
-        const result = client.matchLocationFromTunnelDestGroupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDestGroupFromTunnelDestGroupName', () => {
-        const result = client.matchDestGroupFromTunnelDestGroupName(fakePath);
-        assert.strictEqual(result, 'destGroupValue');
-        assert(
-          (client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createBrand with closed client', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateBrandRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createBrand(request), expectedError);
+        });
     });
 
-    describe('tunnelLocation', async () => {
-      const fakePath = '/rendered/path/tunnelLocation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client =
-        new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      client.pathTemplates.tunnelLocationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.tunnelLocationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getBrand', () => {
+        it('invokes getBrand without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetBrandRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.Brand()
+            );
+            client.innerApiCalls.getBrand = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBrand(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBrand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBrand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('tunnelLocationPath', () => {
-        const result = client.tunnelLocationPath(
-          'projectValue',
-          'locationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.tunnelLocationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getBrand without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetBrandRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.Brand()
+            );
+            client.innerApiCalls.getBrand = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBrand(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.iap.v1.IBrand|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBrand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBrand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromTunnelLocationName', () => {
-        const result = client.matchProjectFromTunnelLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getBrand with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetBrandRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBrand = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBrand(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBrand as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBrand as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromTunnelLocationName', () => {
-        const result = client.matchLocationFromTunnelLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getBrand with closed client', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetBrandRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetBrandRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBrand(request), expectedError);
+        });
     });
-  });
+
+    describe('createIdentityAwareProxyClient', () => {
+        it('invokes createIdentityAwareProxyClient without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
+            );
+            client.innerApiCalls.createIdentityAwareProxyClient = stubSimpleCall(expectedResponse);
+            const [response] = await client.createIdentityAwareProxyClient(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIdentityAwareProxyClient without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
+            );
+            client.innerApiCalls.createIdentityAwareProxyClient = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createIdentityAwareProxyClient(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.iap.v1.IIdentityAwareProxyClient|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIdentityAwareProxyClient with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createIdentityAwareProxyClient = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createIdentityAwareProxyClient(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIdentityAwareProxyClient with closed client', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createIdentityAwareProxyClient(request), expectedError);
+        });
+    });
+
+    describe('getIdentityAwareProxyClient', () => {
+        it('invokes getIdentityAwareProxyClient without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
+            );
+            client.innerApiCalls.getIdentityAwareProxyClient = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIdentityAwareProxyClient(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIdentityAwareProxyClient without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
+            );
+            client.innerApiCalls.getIdentityAwareProxyClient = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIdentityAwareProxyClient(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.iap.v1.IIdentityAwareProxyClient|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIdentityAwareProxyClient with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIdentityAwareProxyClient = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIdentityAwareProxyClient(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIdentityAwareProxyClient with closed client', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIdentityAwareProxyClient(request), expectedError);
+        });
+    });
+
+    describe('resetIdentityAwareProxyClientSecret', () => {
+        it('invokes resetIdentityAwareProxyClientSecret without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
+            );
+            client.innerApiCalls.resetIdentityAwareProxyClientSecret = stubSimpleCall(expectedResponse);
+            const [response] = await client.resetIdentityAwareProxyClientSecret(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resetIdentityAwareProxyClientSecret without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.iap.v1.IdentityAwareProxyClient()
+            );
+            client.innerApiCalls.resetIdentityAwareProxyClientSecret = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.resetIdentityAwareProxyClientSecret(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.iap.v1.IIdentityAwareProxyClient|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resetIdentityAwareProxyClientSecret with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resetIdentityAwareProxyClientSecret = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.resetIdentityAwareProxyClientSecret(request), expectedError);
+            const actualRequest = (client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resetIdentityAwareProxyClientSecret with closed client', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.resetIdentityAwareProxyClientSecret(request), expectedError);
+        });
+    });
+
+    describe('deleteIdentityAwareProxyClient', () => {
+        it('invokes deleteIdentityAwareProxyClient without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteIdentityAwareProxyClient = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteIdentityAwareProxyClient(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIdentityAwareProxyClient without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteIdentityAwareProxyClient = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteIdentityAwareProxyClient(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIdentityAwareProxyClient with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteIdentityAwareProxyClient = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteIdentityAwareProxyClient(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIdentityAwareProxyClient as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIdentityAwareProxyClient with closed client', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteIdentityAwareProxyClient(request), expectedError);
+        });
+    });
+
+    describe('listIdentityAwareProxyClients', () => {
+        it('invokes listIdentityAwareProxyClients without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+            ];
+            client.innerApiCalls.listIdentityAwareProxyClients = stubSimpleCall(expectedResponse);
+            const [response] = await client.listIdentityAwareProxyClients(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listIdentityAwareProxyClients as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIdentityAwareProxyClients as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIdentityAwareProxyClients without error using callback', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+            ];
+            client.innerApiCalls.listIdentityAwareProxyClients = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listIdentityAwareProxyClients(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.iap.v1.IIdentityAwareProxyClient[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listIdentityAwareProxyClients as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIdentityAwareProxyClients as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIdentityAwareProxyClients with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listIdentityAwareProxyClients = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listIdentityAwareProxyClients(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listIdentityAwareProxyClients as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIdentityAwareProxyClients as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIdentityAwareProxyClientsStream without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+            ];
+            client.descriptors.page.listIdentityAwareProxyClients.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listIdentityAwareProxyClientsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.iap.v1.IdentityAwareProxyClient[] = [];
+                stream.on('data', (response: protos.google.cloud.iap.v1.IdentityAwareProxyClient) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listIdentityAwareProxyClients.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listIdentityAwareProxyClients, request));
+            assert(
+                (client.descriptors.page.listIdentityAwareProxyClients.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listIdentityAwareProxyClientsStream with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listIdentityAwareProxyClients.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listIdentityAwareProxyClientsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.iap.v1.IdentityAwareProxyClient[] = [];
+                stream.on('data', (response: protos.google.cloud.iap.v1.IdentityAwareProxyClient) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listIdentityAwareProxyClients.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listIdentityAwareProxyClients, request));
+            assert(
+                (client.descriptors.page.listIdentityAwareProxyClients.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listIdentityAwareProxyClients without error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+              generateSampleMessage(new protos.google.cloud.iap.v1.IdentityAwareProxyClient()),
+            ];
+            client.descriptors.page.listIdentityAwareProxyClients.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.iap.v1.IIdentityAwareProxyClient[] = [];
+            const iterable = client.listIdentityAwareProxyClientsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listIdentityAwareProxyClients.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listIdentityAwareProxyClients.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listIdentityAwareProxyClients with error', async () => {
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listIdentityAwareProxyClients.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listIdentityAwareProxyClientsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.iap.v1.IIdentityAwareProxyClient[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listIdentityAwareProxyClients.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listIdentityAwareProxyClients.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tunnelDestGroup', async () => {
+            const fakePath = "/rendered/path/tunnelDestGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dest_group: "destGroupValue",
+            };
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tunnelDestGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tunnelDestGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tunnelDestGroupPath', () => {
+                const result = client.tunnelDestGroupPath("projectValue", "locationValue", "destGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tunnelDestGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTunnelDestGroupName', () => {
+                const result = client.matchProjectFromTunnelDestGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTunnelDestGroupName', () => {
+                const result = client.matchLocationFromTunnelDestGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDestGroupFromTunnelDestGroupName', () => {
+                const result = client.matchDestGroupFromTunnelDestGroupName(fakePath);
+                assert.strictEqual(result, "destGroupValue");
+                assert((client.pathTemplates.tunnelDestGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tunnelLocation', async () => {
+            const fakePath = "/rendered/path/tunnelLocation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new identityawareproxyoauthserviceModule.v1.IdentityAwareProxyOAuthServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.tunnelLocationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.tunnelLocationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('tunnelLocationPath', () => {
+                const result = client.tunnelLocationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.tunnelLocationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromTunnelLocationName', () => {
+                const result = client.matchProjectFromTunnelLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromTunnelLocationName', () => {
+                const result = client.matchLocationFromTunnelLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.tunnelLocationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

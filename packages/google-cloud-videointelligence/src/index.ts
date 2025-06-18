@@ -25,21 +25,7 @@ import * as v1p3beta1 from './v1p3beta1';
 const VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 type VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 
-export {
-  v1,
-  v1beta2,
-  v1p1beta1,
-  v1p2beta1,
-  v1p3beta1,
-  VideoIntelligenceServiceClient,
-};
-export default {
-  v1,
-  v1beta2,
-  v1p1beta1,
-  v1p2beta1,
-  v1p3beta1,
-  VideoIntelligenceServiceClient,
-};
+export {v1, v1beta2, v1p1beta1, v1p2beta1, v1p3beta1, VideoIntelligenceServiceClient};
+export default {v1, v1beta2, v1p1beta1, v1p2beta1, v1p3beta1, VideoIntelligenceServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

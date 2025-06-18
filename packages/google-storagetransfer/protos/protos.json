@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -691,6 +694,33 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "federatedIdentityConfig": {
+                      "type": "FederatedIdentityConfig",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "FederatedIdentityConfig": {
+                      "fields": {
+                        "clientId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tenantId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1187,6 +1217,13 @@
                       "type": "string",
                       "id": 3
                     },
+                    "serviceAccount": {
+                      "type": "string",
+                      "id": 18,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
                     "transferSpec": {
                       "type": "TransferSpec",
                       "id": 4
@@ -1449,7 +1486,8 @@
                       "values": {
                         "LOGGABLE_ACTION_STATE_UNSPECIFIED": 0,
                         "SUCCEEDED": 1,
-                        "FAILED": 2
+                        "FAILED": 2,
+                        "SKIPPED": 3
                       }
                     }
                   }

@@ -218,9 +218,14 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         throw err;
       });
       assert(client.sqlUsersServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -229,9 +234,14 @@ describe('v1beta4.SqlUsersServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.sqlUsersServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -411,7 +421,9 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -574,7 +586,9 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -721,7 +735,9 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -864,7 +880,9 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.list(request), expectedError);
     });
   });
@@ -1011,7 +1029,9 @@ describe('v1beta4.SqlUsersServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.update(request), expectedError);
     });
   });

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v2.0.1...vmwareengine-v2.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6304](https://github.com/googleapis/google-cloud-node/issues/6304)) ([132240f](https://github.com/googleapis/google-cloud-node/commit/132240fbf6cb29b309b76c1d60f0611720590847))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v2.0.0...vmwareengine-v2.0.1) (2025-03-19)
 
 

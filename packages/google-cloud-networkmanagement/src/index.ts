@@ -25,11 +25,6 @@ const VpcFlowLogsServiceClient = v1.VpcFlowLogsServiceClient;
 type VpcFlowLogsServiceClient = v1.VpcFlowLogsServiceClient;
 
 export {v1, v1beta1, ReachabilityServiceClient, VpcFlowLogsServiceClient};
-export default {
-  v1,
-  v1beta1,
-  ReachabilityServiceClient,
-  VpcFlowLogsServiceClient,
-};
+export default {v1, v1beta1, ReachabilityServiceClient, VpcFlowLogsServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

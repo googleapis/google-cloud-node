@@ -16,27 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  AgentsClient,
-  AnswerRecordsClient,
-  ContextsClient,
-  ConversationDatasetsClient,
-  ConversationModelsClient,
-  ConversationProfilesClient,
-  ConversationsClient,
-  DocumentsClient,
-  EncryptionSpecServiceClient,
-  EntityTypesClient,
-  EnvironmentsClient,
-  FulfillmentsClient,
-  GeneratorsClient,
-  IntentsClient,
-  KnowledgeBasesClient,
-  ParticipantsClient,
-  SessionEntityTypesClient,
-  SessionsClient,
-  VersionsClient,
-} from '@google-cloud/dialogflow';
+import {AgentsClient, AnswerRecordsClient, ContextsClient, ConversationDatasetsClient, ConversationModelsClient, ConversationProfilesClient, ConversationsClient, DocumentsClient, EncryptionSpecServiceClient, EntityTypesClient, EnvironmentsClient, FulfillmentsClient, GeneratorsClient, IntentsClient, KnowledgeBasesClient, ParticipantsClient, SessionEntityTypesClient, SessionsClient, VersionsClient} from '@google-cloud/dialogflow';
 
 // check that the client class type name can be used
 function doStuffWithAgentsClient(client: AgentsClient) {
@@ -48,17 +28,13 @@ function doStuffWithAnswerRecordsClient(client: AnswerRecordsClient) {
 function doStuffWithContextsClient(client: ContextsClient) {
   client.close();
 }
-function doStuffWithConversationDatasetsClient(
-  client: ConversationDatasetsClient
-) {
+function doStuffWithConversationDatasetsClient(client: ConversationDatasetsClient) {
   client.close();
 }
 function doStuffWithConversationModelsClient(client: ConversationModelsClient) {
   client.close();
 }
-function doStuffWithConversationProfilesClient(
-  client: ConversationProfilesClient
-) {
+function doStuffWithConversationProfilesClient(client: ConversationProfilesClient) {
   client.close();
 }
 function doStuffWithConversationsClient(client: ConversationsClient) {
@@ -67,9 +43,7 @@ function doStuffWithConversationsClient(client: ConversationsClient) {
 function doStuffWithDocumentsClient(client: DocumentsClient) {
   client.close();
 }
-function doStuffWithEncryptionSpecServiceClient(
-  client: EncryptionSpecServiceClient
-) {
+function doStuffWithEncryptionSpecServiceClient(client: EncryptionSpecServiceClient) {
   client.close();
 }
 function doStuffWithEntityTypesClient(client: EntityTypesClient) {

@@ -1,0 +1,63 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-ordertracking",
+        "version": "0.0.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.shopping.merchant.ordertracking.v1beta",
+                "version": "v1beta"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "merchantapi_v1beta_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_async",
+            "title": "OrderTrackingSignalsService createOrderTrackingSignal Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates new order tracking signal.",
+            "canonical": true,
+            "file": "order_tracking_signals_service.create_order_tracking_signal.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateOrderTrackingSignal",
+                "fullName": "google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService.CreateOrderTrackingSignal",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_tracking_signal_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_tracking_signal",
+                        "type": ".google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignal"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignal",
+                "client": {
+                    "shortName": "OrderTrackingSignalsServiceClient",
+                    "fullName": "google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateOrderTrackingSignal",
+                    "fullName": "google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService.CreateOrderTrackingSignal",
+                    "service": {
+                        "shortName": "OrderTrackingSignalsService",
+                        "fullName": "google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService"
+                    }
+                }
+            }
+        }
+    ]
+}

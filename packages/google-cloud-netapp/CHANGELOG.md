@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.11.0...netapp-v0.12.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6301](https://github.com/googleapis/google-cloud-node/issues/6301)) ([42754a7](https://github.com/googleapis/google-cloud-node/commit/42754a72b34a01d201341428b4a358ff781b0612))
+
 ## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.10.1...netapp-v0.11.0) (2025-05-09)
 
 

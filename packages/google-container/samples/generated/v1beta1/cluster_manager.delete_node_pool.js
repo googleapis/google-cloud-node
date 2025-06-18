@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, nodePoolId) {
+function main() {
   // [START container_v1beta1_generated_ClusterManager_DeleteNodePool_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -44,10 +44,6 @@ function main(projectId, zone, clusterId, nodePoolId) {
   async function callDeleteNodePool() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
-      nodePoolId,
     };
 
     // Run request

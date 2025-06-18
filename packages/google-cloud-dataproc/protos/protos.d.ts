@@ -4728,7 +4728,9 @@ export namespace google {
                         SCENARIO_UNSPECIFIED = 0,
                         SCALING = 2,
                         BROADCAST_HASH_JOIN = 3,
-                        MEMORY = 4
+                        MEMORY = 4,
+                        NONE = 5,
+                        AUTO = 6
                     }
                 }
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/language-v7.0.2...language-v7.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6301](https://github.com/googleapis/google-cloud-node/issues/6301)) ([42754a7](https://github.com/googleapis/google-cloud-node/commit/42754a72b34a01d201341428b4a358ff781b0612))
+
 ## [7.0.2](https://github.com/googleapis/google-cloud-node/compare/language-v7.0.1...language-v7.0.2) (2025-05-09)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import {
   NotificationChannelServiceClient,
   QueryServiceClient,
   ServiceMonitoringServiceClient,
+  SnoozeServiceClient,
   UptimeCheckServiceClient,
 } from '@google-cloud/monitoring';
 
@@ -49,6 +50,9 @@ function doStuffWithServiceMonitoringServiceClient(
 ) {
   client.close();
 }
+function doStuffWithSnoozeServiceClient(client: SnoozeServiceClient) {
+  client.close();
+}
 function doStuffWithUptimeCheckServiceClient(client: UptimeCheckServiceClient) {
   client.close();
 }
@@ -73,6 +77,9 @@ function main() {
   // check that the client instance can be created
   const serviceMonitoringServiceClient = new ServiceMonitoringServiceClient();
   doStuffWithServiceMonitoringServiceClient(serviceMonitoringServiceClient);
+  // check that the client instance can be created
+  const snoozeServiceClient = new SnoozeServiceClient();
+  doStuffWithSnoozeServiceClient(snoozeServiceClient);
   // check that the client instance can be created
   const uptimeCheckServiceClient = new UptimeCheckServiceClient();
   doStuffWithUptimeCheckServiceClient(uptimeCheckServiceClient);

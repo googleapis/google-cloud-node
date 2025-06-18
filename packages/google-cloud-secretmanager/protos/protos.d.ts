@@ -67,6 +67,9 @@ export namespace google {
 
                     /** Secret customerManagedEncryption */
                     customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
+
+                    /** Secret tags */
+                    tags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Secret. */
@@ -116,6 +119,9 @@ export namespace google {
 
                     /** Secret customerManagedEncryption. */
                     public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
+
+                    /** Secret tags. */
+                    public tags: { [k: string]: string };
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");
@@ -1570,7 +1576,7 @@ export namespace google {
                 interface ISecretPayload {
 
                     /** SecretPayload data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** SecretPayload dataCrc32c */
                     dataCrc32c?: (number|Long|string|null);
@@ -1586,13 +1592,10 @@ export namespace google {
                     constructor(properties?: google.cloud.secretmanager.v1.ISecretPayload);
 
                     /** SecretPayload data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** SecretPayload dataCrc32c. */
                     public dataCrc32c?: (number|Long|string|null);
-
-                    /** SecretPayload _dataCrc32c. */
-                    public _dataCrc32c?: "dataCrc32c";
 
                     /**
                      * Creates a new SecretPayload instance using the specified properties.
@@ -5128,7 +5131,7 @@ export namespace google {
                 interface ISecretPayload {
 
                     /** SecretPayload data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** SecretPayload dataCrc32c */
                     dataCrc32c?: (number|Long|string|null);
@@ -5144,13 +5147,10 @@ export namespace google {
                     constructor(properties?: google.cloud.secretmanager.v1beta2.ISecretPayload);
 
                     /** SecretPayload data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** SecretPayload dataCrc32c. */
                     public dataCrc32c?: (number|Long|string|null);
-
-                    /** SecretPayload _dataCrc32c. */
-                    public _dataCrc32c?: "dataCrc32c";
 
                     /**
                      * Creates a new SecretPayload instance using the specified properties.
@@ -7788,7 +7788,7 @@ export namespace google {
                 interface ISecretPayload {
 
                     /** SecretPayload data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a SecretPayload. */
@@ -7801,7 +7801,7 @@ export namespace google {
                     constructor(properties?: google.cloud.secrets.v1beta1.ISecretPayload);
 
                     /** SecretPayload data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new SecretPayload instance using the specified properties.
@@ -10676,6 +10676,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -10716,6 +10719,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -14669,6 +14675,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -14917,7 +14926,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -14948,7 +14957,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -16987,7 +16996,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|string|null);
+                etag?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Policy. */
@@ -17009,7 +17018,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|string);
+                public etag: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.

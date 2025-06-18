@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
+function main(nodeVersion, imageType) {
   // [START container_v1beta1_generated_ClusterManager_UpdateNodePool_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -174,6 +174,20 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  Specifies the configuration of queued provisioning.
    */
   // const queuedProvisioning = {}
+  /**
+   *  List of Storage Pools where boot disks are provisioned.
+   *  Existing Storage Pools will be replaced with storage-pools.
+   */
+  // const storagePools = ['abc','def']
+  /**
+   *  The maximum duration for the nodes to exist.
+   *  If unspecified, the nodes can exist indefinitely.
+   */
+  // const maxRunDuration = {}
+  /**
+   *  Flex Start flag for enabling Flex Start VM.
+   */
+  // const flexStart = true
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1beta1;
@@ -184,10 +198,6 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
   async function callUpdateNodePool() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
-      nodePoolId,
       nodeVersion,
       imageType,
     };

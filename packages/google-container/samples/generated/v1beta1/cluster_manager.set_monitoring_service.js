@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, monitoringService) {
+function main(monitoringService) {
   // [START container_v1beta1_generated_ClusterManager_SetMonitoringService_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -31,7 +31,7 @@ function main(projectId, zone, clusterId, monitoringService) {
   /**
    *  Required. The monitoring service the cluster should use to write metrics.
    *  Currently available options:
-   *  * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+   *  * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
    *  service with a Kubernetes-native resource model
    *  * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
    *    longer available as of GKE 1.15).
@@ -55,9 +55,6 @@ function main(projectId, zone, clusterId, monitoringService) {
   async function callSetMonitoringService() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
       monitoringService,
     };
 

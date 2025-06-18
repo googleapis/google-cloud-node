@@ -18,20 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -121,41 +108,20 @@ export class FunctionServiceClient {
    *     const client = new FunctionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof FunctionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudfunctions.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -181,7 +147,7 @@ export class FunctionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -194,14 +160,18 @@ export class FunctionServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -264,11 +234,8 @@ export class FunctionServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listFunctions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'functions'
-      ),
+      listFunctions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'functions')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -277,86 +244,45 @@ export class FunctionServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v2beta/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v2beta/{resource=projects/*/locations/*/functions/*}:getIamPolicy',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v2beta/{resource=projects/*/locations/*/functions/*}:setIamPolicy',
-          body: '*',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v2beta/{resource=projects/*/locations/*/functions/*}:testIamPermissions',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2beta/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2beta/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.ListLocations',get: '/v2beta/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v2beta/{resource=projects/*/locations/*/functions/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v2beta/{resource=projects/*/locations/*/functions/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v2beta/{resource=projects/*/locations/*/functions/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v2beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v2beta/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createFunctionResponse = protoFilesRoot.lookup(
-      '.google.cloud.functions.v2beta.Function'
-    ) as gax.protobuf.Type;
+      '.google.cloud.functions.v2beta.Function') as gax.protobuf.Type;
     const createFunctionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.functions.v2beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.functions.v2beta.OperationMetadata') as gax.protobuf.Type;
     const updateFunctionResponse = protoFilesRoot.lookup(
-      '.google.cloud.functions.v2beta.Function'
-    ) as gax.protobuf.Type;
+      '.google.cloud.functions.v2beta.Function') as gax.protobuf.Type;
     const updateFunctionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.functions.v2beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.functions.v2beta.OperationMetadata') as gax.protobuf.Type;
     const deleteFunctionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteFunctionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.functions.v2beta.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.functions.v2beta.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createFunction: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createFunctionResponse.decode.bind(createFunctionResponse),
-        createFunctionMetadata.decode.bind(createFunctionMetadata)
-      ),
+        createFunctionMetadata.decode.bind(createFunctionMetadata)),
       updateFunction: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateFunctionResponse.decode.bind(updateFunctionResponse),
-        updateFunctionMetadata.decode.bind(updateFunctionMetadata)
-      ),
+        updateFunctionMetadata.decode.bind(updateFunctionMetadata)),
       deleteFunction: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteFunctionResponse.decode.bind(deleteFunctionResponse),
-        deleteFunctionMetadata.decode.bind(deleteFunctionMetadata)
-      ),
+        deleteFunctionMetadata.decode.bind(deleteFunctionMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.functions.v2beta.FunctionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.functions.v2beta.FunctionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -387,42 +313,28 @@ export class FunctionServiceClient {
     // Put together the "service stub" for
     // google.cloud.functions.v2beta.FunctionService.
     this.functionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.functions.v2beta.FunctionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.functions.v2beta.FunctionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.functions.v2beta.FunctionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const functionServiceStubMethods = [
-      'getFunction',
-      'listFunctions',
-      'createFunction',
-      'updateFunction',
-      'deleteFunction',
-      'generateUploadUrl',
-      'generateDownloadUrl',
-      'listRuntimes',
-    ];
+    const functionServiceStubMethods =
+        ['getFunction', 'listFunctions', 'createFunction', 'updateFunction', 'deleteFunction', 'generateUploadUrl', 'generateDownloadUrl', 'listRuntimes'];
     for (const methodName of functionServiceStubMethods) {
       const callPromise = this.functionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -447,14 +359,8 @@ export class FunctionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudfunctions.googleapis.com';
   }
@@ -465,14 +371,8 @@ export class FunctionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudfunctions.googleapis.com';
   }
@@ -503,7 +403,9 @@ export class FunctionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -512,9 +414,8 @@ export class FunctionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -525,1204 +426,855 @@ export class FunctionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns a function with the given name from the requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the function which details should be obtained.
-   * @param {string} [request.revision]
-   *   Optional. The optional version of the 1st gen function whose details should
-   *   be obtained. The version of a 1st gen function is an integer that starts
-   *   from 1 and gets incremented on redeployments. GCF may keep historical
-   *   configs for old versions of 1st gen function. This field can be specified
-   *   to fetch the historical configs. This field is valid only for GCF 1st gen
-   *   function.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.Function|Function}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.get_function.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_GetFunction_async
-   */
+/**
+ * Returns a function with the given name from the requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the function which details should be obtained.
+ * @param {string} [request.revision]
+ *   Optional. The optional version of the 1st gen function whose details should
+ *   be obtained. The version of a 1st gen function is an integer that starts
+ *   from 1 and gets incremented on redeployments. GCF may keep historical
+ *   configs for old versions of 1st gen function. This field can be specified
+ *   to fetch the historical configs. This field is valid only for GCF 1st gen
+ *   function.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.Function|Function}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.get_function.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_GetFunction_async
+ */
   getFunction(
-    request?: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IFunction,
-      protos.google.cloud.functions.v2beta.IGetFunctionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IFunction,
+        protos.google.cloud.functions.v2beta.IGetFunctionRequest|undefined, {}|undefined
+      ]>;
   getFunction(
-    request: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IFunction,
-      | protos.google.cloud.functions.v2beta.IGetFunctionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFunction(
-    request: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IFunction,
-      | protos.google.cloud.functions.v2beta.IGetFunctionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFunction(
-    request?: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.functions.v2beta.IFunction,
-          | protos.google.cloud.functions.v2beta.IGetFunctionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.functions.v2beta.IFunction,
-      | protos.google.cloud.functions.v2beta.IGetFunctionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IFunction,
-      protos.google.cloud.functions.v2beta.IGetFunctionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.functions.v2beta.IGetFunctionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFunction(
+      request: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
+      callback: Callback<
+          protos.google.cloud.functions.v2beta.IFunction,
+          protos.google.cloud.functions.v2beta.IGetFunctionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFunction(
+      request?: protos.google.cloud.functions.v2beta.IGetFunctionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.functions.v2beta.IFunction,
+          protos.google.cloud.functions.v2beta.IGetFunctionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.functions.v2beta.IFunction,
+          protos.google.cloud.functions.v2beta.IGetFunctionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IFunction,
+        protos.google.cloud.functions.v2beta.IGetFunctionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getFunction request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.functions.v2beta.IFunction,
-          | protos.google.cloud.functions.v2beta.IGetFunctionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.functions.v2beta.IFunction,
+        protos.google.cloud.functions.v2beta.IGetFunctionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFunction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getFunction(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.functions.v2beta.IFunction,
-          protos.google.cloud.functions.v2beta.IGetFunctionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getFunction response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getFunction(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.functions.v2beta.IFunction,
+        protos.google.cloud.functions.v2beta.IGetFunctionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getFunction response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns a signed URL for uploading a function source code.
-   * For more information about the signed URL usage see:
-   * https://cloud.google.com/storage/docs/access-control/signed-urls.
-   * Once the function source code upload is complete, the used signed
-   * URL should be provided in CreateFunction or UpdateFunction request
-   * as a reference to the function source code.
-   *
-   * When uploading source code to the generated signed URL, please follow
-   * these restrictions:
-   *
-   * * Source file type should be a zip file.
-   * * No credentials should be attached - the signed URLs provide access to the
-   *   target bucket using internal service identity; if credentials were
-   *   attached, the identity from the credentials would be used, but that
-   *   identity does not have permissions to upload files to the URL.
-   *
-   * When making a HTTP PUT request, specify this header:
-   *
-   * * `content-type: application/zip`
-   *
-   * Do not specify this header:
-   *
-   * * `Authorization: Bearer YOUR_TOKEN`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location in which the Google Cloud Storage signed
-   *   URL should be generated, specified in the format `projects/* /locations/*`.
-   * @param {string} request.kmsKeyName
-   *   [Preview] Resource name of a KMS crypto key (managed by the user) used to
-   *   encrypt/decrypt function source code objects in intermediate Cloud Storage
-   *   buckets. When you generate an upload url and upload your source code, it
-   *   gets copied to an intermediate Cloud Storage bucket. The source code is
-   *   then copied to a versioned directory in the sources bucket in the consumer
-   *   project during the function deployment.
-   *
-   *   It must match the pattern
-   *   `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
-   *
-   *   The Google Cloud Functions service account
-   *   (service-{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
-   *   granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
-   *   (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
-   *   Key/KeyRing/Project/Organization (least access preferred).
-   * @param {google.cloud.functions.v2beta.Environment} request.environment
-   *   The function environment the generated upload url will be used for.
-   *   The upload url for 2nd Gen functions can also be used for 1st gen
-   *   functions, but not vice versa. If not specified, 2nd generation-style
-   *   upload URLs are generated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.GenerateUploadUrlResponse|GenerateUploadUrlResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.generate_upload_url.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_GenerateUploadUrl_async
-   */
+/**
+ * Returns a signed URL for uploading a function source code.
+ * For more information about the signed URL usage see:
+ * https://cloud.google.com/storage/docs/access-control/signed-urls.
+ * Once the function source code upload is complete, the used signed
+ * URL should be provided in CreateFunction or UpdateFunction request
+ * as a reference to the function source code.
+ *
+ * When uploading source code to the generated signed URL, please follow
+ * these restrictions:
+ *
+ * * Source file type should be a zip file.
+ * * No credentials should be attached - the signed URLs provide access to the
+ *   target bucket using internal service identity; if credentials were
+ *   attached, the identity from the credentials would be used, but that
+ *   identity does not have permissions to upload files to the URL.
+ *
+ * When making a HTTP PUT request, specify this header:
+ *
+ * * `content-type: application/zip`
+ *
+ * Do not specify this header:
+ *
+ * * `Authorization: Bearer YOUR_TOKEN`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location in which the Google Cloud Storage signed
+ *   URL should be generated, specified in the format `projects/* /locations/*`.
+ * @param {string} request.kmsKeyName
+ *   [Preview] Resource name of a KMS crypto key (managed by the user) used to
+ *   encrypt/decrypt function source code objects in intermediate Cloud Storage
+ *   buckets. When you generate an upload url and upload your source code, it
+ *   gets copied to an intermediate Cloud Storage bucket. The source code is
+ *   then copied to a versioned directory in the sources bucket in the consumer
+ *   project during the function deployment.
+ *
+ *   It must match the pattern
+ *   `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+ *
+ *   The Google Cloud Functions service account
+ *   (service-{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+ *   granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+ *   (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+ *   Key/KeyRing/Project/Organization (least access preferred).
+ * @param {google.cloud.functions.v2beta.Environment} request.environment
+ *   The function environment the generated upload url will be used for.
+ *   The upload url for 2nd Gen functions can also be used for 1st gen
+ *   functions, but not vice versa. If not specified, 2nd generation-style
+ *   upload URLs are generated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.GenerateUploadUrlResponse|GenerateUploadUrlResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.generate_upload_url.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_GenerateUploadUrl_async
+ */
   generateUploadUrl(
-    request?: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-      (
-        | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|undefined, {}|undefined
+      ]>;
   generateUploadUrl(
-    request: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-      | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateUploadUrl(
-    request: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-      | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateUploadUrl(
-    request?: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-          | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-      | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-      (
-        | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateUploadUrl(
+      request: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
+      callback: Callback<
+          protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
+          protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateUploadUrl(
+      request?: protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
+          protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
+          protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateUploadUrl request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-          | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateUploadUrl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateUploadUrl(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
-          (
-            | protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateUploadUrl response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.generateUploadUrl(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateUploadUrlRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateUploadUrl response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns a signed URL for downloading deployed function source code.
-   * The URL is only valid for a limited period and should be used within
-   * 30 minutes of generation.
-   * For more information about the signed URL usage see:
-   * https://cloud.google.com/storage/docs/access-control/signed-urls
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of function for which source code Google Cloud Storage
-   *   signed URL should be generated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.GenerateDownloadUrlResponse|GenerateDownloadUrlResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.generate_download_url.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_GenerateDownloadUrl_async
-   */
+/**
+ * Returns a signed URL for downloading deployed function source code.
+ * The URL is only valid for a limited period and should be used within
+ * 30 minutes of generation.
+ * For more information about the signed URL usage see:
+ * https://cloud.google.com/storage/docs/access-control/signed-urls
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of function for which source code Google Cloud Storage
+ *   signed URL should be generated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.GenerateDownloadUrlResponse|GenerateDownloadUrlResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.generate_download_url.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_GenerateDownloadUrl_async
+ */
   generateDownloadUrl(
-    request?: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-      (
-        | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|undefined, {}|undefined
+      ]>;
   generateDownloadUrl(
-    request: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-      | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateDownloadUrl(
-    request: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-      | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateDownloadUrl(
-    request?: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-          | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-      | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-      (
-        | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateDownloadUrl(
+      request: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
+      callback: Callback<
+          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
+          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateDownloadUrl(
+      request?: protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
+          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
+          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateDownloadUrl request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-          | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateDownloadUrl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateDownloadUrl(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
-          (
-            | protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateDownloadUrl response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.generateDownloadUrl(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlResponse,
+        protos.google.cloud.functions.v2beta.IGenerateDownloadUrlRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateDownloadUrl response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns a list of runtimes that are supported for the requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the runtimes should be
-   *   listed, specified in the format `projects/* /locations/*`
-   * @param {string} request.filter
-   *   The filter for Runtimes that match the filter expression,
-   *   following the syntax outlined in https://google.aip.dev/160.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.ListRuntimesResponse|ListRuntimesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.list_runtimes.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_ListRuntimes_async
-   */
+/**
+ * Returns a list of runtimes that are supported for the requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the runtimes should be
+ *   listed, specified in the format `projects/* /locations/*`
+ * @param {string} request.filter
+ *   The filter for Runtimes that match the filter expression,
+ *   following the syntax outlined in https://google.aip.dev/160.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.functions.v2beta.ListRuntimesResponse|ListRuntimesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.list_runtimes.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_ListRuntimes_async
+ */
   listRuntimes(
-    request?: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-      protos.google.cloud.functions.v2beta.IListRuntimesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IListRuntimesResponse,
+        protos.google.cloud.functions.v2beta.IListRuntimesRequest|undefined, {}|undefined
+      ]>;
   listRuntimes(
-    request: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-      | protos.google.cloud.functions.v2beta.IListRuntimesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listRuntimes(
-    request: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
-    callback: Callback<
-      protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-      | protos.google.cloud.functions.v2beta.IListRuntimesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listRuntimes(
-    request?: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-          | protos.google.cloud.functions.v2beta.IListRuntimesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-      | protos.google.cloud.functions.v2beta.IListRuntimesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-      protos.google.cloud.functions.v2beta.IListRuntimesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.functions.v2beta.IListRuntimesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listRuntimes(
+      request: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
+      callback: Callback<
+          protos.google.cloud.functions.v2beta.IListRuntimesResponse,
+          protos.google.cloud.functions.v2beta.IListRuntimesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listRuntimes(
+      request?: protos.google.cloud.functions.v2beta.IListRuntimesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.functions.v2beta.IListRuntimesResponse,
+          protos.google.cloud.functions.v2beta.IListRuntimesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.functions.v2beta.IListRuntimesResponse,
+          protos.google.cloud.functions.v2beta.IListRuntimesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IListRuntimesResponse,
+        protos.google.cloud.functions.v2beta.IListRuntimesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuntimes request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-          | protos.google.cloud.functions.v2beta.IListRuntimesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.functions.v2beta.IListRuntimesResponse,
+        protos.google.cloud.functions.v2beta.IListRuntimesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listRuntimes response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listRuntimes(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.functions.v2beta.IListRuntimesResponse,
-          protos.google.cloud.functions.v2beta.IListRuntimesRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listRuntimes response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.listRuntimes(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.functions.v2beta.IListRuntimesResponse,
+        protos.google.cloud.functions.v2beta.IListRuntimesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listRuntimes response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates a new function. If a function with the given name already exists in
-   * the specified project, the long running operation will return
-   * `ALREADY_EXISTS` error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location in which the function should be created,
-   *   specified in the format `projects/* /locations/*`
-   * @param {google.cloud.functions.v2beta.Function} request.function
-   *   Required. Function to be created.
-   * @param {string} request.functionId
-   *   The ID to use for the function, which will become the final component of
-   *   the function's resource name.
-   *
-   *   This value should be 4-63 characters, and valid characters
-   *   are /{@link protos.0-9|a-z}-/.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.create_function.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_CreateFunction_async
-   */
+/**
+ * Creates a new function. If a function with the given name already exists in
+ * the specified project, the long running operation will return
+ * `ALREADY_EXISTS` error.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location in which the function should be created,
+ *   specified in the format `projects/* /locations/*`
+ * @param {google.cloud.functions.v2beta.Function} request.function
+ *   Required. Function to be created.
+ * @param {string} request.functionId
+ *   The ID to use for the function, which will become the final component of
+ *   the function's resource name.
+ *
+ *   This value should be 4-63 characters, and valid characters
+ *   are /{@link protos.0-9|a-z}-/.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.create_function.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_CreateFunction_async
+ */
   createFunction(
-    request?: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createFunction(
-    request: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createFunction(
-    request: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createFunction(
-    request?: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.functions.v2beta.IFunction,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.functions.v2beta.ICreateFunctionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.functions.v2beta.IFunction,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createFunction response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createFunction request %j', request);
-    return this.innerApiCalls
-      .createFunction(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.functions.v2beta.IFunction,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createFunction response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createFunction(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createFunction response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createFunction()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.create_function.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_CreateFunction_async
-   */
-  async checkCreateFunctionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.functions.v2beta.Function,
-      protos.google.cloud.functions.v2beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createFunction()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.create_function.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_CreateFunction_async
+ */
+  async checkCreateFunctionProgress(name: string): Promise<LROperation<protos.google.cloud.functions.v2beta.Function, protos.google.cloud.functions.v2beta.OperationMetadata>>{
     this._log.info('createFunction long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createFunction,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.functions.v2beta.Function,
-      protos.google.cloud.functions.v2beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createFunction, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.functions.v2beta.Function, protos.google.cloud.functions.v2beta.OperationMetadata>;
   }
-  /**
-   * Updates existing function.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.functions.v2beta.Function} request.function
-   *   Required. New version of the function.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   *   If no field mask is provided, all fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.update_function.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_UpdateFunction_async
-   */
+/**
+ * Updates existing function.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.functions.v2beta.Function} request.function
+ *   Required. New version of the function.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ *   If no field mask is provided, all fields will be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.update_function.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_UpdateFunction_async
+ */
   updateFunction(
-    request?: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateFunction(
-    request: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateFunction(
-    request: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateFunction(
-    request?: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.functions.v2beta.IFunction,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.functions.v2beta.IFunction,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.functions.v2beta.IUpdateFunctionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'function.name': request.function!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'function.name': request.function!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.functions.v2beta.IFunction,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateFunction response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateFunction request %j', request);
-    return this.innerApiCalls
-      .updateFunction(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.functions.v2beta.IFunction,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateFunction response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateFunction(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.functions.v2beta.IFunction, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateFunction response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateFunction()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.update_function.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_UpdateFunction_async
-   */
-  async checkUpdateFunctionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.functions.v2beta.Function,
-      protos.google.cloud.functions.v2beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateFunction()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.update_function.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_UpdateFunction_async
+ */
+  async checkUpdateFunctionProgress(name: string): Promise<LROperation<protos.google.cloud.functions.v2beta.Function, protos.google.cloud.functions.v2beta.OperationMetadata>>{
     this._log.info('updateFunction long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateFunction,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.functions.v2beta.Function,
-      protos.google.cloud.functions.v2beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateFunction, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.functions.v2beta.Function, protos.google.cloud.functions.v2beta.OperationMetadata>;
   }
-  /**
-   * Deletes a function with the given name from the specified project. If the
-   * given function is used by some trigger, the trigger will be updated to
-   * remove this function.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the function which should be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.delete_function.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_DeleteFunction_async
-   */
+/**
+ * Deletes a function with the given name from the specified project. If the
+ * given function is used by some trigger, the trigger will be updated to
+ * remove this function.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the function which should be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.delete_function.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_DeleteFunction_async
+ */
   deleteFunction(
-    request?: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteFunction(
-    request: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteFunction(
-    request: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteFunction(
-    request?: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.functions.v2beta.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.functions.v2beta.IDeleteFunctionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteFunction response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteFunction request %j', request);
-    return this.innerApiCalls
-      .deleteFunction(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.functions.v2beta.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteFunction response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteFunction(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.functions.v2beta.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteFunction response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteFunction()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.delete_function.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_DeleteFunction_async
-   */
-  async checkDeleteFunctionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.functions.v2beta.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteFunction()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.delete_function.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_DeleteFunction_async
+ */
+  async checkDeleteFunctionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.functions.v2beta.OperationMetadata>>{
     this._log.info('deleteFunction long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteFunction,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.functions.v2beta.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteFunction, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.functions.v2beta.OperationMetadata>;
   }
-  /**
-   * Returns a list of functions that belong to the requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the function should be
-   *   listed, specified in the format `projects/* /locations/*` If you want to
-   *   list functions in all locations, use "-" in place of a location. When
-   *   listing functions in all locations, if one or more location(s) are
-   *   unreachable, the response will contain functions from all reachable
-   *   locations along with the names of any unreachable locations.
-   * @param {number} request.pageSize
-   *   Maximum number of functions to return per call. The largest allowed
-   *   page_size is 1,000, if the page_size is omitted or specified as greater
-   *   than 1,000 then it will be replaced as 1,000. The size of the list
-   *   response can be less than specified when used with filters.
-   * @param {string} request.pageToken
-   *   The value returned by the last
-   *   `ListFunctionsResponse`; indicates that
-   *   this is a continuation of a prior `ListFunctions` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   The filter for Functions that match the filter expression,
-   *   following the syntax outlined in https://google.aip.dev/160.
-   * @param {string} request.orderBy
-   *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending.
-   *   See https://google.aip.dev/132#ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.functions.v2beta.Function|Function}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listFunctionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns a list of functions that belong to the requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the function should be
+ *   listed, specified in the format `projects/* /locations/*` If you want to
+ *   list functions in all locations, use "-" in place of a location. When
+ *   listing functions in all locations, if one or more location(s) are
+ *   unreachable, the response will contain functions from all reachable
+ *   locations along with the names of any unreachable locations.
+ * @param {number} request.pageSize
+ *   Maximum number of functions to return per call. The largest allowed
+ *   page_size is 1,000, if the page_size is omitted or specified as greater
+ *   than 1,000 then it will be replaced as 1,000. The size of the list
+ *   response can be less than specified when used with filters.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   `ListFunctionsResponse`; indicates that
+ *   this is a continuation of a prior `ListFunctions` call, and that the
+ *   system should return the next page of data.
+ * @param {string} request.filter
+ *   The filter for Functions that match the filter expression,
+ *   following the syntax outlined in https://google.aip.dev/160.
+ * @param {string} request.orderBy
+ *   The sorting order of the resources returned. Value should be a comma
+ *   separated list of fields. The default sorting oder is ascending.
+ *   See https://google.aip.dev/132#ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.functions.v2beta.Function|Function}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listFunctionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFunctions(
-    request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IFunction[],
-      protos.google.cloud.functions.v2beta.IListFunctionsRequest | null,
-      protos.google.cloud.functions.v2beta.IListFunctionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IFunction[],
+        protos.google.cloud.functions.v2beta.IListFunctionsRequest|null,
+        protos.google.cloud.functions.v2beta.IListFunctionsResponse
+      ]>;
   listFunctions(
-    request: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-      | protos.google.cloud.functions.v2beta.IListFunctionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.functions.v2beta.IFunction
-    >
-  ): void;
-  listFunctions(
-    request: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-      | protos.google.cloud.functions.v2beta.IListFunctionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.functions.v2beta.IFunction
-    >
-  ): void;
-  listFunctions(
-    request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-          | protos.google.cloud.functions.v2beta.IListFunctionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.functions.v2beta.IFunction
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-      | protos.google.cloud.functions.v2beta.IListFunctionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.functions.v2beta.IFunction
-    >
-  ): Promise<
-    [
-      protos.google.cloud.functions.v2beta.IFunction[],
-      protos.google.cloud.functions.v2beta.IListFunctionsRequest | null,
-      protos.google.cloud.functions.v2beta.IListFunctionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.functions.v2beta.IListFunctionsResponse|null|undefined,
+          protos.google.cloud.functions.v2beta.IFunction>): void;
+  listFunctions(
+      request: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+          protos.google.cloud.functions.v2beta.IListFunctionsResponse|null|undefined,
+          protos.google.cloud.functions.v2beta.IFunction>): void;
+  listFunctions(
+      request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+          protos.google.cloud.functions.v2beta.IListFunctionsResponse|null|undefined,
+          protos.google.cloud.functions.v2beta.IFunction>,
+      callback?: PaginationCallback<
+          protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+          protos.google.cloud.functions.v2beta.IListFunctionsResponse|null|undefined,
+          protos.google.cloud.functions.v2beta.IFunction>):
+      Promise<[
+        protos.google.cloud.functions.v2beta.IFunction[],
+        protos.google.cloud.functions.v2beta.IListFunctionsRequest|null,
+        protos.google.cloud.functions.v2beta.IListFunctionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-          | protos.google.cloud.functions.v2beta.IListFunctionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.functions.v2beta.IFunction
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+      protos.google.cloud.functions.v2beta.IListFunctionsResponse|null|undefined,
+      protos.google.cloud.functions.v2beta.IFunction>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFunctions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1731,74 +1283,71 @@ export class FunctionServiceClient {
     this._log.info('listFunctions request %j', request);
     return this.innerApiCalls
       .listFunctions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.functions.v2beta.IFunction[],
-          protos.google.cloud.functions.v2beta.IListFunctionsRequest | null,
-          protos.google.cloud.functions.v2beta.IListFunctionsResponse,
-        ]) => {
-          this._log.info('listFunctions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.functions.v2beta.IFunction[],
+        protos.google.cloud.functions.v2beta.IListFunctionsRequest|null,
+        protos.google.cloud.functions.v2beta.IListFunctionsResponse
+      ]) => {
+        this._log.info('listFunctions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listFunctions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the function should be
-   *   listed, specified in the format `projects/* /locations/*` If you want to
-   *   list functions in all locations, use "-" in place of a location. When
-   *   listing functions in all locations, if one or more location(s) are
-   *   unreachable, the response will contain functions from all reachable
-   *   locations along with the names of any unreachable locations.
-   * @param {number} request.pageSize
-   *   Maximum number of functions to return per call. The largest allowed
-   *   page_size is 1,000, if the page_size is omitted or specified as greater
-   *   than 1,000 then it will be replaced as 1,000. The size of the list
-   *   response can be less than specified when used with filters.
-   * @param {string} request.pageToken
-   *   The value returned by the last
-   *   `ListFunctionsResponse`; indicates that
-   *   this is a continuation of a prior `ListFunctions` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   The filter for Functions that match the filter expression,
-   *   following the syntax outlined in https://google.aip.dev/160.
-   * @param {string} request.orderBy
-   *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending.
-   *   See https://google.aip.dev/132#ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.functions.v2beta.Function|Function} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listFunctionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listFunctions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the function should be
+ *   listed, specified in the format `projects/* /locations/*` If you want to
+ *   list functions in all locations, use "-" in place of a location. When
+ *   listing functions in all locations, if one or more location(s) are
+ *   unreachable, the response will contain functions from all reachable
+ *   locations along with the names of any unreachable locations.
+ * @param {number} request.pageSize
+ *   Maximum number of functions to return per call. The largest allowed
+ *   page_size is 1,000, if the page_size is omitted or specified as greater
+ *   than 1,000 then it will be replaced as 1,000. The size of the list
+ *   response can be less than specified when used with filters.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   `ListFunctionsResponse`; indicates that
+ *   this is a continuation of a prior `ListFunctions` call, and that the
+ *   system should return the next page of data.
+ * @param {string} request.filter
+ *   The filter for Functions that match the filter expression,
+ *   following the syntax outlined in https://google.aip.dev/160.
+ * @param {string} request.orderBy
+ *   The sorting order of the resources returned. Value should be a comma
+ *   separated list of fields. The default sorting oder is ascending.
+ *   See https://google.aip.dev/132#ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.functions.v2beta.Function|Function} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listFunctionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFunctionsStream(
-    request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFunctions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFunctions stream %j', request);
     return this.descriptors.page.listFunctions.createStream(
       this.innerApiCalls.listFunctions as GaxCall,
@@ -1807,65 +1356,64 @@ export class FunctionServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listFunctions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the function should be
-   *   listed, specified in the format `projects/* /locations/*` If you want to
-   *   list functions in all locations, use "-" in place of a location. When
-   *   listing functions in all locations, if one or more location(s) are
-   *   unreachable, the response will contain functions from all reachable
-   *   locations along with the names of any unreachable locations.
-   * @param {number} request.pageSize
-   *   Maximum number of functions to return per call. The largest allowed
-   *   page_size is 1,000, if the page_size is omitted or specified as greater
-   *   than 1,000 then it will be replaced as 1,000. The size of the list
-   *   response can be less than specified when used with filters.
-   * @param {string} request.pageToken
-   *   The value returned by the last
-   *   `ListFunctionsResponse`; indicates that
-   *   this is a continuation of a prior `ListFunctions` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   The filter for Functions that match the filter expression,
-   *   following the syntax outlined in https://google.aip.dev/160.
-   * @param {string} request.orderBy
-   *   The sorting order of the resources returned. Value should be a comma
-   *   separated list of fields. The default sorting oder is ascending.
-   *   See https://google.aip.dev/132#ordering.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.functions.v2beta.Function|Function}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/function_service.list_functions.js</caption>
-   * region_tag:cloudfunctions_v2beta_generated_FunctionService_ListFunctions_async
-   */
+/**
+ * Equivalent to `listFunctions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the function should be
+ *   listed, specified in the format `projects/* /locations/*` If you want to
+ *   list functions in all locations, use "-" in place of a location. When
+ *   listing functions in all locations, if one or more location(s) are
+ *   unreachable, the response will contain functions from all reachable
+ *   locations along with the names of any unreachable locations.
+ * @param {number} request.pageSize
+ *   Maximum number of functions to return per call. The largest allowed
+ *   page_size is 1,000, if the page_size is omitted or specified as greater
+ *   than 1,000 then it will be replaced as 1,000. The size of the list
+ *   response can be less than specified when used with filters.
+ * @param {string} request.pageToken
+ *   The value returned by the last
+ *   `ListFunctionsResponse`; indicates that
+ *   this is a continuation of a prior `ListFunctions` call, and that the
+ *   system should return the next page of data.
+ * @param {string} request.filter
+ *   The filter for Functions that match the filter expression,
+ *   following the syntax outlined in https://google.aip.dev/160.
+ * @param {string} request.orderBy
+ *   The sorting order of the resources returned. Value should be a comma
+ *   separated list of fields. The default sorting oder is ascending.
+ *   See https://google.aip.dev/132#ordering.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.functions.v2beta.Function|Function}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/function_service.list_functions.js</caption>
+ * region_tag:cloudfunctions_v2beta_generated_FunctionService_ListFunctions_async
+ */
   listFunctionsAsync(
-    request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.functions.v2beta.IFunction> {
+      request?: protos.google.cloud.functions.v2beta.IListFunctionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.functions.v2beta.IFunction>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFunctions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFunctions iterate %j', request);
     return this.descriptors.page.listFunctions.asyncIterate(
       this.innerApiCalls['listFunctions'] as GaxCall,
@@ -1873,31 +1421,31 @@ export class FunctionServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.functions.v2beta.IFunction>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1912,39 +1460,39 @@ export class FunctionServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1959,40 +1507,40 @@ export class FunctionServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -2007,11 +1555,11 @@ export class FunctionServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2051,7 +1599,7 @@ export class FunctionServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2089,7 +1637,7 @@ export class FunctionServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2134,20 +1682,20 @@ export class FunctionServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2184,13 +1732,13 @@ export class FunctionServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2224,7 +1772,7 @@ export class FunctionServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2239,20 +1787,20 @@ export class FunctionServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2296,20 +1844,20 @@ export class FunctionServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2325,7 +1873,7 @@ export class FunctionServiceClient {
    * @param {string} build
    * @returns {string} Resource name string.
    */
-  buildPath(project: string, location: string, build: string) {
+  buildPath(project:string,location:string,build:string) {
     return this.pathTemplates.buildPathTemplate.render({
       project: project,
       location: location,
@@ -2374,7 +1922,7 @@ export class FunctionServiceClient {
    * @param {string} channel
    * @returns {string} Resource name string.
    */
-  channelPath(project: string, location: string, channel: string) {
+  channelPath(project:string,location:string,channel:string) {
     return this.pathTemplates.channelPathTemplate.render({
       project: project,
       location: location,
@@ -2423,7 +1971,7 @@ export class FunctionServiceClient {
    * @param {string} connector
    * @returns {string} Resource name string.
    */
-  connectorPath(project: string, location: string, connector: string) {
+  connectorPath(project:string,location:string,connector:string) {
     return this.pathTemplates.connectorPathTemplate.render({
       project: project,
       location: location,
@@ -2439,8 +1987,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectorName(connectorName: string) {
-    return this.pathTemplates.connectorPathTemplate.match(connectorName)
-      .project;
+    return this.pathTemplates.connectorPathTemplate.match(connectorName).project;
   }
 
   /**
@@ -2451,8 +1998,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConnectorName(connectorName: string) {
-    return this.pathTemplates.connectorPathTemplate.match(connectorName)
-      .location;
+    return this.pathTemplates.connectorPathTemplate.match(connectorName).location;
   }
 
   /**
@@ -2463,8 +2009,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the connector.
    */
   matchConnectorFromConnectorName(connectorName: string) {
-    return this.pathTemplates.connectorPathTemplate.match(connectorName)
-      .connector;
+    return this.pathTemplates.connectorPathTemplate.match(connectorName).connector;
   }
 
   /**
@@ -2476,12 +2021,7 @@ export class FunctionServiceClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -2498,8 +2038,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
   }
 
   /**
@@ -2510,8 +2049,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
   }
 
   /**
@@ -2522,8 +2060,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
   }
 
   /**
@@ -2534,8 +2071,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
   }
 
   /**
@@ -2546,7 +2082,7 @@ export class FunctionServiceClient {
    * @param {string} functionParam
    * @returns {string} Resource name string.
    */
-  functionPath(project: string, location: string, functionParam: string) {
+  functionPath(project:string,location:string,functionParam:string) {
     return this.pathTemplates.functionPathTemplate.render({
       project: project,
       location: location,
@@ -2594,7 +2130,7 @@ export class FunctionServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2629,7 +2165,7 @@ export class FunctionServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2654,7 +2190,7 @@ export class FunctionServiceClient {
    * @param {string} repository
    * @returns {string} Resource name string.
    */
-  repositoryPath(project: string, location: string, repository: string) {
+  repositoryPath(project:string,location:string,repository:string) {
     return this.pathTemplates.repositoryPathTemplate.render({
       project: project,
       location: location,
@@ -2670,8 +2206,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .project;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).project;
   }
 
   /**
@@ -2682,8 +2217,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .location;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).location;
   }
 
   /**
@@ -2694,8 +2228,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .repository;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).repository;
   }
 
   /**
@@ -2706,7 +2239,7 @@ export class FunctionServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(project: string, location: string, service: string) {
+  servicePath(project:string,location:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -2754,7 +2287,7 @@ export class FunctionServiceClient {
    * @param {string} topic
    * @returns {string} Resource name string.
    */
-  topicPath(project: string, topic: string) {
+  topicPath(project:string,topic:string) {
     return this.pathTemplates.topicPathTemplate.render({
       project: project,
       topic: topic,
@@ -2791,7 +2324,7 @@ export class FunctionServiceClient {
    * @param {string} trigger
    * @returns {string} Resource name string.
    */
-  triggerPath(project: string, location: string, trigger: string) {
+  triggerPath(project:string,location:string,trigger:string) {
     return this.pathTemplates.triggerPathTemplate.render({
       project: project,
       location: location,
@@ -2840,7 +2373,7 @@ export class FunctionServiceClient {
    * @param {string} worker_pool
    * @returns {string} Resource name string.
    */
-  workerPoolPath(project: string, location: string, workerPool: string) {
+  workerPoolPath(project:string,location:string,workerPool:string) {
     return this.pathTemplates.workerPoolPathTemplate.render({
       project: project,
       location: location,
@@ -2856,8 +2389,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWorkerPoolName(workerPoolName: string) {
-    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
-      .project;
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).project;
   }
 
   /**
@@ -2868,8 +2400,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWorkerPoolName(workerPoolName: string) {
-    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
-      .location;
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).location;
   }
 
   /**
@@ -2880,8 +2411,7 @@ export class FunctionServiceClient {
    * @returns {string} A string representing the worker_pool.
    */
   matchWorkerPoolFromWorkerPoolName(workerPoolName: string) {
-    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
-      .worker_pool;
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).worker_pool;
   }
 
   /**
@@ -2896,9 +2426,9 @@ export class FunctionServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

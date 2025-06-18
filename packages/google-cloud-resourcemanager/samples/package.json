@@ -14,7 +14,7 @@
     "test": "mocha --timeout=600000"
   },
   "dependencies": {
-    "@google-cloud/resource-manager": "^6.0.1"
+    "@google-cloud/resource-manager": "^6.1.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

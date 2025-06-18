@@ -58,6 +58,12 @@ export namespace google {
 
                 /** AlertPolicy mutationRecord */
                 mutationRecord?: (google.monitoring.v3.IMutationRecord|null);
+
+                /** AlertPolicy alertStrategy */
+                alertStrategy?: (google.monitoring.v3.AlertPolicy.IAlertStrategy|null);
+
+                /** AlertPolicy severity */
+                severity?: (google.monitoring.v3.AlertPolicy.Severity|keyof typeof google.monitoring.v3.AlertPolicy.Severity|null);
             }
 
             /** Represents an AlertPolicy. */
@@ -101,6 +107,12 @@ export namespace google {
 
                 /** AlertPolicy mutationRecord. */
                 public mutationRecord?: (google.monitoring.v3.IMutationRecord|null);
+
+                /** AlertPolicy alertStrategy. */
+                public alertStrategy?: (google.monitoring.v3.AlertPolicy.IAlertStrategy|null);
+
+                /** AlertPolicy severity. */
+                public severity: (google.monitoring.v3.AlertPolicy.Severity|keyof typeof google.monitoring.v3.AlertPolicy.Severity);
 
                 /**
                  * Creates a new AlertPolicy instance using the specified properties.
@@ -190,6 +202,12 @@ export namespace google {
 
                     /** Documentation mimeType */
                     mimeType?: (string|null);
+
+                    /** Documentation subject */
+                    subject?: (string|null);
+
+                    /** Documentation links */
+                    links?: (google.monitoring.v3.AlertPolicy.Documentation.ILink[]|null);
                 }
 
                 /** Represents a Documentation. */
@@ -206,6 +224,12 @@ export namespace google {
 
                     /** Documentation mimeType. */
                     public mimeType: string;
+
+                    /** Documentation subject. */
+                    public subject: string;
+
+                    /** Documentation links. */
+                    public links: google.monitoring.v3.AlertPolicy.Documentation.ILink[];
 
                     /**
                      * Creates a new Documentation instance using the specified properties.
@@ -285,6 +309,112 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace Documentation {
+
+                    /** Properties of a Link. */
+                    interface ILink {
+
+                        /** Link displayName */
+                        displayName?: (string|null);
+
+                        /** Link url */
+                        url?: (string|null);
+                    }
+
+                    /** Represents a Link. */
+                    class Link implements ILink {
+
+                        /**
+                         * Constructs a new Link.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.Documentation.ILink);
+
+                        /** Link displayName. */
+                        public displayName: string;
+
+                        /** Link url. */
+                        public url: string;
+
+                        /**
+                         * Creates a new Link instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Link instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.Documentation.ILink): google.monitoring.v3.AlertPolicy.Documentation.Link;
+
+                        /**
+                         * Encodes the specified Link message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Documentation.Link.verify|verify} messages.
+                         * @param message Link message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.Documentation.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Link message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Documentation.Link.verify|verify} messages.
+                         * @param message Link message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Documentation.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Link message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Link
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Documentation.Link;
+
+                        /**
+                         * Decodes a Link message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Link
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Documentation.Link;
+
+                        /**
+                         * Verifies a Link message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Link message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Link
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Documentation.Link;
+
+                        /**
+                         * Creates a plain object from a Link message. Also converts values to other types if specified.
+                         * @param message Link
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.Documentation.Link, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Link to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Link
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a Condition. */
                 interface ICondition {
 
@@ -300,8 +430,17 @@ export namespace google {
                     /** Condition conditionAbsent */
                     conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
 
+                    /** Condition conditionMatchedLog */
+                    conditionMatchedLog?: (google.monitoring.v3.AlertPolicy.Condition.ILogMatch|null);
+
                     /** Condition conditionMonitoringQueryLanguage */
                     conditionMonitoringQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null);
+
+                    /** Condition conditionPrometheusQueryLanguage */
+                    conditionPrometheusQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition|null);
+
+                    /** Condition conditionSql */
+                    conditionSql?: (google.monitoring.v3.AlertPolicy.Condition.ISqlCondition|null);
                 }
 
                 /** Represents a Condition. */
@@ -325,11 +464,20 @@ export namespace google {
                     /** Condition conditionAbsent. */
                     public conditionAbsent?: (google.monitoring.v3.AlertPolicy.Condition.IMetricAbsence|null);
 
+                    /** Condition conditionMatchedLog. */
+                    public conditionMatchedLog?: (google.monitoring.v3.AlertPolicy.Condition.ILogMatch|null);
+
                     /** Condition conditionMonitoringQueryLanguage. */
                     public conditionMonitoringQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.IMonitoringQueryLanguageCondition|null);
 
+                    /** Condition conditionPrometheusQueryLanguage. */
+                    public conditionPrometheusQueryLanguage?: (google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition|null);
+
+                    /** Condition conditionSql. */
+                    public conditionSql?: (google.monitoring.v3.AlertPolicy.Condition.ISqlCondition|null);
+
                     /** Condition condition. */
-                    public condition?: ("conditionThreshold"|"conditionAbsent"|"conditionMonitoringQueryLanguage");
+                    public condition?: ("conditionThreshold"|"conditionAbsent"|"conditionMatchedLog"|"conditionMonitoringQueryLanguage"|"conditionPrometheusQueryLanguage"|"conditionSql");
 
                     /**
                      * Creates a new Condition instance using the specified properties.
@@ -517,6 +665,14 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** EvaluationMissingData enum. */
+                    enum EvaluationMissingData {
+                        EVALUATION_MISSING_DATA_UNSPECIFIED = 0,
+                        EVALUATION_MISSING_DATA_INACTIVE = 1,
+                        EVALUATION_MISSING_DATA_ACTIVE = 2,
+                        EVALUATION_MISSING_DATA_NO_OP = 3
+                    }
+
                     /** Properties of a MetricThreshold. */
                     interface IMetricThreshold {
 
@@ -532,6 +688,9 @@ export namespace google {
                         /** MetricThreshold denominatorAggregations */
                         denominatorAggregations?: (google.monitoring.v3.IAggregation[]|null);
 
+                        /** MetricThreshold forecastOptions */
+                        forecastOptions?: (google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions|null);
+
                         /** MetricThreshold comparison */
                         comparison?: (google.monitoring.v3.ComparisonType|keyof typeof google.monitoring.v3.ComparisonType|null);
 
@@ -543,6 +702,9 @@ export namespace google {
 
                         /** MetricThreshold trigger */
                         trigger?: (google.monitoring.v3.AlertPolicy.Condition.ITrigger|null);
+
+                        /** MetricThreshold evaluationMissingData */
+                        evaluationMissingData?: (google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|keyof typeof google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|null);
                     }
 
                     /** Represents a MetricThreshold. */
@@ -566,6 +728,9 @@ export namespace google {
                         /** MetricThreshold denominatorAggregations. */
                         public denominatorAggregations: google.monitoring.v3.IAggregation[];
 
+                        /** MetricThreshold forecastOptions. */
+                        public forecastOptions?: (google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions|null);
+
                         /** MetricThreshold comparison. */
                         public comparison: (google.monitoring.v3.ComparisonType|keyof typeof google.monitoring.v3.ComparisonType);
 
@@ -577,6 +742,9 @@ export namespace google {
 
                         /** MetricThreshold trigger. */
                         public trigger?: (google.monitoring.v3.AlertPolicy.Condition.ITrigger|null);
+
+                        /** MetricThreshold evaluationMissingData. */
+                        public evaluationMissingData: (google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|keyof typeof google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData);
 
                         /**
                          * Creates a new MetricThreshold instance using the specified properties.
@@ -654,6 +822,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MetricThreshold {
+
+                        /** Properties of a ForecastOptions. */
+                        interface IForecastOptions {
+
+                            /** ForecastOptions forecastHorizon */
+                            forecastHorizon?: (google.protobuf.IDuration|null);
+                        }
+
+                        /** Represents a ForecastOptions. */
+                        class ForecastOptions implements IForecastOptions {
+
+                            /**
+                             * Constructs a new ForecastOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions);
+
+                            /** ForecastOptions forecastHorizon. */
+                            public forecastHorizon?: (google.protobuf.IDuration|null);
+
+                            /**
+                             * Creates a new ForecastOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ForecastOptions instance
+                             */
+                            public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions): google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions;
+
+                            /**
+                             * Encodes the specified ForecastOptions message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.verify|verify} messages.
+                             * @param message ForecastOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ForecastOptions message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions.verify|verify} messages.
+                             * @param message ForecastOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.IForecastOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ForecastOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ForecastOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions;
+
+                            /**
+                             * Decodes a ForecastOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ForecastOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions;
+
+                            /**
+                             * Verifies a ForecastOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ForecastOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ForecastOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions;
+
+                            /**
+                             * Creates a plain object from a ForecastOptions message. Also converts values to other types if specified.
+                             * @param message ForecastOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ForecastOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ForecastOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a MetricAbsence. */
@@ -771,6 +1039,109 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a LogMatch. */
+                    interface ILogMatch {
+
+                        /** LogMatch filter */
+                        filter?: (string|null);
+
+                        /** LogMatch labelExtractors */
+                        labelExtractors?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a LogMatch. */
+                    class LogMatch implements ILogMatch {
+
+                        /**
+                         * Constructs a new LogMatch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.ILogMatch);
+
+                        /** LogMatch filter. */
+                        public filter: string;
+
+                        /** LogMatch labelExtractors. */
+                        public labelExtractors: { [k: string]: string };
+
+                        /**
+                         * Creates a new LogMatch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LogMatch instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.ILogMatch): google.monitoring.v3.AlertPolicy.Condition.LogMatch;
+
+                        /**
+                         * Encodes the specified LogMatch message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.LogMatch.verify|verify} messages.
+                         * @param message LogMatch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.Condition.ILogMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LogMatch message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.LogMatch.verify|verify} messages.
+                         * @param message LogMatch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.ILogMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LogMatch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LogMatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.LogMatch;
+
+                        /**
+                         * Decodes a LogMatch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LogMatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.LogMatch;
+
+                        /**
+                         * Verifies a LogMatch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LogMatch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LogMatch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.LogMatch;
+
+                        /**
+                         * Creates a plain object from a LogMatch message. Also converts values to other types if specified.
+                         * @param message LogMatch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.LogMatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LogMatch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LogMatch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a MonitoringQueryLanguageCondition. */
                     interface IMonitoringQueryLanguageCondition {
 
@@ -782,6 +1153,9 @@ export namespace google {
 
                         /** MonitoringQueryLanguageCondition trigger */
                         trigger?: (google.monitoring.v3.AlertPolicy.Condition.ITrigger|null);
+
+                        /** MonitoringQueryLanguageCondition evaluationMissingData */
+                        evaluationMissingData?: (google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|keyof typeof google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|null);
                     }
 
                     /** Represents a MonitoringQueryLanguageCondition. */
@@ -801,6 +1175,9 @@ export namespace google {
 
                         /** MonitoringQueryLanguageCondition trigger. */
                         public trigger?: (google.monitoring.v3.AlertPolicy.Condition.ITrigger|null);
+
+                        /** MonitoringQueryLanguageCondition evaluationMissingData. */
+                        public evaluationMissingData: (google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData|keyof typeof google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData);
 
                         /**
                          * Creates a new MonitoringQueryLanguageCondition instance using the specified properties.
@@ -879,6 +1256,781 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a PrometheusQueryLanguageCondition. */
+                    interface IPrometheusQueryLanguageCondition {
+
+                        /** PrometheusQueryLanguageCondition query */
+                        query?: (string|null);
+
+                        /** PrometheusQueryLanguageCondition duration */
+                        duration?: (google.protobuf.IDuration|null);
+
+                        /** PrometheusQueryLanguageCondition evaluationInterval */
+                        evaluationInterval?: (google.protobuf.IDuration|null);
+
+                        /** PrometheusQueryLanguageCondition labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** PrometheusQueryLanguageCondition ruleGroup */
+                        ruleGroup?: (string|null);
+
+                        /** PrometheusQueryLanguageCondition alertRule */
+                        alertRule?: (string|null);
+
+                        /** PrometheusQueryLanguageCondition disableMetricValidation */
+                        disableMetricValidation?: (boolean|null);
+                    }
+
+                    /** Represents a PrometheusQueryLanguageCondition. */
+                    class PrometheusQueryLanguageCondition implements IPrometheusQueryLanguageCondition {
+
+                        /**
+                         * Constructs a new PrometheusQueryLanguageCondition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition);
+
+                        /** PrometheusQueryLanguageCondition query. */
+                        public query: string;
+
+                        /** PrometheusQueryLanguageCondition duration. */
+                        public duration?: (google.protobuf.IDuration|null);
+
+                        /** PrometheusQueryLanguageCondition evaluationInterval. */
+                        public evaluationInterval?: (google.protobuf.IDuration|null);
+
+                        /** PrometheusQueryLanguageCondition labels. */
+                        public labels: { [k: string]: string };
+
+                        /** PrometheusQueryLanguageCondition ruleGroup. */
+                        public ruleGroup: string;
+
+                        /** PrometheusQueryLanguageCondition alertRule. */
+                        public alertRule: string;
+
+                        /** PrometheusQueryLanguageCondition disableMetricValidation. */
+                        public disableMetricValidation: boolean;
+
+                        /**
+                         * Creates a new PrometheusQueryLanguageCondition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrometheusQueryLanguageCondition instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition): google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition;
+
+                        /**
+                         * Encodes the specified PrometheusQueryLanguageCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.verify|verify} messages.
+                         * @param message PrometheusQueryLanguageCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrometheusQueryLanguageCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition.verify|verify} messages.
+                         * @param message PrometheusQueryLanguageCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.IPrometheusQueryLanguageCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrometheusQueryLanguageCondition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrometheusQueryLanguageCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition;
+
+                        /**
+                         * Decodes a PrometheusQueryLanguageCondition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrometheusQueryLanguageCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition;
+
+                        /**
+                         * Verifies a PrometheusQueryLanguageCondition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrometheusQueryLanguageCondition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrometheusQueryLanguageCondition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition;
+
+                        /**
+                         * Creates a plain object from a PrometheusQueryLanguageCondition message. Also converts values to other types if specified.
+                         * @param message PrometheusQueryLanguageCondition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrometheusQueryLanguageCondition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrometheusQueryLanguageCondition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SqlCondition. */
+                    interface ISqlCondition {
+
+                        /** SqlCondition query */
+                        query?: (string|null);
+
+                        /** SqlCondition minutes */
+                        minutes?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes|null);
+
+                        /** SqlCondition hourly */
+                        hourly?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly|null);
+
+                        /** SqlCondition daily */
+                        daily?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily|null);
+
+                        /** SqlCondition rowCountTest */
+                        rowCountTest?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest|null);
+
+                        /** SqlCondition booleanTest */
+                        booleanTest?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest|null);
+                    }
+
+                    /** Represents a SqlCondition. */
+                    class SqlCondition implements ISqlCondition {
+
+                        /**
+                         * Constructs a new SqlCondition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.ISqlCondition);
+
+                        /** SqlCondition query. */
+                        public query: string;
+
+                        /** SqlCondition minutes. */
+                        public minutes?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes|null);
+
+                        /** SqlCondition hourly. */
+                        public hourly?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly|null);
+
+                        /** SqlCondition daily. */
+                        public daily?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily|null);
+
+                        /** SqlCondition rowCountTest. */
+                        public rowCountTest?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest|null);
+
+                        /** SqlCondition booleanTest. */
+                        public booleanTest?: (google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest|null);
+
+                        /** SqlCondition schedule. */
+                        public schedule?: ("minutes"|"hourly"|"daily");
+
+                        /** SqlCondition evaluate. */
+                        public evaluate?: ("rowCountTest"|"booleanTest");
+
+                        /**
+                         * Creates a new SqlCondition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlCondition instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.ISqlCondition): google.monitoring.v3.AlertPolicy.Condition.SqlCondition;
+
+                        /**
+                         * Encodes the specified SqlCondition message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.verify|verify} messages.
+                         * @param message SqlCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.Condition.ISqlCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlCondition message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.verify|verify} messages.
+                         * @param message SqlCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.ISqlCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlCondition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.SqlCondition;
+
+                        /**
+                         * Decodes a SqlCondition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.SqlCondition;
+
+                        /**
+                         * Verifies a SqlCondition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlCondition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlCondition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.SqlCondition;
+
+                        /**
+                         * Creates a plain object from a SqlCondition message. Also converts values to other types if specified.
+                         * @param message SqlCondition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlCondition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlCondition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SqlCondition {
+
+                        /** Properties of a Minutes. */
+                        interface IMinutes {
+
+                            /** Minutes periodicity */
+                            periodicity?: (number|null);
+                        }
+
+                        /** Represents a Minutes. */
+                        class Minutes implements IMinutes {
+
+                            /**
+                             * Constructs a new Minutes.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes);
+
+                            /** Minutes periodicity. */
+                            public periodicity: number;
+
+                            /**
+                             * Creates a new Minutes instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Minutes instance
+                             */
+                            public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes;
+
+                            /**
+                             * Encodes the specified Minutes message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.verify|verify} messages.
+                             * @param message Minutes message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Minutes message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes.verify|verify} messages.
+                             * @param message Minutes message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IMinutes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Minutes message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Minutes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes;
+
+                            /**
+                             * Decodes a Minutes message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Minutes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes;
+
+                            /**
+                             * Verifies a Minutes message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Minutes message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Minutes
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes;
+
+                            /**
+                             * Creates a plain object from a Minutes message. Also converts values to other types if specified.
+                             * @param message Minutes
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Minutes to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Minutes
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an Hourly. */
+                        interface IHourly {
+
+                            /** Hourly periodicity */
+                            periodicity?: (number|null);
+
+                            /** Hourly minuteOffset */
+                            minuteOffset?: (number|null);
+                        }
+
+                        /** Represents an Hourly. */
+                        class Hourly implements IHourly {
+
+                            /**
+                             * Constructs a new Hourly.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly);
+
+                            /** Hourly periodicity. */
+                            public periodicity: number;
+
+                            /** Hourly minuteOffset. */
+                            public minuteOffset?: (number|null);
+
+                            /** Hourly _minuteOffset. */
+                            public _minuteOffset?: "minuteOffset";
+
+                            /**
+                             * Creates a new Hourly instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Hourly instance
+                             */
+                            public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly;
+
+                            /**
+                             * Encodes the specified Hourly message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.verify|verify} messages.
+                             * @param message Hourly message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Hourly message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly.verify|verify} messages.
+                             * @param message Hourly message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IHourly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Hourly message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Hourly
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly;
+
+                            /**
+                             * Decodes an Hourly message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Hourly
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly;
+
+                            /**
+                             * Verifies an Hourly message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Hourly message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Hourly
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly;
+
+                            /**
+                             * Creates a plain object from an Hourly message. Also converts values to other types if specified.
+                             * @param message Hourly
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Hourly to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Hourly
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Daily. */
+                        interface IDaily {
+
+                            /** Daily periodicity */
+                            periodicity?: (number|null);
+
+                            /** Daily executionTime */
+                            executionTime?: (google.type.ITimeOfDay|null);
+                        }
+
+                        /** Represents a Daily. */
+                        class Daily implements IDaily {
+
+                            /**
+                             * Constructs a new Daily.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily);
+
+                            /** Daily periodicity. */
+                            public periodicity: number;
+
+                            /** Daily executionTime. */
+                            public executionTime?: (google.type.ITimeOfDay|null);
+
+                            /**
+                             * Creates a new Daily instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Daily instance
+                             */
+                            public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily;
+
+                            /**
+                             * Encodes the specified Daily message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.verify|verify} messages.
+                             * @param message Daily message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Daily message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily.verify|verify} messages.
+                             * @param message Daily message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IDaily, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Daily message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Daily
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily;
+
+                            /**
+                             * Decodes a Daily message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Daily
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily;
+
+                            /**
+                             * Verifies a Daily message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Daily message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Daily
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily;
+
+                            /**
+                             * Creates a plain object from a Daily message. Also converts values to other types if specified.
+                             * @param message Daily
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Daily to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Daily
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a RowCountTest. */
+                        interface IRowCountTest {
+
+                            /** RowCountTest comparison */
+                            comparison?: (google.monitoring.v3.ComparisonType|keyof typeof google.monitoring.v3.ComparisonType|null);
+
+                            /** RowCountTest threshold */
+                            threshold?: (number|Long|string|null);
+                        }
+
+                        /** Represents a RowCountTest. */
+                        class RowCountTest implements IRowCountTest {
+
+                            /**
+                             * Constructs a new RowCountTest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest);
+
+                            /** RowCountTest comparison. */
+                            public comparison: (google.monitoring.v3.ComparisonType|keyof typeof google.monitoring.v3.ComparisonType);
+
+                            /** RowCountTest threshold. */
+                            public threshold: (number|Long|string);
+
+                            /**
+                             * Creates a new RowCountTest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RowCountTest instance
+                             */
+                            public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest;
+
+                            /**
+                             * Encodes the specified RowCountTest message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.verify|verify} messages.
+                             * @param message RowCountTest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RowCountTest message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest.verify|verify} messages.
+                             * @param message RowCountTest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IRowCountTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RowCountTest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RowCountTest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest;
+
+                            /**
+                             * Decodes a RowCountTest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RowCountTest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest;
+
+                            /**
+                             * Verifies a RowCountTest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RowCountTest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RowCountTest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest;
+
+                            /**
+                             * Creates a plain object from a RowCountTest message. Also converts values to other types if specified.
+                             * @param message RowCountTest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RowCountTest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RowCountTest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a BooleanTest. */
+                        interface IBooleanTest {
+
+                            /** BooleanTest column */
+                            column?: (string|null);
+                        }
+
+                        /** Represents a BooleanTest. */
+                        class BooleanTest implements IBooleanTest {
+
+                            /**
+                             * Constructs a new BooleanTest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest);
+
+                            /** BooleanTest column. */
+                            public column: string;
+
+                            /**
+                             * Creates a new BooleanTest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BooleanTest instance
+                             */
+                            public static create(properties?: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest;
+
+                            /**
+                             * Encodes the specified BooleanTest message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.verify|verify} messages.
+                             * @param message BooleanTest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BooleanTest message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest.verify|verify} messages.
+                             * @param message BooleanTest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.IBooleanTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BooleanTest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BooleanTest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest;
+
+                            /**
+                             * Decodes a BooleanTest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BooleanTest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest;
+
+                            /**
+                             * Verifies a BooleanTest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BooleanTest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BooleanTest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest;
+
+                            /**
+                             * Creates a plain object from a BooleanTest message. Also converts values to other types if specified.
+                             * @param message BooleanTest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BooleanTest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BooleanTest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** ConditionCombinerType enum. */
@@ -887,6 +2039,339 @@ export namespace google {
                     AND = 1,
                     OR = 2,
                     AND_WITH_MATCHING_RESOURCE = 3
+                }
+
+                /** Properties of an AlertStrategy. */
+                interface IAlertStrategy {
+
+                    /** AlertStrategy notificationRateLimit */
+                    notificationRateLimit?: (google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit|null);
+
+                    /** AlertStrategy notificationPrompts */
+                    notificationPrompts?: (google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationPrompt[]|null);
+
+                    /** AlertStrategy autoClose */
+                    autoClose?: (google.protobuf.IDuration|null);
+
+                    /** AlertStrategy notificationChannelStrategy */
+                    notificationChannelStrategy?: (google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy[]|null);
+                }
+
+                /** Represents an AlertStrategy. */
+                class AlertStrategy implements IAlertStrategy {
+
+                    /**
+                     * Constructs a new AlertStrategy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.AlertPolicy.IAlertStrategy);
+
+                    /** AlertStrategy notificationRateLimit. */
+                    public notificationRateLimit?: (google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit|null);
+
+                    /** AlertStrategy notificationPrompts. */
+                    public notificationPrompts: google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationPrompt[];
+
+                    /** AlertStrategy autoClose. */
+                    public autoClose?: (google.protobuf.IDuration|null);
+
+                    /** AlertStrategy notificationChannelStrategy. */
+                    public notificationChannelStrategy: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy[];
+
+                    /**
+                     * Creates a new AlertStrategy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlertStrategy instance
+                     */
+                    public static create(properties?: google.monitoring.v3.AlertPolicy.IAlertStrategy): google.monitoring.v3.AlertPolicy.AlertStrategy;
+
+                    /**
+                     * Encodes the specified AlertStrategy message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.verify|verify} messages.
+                     * @param message AlertStrategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.AlertPolicy.IAlertStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlertStrategy message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.verify|verify} messages.
+                     * @param message AlertStrategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.IAlertStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlertStrategy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlertStrategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.AlertStrategy;
+
+                    /**
+                     * Decodes an AlertStrategy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlertStrategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.AlertStrategy;
+
+                    /**
+                     * Verifies an AlertStrategy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlertStrategy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlertStrategy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.AlertStrategy;
+
+                    /**
+                     * Creates a plain object from an AlertStrategy message. Also converts values to other types if specified.
+                     * @param message AlertStrategy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.AlertPolicy.AlertStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlertStrategy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlertStrategy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AlertStrategy {
+
+                    /** Properties of a NotificationRateLimit. */
+                    interface INotificationRateLimit {
+
+                        /** NotificationRateLimit period */
+                        period?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a NotificationRateLimit. */
+                    class NotificationRateLimit implements INotificationRateLimit {
+
+                        /**
+                         * Constructs a new NotificationRateLimit.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit);
+
+                        /** NotificationRateLimit period. */
+                        public period?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new NotificationRateLimit instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NotificationRateLimit instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit;
+
+                        /**
+                         * Encodes the specified NotificationRateLimit message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.verify|verify} messages.
+                         * @param message NotificationRateLimit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NotificationRateLimit message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.verify|verify} messages.
+                         * @param message NotificationRateLimit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationRateLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NotificationRateLimit message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NotificationRateLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit;
+
+                        /**
+                         * Decodes a NotificationRateLimit message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NotificationRateLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit;
+
+                        /**
+                         * Verifies a NotificationRateLimit message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NotificationRateLimit message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NotificationRateLimit
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit;
+
+                        /**
+                         * Creates a plain object from a NotificationRateLimit message. Also converts values to other types if specified.
+                         * @param message NotificationRateLimit
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NotificationRateLimit to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NotificationRateLimit
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** NotificationPrompt enum. */
+                    enum NotificationPrompt {
+                        NOTIFICATION_PROMPT_UNSPECIFIED = 0,
+                        OPENED = 1,
+                        CLOSED = 3
+                    }
+
+                    /** Properties of a NotificationChannelStrategy. */
+                    interface INotificationChannelStrategy {
+
+                        /** NotificationChannelStrategy notificationChannelNames */
+                        notificationChannelNames?: (string[]|null);
+
+                        /** NotificationChannelStrategy renotifyInterval */
+                        renotifyInterval?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a NotificationChannelStrategy. */
+                    class NotificationChannelStrategy implements INotificationChannelStrategy {
+
+                        /**
+                         * Constructs a new NotificationChannelStrategy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy);
+
+                        /** NotificationChannelStrategy notificationChannelNames. */
+                        public notificationChannelNames: string[];
+
+                        /** NotificationChannelStrategy renotifyInterval. */
+                        public renotifyInterval?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new NotificationChannelStrategy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NotificationChannelStrategy instance
+                         */
+                        public static create(properties?: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy;
+
+                        /**
+                         * Encodes the specified NotificationChannelStrategy message. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.verify|verify} messages.
+                         * @param message NotificationChannelStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NotificationChannelStrategy message, length delimited. Does not implicitly {@link google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy.verify|verify} messages.
+                         * @param message NotificationChannelStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.AlertPolicy.AlertStrategy.INotificationChannelStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NotificationChannelStrategy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NotificationChannelStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy;
+
+                        /**
+                         * Decodes a NotificationChannelStrategy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NotificationChannelStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy;
+
+                        /**
+                         * Verifies a NotificationChannelStrategy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NotificationChannelStrategy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NotificationChannelStrategy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy;
+
+                        /**
+                         * Creates a plain object from a NotificationChannelStrategy message. Also converts values to other types if specified.
+                         * @param message NotificationChannelStrategy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NotificationChannelStrategy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NotificationChannelStrategy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Severity enum. */
+                enum Severity {
+                    SEVERITY_UNSPECIFIED = 0,
+                    CRITICAL = 1,
+                    ERROR = 2,
+                    WARNING = 3
                 }
             }
 
@@ -3525,6 +5010,9 @@ export namespace google {
 
                 /** TimeSeries unit */
                 unit?: (string|null);
+
+                /** TimeSeries description */
+                description?: (string|null);
             }
 
             /** Represents a TimeSeries. */
@@ -3556,6 +5044,9 @@ export namespace google {
 
                 /** TimeSeries unit. */
                 public unit: string;
+
+                /** TimeSeries description. */
+                public description: string;
 
                 /**
                  * Creates a new TimeSeries instance using the specified properties.
@@ -4638,6 +6129,20 @@ export namespace google {
                  * @returns Promise
                  */
                 public createTimeSeries(request: google.monitoring.v3.ICreateTimeSeriesRequest): Promise<google.protobuf.Empty>;
+
+                /**
+                 * Calls CreateServiceTimeSeries.
+                 * @param request CreateTimeSeriesRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public createServiceTimeSeries(request: google.monitoring.v3.ICreateTimeSeriesRequest, callback: google.monitoring.v3.MetricService.CreateServiceTimeSeriesCallback): void;
+
+                /**
+                 * Calls CreateServiceTimeSeries.
+                 * @param request CreateTimeSeriesRequest message or plain object
+                 * @returns Promise
+                 */
+                public createServiceTimeSeries(request: google.monitoring.v3.ICreateTimeSeriesRequest): Promise<google.protobuf.Empty>;
             }
 
             namespace MetricService {
@@ -4697,6 +6202,13 @@ export namespace google {
                  * @param [response] Empty
                  */
                 type CreateTimeSeriesCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                /**
+                 * Callback as used by {@link google.monitoring.v3.MetricService|createServiceTimeSeries}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type CreateServiceTimeSeriesCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
             }
 
             /** Properties of a ListMonitoredResourceDescriptorsRequest. */
@@ -5028,6 +6540,9 @@ export namespace google {
 
                 /** ListMetricDescriptorsRequest pageToken */
                 pageToken?: (string|null);
+
+                /** ListMetricDescriptorsRequest activeOnly */
+                activeOnly?: (boolean|null);
             }
 
             /** Represents a ListMetricDescriptorsRequest. */
@@ -5050,6 +6565,9 @@ export namespace google {
 
                 /** ListMetricDescriptorsRequest pageToken. */
                 public pageToken: string;
+
+                /** ListMetricDescriptorsRequest activeOnly. */
+                public activeOnly: boolean;
 
                 /**
                  * Creates a new ListMetricDescriptorsRequest instance using the specified properties.
@@ -8503,8 +10021,26 @@ export namespace google {
                 /** Service istioCanonicalService */
                 istioCanonicalService?: (google.monitoring.v3.Service.IIstioCanonicalService|null);
 
+                /** Service cloudRun */
+                cloudRun?: (google.monitoring.v3.Service.ICloudRun|null);
+
+                /** Service gkeNamespace */
+                gkeNamespace?: (google.monitoring.v3.Service.IGkeNamespace|null);
+
+                /** Service gkeWorkload */
+                gkeWorkload?: (google.monitoring.v3.Service.IGkeWorkload|null);
+
+                /** Service gkeService */
+                gkeService?: (google.monitoring.v3.Service.IGkeService|null);
+
+                /** Service basicService */
+                basicService?: (google.monitoring.v3.Service.IBasicService|null);
+
                 /** Service telemetry */
                 telemetry?: (google.monitoring.v3.Service.ITelemetry|null);
+
+                /** Service userLabels */
+                userLabels?: ({ [k: string]: string }|null);
             }
 
             /** Represents a Service. */
@@ -8540,11 +10076,29 @@ export namespace google {
                 /** Service istioCanonicalService. */
                 public istioCanonicalService?: (google.monitoring.v3.Service.IIstioCanonicalService|null);
 
+                /** Service cloudRun. */
+                public cloudRun?: (google.monitoring.v3.Service.ICloudRun|null);
+
+                /** Service gkeNamespace. */
+                public gkeNamespace?: (google.monitoring.v3.Service.IGkeNamespace|null);
+
+                /** Service gkeWorkload. */
+                public gkeWorkload?: (google.monitoring.v3.Service.IGkeWorkload|null);
+
+                /** Service gkeService. */
+                public gkeService?: (google.monitoring.v3.Service.IGkeService|null);
+
+                /** Service basicService. */
+                public basicService?: (google.monitoring.v3.Service.IBasicService|null);
+
                 /** Service telemetry. */
                 public telemetry?: (google.monitoring.v3.Service.ITelemetry|null);
 
+                /** Service userLabels. */
+                public userLabels: { [k: string]: string };
+
                 /** Service identifier. */
-                public identifier?: ("custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|"istioCanonicalService");
+                public identifier?: ("custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|"meshIstio"|"istioCanonicalService"|"cloudRun"|"gkeNamespace"|"gkeWorkload"|"gkeService");
 
                 /**
                  * Creates a new Service instance using the specified properties.
@@ -9244,6 +10798,575 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CloudRun. */
+                interface ICloudRun {
+
+                    /** CloudRun serviceName */
+                    serviceName?: (string|null);
+
+                    /** CloudRun location */
+                    location?: (string|null);
+                }
+
+                /** Represents a CloudRun. */
+                class CloudRun implements ICloudRun {
+
+                    /**
+                     * Constructs a new CloudRun.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Service.ICloudRun);
+
+                    /** CloudRun serviceName. */
+                    public serviceName: string;
+
+                    /** CloudRun location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new CloudRun instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudRun instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Service.ICloudRun): google.monitoring.v3.Service.CloudRun;
+
+                    /**
+                     * Encodes the specified CloudRun message. Does not implicitly {@link google.monitoring.v3.Service.CloudRun.verify|verify} messages.
+                     * @param message CloudRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Service.ICloudRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudRun message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.CloudRun.verify|verify} messages.
+                     * @param message CloudRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Service.ICloudRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudRun message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Service.CloudRun;
+
+                    /**
+                     * Decodes a CloudRun message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Service.CloudRun;
+
+                    /**
+                     * Verifies a CloudRun message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudRun message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudRun
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Service.CloudRun;
+
+                    /**
+                     * Creates a plain object from a CloudRun message. Also converts values to other types if specified.
+                     * @param message CloudRun
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Service.CloudRun, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkeNamespace. */
+                interface IGkeNamespace {
+
+                    /** GkeNamespace projectId */
+                    projectId?: (string|null);
+
+                    /** GkeNamespace location */
+                    location?: (string|null);
+
+                    /** GkeNamespace clusterName */
+                    clusterName?: (string|null);
+
+                    /** GkeNamespace namespaceName */
+                    namespaceName?: (string|null);
+                }
+
+                /** Represents a GkeNamespace. */
+                class GkeNamespace implements IGkeNamespace {
+
+                    /**
+                     * Constructs a new GkeNamespace.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Service.IGkeNamespace);
+
+                    /** GkeNamespace projectId. */
+                    public projectId: string;
+
+                    /** GkeNamespace location. */
+                    public location: string;
+
+                    /** GkeNamespace clusterName. */
+                    public clusterName: string;
+
+                    /** GkeNamespace namespaceName. */
+                    public namespaceName: string;
+
+                    /**
+                     * Creates a new GkeNamespace instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeNamespace instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Service.IGkeNamespace): google.monitoring.v3.Service.GkeNamespace;
+
+                    /**
+                     * Encodes the specified GkeNamespace message. Does not implicitly {@link google.monitoring.v3.Service.GkeNamespace.verify|verify} messages.
+                     * @param message GkeNamespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Service.IGkeNamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeNamespace message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.GkeNamespace.verify|verify} messages.
+                     * @param message GkeNamespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Service.IGkeNamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeNamespace message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeNamespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Service.GkeNamespace;
+
+                    /**
+                     * Decodes a GkeNamespace message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeNamespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Service.GkeNamespace;
+
+                    /**
+                     * Verifies a GkeNamespace message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeNamespace message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeNamespace
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Service.GkeNamespace;
+
+                    /**
+                     * Creates a plain object from a GkeNamespace message. Also converts values to other types if specified.
+                     * @param message GkeNamespace
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Service.GkeNamespace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeNamespace to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkeNamespace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkeWorkload. */
+                interface IGkeWorkload {
+
+                    /** GkeWorkload projectId */
+                    projectId?: (string|null);
+
+                    /** GkeWorkload location */
+                    location?: (string|null);
+
+                    /** GkeWorkload clusterName */
+                    clusterName?: (string|null);
+
+                    /** GkeWorkload namespaceName */
+                    namespaceName?: (string|null);
+
+                    /** GkeWorkload topLevelControllerType */
+                    topLevelControllerType?: (string|null);
+
+                    /** GkeWorkload topLevelControllerName */
+                    topLevelControllerName?: (string|null);
+                }
+
+                /** Represents a GkeWorkload. */
+                class GkeWorkload implements IGkeWorkload {
+
+                    /**
+                     * Constructs a new GkeWorkload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Service.IGkeWorkload);
+
+                    /** GkeWorkload projectId. */
+                    public projectId: string;
+
+                    /** GkeWorkload location. */
+                    public location: string;
+
+                    /** GkeWorkload clusterName. */
+                    public clusterName: string;
+
+                    /** GkeWorkload namespaceName. */
+                    public namespaceName: string;
+
+                    /** GkeWorkload topLevelControllerType. */
+                    public topLevelControllerType: string;
+
+                    /** GkeWorkload topLevelControllerName. */
+                    public topLevelControllerName: string;
+
+                    /**
+                     * Creates a new GkeWorkload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeWorkload instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Service.IGkeWorkload): google.monitoring.v3.Service.GkeWorkload;
+
+                    /**
+                     * Encodes the specified GkeWorkload message. Does not implicitly {@link google.monitoring.v3.Service.GkeWorkload.verify|verify} messages.
+                     * @param message GkeWorkload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Service.IGkeWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeWorkload message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.GkeWorkload.verify|verify} messages.
+                     * @param message GkeWorkload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Service.IGkeWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeWorkload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeWorkload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Service.GkeWorkload;
+
+                    /**
+                     * Decodes a GkeWorkload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeWorkload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Service.GkeWorkload;
+
+                    /**
+                     * Verifies a GkeWorkload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeWorkload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeWorkload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Service.GkeWorkload;
+
+                    /**
+                     * Creates a plain object from a GkeWorkload message. Also converts values to other types if specified.
+                     * @param message GkeWorkload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Service.GkeWorkload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeWorkload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkeWorkload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkeService. */
+                interface IGkeService {
+
+                    /** GkeService projectId */
+                    projectId?: (string|null);
+
+                    /** GkeService location */
+                    location?: (string|null);
+
+                    /** GkeService clusterName */
+                    clusterName?: (string|null);
+
+                    /** GkeService namespaceName */
+                    namespaceName?: (string|null);
+
+                    /** GkeService serviceName */
+                    serviceName?: (string|null);
+                }
+
+                /** Represents a GkeService. */
+                class GkeService implements IGkeService {
+
+                    /**
+                     * Constructs a new GkeService.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Service.IGkeService);
+
+                    /** GkeService projectId. */
+                    public projectId: string;
+
+                    /** GkeService location. */
+                    public location: string;
+
+                    /** GkeService clusterName. */
+                    public clusterName: string;
+
+                    /** GkeService namespaceName. */
+                    public namespaceName: string;
+
+                    /** GkeService serviceName. */
+                    public serviceName: string;
+
+                    /**
+                     * Creates a new GkeService instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkeService instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Service.IGkeService): google.monitoring.v3.Service.GkeService;
+
+                    /**
+                     * Encodes the specified GkeService message. Does not implicitly {@link google.monitoring.v3.Service.GkeService.verify|verify} messages.
+                     * @param message GkeService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Service.IGkeService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkeService message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.GkeService.verify|verify} messages.
+                     * @param message GkeService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Service.IGkeService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkeService message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkeService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Service.GkeService;
+
+                    /**
+                     * Decodes a GkeService message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkeService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Service.GkeService;
+
+                    /**
+                     * Verifies a GkeService message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkeService message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkeService
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Service.GkeService;
+
+                    /**
+                     * Creates a plain object from a GkeService message. Also converts values to other types if specified.
+                     * @param message GkeService
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Service.GkeService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkeService to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkeService
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BasicService. */
+                interface IBasicService {
+
+                    /** BasicService serviceType */
+                    serviceType?: (string|null);
+
+                    /** BasicService serviceLabels */
+                    serviceLabels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a BasicService. */
+                class BasicService implements IBasicService {
+
+                    /**
+                     * Constructs a new BasicService.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Service.IBasicService);
+
+                    /** BasicService serviceType. */
+                    public serviceType: string;
+
+                    /** BasicService serviceLabels. */
+                    public serviceLabels: { [k: string]: string };
+
+                    /**
+                     * Creates a new BasicService instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BasicService instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Service.IBasicService): google.monitoring.v3.Service.BasicService;
+
+                    /**
+                     * Encodes the specified BasicService message. Does not implicitly {@link google.monitoring.v3.Service.BasicService.verify|verify} messages.
+                     * @param message BasicService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Service.IBasicService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BasicService message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.BasicService.verify|verify} messages.
+                     * @param message BasicService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Service.IBasicService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BasicService message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BasicService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Service.BasicService;
+
+                    /**
+                     * Decodes a BasicService message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BasicService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Service.BasicService;
+
+                    /**
+                     * Verifies a BasicService message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BasicService message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BasicService
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Service.BasicService;
+
+                    /**
+                     * Creates a plain object from a BasicService message. Also converts values to other types if specified.
+                     * @param message BasicService
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Service.BasicService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BasicService to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BasicService
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Telemetry. */
                 interface ITelemetry {
 
@@ -9362,6 +11485,9 @@ export namespace google {
 
                 /** ServiceLevelObjective calendarPeriod */
                 calendarPeriod?: (google.type.CalendarPeriod|keyof typeof google.type.CalendarPeriod|null);
+
+                /** ServiceLevelObjective userLabels */
+                userLabels?: ({ [k: string]: string }|null);
             }
 
             /** Represents a ServiceLevelObjective. */
@@ -9390,6 +11516,9 @@ export namespace google {
 
                 /** ServiceLevelObjective calendarPeriod. */
                 public calendarPeriod?: (google.type.CalendarPeriod|keyof typeof google.type.CalendarPeriod|null);
+
+                /** ServiceLevelObjective userLabels. */
+                public userLabels: { [k: string]: string };
 
                 /** ServiceLevelObjective period. */
                 public period?: ("rollingPeriod"|"calendarPeriod");
@@ -12166,6 +14295,856 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a Snooze. */
+            interface ISnooze {
+
+                /** Snooze name */
+                name?: (string|null);
+
+                /** Snooze criteria */
+                criteria?: (google.monitoring.v3.Snooze.ICriteria|null);
+
+                /** Snooze interval */
+                interval?: (google.monitoring.v3.ITimeInterval|null);
+
+                /** Snooze displayName */
+                displayName?: (string|null);
+            }
+
+            /** Represents a Snooze. */
+            class Snooze implements ISnooze {
+
+                /**
+                 * Constructs a new Snooze.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ISnooze);
+
+                /** Snooze name. */
+                public name: string;
+
+                /** Snooze criteria. */
+                public criteria?: (google.monitoring.v3.Snooze.ICriteria|null);
+
+                /** Snooze interval. */
+                public interval?: (google.monitoring.v3.ITimeInterval|null);
+
+                /** Snooze displayName. */
+                public displayName: string;
+
+                /**
+                 * Creates a new Snooze instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Snooze instance
+                 */
+                public static create(properties?: google.monitoring.v3.ISnooze): google.monitoring.v3.Snooze;
+
+                /**
+                 * Encodes the specified Snooze message. Does not implicitly {@link google.monitoring.v3.Snooze.verify|verify} messages.
+                 * @param message Snooze message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ISnooze, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Snooze message, length delimited. Does not implicitly {@link google.monitoring.v3.Snooze.verify|verify} messages.
+                 * @param message Snooze message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ISnooze, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Snooze message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Snooze
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Snooze;
+
+                /**
+                 * Decodes a Snooze message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Snooze
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Snooze;
+
+                /**
+                 * Verifies a Snooze message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Snooze message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Snooze
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Snooze;
+
+                /**
+                 * Creates a plain object from a Snooze message. Also converts values to other types if specified.
+                 * @param message Snooze
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.Snooze, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Snooze to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Snooze
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Snooze {
+
+                /** Properties of a Criteria. */
+                interface ICriteria {
+
+                    /** Criteria policies */
+                    policies?: (string[]|null);
+
+                    /** Criteria filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a Criteria. */
+                class Criteria implements ICriteria {
+
+                    /**
+                     * Constructs a new Criteria.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.Snooze.ICriteria);
+
+                    /** Criteria policies. */
+                    public policies: string[];
+
+                    /** Criteria filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new Criteria instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Criteria instance
+                     */
+                    public static create(properties?: google.monitoring.v3.Snooze.ICriteria): google.monitoring.v3.Snooze.Criteria;
+
+                    /**
+                     * Encodes the specified Criteria message. Does not implicitly {@link google.monitoring.v3.Snooze.Criteria.verify|verify} messages.
+                     * @param message Criteria message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.Snooze.ICriteria, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Criteria message, length delimited. Does not implicitly {@link google.monitoring.v3.Snooze.Criteria.verify|verify} messages.
+                     * @param message Criteria message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.Snooze.ICriteria, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Criteria message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Criteria
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.Snooze.Criteria;
+
+                    /**
+                     * Decodes a Criteria message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Criteria
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.Snooze.Criteria;
+
+                    /**
+                     * Verifies a Criteria message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Criteria message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Criteria
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.Snooze.Criteria;
+
+                    /**
+                     * Creates a plain object from a Criteria message. Also converts values to other types if specified.
+                     * @param message Criteria
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.Snooze.Criteria, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Criteria to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Criteria
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Represents a SnoozeService */
+            class SnoozeService extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new SnoozeService service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Creates new SnoozeService service using the specified rpc implementation.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 * @returns RPC service. Useful where requests and/or responses are streamed.
+                 */
+                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SnoozeService;
+
+                /**
+                 * Calls CreateSnooze.
+                 * @param request CreateSnoozeRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Snooze
+                 */
+                public createSnooze(request: google.monitoring.v3.ICreateSnoozeRequest, callback: google.monitoring.v3.SnoozeService.CreateSnoozeCallback): void;
+
+                /**
+                 * Calls CreateSnooze.
+                 * @param request CreateSnoozeRequest message or plain object
+                 * @returns Promise
+                 */
+                public createSnooze(request: google.monitoring.v3.ICreateSnoozeRequest): Promise<google.monitoring.v3.Snooze>;
+
+                /**
+                 * Calls ListSnoozes.
+                 * @param request ListSnoozesRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListSnoozesResponse
+                 */
+                public listSnoozes(request: google.monitoring.v3.IListSnoozesRequest, callback: google.monitoring.v3.SnoozeService.ListSnoozesCallback): void;
+
+                /**
+                 * Calls ListSnoozes.
+                 * @param request ListSnoozesRequest message or plain object
+                 * @returns Promise
+                 */
+                public listSnoozes(request: google.monitoring.v3.IListSnoozesRequest): Promise<google.monitoring.v3.ListSnoozesResponse>;
+
+                /**
+                 * Calls GetSnooze.
+                 * @param request GetSnoozeRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Snooze
+                 */
+                public getSnooze(request: google.monitoring.v3.IGetSnoozeRequest, callback: google.monitoring.v3.SnoozeService.GetSnoozeCallback): void;
+
+                /**
+                 * Calls GetSnooze.
+                 * @param request GetSnoozeRequest message or plain object
+                 * @returns Promise
+                 */
+                public getSnooze(request: google.monitoring.v3.IGetSnoozeRequest): Promise<google.monitoring.v3.Snooze>;
+
+                /**
+                 * Calls UpdateSnooze.
+                 * @param request UpdateSnoozeRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Snooze
+                 */
+                public updateSnooze(request: google.monitoring.v3.IUpdateSnoozeRequest, callback: google.monitoring.v3.SnoozeService.UpdateSnoozeCallback): void;
+
+                /**
+                 * Calls UpdateSnooze.
+                 * @param request UpdateSnoozeRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateSnooze(request: google.monitoring.v3.IUpdateSnoozeRequest): Promise<google.monitoring.v3.Snooze>;
+            }
+
+            namespace SnoozeService {
+
+                /**
+                 * Callback as used by {@link google.monitoring.v3.SnoozeService|createSnooze}.
+                 * @param error Error, if any
+                 * @param [response] Snooze
+                 */
+                type CreateSnoozeCallback = (error: (Error|null), response?: google.monitoring.v3.Snooze) => void;
+
+                /**
+                 * Callback as used by {@link google.monitoring.v3.SnoozeService|listSnoozes}.
+                 * @param error Error, if any
+                 * @param [response] ListSnoozesResponse
+                 */
+                type ListSnoozesCallback = (error: (Error|null), response?: google.monitoring.v3.ListSnoozesResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.monitoring.v3.SnoozeService|getSnooze}.
+                 * @param error Error, if any
+                 * @param [response] Snooze
+                 */
+                type GetSnoozeCallback = (error: (Error|null), response?: google.monitoring.v3.Snooze) => void;
+
+                /**
+                 * Callback as used by {@link google.monitoring.v3.SnoozeService|updateSnooze}.
+                 * @param error Error, if any
+                 * @param [response] Snooze
+                 */
+                type UpdateSnoozeCallback = (error: (Error|null), response?: google.monitoring.v3.Snooze) => void;
+            }
+
+            /** Properties of a CreateSnoozeRequest. */
+            interface ICreateSnoozeRequest {
+
+                /** CreateSnoozeRequest parent */
+                parent?: (string|null);
+
+                /** CreateSnoozeRequest snooze */
+                snooze?: (google.monitoring.v3.ISnooze|null);
+            }
+
+            /** Represents a CreateSnoozeRequest. */
+            class CreateSnoozeRequest implements ICreateSnoozeRequest {
+
+                /**
+                 * Constructs a new CreateSnoozeRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ICreateSnoozeRequest);
+
+                /** CreateSnoozeRequest parent. */
+                public parent: string;
+
+                /** CreateSnoozeRequest snooze. */
+                public snooze?: (google.monitoring.v3.ISnooze|null);
+
+                /**
+                 * Creates a new CreateSnoozeRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateSnoozeRequest instance
+                 */
+                public static create(properties?: google.monitoring.v3.ICreateSnoozeRequest): google.monitoring.v3.CreateSnoozeRequest;
+
+                /**
+                 * Encodes the specified CreateSnoozeRequest message. Does not implicitly {@link google.monitoring.v3.CreateSnoozeRequest.verify|verify} messages.
+                 * @param message CreateSnoozeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ICreateSnoozeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateSnoozeRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateSnoozeRequest.verify|verify} messages.
+                 * @param message CreateSnoozeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ICreateSnoozeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateSnoozeRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateSnoozeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.CreateSnoozeRequest;
+
+                /**
+                 * Decodes a CreateSnoozeRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateSnoozeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.CreateSnoozeRequest;
+
+                /**
+                 * Verifies a CreateSnoozeRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateSnoozeRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateSnoozeRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.CreateSnoozeRequest;
+
+                /**
+                 * Creates a plain object from a CreateSnoozeRequest message. Also converts values to other types if specified.
+                 * @param message CreateSnoozeRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.CreateSnoozeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateSnoozeRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CreateSnoozeRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListSnoozesRequest. */
+            interface IListSnoozesRequest {
+
+                /** ListSnoozesRequest parent */
+                parent?: (string|null);
+
+                /** ListSnoozesRequest filter */
+                filter?: (string|null);
+
+                /** ListSnoozesRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListSnoozesRequest pageToken */
+                pageToken?: (string|null);
+            }
+
+            /** Represents a ListSnoozesRequest. */
+            class ListSnoozesRequest implements IListSnoozesRequest {
+
+                /**
+                 * Constructs a new ListSnoozesRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IListSnoozesRequest);
+
+                /** ListSnoozesRequest parent. */
+                public parent: string;
+
+                /** ListSnoozesRequest filter. */
+                public filter: string;
+
+                /** ListSnoozesRequest pageSize. */
+                public pageSize: number;
+
+                /** ListSnoozesRequest pageToken. */
+                public pageToken: string;
+
+                /**
+                 * Creates a new ListSnoozesRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListSnoozesRequest instance
+                 */
+                public static create(properties?: google.monitoring.v3.IListSnoozesRequest): google.monitoring.v3.ListSnoozesRequest;
+
+                /**
+                 * Encodes the specified ListSnoozesRequest message. Does not implicitly {@link google.monitoring.v3.ListSnoozesRequest.verify|verify} messages.
+                 * @param message ListSnoozesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IListSnoozesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListSnoozesRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.ListSnoozesRequest.verify|verify} messages.
+                 * @param message ListSnoozesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IListSnoozesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListSnoozesRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListSnoozesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.ListSnoozesRequest;
+
+                /**
+                 * Decodes a ListSnoozesRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListSnoozesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.ListSnoozesRequest;
+
+                /**
+                 * Verifies a ListSnoozesRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListSnoozesRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListSnoozesRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.ListSnoozesRequest;
+
+                /**
+                 * Creates a plain object from a ListSnoozesRequest message. Also converts values to other types if specified.
+                 * @param message ListSnoozesRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.ListSnoozesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListSnoozesRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListSnoozesRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListSnoozesResponse. */
+            interface IListSnoozesResponse {
+
+                /** ListSnoozesResponse snoozes */
+                snoozes?: (google.monitoring.v3.ISnooze[]|null);
+
+                /** ListSnoozesResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListSnoozesResponse. */
+            class ListSnoozesResponse implements IListSnoozesResponse {
+
+                /**
+                 * Constructs a new ListSnoozesResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IListSnoozesResponse);
+
+                /** ListSnoozesResponse snoozes. */
+                public snoozes: google.monitoring.v3.ISnooze[];
+
+                /** ListSnoozesResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListSnoozesResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListSnoozesResponse instance
+                 */
+                public static create(properties?: google.monitoring.v3.IListSnoozesResponse): google.monitoring.v3.ListSnoozesResponse;
+
+                /**
+                 * Encodes the specified ListSnoozesResponse message. Does not implicitly {@link google.monitoring.v3.ListSnoozesResponse.verify|verify} messages.
+                 * @param message ListSnoozesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IListSnoozesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListSnoozesResponse message, length delimited. Does not implicitly {@link google.monitoring.v3.ListSnoozesResponse.verify|verify} messages.
+                 * @param message ListSnoozesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IListSnoozesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListSnoozesResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListSnoozesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.ListSnoozesResponse;
+
+                /**
+                 * Decodes a ListSnoozesResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListSnoozesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.ListSnoozesResponse;
+
+                /**
+                 * Verifies a ListSnoozesResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListSnoozesResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListSnoozesResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.ListSnoozesResponse;
+
+                /**
+                 * Creates a plain object from a ListSnoozesResponse message. Also converts values to other types if specified.
+                 * @param message ListSnoozesResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.ListSnoozesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListSnoozesResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListSnoozesResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetSnoozeRequest. */
+            interface IGetSnoozeRequest {
+
+                /** GetSnoozeRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetSnoozeRequest. */
+            class GetSnoozeRequest implements IGetSnoozeRequest {
+
+                /**
+                 * Constructs a new GetSnoozeRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IGetSnoozeRequest);
+
+                /** GetSnoozeRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetSnoozeRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetSnoozeRequest instance
+                 */
+                public static create(properties?: google.monitoring.v3.IGetSnoozeRequest): google.monitoring.v3.GetSnoozeRequest;
+
+                /**
+                 * Encodes the specified GetSnoozeRequest message. Does not implicitly {@link google.monitoring.v3.GetSnoozeRequest.verify|verify} messages.
+                 * @param message GetSnoozeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IGetSnoozeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetSnoozeRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.GetSnoozeRequest.verify|verify} messages.
+                 * @param message GetSnoozeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IGetSnoozeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetSnoozeRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetSnoozeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.GetSnoozeRequest;
+
+                /**
+                 * Decodes a GetSnoozeRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetSnoozeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.GetSnoozeRequest;
+
+                /**
+                 * Verifies a GetSnoozeRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetSnoozeRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetSnoozeRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.GetSnoozeRequest;
+
+                /**
+                 * Creates a plain object from a GetSnoozeRequest message. Also converts values to other types if specified.
+                 * @param message GetSnoozeRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.GetSnoozeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetSnoozeRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetSnoozeRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateSnoozeRequest. */
+            interface IUpdateSnoozeRequest {
+
+                /** UpdateSnoozeRequest snooze */
+                snooze?: (google.monitoring.v3.ISnooze|null);
+
+                /** UpdateSnoozeRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents an UpdateSnoozeRequest. */
+            class UpdateSnoozeRequest implements IUpdateSnoozeRequest {
+
+                /**
+                 * Constructs a new UpdateSnoozeRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.IUpdateSnoozeRequest);
+
+                /** UpdateSnoozeRequest snooze. */
+                public snooze?: (google.monitoring.v3.ISnooze|null);
+
+                /** UpdateSnoozeRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new UpdateSnoozeRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateSnoozeRequest instance
+                 */
+                public static create(properties?: google.monitoring.v3.IUpdateSnoozeRequest): google.monitoring.v3.UpdateSnoozeRequest;
+
+                /**
+                 * Encodes the specified UpdateSnoozeRequest message. Does not implicitly {@link google.monitoring.v3.UpdateSnoozeRequest.verify|verify} messages.
+                 * @param message UpdateSnoozeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.IUpdateSnoozeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateSnoozeRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.UpdateSnoozeRequest.verify|verify} messages.
+                 * @param message UpdateSnoozeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.IUpdateSnoozeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateSnoozeRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateSnoozeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.UpdateSnoozeRequest;
+
+                /**
+                 * Decodes an UpdateSnoozeRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateSnoozeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.UpdateSnoozeRequest;
+
+                /**
+                 * Verifies an UpdateSnoozeRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateSnoozeRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateSnoozeRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.UpdateSnoozeRequest;
+
+                /**
+                 * Creates a plain object from an UpdateSnoozeRequest message. Also converts values to other types if specified.
+                 * @param message UpdateSnoozeRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.UpdateSnoozeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateSnoozeRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateSnoozeRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a SpanContext. */
             interface ISpanContext {
 
@@ -12261,15 +15240,6 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** UptimeCheckRegion enum. */
-            enum UptimeCheckRegion {
-                REGION_UNSPECIFIED = 0,
-                USA = 1,
-                EUROPE = 2,
-                SOUTH_AMERICA = 3,
-                ASIA_PACIFIC = 4
             }
 
             /** Properties of an InternalChecker. */
@@ -12409,6 +15379,212 @@ export namespace google {
                 }
             }
 
+            /** Properties of a SyntheticMonitorTarget. */
+            interface ISyntheticMonitorTarget {
+
+                /** SyntheticMonitorTarget cloudFunctionV2 */
+                cloudFunctionV2?: (google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target|null);
+            }
+
+            /** Represents a SyntheticMonitorTarget. */
+            class SyntheticMonitorTarget implements ISyntheticMonitorTarget {
+
+                /**
+                 * Constructs a new SyntheticMonitorTarget.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ISyntheticMonitorTarget);
+
+                /** SyntheticMonitorTarget cloudFunctionV2. */
+                public cloudFunctionV2?: (google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target|null);
+
+                /** SyntheticMonitorTarget target. */
+                public target?: "cloudFunctionV2";
+
+                /**
+                 * Creates a new SyntheticMonitorTarget instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SyntheticMonitorTarget instance
+                 */
+                public static create(properties?: google.monitoring.v3.ISyntheticMonitorTarget): google.monitoring.v3.SyntheticMonitorTarget;
+
+                /**
+                 * Encodes the specified SyntheticMonitorTarget message. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.verify|verify} messages.
+                 * @param message SyntheticMonitorTarget message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ISyntheticMonitorTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SyntheticMonitorTarget message, length delimited. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.verify|verify} messages.
+                 * @param message SyntheticMonitorTarget message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ISyntheticMonitorTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SyntheticMonitorTarget message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SyntheticMonitorTarget
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.SyntheticMonitorTarget;
+
+                /**
+                 * Decodes a SyntheticMonitorTarget message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SyntheticMonitorTarget
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.SyntheticMonitorTarget;
+
+                /**
+                 * Verifies a SyntheticMonitorTarget message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SyntheticMonitorTarget message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SyntheticMonitorTarget
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.SyntheticMonitorTarget;
+
+                /**
+                 * Creates a plain object from a SyntheticMonitorTarget message. Also converts values to other types if specified.
+                 * @param message SyntheticMonitorTarget
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.SyntheticMonitorTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SyntheticMonitorTarget to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SyntheticMonitorTarget
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SyntheticMonitorTarget {
+
+                /** Properties of a CloudFunctionV2Target. */
+                interface ICloudFunctionV2Target {
+
+                    /** CloudFunctionV2Target name */
+                    name?: (string|null);
+
+                    /** CloudFunctionV2Target cloudRunRevision */
+                    cloudRunRevision?: (google.api.IMonitoredResource|null);
+                }
+
+                /** Represents a CloudFunctionV2Target. */
+                class CloudFunctionV2Target implements ICloudFunctionV2Target {
+
+                    /**
+                     * Constructs a new CloudFunctionV2Target.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target);
+
+                    /** CloudFunctionV2Target name. */
+                    public name: string;
+
+                    /** CloudFunctionV2Target cloudRunRevision. */
+                    public cloudRunRevision?: (google.api.IMonitoredResource|null);
+
+                    /**
+                     * Creates a new CloudFunctionV2Target instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudFunctionV2Target instance
+                     */
+                    public static create(properties?: google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target): google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target;
+
+                    /**
+                     * Encodes the specified CloudFunctionV2Target message. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.verify|verify} messages.
+                     * @param message CloudFunctionV2Target message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudFunctionV2Target message, length delimited. Does not implicitly {@link google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.verify|verify} messages.
+                     * @param message CloudFunctionV2Target message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.SyntheticMonitorTarget.ICloudFunctionV2Target, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudFunctionV2Target message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudFunctionV2Target
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target;
+
+                    /**
+                     * Decodes a CloudFunctionV2Target message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudFunctionV2Target
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target;
+
+                    /**
+                     * Verifies a CloudFunctionV2Target message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudFunctionV2Target message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudFunctionV2Target
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target;
+
+                    /**
+                     * Creates a plain object from a CloudFunctionV2Target message. Also converts values to other types if specified.
+                     * @param message CloudFunctionV2Target
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudFunctionV2Target to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudFunctionV2Target
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Properties of an UptimeCheckConfig. */
             interface IUptimeCheckConfig {
 
@@ -12423,6 +15599,9 @@ export namespace google {
 
                 /** UptimeCheckConfig resourceGroup */
                 resourceGroup?: (google.monitoring.v3.UptimeCheckConfig.IResourceGroup|null);
+
+                /** UptimeCheckConfig syntheticMonitor */
+                syntheticMonitor?: (google.monitoring.v3.ISyntheticMonitorTarget|null);
 
                 /** UptimeCheckConfig httpCheck */
                 httpCheck?: (google.monitoring.v3.UptimeCheckConfig.IHttpCheck|null);
@@ -12439,6 +15618,9 @@ export namespace google {
                 /** UptimeCheckConfig contentMatchers */
                 contentMatchers?: (google.monitoring.v3.UptimeCheckConfig.IContentMatcher[]|null);
 
+                /** UptimeCheckConfig checkerType */
+                checkerType?: (google.monitoring.v3.UptimeCheckConfig.CheckerType|keyof typeof google.monitoring.v3.UptimeCheckConfig.CheckerType|null);
+
                 /** UptimeCheckConfig selectedRegions */
                 selectedRegions?: (google.monitoring.v3.UptimeCheckRegion[]|null);
 
@@ -12447,6 +15629,9 @@ export namespace google {
 
                 /** UptimeCheckConfig internalCheckers */
                 internalCheckers?: (google.monitoring.v3.IInternalChecker[]|null);
+
+                /** UptimeCheckConfig userLabels */
+                userLabels?: ({ [k: string]: string }|null);
             }
 
             /** Represents an UptimeCheckConfig. */
@@ -12470,6 +15655,9 @@ export namespace google {
                 /** UptimeCheckConfig resourceGroup. */
                 public resourceGroup?: (google.monitoring.v3.UptimeCheckConfig.IResourceGroup|null);
 
+                /** UptimeCheckConfig syntheticMonitor. */
+                public syntheticMonitor?: (google.monitoring.v3.ISyntheticMonitorTarget|null);
+
                 /** UptimeCheckConfig httpCheck. */
                 public httpCheck?: (google.monitoring.v3.UptimeCheckConfig.IHttpCheck|null);
 
@@ -12485,6 +15673,9 @@ export namespace google {
                 /** UptimeCheckConfig contentMatchers. */
                 public contentMatchers: google.monitoring.v3.UptimeCheckConfig.IContentMatcher[];
 
+                /** UptimeCheckConfig checkerType. */
+                public checkerType: (google.monitoring.v3.UptimeCheckConfig.CheckerType|keyof typeof google.monitoring.v3.UptimeCheckConfig.CheckerType);
+
                 /** UptimeCheckConfig selectedRegions. */
                 public selectedRegions: google.monitoring.v3.UptimeCheckRegion[];
 
@@ -12494,8 +15685,11 @@ export namespace google {
                 /** UptimeCheckConfig internalCheckers. */
                 public internalCheckers: google.monitoring.v3.IInternalChecker[];
 
+                /** UptimeCheckConfig userLabels. */
+                public userLabels: { [k: string]: string };
+
                 /** UptimeCheckConfig resource. */
-                public resource?: ("monitoredResource"|"resourceGroup");
+                public resource?: ("monitoredResource"|"resourceGroup"|"syntheticMonitor");
 
                 /** UptimeCheckConfig checkRequestType. */
                 public checkRequestType?: ("httpCheck"|"tcpCheck");
@@ -12683,6 +15877,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PingConfig. */
+                interface IPingConfig {
+
+                    /** PingConfig pingsCount */
+                    pingsCount?: (number|null);
+                }
+
+                /** Represents a PingConfig. */
+                class PingConfig implements IPingConfig {
+
+                    /**
+                     * Constructs a new PingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.UptimeCheckConfig.IPingConfig);
+
+                    /** PingConfig pingsCount. */
+                    public pingsCount: number;
+
+                    /**
+                     * Creates a new PingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PingConfig instance
+                     */
+                    public static create(properties?: google.monitoring.v3.UptimeCheckConfig.IPingConfig): google.monitoring.v3.UptimeCheckConfig.PingConfig;
+
+                    /**
+                     * Encodes the specified PingConfig message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.PingConfig.verify|verify} messages.
+                     * @param message PingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.UptimeCheckConfig.IPingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PingConfig message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.PingConfig.verify|verify} messages.
+                     * @param message PingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.UptimeCheckConfig.IPingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.UptimeCheckConfig.PingConfig;
+
+                    /**
+                     * Decodes a PingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.UptimeCheckConfig.PingConfig;
+
+                    /**
+                     * Verifies a PingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.UptimeCheckConfig.PingConfig;
+
+                    /**
+                     * Creates a plain object from a PingConfig message. Also converts values to other types if specified.
+                     * @param message PingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.UptimeCheckConfig.PingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PingConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a HttpCheck. */
                 interface IHttpCheck {
 
@@ -12710,11 +16001,23 @@ export namespace google {
                     /** HttpCheck contentType */
                     contentType?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType|null);
 
+                    /** HttpCheck customContentType */
+                    customContentType?: (string|null);
+
                     /** HttpCheck validateSsl */
                     validateSsl?: (boolean|null);
 
                     /** HttpCheck body */
-                    body?: (Uint8Array|Buffer|string|null);
+                    body?: (Uint8Array|string|null);
+
+                    /** HttpCheck acceptedResponseStatusCodes */
+                    acceptedResponseStatusCodes?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode[]|null);
+
+                    /** HttpCheck pingConfig */
+                    pingConfig?: (google.monitoring.v3.UptimeCheckConfig.IPingConfig|null);
+
+                    /** HttpCheck serviceAgentAuthentication */
+                    serviceAgentAuthentication?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication|null);
                 }
 
                 /** Represents a HttpCheck. */
@@ -12750,11 +16053,26 @@ export namespace google {
                     /** HttpCheck contentType. */
                     public contentType: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType);
 
+                    /** HttpCheck customContentType. */
+                    public customContentType: string;
+
                     /** HttpCheck validateSsl. */
                     public validateSsl: boolean;
 
                     /** HttpCheck body. */
-                    public body: (Uint8Array|Buffer|string);
+                    public body: (Uint8Array|string);
+
+                    /** HttpCheck acceptedResponseStatusCodes. */
+                    public acceptedResponseStatusCodes: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode[];
+
+                    /** HttpCheck pingConfig. */
+                    public pingConfig?: (google.monitoring.v3.UptimeCheckConfig.IPingConfig|null);
+
+                    /** HttpCheck serviceAgentAuthentication. */
+                    public serviceAgentAuthentication?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication|null);
+
+                    /** HttpCheck authMethod. */
+                    public authMethod?: "serviceAgentAuthentication";
 
                     /**
                      * Creates a new HttpCheck instance using the specified properties.
@@ -12835,6 +16153,13 @@ export namespace google {
                 }
 
                 namespace HttpCheck {
+
+                    /** RequestMethod enum. */
+                    enum RequestMethod {
+                        METHOD_UNSPECIFIED = 0,
+                        GET = 1,
+                        POST = 2
+                    }
 
                     /** Properties of a BasicAuthentication. */
                     interface IBasicAuthentication {
@@ -12939,17 +16264,237 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** RequestMethod enum. */
-                    enum RequestMethod {
-                        METHOD_UNSPECIFIED = 0,
-                        GET = 1,
-                        POST = 2
-                    }
-
                     /** ContentType enum. */
                     enum ContentType {
                         TYPE_UNSPECIFIED = 0,
-                        URL_ENCODED = 1
+                        URL_ENCODED = 1,
+                        USER_PROVIDED = 2
+                    }
+
+                    /** Properties of a ResponseStatusCode. */
+                    interface IResponseStatusCode {
+
+                        /** ResponseStatusCode statusValue */
+                        statusValue?: (number|null);
+
+                        /** ResponseStatusCode statusClass */
+                        statusClass?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass|null);
+                    }
+
+                    /** Represents a ResponseStatusCode. */
+                    class ResponseStatusCode implements IResponseStatusCode {
+
+                        /**
+                         * Constructs a new ResponseStatusCode.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode);
+
+                        /** ResponseStatusCode statusValue. */
+                        public statusValue?: (number|null);
+
+                        /** ResponseStatusCode statusClass. */
+                        public statusClass?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass|null);
+
+                        /** ResponseStatusCode statusCode. */
+                        public statusCode?: ("statusValue"|"statusClass");
+
+                        /**
+                         * Creates a new ResponseStatusCode instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResponseStatusCode instance
+                         */
+                        public static create(properties?: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode;
+
+                        /**
+                         * Encodes the specified ResponseStatusCode message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.verify|verify} messages.
+                         * @param message ResponseStatusCode message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResponseStatusCode message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.verify|verify} messages.
+                         * @param message ResponseStatusCode message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IResponseStatusCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResponseStatusCode message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResponseStatusCode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode;
+
+                        /**
+                         * Decodes a ResponseStatusCode message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResponseStatusCode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode;
+
+                        /**
+                         * Verifies a ResponseStatusCode message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResponseStatusCode message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResponseStatusCode
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode;
+
+                        /**
+                         * Creates a plain object from a ResponseStatusCode message. Also converts values to other types if specified.
+                         * @param message ResponseStatusCode
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResponseStatusCode to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResponseStatusCode
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ResponseStatusCode {
+
+                        /** StatusClass enum. */
+                        enum StatusClass {
+                            STATUS_CLASS_UNSPECIFIED = 0,
+                            STATUS_CLASS_1XX = 100,
+                            STATUS_CLASS_2XX = 200,
+                            STATUS_CLASS_3XX = 300,
+                            STATUS_CLASS_4XX = 400,
+                            STATUS_CLASS_5XX = 500,
+                            STATUS_CLASS_ANY = 1000
+                        }
+                    }
+
+                    /** Properties of a ServiceAgentAuthentication. */
+                    interface IServiceAgentAuthentication {
+
+                        /** ServiceAgentAuthentication type */
+                        type?: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType|null);
+                    }
+
+                    /** Represents a ServiceAgentAuthentication. */
+                    class ServiceAgentAuthentication implements IServiceAgentAuthentication {
+
+                        /**
+                         * Constructs a new ServiceAgentAuthentication.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication);
+
+                        /** ServiceAgentAuthentication type. */
+                        public type: (google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType|keyof typeof google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType);
+
+                        /**
+                         * Creates a new ServiceAgentAuthentication instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServiceAgentAuthentication instance
+                         */
+                        public static create(properties?: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication;
+
+                        /**
+                         * Encodes the specified ServiceAgentAuthentication message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.verify|verify} messages.
+                         * @param message ServiceAgentAuthentication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServiceAgentAuthentication message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.verify|verify} messages.
+                         * @param message ServiceAgentAuthentication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.UptimeCheckConfig.HttpCheck.IServiceAgentAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServiceAgentAuthentication message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServiceAgentAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication;
+
+                        /**
+                         * Decodes a ServiceAgentAuthentication message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServiceAgentAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication;
+
+                        /**
+                         * Verifies a ServiceAgentAuthentication message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServiceAgentAuthentication message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServiceAgentAuthentication
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication;
+
+                        /**
+                         * Creates a plain object from a ServiceAgentAuthentication message. Also converts values to other types if specified.
+                         * @param message ServiceAgentAuthentication
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServiceAgentAuthentication to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServiceAgentAuthentication
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ServiceAgentAuthentication {
+
+                        /** ServiceAgentAuthenticationType enum. */
+                        enum ServiceAgentAuthenticationType {
+                            SERVICE_AGENT_AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                            OIDC_TOKEN = 1
+                        }
                     }
                 }
 
@@ -12958,6 +16503,9 @@ export namespace google {
 
                     /** TcpCheck port */
                     port?: (number|null);
+
+                    /** TcpCheck pingConfig */
+                    pingConfig?: (google.monitoring.v3.UptimeCheckConfig.IPingConfig|null);
                 }
 
                 /** Represents a TcpCheck. */
@@ -12971,6 +16519,9 @@ export namespace google {
 
                     /** TcpCheck port. */
                     public port: number;
+
+                    /** TcpCheck pingConfig. */
+                    public pingConfig?: (google.monitoring.v3.UptimeCheckConfig.IPingConfig|null);
 
                     /**
                      * Creates a new TcpCheck instance using the specified properties.
@@ -13058,6 +16609,9 @@ export namespace google {
 
                     /** ContentMatcher matcher */
                     matcher?: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|keyof typeof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|null);
+
+                    /** ContentMatcher jsonPathMatcher */
+                    jsonPathMatcher?: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher|null);
                 }
 
                 /** Represents a ContentMatcher. */
@@ -13074,6 +16628,12 @@ export namespace google {
 
                     /** ContentMatcher matcher. */
                     public matcher: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|keyof typeof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption);
+
+                    /** ContentMatcher jsonPathMatcher. */
+                    public jsonPathMatcher?: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher|null);
+
+                    /** ContentMatcher additionalMatcherInfo. */
+                    public additionalMatcherInfo?: "jsonPathMatcher";
 
                     /**
                      * Creates a new ContentMatcher instance using the specified properties.
@@ -13161,8 +16721,130 @@ export namespace google {
                         CONTAINS_STRING = 1,
                         NOT_CONTAINS_STRING = 2,
                         MATCHES_REGEX = 3,
-                        NOT_MATCHES_REGEX = 4
+                        NOT_MATCHES_REGEX = 4,
+                        MATCHES_JSON_PATH = 5,
+                        NOT_MATCHES_JSON_PATH = 6
                     }
+
+                    /** Properties of a JsonPathMatcher. */
+                    interface IJsonPathMatcher {
+
+                        /** JsonPathMatcher jsonPath */
+                        jsonPath?: (string|null);
+
+                        /** JsonPathMatcher jsonMatcher */
+                        jsonMatcher?: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption|keyof typeof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption|null);
+                    }
+
+                    /** Represents a JsonPathMatcher. */
+                    class JsonPathMatcher implements IJsonPathMatcher {
+
+                        /**
+                         * Constructs a new JsonPathMatcher.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher);
+
+                        /** JsonPathMatcher jsonPath. */
+                        public jsonPath: string;
+
+                        /** JsonPathMatcher jsonMatcher. */
+                        public jsonMatcher: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption|keyof typeof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption);
+
+                        /**
+                         * Creates a new JsonPathMatcher instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns JsonPathMatcher instance
+                         */
+                        public static create(properties?: google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher): google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher;
+
+                        /**
+                         * Encodes the specified JsonPathMatcher message. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.verify|verify} messages.
+                         * @param message JsonPathMatcher message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified JsonPathMatcher message, length delimited. Does not implicitly {@link google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.verify|verify} messages.
+                         * @param message JsonPathMatcher message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.v3.UptimeCheckConfig.ContentMatcher.IJsonPathMatcher, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a JsonPathMatcher message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns JsonPathMatcher
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher;
+
+                        /**
+                         * Decodes a JsonPathMatcher message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns JsonPathMatcher
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher;
+
+                        /**
+                         * Verifies a JsonPathMatcher message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a JsonPathMatcher message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns JsonPathMatcher
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher;
+
+                        /**
+                         * Creates a plain object from a JsonPathMatcher message. Also converts values to other types if specified.
+                         * @param message JsonPathMatcher
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this JsonPathMatcher to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for JsonPathMatcher
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace JsonPathMatcher {
+
+                        /** JsonPathMatcherOption enum. */
+                        enum JsonPathMatcherOption {
+                            JSON_PATH_MATCHER_OPTION_UNSPECIFIED = 0,
+                            EXACT_MATCH = 1,
+                            REGEX_MATCH = 2
+                        }
+                    }
+                }
+
+                /** CheckerType enum. */
+                enum CheckerType {
+                    CHECKER_TYPE_UNSPECIFIED = 0,
+                    STATIC_IP_CHECKERS = 1,
+                    VPC_CHECKERS = 3
                 }
             }
 
@@ -13273,6 +16955,18 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** UptimeCheckRegion enum. */
+            enum UptimeCheckRegion {
+                REGION_UNSPECIFIED = 0,
+                USA = 1,
+                EUROPE = 2,
+                SOUTH_AMERICA = 3,
+                ASIA_PACIFIC = 4,
+                USA_OREGON = 5,
+                USA_IOWA = 6,
+                USA_VIRGINIA = 7
             }
 
             /** GroupResourceType enum. */
@@ -13438,6 +17132,9 @@ export namespace google {
                 /** ListUptimeCheckConfigsRequest parent */
                 parent?: (string|null);
 
+                /** ListUptimeCheckConfigsRequest filter */
+                filter?: (string|null);
+
                 /** ListUptimeCheckConfigsRequest pageSize */
                 pageSize?: (number|null);
 
@@ -13456,6 +17153,9 @@ export namespace google {
 
                 /** ListUptimeCheckConfigsRequest parent. */
                 public parent: string;
+
+                /** ListUptimeCheckConfigsRequest filter. */
+                public filter: string;
 
                 /** ListUptimeCheckConfigsRequest pageSize. */
                 public pageSize: number;
@@ -15956,9 +19656,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -15999,9 +19696,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -17998,6 +21692,115 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
         }
     }
 
@@ -20173,6 +23976,9 @@ export namespace google {
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */
@@ -20798,9 +24604,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -21049,7 +24852,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|Buffer|string|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -21080,7 +24883,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|Buffer|string);
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -22116,7 +25919,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -22132,7 +25935,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -23198,7 +27001,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|Buffer|string|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -23211,7 +27014,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|Buffer|string);
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
@@ -23924,6 +27727,121 @@ export namespace google {
 
     /** Namespace type. */
     namespace type {
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeOfDay
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
 
         /** CalendarPeriod enum. */
         enum CalendarPeriod {

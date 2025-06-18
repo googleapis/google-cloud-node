@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -26,35 +26,39 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/service_monitoring_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './service_monitoring_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
  *  The Cloud Monitoring Service-Oriented Monitoring API has endpoints for
- *  managing and querying aspects of a workspace's services. These include the
- *  `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
- *  of categorized Health Metrics.
+ *  managing and querying aspects of a Metrics Scope's services. These include
+ *  the `Service`'s monitored resources, its Service-Level Objectives, and a
+ *  taxonomy of categorized Health Metrics.
  * @class
  * @memberof v3
  */
 export class ServiceMonitoringServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('monitoring');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -62,6 +66,7 @@ export class ServiceMonitoringServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   serviceMonitoringServiceStub?: Promise<{[name: string]: Function}>;
@@ -71,7 +76,7 @@ export class ServiceMonitoringServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -88,24 +93,54 @@ export class ServiceMonitoringServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new ServiceMonitoringServiceClient({fallback: true}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this
       .constructor as typeof ServiceMonitoringServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'monitoring.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     const fallback =
@@ -113,13 +148,21 @@ export class ServiceMonitoringServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -130,41 +173,34 @@ export class ServiceMonitoringServiceClient {
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
+
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -252,6 +288,9 @@ export class ServiceMonitoringServiceClient {
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
+      snoozePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/snoozes/{snooze}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -282,6 +321,9 @@ export class ServiceMonitoringServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -310,7 +352,8 @@ export class ServiceMonitoringServiceClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.ServiceMonitoringService,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -346,7 +389,8 @@ export class ServiceMonitoringServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -357,19 +401,50 @@ export class ServiceMonitoringServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -412,8 +487,33 @@ export class ServiceMonitoringServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Create a `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource
+   *   [name](https://cloud.google.com/monitoring/api/v3#project_name) of the
+   *   parent Metrics Scope. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} request.serviceId
+   *   Optional. The Service id to use for this Service. If omitted, an id will be
+   *   generated instead. Must match the pattern `[a-z0-9\-]+`
+   * @param {google.monitoring.v3.Service} request.service
+   *   Required. The `Service` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.create_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_CreateService_async
+   */
   createService(
-    request: protos.google.monitoring.v3.ICreateServiceRequest,
+    request?: protos.google.monitoring.v3.ICreateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -439,32 +539,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Create a `Service`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent workspace. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.serviceId
-   *   Optional. The Service id to use for this Service. If omitted, an id will be
-   *   generated instead. Must match the pattern `[a-z0-9\-]+`
-   * @param {google.monitoring.v3.Service} request.service
-   *   Required. The `Service` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Service]{@link google.monitoring.v3.Service}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createService(request);
-   */
   createService(
-    request: protos.google.monitoring.v3.ICreateServiceRequest,
+    request?: protos.google.monitoring.v3.ICreateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -496,14 +572,58 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.ICreateServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Get the named `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `Service`. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.get_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_GetService_async
+   */
   getService(
-    request: protos.google.monitoring.v3.IGetServiceRequest,
+    request?: protos.google.monitoring.v3.IGetServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -529,27 +649,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get the named `Service`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the `Service`. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Service]{@link google.monitoring.v3.Service}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getService(request);
-   */
   getService(
-    request: protos.google.monitoring.v3.IGetServiceRequest,
+    request?: protos.google.monitoring.v3.IGetServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -581,14 +682,59 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IGetServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Update this `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.monitoring.v3.Service} request.service
+   *   Required. The `Service` to draw updates from.
+   *   The given `name` specifies the resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A set of field paths defining which fields to use for the update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.update_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_UpdateService_async
+   */
   updateService(
-    request: protos.google.monitoring.v3.IUpdateServiceRequest,
+    request?: protos.google.monitoring.v3.IUpdateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -614,28 +760,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Update this `Service`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.monitoring.v3.Service} request.service
-   *   Required. The `Service` to draw updates from.
-   *   The given `name` specifies the resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   A set of field paths defining which fields to use for the update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Service]{@link google.monitoring.v3.Service}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateService(request);
-   */
   updateService(
-    request: protos.google.monitoring.v3.IUpdateServiceRequest,
+    request?: protos.google.monitoring.v3.IUpdateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -667,14 +793,58 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'service.name': request.service!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'service.name': request.service!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Soft delete this `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `Service` to delete. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.delete_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_DeleteService_async
+   */
   deleteService(
-    request: protos.google.monitoring.v3.IDeleteServiceRequest,
+    request?: protos.google.monitoring.v3.IDeleteServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -700,27 +870,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Soft delete this `Service`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the `Service` to delete. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteService(request);
-   */
   deleteService(
-    request: protos.google.monitoring.v3.IDeleteServiceRequest,
+    request?: protos.google.monitoring.v3.IDeleteServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -752,14 +903,66 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteService(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Create a `ServiceLevelObjective` for the given `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent `Service`. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   * @param {string} request.serviceLevelObjectiveId
+   *   Optional. The ServiceLevelObjective id to use for this
+   *   ServiceLevelObjective. If omitted, an id will be generated instead. Must
+   *   match the pattern `^[a-zA-Z0-9-_:.]+$`
+   * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
+   *   Required. The `ServiceLevelObjective` to create.
+   *   The provided `name` will be respected if no `ServiceLevelObjective` exists
+   *   with this name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.create_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_CreateServiceLevelObjective_async
+   */
   createServiceLevelObjective(
-    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -792,35 +995,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Create a `ServiceLevelObjective` for the given `Service`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent `Service`. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
-   * @param {string} request.serviceLevelObjectiveId
-   *   Optional. The ServiceLevelObjective id to use for this
-   *   ServiceLevelObjective. If omitted, an id will be generated instead. Must
-   *   match the pattern `[a-z0-9\-]+`
-   * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
-   *   Required. The `ServiceLevelObjective` to create.
-   *   The provided `name` will be respected if no `ServiceLevelObjective` exists
-   *   with this name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createServiceLevelObjective(request);
-   */
   createServiceLevelObjective(
-    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -859,18 +1035,69 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createServiceLevelObjective(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createServiceLevelObjective request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createServiceLevelObjective response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          (
+            | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Get a `ServiceLevelObjective` by name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `ServiceLevelObjective` to get. The format
+   *   is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
+   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
+   *   View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
+   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
+   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
+   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.get_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_GetServiceLevelObjective_async
+   */
   getServiceLevelObjective(
-    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -900,32 +1127,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get a `ServiceLevelObjective` by name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the `ServiceLevelObjective` to get. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
-   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
-   *   View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
-   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
-   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
-   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getServiceLevelObjective(request);
-   */
   getServiceLevelObjective(
-    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -961,18 +1164,64 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getServiceLevelObjective(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getServiceLevelObjective request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServiceLevelObjective response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          (
+            | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Update the given `ServiceLevelObjective`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
+   *   Required. The `ServiceLevelObjective` to draw updates from.
+   *   The given `name` specifies the resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A set of field paths defining which fields to use for the update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.update_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_UpdateServiceLevelObjective_async
+   */
   updateServiceLevelObjective(
-    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1005,28 +1254,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Update the given `ServiceLevelObjective`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
-   *   Required. The `ServiceLevelObjective` to draw updates from.
-   *   The given `name` specifies the resource to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   A set of field paths defining which fields to use for the update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateServiceLevelObjective(request);
-   */
   updateServiceLevelObjective(
-    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1065,19 +1294,65 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'service_level_objective.name':
-          request.serviceLevelObjective!.name || '',
+          request.serviceLevelObjective!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateServiceLevelObjective(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateServiceLevelObjective request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateServiceLevelObjective response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          (
+            | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Delete the given `ServiceLevelObjective`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `ServiceLevelObjective` to delete. The
+   *   format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.delete_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_DeleteServiceLevelObjective_async
+   */
   deleteServiceLevelObjective(
-    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1110,27 +1385,8 @@ export class ServiceMonitoringServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Delete the given `ServiceLevelObjective`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the `ServiceLevelObjective` to delete. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteServiceLevelObjective(request);
-   */
   deleteServiceLevelObjective(
-    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    request?: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1169,19 +1425,96 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteServiceLevelObjective(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteServiceLevelObjective request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteServiceLevelObjective response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
+  /**
+   * List `Service`s for this Metrics Scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed services,
+   *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
+   *   or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   A filter specifying what `Service`s to return. The filter supports
+   *   filtering on a particular service-identifier type or one of its attributes.
+   *
+   *   To filter on a particular service-identifier type, the `identifier_case`
+   *   refers to which option in the `identifier` field is populated. For example,
+   *   the filter `identifier_case = "CUSTOM"` would match all services with a
+   *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
+   *   "MESH_ISTIO", and the other options listed at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   *
+   *   To filter on an attribute of a service-identifier type, apply the filter
+   *   name by using the snake case of the service-identifier type and the
+   *   attribute of that service-identifier type, and join the two with a period.
+   *   For example, to filter by the `meshUid` field of the `MeshIstio`
+   *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
+   *   "123"` to match all services with mesh UID "123". Service-identifier types
+   *   and their attributes are described at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.Service|Service}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServices(
-    request: protos.google.monitoring.v3.IListServicesRequest,
+    request?: protos.google.monitoring.v3.IListServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1207,59 +1540,8 @@ export class ServiceMonitoringServiceClient {
       protos.google.monitoring.v3.IService
     >
   ): void;
-  /**
-   * List `Service`s for this workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent containing the listed services, either a
-   *   project or a Monitoring Workspace. The formats are:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
-   * @param {string} request.filter
-   *   A filter specifying what `Service`s to return. The filter currently
-   *   supports the following fields:
-   *
-   *       - `identifier_case`
-   *       - `app_engine.module_id`
-   *       - `cloud_endpoints.service` (reserved for future use)
-   *       - `mesh_istio.mesh_uid`
-   *       - `mesh_istio.service_namespace`
-   *       - `mesh_istio.service_name`
-   *       - `cluster_istio.location` (deprecated)
-   *       - `cluster_istio.cluster_name` (deprecated)
-   *       - `cluster_istio.service_namespace` (deprecated)
-   *       - `cluster_istio.service_name` (deprecated)
-   *
-   *   `identifier_case` refers to which option in the identifier oneof is
-   *   populated. For example, the filter `identifier_case = "CUSTOM"` would match
-   *   all services with a value for the `custom` field. Valid options are
-   *   "CUSTOM", "APP_ENGINE", "MESH_ISTIO", plus "CLUSTER_ISTIO" (deprecated)
-   *   and "CLOUD_ENDPOINTS" (reserved for future use).
-   * @param {number} request.pageSize
-   *   A non-negative number that is the maximum number of results to return.
-   *   When 0, use default page size.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Service]{@link google.monitoring.v3.Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listServices(
-    request: protos.google.monitoring.v3.IListServicesRequest,
+    request?: protos.google.monitoring.v3.IListServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1291,43 +1573,69 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listServices(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListServicesRequest,
+          protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+          protos.google.monitoring.v3.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.IService[],
+          protos.google.monitoring.v3.IListServicesRequest | null,
+          protos.google.monitoring.v3.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listServices`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent containing the listed services, either a
-   *   project or a Monitoring Workspace. The formats are:
+   *   Required. Resource name of the parent containing the listed services,
+   *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
+   *   or a Monitoring Metrics Scope. The formats are:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
    * @param {string} request.filter
-   *   A filter specifying what `Service`s to return. The filter currently
-   *   supports the following fields:
+   *   A filter specifying what `Service`s to return. The filter supports
+   *   filtering on a particular service-identifier type or one of its attributes.
    *
-   *       - `identifier_case`
-   *       - `app_engine.module_id`
-   *       - `cloud_endpoints.service` (reserved for future use)
-   *       - `mesh_istio.mesh_uid`
-   *       - `mesh_istio.service_namespace`
-   *       - `mesh_istio.service_name`
-   *       - `cluster_istio.location` (deprecated)
-   *       - `cluster_istio.cluster_name` (deprecated)
-   *       - `cluster_istio.service_namespace` (deprecated)
-   *       - `cluster_istio.service_name` (deprecated)
+   *   To filter on a particular service-identifier type, the `identifier_case`
+   *   refers to which option in the `identifier` field is populated. For example,
+   *   the filter `identifier_case = "CUSTOM"` would match all services with a
+   *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
+   *   "MESH_ISTIO", and the other options listed at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
    *
-   *   `identifier_case` refers to which option in the identifier oneof is
-   *   populated. For example, the filter `identifier_case = "CUSTOM"` would match
-   *   all services with a value for the `custom` field. Valid options are
-   *   "CUSTOM", "APP_ENGINE", "MESH_ISTIO", plus "CLUSTER_ISTIO" (deprecated)
-   *   and "CLOUD_ENDPOINTS" (reserved for future use).
+   *   To filter on an attribute of a service-identifier type, apply the filter
+   *   name by using the snake case of the service-identifier type and the
+   *   attribute of that service-identifier type, and join the two with a period.
+   *   For example, to filter by the `meshUid` field of the `MeshIstio`
+   *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
+   *   "123"` to match all services with mesh UID "123". Service-identifier types
+   *   and their attributes are described at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
    * @param {number} request.pageSize
    *   A non-negative number that is the maximum number of results to return.
    *   When 0, use default page size.
@@ -1338,13 +1646,12 @@ export class ServiceMonitoringServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Service]{@link google.monitoring.v3.Service} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.Service|Service} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listServicesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listServicesStream(
@@ -1356,13 +1663,17 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
-      this.innerApiCalls.listServices as gax.GaxCall,
+      this.innerApiCalls.listServices as GaxCall,
       request,
       callSettings
     );
@@ -1375,31 +1686,31 @@ export class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent containing the listed services, either a
-   *   project or a Monitoring Workspace. The formats are:
+   *   Required. Resource name of the parent containing the listed services,
+   *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
+   *   or a Monitoring Metrics Scope. The formats are:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
    *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
    * @param {string} request.filter
-   *   A filter specifying what `Service`s to return. The filter currently
-   *   supports the following fields:
+   *   A filter specifying what `Service`s to return. The filter supports
+   *   filtering on a particular service-identifier type or one of its attributes.
    *
-   *       - `identifier_case`
-   *       - `app_engine.module_id`
-   *       - `cloud_endpoints.service` (reserved for future use)
-   *       - `mesh_istio.mesh_uid`
-   *       - `mesh_istio.service_namespace`
-   *       - `mesh_istio.service_name`
-   *       - `cluster_istio.location` (deprecated)
-   *       - `cluster_istio.cluster_name` (deprecated)
-   *       - `cluster_istio.service_namespace` (deprecated)
-   *       - `cluster_istio.service_name` (deprecated)
+   *   To filter on a particular service-identifier type, the `identifier_case`
+   *   refers to which option in the `identifier` field is populated. For example,
+   *   the filter `identifier_case = "CUSTOM"` would match all services with a
+   *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
+   *   "MESH_ISTIO", and the other options listed at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
    *
-   *   `identifier_case` refers to which option in the identifier oneof is
-   *   populated. For example, the filter `identifier_case = "CUSTOM"` would match
-   *   all services with a value for the `custom` field. Valid options are
-   *   "CUSTOM", "APP_ENGINE", "MESH_ISTIO", plus "CLUSTER_ISTIO" (deprecated)
-   *   and "CLOUD_ENDPOINTS" (reserved for future use).
+   *   To filter on an attribute of a service-identifier type, apply the filter
+   *   name by using the snake case of the service-identifier type and the
+   *   attribute of that service-identifier type, and join the two with a period.
+   *   For example, to filter by the `meshUid` field of the `MeshIstio`
+   *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
+   *   "123"` to match all services with mesh UID "123". Service-identifier types
+   *   and their attributes are described at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
    * @param {number} request.pageSize
    *   A non-negative number that is the maximum number of results to return.
    *   When 0, use default page size.
@@ -1410,18 +1721,14 @@ export class ServiceMonitoringServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Service]{@link google.monitoring.v3.Service}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.v3.Service|Service}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listServicesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.list_services.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_ListServices_async
    */
   listServicesAsync(
     request?: protos.google.monitoring.v3.IListServicesRequest,
@@ -1432,20 +1739,60 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IService>;
   }
+  /**
+   * List the `ServiceLevelObjective`s for the given `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed SLOs, either a
+   *   project or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
+   * @param {string} request.filter
+   *   A filter specifying what `ServiceLevelObjective`s to return.
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
+   *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
+   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
+   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
+   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServiceLevelObjectivesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServiceLevelObjectives(
-    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1475,46 +1822,8 @@ export class ServiceMonitoringServiceClient {
       protos.google.monitoring.v3.IServiceLevelObjective
     >
   ): void;
-  /**
-   * List the `ServiceLevelObjective`s for the given `Service`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent containing the listed SLOs, either a
-   *   project or a Monitoring Workspace. The formats are:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
-   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
-   * @param {string} request.filter
-   *   A filter specifying what `ServiceLevelObjective`s to return.
-   * @param {number} request.pageSize
-   *   A non-negative number that is the maximum number of results to return.
-   *   When 0, use default page size.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
-   *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
-   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
-   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
-   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServiceLevelObjectivesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listServiceLevelObjectives(
-    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1550,24 +1859,48 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listServiceLevelObjectives(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+          | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IServiceLevelObjective
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServiceLevelObjectives values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServiceLevelObjectives request %j', request);
+    return this.innerApiCalls
+      .listServiceLevelObjectives(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.IServiceLevelObjective[],
+          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
+          protos.google.monitoring.v3.IListServiceLevelObjectivesResponse,
+        ]) => {
+          this._log.info('listServiceLevelObjectives values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listServiceLevelObjectives`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent containing the listed SLOs, either a
-   *   project or a Monitoring Workspace. The formats are:
+   *   project or a Monitoring Metrics Scope. The formats are:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
    *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
@@ -1588,13 +1921,12 @@ export class ServiceMonitoringServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listServiceLevelObjectivesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listServiceLevelObjectivesStream(
@@ -1606,13 +1938,17 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listServiceLevelObjectives'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServiceLevelObjectives stream %j', request);
     return this.descriptors.page.listServiceLevelObjectives.createStream(
-      this.innerApiCalls.listServiceLevelObjectives as gax.GaxCall,
+      this.innerApiCalls.listServiceLevelObjectives as GaxCall,
       request,
       callSettings
     );
@@ -1626,7 +1962,7 @@ export class ServiceMonitoringServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent containing the listed SLOs, either a
-   *   project or a Monitoring Workspace. The formats are:
+   *   project or a Monitoring Metrics Scope. The formats are:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
    *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
@@ -1647,18 +1983,14 @@ export class ServiceMonitoringServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listServiceLevelObjectivesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.list_service_level_objectives.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_ListServiceLevelObjectives_async
    */
   listServiceLevelObjectivesAsync(
     request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
@@ -1669,15 +2001,18 @@ export class ServiceMonitoringServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listServiceLevelObjectives'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listServiceLevelObjectives iterate %j', request);
     return this.descriptors.page.listServiceLevelObjectives.asyncIterate(
       this.innerApiCalls['listServiceLevelObjectives'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IServiceLevelObjective>;
   }
@@ -2874,15 +3209,51 @@ export class ServiceMonitoringServiceClient {
   }
 
   /**
+   * Return a fully-qualified snooze resource name string.
+   *
+   * @param {string} project
+   * @param {string} snooze
+   * @returns {string} Resource name string.
+   */
+  snoozePath(project: string, snooze: string) {
+    return this.pathTemplates.snoozePathTemplate.render({
+      project: project,
+      snooze: snooze,
+    });
+  }
+
+  /**
+   * Parse the project from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).project;
+  }
+
+  /**
+   * Parse the snooze from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the snooze.
+   */
+  matchSnoozeFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).snooze;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.serviceMonitoringServiceStub!.then(stub => {
+    if (this.serviceMonitoringServiceStub && !this._terminated) {
+      return this.serviceMonitoringServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

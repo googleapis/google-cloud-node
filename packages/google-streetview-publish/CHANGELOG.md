@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/streetview-publish-v0.2.1...streetview-publish-v0.3.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6306](https://github.com/googleapis/google-cloud-node/issues/6306)) ([4f02ceb](https://github.com/googleapis/google-cloud-node/commit/4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/streetview-publish-v0.2.0...streetview-publish-v0.2.1) (2025-03-21)
 
 

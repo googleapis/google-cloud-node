@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -36,12 +39,12 @@
         },
         "GetService": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ListServices": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "UpdateService": {
@@ -51,7 +54,7 @@
         },
         "DeleteService": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "CreateServiceLevelObjective": {
@@ -61,12 +64,12 @@
         },
         "GetServiceLevelObjective": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ListServiceLevelObjectives": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "UpdateServiceLevelObjective": {
@@ -76,7 +79,7 @@
         },
         "DeleteServiceLevelObjective": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         }
       }

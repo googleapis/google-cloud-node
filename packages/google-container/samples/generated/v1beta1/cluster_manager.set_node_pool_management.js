@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, nodePoolId, management) {
+function main(management) {
   // [START container_v1beta1_generated_ClusterManager_SetNodePoolManagement_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -48,10 +48,6 @@ function main(projectId, zone, clusterId, nodePoolId, management) {
   async function callSetNodePoolManagement() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
-      nodePoolId,
       management,
     };
 

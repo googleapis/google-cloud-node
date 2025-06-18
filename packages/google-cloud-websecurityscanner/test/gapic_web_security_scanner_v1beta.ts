@@ -270,9 +270,14 @@ describe('v1beta.WebSecurityScannerClient', () => {
         throw err;
       });
       assert(client.webSecurityScannerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -282,9 +287,14 @@ describe('v1beta.WebSecurityScannerClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.webSecurityScannerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -453,7 +463,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createScanConfig(request), expectedError);
     });
   });
@@ -587,7 +599,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteScanConfig(request), expectedError);
     });
   });
@@ -721,7 +735,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getScanConfig(request), expectedError);
     });
   });
@@ -859,7 +875,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.scanConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateScanConfig(request), expectedError);
     });
   });
@@ -993,7 +1011,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.startScanRun(request), expectedError);
     });
   });
@@ -1127,7 +1147,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getScanRun(request), expectedError);
     });
   });
@@ -1261,7 +1283,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.stopScanRun(request), expectedError);
     });
   });
@@ -1395,7 +1419,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getFinding(request), expectedError);
     });
   });
@@ -1530,7 +1556,9 @@ describe('v1beta.WebSecurityScannerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listFindingTypeStats(request), expectedError);
     });
   });

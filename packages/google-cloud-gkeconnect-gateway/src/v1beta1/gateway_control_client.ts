@@ -18,12 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -104,36 +99,17 @@ export class GatewayControlClient {
    *     const client = new GatewayControlClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GatewayControlClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'connectgateway.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -142,9 +118,7 @@ export class GatewayControlClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -167,7 +141,7 @@ export class GatewayControlClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +155,10 @@ export class GatewayControlClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -200,11 +177,8 @@ export class GatewayControlClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.gkeconnect.gateway.v1beta1.GatewayControl',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.gkeconnect.gateway.v1beta1.GatewayControl', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -235,36 +209,31 @@ export class GatewayControlClient {
     // Put together the "service stub" for
     // google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.
     this.gatewayControlStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.gkeconnect.gateway.v1beta1.GatewayControl'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.gkeconnect.gateway.v1beta1
-            .GatewayControl,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.gkeconnect.gateway.v1beta1.GatewayControl') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.gkeconnect.gateway.v1beta1.GatewayControl,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const gatewayControlStubMethods = ['generateCredentials'];
+    const gatewayControlStubMethods =
+        ['generateCredentials'];
     for (const methodName of gatewayControlStubMethods) {
       const callPromise = this.gatewayControlStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -284,14 +253,8 @@ export class GatewayControlClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'connectgateway.googleapis.com';
   }
@@ -302,14 +265,8 @@ export class GatewayControlClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'connectgateway.googleapis.com';
   }
@@ -340,7 +297,9 @@ export class GatewayControlClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -349,9 +308,8 @@ export class GatewayControlClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -362,153 +320,115 @@ export class GatewayControlClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * GenerateCredentials provides connection information that allows a user to
-   * access the specified membership using Connect Gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The Fleet membership resource.
-   * @param {boolean} [request.forceUseAgent]
-   *   Optional. Whether to force the use of Connect Agent-based transport.
-   *
-   *   This will return a configuration that uses Connect Agent as the underlying
-   *   transport mechanism for cluster types that would otherwise have used a
-   *   different transport. Requires that Connect Agent be installed on the
-   *   cluster. Setting this field to false is equivalent to not setting it.
-   * @param {string} [request.version]
-   *   Optional. The Connect Gateway version to be used in the resulting
-   *   configuration.
-   *
-   *   Leave this field blank to let the server choose the version (recommended).
-   * @param {string} [request.kubernetesNamespace]
-   *   Optional. The namespace to use in the kubeconfig context.
-   *
-   *   If this field is specified, the server will set the `namespace` field in
-   *   kubeconfig context. If not specified, the `namespace` field is omitted.
-   * @param {google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem} [request.operatingSystem]
-   *   Optional. The operating system where the kubeconfig will be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse|GenerateCredentialsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/gateway_control.generate_credentials.js</caption>
-   * region_tag:connectgateway_v1beta1_generated_GatewayControl_GenerateCredentials_async
-   */
+/**
+ * GenerateCredentials provides connection information that allows a user to
+ * access the specified membership using Connect Gateway.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The Fleet membership resource.
+ * @param {boolean} [request.forceUseAgent]
+ *   Optional. Whether to force the use of Connect Agent-based transport.
+ *
+ *   This will return a configuration that uses Connect Agent as the underlying
+ *   transport mechanism for cluster types that would otherwise have used a
+ *   different transport. Requires that Connect Agent be installed on the
+ *   cluster. Setting this field to false is equivalent to not setting it.
+ * @param {string} [request.version]
+ *   Optional. The Connect Gateway version to be used in the resulting
+ *   configuration.
+ *
+ *   Leave this field blank to let the server choose the version (recommended).
+ * @param {string} [request.kubernetesNamespace]
+ *   Optional. The namespace to use in the kubeconfig context.
+ *
+ *   If this field is specified, the server will set the `namespace` field in
+ *   kubeconfig context. If not specified, the `namespace` field is omitted.
+ * @param {google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem} [request.operatingSystem]
+ *   Optional. The operating system where the kubeconfig will be used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse|GenerateCredentialsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/gateway_control.generate_credentials.js</caption>
+ * region_tag:connectgateway_v1beta1_generated_GatewayControl_GenerateCredentials_async
+ */
   generateCredentials(
-    request?: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-      (
-        | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|undefined, {}|undefined
+      ]>;
   generateCredentials(
-    request: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-      | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateCredentials(
-    request: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
-    callback: Callback<
-      protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-      | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateCredentials(
-    request?: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-          | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-      | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-      (
-        | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateCredentials(
+      request: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
+      callback: Callback<
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateCredentials(
+      request?: protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateCredentials request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-          | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateCredentials response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateCredentials(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
-          (
-            | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateCredentials response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.generateCredentials(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+        protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateCredentials response %j', response);
+        return [response, options, rawResponse];
+      });
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

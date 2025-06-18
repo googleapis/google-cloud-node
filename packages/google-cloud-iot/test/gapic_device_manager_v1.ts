@@ -256,9 +256,14 @@ describe('v1.DeviceManagerClient', () => {
         throw err;
       });
       assert(client.deviceManagerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v1.DeviceManagerClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.deviceManagerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -433,7 +443,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDeviceRegistry(request), expectedError);
     });
   });
@@ -563,7 +575,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDeviceRegistry(request), expectedError);
     });
   });
@@ -698,7 +712,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.deviceRegistry.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDeviceRegistry(request), expectedError);
     });
   });
@@ -829,7 +845,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDeviceRegistry(request), expectedError);
     });
   });
@@ -959,7 +977,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDevice(request), expectedError);
     });
   });
@@ -1086,7 +1106,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDevice(request), expectedError);
     });
   });
@@ -1220,7 +1242,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.device.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDevice(request), expectedError);
     });
   });
@@ -1350,7 +1374,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDevice(request), expectedError);
     });
   });
@@ -1484,7 +1510,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.modifyCloudToDeviceConfig(request),
         expectedError
@@ -1621,7 +1649,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.listDeviceConfigVersions(request),
         expectedError
@@ -1754,7 +1784,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listDeviceStates(request), expectedError);
     });
   });
@@ -1884,7 +1916,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -2014,7 +2048,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -2145,7 +2181,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -2276,7 +2314,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.sendCommandToDevice(request), expectedError);
     });
   });
@@ -2407,7 +2447,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.bindDeviceToGateway(request), expectedError);
     });
   });
@@ -2541,7 +2583,9 @@ describe('v1.DeviceManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.unbindDeviceFromGateway(request),
         expectedError

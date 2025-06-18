@@ -257,9 +257,14 @@ describe('v1beta1.ClusterManagerClient', () => {
         throw err;
       });
       assert(client.clusterManagerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1beta1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.clusterManagerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -473,7 +483,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listClusters(request), expectedError);
     });
   });
@@ -663,7 +675,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCluster(request), expectedError);
     });
   });
@@ -833,7 +847,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCluster(request), expectedError);
     });
   });
@@ -1023,7 +1039,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCluster(request), expectedError);
     });
   });
@@ -1233,7 +1251,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateNodePool(request), expectedError);
     });
   });
@@ -1447,7 +1467,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setNodePoolAutoscaling(request),
         expectedError
@@ -1640,7 +1662,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLoggingService(request), expectedError);
     });
   });
@@ -1831,7 +1855,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMonitoringService(request), expectedError);
     });
   });
@@ -2021,7 +2047,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setAddonsConfig(request), expectedError);
     });
   });
@@ -2218,7 +2246,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLocations(request), expectedError);
       assert(stub.calledOnce);
     });
@@ -2409,7 +2439,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateMaster(request), expectedError);
     });
   });
@@ -2599,7 +2631,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMasterAuth(request), expectedError);
     });
   });
@@ -2789,7 +2823,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteCluster(request), expectedError);
     });
   });
@@ -2959,7 +2995,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listOperations(request), expectedError);
     });
   });
@@ -3149,7 +3187,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getOperation(request), expectedError);
     });
   });
@@ -3339,7 +3379,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.cancelOperation(request), expectedError);
     });
   });
@@ -3509,7 +3551,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getServerConfig(request), expectedError);
     });
   });
@@ -3639,7 +3683,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getJSONWebKeys(request), expectedError);
     });
   });
@@ -3829,7 +3875,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listNodePools(request), expectedError);
     });
   });
@@ -4039,7 +4087,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNodePool(request), expectedError);
     });
   });
@@ -4229,7 +4279,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createNodePool(request), expectedError);
     });
   });
@@ -4439,7 +4491,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteNodePool(request), expectedError);
     });
   });
@@ -4573,7 +4627,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.completeNodePoolUpgrade(request),
         expectedError
@@ -4790,7 +4846,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.rollbackNodePoolUpgrade(request),
         expectedError
@@ -5007,7 +5065,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setNodePoolManagement(request),
         expectedError
@@ -5197,7 +5257,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLabels(request), expectedError);
     });
   });
@@ -5387,7 +5449,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLegacyAbac(request), expectedError);
     });
   });
@@ -5577,7 +5641,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.startIPRotation(request), expectedError);
     });
   });
@@ -5768,7 +5834,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.completeIPRotation(request), expectedError);
     });
   });
@@ -5978,7 +6046,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setNodePoolSize(request), expectedError);
     });
   });
@@ -6168,7 +6238,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setNetworkPolicy(request), expectedError);
     });
   });
@@ -6359,7 +6431,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMaintenancePolicy(request), expectedError);
     });
   });
@@ -6493,7 +6567,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.checkAutopilotCompatibility(request),
         expectedError
@@ -6626,8 +6702,288 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listLocations(request), expectedError);
+    });
+  });
+
+  describe('fetchClusterUpgradeInfo', () => {
+    it('invokes fetchClusterUpgradeInfo without error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.ClusterUpgradeInfo()
+      );
+      client.innerApiCalls.fetchClusterUpgradeInfo =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchClusterUpgradeInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchClusterUpgradeInfo without error using callback', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.ClusterUpgradeInfo()
+      );
+      client.innerApiCalls.fetchClusterUpgradeInfo =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchClusterUpgradeInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.container.v1beta1.IClusterUpgradeInfo | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchClusterUpgradeInfo with error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchClusterUpgradeInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.fetchClusterUpgradeInfo(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchClusterUpgradeInfo with closed client', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchClusterUpgradeInfo(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('fetchNodePoolUpgradeInfo', () => {
+    it('invokes fetchNodePoolUpgradeInfo without error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.NodePoolUpgradeInfo()
+      );
+      client.innerApiCalls.fetchNodePoolUpgradeInfo =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchNodePoolUpgradeInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNodePoolUpgradeInfo without error using callback', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.NodePoolUpgradeInfo()
+      );
+      client.innerApiCalls.fetchNodePoolUpgradeInfo =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchNodePoolUpgradeInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.container.v1beta1.INodePoolUpgradeInfo | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNodePoolUpgradeInfo with error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchNodePoolUpgradeInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.fetchNodePoolUpgradeInfo(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNodePoolUpgradeInfo with closed client', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchNodePoolUpgradeInfo(request),
+        expectedError
+      );
     });
   });
 
@@ -6980,6 +7336,164 @@ describe('v1beta1.ClusterManagerClient', () => {
             expectedHeaderRequestParams
           )
       );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('caPool', async () => {
+      const fakePath = '/rendered/path/caPool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        ca_pool: 'caPoolValue',
+      };
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.caPoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.caPoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('caPoolPath', () => {
+        const result = client.caPoolPath(
+          'projectValue',
+          'locationValue',
+          'caPoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCaPoolName', () => {
+        const result = client.matchProjectFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCaPoolName', () => {
+        const result = client.matchLocationFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaPoolFromCaPoolName', () => {
+        const result = client.matchCaPoolFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'caPoolValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('cryptoKeyVersion', async () => {
+      const fakePath = '/rendered/path/cryptoKeyVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+        crypto_key_version: 'cryptoKeyVersionValue',
+      };
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyVersionPath', () => {
+        const result = client.cryptoKeyVersionPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+          'cryptoKeyVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCryptoKeyVersionName', () => {
+        const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCryptoKeyVersionName', () => {
+        const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyVersionName', () => {
+        const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+        const result =
+          client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyVersionValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
   });
 });

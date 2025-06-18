@@ -5909,6 +5909,7 @@
                      * @property {string|null} [container] AzureBlobStorageData container
                      * @property {string|null} [path] AzureBlobStorageData path
                      * @property {string|null} [credentialsSecret] AzureBlobStorageData credentialsSecret
+                     * @property {google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig|null} [federatedIdentityConfig] AzureBlobStorageData federatedIdentityConfig
                      */
     
                     /**
@@ -5967,6 +5968,14 @@
                     AzureBlobStorageData.prototype.credentialsSecret = "";
     
                     /**
+                     * AzureBlobStorageData federatedIdentityConfig.
+                     * @member {google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig|null|undefined} federatedIdentityConfig
+                     * @memberof google.storagetransfer.v1.AzureBlobStorageData
+                     * @instance
+                     */
+                    AzureBlobStorageData.prototype.federatedIdentityConfig = null;
+    
+                    /**
                      * Creates a new AzureBlobStorageData instance using the specified properties.
                      * @function create
                      * @memberof google.storagetransfer.v1.AzureBlobStorageData
@@ -6000,6 +6009,8 @@
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.path);
                         if (message.credentialsSecret != null && Object.hasOwnProperty.call(message, "credentialsSecret"))
                             writer.uint32(/* id 7, wireType 2 =*/58).string(message.credentialsSecret);
+                        if (message.federatedIdentityConfig != null && Object.hasOwnProperty.call(message, "federatedIdentityConfig"))
+                            $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.encode(message.federatedIdentityConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         return writer;
                     };
     
@@ -6054,6 +6065,10 @@
                                     message.credentialsSecret = reader.string();
                                     break;
                                 }
+                            case 8: {
+                                    message.federatedIdentityConfig = $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -6106,6 +6121,11 @@
                         if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
                             if (!$util.isString(message.credentialsSecret))
                                 return "credentialsSecret: string expected";
+                        if (message.federatedIdentityConfig != null && message.hasOwnProperty("federatedIdentityConfig")) {
+                            var error = $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.verify(message.federatedIdentityConfig);
+                            if (error)
+                                return "federatedIdentityConfig." + error;
+                        }
                         return null;
                     };
     
@@ -6134,6 +6154,11 @@
                             message.path = String(object.path);
                         if (object.credentialsSecret != null)
                             message.credentialsSecret = String(object.credentialsSecret);
+                        if (object.federatedIdentityConfig != null) {
+                            if (typeof object.federatedIdentityConfig !== "object")
+                                throw TypeError(".google.storagetransfer.v1.AzureBlobStorageData.federatedIdentityConfig: object expected");
+                            message.federatedIdentityConfig = $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.fromObject(object.federatedIdentityConfig);
+                        }
                         return message;
                     };
     
@@ -6156,6 +6181,7 @@
                             object.container = "";
                             object.path = "";
                             object.credentialsSecret = "";
+                            object.federatedIdentityConfig = null;
                         }
                         if (message.storageAccount != null && message.hasOwnProperty("storageAccount"))
                             object.storageAccount = message.storageAccount;
@@ -6167,6 +6193,8 @@
                             object.path = message.path;
                         if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
                             object.credentialsSecret = message.credentialsSecret;
+                        if (message.federatedIdentityConfig != null && message.hasOwnProperty("federatedIdentityConfig"))
+                            object.federatedIdentityConfig = $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.toObject(message.federatedIdentityConfig, options);
                         return object;
                     };
     
@@ -6195,6 +6223,233 @@
                         }
                         return typeUrlPrefix + "/google.storagetransfer.v1.AzureBlobStorageData";
                     };
+    
+                    AzureBlobStorageData.FederatedIdentityConfig = (function() {
+    
+                        /**
+                         * Properties of a FederatedIdentityConfig.
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData
+                         * @interface IFederatedIdentityConfig
+                         * @property {string|null} [clientId] FederatedIdentityConfig clientId
+                         * @property {string|null} [tenantId] FederatedIdentityConfig tenantId
+                         */
+    
+                        /**
+                         * Constructs a new FederatedIdentityConfig.
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData
+                         * @classdesc Represents a FederatedIdentityConfig.
+                         * @implements IFederatedIdentityConfig
+                         * @constructor
+                         * @param {google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig=} [properties] Properties to set
+                         */
+                        function FederatedIdentityConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FederatedIdentityConfig clientId.
+                         * @member {string} clientId
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @instance
+                         */
+                        FederatedIdentityConfig.prototype.clientId = "";
+    
+                        /**
+                         * FederatedIdentityConfig tenantId.
+                         * @member {string} tenantId
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @instance
+                         */
+                        FederatedIdentityConfig.prototype.tenantId = "";
+    
+                        /**
+                         * Creates a new FederatedIdentityConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig=} [properties] Properties to set
+                         * @returns {google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig} FederatedIdentityConfig instance
+                         */
+                        FederatedIdentityConfig.create = function create(properties) {
+                            return new FederatedIdentityConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FederatedIdentityConfig message. Does not implicitly {@link google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig} message FederatedIdentityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FederatedIdentityConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.clientId != null && Object.hasOwnProperty.call(message, "clientId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.clientId);
+                            if (message.tenantId != null && Object.hasOwnProperty.call(message, "tenantId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tenantId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FederatedIdentityConfig message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig} message FederatedIdentityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FederatedIdentityConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FederatedIdentityConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig} FederatedIdentityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FederatedIdentityConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.clientId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tenantId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FederatedIdentityConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig} FederatedIdentityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FederatedIdentityConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FederatedIdentityConfig message.
+                         * @function verify
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FederatedIdentityConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                if (!$util.isString(message.clientId))
+                                    return "clientId: string expected";
+                            if (message.tenantId != null && message.hasOwnProperty("tenantId"))
+                                if (!$util.isString(message.tenantId))
+                                    return "tenantId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FederatedIdentityConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig} FederatedIdentityConfig
+                         */
+                        FederatedIdentityConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig)
+                                return object;
+                            var message = new $root.google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig();
+                            if (object.clientId != null)
+                                message.clientId = String(object.clientId);
+                            if (object.tenantId != null)
+                                message.tenantId = String(object.tenantId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FederatedIdentityConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig} message FederatedIdentityConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FederatedIdentityConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.clientId = "";
+                                object.tenantId = "";
+                            }
+                            if (message.clientId != null && message.hasOwnProperty("clientId"))
+                                object.clientId = message.clientId;
+                            if (message.tenantId != null && message.hasOwnProperty("tenantId"))
+                                object.tenantId = message.tenantId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FederatedIdentityConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FederatedIdentityConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FederatedIdentityConfig
+                         * @function getTypeUrl
+                         * @memberof google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FederatedIdentityConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig";
+                        };
+    
+                        return FederatedIdentityConfig;
+                    })();
     
                     return AzureBlobStorageData;
                 })();
@@ -11042,6 +11297,7 @@
                      * @property {string|null} [name] TransferJob name
                      * @property {string|null} [description] TransferJob description
                      * @property {string|null} [projectId] TransferJob projectId
+                     * @property {string|null} [serviceAccount] TransferJob serviceAccount
                      * @property {google.storagetransfer.v1.ITransferSpec|null} [transferSpec] TransferJob transferSpec
                      * @property {google.storagetransfer.v1.IReplicationSpec|null} [replicationSpec] TransferJob replicationSpec
                      * @property {google.storagetransfer.v1.INotificationConfig|null} [notificationConfig] TransferJob notificationConfig
@@ -11093,6 +11349,14 @@
                      * @instance
                      */
                     TransferJob.prototype.projectId = "";
+    
+                    /**
+                     * TransferJob serviceAccount.
+                     * @member {string} serviceAccount
+                     * @memberof google.storagetransfer.v1.TransferJob
+                     * @instance
+                     */
+                    TransferJob.prototype.serviceAccount = "";
     
                     /**
                      * TransferJob transferSpec.
@@ -11234,6 +11498,8 @@
                             $root.google.storagetransfer.v1.EventStream.encode(message.eventStream, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                         if (message.replicationSpec != null && Object.hasOwnProperty.call(message, "replicationSpec"))
                             $root.google.storagetransfer.v1.ReplicationSpec.encode(message.replicationSpec, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                        if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                            writer.uint32(/* id 18, wireType 2 =*/146).string(message.serviceAccount);
                         return writer;
                     };
     
@@ -11278,6 +11544,10 @@
                                 }
                             case 3: {
                                     message.projectId = reader.string();
+                                    break;
+                                }
+                            case 18: {
+                                    message.serviceAccount = reader.string();
                                     break;
                                 }
                             case 4: {
@@ -11368,6 +11638,9 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
+                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                            if (!$util.isString(message.serviceAccount))
+                                return "serviceAccount: string expected";
                         if (message.transferSpec != null && message.hasOwnProperty("transferSpec")) {
                             var error = $root.google.storagetransfer.v1.TransferSpec.verify(message.transferSpec);
                             if (error)
@@ -11447,6 +11720,8 @@
                             message.description = String(object.description);
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
+                        if (object.serviceAccount != null)
+                            message.serviceAccount = String(object.serviceAccount);
                         if (object.transferSpec != null) {
                             if (typeof object.transferSpec !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferJob.transferSpec: object expected");
@@ -11549,6 +11824,7 @@
                             object.loggingConfig = null;
                             object.eventStream = null;
                             object.replicationSpec = null;
+                            object.serviceAccount = "";
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -11578,6 +11854,8 @@
                             object.eventStream = $root.google.storagetransfer.v1.EventStream.toObject(message.eventStream, options);
                         if (message.replicationSpec != null && message.hasOwnProperty("replicationSpec"))
                             object.replicationSpec = $root.google.storagetransfer.v1.ReplicationSpec.toObject(message.replicationSpec, options);
+                        if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                            object.serviceAccount = message.serviceAccount;
                         return object;
                     };
     
@@ -13780,6 +14058,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                         }
@@ -13852,6 +14131,10 @@
                                 case "FAILED":
                                 case 2:
                                     message.logActionStates[i] = 2;
+                                    break;
+                                case "SKIPPED":
+                                case 3:
+                                    message.logActionStates[i] = 3;
                                     break;
                                 }
                         }
@@ -13945,12 +14228,14 @@
                      * @property {number} LOGGABLE_ACTION_STATE_UNSPECIFIED=0 LOGGABLE_ACTION_STATE_UNSPECIFIED value
                      * @property {number} SUCCEEDED=1 SUCCEEDED value
                      * @property {number} FAILED=2 FAILED value
+                     * @property {number} SKIPPED=3 SKIPPED value
                      */
                     LoggingConfig.LoggableActionState = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "LOGGABLE_ACTION_STATE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "SUCCEEDED"] = 1;
                         values[valuesById[2] = "FAILED"] = 2;
+                        values[valuesById[3] = "SKIPPED"] = 3;
                         return values;
                     })();
     

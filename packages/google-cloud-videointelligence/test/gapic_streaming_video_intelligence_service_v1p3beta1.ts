@@ -219,9 +219,14 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
         throw err;
       });
       assert(client.streamingVideoIntelligenceServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -236,9 +241,14 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
         client.streamingVideoIntelligenceServiceStub,
         undefined
       );
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

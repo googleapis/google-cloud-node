@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/parametermanager": "^0.3.0"
+    "@google-cloud/parametermanager": "^0.4.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

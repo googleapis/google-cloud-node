@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, networkPolicy) {
+function main(networkPolicy) {
   // [START container_v1beta1_generated_ClusterManager_SetNetworkPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -47,9 +47,6 @@ function main(projectId, zone, clusterId, networkPolicy) {
   async function callSetNetworkPolicy() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
       networkPolicy,
     };
 

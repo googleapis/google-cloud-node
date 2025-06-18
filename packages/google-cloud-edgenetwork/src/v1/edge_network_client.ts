@@ -18,18 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -116,41 +105,20 @@ export class EdgeNetworkClient {
    *     const client = new EdgeNetworkClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EdgeNetworkClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'edgenetwork.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -176,7 +144,7 @@ export class EdgeNetworkClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -192,9 +160,13 @@ export class EdgeNetworkClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -245,36 +217,18 @@ export class EdgeNetworkClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listZones: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'zones'
-      ),
-      listNetworks: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'networks'
-      ),
-      listSubnets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'subnets'
-      ),
-      listInterconnects: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'interconnects'
-      ),
-      listInterconnectAttachments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'interconnectAttachments'
-      ),
-      listRouters: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'routers'
-      ),
+      listZones:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'zones'),
+      listNetworks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'networks'),
+      listSubnets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'subnets'),
+      listInterconnects:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'interconnects'),
+      listInterconnectAttachments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'interconnectAttachments'),
+      listRouters:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'routers')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -283,170 +237,101 @@ export class EdgeNetworkClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createNetworkResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.Network'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.Network') as gax.protobuf.Type;
     const createNetworkMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteNetworkResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteNetworkMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const createSubnetResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.Subnet'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.Subnet') as gax.protobuf.Type;
     const createSubnetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const updateSubnetResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.Subnet'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.Subnet') as gax.protobuf.Type;
     const updateSubnetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteSubnetResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteSubnetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const createInterconnectAttachmentResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.InterconnectAttachment'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.InterconnectAttachment') as gax.protobuf.Type;
     const createInterconnectAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteInterconnectAttachmentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteInterconnectAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const createRouterResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.Router'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.Router') as gax.protobuf.Type;
     const createRouterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const updateRouterResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.Router'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.Router') as gax.protobuf.Type;
     const updateRouterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteRouterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteRouterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgenetwork.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.edgenetwork.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createNetwork: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createNetworkResponse.decode.bind(createNetworkResponse),
-        createNetworkMetadata.decode.bind(createNetworkMetadata)
-      ),
+        createNetworkMetadata.decode.bind(createNetworkMetadata)),
       deleteNetwork: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteNetworkResponse.decode.bind(deleteNetworkResponse),
-        deleteNetworkMetadata.decode.bind(deleteNetworkMetadata)
-      ),
+        deleteNetworkMetadata.decode.bind(deleteNetworkMetadata)),
       createSubnet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSubnetResponse.decode.bind(createSubnetResponse),
-        createSubnetMetadata.decode.bind(createSubnetMetadata)
-      ),
+        createSubnetMetadata.decode.bind(createSubnetMetadata)),
       updateSubnet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateSubnetResponse.decode.bind(updateSubnetResponse),
-        updateSubnetMetadata.decode.bind(updateSubnetMetadata)
-      ),
+        updateSubnetMetadata.decode.bind(updateSubnetMetadata)),
       deleteSubnet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSubnetResponse.decode.bind(deleteSubnetResponse),
-        deleteSubnetMetadata.decode.bind(deleteSubnetMetadata)
-      ),
+        deleteSubnetMetadata.decode.bind(deleteSubnetMetadata)),
       createInterconnectAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createInterconnectAttachmentResponse.decode.bind(
-          createInterconnectAttachmentResponse
-        ),
-        createInterconnectAttachmentMetadata.decode.bind(
-          createInterconnectAttachmentMetadata
-        )
-      ),
+        createInterconnectAttachmentResponse.decode.bind(createInterconnectAttachmentResponse),
+        createInterconnectAttachmentMetadata.decode.bind(createInterconnectAttachmentMetadata)),
       deleteInterconnectAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteInterconnectAttachmentResponse.decode.bind(
-          deleteInterconnectAttachmentResponse
-        ),
-        deleteInterconnectAttachmentMetadata.decode.bind(
-          deleteInterconnectAttachmentMetadata
-        )
-      ),
+        deleteInterconnectAttachmentResponse.decode.bind(deleteInterconnectAttachmentResponse),
+        deleteInterconnectAttachmentMetadata.decode.bind(deleteInterconnectAttachmentMetadata)),
       createRouter: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRouterResponse.decode.bind(createRouterResponse),
-        createRouterMetadata.decode.bind(createRouterMetadata)
-      ),
+        createRouterMetadata.decode.bind(createRouterMetadata)),
       updateRouter: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateRouterResponse.decode.bind(updateRouterResponse),
-        updateRouterMetadata.decode.bind(updateRouterMetadata)
-      ),
+        updateRouterMetadata.decode.bind(updateRouterMetadata)),
       deleteRouter: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRouterResponse.decode.bind(deleteRouterResponse),
-        deleteRouterMetadata.decode.bind(deleteRouterMetadata)
-      ),
+        deleteRouterMetadata.decode.bind(deleteRouterMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.edgenetwork.v1.EdgeNetwork',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.edgenetwork.v1.EdgeNetwork', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -477,60 +362,28 @@ export class EdgeNetworkClient {
     // Put together the "service stub" for
     // google.cloud.edgenetwork.v1.EdgeNetwork.
     this.edgeNetworkStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.edgenetwork.v1.EdgeNetwork'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.edgenetwork.v1.EdgeNetwork') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.edgenetwork.v1.EdgeNetwork,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const edgeNetworkStubMethods = [
-      'initializeZone',
-      'listZones',
-      'getZone',
-      'listNetworks',
-      'getNetwork',
-      'diagnoseNetwork',
-      'createNetwork',
-      'deleteNetwork',
-      'listSubnets',
-      'getSubnet',
-      'createSubnet',
-      'updateSubnet',
-      'deleteSubnet',
-      'listInterconnects',
-      'getInterconnect',
-      'diagnoseInterconnect',
-      'listInterconnectAttachments',
-      'getInterconnectAttachment',
-      'createInterconnectAttachment',
-      'deleteInterconnectAttachment',
-      'listRouters',
-      'getRouter',
-      'diagnoseRouter',
-      'createRouter',
-      'updateRouter',
-      'deleteRouter',
-    ];
+    const edgeNetworkStubMethods =
+        ['initializeZone', 'listZones', 'getZone', 'listNetworks', 'getNetwork', 'diagnoseNetwork', 'createNetwork', 'deleteNetwork', 'listSubnets', 'getSubnet', 'createSubnet', 'updateSubnet', 'deleteSubnet', 'listInterconnects', 'getInterconnect', 'diagnoseInterconnect', 'listInterconnectAttachments', 'getInterconnectAttachment', 'createInterconnectAttachment', 'deleteInterconnectAttachment', 'listRouters', 'getRouter', 'diagnoseRouter', 'createRouter', 'updateRouter', 'deleteRouter'];
     for (const methodName of edgeNetworkStubMethods) {
       const callPromise = this.edgeNetworkStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -555,14 +408,8 @@ export class EdgeNetworkClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'edgenetwork.googleapis.com';
   }
@@ -573,14 +420,8 @@ export class EdgeNetworkClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'edgenetwork.googleapis.com';
   }
@@ -611,7 +452,9 @@ export class EdgeNetworkClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -620,9 +463,8 @@ export class EdgeNetworkClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -633,3180 +475,2225 @@ export class EdgeNetworkClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * InitializeZone will initialize resources for a zone in a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the zone resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.InitializeZoneResponse|InitializeZoneResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.initialize_zone.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_InitializeZone_async
-   */
+/**
+ * InitializeZone will initialize resources for a zone in a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the zone resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.InitializeZoneResponse|InitializeZoneResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.initialize_zone.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_InitializeZone_async
+ */
   initializeZone(
-    request?: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-      protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|undefined, {}|undefined
+      ]>;
   initializeZone(
-    request: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-      | protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  initializeZone(
-    request: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-      | protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  initializeZone(
-    request?: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-          | protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-      | protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-      protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|null|undefined,
+          {}|null|undefined>): void;
+  initializeZone(
+      request: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|null|undefined,
+          {}|null|undefined>): void;
+  initializeZone(
+      request?: protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+          protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('initializeZone request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-          | protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('initializeZone response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .initializeZone(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
-          protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('initializeZone response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.initializeZone(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneResponse,
+        protos.google.cloud.edgenetwork.v1.IInitializeZoneRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('initializeZone response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Deprecated: not implemented.
-   * Gets details of a single Zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Zone|Zone}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.get_zone.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetZone_async
-   * @deprecated GetZone is deprecated and may be removed in a future version.
-   */
+/**
+ * Deprecated: not implemented.
+ * Gets details of a single Zone.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Zone|Zone}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.get_zone.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetZone_async
+ * @deprecated GetZone is deprecated and may be removed in a future version.
+ */
   getZone(
-    request?: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IZone,
-      protos.google.cloud.edgenetwork.v1.IGetZoneRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IZone,
+        protos.google.cloud.edgenetwork.v1.IGetZoneRequest|undefined, {}|undefined
+      ]>;
   getZone(
-    request: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IZone,
-      protos.google.cloud.edgenetwork.v1.IGetZoneRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getZone(
-    request: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IZone,
-      protos.google.cloud.edgenetwork.v1.IGetZoneRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getZone(
-    request?: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IZone,
-          protos.google.cloud.edgenetwork.v1.IGetZoneRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IZone,
-      protos.google.cloud.edgenetwork.v1.IGetZoneRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IZone,
-      protos.google.cloud.edgenetwork.v1.IGetZoneRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IGetZoneRequest|null|undefined,
+          {}|null|undefined>): void;
+  getZone(
+      request: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IZone,
+          protos.google.cloud.edgenetwork.v1.IGetZoneRequest|null|undefined,
+          {}|null|undefined>): void;
+  getZone(
+      request?: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IZone,
+          protos.google.cloud.edgenetwork.v1.IGetZoneRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IZone,
+          protos.google.cloud.edgenetwork.v1.IGetZoneRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IZone,
+        protos.google.cloud.edgenetwork.v1.IGetZoneRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    this.warn(
-      'DEP$EdgeNetwork-$GetZone',
-      'GetZone is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$EdgeNetwork-$GetZone','GetZone is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('getZone request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IZone,
-          protos.google.cloud.edgenetwork.v1.IGetZoneRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IZone,
+        protos.google.cloud.edgenetwork.v1.IGetZoneRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getZone response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getZone(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IZone,
-          protos.google.cloud.edgenetwork.v1.IGetZoneRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getZone response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getZone(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IZone,
+        protos.google.cloud.edgenetwork.v1.IGetZoneRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getZone response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a single Network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Network|Network}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.get_network.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetNetwork_async
-   */
+/**
+ * Gets details of a single Network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Network|Network}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.get_network.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetNetwork_async
+ */
   getNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.INetwork,
-      protos.google.cloud.edgenetwork.v1.IGetNetworkRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.INetwork,
+        protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|undefined, {}|undefined
+      ]>;
   getNetwork(
-    request: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.INetwork,
-      protos.google.cloud.edgenetwork.v1.IGetNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNetwork(
-    request: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.INetwork,
-      protos.google.cloud.edgenetwork.v1.IGetNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.INetwork,
-          | protos.google.cloud.edgenetwork.v1.IGetNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.INetwork,
-      protos.google.cloud.edgenetwork.v1.IGetNetworkRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.INetwork,
-      protos.google.cloud.edgenetwork.v1.IGetNetworkRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNetwork(
+      request: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.INetwork,
+          protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNetwork(
+      request?: protos.google.cloud.edgenetwork.v1.IGetNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.INetwork,
+          protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.INetwork,
+          protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.INetwork,
+        protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNetwork request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.INetwork,
-          | protos.google.cloud.edgenetwork.v1.IGetNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.INetwork,
+        protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNetwork response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNetwork(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.INetwork,
-          protos.google.cloud.edgenetwork.v1.IGetNetworkRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getNetwork response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getNetwork(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.INetwork,
+        protos.google.cloud.edgenetwork.v1.IGetNetworkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNetwork response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Get the diagnostics of a single network resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the network resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.DiagnoseNetworkResponse|DiagnoseNetworkResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.diagnose_network.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DiagnoseNetwork_async
-   */
+/**
+ * Get the diagnostics of a single network resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the network resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.DiagnoseNetworkResponse|DiagnoseNetworkResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.diagnose_network.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DiagnoseNetwork_async
+ */
   diagnoseNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-      protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|undefined, {}|undefined
+      ]>;
   diagnoseNetwork(
-    request: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  diagnoseNetwork(
-    request: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  diagnoseNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-          | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-      protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  diagnoseNetwork(
+      request: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|null|undefined,
+          {}|null|undefined>): void;
+  diagnoseNetwork(
+      request?: protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('diagnoseNetwork request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-          | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('diagnoseNetwork response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .diagnoseNetwork(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
-          (
-            | protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('diagnoseNetwork response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.diagnoseNetwork(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseNetworkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('diagnoseNetwork response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a single Subnet.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.get_subnet.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetSubnet_async
-   */
+/**
+ * Gets details of a single Subnet.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.get_subnet.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetSubnet_async
+ */
   getSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.ISubnet,
-      protos.google.cloud.edgenetwork.v1.IGetSubnetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.ISubnet,
+        protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|undefined, {}|undefined
+      ]>;
   getSubnet(
-    request: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.ISubnet,
-      protos.google.cloud.edgenetwork.v1.IGetSubnetRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSubnet(
-    request: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.ISubnet,
-      protos.google.cloud.edgenetwork.v1.IGetSubnetRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.ISubnet,
-          | protos.google.cloud.edgenetwork.v1.IGetSubnetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.ISubnet,
-      protos.google.cloud.edgenetwork.v1.IGetSubnetRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.ISubnet,
-      protos.google.cloud.edgenetwork.v1.IGetSubnetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSubnet(
+      request: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.ISubnet,
+          protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSubnet(
+      request?: protos.google.cloud.edgenetwork.v1.IGetSubnetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.ISubnet,
+          protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.ISubnet,
+          protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.ISubnet,
+        protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSubnet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.ISubnet,
-          | protos.google.cloud.edgenetwork.v1.IGetSubnetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.ISubnet,
+        protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSubnet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSubnet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.ISubnet,
-          protos.google.cloud.edgenetwork.v1.IGetSubnetRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getSubnet response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getSubnet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.ISubnet,
+        protos.google.cloud.edgenetwork.v1.IGetSubnetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSubnet response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a single Interconnect.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.get_interconnect.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetInterconnect_async
-   */
+/**
+ * Gets details of a single Interconnect.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.get_interconnect.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetInterconnect_async
+ */
   getInterconnect(
-    request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnect,
-      protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnect,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|undefined, {}|undefined
+      ]>;
   getInterconnect(
-    request: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IInterconnect,
-      | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInterconnect(
-    request: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IInterconnect,
-      | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInterconnect(
-    request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IInterconnect,
-          | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IInterconnect,
-      | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnect,
-      protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInterconnect(
+      request: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnect,
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInterconnect(
+      request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnect,
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnect,
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnect,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInterconnect request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IInterconnect,
-          | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IInterconnect,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInterconnect response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInterconnect(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IInterconnect,
-          (
-            | protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getInterconnect response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getInterconnect(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IInterconnect,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInterconnect response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Get the diagnostics of a single interconnect resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the interconnect resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.DiagnoseInterconnectResponse|DiagnoseInterconnectResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.diagnose_interconnect.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DiagnoseInterconnect_async
-   */
+/**
+ * Get the diagnostics of a single interconnect resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the interconnect resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.DiagnoseInterconnectResponse|DiagnoseInterconnectResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.diagnose_interconnect.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DiagnoseInterconnect_async
+ */
   diagnoseInterconnect(
-    request?: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-      (
-        | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|undefined, {}|undefined
+      ]>;
   diagnoseInterconnect(
-    request: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  diagnoseInterconnect(
-    request: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  diagnoseInterconnect(
-    request?: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-          | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-      (
-        | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|null|undefined,
+          {}|null|undefined>): void;
+  diagnoseInterconnect(
+      request: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|null|undefined,
+          {}|null|undefined>): void;
+  diagnoseInterconnect(
+      request?: protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('diagnoseInterconnect request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-          | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('diagnoseInterconnect response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .diagnoseInterconnect(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
-          (
-            | protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('diagnoseInterconnect response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.diagnoseInterconnect(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseInterconnectRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('diagnoseInterconnect response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a single InterconnectAttachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.get_interconnect_attachment.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetInterconnectAttachment_async
-   */
+/**
+ * Gets details of a single InterconnectAttachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.get_interconnect_attachment.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetInterconnectAttachment_async
+ */
   getInterconnectAttachment(
-    request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-      (
-        | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>;
   getInterconnectAttachment(
-    request: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-      | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInterconnectAttachment(
-    request: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-      | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInterconnectAttachment(
-    request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-          | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-      | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-      (
-        | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInterconnectAttachment(
+      request: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInterconnectAttachment(
+      request?: protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+          protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInterconnectAttachment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-          | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInterconnectAttachment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInterconnectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-          (
-            | protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getInterconnectAttachment response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getInterconnectAttachment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
+        protos.google.cloud.edgenetwork.v1.IGetInterconnectAttachmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInterconnectAttachment response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets details of a single Router.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Router|Router}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.get_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetRouter_async
-   */
+/**
+ * Gets details of a single Router.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.Router|Router}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.get_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetRouter_async
+ */
   getRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IRouter,
-      protos.google.cloud.edgenetwork.v1.IGetRouterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IRouter,
+        protos.google.cloud.edgenetwork.v1.IGetRouterRequest|undefined, {}|undefined
+      ]>;
   getRouter(
-    request: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IRouter,
-      protos.google.cloud.edgenetwork.v1.IGetRouterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRouter(
-    request: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IRouter,
-      protos.google.cloud.edgenetwork.v1.IGetRouterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IRouter,
-          | protos.google.cloud.edgenetwork.v1.IGetRouterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IRouter,
-      protos.google.cloud.edgenetwork.v1.IGetRouterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IRouter,
-      protos.google.cloud.edgenetwork.v1.IGetRouterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IGetRouterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRouter(
+      request: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IRouter,
+          protos.google.cloud.edgenetwork.v1.IGetRouterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRouter(
+      request?: protos.google.cloud.edgenetwork.v1.IGetRouterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IRouter,
+          protos.google.cloud.edgenetwork.v1.IGetRouterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IRouter,
+          protos.google.cloud.edgenetwork.v1.IGetRouterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IRouter,
+        protos.google.cloud.edgenetwork.v1.IGetRouterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRouter request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IRouter,
-          | protos.google.cloud.edgenetwork.v1.IGetRouterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IRouter,
+        protos.google.cloud.edgenetwork.v1.IGetRouterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRouter response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRouter(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IRouter,
-          protos.google.cloud.edgenetwork.v1.IGetRouterRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRouter response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getRouter(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IRouter,
+        protos.google.cloud.edgenetwork.v1.IGetRouterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRouter response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Get the diagnostics of a single router resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the router resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.DiagnoseRouterResponse|DiagnoseRouterResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.diagnose_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DiagnoseRouter_async
-   */
+/**
+ * Get the diagnostics of a single router resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the router resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.edgenetwork.v1.DiagnoseRouterResponse|DiagnoseRouterResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.diagnose_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DiagnoseRouter_async
+ */
   diagnoseRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-      protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|undefined, {}|undefined
+      ]>;
   diagnoseRouter(
-    request: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  diagnoseRouter(
-    request: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
-    callback: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  diagnoseRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-          | protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-      | protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-      protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|null|undefined,
+          {}|null|undefined>): void;
+  diagnoseRouter(
+      request: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
+      callback: Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|null|undefined,
+          {}|null|undefined>): void;
+  diagnoseRouter(
+      request?: protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('diagnoseRouter request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-          | protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('diagnoseRouter response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .diagnoseRouter(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
-          protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('diagnoseRouter response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.diagnoseRouter(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterResponse,
+        protos.google.cloud.edgenetwork.v1.IDiagnoseRouterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('diagnoseRouter response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Creates a new Network in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.networkId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   network_id from the method_signature of Create RPC
-   * @param {google.cloud.edgenetwork.v1.Network} request.network
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_network.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateNetwork_async
-   */
+/**
+ * Creates a new Network in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.networkId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   network_id from the method_signature of Create RPC
+ * @param {google.cloud.edgenetwork.v1.Network} request.network
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_network.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateNetwork_async
+ */
   createNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.INetwork,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createNetwork(
-    request: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.INetwork,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createNetwork(
-    request: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.INetwork,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.INetwork,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.INetwork,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.INetwork,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.ICreateNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.INetwork,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createNetwork response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createNetwork request %j', request);
-    return this.innerApiCalls
-      .createNetwork(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.INetwork,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createNetwork response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createNetwork(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.edgenetwork.v1.INetwork, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createNetwork response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createNetwork()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_network.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateNetwork_async
-   */
-  async checkCreateNetworkProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.edgenetwork.v1.Network,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createNetwork()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_network.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateNetwork_async
+ */
+  async checkCreateNetworkProgress(name: string): Promise<LROperation<protos.google.cloud.edgenetwork.v1.Network, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('createNetwork long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createNetwork,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.edgenetwork.v1.Network,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createNetwork, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.edgenetwork.v1.Network, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_network.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteNetwork_async
-   */
+/**
+ * Deletes a single Network.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_network.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteNetwork_async
+ */
   deleteNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteNetwork(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteNetwork(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteNetwork(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteNetworkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteNetwork response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteNetwork request %j', request);
-    return this.innerApiCalls
-      .deleteNetwork(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteNetwork response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteNetwork(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteNetwork response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteNetwork()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_network.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteNetwork_async
-   */
-  async checkDeleteNetworkProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteNetwork()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_network.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteNetwork_async
+ */
+  async checkDeleteNetworkProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('deleteNetwork long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteNetwork,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteNetwork, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new Subnet in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.subnetId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   subnet_id from the method_signature of Create RPC
-   * @param {google.cloud.edgenetwork.v1.Subnet} request.subnet
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_subnet.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateSubnet_async
-   */
+/**
+ * Creates a new Subnet in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.subnetId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   subnet_id from the method_signature of Create RPC
+ * @param {google.cloud.edgenetwork.v1.Subnet} request.subnet
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_subnet.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateSubnet_async
+ */
   createSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createSubnet(
-    request: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSubnet(
-    request: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.ISubnet,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.ICreateSubnetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.ISubnet,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSubnet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSubnet request %j', request);
-    return this.innerApiCalls
-      .createSubnet(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.ISubnet,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createSubnet response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createSubnet(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createSubnet response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createSubnet()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_subnet.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateSubnet_async
-   */
-  async checkCreateSubnetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.edgenetwork.v1.Subnet,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createSubnet()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_subnet.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateSubnet_async
+ */
+  async checkCreateSubnetProgress(name: string): Promise<LROperation<protos.google.cloud.edgenetwork.v1.Subnet, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('createSubnet long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createSubnet,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.edgenetwork.v1.Subnet,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSubnet, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.edgenetwork.v1.Subnet, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Subnet.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Subnet resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.edgenetwork.v1.Subnet} request.subnet
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.update_subnet.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateSubnet_async
-   */
+/**
+ * Updates the parameters of a single Subnet.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Subnet resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.edgenetwork.v1.Subnet} request.subnet
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.update_subnet.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateSubnet_async
+ */
   updateSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateSubnet(
-    request: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSubnet(
-    request: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.ISubnet,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.ISubnet,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.IUpdateSubnetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'subnet.name': request.subnet!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'subnet.name': request.subnet!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.ISubnet,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSubnet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSubnet request %j', request);
-    return this.innerApiCalls
-      .updateSubnet(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.ISubnet,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSubnet response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateSubnet(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.edgenetwork.v1.ISubnet, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateSubnet response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateSubnet()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.update_subnet.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateSubnet_async
-   */
-  async checkUpdateSubnetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.edgenetwork.v1.Subnet,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateSubnet()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.update_subnet.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateSubnet_async
+ */
+  async checkUpdateSubnetProgress(name: string): Promise<LROperation<protos.google.cloud.edgenetwork.v1.Subnet, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('updateSubnet long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSubnet,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.edgenetwork.v1.Subnet,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSubnet, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.edgenetwork.v1.Subnet, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Subnet.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_subnet.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteSubnet_async
-   */
+/**
+ * Deletes a single Subnet.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_subnet.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteSubnet_async
+ */
   deleteSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteSubnet(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSubnet(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSubnet(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteSubnetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSubnet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSubnet request %j', request);
-    return this.innerApiCalls
-      .deleteSubnet(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSubnet response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteSubnet(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteSubnet response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteSubnet()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_subnet.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteSubnet_async
-   */
-  async checkDeleteSubnetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteSubnet()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_subnet.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteSubnet_async
+ */
+  async checkDeleteSubnetProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('deleteSubnet long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteSubnet,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSubnet, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new InterconnectAttachment in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.interconnectAttachmentId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   interconnect_attachment_id from the method_signature of Create RPC
-   * @param {google.cloud.edgenetwork.v1.InterconnectAttachment} request.interconnectAttachment
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_interconnect_attachment.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateInterconnectAttachment_async
-   */
+/**
+ * Creates a new InterconnectAttachment in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.interconnectAttachmentId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   interconnect_attachment_id from the method_signature of Create RPC
+ * @param {google.cloud.edgenetwork.v1.InterconnectAttachment} request.interconnectAttachment
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_interconnect_attachment.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateInterconnectAttachment_async
+ */
   createInterconnectAttachment(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createInterconnectAttachment(
-    request: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInterconnectAttachment(
-    request: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInterconnectAttachment(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.ICreateInterconnectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'createInterconnectAttachment response %j',
-            rawResponse
-          );
+          this._log.info('createInterconnectAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInterconnectAttachment request %j', request);
-    return this.innerApiCalls
-      .createInterconnectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IInterconnectAttachment,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'createInterconnectAttachment response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createInterconnectAttachment(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createInterconnectAttachment response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createInterconnectAttachment()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_interconnect_attachment.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateInterconnectAttachment_async
-   */
-  async checkCreateInterconnectAttachmentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.edgenetwork.v1.InterconnectAttachment,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createInterconnectAttachment()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_interconnect_attachment.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateInterconnectAttachment_async
+ */
+  async checkCreateInterconnectAttachmentProgress(name: string): Promise<LROperation<protos.google.cloud.edgenetwork.v1.InterconnectAttachment, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('createInterconnectAttachment long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createInterconnectAttachment,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.edgenetwork.v1.InterconnectAttachment,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInterconnectAttachment, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.edgenetwork.v1.InterconnectAttachment, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single InterconnectAttachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_interconnect_attachment.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteInterconnectAttachment_async
-   */
+/**
+ * Deletes a single InterconnectAttachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_interconnect_attachment.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteInterconnectAttachment_async
+ */
   deleteInterconnectAttachment(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteInterconnectAttachment(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInterconnectAttachment(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteInterconnectAttachment(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteInterconnectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'deleteInterconnectAttachment response %j',
-            rawResponse
-          );
+          this._log.info('deleteInterconnectAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInterconnectAttachment request %j', request);
-    return this.innerApiCalls
-      .deleteInterconnectAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'deleteInterconnectAttachment response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteInterconnectAttachment(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteInterconnectAttachment response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteInterconnectAttachment()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_interconnect_attachment.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteInterconnectAttachment_async
-   */
-  async checkDeleteInterconnectAttachmentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteInterconnectAttachment()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_interconnect_attachment.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteInterconnectAttachment_async
+ */
+  async checkDeleteInterconnectAttachmentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('deleteInterconnectAttachment long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteInterconnectAttachment,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInterconnectAttachment, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new Router in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.routerId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   router_id from the method_signature of Create RPC
-   * @param {google.cloud.edgenetwork.v1.Router} request.router
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateRouter_async
-   */
+/**
+ * Creates a new Router in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.routerId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   router_id from the method_signature of Create RPC
+ * @param {google.cloud.edgenetwork.v1.Router} request.router
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateRouter_async
+ */
   createRouter(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createRouter(
-    request: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRouter(
-    request: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRouter(
-    request?: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IRouter,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.ICreateRouterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IRouter,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRouter response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRouter request %j', request);
-    return this.innerApiCalls
-      .createRouter(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IRouter,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRouter response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createRouter(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createRouter response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createRouter()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.create_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateRouter_async
-   */
-  async checkCreateRouterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.edgenetwork.v1.Router,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createRouter()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.create_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_CreateRouter_async
+ */
+  async checkCreateRouterProgress(name: string): Promise<LROperation<protos.google.cloud.edgenetwork.v1.Router, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('createRouter long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createRouter,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.edgenetwork.v1.Router,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRouter, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.edgenetwork.v1.Router, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Updates the parameters of a single Router.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Router resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.edgenetwork.v1.Router} request.router
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.update_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateRouter_async
-   */
+/**
+ * Updates the parameters of a single Router.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   Router resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.edgenetwork.v1.Router} request.router
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.update_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateRouter_async
+ */
   updateRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateRouter(
-    request: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateRouter(
-    request: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IRouter,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.edgenetwork.v1.IRouter,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.IUpdateRouterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'router.name': request.router!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'router.name': request.router!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IRouter,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateRouter response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateRouter request %j', request);
-    return this.innerApiCalls
-      .updateRouter(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.edgenetwork.v1.IRouter,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRouter response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateRouter(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.edgenetwork.v1.IRouter, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateRouter response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateRouter()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.update_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateRouter_async
-   */
-  async checkUpdateRouterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.edgenetwork.v1.Router,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateRouter()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.update_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_UpdateRouter_async
+ */
+  async checkUpdateRouterProgress(name: string): Promise<LROperation<protos.google.cloud.edgenetwork.v1.Router, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('updateRouter long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateRouter,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.edgenetwork.v1.Router,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateRouter, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.edgenetwork.v1.Router, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Router.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteRouter_async
-   */
+/**
+ * Deletes a single Router.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteRouter_async
+ */
   deleteRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteRouter(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRouter(
-    request: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRouter(
-    request?: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.edgenetwork.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.edgenetwork.v1.IDeleteRouterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRouter response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRouter request %j', request);
-    return this.innerApiCalls
-      .deleteRouter(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.edgenetwork.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRouter response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteRouter(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgenetwork.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteRouter response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteRouter()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.delete_router.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteRouter_async
-   */
-  async checkDeleteRouterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteRouter()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.delete_router.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_DeleteRouter_async
+ */
+  async checkDeleteRouterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>>{
     this._log.info('deleteRouter long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteRouter,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.edgenetwork.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRouter, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgenetwork.v1.OperationMetadata>;
   }
-  /**
-   * Deprecated: not implemented.
-   * Lists Zones in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListZonesRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Zone|Zone}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listZonesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @deprecated ListZones is deprecated and may be removed in a future version.
-   */
+ /**
+ * Deprecated: not implemented.
+ * Lists Zones in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListZonesRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Zone|Zone}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listZonesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated ListZones is deprecated and may be removed in a future version.
+ */
   listZones(
-    request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IZone[],
-      protos.google.cloud.edgenetwork.v1.IListZonesRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListZonesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IZone[],
+        protos.google.cloud.edgenetwork.v1.IListZonesRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListZonesResponse
+      ]>;
   listZones(
-    request: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-      protos.google.cloud.edgenetwork.v1.IListZonesResponse | null | undefined,
-      protos.google.cloud.edgenetwork.v1.IZone
-    >
-  ): void;
-  listZones(
-    request: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-      protos.google.cloud.edgenetwork.v1.IListZonesResponse | null | undefined,
-      protos.google.cloud.edgenetwork.v1.IZone
-    >
-  ): void;
-  listZones(
-    request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-          | protos.google.cloud.edgenetwork.v1.IListZonesResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IZone
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-      protos.google.cloud.edgenetwork.v1.IListZonesResponse | null | undefined,
-      protos.google.cloud.edgenetwork.v1.IZone
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IZone[],
-      protos.google.cloud.edgenetwork.v1.IListZonesRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListZonesResponse,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IListZonesResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IZone>): void;
+  listZones(
+      request: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+          protos.google.cloud.edgenetwork.v1.IListZonesResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IZone>): void;
+  listZones(
+      request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+          protos.google.cloud.edgenetwork.v1.IListZonesResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IZone>,
+      callback?: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+          protos.google.cloud.edgenetwork.v1.IListZonesResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IZone>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IZone[],
+        protos.google.cloud.edgenetwork.v1.IListZonesRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListZonesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    this.warn(
-      'DEP$EdgeNetwork-$ListZones',
-      'ListZones is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-          | protos.google.cloud.edgenetwork.v1.IListZonesResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IZone
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$EdgeNetwork-$ListZones','ListZones is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+      protos.google.cloud.edgenetwork.v1.IListZonesResponse|null|undefined,
+      protos.google.cloud.edgenetwork.v1.IZone>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listZones values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3815,67 +2702,60 @@ export class EdgeNetworkClient {
     this._log.info('listZones request %j', request);
     return this.innerApiCalls
       .listZones(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.edgenetwork.v1.IZone[],
-          protos.google.cloud.edgenetwork.v1.IListZonesRequest | null,
-          protos.google.cloud.edgenetwork.v1.IListZonesResponse,
-        ]) => {
-          this._log.info('listZones values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.edgenetwork.v1.IZone[],
+        protos.google.cloud.edgenetwork.v1.IListZonesRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListZonesResponse
+      ]) => {
+        this._log.info('listZones values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listZones`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListZonesRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Zone|Zone} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listZonesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @deprecated ListZones is deprecated and may be removed in a future version.
-   */
+/**
+ * Equivalent to `listZones`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListZonesRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Zone|Zone} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listZonesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated ListZones is deprecated and may be removed in a future version.
+ */
   listZonesStream(
-    request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this.warn(
-      'DEP$EdgeNetwork-$ListZones',
-      'ListZones is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$EdgeNetwork-$ListZones','ListZones is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listZones stream %j', request);
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
@@ -3884,58 +2764,53 @@ export class EdgeNetworkClient {
     );
   }
 
-  /**
-   * Equivalent to `listZones`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListZonesRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.edgenetwork.v1.Zone|Zone}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.list_zones.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListZones_async
-   * @deprecated ListZones is deprecated and may be removed in a future version.
-   */
+/**
+ * Equivalent to `listZones`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListZonesRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.edgenetwork.v1.Zone|Zone}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.list_zones.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListZones_async
+ * @deprecated ListZones is deprecated and may be removed in a future version.
+ */
   listZonesAsync(
-    request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.edgenetwork.v1.IZone> {
+      request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.edgenetwork.v1.IZone>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this.warn(
-      'DEP$EdgeNetwork-$ListZones',
-      'ListZones is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$EdgeNetwork-$ListZones','ListZones is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listZones iterate %j', request);
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
@@ -3943,117 +2818,92 @@ export class EdgeNetworkClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.edgenetwork.v1.IZone>;
   }
-  /**
-   * Lists Networks in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListNetworksRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Network|Network}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNetworksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Networks in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListNetworksRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Network|Network}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNetworksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNetworks(
-    request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.INetwork[],
-      protos.google.cloud.edgenetwork.v1.IListNetworksRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListNetworksResponse,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.INetwork[],
+        protos.google.cloud.edgenetwork.v1.IListNetworksRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListNetworksResponse
+      ]>;
   listNetworks(
-    request: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-      | protos.google.cloud.edgenetwork.v1.IListNetworksResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.INetwork
-    >
-  ): void;
-  listNetworks(
-    request: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-      | protos.google.cloud.edgenetwork.v1.IListNetworksResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.INetwork
-    >
-  ): void;
-  listNetworks(
-    request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-          | protos.google.cloud.edgenetwork.v1.IListNetworksResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.INetwork
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-      | protos.google.cloud.edgenetwork.v1.IListNetworksResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.INetwork
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.INetwork[],
-      protos.google.cloud.edgenetwork.v1.IListNetworksRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListNetworksResponse,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IListNetworksResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.INetwork>): void;
+  listNetworks(
+      request: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+          protos.google.cloud.edgenetwork.v1.IListNetworksResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.INetwork>): void;
+  listNetworks(
+      request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+          protos.google.cloud.edgenetwork.v1.IListNetworksResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.INetwork>,
+      callback?: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+          protos.google.cloud.edgenetwork.v1.IListNetworksResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.INetwork>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.INetwork[],
+        protos.google.cloud.edgenetwork.v1.IListNetworksRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListNetworksResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-          | protos.google.cloud.edgenetwork.v1.IListNetworksResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.INetwork
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+      protos.google.cloud.edgenetwork.v1.IListNetworksResponse|null|undefined,
+      protos.google.cloud.edgenetwork.v1.INetwork>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNetworks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4062,61 +2912,58 @@ export class EdgeNetworkClient {
     this._log.info('listNetworks request %j', request);
     return this.innerApiCalls
       .listNetworks(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.edgenetwork.v1.INetwork[],
-          protos.google.cloud.edgenetwork.v1.IListNetworksRequest | null,
-          protos.google.cloud.edgenetwork.v1.IListNetworksResponse,
-        ]) => {
-          this._log.info('listNetworks values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.edgenetwork.v1.INetwork[],
+        protos.google.cloud.edgenetwork.v1.IListNetworksRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListNetworksResponse
+      ]) => {
+        this._log.info('listNetworks values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listNetworks`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListNetworksRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Network|Network} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNetworksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNetworks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListNetworksRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Network|Network} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNetworksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNetworksStream(
-    request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNetworks stream %j', request);
     return this.descriptors.page.listNetworks.createStream(
       this.innerApiCalls.listNetworks as GaxCall,
@@ -4125,52 +2972,51 @@ export class EdgeNetworkClient {
     );
   }
 
-  /**
-   * Equivalent to `listNetworks`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListNetworksRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.edgenetwork.v1.Network|Network}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.list_networks.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListNetworks_async
-   */
+/**
+ * Equivalent to `listNetworks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListNetworksRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.edgenetwork.v1.Network|Network}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.list_networks.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListNetworks_async
+ */
   listNetworksAsync(
-    request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.edgenetwork.v1.INetwork> {
+      request?: protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.edgenetwork.v1.INetwork>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNetworks iterate %j', request);
     return this.descriptors.page.listNetworks.asyncIterate(
       this.innerApiCalls['listNetworks'] as GaxCall,
@@ -4178,117 +3024,92 @@ export class EdgeNetworkClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.edgenetwork.v1.INetwork>;
   }
-  /**
-   * Lists Subnets in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListSubnetsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSubnetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Subnets in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListSubnetsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSubnetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSubnets(
-    request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.ISubnet[],
-      protos.google.cloud.edgenetwork.v1.IListSubnetsRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListSubnetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.ISubnet[],
+        protos.google.cloud.edgenetwork.v1.IListSubnetsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
+      ]>;
   listSubnets(
-    request: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.ISubnet
-    >
-  ): void;
-  listSubnets(
-    request: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.ISubnet
-    >
-  ): void;
-  listSubnets(
-    request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-          | protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.ISubnet
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.ISubnet
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.ISubnet[],
-      protos.google.cloud.edgenetwork.v1.IListSubnetsRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListSubnetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IListSubnetsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.ISubnet>): void;
+  listSubnets(
+      request: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+          protos.google.cloud.edgenetwork.v1.IListSubnetsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.ISubnet>): void;
+  listSubnets(
+      request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+          protos.google.cloud.edgenetwork.v1.IListSubnetsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.ISubnet>,
+      callback?: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+          protos.google.cloud.edgenetwork.v1.IListSubnetsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.ISubnet>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.ISubnet[],
+        protos.google.cloud.edgenetwork.v1.IListSubnetsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-          | protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.ISubnet
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+      protos.google.cloud.edgenetwork.v1.IListSubnetsResponse|null|undefined,
+      protos.google.cloud.edgenetwork.v1.ISubnet>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSubnets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4297,61 +3118,58 @@ export class EdgeNetworkClient {
     this._log.info('listSubnets request %j', request);
     return this.innerApiCalls
       .listSubnets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.edgenetwork.v1.ISubnet[],
-          protos.google.cloud.edgenetwork.v1.IListSubnetsRequest | null,
-          protos.google.cloud.edgenetwork.v1.IListSubnetsResponse,
-        ]) => {
-          this._log.info('listSubnets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.edgenetwork.v1.ISubnet[],
+        protos.google.cloud.edgenetwork.v1.IListSubnetsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListSubnetsResponse
+      ]) => {
+        this._log.info('listSubnets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSubnets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListSubnetsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSubnetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSubnets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListSubnetsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSubnetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSubnetsStream(
-    request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSubnets stream %j', request);
     return this.descriptors.page.listSubnets.createStream(
       this.innerApiCalls.listSubnets as GaxCall,
@@ -4360,52 +3178,51 @@ export class EdgeNetworkClient {
     );
   }
 
-  /**
-   * Equivalent to `listSubnets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListSubnetsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.list_subnets.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListSubnets_async
-   */
+/**
+ * Equivalent to `listSubnets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListSubnetsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.edgenetwork.v1.Subnet|Subnet}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.list_subnets.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListSubnets_async
+ */
   listSubnetsAsync(
-    request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.edgenetwork.v1.ISubnet> {
+      request?: protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.edgenetwork.v1.ISubnet>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSubnets iterate %j', request);
     return this.descriptors.page.listSubnets.asyncIterate(
       this.innerApiCalls['listSubnets'] as GaxCall,
@@ -4413,117 +3230,92 @@ export class EdgeNetworkClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.edgenetwork.v1.ISubnet>;
   }
-  /**
-   * Lists Interconnects in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListInterconnectsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listInterconnectsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Interconnects in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListInterconnectsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listInterconnectsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInterconnects(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnect[],
-      protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnect[],
+        protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
+      ]>;
   listInterconnects(
-    request: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IInterconnect
-    >
-  ): void;
-  listInterconnects(
-    request: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IInterconnect
-    >
-  ): void;
-  listInterconnects(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-          | protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IInterconnect
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IInterconnect
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnect[],
-      protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnect>): void;
+  listInterconnects(
+      request: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnect>): void;
+  listInterconnects(
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnect>,
+      callback?: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnect>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnect[],
+        protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-          | protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IInterconnect
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+      protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse|null|undefined,
+      protos.google.cloud.edgenetwork.v1.IInterconnect>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInterconnects values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4532,61 +3324,58 @@ export class EdgeNetworkClient {
     this._log.info('listInterconnects request %j', request);
     return this.innerApiCalls
       .listInterconnects(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.edgenetwork.v1.IInterconnect[],
-          protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest | null,
-          protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse,
-        ]) => {
-          this._log.info('listInterconnects values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.edgenetwork.v1.IInterconnect[],
+        protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListInterconnectsResponse
+      ]) => {
+        this._log.info('listInterconnects values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listInterconnects`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListInterconnectsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listInterconnectsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listInterconnects`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListInterconnectsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listInterconnectsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInterconnectsStream(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInterconnects stream %j', request);
     return this.descriptors.page.listInterconnects.createStream(
       this.innerApiCalls.listInterconnects as GaxCall,
@@ -4595,52 +3384,51 @@ export class EdgeNetworkClient {
     );
   }
 
-  /**
-   * Equivalent to `listInterconnects`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListInterconnectsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.list_interconnects.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListInterconnects_async
-   */
+/**
+ * Equivalent to `listInterconnects`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListInterconnectsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.edgenetwork.v1.Interconnect|Interconnect}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.list_interconnects.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListInterconnects_async
+ */
   listInterconnectsAsync(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.edgenetwork.v1.IInterconnect> {
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.edgenetwork.v1.IInterconnect>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInterconnects iterate %j', request);
     return this.descriptors.page.listInterconnects.asyncIterate(
       this.innerApiCalls['listInterconnects'] as GaxCall,
@@ -4648,117 +3436,92 @@ export class EdgeNetworkClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.edgenetwork.v1.IInterconnect>;
   }
-  /**
-   * Lists InterconnectAttachments in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListInterconnectAttachmentsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listInterconnectAttachmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists InterconnectAttachments in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListInterconnectAttachmentsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listInterconnectAttachmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInterconnectAttachments(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment[],
-      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment[],
+        protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
+      ]>;
   listInterconnectAttachments(
-    request: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment
-    >
-  ): void;
-  listInterconnectAttachments(
-    request: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment
-    >
-  ): void;
-  listInterconnectAttachments(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-          | protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-      | protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment[],
-      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment>): void;
+  listInterconnectAttachments(
+      request: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment>): void;
+  listInterconnectAttachments(
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment[],
+        protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-          | protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+      protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse|null|undefined,
+      protos.google.cloud.edgenetwork.v1.IInterconnectAttachment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInterconnectAttachments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4767,61 +3530,58 @@ export class EdgeNetworkClient {
     this._log.info('listInterconnectAttachments request %j', request);
     return this.innerApiCalls
       .listInterconnectAttachments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.edgenetwork.v1.IInterconnectAttachment[],
-          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest | null,
-          protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse,
-        ]) => {
-          this._log.info('listInterconnectAttachments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.edgenetwork.v1.IInterconnectAttachment[],
+        protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsResponse
+      ]) => {
+        this._log.info('listInterconnectAttachments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listInterconnectAttachments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListInterconnectAttachmentsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listInterconnectAttachmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listInterconnectAttachments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListInterconnectAttachmentsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listInterconnectAttachmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInterconnectAttachmentsStream(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInterconnectAttachments stream %j', request);
     return this.descriptors.page.listInterconnectAttachments.createStream(
       this.innerApiCalls.listInterconnectAttachments as GaxCall,
@@ -4830,52 +3590,51 @@ export class EdgeNetworkClient {
     );
   }
 
-  /**
-   * Equivalent to `listInterconnectAttachments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListInterconnectAttachmentsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.list_interconnect_attachments.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListInterconnectAttachments_async
-   */
+/**
+ * Equivalent to `listInterconnectAttachments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListInterconnectAttachmentsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.edgenetwork.v1.InterconnectAttachment|InterconnectAttachment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.list_interconnect_attachments.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListInterconnectAttachments_async
+ */
   listInterconnectAttachmentsAsync(
-    request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment> {
+      request?: protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInterconnectAttachments iterate %j', request);
     return this.descriptors.page.listInterconnectAttachments.asyncIterate(
       this.innerApiCalls['listInterconnectAttachments'] as GaxCall,
@@ -4883,117 +3642,92 @@ export class EdgeNetworkClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.edgenetwork.v1.IInterconnectAttachment>;
   }
-  /**
-   * Lists Routers in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListRoutersRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Router|Router}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRoutersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Routers in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListRoutersRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.edgenetwork.v1.Router|Router}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRoutersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRouters(
-    request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IRouter[],
-      protos.google.cloud.edgenetwork.v1.IListRoutersRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListRoutersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IRouter[],
+        protos.google.cloud.edgenetwork.v1.IListRoutersRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListRoutersResponse
+      ]>;
   listRouters(
-    request: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-      | protos.google.cloud.edgenetwork.v1.IListRoutersResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IRouter
-    >
-  ): void;
-  listRouters(
-    request: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-      | protos.google.cloud.edgenetwork.v1.IListRoutersResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IRouter
-    >
-  ): void;
-  listRouters(
-    request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-          | protos.google.cloud.edgenetwork.v1.IListRoutersResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IRouter
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-      | protos.google.cloud.edgenetwork.v1.IListRoutersResponse
-      | null
-      | undefined,
-      protos.google.cloud.edgenetwork.v1.IRouter
-    >
-  ): Promise<
-    [
-      protos.google.cloud.edgenetwork.v1.IRouter[],
-      protos.google.cloud.edgenetwork.v1.IListRoutersRequest | null,
-      protos.google.cloud.edgenetwork.v1.IListRoutersResponse,
-    ]
-  > | void {
+          protos.google.cloud.edgenetwork.v1.IListRoutersResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IRouter>): void;
+  listRouters(
+      request: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+          protos.google.cloud.edgenetwork.v1.IListRoutersResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IRouter>): void;
+  listRouters(
+      request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+          protos.google.cloud.edgenetwork.v1.IListRoutersResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IRouter>,
+      callback?: PaginationCallback<
+          protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+          protos.google.cloud.edgenetwork.v1.IListRoutersResponse|null|undefined,
+          protos.google.cloud.edgenetwork.v1.IRouter>):
+      Promise<[
+        protos.google.cloud.edgenetwork.v1.IRouter[],
+        protos.google.cloud.edgenetwork.v1.IListRoutersRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListRoutersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-          | protos.google.cloud.edgenetwork.v1.IListRoutersResponse
-          | null
-          | undefined,
-          protos.google.cloud.edgenetwork.v1.IRouter
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+      protos.google.cloud.edgenetwork.v1.IListRoutersResponse|null|undefined,
+      protos.google.cloud.edgenetwork.v1.IRouter>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRouters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5002,61 +3736,58 @@ export class EdgeNetworkClient {
     this._log.info('listRouters request %j', request);
     return this.innerApiCalls
       .listRouters(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.edgenetwork.v1.IRouter[],
-          protos.google.cloud.edgenetwork.v1.IListRoutersRequest | null,
-          protos.google.cloud.edgenetwork.v1.IListRoutersResponse,
-        ]) => {
-          this._log.info('listRouters values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.edgenetwork.v1.IRouter[],
+        protos.google.cloud.edgenetwork.v1.IListRoutersRequest|null,
+        protos.google.cloud.edgenetwork.v1.IListRoutersResponse
+      ]) => {
+        this._log.info('listRouters values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRouters`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListRoutersRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Router|Router} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRoutersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRouters`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListRoutersRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.edgenetwork.v1.Router|Router} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRoutersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRoutersStream(
-    request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRouters stream %j', request);
     return this.descriptors.page.listRouters.createStream(
       this.innerApiCalls.listRouters as GaxCall,
@@ -5065,52 +3796,51 @@ export class EdgeNetworkClient {
     );
   }
 
-  /**
-   * Equivalent to `listRouters`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListRoutersRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.edgenetwork.v1.Router|Router}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/edge_network.list_routers.js</caption>
-   * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListRouters_async
-   */
+/**
+ * Equivalent to `listRouters`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListRoutersRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.edgenetwork.v1.Router|Router}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/edge_network.list_routers.js</caption>
+ * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListRouters_async
+ */
   listRoutersAsync(
-    request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.edgenetwork.v1.IRouter> {
+      request?: protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.edgenetwork.v1.IRouter>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRouters iterate %j', request);
     return this.descriptors.page.listRouters.asyncIterate(
       this.innerApiCalls['listRouters'] as GaxCall,
@@ -5118,7 +3848,7 @@ export class EdgeNetworkClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.edgenetwork.v1.IRouter>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -5158,7 +3888,7 @@ export class EdgeNetworkClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -5196,7 +3926,7 @@ export class EdgeNetworkClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5241,20 +3971,20 @@ export class EdgeNetworkClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5291,13 +4021,13 @@ export class EdgeNetworkClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5331,7 +4061,7 @@ export class EdgeNetworkClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -5346,20 +4076,20 @@ export class EdgeNetworkClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5403,20 +4133,20 @@ export class EdgeNetworkClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5433,12 +4163,7 @@ export class EdgeNetworkClient {
    * @param {string} interconnect
    * @returns {string} Resource name string.
    */
-  interconnectPath(
-    project: string,
-    location: string,
-    zone: string,
-    interconnect: string
-  ) {
+  interconnectPath(project:string,location:string,zone:string,interconnect:string) {
     return this.pathTemplates.interconnectPathTemplate.render({
       project: project,
       location: location,
@@ -5455,8 +4180,7 @@ export class EdgeNetworkClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInterconnectName(interconnectName: string) {
-    return this.pathTemplates.interconnectPathTemplate.match(interconnectName)
-      .project;
+    return this.pathTemplates.interconnectPathTemplate.match(interconnectName).project;
   }
 
   /**
@@ -5467,8 +4191,7 @@ export class EdgeNetworkClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInterconnectName(interconnectName: string) {
-    return this.pathTemplates.interconnectPathTemplate.match(interconnectName)
-      .location;
+    return this.pathTemplates.interconnectPathTemplate.match(interconnectName).location;
   }
 
   /**
@@ -5479,8 +4202,7 @@ export class EdgeNetworkClient {
    * @returns {string} A string representing the zone.
    */
   matchZoneFromInterconnectName(interconnectName: string) {
-    return this.pathTemplates.interconnectPathTemplate.match(interconnectName)
-      .zone;
+    return this.pathTemplates.interconnectPathTemplate.match(interconnectName).zone;
   }
 
   /**
@@ -5491,8 +4213,7 @@ export class EdgeNetworkClient {
    * @returns {string} A string representing the interconnect.
    */
   matchInterconnectFromInterconnectName(interconnectName: string) {
-    return this.pathTemplates.interconnectPathTemplate.match(interconnectName)
-      .interconnect;
+    return this.pathTemplates.interconnectPathTemplate.match(interconnectName).interconnect;
   }
 
   /**
@@ -5504,12 +4225,7 @@ export class EdgeNetworkClient {
    * @param {string} interconnect_attachment
    * @returns {string} Resource name string.
    */
-  interconnectAttachmentPath(
-    project: string,
-    location: string,
-    zone: string,
-    interconnectAttachment: string
-  ) {
+  interconnectAttachmentPath(project:string,location:string,zone:string,interconnectAttachment:string) {
     return this.pathTemplates.interconnectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -5525,12 +4241,8 @@ export class EdgeNetworkClient {
    *   A fully-qualified path representing InterconnectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterconnectAttachmentName(
-    interconnectAttachmentName: string
-  ) {
-    return this.pathTemplates.interconnectAttachmentPathTemplate.match(
-      interconnectAttachmentName
-    ).project;
+  matchProjectFromInterconnectAttachmentName(interconnectAttachmentName: string) {
+    return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).project;
   }
 
   /**
@@ -5540,12 +4252,8 @@ export class EdgeNetworkClient {
    *   A fully-qualified path representing InterconnectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterconnectAttachmentName(
-    interconnectAttachmentName: string
-  ) {
-    return this.pathTemplates.interconnectAttachmentPathTemplate.match(
-      interconnectAttachmentName
-    ).location;
+  matchLocationFromInterconnectAttachmentName(interconnectAttachmentName: string) {
+    return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).location;
   }
 
   /**
@@ -5556,9 +4264,7 @@ export class EdgeNetworkClient {
    * @returns {string} A string representing the zone.
    */
   matchZoneFromInterconnectAttachmentName(interconnectAttachmentName: string) {
-    return this.pathTemplates.interconnectAttachmentPathTemplate.match(
-      interconnectAttachmentName
-    ).zone;
+    return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).zone;
   }
 
   /**
@@ -5568,12 +4274,8 @@ export class EdgeNetworkClient {
    *   A fully-qualified path representing InterconnectAttachment resource.
    * @returns {string} A string representing the interconnect_attachment.
    */
-  matchInterconnectAttachmentFromInterconnectAttachmentName(
-    interconnectAttachmentName: string
-  ) {
-    return this.pathTemplates.interconnectAttachmentPathTemplate.match(
-      interconnectAttachmentName
-    ).interconnect_attachment;
+  matchInterconnectAttachmentFromInterconnectAttachmentName(interconnectAttachmentName: string) {
+    return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).interconnect_attachment;
   }
 
   /**
@@ -5583,7 +4285,7 @@ export class EdgeNetworkClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -5621,12 +4323,7 @@ export class EdgeNetworkClient {
    * @param {string} network
    * @returns {string} Resource name string.
    */
-  networkPath(
-    project: string,
-    location: string,
-    zone: string,
-    network: string
-  ) {
+  networkPath(project:string,location:string,zone:string,network:string) {
     return this.pathTemplates.networkPathTemplate.render({
       project: project,
       location: location,
@@ -5685,7 +4382,7 @@ export class EdgeNetworkClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -5711,7 +4408,7 @@ export class EdgeNetworkClient {
    * @param {string} router
    * @returns {string} Resource name string.
    */
-  routerPath(project: string, location: string, zone: string, router: string) {
+  routerPath(project:string,location:string,zone:string,router:string) {
     return this.pathTemplates.routerPathTemplate.render({
       project: project,
       location: location,
@@ -5773,7 +4470,7 @@ export class EdgeNetworkClient {
    * @param {string} subnet
    * @returns {string} Resource name string.
    */
-  subnetPath(project: string, location: string, zone: string, subnet: string) {
+  subnetPath(project:string,location:string,zone:string,subnet:string) {
     return this.pathTemplates.subnetPathTemplate.render({
       project: project,
       location: location,
@@ -5834,7 +4531,7 @@ export class EdgeNetworkClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project: string, location: string, zone: string) {
+  zonePath(project:string,location:string,zone:string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -5887,8 +4584,8 @@ export class EdgeNetworkClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

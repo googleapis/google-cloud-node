@@ -26,12 +26,6 @@ const NotebookServiceClient = v1.NotebookServiceClient;
 type NotebookServiceClient = v1.NotebookServiceClient;
 
 export {v1, v1beta1, v2, ManagedNotebookServiceClient, NotebookServiceClient};
-export default {
-  v1,
-  v1beta1,
-  v2,
-  ManagedNotebookServiceClient,
-  NotebookServiceClient,
-};
+export default {v1, v1beta1, v2, ManagedNotebookServiceClient, NotebookServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

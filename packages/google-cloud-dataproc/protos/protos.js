@@ -12000,6 +12000,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
+                                    case 6:
                                         break;
                                     }
                             }
@@ -12044,6 +12046,14 @@
                                     case "MEMORY":
                                     case 4:
                                         message.scenarios[i] = 4;
+                                        break;
+                                    case "NONE":
+                                    case 5:
+                                        message.scenarios[i] = 5;
+                                        break;
+                                    case "AUTO":
+                                    case 6:
+                                        message.scenarios[i] = 6;
                                         break;
                                     }
                             }
@@ -12107,6 +12117,8 @@
                          * @property {number} SCALING=2 SCALING value
                          * @property {number} BROADCAST_HASH_JOIN=3 BROADCAST_HASH_JOIN value
                          * @property {number} MEMORY=4 MEMORY value
+                         * @property {number} NONE=5 NONE value
+                         * @property {number} AUTO=6 AUTO value
                          */
                         AutotuningConfig.Scenario = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12114,6 +12126,8 @@
                             values[valuesById[2] = "SCALING"] = 2;
                             values[valuesById[3] = "BROADCAST_HASH_JOIN"] = 3;
                             values[valuesById[4] = "MEMORY"] = 4;
+                            values[valuesById[5] = "NONE"] = 5;
+                            values[valuesById[6] = "AUTO"] = 6;
                             return values;
                         })();
     

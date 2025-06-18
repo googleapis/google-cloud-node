@@ -6645,12 +6645,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -8496,6 +8493,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -8555,6 +8553,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -8589,6 +8595,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -8643,6 +8651,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -8703,6 +8715,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -8739,6 +8754,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -8762,6 +8779,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -8776,6 +8794,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -14906,12 +14926,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ConfigSync _enabled.
-                             * @member {"enabled"|undefined} _enabled
-                             * @memberof google.cloud.gkehub.configmanagement.v1.ConfigSync
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ConfigSync.prototype, "_enabled", {
                                 get: $util.oneOfGetter($oneOfFields = ["enabled"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -15944,23 +15959,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * PolicyController _templateLibraryInstalled.
-                             * @member {"templateLibraryInstalled"|undefined} _templateLibraryInstalled
-                             * @memberof google.cloud.gkehub.configmanagement.v1.PolicyController
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyController.prototype, "_templateLibraryInstalled", {
                                 get: $util.oneOfGetter($oneOfFields = ["templateLibraryInstalled"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PolicyController _auditIntervalSeconds.
-                             * @member {"auditIntervalSeconds"|undefined} _auditIntervalSeconds
-                             * @memberof google.cloud.gkehub.configmanagement.v1.PolicyController
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyController.prototype, "_auditIntervalSeconds", {
                                 get: $util.oneOfGetter($oneOfFields = ["auditIntervalSeconds"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -22805,23 +22810,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * PolicyController _templateLibraryInstalled.
-                             * @member {"templateLibraryInstalled"|undefined} _templateLibraryInstalled
-                             * @memberof google.cloud.gkehub.configmanagement.v1alpha.PolicyController
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyController.prototype, "_templateLibraryInstalled", {
                                 get: $util.oneOfGetter($oneOfFields = ["templateLibraryInstalled"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PolicyController _auditIntervalSeconds.
-                             * @member {"auditIntervalSeconds"|undefined} _auditIntervalSeconds
-                             * @memberof google.cloud.gkehub.configmanagement.v1alpha.PolicyController
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyController.prototype, "_auditIntervalSeconds", {
                                 get: $util.oneOfGetter($oneOfFields = ["auditIntervalSeconds"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -29272,12 +29267,7 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ConfigSync _enabled.
-                             * @member {"enabled"|undefined} _enabled
-                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ConfigSync
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ConfigSync.prototype, "_enabled", {
                                 get: $util.oneOfGetter($oneOfFields = ["enabled"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -30337,23 +30327,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * PolicyController _templateLibraryInstalled.
-                             * @member {"templateLibraryInstalled"|undefined} _templateLibraryInstalled
-                             * @memberof google.cloud.gkehub.configmanagement.v1beta.PolicyController
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyController.prototype, "_templateLibraryInstalled", {
                                 get: $util.oneOfGetter($oneOfFields = ["templateLibraryInstalled"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PolicyController _auditIntervalSeconds.
-                             * @member {"auditIntervalSeconds"|undefined} _auditIntervalSeconds
-                             * @memberof google.cloud.gkehub.configmanagement.v1beta.PolicyController
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyController.prototype, "_auditIntervalSeconds", {
                                 get: $util.oneOfGetter($oneOfFields = ["auditIntervalSeconds"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -64647,45 +64627,25 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * HubConfig _auditIntervalSeconds.
-                             * @member {"auditIntervalSeconds"|undefined} _auditIntervalSeconds
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.HubConfig
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(HubConfig.prototype, "_auditIntervalSeconds", {
                                 get: $util.oneOfGetter($oneOfFields = ["auditIntervalSeconds"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * HubConfig _monitoring.
-                             * @member {"monitoring"|undefined} _monitoring
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.HubConfig
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(HubConfig.prototype, "_monitoring", {
                                 get: $util.oneOfGetter($oneOfFields = ["monitoring"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * HubConfig _policyContent.
-                             * @member {"policyContent"|undefined} _policyContent
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.HubConfig
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(HubConfig.prototype, "_policyContent", {
                                 get: $util.oneOfGetter($oneOfFields = ["policyContent"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * HubConfig _constraintViolationLimit.
-                             * @member {"constraintViolationLimit"|undefined} _constraintViolationLimit
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.HubConfig
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(HubConfig.prototype, "_constraintViolationLimit", {
                                 get: $util.oneOfGetter($oneOfFields = ["constraintViolationLimit"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -65222,34 +65182,19 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * PolicyControllerDeploymentConfig _replicaCount.
-                             * @member {"replicaCount"|undefined} _replicaCount
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyControllerDeploymentConfig.prototype, "_replicaCount", {
                                 get: $util.oneOfGetter($oneOfFields = ["replicaCount"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PolicyControllerDeploymentConfig _containerResources.
-                             * @member {"containerResources"|undefined} _containerResources
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyControllerDeploymentConfig.prototype, "_containerResources", {
                                 get: $util.oneOfGetter($oneOfFields = ["containerResources"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PolicyControllerDeploymentConfig _podAntiAffinity.
-                             * @member {"podAntiAffinity"|undefined} _podAntiAffinity
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PolicyControllerDeploymentConfig.prototype, "_podAntiAffinity", {
                                 get: $util.oneOfGetter($oneOfFields = ["podAntiAffinity"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -65615,45 +65560,25 @@
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
-                                /**
-                                 * Toleration _key.
-                                 * @member {"key"|undefined} _key
-                                 * @memberof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Toleration
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Toleration.prototype, "_key", {
                                     get: $util.oneOfGetter($oneOfFields = ["key"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
-                                /**
-                                 * Toleration _operator.
-                                 * @member {"operator"|undefined} _operator
-                                 * @memberof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Toleration
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Toleration.prototype, "_operator", {
                                     get: $util.oneOfGetter($oneOfFields = ["operator"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
-                                /**
-                                 * Toleration _value.
-                                 * @member {"value"|undefined} _value
-                                 * @memberof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Toleration
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Toleration.prototype, "_value", {
                                     get: $util.oneOfGetter($oneOfFields = ["value"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
-                                /**
-                                 * Toleration _effect.
-                                 * @member {"effect"|undefined} _effect
-                                 * @memberof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Toleration
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Toleration.prototype, "_effect", {
                                     get: $util.oneOfGetter($oneOfFields = ["effect"]),
                                     set: $util.oneOfSetter($oneOfFields)
@@ -65951,23 +65876,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ResourceRequirements _limits.
-                             * @member {"limits"|undefined} _limits
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.ResourceRequirements
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ResourceRequirements.prototype, "_limits", {
                                 get: $util.oneOfGetter($oneOfFields = ["limits"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ResourceRequirements _requests.
-                             * @member {"requests"|undefined} _requests
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.ResourceRequirements
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ResourceRequirements.prototype, "_requests", {
                                 get: $util.oneOfGetter($oneOfFields = ["requests"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -66222,23 +66137,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ResourceList _memory.
-                             * @member {"memory"|undefined} _memory
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.ResourceList
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ResourceList.prototype, "_memory", {
                                 get: $util.oneOfGetter($oneOfFields = ["memory"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ResourceList _cpu.
-                             * @member {"cpu"|undefined} _cpu
-                             * @memberof google.cloud.gkehub.policycontroller.v1beta.ResourceList
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ResourceList.prototype, "_cpu", {
                                 get: $util.oneOfGetter($oneOfFields = ["cpu"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -83316,6 +83221,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -83417,6 +83323,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -83463,6 +83377,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -83541,6 +83457,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -83635,6 +83555,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -83729,6 +83652,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -83758,6 +83683,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -83788,6 +83714,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     

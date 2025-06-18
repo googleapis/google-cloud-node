@@ -6,7 +6,7 @@
     "directory": "packages/google-cloud-phishingprotection"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-phishingprotection",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "author": "Google LLC",
   "description": "Phishing Protection API client for Node.js",
   "main": "build/src/index.js",
@@ -29,7 +29,7 @@
     "Phishing Protection API"
   ],
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

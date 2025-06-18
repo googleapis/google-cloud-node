@@ -5202,12 +5202,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AllowedDomainsSettings _enable.
-                         * @member {"enable"|undefined} _enable
-                         * @memberof google.cloud.iap.v1.AllowedDomainsSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AllowedDomainsSettings.prototype, "_enable", {
                             get: $util.oneOfGetter($oneOfFields = ["enable"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -5978,12 +5973,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AccessDeniedPageSettings _remediationTokenGenerationEnabled.
-                         * @member {"remediationTokenGenerationEnabled"|undefined} _remediationTokenGenerationEnabled
-                         * @memberof google.cloud.iap.v1.AccessDeniedPageSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AccessDeniedPageSettings.prototype, "_remediationTokenGenerationEnabled", {
                             get: $util.oneOfGetter($oneOfFields = ["remediationTokenGenerationEnabled"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -6266,23 +6256,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AttributePropagationSettings _expression.
-                         * @member {"expression"|undefined} _expression
-                         * @memberof google.cloud.iap.v1.AttributePropagationSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AttributePropagationSettings.prototype, "_expression", {
                             get: $util.oneOfGetter($oneOfFields = ["expression"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * AttributePropagationSettings _enable.
-                         * @member {"enable"|undefined} _enable
-                         * @memberof google.cloud.iap.v1.AttributePropagationSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AttributePropagationSettings.prototype, "_enable", {
                             get: $util.oneOfGetter($oneOfFields = ["enable"]),
                             set: $util.oneOfSetter($oneOfFields)

@@ -20134,6 +20134,9 @@ export namespace google {
 
                     /** DataProfileAction tagResources */
                     tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
+
+                    /** DataProfileAction publishToDataplexCatalog */
+                    publishToDataplexCatalog?: (google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog|null);
                 }
 
                 /** Represents a DataProfileAction. */
@@ -20160,8 +20163,11 @@ export namespace google {
                     /** DataProfileAction tagResources. */
                     public tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
 
+                    /** DataProfileAction publishToDataplexCatalog. */
+                    public publishToDataplexCatalog?: (google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog|null);
+
                     /** DataProfileAction action. */
-                    public action?: ("exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources");
+                    public action?: ("exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources"|"publishToDataplexCatalog");
 
                     /**
                      * Creates a new DataProfileAction instance using the specified properties.
@@ -20663,6 +20669,103 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a PublishToDataplexCatalog. */
+                    interface IPublishToDataplexCatalog {
+
+                        /** PublishToDataplexCatalog lowerDataRiskToLow */
+                        lowerDataRiskToLow?: (boolean|null);
+                    }
+
+                    /** Represents a PublishToDataplexCatalog. */
+                    class PublishToDataplexCatalog implements IPublishToDataplexCatalog {
+
+                        /**
+                         * Constructs a new PublishToDataplexCatalog.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog);
+
+                        /** PublishToDataplexCatalog lowerDataRiskToLow. */
+                        public lowerDataRiskToLow: boolean;
+
+                        /**
+                         * Creates a new PublishToDataplexCatalog instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishToDataplexCatalog instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog): google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog;
+
+                        /**
+                         * Encodes the specified PublishToDataplexCatalog message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify|verify} messages.
+                         * @param message PublishToDataplexCatalog message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishToDataplexCatalog message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify|verify} messages.
+                         * @param message PublishToDataplexCatalog message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishToDataplexCatalog message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishToDataplexCatalog
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog;
+
+                        /**
+                         * Decodes a PublishToDataplexCatalog message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishToDataplexCatalog
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog;
+
+                        /**
+                         * Verifies a PublishToDataplexCatalog message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishToDataplexCatalog message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishToDataplexCatalog
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog;
+
+                        /**
+                         * Creates a plain object from a PublishToDataplexCatalog message. Also converts values to other types if specified.
+                         * @param message PublishToDataplexCatalog
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishToDataplexCatalog to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishToDataplexCatalog
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a TagResources. */
                     interface ITagResources {
 
@@ -21008,6 +21111,12 @@ export namespace google {
 
                     /** DataProfileFinding resourceVisibility */
                     resourceVisibility?: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility|null);
+
+                    /** DataProfileFinding fullResourceName */
+                    fullResourceName?: (string|null);
+
+                    /** DataProfileFinding dataSourceType */
+                    dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
                 }
 
                 /** Represents a DataProfileFinding. */
@@ -21042,6 +21151,12 @@ export namespace google {
 
                     /** DataProfileFinding resourceVisibility. */
                     public resourceVisibility: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility);
+
+                    /** DataProfileFinding fullResourceName. */
+                    public fullResourceName: string;
+
+                    /** DataProfileFinding dataSourceType. */
+                    public dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
 
                     /**
                      * Creates a new DataProfileFinding instance using the specified properties.
@@ -40905,6 +41020,9 @@ export namespace google {
 
                     /** TableReference tableId */
                     tableId?: (string|null);
+
+                    /** TableReference projectId */
+                    projectId?: (string|null);
                 }
 
                 /** Represents a TableReference. */
@@ -40921,6 +41039,9 @@ export namespace google {
 
                     /** TableReference tableId. */
                     public tableId: string;
+
+                    /** TableReference projectId. */
+                    public projectId: string;
 
                     /**
                      * Creates a new TableReference instance using the specified properties.

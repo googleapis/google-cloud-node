@@ -182,6 +182,15 @@ function main(nodeVersion, imageType) {
    *  Existing Storage Pools will be replaced with storage-pools.
    */
   // const storagePools = ['abc','def']
+  /**
+   *  The maximum duration for the nodes to exist.
+   *  If unspecified, the nodes can exist indefinitely.
+   */
+  // const maxRunDuration = {}
+  /**
+   *  Flex Start flag for enabling Flex Start VM.
+   */
+  // const flexStart = true
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

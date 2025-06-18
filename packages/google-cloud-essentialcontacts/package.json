@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/essential-contacts",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Essential contacts client for Node.js",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

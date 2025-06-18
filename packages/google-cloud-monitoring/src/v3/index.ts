@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,4 +22,5 @@ export {MetricServiceClient} from './metric_service_client';
 export {NotificationChannelServiceClient} from './notification_channel_service_client';
 export {QueryServiceClient} from './query_service_client';
 export {ServiceMonitoringServiceClient} from './service_monitoring_service_client';
+export {SnoozeServiceClient} from './snooze_service_client';
 export {UptimeCheckServiceClient} from './uptime_check_service_client';

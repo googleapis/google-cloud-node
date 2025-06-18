@@ -29,1833 +29,1485 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.GSuiteAddOnsClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'gsuiteaddons.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          gsuiteaddonsModule.v1.GSuiteAddOnsClient.servicePath;
-        assert.strictEqual(servicePath, 'gsuiteaddons.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          gsuiteaddonsModule.v1.GSuiteAddOnsClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'gsuiteaddons.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gsuiteaddons.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gsuiteaddons.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'gsuiteaddons.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'gsuiteaddons.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'gsuiteaddons.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = gsuiteaddonsModule.v1.GSuiteAddOnsClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = gsuiteaddonsModule.v1.GSuiteAddOnsClient.servicePath;
+                assert.strictEqual(servicePath, 'gsuiteaddons.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.gSuiteAddOnsStub, undefined);
-      await client.initialize();
-      assert(client.gSuiteAddOnsStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.gSuiteAddOnsStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.gSuiteAddOnsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getAuthorization', () => {
-    it('invokes getAuthorization without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Authorization()
-      );
-      client.innerApiCalls.getAuthorization = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAuthorization(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAuthorization as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAuthorization as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAuthorization without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Authorization()
-      );
-      client.innerApiCalls.getAuthorization =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAuthorization(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gsuiteaddons.v1.IAuthorization | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAuthorization as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAuthorization as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAuthorization with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAuthorization = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAuthorization(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAuthorization as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAuthorization as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAuthorization with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getAuthorization(request), expectedError);
-    });
-  });
-
-  describe('createDeployment', () => {
-    it('invokes createDeployment without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Deployment()
-      );
-      client.innerApiCalls.createDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.createDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeployment without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Deployment()
-      );
-      client.innerApiCalls.createDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gsuiteaddons.v1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeployment with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeployment with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createDeployment(request), expectedError);
-    });
-  });
-
-  describe('replaceDeployment', () => {
-    it('invokes replaceDeployment without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Deployment()
-      );
-      client.innerApiCalls.replaceDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.replaceDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceDeployment without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Deployment()
-      );
-      client.innerApiCalls.replaceDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.replaceDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gsuiteaddons.v1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.replaceDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceDeployment with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.replaceDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.replaceDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.replaceDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.replaceDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes replaceDeployment with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
-      );
-      request.deployment ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest',
-        ['deployment', 'name']
-      );
-      request.deployment.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.replaceDeployment(request), expectedError);
-    });
-  });
-
-  describe('getDeployment', () => {
-    it('invokes getDeployment without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Deployment()
-      );
-      client.innerApiCalls.getDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDeployment without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.Deployment()
-      );
-      client.innerApiCalls.getDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gsuiteaddons.v1.IDeployment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDeployment with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDeployment with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getDeployment(request), expectedError);
-    });
-  });
-
-  describe('deleteDeployment', () => {
-    it('invokes deleteDeployment without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDeployment without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDeployment with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDeployment with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteDeployment(request), expectedError);
-    });
-  });
-
-  describe('installDeployment', () => {
-    it('invokes installDeployment without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.installDeployment = stubSimpleCall(expectedResponse);
-      const [response] = await client.installDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.installDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.installDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes installDeployment without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.installDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.installDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.installDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.installDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes installDeployment with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.installDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.installDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.installDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.installDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes installDeployment with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.installDeployment(request), expectedError);
-    });
-  });
-
-  describe('uninstallDeployment', () => {
-    it('invokes uninstallDeployment without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.uninstallDeployment =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.uninstallDeployment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.uninstallDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.uninstallDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes uninstallDeployment without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.uninstallDeployment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.uninstallDeployment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.uninstallDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.uninstallDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes uninstallDeployment with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.uninstallDeployment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.uninstallDeployment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.uninstallDeployment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.uninstallDeployment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes uninstallDeployment with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.uninstallDeployment(request), expectedError);
-    });
-  });
-
-  describe('getInstallStatus', () => {
-    it('invokes getInstallStatus without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.InstallStatus()
-      );
-      client.innerApiCalls.getInstallStatus = stubSimpleCall(expectedResponse);
-      const [response] = await client.getInstallStatus(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstallStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstallStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstallStatus without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.InstallStatus()
-      );
-      client.innerApiCalls.getInstallStatus =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getInstallStatus(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gsuiteaddons.v1.IInstallStatus | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstallStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstallStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstallStatus with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getInstallStatus = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getInstallStatus(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getInstallStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstallStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstallStatus with closed client', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getInstallStatus(request), expectedError);
-    });
-  });
-
-  describe('listDeployments', () => {
-    it('invokes listDeployments without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.listDeployments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDeployments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeployments without error using callback', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-      ];
-      client.innerApiCalls.listDeployments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDeployments(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gsuiteaddons.v1.IDeployment[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeployments with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDeployments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDeployments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeployments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeploymentsStream without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-      ];
-      client.descriptors.page.listDeployments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gsuiteaddons.v1.Deployment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gsuiteaddons.v1.Deployment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDeployments, request)
-      );
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listDeploymentsStream with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDeployments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDeploymentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gsuiteaddons.v1.Deployment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gsuiteaddons.v1.Deployment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDeployments, request)
-      );
-      assert(
-        (client.descriptors.page.listDeployments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDeployments without error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gsuiteaddons.v1.Deployment()
-        ),
-      ];
-      client.descriptors.page.listDeployments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gsuiteaddons.v1.IDeployment[] = [];
-      const iterable = client.listDeploymentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDeployments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDeployments with error', async () => {
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDeployments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDeploymentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gsuiteaddons.v1.IDeployment[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = gsuiteaddonsModule.v1.GSuiteAddOnsClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'gsuiteaddons.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDeployments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gsuiteaddons.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('authorization', async () => {
-      const fakePath = '/rendered/path/authorization';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.authorizationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.authorizationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gsuiteaddons.example.com');
+        });
 
-      it('authorizationPath', () => {
-        const result = client.authorizationPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.authorizationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gsuiteaddons.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchProjectFromAuthorizationName', () => {
-        const result = client.matchProjectFromAuthorizationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.authorizationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gsuiteaddons.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new gsuiteaddonsModule.v1.GSuiteAddOnsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    describe('deployment', async () => {
-      const fakePath = '/rendered/path/deployment';
-      const expectedParameters = {
-        project: 'projectValue',
-        deployment: 'deploymentValue',
-      };
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.deploymentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.deploymentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = gsuiteaddonsModule.v1.GSuiteAddOnsClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('deploymentPath', () => {
-        const result = client.deploymentPath('projectValue', 'deploymentValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient();
+            assert(client);
+        });
 
-      it('matchProjectFromDeploymentName', () => {
-        const result = client.matchProjectFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchDeploymentFromDeploymentName', () => {
-        const result = client.matchDeploymentFromDeploymentName(fakePath);
-        assert.strictEqual(result, 'deploymentValue');
-        assert(
-          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.gSuiteAddOnsStub, undefined);
+            await client.initialize();
+            assert(client.gSuiteAddOnsStub);
+        });
 
-    describe('installStatus', async () => {
-      const fakePath = '/rendered/path/installStatus';
-      const expectedParameters = {
-        project: 'projectValue',
-        deployment: 'deploymentValue',
-      };
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.installStatusPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.installStatusPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has close method for the initialized client', done => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.gSuiteAddOnsStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('installStatusPath', () => {
-        const result = client.installStatusPath(
-          'projectValue',
-          'deploymentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.installStatusPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.gSuiteAddOnsStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchProjectFromInstallStatusName', () => {
-        const result = client.matchProjectFromInstallStatusName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.installStatusPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchDeploymentFromInstallStatusName', () => {
-        const result = client.matchDeploymentFromInstallStatusName(fakePath);
-        assert.strictEqual(result, 'deploymentValue');
-        assert(
-          (client.pathTemplates.installStatusPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getAuthorization', () => {
+        it('invokes getAuthorization without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Authorization()
+            );
+            client.innerApiCalls.getAuthorization = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAuthorization(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthorization as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorization as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getAuthorization without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Authorization()
+            );
+            client.innerApiCalls.getAuthorization = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAuthorization(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gsuiteaddons.v1.IAuthorization|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthorization as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorization as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getAuthorization with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAuthorization = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAuthorization(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAuthorization as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorization as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthorization with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetAuthorizationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAuthorization(request), expectedError);
+        });
     });
-  });
+
+    describe('createDeployment', () => {
+        it('invokes createDeployment without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Deployment()
+            );
+            client.innerApiCalls.createDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.createDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeployment without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Deployment()
+            );
+            client.innerApiCalls.createDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gsuiteaddons.v1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeployment with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeployment with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.CreateDeploymentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createDeployment(request), expectedError);
+        });
+    });
+
+    describe('replaceDeployment', () => {
+        it('invokes replaceDeployment without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Deployment()
+            );
+            client.innerApiCalls.replaceDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.replaceDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceDeployment without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Deployment()
+            );
+            client.innerApiCalls.replaceDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.replaceDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gsuiteaddons.v1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.replaceDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceDeployment with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.replaceDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.replaceDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.replaceDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.replaceDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes replaceDeployment with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest()
+            );
+            request.deployment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ReplaceDeploymentRequest', ['deployment', 'name']);
+            request.deployment.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.replaceDeployment(request), expectedError);
+        });
+    });
+
+    describe('getDeployment', () => {
+        it('invokes getDeployment without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Deployment()
+            );
+            client.innerApiCalls.getDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeployment without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.Deployment()
+            );
+            client.innerApiCalls.getDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gsuiteaddons.v1.IDeployment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeployment with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeployment with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDeployment(request), expectedError);
+        });
+    });
+
+    describe('deleteDeployment', () => {
+        it('invokes deleteDeployment without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeployment without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeployment with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeployment with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.DeleteDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteDeployment(request), expectedError);
+        });
+    });
+
+    describe('installDeployment', () => {
+        it('invokes installDeployment without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.installDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.installDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.installDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.installDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes installDeployment without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.installDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.installDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.installDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.installDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes installDeployment with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.installDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.installDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.installDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.installDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes installDeployment with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.InstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.installDeployment(request), expectedError);
+        });
+    });
+
+    describe('uninstallDeployment', () => {
+        it('invokes uninstallDeployment without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.uninstallDeployment = stubSimpleCall(expectedResponse);
+            const [response] = await client.uninstallDeployment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.uninstallDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.uninstallDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes uninstallDeployment without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.uninstallDeployment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.uninstallDeployment(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.uninstallDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.uninstallDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes uninstallDeployment with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.uninstallDeployment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.uninstallDeployment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.uninstallDeployment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.uninstallDeployment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes uninstallDeployment with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.UninstallDeploymentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.uninstallDeployment(request), expectedError);
+        });
+    });
+
+    describe('getInstallStatus', () => {
+        it('invokes getInstallStatus without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.InstallStatus()
+            );
+            client.innerApiCalls.getInstallStatus = stubSimpleCall(expectedResponse);
+            const [response] = await client.getInstallStatus(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstallStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstallStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstallStatus without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.InstallStatus()
+            );
+            client.innerApiCalls.getInstallStatus = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getInstallStatus(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gsuiteaddons.v1.IInstallStatus|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstallStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstallStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstallStatus with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getInstallStatus = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getInstallStatus(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getInstallStatus as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstallStatus as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstallStatus with closed client', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.GetInstallStatusRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getInstallStatus(request), expectedError);
+        });
+    });
+
+    describe('listDeployments', () => {
+        it('invokes listDeployments without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+            ];
+            client.innerApiCalls.listDeployments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDeployments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeployments without error using callback', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+            ];
+            client.innerApiCalls.listDeployments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDeployments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gsuiteaddons.v1.IDeployment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeployments with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDeployments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDeployments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeployments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentsStream without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+            ];
+            client.descriptors.page.listDeployments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gsuiteaddons.v1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.gsuiteaddons.v1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeployments, request));
+            assert(
+                (client.descriptors.page.listDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDeploymentsStream with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeployments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDeploymentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gsuiteaddons.v1.Deployment[] = [];
+                stream.on('data', (response: protos.google.cloud.gsuiteaddons.v1.Deployment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDeployments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeployments, request));
+            assert(
+                (client.descriptors.page.listDeployments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDeployments without error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+              generateSampleMessage(new protos.google.cloud.gsuiteaddons.v1.Deployment()),
+            ];
+            client.descriptors.page.listDeployments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gsuiteaddons.v1.IDeployment[] = [];
+            const iterable = client.listDeploymentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDeployments with error', async () => {
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gsuiteaddons.v1.ListDeploymentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeployments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDeploymentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gsuiteaddons.v1.IDeployment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('authorization', async () => {
+            const fakePath = "/rendered/path/authorization";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.authorizationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.authorizationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('authorizationPath', () => {
+                const result = client.authorizationPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.authorizationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAuthorizationName', () => {
+                const result = client.matchProjectFromAuthorizationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.authorizationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deployment', async () => {
+            const fakePath = "/rendered/path/deployment";
+            const expectedParameters = {
+                project: "projectValue",
+                deployment: "deploymentValue",
+            };
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deploymentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deploymentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deploymentPath', () => {
+                const result = client.deploymentPath("projectValue", "deploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deploymentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDeploymentName', () => {
+                const result = client.matchProjectFromDeploymentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentFromDeploymentName', () => {
+                const result = client.matchDeploymentFromDeploymentName(fakePath);
+                assert.strictEqual(result, "deploymentValue");
+                assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('installStatus', async () => {
+            const fakePath = "/rendered/path/installStatus";
+            const expectedParameters = {
+                project: "projectValue",
+                deployment: "deploymentValue",
+            };
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.installStatusPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.installStatusPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('installStatusPath', () => {
+                const result = client.installStatusPath("projectValue", "deploymentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.installStatusPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInstallStatusName', () => {
+                const result = client.matchProjectFromInstallStatusName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.installStatusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentFromInstallStatusName', () => {
+                const result = client.matchDeploymentFromInstallStatusName(fakePath);
+                assert.strictEqual(result, "deploymentValue");
+                assert((client.pathTemplates.installStatusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new gsuiteaddonsModule.v1.GSuiteAddOnsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.0.1...storage-transfer-v4.1.0) (2025-06-03)
+
+
+### Features
+
+* [storagetransfer] support Azure federated identity ([#6375](https://github.com/googleapis/google-cloud-node/issues/6375)) ([b8f6929](https://github.com/googleapis/google-cloud-node/commit/b8f69297ff6e1eb3df0590f633947a337e30a406))
+* Add protobufjs 2023 edition support ([#6306](https://github.com/googleapis/google-cloud-node/issues/6306)) ([4f02ceb](https://github.com/googleapis/google-cloud-node/commit/4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.0.0...storage-transfer-v4.0.1) (2025-03-21)
 
 

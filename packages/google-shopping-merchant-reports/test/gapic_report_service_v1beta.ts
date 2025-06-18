@@ -256,9 +256,14 @@ describe('v1beta.ReportServiceClient', () => {
         throw err;
       });
       assert(client.reportServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v1beta.ReportServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.reportServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

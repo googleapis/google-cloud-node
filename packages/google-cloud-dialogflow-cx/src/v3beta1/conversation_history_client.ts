@@ -18,16 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -110,41 +101,20 @@ export class ConversationHistoryClient {
    *     const client = new ConversationHistoryClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ConversationHistoryClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dialogflow.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class ConversationHistoryClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +156,13 @@ export class ConversationHistoryClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -269,22 +243,18 @@ export class ConversationHistoryClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectLocationAgentEnvironmentSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
-        ),
-      projectLocationAgentFlowTransitionRouteGroupPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
-        ),
-      projectLocationAgentSessionEntityTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
-        ),
-      projectLocationAgentTransitionRouteGroupPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
-        ),
+      projectLocationAgentEnvironmentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      projectLocationAgentFlowTransitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
+      ),
+      projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
+      ),
+      projectLocationAgentTransitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
+      ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
       ),
@@ -312,20 +282,14 @@ export class ConversationHistoryClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConversations: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'conversations'
-      ),
+      listConversations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'conversations')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dialogflow.cx.v3beta1.ConversationHistory',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dialogflow.cx.v3beta1.ConversationHistory', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -356,40 +320,32 @@ export class ConversationHistoryClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.cx.v3beta1.ConversationHistory.
     this.conversationHistoryStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dialogflow.cx.v3beta1.ConversationHistory'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.dialogflow.cx.v3beta1
-            .ConversationHistory,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.cx.v3beta1.ConversationHistory') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.dialogflow.cx.v3beta1.ConversationHistory,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const conversationHistoryStubMethods = [
-      'listConversations',
-      'getConversation',
-      'deleteConversation',
-    ];
+    const conversationHistoryStubMethods =
+        ['listConversations', 'getConversation', 'deleteConversation'];
     for (const methodName of conversationHistoryStubMethods) {
       const callPromise = this.conversationHistoryStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -409,14 +365,8 @@ export class ConversationHistoryClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dialogflow.googleapis.com';
   }
@@ -427,14 +377,8 @@ export class ConversationHistoryClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dialogflow.googleapis.com';
   }
@@ -467,7 +411,7 @@ export class ConversationHistoryClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow',
+      'https://www.googleapis.com/auth/dialogflow'
     ];
   }
 
@@ -477,9 +421,8 @@ export class ConversationHistoryClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -490,386 +433,283 @@ export class ConversationHistoryClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves the specified conversation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the conversation.
-   *   Format:
-   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/conversations/<ConversationID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/conversation_history.get_conversation.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_ConversationHistory_GetConversation_async
-   */
+/**
+ * Retrieves the specified conversation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the conversation.
+ *   Format:
+ *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/conversations/<ConversationID>`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/conversation_history.get_conversation.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_ConversationHistory_GetConversation_async
+ */
   getConversation(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+        protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|undefined, {}|undefined
+      ]>;
   getConversation(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConversation(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConversation(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConversation(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
+      callback: Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+          protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConversation(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+          protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+          protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+        protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConversation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+        protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConversation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConversation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
-          (
-            | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConversation response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getConversation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+        protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConversation response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Deletes the specified conversation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the conversation.
-   *   Format:
-   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/conversations/<ConversationID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/conversation_history.delete_conversation.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_ConversationHistory_DeleteConversation_async
-   */
+/**
+ * Deletes the specified conversation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the conversation.
+ *   Format:
+ *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/conversations/<ConversationID>`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/conversation_history.delete_conversation.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_ConversationHistory_DeleteConversation_async
+ */
   deleteConversation(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|undefined, {}|undefined
+      ]>;
   deleteConversation(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConversation(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConversation(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConversation(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConversation(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteConversation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteConversation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteConversation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConversation response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.deleteConversation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteConversation response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Returns the list of all conversations.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all conversations for.
-   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
-   * @param {string} [request.filter]
-   *   Optional. The filter string. Supports filter by create_time,
-   *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
-   *   intents.display_name, pages.display_name and flows.display_name. Timestamps
-   *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
-   *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
-   *   supported. Some examples:
-   *     1. By create time:
-   *          create_time > "2022-04-21T11:30:00-04:00"
-   *     2. By intent display name:
-   *          intents.display_name : "billing"
-   *     3. By end interaction signal:
-   *          metrics.has_end_interaction = true
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
-   *   default 100 and at most 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConversationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the list of all conversations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to list all conversations for.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {string} [request.filter]
+ *   Optional. The filter string. Supports filter by create_time,
+ *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
+ *   intents.display_name, pages.display_name and flows.display_name. Timestamps
+ *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
+ *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
+ *   supported. Some examples:
+ *     1. By create time:
+ *          create_time > "2022-04-21T11:30:00-04:00"
+ *     2. By intent display name:
+ *          intents.display_name : "billing"
+ *     3. By end interaction signal:
+ *          metrics.has_end_interaction = true
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return in a single page. By
+ *   default 100 and at most 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous list request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConversationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConversations(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
-      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
+        protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest|null,
+        protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
+      ]>;
   listConversations(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation
-    >
-  ): void;
-  listConversations(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation
-    >
-  ): void;
-  listConversations(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dialogflow.cx.v3beta1.IConversation
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
-      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation>): void;
+  listConversations(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation>): void;
+  listConversations(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse|null|undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation>):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
+        protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest|null,
+        protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dialogflow.cx.v3beta1.IConversation
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse|null|undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConversations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -878,71 +718,68 @@ export class ConversationHistoryClient {
     this._log.info('listConversations request %j', request);
     return this.innerApiCalls
       .listConversations(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
-          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest | null,
-          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse,
-        ]) => {
-          this._log.info('listConversations values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
+        protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest|null,
+        protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
+      ]) => {
+        this._log.info('listConversations values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConversations`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all conversations for.
-   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
-   * @param {string} [request.filter]
-   *   Optional. The filter string. Supports filter by create_time,
-   *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
-   *   intents.display_name, pages.display_name and flows.display_name. Timestamps
-   *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
-   *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
-   *   supported. Some examples:
-   *     1. By create time:
-   *          create_time > "2022-04-21T11:30:00-04:00"
-   *     2. By intent display name:
-   *          intents.display_name : "billing"
-   *     3. By end interaction signal:
-   *          metrics.has_end_interaction = true
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
-   *   default 100 and at most 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConversationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConversations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to list all conversations for.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {string} [request.filter]
+ *   Optional. The filter string. Supports filter by create_time,
+ *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
+ *   intents.display_name, pages.display_name and flows.display_name. Timestamps
+ *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
+ *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
+ *   supported. Some examples:
+ *     1. By create time:
+ *          create_time > "2022-04-21T11:30:00-04:00"
+ *     2. By intent display name:
+ *          intents.display_name : "billing"
+ *     3. By end interaction signal:
+ *          metrics.has_end_interaction = true
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return in a single page. By
+ *   default 100 and at most 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous list request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConversationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConversationsStream(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
@@ -951,62 +788,61 @@ export class ConversationHistoryClient {
     );
   }
 
-  /**
-   * Equivalent to `listConversations`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all conversations for.
-   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
-   * @param {string} [request.filter]
-   *   Optional. The filter string. Supports filter by create_time,
-   *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
-   *   intents.display_name, pages.display_name and flows.display_name. Timestamps
-   *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
-   *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
-   *   supported. Some examples:
-   *     1. By create time:
-   *          create_time > "2022-04-21T11:30:00-04:00"
-   *     2. By intent display name:
-   *          intents.display_name : "billing"
-   *     3. By end interaction signal:
-   *          metrics.has_end_interaction = true
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
-   *   default 100 and at most 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/conversation_history.list_conversations.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_ConversationHistory_ListConversations_async
-   */
+/**
+ * Equivalent to `listConversations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to list all conversations for.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {string} [request.filter]
+ *   Optional. The filter string. Supports filter by create_time,
+ *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
+ *   intents.display_name, pages.display_name and flows.display_name. Timestamps
+ *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
+ *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
+ *   supported. Some examples:
+ *     1. By create time:
+ *          create_time > "2022-04-21T11:30:00-04:00"
+ *     2. By intent display name:
+ *          intents.display_name : "billing"
+ *     3. By end interaction signal:
+ *          metrics.has_end_interaction = true
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return in a single page. By
+ *   default 100 and at most 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous list request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/conversation_history.list_conversations.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_ConversationHistory_ListConversations_async
+ */
   listConversationsAsync(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IConversation> {
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IConversation>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
@@ -1014,7 +850,7 @@ export class ConversationHistoryClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IConversation>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1054,7 +890,7 @@ export class ConversationHistoryClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1104,7 +940,7 @@ export class ConversationHistoryClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project: string, location: string, agent: string) {
+  agentPath(project:string,location:string,agent:string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -1153,11 +989,7 @@ export class ConversationHistoryClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentGenerativeSettingsPath(
-    project: string,
-    location: string,
-    agent: string
-  ) {
+  agentGenerativeSettingsPath(project:string,location:string,agent:string) {
     return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
       project: project,
       location: location,
@@ -1172,12 +1004,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAgentGenerativeSettingsName(
-    agentGenerativeSettingsName: string
-  ) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
-      agentGenerativeSettingsName
-    ).project;
+  matchProjectFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).project;
   }
 
   /**
@@ -1187,12 +1015,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentGenerativeSettingsName(
-    agentGenerativeSettingsName: string
-  ) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
-      agentGenerativeSettingsName
-    ).location;
+  matchLocationFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).location;
   }
 
   /**
@@ -1202,12 +1026,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromAgentGenerativeSettingsName(
-    agentGenerativeSettingsName: string
-  ) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
-      agentGenerativeSettingsName
-    ).agent;
+  matchAgentFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).agent;
   }
 
   /**
@@ -1218,7 +1038,7 @@ export class ConversationHistoryClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentValidationResultPath(project: string, location: string, agent: string) {
+  agentValidationResultPath(project:string,location:string,agent:string) {
     return this.pathTemplates.agentValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -1234,9 +1054,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(
-      agentValidationResultName
-    ).project;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).project;
   }
 
   /**
@@ -1246,12 +1064,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing AgentValidationResult resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentValidationResultName(
-    agentValidationResultName: string
-  ) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(
-      agentValidationResultName
-    ).location;
+  matchLocationFromAgentValidationResultName(agentValidationResultName: string) {
+    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).location;
   }
 
   /**
@@ -1262,9 +1076,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(
-      agentValidationResultName
-    ).agent;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).agent;
   }
 
   /**
@@ -1276,12 +1088,7 @@ export class ConversationHistoryClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(
-    project: string,
-    location: string,
-    agent: string,
-    changelog: string
-  ) {
+  changelogPath(project:string,location:string,agent:string,changelog:string) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -1298,8 +1105,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName)
-      .project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
   }
 
   /**
@@ -1310,8 +1116,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName)
-      .location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
   }
 
   /**
@@ -1333,8 +1138,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName)
-      .changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
   }
 
   /**
@@ -1347,13 +1151,7 @@ export class ConversationHistoryClient {
    * @param {string} continuous_test_result
    * @returns {string} Resource name string.
    */
-  continuousTestResultPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    continuousTestResult: string
-  ) {
+  continuousTestResultPath(project:string,location:string,agent:string,environment:string,continuousTestResult:string) {
     return this.pathTemplates.continuousTestResultPathTemplate.render({
       project: project,
       location: location,
@@ -1371,9 +1169,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).project;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).project;
   }
 
   /**
@@ -1384,9 +1180,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).location;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).location;
   }
 
   /**
@@ -1397,9 +1191,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).agent;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).agent;
   }
 
   /**
@@ -1409,12 +1201,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromContinuousTestResultName(
-    continuousTestResultName: string
-  ) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).environment;
+  matchEnvironmentFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).environment;
   }
 
   /**
@@ -1424,12 +1212,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the continuous_test_result.
    */
-  matchContinuousTestResultFromContinuousTestResultName(
-    continuousTestResultName: string
-  ) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(
-      continuousTestResultName
-    ).continuous_test_result;
+  matchContinuousTestResultFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).continuous_test_result;
   }
 
   /**
@@ -1441,12 +1225,7 @@ export class ConversationHistoryClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(
-    project: string,
-    location: string,
-    agent: string,
-    conversation: string
-  ) {
+  conversationPath(project:string,location:string,agent:string,conversation:string) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -1463,8 +1242,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
   }
 
   /**
@@ -1475,8 +1253,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
   }
 
   /**
@@ -1487,8 +1264,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .agent;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName).agent;
   }
 
   /**
@@ -1499,8 +1275,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName)
-      .conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
   }
 
   /**
@@ -1513,13 +1288,7 @@ export class ConversationHistoryClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    deployment: string
-  ) {
+  deploymentPath(project:string,location:string,agent:string,environment:string,deployment:string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1537,8 +1306,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
   }
 
   /**
@@ -1549,8 +1317,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
   }
 
   /**
@@ -1561,8 +1328,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .agent;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).agent;
   }
 
   /**
@@ -1573,8 +1339,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .environment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).environment;
   }
 
   /**
@@ -1585,8 +1350,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
   }
 
   /**
@@ -1598,12 +1362,7 @@ export class ConversationHistoryClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(
-    project: string,
-    location: string,
-    agent: string,
-    entityType: string
-  ) {
+  entityTypePath(project:string,location:string,agent:string,entityType:string) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -1620,8 +1379,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
   }
 
   /**
@@ -1632,8 +1390,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
   }
 
   /**
@@ -1644,8 +1401,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .agent;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).agent;
   }
 
   /**
@@ -1656,8 +1412,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
   }
 
   /**
@@ -1669,12 +1424,7 @@ export class ConversationHistoryClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string
-  ) {
+  environmentPath(project:string,location:string,agent:string,environment:string) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -1691,8 +1441,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
   }
 
   /**
@@ -1703,8 +1452,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
   }
 
   /**
@@ -1715,8 +1463,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .agent;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).agent;
   }
 
   /**
@@ -1727,8 +1474,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
   }
 
   /**
@@ -1741,13 +1487,7 @@ export class ConversationHistoryClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(
-    project: string,
-    location: string,
-    agent: string,
-    playbook: string,
-    example: string
-  ) {
+  examplePath(project:string,location:string,agent:string,playbook:string,example:string) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       location: location,
@@ -1822,13 +1562,7 @@ export class ConversationHistoryClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  experimentPath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    experiment: string
-  ) {
+  experimentPath(project:string,location:string,agent:string,environment:string,experiment:string) {
     return this.pathTemplates.experimentPathTemplate.render({
       project: project,
       location: location,
@@ -1846,8 +1580,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .project;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).project;
   }
 
   /**
@@ -1858,8 +1591,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .location;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).location;
   }
 
   /**
@@ -1870,8 +1602,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .agent;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).agent;
   }
 
   /**
@@ -1882,8 +1613,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .environment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).environment;
   }
 
   /**
@@ -1894,8 +1624,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName)
-      .experiment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName).experiment;
   }
 
   /**
@@ -1907,7 +1636,7 @@ export class ConversationHistoryClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowPath(project: string, location: string, agent: string, flow: string) {
+  flowPath(project:string,location:string,agent:string,flow:string) {
     return this.pathTemplates.flowPathTemplate.render({
       project: project,
       location: location,
@@ -1969,12 +1698,7 @@ export class ConversationHistoryClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowValidationResultPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string
-  ) {
+  flowValidationResultPath(project:string,location:string,agent:string,flow:string) {
     return this.pathTemplates.flowValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -1991,9 +1715,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).project;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).project;
   }
 
   /**
@@ -2004,9 +1726,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).location;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).location;
   }
 
   /**
@@ -2017,9 +1737,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).agent;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).agent;
   }
 
   /**
@@ -2030,9 +1748,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the flow.
    */
   matchFlowFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(
-      flowValidationResultName
-    ).flow;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).flow;
   }
 
   /**
@@ -2044,12 +1760,7 @@ export class ConversationHistoryClient {
    * @param {string} generator
    * @returns {string} Resource name string.
    */
-  generatorPath(
-    project: string,
-    location: string,
-    agent: string,
-    generator: string
-  ) {
+  generatorPath(project:string,location:string,agent:string,generator:string) {
     return this.pathTemplates.generatorPathTemplate.render({
       project: project,
       location: location,
@@ -2066,8 +1777,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .project;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).project;
   }
 
   /**
@@ -2078,8 +1788,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .location;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).location;
   }
 
   /**
@@ -2101,8 +1810,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the generator.
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName)
-      .generator;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
   }
 
   /**
@@ -2114,7 +1822,7 @@ export class ConversationHistoryClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  intentPath(project: string, location: string, agent: string, intent: string) {
+  intentPath(project:string,location:string,agent:string,intent:string) {
     return this.pathTemplates.intentPathTemplate.render({
       project: project,
       location: location,
@@ -2174,7 +1882,7 @@ export class ConversationHistoryClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2213,13 +1921,7 @@ export class ConversationHistoryClient {
    * @param {string} page
    * @returns {string} Resource name string.
    */
-  pagePath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    page: string
-  ) {
+  pagePath(project:string,location:string,agent:string,flow:string,page:string) {
     return this.pathTemplates.pagePathTemplate.render({
       project: project,
       location: location,
@@ -2293,12 +1995,7 @@ export class ConversationHistoryClient {
    * @param {string} playbook
    * @returns {string} Resource name string.
    */
-  playbookPath(
-    project: string,
-    location: string,
-    agent: string,
-    playbook: string
-  ) {
+  playbookPath(project:string,location:string,agent:string,playbook:string) {
     return this.pathTemplates.playbookPathTemplate.render({
       project: project,
       location: location,
@@ -2361,13 +2058,7 @@ export class ConversationHistoryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  playbookVersionPath(
-    project: string,
-    location: string,
-    agent: string,
-    playbook: string,
-    version: string
-  ) {
+  playbookVersionPath(project:string,location:string,agent:string,playbook:string,version:string) {
     return this.pathTemplates.playbookVersionPathTemplate.render({
       project: project,
       location: location,
@@ -2385,9 +2076,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(
-      playbookVersionName
-    ).project;
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).project;
   }
 
   /**
@@ -2398,9 +2087,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(
-      playbookVersionName
-    ).location;
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).location;
   }
 
   /**
@@ -2411,9 +2098,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(
-      playbookVersionName
-    ).agent;
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).agent;
   }
 
   /**
@@ -2424,9 +2109,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the playbook.
    */
   matchPlaybookFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(
-      playbookVersionName
-    ).playbook;
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).playbook;
   }
 
   /**
@@ -2437,9 +2120,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(
-      playbookVersionName
-    ).version;
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).version;
   }
 
   /**
@@ -2448,7 +2129,7 @@ export class ConversationHistoryClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2476,24 +2157,15 @@ export class ConversationHistoryClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentSessionEntityTypePath(
-    project: string,
-    location: string,
-    agent: string,
-    environment: string,
-    session: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        environment: environment,
-        session: session,
-        entity_type: entityType,
-      }
-    );
+  projectLocationAgentEnvironmentSessionEntityTypePath(project:string,location:string,agent:string,environment:string,session:string,entityType:string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      environment: environment,
+      session: session,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -2503,12 +2175,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).project;
   }
 
   /**
@@ -2518,12 +2186,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).location;
+  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).location;
   }
 
   /**
@@ -2533,12 +2197,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).agent;
+  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).agent;
   }
 
   /**
@@ -2548,12 +2208,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).environment;
   }
 
   /**
@@ -2563,12 +2219,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).session;
   }
 
   /**
@@ -2578,12 +2230,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-    projectLocationAgentEnvironmentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
-      projectLocationAgentEnvironmentSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -2596,22 +2244,14 @@ export class ConversationHistoryClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentFlowTransitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        flow: flow,
-        transition_route_group: transitionRouteGroup,
-      }
-    );
+  projectLocationAgentFlowTransitionRouteGroupPath(project:string,location:string,agent:string,flow:string,transitionRouteGroup:string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      flow: flow,
+      transition_route_group: transitionRouteGroup,
+    });
   }
 
   /**
@@ -2621,12 +2261,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).project;
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).project;
   }
 
   /**
@@ -2636,12 +2272,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).location;
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).location;
   }
 
   /**
@@ -2651,12 +2283,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).agent;
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).agent;
   }
 
   /**
@@ -2666,12 +2294,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the flow.
    */
-  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).flow;
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).flow;
   }
 
   /**
@@ -2681,12 +2305,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
-    projectLocationAgentFlowTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentFlowTransitionRouteGroupName
-    ).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).transition_route_group;
   }
 
   /**
@@ -2699,22 +2319,14 @@ export class ConversationHistoryClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionEntityTypePath(
-    project: string,
-    location: string,
-    agent: string,
-    session: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        session: session,
-        entity_type: entityType,
-      }
-    );
+  projectLocationAgentSessionEntityTypePath(project:string,location:string,agent:string,session:string,entityType:string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      session: session,
+      entity_type: entityType,
+    });
   }
 
   /**
@@ -2724,12 +2336,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).project;
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).project;
   }
 
   /**
@@ -2739,12 +2347,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).location;
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).location;
   }
 
   /**
@@ -2754,12 +2358,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).agent;
+  matchAgentFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).agent;
   }
 
   /**
@@ -2769,12 +2369,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).session;
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).session;
   }
 
   /**
@@ -2784,12 +2380,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
-    projectLocationAgentSessionEntityTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
-      projectLocationAgentSessionEntityTypeName
-    ).entity_type;
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).entity_type;
   }
 
   /**
@@ -2801,20 +2393,13 @@ export class ConversationHistoryClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentTransitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        agent: agent,
-        transition_route_group: transitionRouteGroup,
-      }
-    );
+  projectLocationAgentTransitionRouteGroupPath(project:string,location:string,agent:string,transitionRouteGroup:string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      transition_route_group: transitionRouteGroup,
+    });
   }
 
   /**
@@ -2824,12 +2409,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).project;
+  matchProjectFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).project;
   }
 
   /**
@@ -2839,12 +2420,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).location;
+  matchLocationFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).location;
   }
 
   /**
@@ -2854,12 +2431,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).agent;
+  matchAgentFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).agent;
   }
 
   /**
@@ -2869,12 +2442,8 @@ export class ConversationHistoryClient {
    *   A fully-qualified path representing project_location_agent_transition_route_group resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
-    projectLocationAgentTransitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
-      projectLocationAgentTransitionRouteGroupName
-    ).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).transition_route_group;
   }
 
   /**
@@ -2885,11 +2454,7 @@ export class ConversationHistoryClient {
    * @param {string} security_settings
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(
-    project: string,
-    location: string,
-    securitySettings: string
-  ) {
+  securitySettingsPath(project:string,location:string,securitySettings:string) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -2905,9 +2470,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(
-      securitySettingsName
-    ).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
   }
 
   /**
@@ -2918,9 +2481,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(
-      securitySettingsName
-    ).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
   }
 
   /**
@@ -2931,9 +2492,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the security_settings.
    */
   matchSecuritySettingsFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(
-      securitySettingsName
-    ).security_settings;
+    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).security_settings;
   }
 
   /**
@@ -2945,12 +2504,7 @@ export class ConversationHistoryClient {
    * @param {string} test_case
    * @returns {string} Resource name string.
    */
-  testCasePath(
-    project: string,
-    location: string,
-    agent: string,
-    testCase: string
-  ) {
+  testCasePath(project:string,location:string,agent:string,testCase:string) {
     return this.pathTemplates.testCasePathTemplate.render({
       project: project,
       location: location,
@@ -3000,8 +2554,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseName(testCaseName: string) {
-    return this.pathTemplates.testCasePathTemplate.match(testCaseName)
-      .test_case;
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName).test_case;
   }
 
   /**
@@ -3014,13 +2567,7 @@ export class ConversationHistoryClient {
    * @param {string} result
    * @returns {string} Resource name string.
    */
-  testCaseResultPath(
-    project: string,
-    location: string,
-    agent: string,
-    testCase: string,
-    result: string
-  ) {
+  testCaseResultPath(project:string,location:string,agent:string,testCase:string,result:string) {
     return this.pathTemplates.testCaseResultPathTemplate.render({
       project: project,
       location: location,
@@ -3038,9 +2585,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).project;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).project;
   }
 
   /**
@@ -3051,9 +2596,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).location;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).location;
   }
 
   /**
@@ -3064,9 +2607,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).agent;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).agent;
   }
 
   /**
@@ -3077,9 +2618,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).test_case;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).test_case;
   }
 
   /**
@@ -3090,9 +2629,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the result.
    */
   matchResultFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(
-      testCaseResultName
-    ).result;
+    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).result;
   }
 
   /**
@@ -3104,7 +2641,7 @@ export class ConversationHistoryClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project: string, location: string, agent: string, tool: string) {
+  toolPath(project:string,location:string,agent:string,tool:string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -3167,13 +2704,7 @@ export class ConversationHistoryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  toolVersionPath(
-    project: string,
-    location: string,
-    agent: string,
-    tool: string,
-    version: string
-  ) {
+  toolVersionPath(project:string,location:string,agent:string,tool:string,version:string) {
     return this.pathTemplates.toolVersionPathTemplate.render({
       project: project,
       location: location,
@@ -3191,8 +2722,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
-      .project;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).project;
   }
 
   /**
@@ -3203,8 +2733,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
-      .location;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).location;
   }
 
   /**
@@ -3215,8 +2744,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
-      .agent;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).agent;
   }
 
   /**
@@ -3227,8 +2755,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the tool.
    */
   matchToolFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
-      .tool;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).tool;
   }
 
   /**
@@ -3239,8 +2766,7 @@ export class ConversationHistoryClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
-      .version;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).version;
   }
 
   /**
@@ -3253,13 +2779,7 @@ export class ConversationHistoryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    version: string
-  ) {
+  versionPath(project:string,location:string,agent:string,flow:string,version:string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -3333,12 +2853,7 @@ export class ConversationHistoryClient {
    * @param {string} webhook
    * @returns {string} Resource name string.
    */
-  webhookPath(
-    project: string,
-    location: string,
-    agent: string,
-    webhook: string
-  ) {
+  webhookPath(project:string,location:string,agent:string,webhook:string) {
     return this.pathTemplates.webhookPathTemplate.render({
       project: project,
       location: location,
@@ -3403,7 +2918,7 @@ export class ConversationHistoryClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

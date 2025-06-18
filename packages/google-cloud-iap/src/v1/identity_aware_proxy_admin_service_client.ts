@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,42 +100,20 @@ export class IdentityAwareProxyAdminServiceClient {
    *     const client = new IdentityAwareProxyAdminServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof IdentityAwareProxyAdminServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof IdentityAwareProxyAdminServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'iap.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class IdentityAwareProxyAdminServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class IdentityAwareProxyAdminServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,20 +192,14 @@ export class IdentityAwareProxyAdminServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTunnelDestGroups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tunnelDestGroups'
-      ),
+      listTunnelDestGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tunnelDestGroups')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.iap.v1.IdentityAwareProxyAdminService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.iap.v1.IdentityAwareProxyAdminService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -262,48 +230,32 @@ export class IdentityAwareProxyAdminServiceClient {
     // Put together the "service stub" for
     // google.cloud.iap.v1.IdentityAwareProxyAdminService.
     this.identityAwareProxyAdminServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.iap.v1.IdentityAwareProxyAdminService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.iap.v1
-            .IdentityAwareProxyAdminService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.iap.v1.IdentityAwareProxyAdminService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.iap.v1.IdentityAwareProxyAdminService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const identityAwareProxyAdminServiceStubMethods = [
-      'setIamPolicy',
-      'getIamPolicy',
-      'testIamPermissions',
-      'getIapSettings',
-      'updateIapSettings',
-      'validateIapAttributeExpression',
-      'listTunnelDestGroups',
-      'createTunnelDestGroup',
-      'getTunnelDestGroup',
-      'deleteTunnelDestGroup',
-      'updateTunnelDestGroup',
-    ];
+    const identityAwareProxyAdminServiceStubMethods =
+        ['setIamPolicy', 'getIamPolicy', 'testIamPermissions', 'getIapSettings', 'updateIapSettings', 'validateIapAttributeExpression', 'listTunnelDestGroups', 'createTunnelDestGroup', 'getTunnelDestGroup', 'deleteTunnelDestGroup', 'updateTunnelDestGroup'];
     for (const methodName of identityAwareProxyAdminServiceStubMethods) {
       const callPromise = this.identityAwareProxyAdminServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -323,14 +275,8 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'iap.googleapis.com';
   }
@@ -341,14 +287,8 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'iap.googleapis.com';
   }
@@ -379,7 +319,9 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -388,9 +330,8 @@ export class IdentityAwareProxyAdminServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -401,1334 +342,1046 @@ export class IdentityAwareProxyAdminServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Sets the access control policy for an Identity-Aware Proxy protected
-   * resource. Replaces any existing policy.
-   * More information about managing access via IAP can be found at:
-   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.set_iam_policy.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy for an Identity-Aware Proxy protected
+ * resource. Replaces any existing policy.
+ * More information about managing access via IAP can be found at:
+ * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.set_iam_policy.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the access control policy for an Identity-Aware Proxy protected
-   * resource.
-   * More information about managing access via IAP can be found at:
-   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_iam_policy.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy for an Identity-Aware Proxy protected
+ * resource.
+ * More information about managing access via IAP can be found at:
+ * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_iam_policy.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Returns permissions that a caller has on the Identity-Aware Proxy protected
-   * resource.
-   * More information about managing access via IAP can be found at:
-   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.test_iam_permissions.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_TestIamPermissions_async
-   */
+/**
+ * Returns permissions that a caller has on the Identity-Aware Proxy protected
+ * resource.
+ * More information about managing access via IAP can be found at:
+ * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.test_iam_permissions.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the IAP settings on a particular IAP protected resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for which to retrieve the settings.
-   *   Authorization: Requires the `getSettings` permission for the associated
-   *   resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.IapSettings|IapSettings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_iap_settings.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_async
-   */
+/**
+ * Gets the IAP settings on a particular IAP protected resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name for which to retrieve the settings.
+ *   Authorization: Requires the `getSettings` permission for the associated
+ *   resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.IapSettings|IapSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_iap_settings.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_async
+ */
   getIapSettings(
-    request?: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IGetIapSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IGetIapSettingsRequest|undefined, {}|undefined
+      ]>;
   getIapSettings(
-    request: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IGetIapSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIapSettings(
-    request: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
-    callback: Callback<
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IGetIapSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIapSettings(
-    request?: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iap.v1.IIapSettings,
-          protos.google.cloud.iap.v1.IGetIapSettingsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IGetIapSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IGetIapSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.IGetIapSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIapSettings(
+      request: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
+      callback: Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IGetIapSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIapSettings(
+      request?: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IGetIapSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IGetIapSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IGetIapSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIapSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iap.v1.IIapSettings,
-          protos.google.cloud.iap.v1.IGetIapSettingsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IGetIapSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIapSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIapSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iap.v1.IIapSettings,
-          protos.google.cloud.iap.v1.IGetIapSettingsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIapSettings response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getIapSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IGetIapSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIapSettings response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Updates the IAP settings on a particular IAP protected resource. It
-   * replaces all fields unless the `update_mask` is set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.iap.v1.IapSettings} request.iapSettings
-   *   Required. The new values for the IAP settings to be updated.
-   *   Authorization: Requires the `updateSettings` permission for the associated
-   *   resource.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The field mask specifying which IAP settings should be updated.
-   *   If omitted, then all of the settings are updated. See
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
-   *
-   *   Note: All IAP reauth settings must always be set together, using the
-   *   field mask: `iapSettings.accessSettings.reauthSettings`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.IapSettings|IapSettings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.update_iap_settings.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_UpdateIapSettings_async
-   */
+/**
+ * Updates the IAP settings on a particular IAP protected resource. It
+ * replaces all fields unless the `update_mask` is set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.iap.v1.IapSettings} request.iapSettings
+ *   Required. The new values for the IAP settings to be updated.
+ *   Authorization: Requires the `updateSettings` permission for the associated
+ *   resource.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The field mask specifying which IAP settings should be updated.
+ *   If omitted, then all of the settings are updated. See
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+ *
+ *   Note: All IAP reauth settings must always be set together, using the
+ *   field mask: `iapSettings.accessSettings.reauthSettings`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.IapSettings|IapSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.update_iap_settings.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_UpdateIapSettings_async
+ */
   updateIapSettings(
-    request?: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|undefined, {}|undefined
+      ]>;
   updateIapSettings(
-    request: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateIapSettings(
-    request: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
-    callback: Callback<
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateIapSettings(
-    request?: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iap.v1.IIapSettings,
-          | protos.google.cloud.iap.v1.IUpdateIapSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.IIapSettings,
-      protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateIapSettings(
+      request: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
+      callback: Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateIapSettings(
+      request?: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'iap_settings.name': request.iapSettings!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'iap_settings.name': request.iapSettings!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateIapSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iap.v1.IIapSettings,
-          | protos.google.cloud.iap.v1.IUpdateIapSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateIapSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateIapSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iap.v1.IIapSettings,
-          protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateIapSettings response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.updateIapSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iap.v1.IIapSettings,
+        protos.google.cloud.iap.v1.IUpdateIapSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateIapSettings response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Validates that a given CEL expression conforms to IAP restrictions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the IAP protected resource.
-   * @param {string} request.expression
-   *   Required. User input string expression. Should be of the form
-   *   `attributes.saml_attributes.filter(attribute, attribute.name in
-   *   ['{attribute_name}', '{attribute_name}'])`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse|ValidateIapAttributeExpressionResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.validate_iap_attribute_expression.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_ValidateIapAttributeExpression_async
-   */
+/**
+ * Validates that a given CEL expression conforms to IAP restrictions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the IAP protected resource.
+ * @param {string} request.expression
+ *   Required. User input string expression. Should be of the form
+ *   `attributes.saml_attributes.filter(attribute, attribute.name in
+ *   ['{attribute_name}', '{attribute_name}'])`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.ValidateIapAttributeExpressionResponse|ValidateIapAttributeExpressionResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.validate_iap_attribute_expression.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_ValidateIapAttributeExpression_async
+ */
   validateIapAttributeExpression(
-    request?: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-      (
-        | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|undefined, {}|undefined
+      ]>;
   validateIapAttributeExpression(
-    request: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-      | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  validateIapAttributeExpression(
-    request: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
-    callback: Callback<
-      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-      | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  validateIapAttributeExpression(
-    request?: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-          | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-      | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-      (
-        | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|null|undefined,
+          {}|null|undefined>): void;
+  validateIapAttributeExpression(
+      request: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+      callback: Callback<
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|null|undefined,
+          {}|null|undefined>): void;
+  validateIapAttributeExpression(
+      request?: protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('validateIapAttributeExpression request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-          | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'validateIapAttributeExpression response %j',
-            response
-          );
+          this._log.info('validateIapAttributeExpression response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .validateIapAttributeExpression(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
-          (
-            | protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'validateIapAttributeExpression response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.validateIapAttributeExpression(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionResponse,
+        protos.google.cloud.iap.v1.IValidateIapAttributeExpressionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('validateIapAttributeExpression response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Creates a new TunnelDestGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Google Cloud Project ID and location.
-   *   In the following format:
-   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
-   * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
-   *   Required. The TunnelDestGroup to create.
-   * @param {string} request.tunnelDestGroupId
-   *   Required. The ID to use for the TunnelDestGroup, which becomes the final
-   *   component of the resource name.
-   *
-   *   This value must be 4-63 characters, and valid characters
-   *   are `[a-z]-`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.create_tunnel_dest_group.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_CreateTunnelDestGroup_async
-   */
+/**
+ * Creates a new TunnelDestGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Google Cloud Project ID and location.
+ *   In the following format:
+ *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+ * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
+ *   Required. The TunnelDestGroup to create.
+ * @param {string} request.tunnelDestGroupId
+ *   Required. The ID to use for the TunnelDestGroup, which becomes the final
+ *   component of the resource name.
+ *
+ *   This value must be 4-63 characters, and valid characters
+ *   are `[a-z]-`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.create_tunnel_dest_group.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_CreateTunnelDestGroup_async
+ */
   createTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|undefined, {}|undefined
+      ]>;
   createTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
-    callback: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iap.v1.ITunnelDestGroup,
-          | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTunnelDestGroup(
+      request: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+      callback: Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTunnelDestGroup(
+      request?: protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createTunnelDestGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iap.v1.ITunnelDestGroup,
-          | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createTunnelDestGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createTunnelDestGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iap.v1.ITunnelDestGroup,
-          protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createTunnelDestGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.createTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createTunnelDestGroup response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Retrieves an existing TunnelDestGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the TunnelDestGroup to be fetched.
-   *   In the following format:
-   *   `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_tunnel_dest_group.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_async
-   */
+/**
+ * Retrieves an existing TunnelDestGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the TunnelDestGroup to be fetched.
+ *   In the following format:
+ *   `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_tunnel_dest_group.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_async
+ */
   getTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|undefined, {}|undefined
+      ]>;
   getTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
-    callback: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iap.v1.ITunnelDestGroup,
-          | protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTunnelDestGroup(
+      request: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+      callback: Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTunnelDestGroup(
+      request?: protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTunnelDestGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iap.v1.ITunnelDestGroup,
-          | protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTunnelDestGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTunnelDestGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iap.v1.ITunnelDestGroup,
-          protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTunnelDestGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTunnelDestGroup response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Deletes a TunnelDestGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the TunnelDestGroup to delete.
-   *   In the following format:
-   *   `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.delete_tunnel_dest_group.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_DeleteTunnelDestGroup_async
-   */
+/**
+ * Deletes a TunnelDestGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the TunnelDestGroup to delete.
+ *   In the following format:
+ *   `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.delete_tunnel_dest_group.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_DeleteTunnelDestGroup_async
+ */
   deleteTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|undefined, {}|undefined
+      ]>;
   deleteTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTunnelDestGroup(
+      request: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTunnelDestGroup(
+      request?: protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteTunnelDestGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTunnelDestGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteTunnelDestGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTunnelDestGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.deleteTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteTunnelDestGroup response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Updates a TunnelDestGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
-   *   Required. The new values for the TunnelDestGroup.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   A field mask that specifies which IAP settings to update.
-   *   If omitted, then all of the settings are updated. See
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.update_tunnel_dest_group.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_UpdateTunnelDestGroup_async
-   */
+/**
+ * Updates a TunnelDestGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.iap.v1.TunnelDestGroup} request.tunnelDestGroup
+ *   Required. The new values for the TunnelDestGroup.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   A field mask that specifies which IAP settings to update.
+ *   If omitted, then all of the settings are updated. See
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.update_tunnel_dest_group.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_UpdateTunnelDestGroup_async
+ */
   updateTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|undefined, {}|undefined
+      ]>;
   updateTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTunnelDestGroup(
-    request: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
-    callback: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTunnelDestGroup(
-    request?: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iap.v1.ITunnelDestGroup,
-          | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup,
-      protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateTunnelDestGroup(
+      request: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+      callback: Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateTunnelDestGroup(
+      request?: protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'tunnel_dest_group.name': request.tunnelDestGroup!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'tunnel_dest_group.name': request.tunnelDestGroup!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateTunnelDestGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iap.v1.ITunnelDestGroup,
-          | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateTunnelDestGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateTunnelDestGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iap.v1.ITunnelDestGroup,
-          protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateTunnelDestGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.updateTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iap.v1.ITunnelDestGroup,
+        protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateTunnelDestGroup response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Lists the existing TunnelDestGroups. To group across all locations, use a
-   * `-` as the location ID. For example:
-   * `/v1/projects/123/iap_tunnel/locations/-/destGroups`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Google Cloud Project ID and location.
-   *   In the following format:
-   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
-   *   A `-` can be used for the location to group across all locations.
-   * @param {number} request.pageSize
-   *   The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 100 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListTunnelDestGroups`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListTunnelDestGroups` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTunnelDestGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the existing TunnelDestGroups. To group across all locations, use a
+ * `-` as the location ID. For example:
+ * `/v1/projects/123/iap_tunnel/locations/-/destGroups`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Google Cloud Project ID and location.
+ *   In the following format:
+ *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+ *   A `-` can be used for the location to group across all locations.
+ * @param {number} request.pageSize
+ *   The maximum number of groups to return. The service might return fewer than
+ *   this value.
+ *   If unspecified, at most 100 groups are returned.
+ *   The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListTunnelDestGroups`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListTunnelDestGroups` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTunnelDestGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTunnelDestGroups(
-    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup[],
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup[],
+        protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest|null,
+        protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      ]>;
   listTunnelDestGroups(
-    request: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-      | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.iap.v1.ITunnelDestGroup
-    >
-  ): void;
-  listTunnelDestGroups(
-    request: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-      | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.iap.v1.ITunnelDestGroup
-    >
-  ): void;
-  listTunnelDestGroups(
-    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-          | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.iap.v1.ITunnelDestGroup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-      | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.iap.v1.ITunnelDestGroup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iap.v1.ITunnelDestGroup[],
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
-      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse,
-    ]
-  > | void {
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse|null|undefined,
+          protos.google.cloud.iap.v1.ITunnelDestGroup>): void;
+  listTunnelDestGroups(
+      request: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse|null|undefined,
+          protos.google.cloud.iap.v1.ITunnelDestGroup>): void;
+  listTunnelDestGroups(
+      request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse|null|undefined,
+          protos.google.cloud.iap.v1.ITunnelDestGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse|null|undefined,
+          protos.google.cloud.iap.v1.ITunnelDestGroup>):
+      Promise<[
+        protos.google.cloud.iap.v1.ITunnelDestGroup[],
+        protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest|null,
+        protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-          | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.iap.v1.ITunnelDestGroup
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse|null|undefined,
+      protos.google.cloud.iap.v1.ITunnelDestGroup>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTunnelDestGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1737,67 +1390,64 @@ export class IdentityAwareProxyAdminServiceClient {
     this._log.info('listTunnelDestGroups request %j', request);
     return this.innerApiCalls
       .listTunnelDestGroups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.iap.v1.ITunnelDestGroup[],
-          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
-          protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse,
-        ]) => {
-          this._log.info('listTunnelDestGroups values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.iap.v1.ITunnelDestGroup[],
+        protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest|null,
+        protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+      ]) => {
+        this._log.info('listTunnelDestGroups values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTunnelDestGroups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Google Cloud Project ID and location.
-   *   In the following format:
-   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
-   *   A `-` can be used for the location to group across all locations.
-   * @param {number} request.pageSize
-   *   The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 100 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListTunnelDestGroups`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListTunnelDestGroups` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTunnelDestGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTunnelDestGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Google Cloud Project ID and location.
+ *   In the following format:
+ *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+ *   A `-` can be used for the location to group across all locations.
+ * @param {number} request.pageSize
+ *   The maximum number of groups to return. The service might return fewer than
+ *   this value.
+ *   If unspecified, at most 100 groups are returned.
+ *   The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListTunnelDestGroups`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListTunnelDestGroups` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTunnelDestGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTunnelDestGroupsStream(
-    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTunnelDestGroups stream %j', request);
     return this.descriptors.page.listTunnelDestGroups.createStream(
       this.innerApiCalls.listTunnelDestGroups as GaxCall,
@@ -1806,58 +1456,57 @@ export class IdentityAwareProxyAdminServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listTunnelDestGroups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Google Cloud Project ID and location.
-   *   In the following format:
-   *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
-   *   A `-` can be used for the location to group across all locations.
-   * @param {number} request.pageSize
-   *   The maximum number of groups to return. The service might return fewer than
-   *   this value.
-   *   If unspecified, at most 100 groups are returned.
-   *   The maximum value is 1000; values above 1000 are coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListTunnelDestGroups`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListTunnelDestGroups` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.list_tunnel_dest_groups.js</caption>
-   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_async
-   */
+/**
+ * Equivalent to `listTunnelDestGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Google Cloud Project ID and location.
+ *   In the following format:
+ *   `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+ *   A `-` can be used for the location to group across all locations.
+ * @param {number} request.pageSize
+ *   The maximum number of groups to return. The service might return fewer than
+ *   this value.
+ *   If unspecified, at most 100 groups are returned.
+ *   The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListTunnelDestGroups`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListTunnelDestGroups` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.iap.v1.TunnelDestGroup|TunnelDestGroup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.list_tunnel_dest_groups.js</caption>
+ * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_ListTunnelDestGroups_async
+ */
   listTunnelDestGroupsAsync(
-    request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.iap.v1.ITunnelDestGroup> {
+      request?: protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.iap.v1.ITunnelDestGroup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTunnelDestGroups iterate %j', request);
     return this.descriptors.page.listTunnelDestGroups.asyncIterate(
       this.innerApiCalls['listTunnelDestGroups'] as GaxCall,
@@ -1875,7 +1524,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1900,7 +1549,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @param {string} dest_group
    * @returns {string} Resource name string.
    */
-  tunnelDestGroupPath(project: string, location: string, destGroup: string) {
+  tunnelDestGroupPath(project:string,location:string,destGroup:string) {
     return this.pathTemplates.tunnelDestGroupPathTemplate.render({
       project: project,
       location: location,
@@ -1916,9 +1565,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTunnelDestGroupName(tunnelDestGroupName: string) {
-    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
-      tunnelDestGroupName
-    ).project;
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(tunnelDestGroupName).project;
   }
 
   /**
@@ -1929,9 +1576,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTunnelDestGroupName(tunnelDestGroupName: string) {
-    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
-      tunnelDestGroupName
-    ).location;
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(tunnelDestGroupName).location;
   }
 
   /**
@@ -1942,9 +1587,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string} A string representing the dest_group.
    */
   matchDestGroupFromTunnelDestGroupName(tunnelDestGroupName: string) {
-    return this.pathTemplates.tunnelDestGroupPathTemplate.match(
-      tunnelDestGroupName
-    ).dest_group;
+    return this.pathTemplates.tunnelDestGroupPathTemplate.match(tunnelDestGroupName).dest_group;
   }
 
   /**
@@ -1954,7 +1597,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  tunnelLocationPath(project: string, location: string) {
+  tunnelLocationPath(project:string,location:string) {
     return this.pathTemplates.tunnelLocationPathTemplate.render({
       project: project,
       location: location,
@@ -1969,9 +1612,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTunnelLocationName(tunnelLocationName: string) {
-    return this.pathTemplates.tunnelLocationPathTemplate.match(
-      tunnelLocationName
-    ).project;
+    return this.pathTemplates.tunnelLocationPathTemplate.match(tunnelLocationName).project;
   }
 
   /**
@@ -1982,9 +1623,7 @@ export class IdentityAwareProxyAdminServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTunnelLocationName(tunnelLocationName: string) {
-    return this.pathTemplates.tunnelLocationPathTemplate.match(
-      tunnelLocationName
-    ).location;
+    return this.pathTemplates.tunnelLocationPathTemplate.match(tunnelLocationName).location;
   }
 
   /**

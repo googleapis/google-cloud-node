@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gsuiteaddons",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Google Workspace Add-ons API client for Node.js",
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

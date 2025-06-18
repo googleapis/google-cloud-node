@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/vision-v5.1.0...vision-v5.2.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6304](https://github.com/googleapis/google-cloud-node/issues/6304)) ([132240f](https://github.com/googleapis/google-cloud-node/commit/132240fbf6cb29b309b76c1d60f0611720590847))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/vision-v5.0.0...vision-v5.1.0) (2025-03-19)
 
 

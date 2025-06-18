@@ -18,16 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -110,41 +101,20 @@ export class DomainsClient {
    *     const client = new DomainsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DomainsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'domains.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class DomainsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class DomainsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -217,11 +190,8 @@ export class DomainsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRegistrations: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'registrations'
-      ),
+      listRegistrations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'registrations')
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -230,153 +200,85 @@ export class DomainsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/registrations/*}:getIamPolicy',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/registrations/*}:setIamPolicy',
-          body: '*',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/registrations/*}:testIamPermissions',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/registrations/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/registrations/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/registrations/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const registerDomainResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.Registration'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.Registration') as gax.protobuf.Type;
     const registerDomainMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
     const transferDomainResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.Registration'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.Registration') as gax.protobuf.Type;
     const transferDomainMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
     const updateRegistrationResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.Registration'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.Registration') as gax.protobuf.Type;
     const updateRegistrationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
     const configureManagementSettingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.Registration'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.Registration') as gax.protobuf.Type;
     const configureManagementSettingsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
     const configureDnsSettingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.Registration'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.Registration') as gax.protobuf.Type;
     const configureDnsSettingsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
     const configureContactSettingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.Registration'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.Registration') as gax.protobuf.Type;
     const configureContactSettingsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
     const exportRegistrationResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.Registration'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.Registration') as gax.protobuf.Type;
     const exportRegistrationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteRegistrationResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteRegistrationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.domains.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       registerDomain: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         registerDomainResponse.decode.bind(registerDomainResponse),
-        registerDomainMetadata.decode.bind(registerDomainMetadata)
-      ),
+        registerDomainMetadata.decode.bind(registerDomainMetadata)),
       transferDomain: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         transferDomainResponse.decode.bind(transferDomainResponse),
-        transferDomainMetadata.decode.bind(transferDomainMetadata)
-      ),
+        transferDomainMetadata.decode.bind(transferDomainMetadata)),
       updateRegistration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateRegistrationResponse.decode.bind(updateRegistrationResponse),
-        updateRegistrationMetadata.decode.bind(updateRegistrationMetadata)
-      ),
+        updateRegistrationMetadata.decode.bind(updateRegistrationMetadata)),
       configureManagementSettings: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        configureManagementSettingsResponse.decode.bind(
-          configureManagementSettingsResponse
-        ),
-        configureManagementSettingsMetadata.decode.bind(
-          configureManagementSettingsMetadata
-        )
-      ),
+        configureManagementSettingsResponse.decode.bind(configureManagementSettingsResponse),
+        configureManagementSettingsMetadata.decode.bind(configureManagementSettingsMetadata)),
       configureDnsSettings: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         configureDnsSettingsResponse.decode.bind(configureDnsSettingsResponse),
-        configureDnsSettingsMetadata.decode.bind(configureDnsSettingsMetadata)
-      ),
+        configureDnsSettingsMetadata.decode.bind(configureDnsSettingsMetadata)),
       configureContactSettings: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        configureContactSettingsResponse.decode.bind(
-          configureContactSettingsResponse
-        ),
-        configureContactSettingsMetadata.decode.bind(
-          configureContactSettingsMetadata
-        )
-      ),
+        configureContactSettingsResponse.decode.bind(configureContactSettingsResponse),
+        configureContactSettingsMetadata.decode.bind(configureContactSettingsMetadata)),
       exportRegistration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportRegistrationResponse.decode.bind(exportRegistrationResponse),
-        exportRegistrationMetadata.decode.bind(exportRegistrationMetadata)
-      ),
+        exportRegistrationMetadata.decode.bind(exportRegistrationMetadata)),
       deleteRegistration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRegistrationResponse.decode.bind(deleteRegistrationResponse),
-        deleteRegistrationMetadata.decode.bind(deleteRegistrationMetadata)
-      ),
+        deleteRegistrationMetadata.decode.bind(deleteRegistrationMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.domains.v1.Domains',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.domains.v1.Domains', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -407,49 +309,28 @@ export class DomainsClient {
     // Put together the "service stub" for
     // google.cloud.domains.v1.Domains.
     this.domainsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.domains.v1.Domains'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.domains.v1.Domains') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.domains.v1.Domains,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const domainsStubMethods = [
-      'searchDomains',
-      'retrieveRegisterParameters',
-      'registerDomain',
-      'retrieveTransferParameters',
-      'transferDomain',
-      'listRegistrations',
-      'getRegistration',
-      'updateRegistration',
-      'configureManagementSettings',
-      'configureDnsSettings',
-      'configureContactSettings',
-      'exportRegistration',
-      'deleteRegistration',
-      'retrieveAuthorizationCode',
-      'resetAuthorizationCode',
-    ];
+    const domainsStubMethods =
+        ['searchDomains', 'retrieveRegisterParameters', 'registerDomain', 'retrieveTransferParameters', 'transferDomain', 'listRegistrations', 'getRegistration', 'updateRegistration', 'configureManagementSettings', 'configureDnsSettings', 'configureContactSettings', 'exportRegistration', 'deleteRegistration', 'retrieveAuthorizationCode', 'resetAuthorizationCode'];
     for (const methodName of domainsStubMethods) {
       const callPromise = this.domainsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -474,14 +355,8 @@ export class DomainsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'domains.googleapis.com';
   }
@@ -492,14 +367,8 @@ export class DomainsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'domains.googleapis.com';
   }
@@ -530,7 +399,9 @@ export class DomainsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -539,9 +410,8 @@ export class DomainsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -552,2386 +422,1661 @@ export class DomainsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Searches for available domain names similar to the provided query.
-   *
-   * Availability results from this method are approximate; call
-   * `RetrieveRegisterParameters` on a domain before registering to confirm
-   * availability.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.query
-   *   Required. String used to search for available domain names.
-   * @param {string} request.location
-   *   Required. The location. Must be in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.SearchDomainsResponse|SearchDomainsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.search_domains.js</caption>
-   * region_tag:domains_v1_generated_Domains_SearchDomains_async
-   */
+/**
+ * Searches for available domain names similar to the provided query.
+ *
+ * Availability results from this method are approximate; call
+ * `RetrieveRegisterParameters` on a domain before registering to confirm
+ * availability.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.query
+ *   Required. String used to search for available domain names.
+ * @param {string} request.location
+ *   Required. The location. Must be in the format `projects/* /locations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.SearchDomainsResponse|SearchDomainsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.search_domains.js</caption>
+ * region_tag:domains_v1_generated_Domains_SearchDomains_async
+ */
   searchDomains(
-    request?: protos.google.cloud.domains.v1.ISearchDomainsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.ISearchDomainsResponse,
-      protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.ISearchDomainsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.domains.v1.ISearchDomainsResponse,
+        protos.google.cloud.domains.v1.ISearchDomainsRequest|undefined, {}|undefined
+      ]>;
   searchDomains(
-    request: protos.google.cloud.domains.v1.ISearchDomainsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.domains.v1.ISearchDomainsResponse,
-      protos.google.cloud.domains.v1.ISearchDomainsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  searchDomains(
-    request: protos.google.cloud.domains.v1.ISearchDomainsRequest,
-    callback: Callback<
-      protos.google.cloud.domains.v1.ISearchDomainsResponse,
-      protos.google.cloud.domains.v1.ISearchDomainsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  searchDomains(
-    request?: protos.google.cloud.domains.v1.ISearchDomainsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.domains.v1.ISearchDomainsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.domains.v1.ISearchDomainsResponse,
-          | protos.google.cloud.domains.v1.ISearchDomainsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.domains.v1.ISearchDomainsResponse,
-      protos.google.cloud.domains.v1.ISearchDomainsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.ISearchDomainsResponse,
-      protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.domains.v1.ISearchDomainsRequest|null|undefined,
+          {}|null|undefined>): void;
+  searchDomains(
+      request: protos.google.cloud.domains.v1.ISearchDomainsRequest,
+      callback: Callback<
+          protos.google.cloud.domains.v1.ISearchDomainsResponse,
+          protos.google.cloud.domains.v1.ISearchDomainsRequest|null|undefined,
+          {}|null|undefined>): void;
+  searchDomains(
+      request?: protos.google.cloud.domains.v1.ISearchDomainsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.domains.v1.ISearchDomainsResponse,
+          protos.google.cloud.domains.v1.ISearchDomainsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.domains.v1.ISearchDomainsResponse,
+          protos.google.cloud.domains.v1.ISearchDomainsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.domains.v1.ISearchDomainsResponse,
+        protos.google.cloud.domains.v1.ISearchDomainsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        location: request.location ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'location': request.location ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchDomains request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.domains.v1.ISearchDomainsResponse,
-          | protos.google.cloud.domains.v1.ISearchDomainsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.domains.v1.ISearchDomainsResponse,
+        protos.google.cloud.domains.v1.ISearchDomainsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('searchDomains response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .searchDomains(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.domains.v1.ISearchDomainsResponse,
-          protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('searchDomains response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.searchDomains(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.domains.v1.ISearchDomainsResponse,
+        protos.google.cloud.domains.v1.ISearchDomainsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('searchDomains response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets parameters needed to register a new domain name, including price and
-   * up-to-date availability. Use the returned values to call `RegisterDomain`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.domainName
-   *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
-   * @param {string} request.location
-   *   Required. The location. Must be in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.RetrieveRegisterParametersResponse|RetrieveRegisterParametersResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.retrieve_register_parameters.js</caption>
-   * region_tag:domains_v1_generated_Domains_RetrieveRegisterParameters_async
-   */
+/**
+ * Gets parameters needed to register a new domain name, including price and
+ * up-to-date availability. Use the returned values to call `RegisterDomain`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.domainName
+ *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
+ * @param {string} request.location
+ *   Required. The location. Must be in the format `projects/* /locations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.RetrieveRegisterParametersResponse|RetrieveRegisterParametersResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.retrieve_register_parameters.js</caption>
+ * region_tag:domains_v1_generated_Domains_RetrieveRegisterParameters_async
+ */
   retrieveRegisterParameters(
-    request?: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-      (
-        | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|undefined, {}|undefined
+      ]>;
   retrieveRegisterParameters(
-    request: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-      | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveRegisterParameters(
-    request: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-      | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveRegisterParameters(
-    request?: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-          | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-      | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-      (
-        | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveRegisterParameters(
+      request: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
+      callback: Callback<
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveRegisterParameters(
+      request?: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        location: request.location ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'location': request.location ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('retrieveRegisterParameters request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-          | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('retrieveRegisterParameters response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .retrieveRegisterParameters(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
-          (
-            | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('retrieveRegisterParameters response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.retrieveRegisterParameters(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('retrieveRegisterParameters response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets parameters needed to transfer a domain name from another registrar to
-   * Cloud Domains. For domains managed by Google Domains, transferring to Cloud
-   * Domains is not supported.
-   *
-   *
-   * Use the returned values to call `TransferDomain`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.domainName
-   *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
-   * @param {string} request.location
-   *   Required. The location. Must be in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.RetrieveTransferParametersResponse|RetrieveTransferParametersResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.retrieve_transfer_parameters.js</caption>
-   * region_tag:domains_v1_generated_Domains_RetrieveTransferParameters_async
-   */
+/**
+ * Gets parameters needed to transfer a domain name from another registrar to
+ * Cloud Domains. For domains managed by Google Domains, transferring to Cloud
+ * Domains is not supported.
+ *
+ *
+ * Use the returned values to call `TransferDomain`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.domainName
+ *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
+ * @param {string} request.location
+ *   Required. The location. Must be in the format `projects/* /locations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.RetrieveTransferParametersResponse|RetrieveTransferParametersResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.retrieve_transfer_parameters.js</caption>
+ * region_tag:domains_v1_generated_Domains_RetrieveTransferParameters_async
+ */
   retrieveTransferParameters(
-    request?: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-      (
-        | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|undefined, {}|undefined
+      ]>;
   retrieveTransferParameters(
-    request: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-      | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveTransferParameters(
-    request: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-      | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveTransferParameters(
-    request?: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-          | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-      | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-      (
-        | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveTransferParameters(
+      request: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
+      callback: Callback<
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveTransferParameters(
+      request?: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        location: request.location ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'location': request.location ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('retrieveTransferParameters request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-          | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('retrieveTransferParameters response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .retrieveTransferParameters(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
-          (
-            | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('retrieveTransferParameters response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.retrieveTransferParameters(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+        protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('retrieveTransferParameters response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the details of a `Registration` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Registration` to get, in the format
-   *   `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.Registration|Registration}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.get_registration.js</caption>
-   * region_tag:domains_v1_generated_Domains_GetRegistration_async
-   */
+/**
+ * Gets the details of a `Registration` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Registration` to get, in the format
+ *   `projects/* /locations/* /registrations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.Registration|Registration}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.get_registration.js</caption>
+ * region_tag:domains_v1_generated_Domains_GetRegistration_async
+ */
   getRegistration(
-    request?: protos.google.cloud.domains.v1.IGetRegistrationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRegistration,
-      protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IGetRegistrationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IGetRegistrationRequest|undefined, {}|undefined
+      ]>;
   getRegistration(
-    request: protos.google.cloud.domains.v1.IGetRegistrationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IRegistration,
-      protos.google.cloud.domains.v1.IGetRegistrationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRegistration(
-    request: protos.google.cloud.domains.v1.IGetRegistrationRequest,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IRegistration,
-      protos.google.cloud.domains.v1.IGetRegistrationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRegistration(
-    request?: protos.google.cloud.domains.v1.IGetRegistrationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.domains.v1.IGetRegistrationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.domains.v1.IRegistration,
-          | protos.google.cloud.domains.v1.IGetRegistrationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.domains.v1.IRegistration,
-      protos.google.cloud.domains.v1.IGetRegistrationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRegistration,
-      protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.domains.v1.IGetRegistrationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRegistration(
+      request: protos.google.cloud.domains.v1.IGetRegistrationRequest,
+      callback: Callback<
+          protos.google.cloud.domains.v1.IRegistration,
+          protos.google.cloud.domains.v1.IGetRegistrationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRegistration(
+      request?: protos.google.cloud.domains.v1.IGetRegistrationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.domains.v1.IRegistration,
+          protos.google.cloud.domains.v1.IGetRegistrationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.domains.v1.IRegistration,
+          protos.google.cloud.domains.v1.IGetRegistrationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IGetRegistrationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRegistration request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.domains.v1.IRegistration,
-          | protos.google.cloud.domains.v1.IGetRegistrationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IGetRegistrationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRegistration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRegistration(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.domains.v1.IRegistration,
-          protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getRegistration response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.getRegistration(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IGetRegistrationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRegistration response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Gets the authorization code of the `Registration` for the purpose of
-   * transferring the domain to another registrar.
-   *
-   * You can call this method only after 60 days have elapsed since the initial
-   * domain registration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose authorization code is being retrieved,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.AuthorizationCode|AuthorizationCode}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.retrieve_authorization_code.js</caption>
-   * region_tag:domains_v1_generated_Domains_RetrieveAuthorizationCode_async
-   */
+/**
+ * Gets the authorization code of the `Registration` for the purpose of
+ * transferring the domain to another registrar.
+ *
+ * You can call this method only after 60 days have elapsed since the initial
+ * domain registration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.registration
+ *   Required. The name of the `Registration` whose authorization code is being retrieved,
+ *   in the format `projects/* /locations/* /registrations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.AuthorizationCode|AuthorizationCode}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.retrieve_authorization_code.js</caption>
+ * region_tag:domains_v1_generated_Domains_RetrieveAuthorizationCode_async
+ */
   retrieveAuthorizationCode(
-    request?: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      (
-        | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|undefined, {}|undefined
+      ]>;
   retrieveAuthorizationCode(
-    request: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveAuthorizationCode(
-    request: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retrieveAuthorizationCode(
-    request?: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.domains.v1.IAuthorizationCode,
-          | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      (
-        | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveAuthorizationCode(
+      request: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
+      callback: Callback<
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  retrieveAuthorizationCode(
+      request?: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        registration: request.registration ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'registration': request.registration ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('retrieveAuthorizationCode request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.domains.v1.IAuthorizationCode,
-          | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('retrieveAuthorizationCode response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .retrieveAuthorizationCode(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.domains.v1.IAuthorizationCode,
-          (
-            | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('retrieveAuthorizationCode response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.retrieveAuthorizationCode(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('retrieveAuthorizationCode response %j', response);
+        return [response, options, rawResponse];
+      });
   }
-  /**
-   * Resets the authorization code of the `Registration` to a new random string.
-   *
-   * You can call this method only after 60 days have elapsed since the initial
-   * domain registration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose authorization code is being reset,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.AuthorizationCode|AuthorizationCode}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.reset_authorization_code.js</caption>
-   * region_tag:domains_v1_generated_Domains_ResetAuthorizationCode_async
-   */
+/**
+ * Resets the authorization code of the `Registration` to a new random string.
+ *
+ * You can call this method only after 60 days have elapsed since the initial
+ * domain registration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.registration
+ *   Required. The name of the `Registration` whose authorization code is being reset,
+ *   in the format `projects/* /locations/* /registrations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.domains.v1.AuthorizationCode|AuthorizationCode}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.reset_authorization_code.js</caption>
+ * region_tag:domains_v1_generated_Domains_ResetAuthorizationCode_async
+ */
   resetAuthorizationCode(
-    request?: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|undefined, {}|undefined
+      ]>;
   resetAuthorizationCode(
-    request: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetAuthorizationCode(
-    request: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
-    callback: Callback<
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetAuthorizationCode(
-    request?: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.domains.v1.IAuthorizationCode,
-          | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IAuthorizationCode,
-      protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetAuthorizationCode(
+      request: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
+      callback: Callback<
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  resetAuthorizationCode(
+      request?: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        registration: request.registration ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'registration': request.registration ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resetAuthorizationCode request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.domains.v1.IAuthorizationCode,
-          | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resetAuthorizationCode response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resetAuthorizationCode(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.domains.v1.IAuthorizationCode,
-          (
-            | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('resetAuthorizationCode response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
+    return this.innerApiCalls.resetAuthorizationCode(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.domains.v1.IAuthorizationCode,
+        protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resetAuthorizationCode response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
-  /**
-   * Registers a new domain name and creates a corresponding `Registration`
-   * resource.
-   *
-   * Call `RetrieveRegisterParameters` first to check availability of the domain
-   * name and determine parameters like price that are needed to build a call to
-   * this method.
-   *
-   * A successful call creates a `Registration` resource in state
-   * `REGISTRATION_PENDING`, which resolves to `ACTIVE` within 1-2
-   * minutes, indicating that the domain was successfully registered. If the
-   * resource ends up in state `REGISTRATION_FAILED`, it indicates that the
-   * domain was not registered successfully, and you can safely delete the
-   * resource and retry registration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the `Registration`. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {google.cloud.domains.v1.Registration} request.registration
-   *   Required. The complete `Registration` resource to be created.
-   * @param {number[]} request.domainNotices
-   *   The list of domain notices that you acknowledge. Call
-   *   `RetrieveRegisterParameters` to see the notices that need acknowledgement.
-   * @param {number[]} request.contactNotices
-   *   The list of contact notices that the caller acknowledges. The notices
-   *   needed here depend on the values specified in
-   *   `registration.contact_settings`.
-   * @param {google.type.Money} request.yearlyPrice
-   *   Required. Yearly price to register or renew the domain.
-   *   The value that should be put here can be obtained from
-   *   RetrieveRegisterParameters or SearchDomains calls.
-   * @param {boolean} request.validateOnly
-   *   When true, only validation is performed, without actually registering
-   *   the domain. Follows:
-   *   https://cloud.google.com/apis/design/design_patterns#request_validation
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.register_domain.js</caption>
-   * region_tag:domains_v1_generated_Domains_RegisterDomain_async
-   */
+/**
+ * Registers a new domain name and creates a corresponding `Registration`
+ * resource.
+ *
+ * Call `RetrieveRegisterParameters` first to check availability of the domain
+ * name and determine parameters like price that are needed to build a call to
+ * this method.
+ *
+ * A successful call creates a `Registration` resource in state
+ * `REGISTRATION_PENDING`, which resolves to `ACTIVE` within 1-2
+ * minutes, indicating that the domain was successfully registered. If the
+ * resource ends up in state `REGISTRATION_FAILED`, it indicates that the
+ * domain was not registered successfully, and you can safely delete the
+ * resource and retry registration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `Registration`. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {google.cloud.domains.v1.Registration} request.registration
+ *   Required. The complete `Registration` resource to be created.
+ * @param {number[]} request.domainNotices
+ *   The list of domain notices that you acknowledge. Call
+ *   `RetrieveRegisterParameters` to see the notices that need acknowledgement.
+ * @param {number[]} request.contactNotices
+ *   The list of contact notices that the caller acknowledges. The notices
+ *   needed here depend on the values specified in
+ *   `registration.contact_settings`.
+ * @param {google.type.Money} request.yearlyPrice
+ *   Required. Yearly price to register or renew the domain.
+ *   The value that should be put here can be obtained from
+ *   RetrieveRegisterParameters or SearchDomains calls.
+ * @param {boolean} request.validateOnly
+ *   When true, only validation is performed, without actually registering
+ *   the domain. Follows:
+ *   https://cloud.google.com/apis/design/design_patterns#request_validation
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.register_domain.js</caption>
+ * region_tag:domains_v1_generated_Domains_RegisterDomain_async
+ */
   registerDomain(
-    request?: protos.google.cloud.domains.v1.IRegisterDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IRegisterDomainRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   registerDomain(
-    request: protos.google.cloud.domains.v1.IRegisterDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IRegisterDomainRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   registerDomain(
-    request: protos.google.cloud.domains.v1.IRegisterDomainRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IRegisterDomainRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   registerDomain(
-    request?: protos.google.cloud.domains.v1.IRegisterDomainRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.IRegisterDomainRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('registerDomain response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('registerDomain request %j', request);
-    return this.innerApiCalls
-      .registerDomain(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('registerDomain response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.registerDomain(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('registerDomain response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `registerDomain()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.register_domain.js</caption>
-   * region_tag:domains_v1_generated_Domains_RegisterDomain_async
-   */
-  async checkRegisterDomainProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `registerDomain()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.register_domain.js</caption>
+ * region_tag:domains_v1_generated_Domains_RegisterDomain_async
+ */
+  async checkRegisterDomainProgress(name: string): Promise<LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('registerDomain long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.registerDomain,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.registerDomain, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Transfers a domain name from another registrar to Cloud Domains.  For
-   * domains managed by Google Domains, transferring to Cloud Domains is not
-   * supported.
-   *
-   *
-   * Before calling this method, go to the domain's current registrar to unlock
-   * the domain for transfer and retrieve the domain's transfer authorization
-   * code. Then call `RetrieveTransferParameters` to confirm that the domain is
-   * unlocked and to get values needed to build a call to this method.
-   *
-   * A successful call creates a `Registration` resource in state
-   * `TRANSFER_PENDING`. It can take several days to complete the transfer
-   * process. The registrant can often speed up this process by approving the
-   * transfer through the current registrar, either by clicking a link in an
-   * email from the registrar or by visiting the registrar's website.
-   *
-   * A few minutes after transfer approval, the resource transitions to state
-   * `ACTIVE`, indicating that the transfer was successful. If the transfer is
-   * rejected or the request expires without being approved, the resource can
-   * end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete
-   * the resource and retry the transfer.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the `Registration`. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {google.cloud.domains.v1.Registration} request.registration
-   *   Required. The complete `Registration` resource to be created.
-   *
-   *   You can leave `registration.dns_settings` unset to import the
-   *   domain's current DNS configuration from its current registrar. Use this
-   *   option only if you are sure that the domain's current DNS service
-   *   does not cease upon transfer, as is often the case for DNS services
-   *   provided for free by the registrar.
-   * @param {number[]} request.contactNotices
-   *   The list of contact notices that you acknowledge. The notices
-   *   needed here depend on the values specified in
-   *   `registration.contact_settings`.
-   * @param {google.type.Money} request.yearlyPrice
-   *   Required. Acknowledgement of the price to transfer or renew the domain for one year.
-   *   Call `RetrieveTransferParameters` to obtain the price, which you must
-   *   acknowledge.
-   * @param {google.cloud.domains.v1.AuthorizationCode} request.authorizationCode
-   *   The domain's transfer authorization code. You can obtain this from the
-   *   domain's current registrar.
-   * @param {boolean} request.validateOnly
-   *   Validate the request without actually transferring the domain.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.transfer_domain.js</caption>
-   * region_tag:domains_v1_generated_Domains_TransferDomain_async
-   */
+/**
+ * Transfers a domain name from another registrar to Cloud Domains.  For
+ * domains managed by Google Domains, transferring to Cloud Domains is not
+ * supported.
+ *
+ *
+ * Before calling this method, go to the domain's current registrar to unlock
+ * the domain for transfer and retrieve the domain's transfer authorization
+ * code. Then call `RetrieveTransferParameters` to confirm that the domain is
+ * unlocked and to get values needed to build a call to this method.
+ *
+ * A successful call creates a `Registration` resource in state
+ * `TRANSFER_PENDING`. It can take several days to complete the transfer
+ * process. The registrant can often speed up this process by approving the
+ * transfer through the current registrar, either by clicking a link in an
+ * email from the registrar or by visiting the registrar's website.
+ *
+ * A few minutes after transfer approval, the resource transitions to state
+ * `ACTIVE`, indicating that the transfer was successful. If the transfer is
+ * rejected or the request expires without being approved, the resource can
+ * end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete
+ * the resource and retry the transfer.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `Registration`. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {google.cloud.domains.v1.Registration} request.registration
+ *   Required. The complete `Registration` resource to be created.
+ *
+ *   You can leave `registration.dns_settings` unset to import the
+ *   domain's current DNS configuration from its current registrar. Use this
+ *   option only if you are sure that the domain's current DNS service
+ *   does not cease upon transfer, as is often the case for DNS services
+ *   provided for free by the registrar.
+ * @param {number[]} request.contactNotices
+ *   The list of contact notices that you acknowledge. The notices
+ *   needed here depend on the values specified in
+ *   `registration.contact_settings`.
+ * @param {google.type.Money} request.yearlyPrice
+ *   Required. Acknowledgement of the price to transfer or renew the domain for one year.
+ *   Call `RetrieveTransferParameters` to obtain the price, which you must
+ *   acknowledge.
+ * @param {google.cloud.domains.v1.AuthorizationCode} request.authorizationCode
+ *   The domain's transfer authorization code. You can obtain this from the
+ *   domain's current registrar.
+ * @param {boolean} request.validateOnly
+ *   Validate the request without actually transferring the domain.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.transfer_domain.js</caption>
+ * region_tag:domains_v1_generated_Domains_TransferDomain_async
+ */
   transferDomain(
-    request?: protos.google.cloud.domains.v1.ITransferDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.ITransferDomainRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   transferDomain(
-    request: protos.google.cloud.domains.v1.ITransferDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.ITransferDomainRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   transferDomain(
-    request: protos.google.cloud.domains.v1.ITransferDomainRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.ITransferDomainRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   transferDomain(
-    request?: protos.google.cloud.domains.v1.ITransferDomainRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.ITransferDomainRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('transferDomain response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('transferDomain request %j', request);
-    return this.innerApiCalls
-      .transferDomain(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('transferDomain response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.transferDomain(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('transferDomain response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `transferDomain()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.transfer_domain.js</caption>
-   * region_tag:domains_v1_generated_Domains_TransferDomain_async
-   */
-  async checkTransferDomainProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `transferDomain()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.transfer_domain.js</caption>
+ * region_tag:domains_v1_generated_Domains_TransferDomain_async
+ */
+  async checkTransferDomainProgress(name: string): Promise<LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('transferDomain long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.transferDomain,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.transferDomain, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Updates select fields of a `Registration` resource, notably `labels`. To
-   * update other fields, use the appropriate custom update method:
-   *
-   * * To update management settings, see `ConfigureManagementSettings`
-   * * To update DNS configuration, see `ConfigureDnsSettings`
-   * * To update contact information, see `ConfigureContactSettings`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.domains.v1.Registration} request.registration
-   *   Fields of the `Registration` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the labels are being updated, the `update_mask` is
-   *   `"labels"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.update_registration.js</caption>
-   * region_tag:domains_v1_generated_Domains_UpdateRegistration_async
-   */
+/**
+ * Updates select fields of a `Registration` resource, notably `labels`. To
+ * update other fields, use the appropriate custom update method:
+ *
+ * * To update management settings, see `ConfigureManagementSettings`
+ * * To update DNS configuration, see `ConfigureDnsSettings`
+ * * To update contact information, see `ConfigureContactSettings`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.domains.v1.Registration} request.registration
+ *   Fields of the `Registration` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The field mask describing which fields to update as a comma-separated list.
+ *   For example, if only the labels are being updated, the `update_mask` is
+ *   `"labels"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.update_registration.js</caption>
+ * region_tag:domains_v1_generated_Domains_UpdateRegistration_async
+ */
   updateRegistration(
-    request?: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateRegistration(
-    request: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateRegistration(
-    request: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateRegistration(
-    request?: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'registration.name': request.registration!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'registration.name': request.registration!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateRegistration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateRegistration request %j', request);
-    return this.innerApiCalls
-      .updateRegistration(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRegistration response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateRegistration(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateRegistration response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateRegistration()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.update_registration.js</caption>
-   * region_tag:domains_v1_generated_Domains_UpdateRegistration_async
-   */
-  async checkUpdateRegistrationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateRegistration()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.update_registration.js</caption>
+ * region_tag:domains_v1_generated_Domains_UpdateRegistration_async
+ */
+  async checkUpdateRegistrationProgress(name: string): Promise<LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('updateRegistration long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateRegistration,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateRegistration, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Updates a `Registration`'s management settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose management settings are being updated,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1.ManagementSettings} request.managementSettings
-   *   Fields of the `ManagementSettings` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the transfer lock is being updated, the `update_mask`
-   *   is `"transfer_lock_state"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.configure_management_settings.js</caption>
-   * region_tag:domains_v1_generated_Domains_ConfigureManagementSettings_async
-   */
+/**
+ * Updates a `Registration`'s management settings.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.registration
+ *   Required. The name of the `Registration` whose management settings are being updated,
+ *   in the format `projects/* /locations/* /registrations/*`.
+ * @param {google.cloud.domains.v1.ManagementSettings} request.managementSettings
+ *   Fields of the `ManagementSettings` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The field mask describing which fields to update as a comma-separated list.
+ *   For example, if only the transfer lock is being updated, the `update_mask`
+ *   is `"transfer_lock_state"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.configure_management_settings.js</caption>
+ * region_tag:domains_v1_generated_Domains_ConfigureManagementSettings_async
+ */
   configureManagementSettings(
-    request?: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   configureManagementSettings(
-    request: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   configureManagementSettings(
-    request: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   configureManagementSettings(
-    request?: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        registration: request.registration ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'registration': request.registration ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'configureManagementSettings response %j',
-            rawResponse
-          );
+          this._log.info('configureManagementSettings response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('configureManagementSettings request %j', request);
-    return this.innerApiCalls
-      .configureManagementSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'configureManagementSettings response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.configureManagementSettings(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('configureManagementSettings response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `configureManagementSettings()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.configure_management_settings.js</caption>
-   * region_tag:domains_v1_generated_Domains_ConfigureManagementSettings_async
-   */
-  async checkConfigureManagementSettingsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `configureManagementSettings()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.configure_management_settings.js</caption>
+ * region_tag:domains_v1_generated_Domains_ConfigureManagementSettings_async
+ */
+  async checkConfigureManagementSettingsProgress(name: string): Promise<LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('configureManagementSettings long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.configureManagementSettings,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.configureManagementSettings, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Updates a `Registration`'s DNS settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose DNS settings are being updated,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1.DnsSettings} request.dnsSettings
-   *   Fields of the `DnsSettings` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the name servers are being updated for an existing
-   *   Custom DNS configuration, the `update_mask` is
-   *   `"custom_dns.name_servers"`.
-   *
-   *   When changing the DNS provider from one type to another, pass the new
-   *   provider's field name as part of the field mask. For example, when changing
-   *   from a Google Domains DNS configuration to a Custom DNS configuration, the
-   *   `update_mask` is `"custom_dns"`. //
-   * @param {boolean} request.validateOnly
-   *   Validate the request without actually updating the DNS settings.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.configure_dns_settings.js</caption>
-   * region_tag:domains_v1_generated_Domains_ConfigureDnsSettings_async
-   */
+/**
+ * Updates a `Registration`'s DNS settings.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.registration
+ *   Required. The name of the `Registration` whose DNS settings are being updated,
+ *   in the format `projects/* /locations/* /registrations/*`.
+ * @param {google.cloud.domains.v1.DnsSettings} request.dnsSettings
+ *   Fields of the `DnsSettings` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The field mask describing which fields to update as a comma-separated list.
+ *   For example, if only the name servers are being updated for an existing
+ *   Custom DNS configuration, the `update_mask` is
+ *   `"custom_dns.name_servers"`.
+ *
+ *   When changing the DNS provider from one type to another, pass the new
+ *   provider's field name as part of the field mask. For example, when changing
+ *   from a Google Domains DNS configuration to a Custom DNS configuration, the
+ *   `update_mask` is `"custom_dns"`. //
+ * @param {boolean} request.validateOnly
+ *   Validate the request without actually updating the DNS settings.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.configure_dns_settings.js</caption>
+ * region_tag:domains_v1_generated_Domains_ConfigureDnsSettings_async
+ */
   configureDnsSettings(
-    request?: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   configureDnsSettings(
-    request: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   configureDnsSettings(
-    request: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   configureDnsSettings(
-    request?: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        registration: request.registration ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'registration': request.registration ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('configureDnsSettings response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('configureDnsSettings request %j', request);
-    return this.innerApiCalls
-      .configureDnsSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('configureDnsSettings response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.configureDnsSettings(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('configureDnsSettings response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `configureDnsSettings()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.configure_dns_settings.js</caption>
-   * region_tag:domains_v1_generated_Domains_ConfigureDnsSettings_async
-   */
-  async checkConfigureDnsSettingsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `configureDnsSettings()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.configure_dns_settings.js</caption>
+ * region_tag:domains_v1_generated_Domains_ConfigureDnsSettings_async
+ */
+  async checkConfigureDnsSettingsProgress(name: string): Promise<LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('configureDnsSettings long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.configureDnsSettings,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.configureDnsSettings, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Updates a `Registration`'s contact settings. Some changes require
-   * confirmation by the domain's registrant contact .
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose contact settings are being updated,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1.ContactSettings} request.contactSettings
-   *   Fields of the `ContactSettings` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the registrant contact is being updated, the
-   *   `update_mask` is `"registrant_contact"`.
-   * @param {number[]} request.contactNotices
-   *   The list of contact notices that the caller acknowledges. The notices
-   *   needed here depend on the values specified in `contact_settings`.
-   * @param {boolean} request.validateOnly
-   *   Validate the request without actually updating the contact settings.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.configure_contact_settings.js</caption>
-   * region_tag:domains_v1_generated_Domains_ConfigureContactSettings_async
-   */
+/**
+ * Updates a `Registration`'s contact settings. Some changes require
+ * confirmation by the domain's registrant contact .
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.registration
+ *   Required. The name of the `Registration` whose contact settings are being updated,
+ *   in the format `projects/* /locations/* /registrations/*`.
+ * @param {google.cloud.domains.v1.ContactSettings} request.contactSettings
+ *   Fields of the `ContactSettings` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The field mask describing which fields to update as a comma-separated list.
+ *   For example, if only the registrant contact is being updated, the
+ *   `update_mask` is `"registrant_contact"`.
+ * @param {number[]} request.contactNotices
+ *   The list of contact notices that the caller acknowledges. The notices
+ *   needed here depend on the values specified in `contact_settings`.
+ * @param {boolean} request.validateOnly
+ *   Validate the request without actually updating the contact settings.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.configure_contact_settings.js</caption>
+ * region_tag:domains_v1_generated_Domains_ConfigureContactSettings_async
+ */
   configureContactSettings(
-    request?: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   configureContactSettings(
-    request: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   configureContactSettings(
-    request: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   configureContactSettings(
-    request?: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        registration: request.registration ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'registration': request.registration ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('configureContactSettings response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('configureContactSettings request %j', request);
-    return this.innerApiCalls
-      .configureContactSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('configureContactSettings response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.configureContactSettings(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('configureContactSettings response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `configureContactSettings()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.configure_contact_settings.js</caption>
-   * region_tag:domains_v1_generated_Domains_ConfigureContactSettings_async
-   */
-  async checkConfigureContactSettingsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `configureContactSettings()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.configure_contact_settings.js</caption>
+ * region_tag:domains_v1_generated_Domains_ConfigureContactSettings_async
+ */
+  async checkConfigureContactSettingsProgress(name: string): Promise<LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('configureContactSettings long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.configureContactSettings,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.configureContactSettings, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Exports a `Registration` resource, such that it is no longer managed by
-   * Cloud Domains.
-   *
-   * When an active domain is successfully exported, you can continue to use the
-   * domain in [Google Domains](https://domains.google/) until it expires. The
-   * calling user becomes the domain's sole owner in Google Domains, and
-   * permissions for the domain are subsequently managed there. The domain does
-   * not renew automatically unless the new owner sets up billing in Google
-   * Domains.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Registration` to export,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.export_registration.js</caption>
-   * region_tag:domains_v1_generated_Domains_ExportRegistration_async
-   */
+/**
+ * Exports a `Registration` resource, such that it is no longer managed by
+ * Cloud Domains.
+ *
+ * When an active domain is successfully exported, you can continue to use the
+ * domain in [Google Domains](https://domains.google/) until it expires. The
+ * calling user becomes the domain's sole owner in Google Domains, and
+ * permissions for the domain are subsequently managed there. The domain does
+ * not renew automatically unless the new owner sets up billing in Google
+ * Domains.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Registration` to export,
+ *   in the format `projects/* /locations/* /registrations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.export_registration.js</caption>
+ * region_tag:domains_v1_generated_Domains_ExportRegistration_async
+ */
   exportRegistration(
-    request?: protos.google.cloud.domains.v1.IExportRegistrationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IExportRegistrationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportRegistration(
-    request: protos.google.cloud.domains.v1.IExportRegistrationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IExportRegistrationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportRegistration(
-    request: protos.google.cloud.domains.v1.IExportRegistrationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IExportRegistrationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportRegistration(
-    request?: protos.google.cloud.domains.v1.IExportRegistrationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1.IRegistration,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.IExportRegistrationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportRegistration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportRegistration request %j', request);
-    return this.innerApiCalls
-      .exportRegistration(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.domains.v1.IRegistration,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportRegistration response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportRegistration(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.domains.v1.IRegistration, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportRegistration response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportRegistration()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.export_registration.js</caption>
-   * region_tag:domains_v1_generated_Domains_ExportRegistration_async
-   */
-  async checkExportRegistrationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportRegistration()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.export_registration.js</caption>
+ * region_tag:domains_v1_generated_Domains_ExportRegistration_async
+ */
+  async checkExportRegistrationProgress(name: string): Promise<LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('exportRegistration long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportRegistration,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1.Registration,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportRegistration, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.domains.v1.Registration, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a `Registration` resource.
-   *
-   * This method works on any `Registration` resource using [Subscription or
-   * Commitment billing](/domains/pricing#billing-models), provided that the
-   * resource was created at least 1 day in the past.
-   *
-   * For `Registration` resources using
-   * [Monthly billing](/domains/pricing#billing-models), this method works if:
-   *
-   * * `state` is `EXPORTED` with `expire_time` in the past
-   * * `state` is `REGISTRATION_FAILED`
-   * * `state` is `TRANSFER_FAILED`
-   *
-   * When an active registration is successfully deleted, you can continue to
-   * use the domain in [Google Domains](https://domains.google/) until it
-   * expires. The calling user becomes the domain's sole owner in Google
-   * Domains, and permissions for the domain are subsequently managed there. The
-   * domain does not renew automatically unless the new owner sets up billing in
-   * Google Domains.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Registration` to delete,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.delete_registration.js</caption>
-   * region_tag:domains_v1_generated_Domains_DeleteRegistration_async
-   */
+/**
+ * Deletes a `Registration` resource.
+ *
+ * This method works on any `Registration` resource using [Subscription or
+ * Commitment billing](/domains/pricing#billing-models), provided that the
+ * resource was created at least 1 day in the past.
+ *
+ * For `Registration` resources using
+ * [Monthly billing](/domains/pricing#billing-models), this method works if:
+ *
+ * * `state` is `EXPORTED` with `expire_time` in the past
+ * * `state` is `REGISTRATION_FAILED`
+ * * `state` is `TRANSFER_FAILED`
+ *
+ * When an active registration is successfully deleted, you can continue to
+ * use the domain in [Google Domains](https://domains.google/) until it
+ * expires. The calling user becomes the domain's sole owner in Google
+ * Domains, and permissions for the domain are subsequently managed there. The
+ * domain does not renew automatically unless the new owner sets up billing in
+ * Google Domains.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `Registration` to delete,
+ *   in the format `projects/* /locations/* /registrations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.delete_registration.js</caption>
+ * region_tag:domains_v1_generated_Domains_DeleteRegistration_async
+ */
   deleteRegistration(
-    request?: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteRegistration(
-    request: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRegistration(
-    request: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRegistration(
-    request?: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRegistration response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRegistration request %j', request);
-    return this.innerApiCalls
-      .deleteRegistration(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.domains.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRegistration response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteRegistration(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.domains.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteRegistration response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteRegistration()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.delete_registration.js</caption>
-   * region_tag:domains_v1_generated_Domains_DeleteRegistration_async
-   */
-  async checkDeleteRegistrationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteRegistration()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.delete_registration.js</caption>
+ * region_tag:domains_v1_generated_Domains_DeleteRegistration_async
+ */
+  async checkDeleteRegistrationProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.domains.v1.OperationMetadata>>{
     this._log.info('deleteRegistration long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteRegistration,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.domains.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRegistration, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.domains.v1.OperationMetadata>;
   }
-  /**
-   * Lists the `Registration` resources in a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which to list `Registration`s, specified in
-   *   the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of results to return.
-   * @param {string} request.pageToken
-   *   When set to the `next_page_token` from a prior response, provides the next
-   *   page of results.
-   * @param {string} request.filter
-   *   Filter expression to restrict the `Registration`s returned.
-   *
-   *   The expression must specify the field name, a comparison operator, and the
-   *   value that you want to use for filtering. The value must be a string, a
-   *   number, a boolean, or an enum value. The comparison operator should be one
-   *   of =, !=, >, <, >=, <=, or : for prefix or wildcard matches.
-   *
-   *   For example, to filter to a specific domain name, use an expression like
-   *   `domainName="example.com"`. You can also check for the existence of a
-   *   field; for example, to find domains using custom DNS settings, use an
-   *   expression like `dnsSettings.customDns:*`.
-   *
-   *   You can also create compound filters by combining expressions with the
-   *   `AND` and `OR` operators. For example, to find domains that are suspended
-   *   or have specific issues flagged, use an expression like
-   *   `(state=SUSPENDED) OR (issue:*)`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.domains.v1.Registration|Registration}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRegistrationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the `Registration` resources in a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which to list `Registration`s, specified in
+ *   the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of results to return.
+ * @param {string} request.pageToken
+ *   When set to the `next_page_token` from a prior response, provides the next
+ *   page of results.
+ * @param {string} request.filter
+ *   Filter expression to restrict the `Registration`s returned.
+ *
+ *   The expression must specify the field name, a comparison operator, and the
+ *   value that you want to use for filtering. The value must be a string, a
+ *   number, a boolean, or an enum value. The comparison operator should be one
+ *   of =, !=, >, <, >=, <=, or : for prefix or wildcard matches.
+ *
+ *   For example, to filter to a specific domain name, use an expression like
+ *   `domainName="example.com"`. You can also check for the existence of a
+ *   field; for example, to find domains using custom DNS settings, use an
+ *   expression like `dnsSettings.customDns:*`.
+ *
+ *   You can also create compound filters by combining expressions with the
+ *   `AND` and `OR` operators. For example, to find domains that are suspended
+ *   or have specific issues flagged, use an expression like
+ *   `(state=SUSPENDED) OR (issue:*)`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.domains.v1.Registration|Registration}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRegistrationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRegistrations(
-    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRegistration[],
-      protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1.IListRegistrationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.domains.v1.IRegistration[],
+        protos.google.cloud.domains.v1.IListRegistrationsRequest|null,
+        protos.google.cloud.domains.v1.IListRegistrationsResponse
+      ]>;
   listRegistrations(
-    request: protos.google.cloud.domains.v1.IListRegistrationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.domains.v1.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1.IListRegistrationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.domains.v1.IRegistration
-    >
-  ): void;
-  listRegistrations(
-    request: protos.google.cloud.domains.v1.IListRegistrationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.domains.v1.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1.IListRegistrationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.domains.v1.IRegistration
-    >
-  ): void;
-  listRegistrations(
-    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.domains.v1.IListRegistrationsRequest,
-          | protos.google.cloud.domains.v1.IListRegistrationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.domains.v1.IRegistration
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.domains.v1.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1.IListRegistrationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.domains.v1.IRegistration
-    >
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1.IRegistration[],
-      protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1.IListRegistrationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.domains.v1.IListRegistrationsResponse|null|undefined,
+          protos.google.cloud.domains.v1.IRegistration>): void;
+  listRegistrations(
+      request: protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.domains.v1.IListRegistrationsRequest,
+          protos.google.cloud.domains.v1.IListRegistrationsResponse|null|undefined,
+          protos.google.cloud.domains.v1.IRegistration>): void;
+  listRegistrations(
+      request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.domains.v1.IListRegistrationsRequest,
+          protos.google.cloud.domains.v1.IListRegistrationsResponse|null|undefined,
+          protos.google.cloud.domains.v1.IRegistration>,
+      callback?: PaginationCallback<
+          protos.google.cloud.domains.v1.IListRegistrationsRequest,
+          protos.google.cloud.domains.v1.IListRegistrationsResponse|null|undefined,
+          protos.google.cloud.domains.v1.IRegistration>):
+      Promise<[
+        protos.google.cloud.domains.v1.IRegistration[],
+        protos.google.cloud.domains.v1.IListRegistrationsRequest|null,
+        protos.google.cloud.domains.v1.IListRegistrationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.domains.v1.IListRegistrationsRequest,
-          | protos.google.cloud.domains.v1.IListRegistrationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.domains.v1.IRegistration
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      protos.google.cloud.domains.v1.IListRegistrationsResponse|null|undefined,
+      protos.google.cloud.domains.v1.IRegistration>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRegistrations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2940,75 +2085,72 @@ export class DomainsClient {
     this._log.info('listRegistrations request %j', request);
     return this.innerApiCalls
       .listRegistrations(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.domains.v1.IRegistration[],
-          protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
-          protos.google.cloud.domains.v1.IListRegistrationsResponse,
-        ]) => {
-          this._log.info('listRegistrations values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.domains.v1.IRegistration[],
+        protos.google.cloud.domains.v1.IListRegistrationsRequest|null,
+        protos.google.cloud.domains.v1.IListRegistrationsResponse
+      ]) => {
+        this._log.info('listRegistrations values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRegistrations`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which to list `Registration`s, specified in
-   *   the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of results to return.
-   * @param {string} request.pageToken
-   *   When set to the `next_page_token` from a prior response, provides the next
-   *   page of results.
-   * @param {string} request.filter
-   *   Filter expression to restrict the `Registration`s returned.
-   *
-   *   The expression must specify the field name, a comparison operator, and the
-   *   value that you want to use for filtering. The value must be a string, a
-   *   number, a boolean, or an enum value. The comparison operator should be one
-   *   of =, !=, >, <, >=, <=, or : for prefix or wildcard matches.
-   *
-   *   For example, to filter to a specific domain name, use an expression like
-   *   `domainName="example.com"`. You can also check for the existence of a
-   *   field; for example, to find domains using custom DNS settings, use an
-   *   expression like `dnsSettings.customDns:*`.
-   *
-   *   You can also create compound filters by combining expressions with the
-   *   `AND` and `OR` operators. For example, to find domains that are suspended
-   *   or have specific issues flagged, use an expression like
-   *   `(state=SUSPENDED) OR (issue:*)`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.domains.v1.Registration|Registration} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRegistrationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRegistrations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which to list `Registration`s, specified in
+ *   the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of results to return.
+ * @param {string} request.pageToken
+ *   When set to the `next_page_token` from a prior response, provides the next
+ *   page of results.
+ * @param {string} request.filter
+ *   Filter expression to restrict the `Registration`s returned.
+ *
+ *   The expression must specify the field name, a comparison operator, and the
+ *   value that you want to use for filtering. The value must be a string, a
+ *   number, a boolean, or an enum value. The comparison operator should be one
+ *   of =, !=, >, <, >=, <=, or : for prefix or wildcard matches.
+ *
+ *   For example, to filter to a specific domain name, use an expression like
+ *   `domainName="example.com"`. You can also check for the existence of a
+ *   field; for example, to find domains using custom DNS settings, use an
+ *   expression like `dnsSettings.customDns:*`.
+ *
+ *   You can also create compound filters by combining expressions with the
+ *   `AND` and `OR` operators. For example, to find domains that are suspended
+ *   or have specific issues flagged, use an expression like
+ *   `(state=SUSPENDED) OR (issue:*)`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.domains.v1.Registration|Registration} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRegistrationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRegistrationsStream(
-    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRegistrations stream %j', request);
     return this.descriptors.page.listRegistrations.createStream(
       this.innerApiCalls.listRegistrations as GaxCall,
@@ -3017,66 +2159,65 @@ export class DomainsClient {
     );
   }
 
-  /**
-   * Equivalent to `listRegistrations`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which to list `Registration`s, specified in
-   *   the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of results to return.
-   * @param {string} request.pageToken
-   *   When set to the `next_page_token` from a prior response, provides the next
-   *   page of results.
-   * @param {string} request.filter
-   *   Filter expression to restrict the `Registration`s returned.
-   *
-   *   The expression must specify the field name, a comparison operator, and the
-   *   value that you want to use for filtering. The value must be a string, a
-   *   number, a boolean, or an enum value. The comparison operator should be one
-   *   of =, !=, >, <, >=, <=, or : for prefix or wildcard matches.
-   *
-   *   For example, to filter to a specific domain name, use an expression like
-   *   `domainName="example.com"`. You can also check for the existence of a
-   *   field; for example, to find domains using custom DNS settings, use an
-   *   expression like `dnsSettings.customDns:*`.
-   *
-   *   You can also create compound filters by combining expressions with the
-   *   `AND` and `OR` operators. For example, to find domains that are suspended
-   *   or have specific issues flagged, use an expression like
-   *   `(state=SUSPENDED) OR (issue:*)`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.domains.v1.Registration|Registration}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/domains.list_registrations.js</caption>
-   * region_tag:domains_v1_generated_Domains_ListRegistrations_async
-   */
+/**
+ * Equivalent to `listRegistrations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which to list `Registration`s, specified in
+ *   the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of results to return.
+ * @param {string} request.pageToken
+ *   When set to the `next_page_token` from a prior response, provides the next
+ *   page of results.
+ * @param {string} request.filter
+ *   Filter expression to restrict the `Registration`s returned.
+ *
+ *   The expression must specify the field name, a comparison operator, and the
+ *   value that you want to use for filtering. The value must be a string, a
+ *   number, a boolean, or an enum value. The comparison operator should be one
+ *   of =, !=, >, <, >=, <=, or : for prefix or wildcard matches.
+ *
+ *   For example, to filter to a specific domain name, use an expression like
+ *   `domainName="example.com"`. You can also check for the existence of a
+ *   field; for example, to find domains using custom DNS settings, use an
+ *   expression like `dnsSettings.customDns:*`.
+ *
+ *   You can also create compound filters by combining expressions with the
+ *   `AND` and `OR` operators. For example, to find domains that are suspended
+ *   or have specific issues flagged, use an expression like
+ *   `(state=SUSPENDED) OR (issue:*)`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.domains.v1.Registration|Registration}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/domains.list_registrations.js</caption>
+ * region_tag:domains_v1_generated_Domains_ListRegistrations_async
+ */
   listRegistrationsAsync(
-    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.domains.v1.IRegistration> {
+      request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.domains.v1.IRegistration>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRegistrations iterate %j', request);
     return this.descriptors.page.listRegistrations.asyncIterate(
       this.innerApiCalls['listRegistrations'] as GaxCall,
@@ -3095,7 +2236,7 @@ export class DomainsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3132,7 +2273,7 @@ export class DomainsClient {
    * @param {string} registration
    * @returns {string} Resource name string.
    */
-  registrationPath(project: string, location: string, registration: string) {
+  registrationPath(project:string,location:string,registration:string) {
     return this.pathTemplates.registrationPathTemplate.render({
       project: project,
       location: location,
@@ -3148,8 +2289,7 @@ export class DomainsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRegistrationName(registrationName: string) {
-    return this.pathTemplates.registrationPathTemplate.match(registrationName)
-      .project;
+    return this.pathTemplates.registrationPathTemplate.match(registrationName).project;
   }
 
   /**
@@ -3160,8 +2300,7 @@ export class DomainsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRegistrationName(registrationName: string) {
-    return this.pathTemplates.registrationPathTemplate.match(registrationName)
-      .location;
+    return this.pathTemplates.registrationPathTemplate.match(registrationName).location;
   }
 
   /**
@@ -3172,8 +2311,7 @@ export class DomainsClient {
    * @returns {string} A string representing the registration.
    */
   matchRegistrationFromRegistrationName(registrationName: string) {
-    return this.pathTemplates.registrationPathTemplate.match(registrationName)
-      .registration;
+    return this.pathTemplates.registrationPathTemplate.match(registrationName).registration;
   }
 
   /**
@@ -3188,7 +2326,7 @@ export class DomainsClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

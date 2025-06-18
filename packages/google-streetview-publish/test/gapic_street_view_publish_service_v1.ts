@@ -304,9 +304,14 @@ describe('v1.StreetViewPublishServiceClient', () => {
         throw err;
       });
       assert(client.streetViewPublishServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -316,9 +321,14 @@ describe('v1.StreetViewPublishServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.streetViewPublishServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -432,7 +442,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
       await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.startUpload(request), expectedError);
     });
   });
@@ -519,7 +531,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.CreatePhotoRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createPhoto(request), expectedError);
     });
   });
@@ -650,7 +664,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.photoId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPhoto(request), expectedError);
     });
   });
@@ -737,7 +753,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.BatchGetPhotosRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchGetPhotos(request), expectedError);
     });
   });
@@ -879,7 +897,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.photo.photoId.id = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updatePhoto(request), expectedError);
     });
   });
@@ -966,7 +986,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.BatchUpdatePhotosRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchUpdatePhotos(request), expectedError);
     });
   });
@@ -1100,7 +1122,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.photoId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePhoto(request), expectedError);
     });
   });
@@ -1187,7 +1211,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
         new protos.google.streetview.publish.v1.BatchDeletePhotosRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchDeletePhotos(request), expectedError);
     });
   });
@@ -1270,7 +1296,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
       await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.startPhotoSequenceUpload(request),
         expectedError
@@ -1408,7 +1436,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
       );
       request.sequenceId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePhotoSequence(request), expectedError);
     });
   });

@@ -288,9 +288,14 @@ describe('v1beta1.EnvironmentsClient', () => {
         throw err;
       });
       assert(client.environmentsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -299,9 +304,14 @@ describe('v1beta1.EnvironmentsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.environmentsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -464,7 +474,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEnvironment(request), expectedError);
     });
   });
@@ -598,7 +610,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.executeAirflowCommand(request),
         expectedError
@@ -732,7 +746,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.stopAirflowCommand(request), expectedError);
     });
   });
@@ -863,7 +879,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.pollAirflowCommand(request), expectedError);
     });
   });
@@ -997,7 +1015,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createUserWorkloadsSecret(request),
         expectedError
@@ -1134,7 +1154,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getUserWorkloadsSecret(request),
         expectedError
@@ -1275,7 +1297,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.userWorkloadsSecret.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateUserWorkloadsSecret(request),
         expectedError
@@ -1412,7 +1436,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteUserWorkloadsSecret(request),
         expectedError
@@ -1549,7 +1575,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createUserWorkloadsConfigMap(request),
         expectedError
@@ -1686,7 +1714,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getUserWorkloadsConfigMap(request),
         expectedError
@@ -1827,7 +1857,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.userWorkloadsConfigMap.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateUserWorkloadsConfigMap(request),
         expectedError
@@ -1964,7 +1996,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteUserWorkloadsConfigMap(request),
         expectedError
@@ -2101,7 +2135,9 @@ describe('v1beta1.EnvironmentsClient', () => {
       );
       request.environment = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.fetchDatabaseProperties(request),
         expectedError
@@ -5073,20 +5109,24 @@ describe('v1beta1.EnvironmentsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5153,20 +5193,24 @@ describe('v1beta1.EnvironmentsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5233,20 +5277,24 @@ describe('v1beta1.EnvironmentsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

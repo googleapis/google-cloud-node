@@ -416,6 +416,10 @@ export class IndexServiceClient {
       '.google.cloud.aiplatform.v1beta1.Index') as gax.protobuf.Type;
     const createIndexMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateIndexOperationMetadata') as gax.protobuf.Type;
+    const importIndexResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.Index') as gax.protobuf.Type;
+    const importIndexMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.ImportIndexOperationMetadata') as gax.protobuf.Type;
     const updateIndexResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.Index') as gax.protobuf.Type;
     const updateIndexMetadata = protoFilesRoot.lookup(
@@ -430,6 +434,10 @@ export class IndexServiceClient {
         this.operationsClient,
         createIndexResponse.decode.bind(createIndexResponse),
         createIndexMetadata.decode.bind(createIndexMetadata)),
+      importIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importIndexResponse.decode.bind(importIndexResponse),
+        importIndexMetadata.decode.bind(importIndexMetadata)),
       updateIndex: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateIndexResponse.decode.bind(updateIndexResponse),
@@ -483,7 +491,7 @@ export class IndexServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const indexServiceStubMethods =
-        ['createIndex', 'getIndex', 'listIndexes', 'updateIndex', 'deleteIndex', 'upsertDatapoints', 'removeDatapoints'];
+        ['createIndex', 'getIndex', 'importIndex', 'listIndexes', 'updateIndex', 'deleteIndex', 'upsertDatapoints', 'removeDatapoints'];
     for (const methodName of indexServiceStubMethods) {
       const callPromise = this.indexServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -979,6 +987,120 @@ export class IndexServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createIndex, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.Index, protos.google.cloud.aiplatform.v1beta1.CreateIndexOperationMetadata>;
+  }
+/**
+ * Imports an Index from an external source (e.g., BigQuery).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Index resource to import data to.
+ *   Format:
+ *   `projects/{project}/locations/{location}/indexes/{index}`
+ * @param {boolean} [request.isCompleteOverwrite]
+ *   Optional. If true, completely replace existing index data. Must be true for
+ *   streaming update indexes.
+ * @param {google.cloud.aiplatform.v1beta1.ImportIndexRequest.ConnectorConfig} request.config
+ *   Required. Configuration for importing data from an external source.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/index_service.import_index.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_IndexService_ImportIndex_async
+ */
+  importIndex(
+      request?: protos.google.cloud.aiplatform.v1beta1.IImportIndexRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  importIndex(
+      request: protos.google.cloud.aiplatform.v1beta1.IImportIndexRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  importIndex(
+      request: protos.google.cloud.aiplatform.v1beta1.IImportIndexRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  importIndex(
+      request?: protos.google.cloud.aiplatform.v1beta1.IImportIndexRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importIndex response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importIndex request %j', request);
+    return this.innerApiCalls.importIndex(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.aiplatform.v1beta1.IIndex, protos.google.cloud.aiplatform.v1beta1.IImportIndexOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importIndex response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `importIndex()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/index_service.import_index.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_IndexService_ImportIndex_async
+ */
+  async checkImportIndexProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.Index, protos.google.cloud.aiplatform.v1beta1.ImportIndexOperationMetadata>>{
+    this._log.info('importIndex long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importIndex, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.Index, protos.google.cloud.aiplatform.v1beta1.ImportIndexOperationMetadata>;
   }
 /**
  * Updates an Index.

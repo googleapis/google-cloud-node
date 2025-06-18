@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, cluster) {
+function main(cluster) {
   // [START container_v1beta1_generated_ClusterManager_CreateCluster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -48,8 +48,6 @@ function main(projectId, zone, cluster) {
   async function callCreateCluster() {
     // Construct request
     const request = {
-      projectId,
-      zone,
       cluster,
     };
 

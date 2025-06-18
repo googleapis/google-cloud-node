@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/orchestration-airflow": "^4.1.0"
+    "@google-cloud/orchestration-airflow": "^4.2.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

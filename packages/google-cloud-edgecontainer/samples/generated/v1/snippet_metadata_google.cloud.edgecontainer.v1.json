@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-edgecontainer",
-        "version": "0.6.1",
+        "version": "0.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

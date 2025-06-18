@@ -162,7 +162,7 @@ export namespace google {
                     threatType?: (google.cloud.webrisk.v1.ThreatType|keyof typeof google.cloud.webrisk.v1.ThreatType|null);
 
                     /** ComputeThreatListDiffRequest versionToken */
-                    versionToken?: (Uint8Array|Buffer|string|null);
+                    versionToken?: (Uint8Array|string|null);
 
                     /** ComputeThreatListDiffRequest constraints */
                     constraints?: (google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints|null);
@@ -181,7 +181,7 @@ export namespace google {
                     public threatType: (google.cloud.webrisk.v1.ThreatType|keyof typeof google.cloud.webrisk.v1.ThreatType);
 
                     /** ComputeThreatListDiffRequest versionToken. */
-                    public versionToken: (Uint8Array|Buffer|string);
+                    public versionToken: (Uint8Array|string);
 
                     /** ComputeThreatListDiffRequest constraints. */
                     public constraints?: (google.cloud.webrisk.v1.ComputeThreatListDiffRequest.IConstraints|null);
@@ -389,7 +389,7 @@ export namespace google {
                     removals?: (google.cloud.webrisk.v1.IThreatEntryRemovals|null);
 
                     /** ComputeThreatListDiffResponse newVersionToken */
-                    newVersionToken?: (Uint8Array|Buffer|string|null);
+                    newVersionToken?: (Uint8Array|string|null);
 
                     /** ComputeThreatListDiffResponse checksum */
                     checksum?: (google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum|null);
@@ -417,7 +417,7 @@ export namespace google {
                     public removals?: (google.cloud.webrisk.v1.IThreatEntryRemovals|null);
 
                     /** ComputeThreatListDiffResponse newVersionToken. */
-                    public newVersionToken: (Uint8Array|Buffer|string);
+                    public newVersionToken: (Uint8Array|string);
 
                     /** ComputeThreatListDiffResponse checksum. */
                     public checksum?: (google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum|null);
@@ -516,7 +516,7 @@ export namespace google {
                     interface IChecksum {
 
                         /** Checksum sha256 */
-                        sha256?: (Uint8Array|Buffer|string|null);
+                        sha256?: (Uint8Array|string|null);
                     }
 
                     /** Represents a Checksum. */
@@ -529,7 +529,7 @@ export namespace google {
                         constructor(properties?: google.cloud.webrisk.v1.ComputeThreatListDiffResponse.IChecksum);
 
                         /** Checksum sha256. */
-                        public sha256: (Uint8Array|Buffer|string);
+                        public sha256: (Uint8Array|string);
 
                         /**
                          * Creates a new Checksum instance using the specified properties.
@@ -920,7 +920,7 @@ export namespace google {
                 interface ISearchHashesRequest {
 
                     /** SearchHashesRequest hashPrefix */
-                    hashPrefix?: (Uint8Array|Buffer|string|null);
+                    hashPrefix?: (Uint8Array|string|null);
 
                     /** SearchHashesRequest threatTypes */
                     threatTypes?: (google.cloud.webrisk.v1.ThreatType[]|null);
@@ -936,7 +936,7 @@ export namespace google {
                     constructor(properties?: google.cloud.webrisk.v1.ISearchHashesRequest);
 
                     /** SearchHashesRequest hashPrefix. */
-                    public hashPrefix: (Uint8Array|Buffer|string);
+                    public hashPrefix: (Uint8Array|string);
 
                     /** SearchHashesRequest threatTypes. */
                     public threatTypes: google.cloud.webrisk.v1.ThreatType[];
@@ -1131,7 +1131,7 @@ export namespace google {
                         threatTypes?: (google.cloud.webrisk.v1.ThreatType[]|null);
 
                         /** ThreatHash hash */
-                        hash?: (Uint8Array|Buffer|string|null);
+                        hash?: (Uint8Array|string|null);
 
                         /** ThreatHash expireTime */
                         expireTime?: (google.protobuf.ITimestamp|null);
@@ -1150,7 +1150,7 @@ export namespace google {
                         public threatTypes: google.cloud.webrisk.v1.ThreatType[];
 
                         /** ThreatHash hash. */
-                        public hash: (Uint8Array|Buffer|string);
+                        public hash: (Uint8Array|string);
 
                         /** ThreatHash expireTime. */
                         public expireTime?: (google.protobuf.ITimestamp|null);
@@ -1560,7 +1560,7 @@ export namespace google {
                     prefixSize?: (number|null);
 
                     /** RawHashes rawHashes */
-                    rawHashes?: (Uint8Array|Buffer|string|null);
+                    rawHashes?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RawHashes. */
@@ -1576,7 +1576,7 @@ export namespace google {
                     public prefixSize: number;
 
                     /** RawHashes rawHashes. */
-                    public rawHashes: (Uint8Array|Buffer|string);
+                    public rawHashes: (Uint8Array|string);
 
                     /**
                      * Creates a new RawHashes instance using the specified properties.
@@ -1669,7 +1669,7 @@ export namespace google {
                     entryCount?: (number|null);
 
                     /** RiceDeltaEncoding encodedData */
-                    encodedData?: (Uint8Array|Buffer|string|null);
+                    encodedData?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RiceDeltaEncoding. */
@@ -1691,7 +1691,7 @@ export namespace google {
                     public entryCount: number;
 
                     /** RiceDeltaEncoding encodedData. */
-                    public encodedData: (Uint8Array|Buffer|string);
+                    public encodedData: (Uint8Array|string);
 
                     /**
                      * Creates a new RiceDeltaEncoding instance using the specified properties.
@@ -2778,7 +2778,7 @@ export namespace google {
                     threatType?: (google.cloud.webrisk.v1beta1.ThreatType|keyof typeof google.cloud.webrisk.v1beta1.ThreatType|null);
 
                     /** ComputeThreatListDiffRequest versionToken */
-                    versionToken?: (Uint8Array|Buffer|string|null);
+                    versionToken?: (Uint8Array|string|null);
 
                     /** ComputeThreatListDiffRequest constraints */
                     constraints?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints|null);
@@ -2797,7 +2797,7 @@ export namespace google {
                     public threatType: (google.cloud.webrisk.v1beta1.ThreatType|keyof typeof google.cloud.webrisk.v1beta1.ThreatType);
 
                     /** ComputeThreatListDiffRequest versionToken. */
-                    public versionToken: (Uint8Array|Buffer|string);
+                    public versionToken: (Uint8Array|string);
 
                     /** ComputeThreatListDiffRequest constraints. */
                     public constraints?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints|null);
@@ -3005,7 +3005,7 @@ export namespace google {
                     removals?: (google.cloud.webrisk.v1beta1.IThreatEntryRemovals|null);
 
                     /** ComputeThreatListDiffResponse newVersionToken */
-                    newVersionToken?: (Uint8Array|Buffer|string|null);
+                    newVersionToken?: (Uint8Array|string|null);
 
                     /** ComputeThreatListDiffResponse checksum */
                     checksum?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum|null);
@@ -3033,7 +3033,7 @@ export namespace google {
                     public removals?: (google.cloud.webrisk.v1beta1.IThreatEntryRemovals|null);
 
                     /** ComputeThreatListDiffResponse newVersionToken. */
-                    public newVersionToken: (Uint8Array|Buffer|string);
+                    public newVersionToken: (Uint8Array|string);
 
                     /** ComputeThreatListDiffResponse checksum. */
                     public checksum?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum|null);
@@ -3125,7 +3125,7 @@ export namespace google {
                     interface IChecksum {
 
                         /** Checksum sha256 */
-                        sha256?: (Uint8Array|Buffer|string|null);
+                        sha256?: (Uint8Array|string|null);
                     }
 
                     /** Represents a Checksum. */
@@ -3138,7 +3138,7 @@ export namespace google {
                         constructor(properties?: google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum);
 
                         /** Checksum sha256. */
-                        public sha256: (Uint8Array|Buffer|string);
+                        public sha256: (Uint8Array|string);
 
                         /**
                          * Creates a new Checksum instance using the specified properties.
@@ -3536,7 +3536,7 @@ export namespace google {
                 interface ISearchHashesRequest {
 
                     /** SearchHashesRequest hashPrefix */
-                    hashPrefix?: (Uint8Array|Buffer|string|null);
+                    hashPrefix?: (Uint8Array|string|null);
 
                     /** SearchHashesRequest threatTypes */
                     threatTypes?: (google.cloud.webrisk.v1beta1.ThreatType[]|null);
@@ -3552,7 +3552,7 @@ export namespace google {
                     constructor(properties?: google.cloud.webrisk.v1beta1.ISearchHashesRequest);
 
                     /** SearchHashesRequest hashPrefix. */
-                    public hashPrefix: (Uint8Array|Buffer|string);
+                    public hashPrefix: (Uint8Array|string);
 
                     /** SearchHashesRequest threatTypes. */
                     public threatTypes: google.cloud.webrisk.v1beta1.ThreatType[];
@@ -3747,7 +3747,7 @@ export namespace google {
                         threatTypes?: (google.cloud.webrisk.v1beta1.ThreatType[]|null);
 
                         /** ThreatHash hash */
-                        hash?: (Uint8Array|Buffer|string|null);
+                        hash?: (Uint8Array|string|null);
 
                         /** ThreatHash expireTime */
                         expireTime?: (google.protobuf.ITimestamp|null);
@@ -3766,7 +3766,7 @@ export namespace google {
                         public threatTypes: google.cloud.webrisk.v1beta1.ThreatType[];
 
                         /** ThreatHash hash. */
-                        public hash: (Uint8Array|Buffer|string);
+                        public hash: (Uint8Array|string);
 
                         /** ThreatHash expireTime. */
                         public expireTime?: (google.protobuf.ITimestamp|null);
@@ -4175,7 +4175,7 @@ export namespace google {
                     prefixSize?: (number|null);
 
                     /** RawHashes rawHashes */
-                    rawHashes?: (Uint8Array|Buffer|string|null);
+                    rawHashes?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RawHashes. */
@@ -4191,7 +4191,7 @@ export namespace google {
                     public prefixSize: number;
 
                     /** RawHashes rawHashes. */
-                    public rawHashes: (Uint8Array|Buffer|string);
+                    public rawHashes: (Uint8Array|string);
 
                     /**
                      * Creates a new RawHashes instance using the specified properties.
@@ -4284,7 +4284,7 @@ export namespace google {
                     entryCount?: (number|null);
 
                     /** RiceDeltaEncoding encodedData */
-                    encodedData?: (Uint8Array|Buffer|string|null);
+                    encodedData?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RiceDeltaEncoding. */
@@ -4306,7 +4306,7 @@ export namespace google {
                     public entryCount: number;
 
                     /** RiceDeltaEncoding encodedData. */
-                    public encodedData: (Uint8Array|Buffer|string);
+                    public encodedData: (Uint8Array|string);
 
                     /**
                      * Creates a new RiceDeltaEncoding instance using the specified properties.
@@ -5044,9 +5044,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -5087,9 +5084,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -9308,9 +9302,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -9562,7 +9553,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|Buffer|string|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -9593,7 +9584,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|Buffer|string);
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -10732,7 +10723,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -10748,7 +10739,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.

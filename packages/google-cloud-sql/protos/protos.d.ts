@@ -718,9 +718,6 @@ export namespace google {
                     /** BackupRun maxChargeableBytes. */
                     public maxChargeableBytes?: (number|Long|string|null);
 
-                    /** BackupRun _maxChargeableBytes. */
-                    public _maxChargeableBytes?: "maxChargeableBytes";
-
                     /**
                      * Creates a new BackupRun instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1356,9 +1353,6 @@ export namespace google {
 
                     /** BackupConfiguration transactionalLogStorageState. */
                     public transactionalLogStorageState?: (google.cloud.sql.v1.BackupConfiguration.TransactionalLogStorageState|keyof typeof google.cloud.sql.v1.BackupConfiguration.TransactionalLogStorageState|null);
-
-                    /** BackupConfiguration _transactionalLogStorageState. */
-                    public _transactionalLogStorageState?: "transactionalLogStorageState";
 
                     /**
                      * Creates a new BackupConfiguration instance using the specified properties.
@@ -4069,12 +4063,6 @@ export namespace google {
                     /** IpConfiguration serverCaMode. */
                     public serverCaMode?: (google.cloud.sql.v1.IpConfiguration.CaMode|keyof typeof google.cloud.sql.v1.IpConfiguration.CaMode|null);
 
-                    /** IpConfiguration _pscConfig. */
-                    public _pscConfig?: "pscConfig";
-
-                    /** IpConfiguration _serverCaMode. */
-                    public _serverCaMode?: "serverCaMode";
-
                     /**
                      * Creates a new IpConfiguration instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4195,9 +4183,6 @@ export namespace google {
 
                     /** PscConfig allowedConsumerProjects. */
                     public allowedConsumerProjects: string[];
-
-                    /** PscConfig _pscEnabled. */
-                    public _pscEnabled?: "pscEnabled";
 
                     /**
                      * Creates a new PscConfig instance using the specified properties.
@@ -6941,18 +6926,6 @@ export namespace google {
 
                     /** AcquireSsrsLeaseContext duration. */
                     public duration?: (google.protobuf.IDuration|null);
-
-                    /** AcquireSsrsLeaseContext _setupLogin. */
-                    public _setupLogin?: "setupLogin";
-
-                    /** AcquireSsrsLeaseContext _serviceLogin. */
-                    public _serviceLogin?: "serviceLogin";
-
-                    /** AcquireSsrsLeaseContext _reportDatabase. */
-                    public _reportDatabase?: "reportDatabase";
-
-                    /** AcquireSsrsLeaseContext _duration. */
-                    public _duration?: "duration";
 
                     /**
                      * Creates a new AcquireSsrsLeaseContext instance using the specified properties.
@@ -12398,9 +12371,6 @@ export namespace google {
                     /** InstancesReencryptRequest backupReencryptionConfig. */
                     public backupReencryptionConfig?: (google.cloud.sql.v1.IBackupReencryptionConfig|null);
 
-                    /** InstancesReencryptRequest _backupReencryptionConfig. */
-                    public _backupReencryptionConfig?: "backupReencryptionConfig";
-
                     /**
                      * Creates a new InstancesReencryptRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -12503,12 +12473,6 @@ export namespace google {
 
                     /** BackupReencryptionConfig backupType. */
                     public backupType?: (google.cloud.sql.v1.BackupReencryptionConfig.BackupType|keyof typeof google.cloud.sql.v1.BackupReencryptionConfig.BackupType|null);
-
-                    /** BackupReencryptionConfig _backupLimit. */
-                    public _backupLimit?: "backupLimit";
-
-                    /** BackupReencryptionConfig _backupType. */
-                    public _backupType?: "backupType";
 
                     /**
                      * Creates a new BackupReencryptionConfig instance using the specified properties.
@@ -14998,9 +14962,6 @@ export namespace google {
                     /** CloneContext preferredZone. */
                     public preferredZone?: (string|null);
 
-                    /** CloneContext _preferredZone. */
-                    public _preferredZone?: "preferredZone";
-
                     /**
                      * Creates a new CloneContext instance using the specified properties.
                      * @param [properties] Properties to set
@@ -15477,30 +15438,6 @@ export namespace google {
                     /** DatabaseInstance switchTransactionLogsToCloudStorageEnabled. */
                     public switchTransactionLogsToCloudStorageEnabled?: (google.protobuf.IBoolValue|null);
 
-                    /** DatabaseInstance _outOfDiskReport. */
-                    public _outOfDiskReport?: "outOfDiskReport";
-
-                    /** DatabaseInstance _sqlNetworkArchitecture. */
-                    public _sqlNetworkArchitecture?: "sqlNetworkArchitecture";
-
-                    /** DatabaseInstance _pscServiceAttachmentLink. */
-                    public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
-
-                    /** DatabaseInstance _dnsName. */
-                    public _dnsName?: "dnsName";
-
-                    /** DatabaseInstance _primaryDnsName. */
-                    public _primaryDnsName?: "primaryDnsName";
-
-                    /** DatabaseInstance _writeEndpoint. */
-                    public _writeEndpoint?: "writeEndpoint";
-
-                    /** DatabaseInstance _geminiConfig. */
-                    public _geminiConfig?: "geminiConfig";
-
-                    /** DatabaseInstance _switchTransactionLogsToCloudStorageEnabled. */
-                    public _switchTransactionLogsToCloudStorageEnabled?: "switchTransactionLogsToCloudStorageEnabled";
-
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
                      * @param [properties] Properties to set
@@ -15733,9 +15670,6 @@ export namespace google {
                         /** SqlScheduledMaintenance scheduleDeadlineTime. */
                         public scheduleDeadlineTime?: (google.protobuf.ITimestamp|null);
 
-                        /** SqlScheduledMaintenance _scheduleDeadlineTime. */
-                        public _scheduleDeadlineTime?: "scheduleDeadlineTime";
-
                         /**
                          * Creates a new SqlScheduledMaintenance instance using the specified properties.
                          * @param [properties] Properties to set
@@ -15838,12 +15772,6 @@ export namespace google {
 
                         /** SqlOutOfDiskReport sqlMinRecommendedIncreaseSizeGb. */
                         public sqlMinRecommendedIncreaseSizeGb?: (number|null);
-
-                        /** SqlOutOfDiskReport _sqlOutOfDiskState. */
-                        public _sqlOutOfDiskState?: "sqlOutOfDiskState";
-
-                        /** SqlOutOfDiskReport _sqlMinRecommendedIncreaseSizeGb. */
-                        public _sqlMinRecommendedIncreaseSizeGb?: "sqlMinRecommendedIncreaseSizeGb";
 
                         /**
                          * Creates a new SqlOutOfDiskReport instance using the specified properties.
@@ -15989,24 +15917,6 @@ export namespace google {
 
                     /** GeminiInstanceConfig flagRecommenderEnabled. */
                     public flagRecommenderEnabled?: (boolean|null);
-
-                    /** GeminiInstanceConfig _entitled. */
-                    public _entitled?: "entitled";
-
-                    /** GeminiInstanceConfig _googleVacuumMgmtEnabled. */
-                    public _googleVacuumMgmtEnabled?: "googleVacuumMgmtEnabled";
-
-                    /** GeminiInstanceConfig _oomSessionCancelEnabled. */
-                    public _oomSessionCancelEnabled?: "oomSessionCancelEnabled";
-
-                    /** GeminiInstanceConfig _activeQueryEnabled. */
-                    public _activeQueryEnabled?: "activeQueryEnabled";
-
-                    /** GeminiInstanceConfig _indexAdvisorEnabled. */
-                    public _indexAdvisorEnabled?: "indexAdvisorEnabled";
-
-                    /** GeminiInstanceConfig _flagRecommenderEnabled. */
-                    public _flagRecommenderEnabled?: "flagRecommenderEnabled";
 
                     /**
                      * Creates a new GeminiInstanceConfig instance using the specified properties.
@@ -16225,15 +16135,6 @@ export namespace google {
 
                     /** AvailableDatabaseVersion displayName. */
                     public displayName?: (string|null);
-
-                    /** AvailableDatabaseVersion _majorVersion. */
-                    public _majorVersion?: "majorVersion";
-
-                    /** AvailableDatabaseVersion _name. */
-                    public _name?: "name";
-
-                    /** AvailableDatabaseVersion _displayName. */
-                    public _displayName?: "displayName";
 
                     /**
                      * Creates a new AvailableDatabaseVersion instance using the specified properties.
@@ -20775,9 +20676,6 @@ export namespace google {
 
                     /** User userDetails. */
                     public userDetails?: "sqlserverUserDetails";
-
-                    /** User _dualPasswordType. */
-                    public _dualPasswordType?: "dualPasswordType";
 
                     /**
                      * Creates a new User instance using the specified properties.
@@ -26001,9 +25899,6 @@ export namespace google {
                     /** InstancesReencryptRequest backupReencryptionConfig. */
                     public backupReencryptionConfig?: (google.cloud.sql.v1beta4.IBackupReencryptionConfig|null);
 
-                    /** InstancesReencryptRequest _backupReencryptionConfig. */
-                    public _backupReencryptionConfig?: "backupReencryptionConfig";
-
                     /**
                      * Creates a new InstancesReencryptRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -26106,12 +26001,6 @@ export namespace google {
 
                     /** BackupReencryptionConfig backupType. */
                     public backupType?: (google.cloud.sql.v1beta4.BackupReencryptionConfig.BackupType|keyof typeof google.cloud.sql.v1beta4.BackupReencryptionConfig.BackupType|null);
-
-                    /** BackupReencryptionConfig _backupLimit. */
-                    public _backupLimit?: "backupLimit";
-
-                    /** BackupReencryptionConfig _backupType. */
-                    public _backupType?: "backupType";
 
                     /**
                      * Creates a new BackupReencryptionConfig instance using the specified properties.
@@ -28322,9 +28211,6 @@ export namespace google {
                     /** SqlInstancesAcquireSsrsLeaseResponse operationId. */
                     public operationId?: (string|null);
 
-                    /** SqlInstancesAcquireSsrsLeaseResponse _operationId. */
-                    public _operationId?: "operationId";
-
                     /**
                      * Creates a new SqlInstancesAcquireSsrsLeaseResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -28823,9 +28709,6 @@ export namespace google {
 
                     /** BackupConfiguration transactionalLogStorageState. */
                     public transactionalLogStorageState?: (google.cloud.sql.v1beta4.BackupConfiguration.TransactionalLogStorageState|keyof typeof google.cloud.sql.v1beta4.BackupConfiguration.TransactionalLogStorageState|null);
-
-                    /** BackupConfiguration _transactionalLogStorageState. */
-                    public _transactionalLogStorageState?: "transactionalLogStorageState";
 
                     /**
                      * Creates a new BackupConfiguration instance using the specified properties.
@@ -29497,12 +29380,6 @@ export namespace google {
 
                     /** CloneContext preferredSecondaryZone. */
                     public preferredSecondaryZone?: (string|null);
-
-                    /** CloneContext _preferredZone. */
-                    public _preferredZone?: "preferredZone";
-
-                    /** CloneContext _preferredSecondaryZone. */
-                    public _preferredSecondaryZone?: "preferredSecondaryZone";
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
@@ -30425,30 +30302,6 @@ export namespace google {
                     /** DatabaseInstance geminiConfig. */
                     public geminiConfig?: (google.cloud.sql.v1beta4.IGeminiInstanceConfig|null);
 
-                    /** DatabaseInstance _outOfDiskReport. */
-                    public _outOfDiskReport?: "outOfDiskReport";
-
-                    /** DatabaseInstance _sqlNetworkArchitecture. */
-                    public _sqlNetworkArchitecture?: "sqlNetworkArchitecture";
-
-                    /** DatabaseInstance _pscServiceAttachmentLink. */
-                    public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
-
-                    /** DatabaseInstance _dnsName. */
-                    public _dnsName?: "dnsName";
-
-                    /** DatabaseInstance _primaryDnsName. */
-                    public _primaryDnsName?: "primaryDnsName";
-
-                    /** DatabaseInstance _writeEndpoint. */
-                    public _writeEndpoint?: "writeEndpoint";
-
-                    /** DatabaseInstance _replicationCluster. */
-                    public _replicationCluster?: "replicationCluster";
-
-                    /** DatabaseInstance _geminiConfig. */
-                    public _geminiConfig?: "geminiConfig";
-
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
                      * @param [properties] Properties to set
@@ -30681,9 +30534,6 @@ export namespace google {
                         /** SqlScheduledMaintenance scheduleDeadlineTime. */
                         public scheduleDeadlineTime?: (google.protobuf.ITimestamp|null);
 
-                        /** SqlScheduledMaintenance _scheduleDeadlineTime. */
-                        public _scheduleDeadlineTime?: "scheduleDeadlineTime";
-
                         /**
                          * Creates a new SqlScheduledMaintenance instance using the specified properties.
                          * @param [properties] Properties to set
@@ -30786,12 +30636,6 @@ export namespace google {
 
                         /** SqlOutOfDiskReport sqlMinRecommendedIncreaseSizeGb. */
                         public sqlMinRecommendedIncreaseSizeGb?: (number|null);
-
-                        /** SqlOutOfDiskReport _sqlOutOfDiskState. */
-                        public _sqlOutOfDiskState?: "sqlOutOfDiskState";
-
-                        /** SqlOutOfDiskReport _sqlMinRecommendedIncreaseSizeGb. */
-                        public _sqlMinRecommendedIncreaseSizeGb?: "sqlMinRecommendedIncreaseSizeGb";
 
                         /**
                          * Creates a new SqlOutOfDiskReport instance using the specified properties.
@@ -30938,24 +30782,6 @@ export namespace google {
                     /** GeminiInstanceConfig flagRecommenderEnabled. */
                     public flagRecommenderEnabled?: (boolean|null);
 
-                    /** GeminiInstanceConfig _entitled. */
-                    public _entitled?: "entitled";
-
-                    /** GeminiInstanceConfig _googleVacuumMgmtEnabled. */
-                    public _googleVacuumMgmtEnabled?: "googleVacuumMgmtEnabled";
-
-                    /** GeminiInstanceConfig _oomSessionCancelEnabled. */
-                    public _oomSessionCancelEnabled?: "oomSessionCancelEnabled";
-
-                    /** GeminiInstanceConfig _activeQueryEnabled. */
-                    public _activeQueryEnabled?: "activeQueryEnabled";
-
-                    /** GeminiInstanceConfig _indexAdvisorEnabled. */
-                    public _indexAdvisorEnabled?: "indexAdvisorEnabled";
-
-                    /** GeminiInstanceConfig _flagRecommenderEnabled. */
-                    public _flagRecommenderEnabled?: "flagRecommenderEnabled";
-
                     /**
                      * Creates a new GeminiInstanceConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31065,15 +30891,6 @@ export namespace google {
                     /** ReplicationCluster drReplica. */
                     public drReplica?: (boolean|null);
 
-                    /** ReplicationCluster _psaWriteEndpoint. */
-                    public _psaWriteEndpoint?: "psaWriteEndpoint";
-
-                    /** ReplicationCluster _failoverDrReplicaName. */
-                    public _failoverDrReplicaName?: "failoverDrReplicaName";
-
-                    /** ReplicationCluster _drReplica. */
-                    public _drReplica?: "drReplica";
-
                     /**
                      * Creates a new ReplicationCluster instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31182,15 +30999,6 @@ export namespace google {
 
                     /** AvailableDatabaseVersion displayName. */
                     public displayName?: (string|null);
-
-                    /** AvailableDatabaseVersion _majorVersion. */
-                    public _majorVersion?: "majorVersion";
-
-                    /** AvailableDatabaseVersion _name. */
-                    public _name?: "name";
-
-                    /** AvailableDatabaseVersion _displayName. */
-                    public _displayName?: "displayName";
 
                     /**
                      * Creates a new AvailableDatabaseVersion instance using the specified properties.
@@ -35254,9 +35062,6 @@ export namespace google {
                     /** IpConfiguration pscConfig. */
                     public pscConfig?: (google.cloud.sql.v1beta4.IPscConfig|null);
 
-                    /** IpConfiguration _pscConfig. */
-                    public _pscConfig?: "pscConfig";
-
                     /**
                      * Creates a new IpConfiguration instance using the specified properties.
                      * @param [properties] Properties to set
@@ -35370,9 +35175,6 @@ export namespace google {
 
                     /** PscConfig allowedConsumerProjects. */
                     public allowedConsumerProjects: string[];
-
-                    /** PscConfig _pscEnabled. */
-                    public _pscEnabled?: "pscEnabled";
 
                     /**
                      * Creates a new PscConfig instance using the specified properties.
@@ -39480,18 +39282,6 @@ export namespace google {
                     /** AcquireSsrsLeaseContext duration. */
                     public duration?: (google.protobuf.IDuration|null);
 
-                    /** AcquireSsrsLeaseContext _setupLogin. */
-                    public _setupLogin?: "setupLogin";
-
-                    /** AcquireSsrsLeaseContext _serviceLogin. */
-                    public _serviceLogin?: "serviceLogin";
-
-                    /** AcquireSsrsLeaseContext _reportDatabase. */
-                    public _reportDatabase?: "reportDatabase";
-
-                    /** AcquireSsrsLeaseContext _duration. */
-                    public _duration?: "duration";
-
                     /**
                      * Creates a new AcquireSsrsLeaseContext instance using the specified properties.
                      * @param [properties] Properties to set
@@ -41505,9 +41295,6 @@ export namespace google {
                     /** User userDetails. */
                     public userDetails?: "sqlserverUserDetails";
 
-                    /** User _dualPasswordType. */
-                    public _dualPasswordType?: "dualPasswordType";
-
                     /**
                      * Creates a new User instance using the specified properties.
                      * @param [properties] Properties to set
@@ -42477,6 +42264,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -42517,6 +42307,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -46474,6 +46267,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -46722,7 +46518,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -46753,7 +46549,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -48768,7 +48564,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -48781,7 +48577,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

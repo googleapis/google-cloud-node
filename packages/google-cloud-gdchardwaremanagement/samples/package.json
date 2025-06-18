@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/gdchardwaremanagement": "^0.6.0"
+    "@google-cloud/gdchardwaremanagement": "^0.7.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const gdchardwaremanagement = require('@google-cloud/gdchardwaremanagement');
 
 function main() {
-  const gDCHardwareManagementClient =
-    new gdchardwaremanagement.GDCHardwareManagementClient();
+  const gDCHardwareManagementClient = new gdchardwaremanagement.GDCHardwareManagementClient();
 }
 
 main();

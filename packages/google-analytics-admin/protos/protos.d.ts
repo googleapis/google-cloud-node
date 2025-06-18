@@ -4457,6 +4457,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public submitUserDeletion(request: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest): Promise<google.analytics.admin.v1alpha.SubmitUserDeletionResponse>;
+
+                    /**
+                     * Calls ListSubpropertySyncConfigs.
+                     * @param request ListSubpropertySyncConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSubpropertySyncConfigsResponse
+                     */
+                    public listSubpropertySyncConfigs(request: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListSubpropertySyncConfigsCallback): void;
+
+                    /**
+                     * Calls ListSubpropertySyncConfigs.
+                     * @param request ListSubpropertySyncConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSubpropertySyncConfigs(request: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest): Promise<google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse>;
+
+                    /**
+                     * Calls UpdateSubpropertySyncConfig.
+                     * @param request UpdateSubpropertySyncConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubpropertySyncConfig
+                     */
+                    public updateSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSubpropertySyncConfigCallback): void;
+
+                    /**
+                     * Calls UpdateSubpropertySyncConfig.
+                     * @param request UpdateSubpropertySyncConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest): Promise<google.analytics.admin.v1alpha.SubpropertySyncConfig>;
+
+                    /**
+                     * Calls GetSubpropertySyncConfig.
+                     * @param request GetSubpropertySyncConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubpropertySyncConfig
+                     */
+                    public getSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetSubpropertySyncConfigCallback): void;
+
+                    /**
+                     * Calls GetSubpropertySyncConfig.
+                     * @param request GetSubpropertySyncConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest): Promise<google.analytics.admin.v1alpha.SubpropertySyncConfig>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -5552,6 +5594,27 @@ export namespace google {
                      * @param [response] SubmitUserDeletionResponse
                      */
                     type SubmitUserDeletionCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubmitUserDeletionResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listSubpropertySyncConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListSubpropertySyncConfigsResponse
+                     */
+                    type ListSubpropertySyncConfigsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateSubpropertySyncConfig}.
+                     * @param error Error, if any
+                     * @param [response] SubpropertySyncConfig
+                     */
+                    type UpdateSubpropertySyncConfigCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubpropertySyncConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getSubpropertySyncConfig}.
+                     * @param error Error, if any
+                     * @param [response] SubpropertySyncConfig
+                     */
+                    type GetSubpropertySyncConfigCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubpropertySyncConfig) => void;
                 }
 
                 /** Properties of a RunAccessReportRequest. */
@@ -24249,6 +24312,9 @@ export namespace google {
 
                     /** ProvisionSubpropertyRequest subpropertyEventFilter */
                     subpropertyEventFilter?: (google.analytics.admin.v1alpha.ISubpropertyEventFilter|null);
+
+                    /** ProvisionSubpropertyRequest customDimensionAndMetricSynchronizationMode */
+                    customDimensionAndMetricSynchronizationMode?: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|null);
                 }
 
                 /** Represents a ProvisionSubpropertyRequest. */
@@ -24265,6 +24331,9 @@ export namespace google {
 
                     /** ProvisionSubpropertyRequest subpropertyEventFilter. */
                     public subpropertyEventFilter?: (google.analytics.admin.v1alpha.ISubpropertyEventFilter|null);
+
+                    /** ProvisionSubpropertyRequest customDimensionAndMetricSynchronizationMode. */
+                    public customDimensionAndMetricSynchronizationMode: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode);
 
                     /**
                      * Creates a new ProvisionSubpropertyRequest instance using the specified properties.
@@ -25892,6 +25961,418 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SubmitUserDeletionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSubpropertySyncConfigRequest. */
+                interface IGetSubpropertySyncConfigRequest {
+
+                    /** GetSubpropertySyncConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSubpropertySyncConfigRequest. */
+                class GetSubpropertySyncConfigRequest implements IGetSubpropertySyncConfigRequest {
+
+                    /**
+                     * Constructs a new GetSubpropertySyncConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest);
+
+                    /** GetSubpropertySyncConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSubpropertySyncConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSubpropertySyncConfigRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Encodes the specified GetSubpropertySyncConfigRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message GetSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSubpropertySyncConfigRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message GetSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSubpropertySyncConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Decodes a GetSubpropertySyncConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Verifies a GetSubpropertySyncConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSubpropertySyncConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSubpropertySyncConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetSubpropertySyncConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetSubpropertySyncConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSubpropertySyncConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSubpropertySyncConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubpropertySyncConfigsRequest. */
+                interface IListSubpropertySyncConfigsRequest {
+
+                    /** ListSubpropertySyncConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSubpropertySyncConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSubpropertySyncConfigsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSubpropertySyncConfigsRequest. */
+                class ListSubpropertySyncConfigsRequest implements IListSubpropertySyncConfigsRequest {
+
+                    /**
+                     * Constructs a new ListSubpropertySyncConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest);
+
+                    /** ListSubpropertySyncConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListSubpropertySyncConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSubpropertySyncConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSubpropertySyncConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubpropertySyncConfigsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubpropertySyncConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubpropertySyncConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Verifies a ListSubpropertySyncConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubpropertySyncConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubpropertySyncConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSubpropertySyncConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListSubpropertySyncConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubpropertySyncConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubpropertySyncConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubpropertySyncConfigsResponse. */
+                interface IListSubpropertySyncConfigsResponse {
+
+                    /** ListSubpropertySyncConfigsResponse subpropertySyncConfigs */
+                    subpropertySyncConfigs?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig[]|null);
+
+                    /** ListSubpropertySyncConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSubpropertySyncConfigsResponse. */
+                class ListSubpropertySyncConfigsResponse implements IListSubpropertySyncConfigsResponse {
+
+                    /**
+                     * Constructs a new ListSubpropertySyncConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse);
+
+                    /** ListSubpropertySyncConfigsResponse subpropertySyncConfigs. */
+                    public subpropertySyncConfigs: google.analytics.admin.v1alpha.ISubpropertySyncConfig[];
+
+                    /** ListSubpropertySyncConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSubpropertySyncConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubpropertySyncConfigsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubpropertySyncConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubpropertySyncConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Verifies a ListSubpropertySyncConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubpropertySyncConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubpropertySyncConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSubpropertySyncConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListSubpropertySyncConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubpropertySyncConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubpropertySyncConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSubpropertySyncConfigRequest. */
+                interface IUpdateSubpropertySyncConfigRequest {
+
+                    /** UpdateSubpropertySyncConfigRequest subpropertySyncConfig */
+                    subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
+
+                    /** UpdateSubpropertySyncConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSubpropertySyncConfigRequest. */
+                class UpdateSubpropertySyncConfigRequest implements IUpdateSubpropertySyncConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateSubpropertySyncConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest);
+
+                    /** UpdateSubpropertySyncConfigRequest subpropertySyncConfig. */
+                    public subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
+
+                    /** UpdateSubpropertySyncConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSubpropertySyncConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSubpropertySyncConfigRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateSubpropertySyncConfigRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message UpdateSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSubpropertySyncConfigRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message UpdateSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSubpropertySyncConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Decodes an UpdateSubpropertySyncConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Verifies an UpdateSubpropertySyncConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSubpropertySyncConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSubpropertySyncConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSubpropertySyncConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSubpropertySyncConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSubpropertySyncConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSubpropertySyncConfigRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -29655,7 +30136,8 @@ export namespace google {
                     EVENT_CREATE_RULE = 29,
                     KEY_EVENT = 30,
                     CALCULATED_METRIC = 31,
-                    REPORTING_DATA_ANNOTATION = 32
+                    REPORTING_DATA_ANNOTATION = 32,
+                    SUBPROPERTY_SYNC_CONFIG = 33
                 }
 
                 /** GoogleSignalsState enum. */
@@ -31554,9 +32036,6 @@ export namespace google {
                     /** ConversionValues lockEnabled. */
                     public lockEnabled: boolean;
 
-                    /** ConversionValues _fineValue. */
-                    public _fineValue?: "fineValue";
-
                     /**
                      * Creates a new ConversionValues instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31677,18 +32156,6 @@ export namespace google {
 
                     /** EventMapping maxEventValue. */
                     public maxEventValue?: (number|null);
-
-                    /** EventMapping _minEventCount. */
-                    public _minEventCount?: "minEventCount";
-
-                    /** EventMapping _maxEventCount. */
-                    public _maxEventCount?: "maxEventCount";
-
-                    /** EventMapping _minEventValue. */
-                    public _minEventValue?: "minEventValue";
-
-                    /** EventMapping _maxEventValue. */
-                    public _maxEventValue?: "maxEventValue";
 
                     /**
                      * Creates a new EventMapping instance using the specified properties.
@@ -32095,6 +32562,9 @@ export namespace google {
 
                         /** ChangeHistoryResource reportingDataAnnotation */
                         reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
+
+                        /** ChangeHistoryResource subpropertySyncConfig */
+                        subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -32187,8 +32657,11 @@ export namespace google {
                         /** ChangeHistoryResource reportingDataAnnotation. */
                         public reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
 
+                        /** ChangeHistoryResource subpropertySyncConfig. */
+                        public subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -32832,9 +33305,6 @@ export namespace google {
                     /** ConversionEvent defaultConversionValue. */
                     public defaultConversionValue?: (google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue|null);
 
-                    /** ConversionEvent _defaultConversionValue. */
-                    public _defaultConversionValue?: "defaultConversionValue";
-
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
                      * @param [properties] Properties to set
@@ -32939,12 +33409,6 @@ export namespace google {
 
                         /** DefaultConversionValue currencyCode. */
                         public currencyCode?: (string|null);
-
-                        /** DefaultConversionValue _value. */
-                        public _value?: "value";
-
-                        /** DefaultConversionValue _currencyCode. */
-                        public _currencyCode?: "currencyCode";
 
                         /**
                          * Creates a new DefaultConversionValue instance using the specified properties.
@@ -35234,6 +35698,125 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a SubpropertySyncConfig. */
+                interface ISubpropertySyncConfig {
+
+                    /** SubpropertySyncConfig name */
+                    name?: (string|null);
+
+                    /** SubpropertySyncConfig applyToProperty */
+                    applyToProperty?: (string|null);
+
+                    /** SubpropertySyncConfig customDimensionAndMetricSyncMode */
+                    customDimensionAndMetricSyncMode?: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|null);
+                }
+
+                /** Represents a SubpropertySyncConfig. */
+                class SubpropertySyncConfig implements ISubpropertySyncConfig {
+
+                    /**
+                     * Constructs a new SubpropertySyncConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ISubpropertySyncConfig);
+
+                    /** SubpropertySyncConfig name. */
+                    public name: string;
+
+                    /** SubpropertySyncConfig applyToProperty. */
+                    public applyToProperty: string;
+
+                    /** SubpropertySyncConfig customDimensionAndMetricSyncMode. */
+                    public customDimensionAndMetricSyncMode: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode);
+
+                    /**
+                     * Creates a new SubpropertySyncConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubpropertySyncConfig instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ISubpropertySyncConfig): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Encodes the specified SubpropertySyncConfig message. Does not implicitly {@link google.analytics.admin.v1alpha.SubpropertySyncConfig.verify|verify} messages.
+                     * @param message SubpropertySyncConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ISubpropertySyncConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubpropertySyncConfig message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SubpropertySyncConfig.verify|verify} messages.
+                     * @param message SubpropertySyncConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISubpropertySyncConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubpropertySyncConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubpropertySyncConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Decodes a SubpropertySyncConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubpropertySyncConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Verifies a SubpropertySyncConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubpropertySyncConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubpropertySyncConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Creates a plain object from a SubpropertySyncConfig message. Also converts values to other types if specified.
+                     * @param message SubpropertySyncConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.SubpropertySyncConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubpropertySyncConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubpropertySyncConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SubpropertySyncConfig {
+
+                    /** SynchronizationMode enum. */
+                    enum SynchronizationMode {
+                        SYNCHRONIZATION_MODE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        ALL = 2
+                    }
+                }
+
                 /** Properties of a SubpropertyEventFilterCondition. */
                 interface ISubpropertyEventFilterCondition {
 
@@ -35824,9 +36407,6 @@ export namespace google {
 
                     /** SubpropertyEventFilter filterClauses. */
                     public filterClauses: google.analytics.admin.v1alpha.ISubpropertyEventFilterClause[];
-
-                    /** SubpropertyEventFilter _applyToProperty. */
-                    public _applyToProperty?: "applyToProperty";
 
                     /**
                      * Creates a new SubpropertyEventFilter instance using the specified properties.
@@ -48452,9 +49032,6 @@ export namespace google {
                     /** ConversionEvent defaultConversionValue. */
                     public defaultConversionValue?: (google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue|null);
 
-                    /** ConversionEvent _defaultConversionValue. */
-                    public _defaultConversionValue?: "defaultConversionValue";
-
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
                      * @param [properties] Properties to set
@@ -48559,12 +49136,6 @@ export namespace google {
 
                         /** DefaultConversionValue currencyCode. */
                         public currencyCode?: (string|null);
-
-                        /** DefaultConversionValue _value. */
-                        public _value?: "value";
-
-                        /** DefaultConversionValue _currencyCode. */
-                        public _currencyCode?: "currencyCode";
 
                         /**
                          * Creates a new DefaultConversionValue instance using the specified properties.
@@ -50251,6 +50822,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -50291,6 +50865,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -54244,6 +54821,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -54492,7 +55072,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -54523,7 +55103,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -56538,7 +57118,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -56551,7 +57131,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

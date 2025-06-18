@@ -254,9 +254,14 @@ describe('v2.OrgPolicyClient', () => {
         throw err;
       });
       assert(client.orgPolicyStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v2.OrgPolicyClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.orgPolicyStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -427,7 +437,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPolicy(request), expectedError);
     });
   });
@@ -558,7 +570,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEffectivePolicy(request), expectedError);
     });
   });
@@ -688,7 +702,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createPolicy(request), expectedError);
     });
   });
@@ -822,7 +838,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updatePolicy(request), expectedError);
     });
   });
@@ -952,7 +970,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePolicy(request), expectedError);
     });
   });
@@ -1086,7 +1106,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createCustomConstraint(request),
         expectedError
@@ -1227,7 +1249,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.customConstraint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateCustomConstraint(request),
         expectedError
@@ -1361,7 +1385,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCustomConstraint(request), expectedError);
     });
   });
@@ -1495,7 +1521,9 @@ describe('v2.OrgPolicyClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteCustomConstraint(request),
         expectedError

@@ -1383,6 +1383,1393 @@
                       }
                     }
                   }
+                },
+                "v1beta": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.ModelArmor.V1Beta",
+                    "go_package": "cloud.google.com/go/modelarmor/apiv1beta/modelarmorpb;modelarmorpb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "V1mainProto",
+                    "java_package": "com.google.cloud.modelarmor.v1beta",
+                    "php_namespace": "Google\\Cloud\\ModelArmor\\V1beta"
+                  },
+                  "nested": {
+                    "ModelArmor": {
+                      "options": {
+                        "(google.api.default_host)": "modelarmor.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListTemplates": {
+                          "requestType": "ListTemplatesRequest",
+                          "responseType": "ListTemplatesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/templates",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*}/templates"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetTemplate": {
+                          "requestType": "GetTemplateRequest",
+                          "responseType": "Template",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/templates/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/templates/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateTemplate": {
+                          "requestType": "CreateTemplateRequest",
+                          "responseType": "Template",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/templates",
+                            "(google.api.http).body": "template",
+                            "(google.api.method_signature)": "parent,template,template_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/templates",
+                                "body": "template"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,template,template_id"
+                            }
+                          ]
+                        },
+                        "UpdateTemplate": {
+                          "requestType": "UpdateTemplateRequest",
+                          "responseType": "Template",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{template.name=projects/*/locations/*/templates/*}",
+                            "(google.api.http).body": "template",
+                            "(google.api.method_signature)": "template,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{template.name=projects/*/locations/*/templates/*}",
+                                "body": "template"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "template,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteTemplate": {
+                          "requestType": "DeleteTemplateRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/templates/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/templates/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetFloorSetting": {
+                          "requestType": "GetFloorSettingRequest",
+                          "responseType": "FloorSetting",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/floorSetting}",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{name=organizations/*/locations/*/floorSetting}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/floorSetting}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta/{name=folders/*/locations/*/floorSetting}"
+                                  },
+                                  {
+                                    "get": "/v1beta/{name=organizations/*/locations/*/floorSetting}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateFloorSetting": {
+                          "requestType": "UpdateFloorSettingRequest",
+                          "responseType": "FloorSetting",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{floor_setting.name=projects/*/locations/*/floorSetting}",
+                            "(google.api.http).body": "floor_setting",
+                            "(google.api.http).additional_bindings.patch": "/v1beta/{floor_setting.name=organizations/*/locations/*/floorSetting}",
+                            "(google.api.http).additional_bindings.body": "floor_setting",
+                            "(google.api.method_signature)": "floor_setting,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{floor_setting.name=projects/*/locations/*/floorSetting}",
+                                "body": "floor_setting",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1beta/{floor_setting.name=folders/*/locations/*/floorSetting}",
+                                    "body": "floor_setting"
+                                  },
+                                  {
+                                    "patch": "/v1beta/{floor_setting.name=organizations/*/locations/*/floorSetting}",
+                                    "body": "floor_setting"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "floor_setting,update_mask"
+                            }
+                          ]
+                        },
+                        "SanitizeUserPrompt": {
+                          "requestType": "SanitizeUserPromptRequest",
+                          "responseType": "SanitizeUserPromptResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/templates/*}:sanitizeUserPrompt",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/templates/*}:sanitizeUserPrompt",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "SanitizeModelResponse": {
+                          "requestType": "SanitizeModelResponseRequest",
+                          "responseType": "SanitizeModelResponseResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/templates/*}:sanitizeModelResponse",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/templates/*}:sanitizeModelResponse",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "FilterMatchState": {
+                      "values": {
+                        "FILTER_MATCH_STATE_UNSPECIFIED": 0,
+                        "NO_MATCH_FOUND": 1,
+                        "MATCH_FOUND": 2
+                      }
+                    },
+                    "FilterExecutionState": {
+                      "values": {
+                        "FILTER_EXECUTION_STATE_UNSPECIFIED": 0,
+                        "EXECUTION_SUCCESS": 1,
+                        "EXECUTION_SKIPPED": 2
+                      }
+                    },
+                    "RaiFilterType": {
+                      "values": {
+                        "RAI_FILTER_TYPE_UNSPECIFIED": 0,
+                        "SEXUALLY_EXPLICIT": 2,
+                        "HATE_SPEECH": 3,
+                        "HARASSMENT": 6,
+                        "DANGEROUS": 17
+                      }
+                    },
+                    "DetectionConfidenceLevel": {
+                      "values": {
+                        "DETECTION_CONFIDENCE_LEVEL_UNSPECIFIED": 0,
+                        "LOW_AND_ABOVE": 1,
+                        "MEDIUM_AND_ABOVE": 2,
+                        "HIGH": 3
+                      }
+                    },
+                    "SdpFindingLikelihood": {
+                      "values": {
+                        "SDP_FINDING_LIKELIHOOD_UNSPECIFIED": 0,
+                        "VERY_UNLIKELY": 1,
+                        "UNLIKELY": 2,
+                        "POSSIBLE": 3,
+                        "LIKELY": 4,
+                        "VERY_LIKELY": 5
+                      }
+                    },
+                    "InvocationResult": {
+                      "values": {
+                        "INVOCATION_RESULT_UNSPECIFIED": 0,
+                        "SUCCESS": 1,
+                        "PARTIAL": 2,
+                        "FAILURE": 3
+                      }
+                    },
+                    "Template": {
+                      "options": {
+                        "(google.api.resource).type": "modelarmor.googleapis.com/Template",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/templates/{template}",
+                        "(google.api.resource).plural": "templates",
+                        "(google.api.resource).singular": "template"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filterConfig": {
+                          "type": "FilterConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "templateMetadata": {
+                          "type": "TemplateMetadata",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TemplateMetadata": {
+                          "fields": {
+                            "ignorePartialInvocationFailures": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customPromptSafetyErrorCode": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customPromptSafetyErrorMessage": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customLlmResponseSafetyErrorCode": {
+                              "type": "int32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customLlmResponseSafetyErrorMessage": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "logTemplateOperations": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "logSanitizeOperations": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FloorSetting": {
+                      "options": {
+                        "(google.api.resource).type": "modelarmor.googleapis.com/FloorSetting",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/floorSetting",
+                        "(google.api.resource).plural": "floorSettings",
+                        "(google.api.resource).singular": "floorSetting"
+                      },
+                      "oneofs": {
+                        "_enableFloorSettingEnforcement": {
+                          "oneof": [
+                            "enableFloorSettingEnforcement"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "filterConfig": {
+                          "type": "FilterConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "enableFloorSettingEnforcement": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListTemplatesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "modelarmor.googleapis.com/Template"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListTemplatesResponse": {
+                      "fields": {
+                        "templates": {
+                          "rule": "repeated",
+                          "type": "Template",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "modelarmor.googleapis.com/Template"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTemplateRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "modelarmor.googleapis.com/Template"
+                          }
+                        },
+                        "templateId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "template": {
+                          "type": "Template",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateTemplateRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "template": {
+                          "type": "Template",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "modelarmor.googleapis.com/Template"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetFloorSettingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "modelarmor.googleapis.com/FloorSetting"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFloorSettingRequest": {
+                      "fields": {
+                        "floorSetting": {
+                          "type": "FloorSetting",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FilterConfig": {
+                      "fields": {
+                        "raiSettings": {
+                          "type": "RaiFilterSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sdpSettings": {
+                          "type": "SdpFilterSettings",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "piAndJailbreakFilterSettings": {
+                          "type": "PiAndJailbreakFilterSettings",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maliciousUriFilterSettings": {
+                          "type": "MaliciousUriFilterSettings",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PiAndJailbreakFilterSettings": {
+                      "fields": {
+                        "filterEnforcement": {
+                          "type": "PiAndJailbreakFilterEnforcement",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "confidenceLevel": {
+                          "type": "DetectionConfidenceLevel",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PiAndJailbreakFilterEnforcement": {
+                          "values": {
+                            "PI_AND_JAILBREAK_FILTER_ENFORCEMENT_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "MaliciousUriFilterSettings": {
+                      "fields": {
+                        "filterEnforcement": {
+                          "type": "MaliciousUriFilterEnforcement",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MaliciousUriFilterEnforcement": {
+                          "values": {
+                            "MALICIOUS_URI_FILTER_ENFORCEMENT_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "RaiFilterSettings": {
+                      "fields": {
+                        "raiFilters": {
+                          "rule": "repeated",
+                          "type": "RaiFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RaiFilter": {
+                          "fields": {
+                            "filterType": {
+                              "type": "RaiFilterType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "confidenceLevel": {
+                              "type": "DetectionConfidenceLevel",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SdpFilterSettings": {
+                      "oneofs": {
+                        "sdpConfiguration": {
+                          "oneof": [
+                            "basicConfig",
+                            "advancedConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "basicConfig": {
+                          "type": "SdpBasicConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "advancedConfig": {
+                          "type": "SdpAdvancedConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SdpBasicConfig": {
+                      "fields": {
+                        "filterEnforcement": {
+                          "type": "SdpBasicConfigEnforcement",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SdpBasicConfigEnforcement": {
+                          "values": {
+                            "SDP_BASIC_CONFIG_ENFORCEMENT_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "SdpAdvancedConfig": {
+                      "fields": {
+                        "inspectTemplate": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deidentifyTemplate": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SanitizeUserPromptRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "modelarmor.googleapis.com/Template"
+                          }
+                        },
+                        "userPromptData": {
+                          "type": "DataItem",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SanitizeModelResponseRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "modelarmor.googleapis.com/Template"
+                          }
+                        },
+                        "modelResponseData": {
+                          "type": "DataItem",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "userPrompt": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiLanguageDetectionMetadata": {
+                          "type": "MultiLanguageDetectionMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SanitizeUserPromptResponse": {
+                      "fields": {
+                        "sanitizationResult": {
+                          "type": "SanitizationResult",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "SanitizeModelResponseResponse": {
+                      "fields": {
+                        "sanitizationResult": {
+                          "type": "SanitizationResult",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "SanitizationResult": {
+                      "fields": {
+                        "filterMatchState": {
+                          "type": "FilterMatchState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "filterResults": {
+                          "keyType": "string",
+                          "type": "FilterResult",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "invocationResult": {
+                          "type": "InvocationResult",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sanitizationMetadata": {
+                          "type": "SanitizationMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SanitizationMetadata": {
+                          "fields": {
+                            "errorCode": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "ignorePartialInvocationFailures": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MultiLanguageDetectionMetadata": {
+                      "fields": {}
+                    },
+                    "FilterResult": {
+                      "oneofs": {
+                        "filterResult": {
+                          "oneof": [
+                            "raiFilterResult",
+                            "sdpFilterResult",
+                            "piAndJailbreakFilterResult",
+                            "maliciousUriFilterResult",
+                            "csamFilterFilterResult",
+                            "virusScanFilterResult"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "raiFilterResult": {
+                          "type": "RaiFilterResult",
+                          "id": 1
+                        },
+                        "sdpFilterResult": {
+                          "type": "SdpFilterResult",
+                          "id": 2
+                        },
+                        "piAndJailbreakFilterResult": {
+                          "type": "PiAndJailbreakFilterResult",
+                          "id": 3
+                        },
+                        "maliciousUriFilterResult": {
+                          "type": "MaliciousUriFilterResult",
+                          "id": 4
+                        },
+                        "csamFilterFilterResult": {
+                          "type": "CsamFilterResult",
+                          "id": 5
+                        },
+                        "virusScanFilterResult": {
+                          "type": "VirusScanFilterResult",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RaiFilterResult": {
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "raiFilterTypeResults": {
+                          "keyType": "string",
+                          "type": "RaiFilterTypeResult",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "RaiFilterTypeResult": {
+                          "fields": {
+                            "filterType": {
+                              "type": "RaiFilterType",
+                              "id": 1
+                            },
+                            "confidenceLevel": {
+                              "type": "DetectionConfidenceLevel",
+                              "id": 2
+                            },
+                            "matchState": {
+                              "type": "FilterMatchState",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SdpFilterResult": {
+                      "oneofs": {
+                        "result": {
+                          "oneof": [
+                            "inspectResult",
+                            "deidentifyResult"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inspectResult": {
+                          "type": "SdpInspectResult",
+                          "id": 1
+                        },
+                        "deidentifyResult": {
+                          "type": "SdpDeidentifyResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SdpInspectResult": {
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "findings": {
+                          "rule": "repeated",
+                          "type": "SdpFinding",
+                          "id": 4
+                        },
+                        "findingsTruncated": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DataItem": {
+                      "oneofs": {
+                        "dataItem": {
+                          "oneof": [
+                            "text",
+                            "byteItem"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "byteItem": {
+                          "type": "ByteDataItem",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ByteDataItem": {
+                      "fields": {
+                        "byteDataType": {
+                          "type": "ByteItemType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "byteData": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ByteItemType": {
+                          "values": {
+                            "BYTE_ITEM_TYPE_UNSPECIFIED": 0,
+                            "PLAINTEXT_UTF8": 1,
+                            "PDF": 2,
+                            "WORD_DOCUMENT": 3,
+                            "EXCEL_DOCUMENT": 4,
+                            "POWERPOINT_DOCUMENT": 5,
+                            "TXT": 6,
+                            "CSV": 7
+                          }
+                        }
+                      }
+                    },
+                    "SdpDeidentifyResult": {
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "data": {
+                          "type": "DataItem",
+                          "id": 4
+                        },
+                        "transformedBytes": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "SdpFinding": {
+                      "fields": {
+                        "infoType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "likelihood": {
+                          "type": "SdpFindingLikelihood",
+                          "id": 2
+                        },
+                        "location": {
+                          "type": "SdpFindingLocation",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "SdpFindingLocation": {
+                          "fields": {
+                            "byteRange": {
+                              "type": "RangeInfo",
+                              "id": 1
+                            },
+                            "codepointRange": {
+                              "type": "RangeInfo",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "PiAndJailbreakFilterResult": {
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "confidenceLevel": {
+                          "type": "DetectionConfidenceLevel",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "MaliciousUriFilterResult": {
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "maliciousUriMatchedItems": {
+                          "rule": "repeated",
+                          "type": "MaliciousUriMatchedItem",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "MaliciousUriMatchedItem": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "locations": {
+                              "rule": "repeated",
+                              "type": "RangeInfo",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "VirusScanFilterResult": {
+                      "oneofs": {
+                        "_scannedSize": {
+                          "oneof": [
+                            "scannedSize"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "scannedContentType": {
+                          "type": "ScannedContentType",
+                          "id": 4
+                        },
+                        "scannedSize": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "virusDetails": {
+                          "rule": "repeated",
+                          "type": "VirusDetail",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "ScannedContentType": {
+                          "values": {
+                            "SCANNED_CONTENT_TYPE_UNSPECIFIED": 0,
+                            "UNKNOWN": 1,
+                            "PLAINTEXT": 2,
+                            "PDF": 3
+                          }
+                        }
+                      }
+                    },
+                    "VirusDetail": {
+                      "fields": {
+                        "vendor": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "threatType": {
+                          "type": "ThreatType",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ThreatType": {
+                          "values": {
+                            "THREAT_TYPE_UNSPECIFIED": 0,
+                            "UNKNOWN": 1,
+                            "VIRUS_OR_WORM": 2,
+                            "MALICIOUS_PROGRAM": 3,
+                            "POTENTIALLY_HARMFUL_CONTENT": 4,
+                            "POTENTIALLY_UNWANTED_CONTENT": 5
+                          }
+                        }
+                      }
+                    },
+                    "CsamFilterResult": {
+                      "fields": {
+                        "executionState": {
+                          "type": "FilterExecutionState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messageItems": {
+                          "rule": "repeated",
+                          "type": "MessageItem",
+                          "id": 2
+                        },
+                        "matchState": {
+                          "type": "FilterMatchState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MessageItem": {
+                      "fields": {
+                        "messageType": {
+                          "type": "MessageType",
+                          "id": 1
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "MessageType": {
+                          "values": {
+                            "MESSAGE_TYPE_UNSPECIFIED": 0,
+                            "INFO": 1,
+                            "WARNING": 2,
+                            "ERROR": 3
+                          }
+                        }
+                      }
+                    },
+                    "RangeInfo": {
+                      "oneofs": {
+                        "_start": {
+                          "oneof": [
+                            "start"
+                          ]
+                        },
+                        "_end": {
+                          "oneof": [
+                            "end"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "start": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "end": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
