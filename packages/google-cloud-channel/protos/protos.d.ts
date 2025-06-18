@@ -856,6 +856,9 @@ export namespace google {
 
                     /** Customer correlationId */
                     correlationId?: (string|null);
+
+                    /** Customer customerAttestationState */
+                    customerAttestationState?: (google.cloud.channel.v1.Customer.CustomerAttestationState|keyof typeof google.cloud.channel.v1.Customer.CustomerAttestationState|null);
                 }
 
                 /** Represents a Customer. */
@@ -905,6 +908,9 @@ export namespace google {
 
                     /** Customer correlationId. */
                     public correlationId: string;
+
+                    /** Customer customerAttestationState. */
+                    public customerAttestationState: (google.cloud.channel.v1.Customer.CustomerAttestationState|keyof typeof google.cloud.channel.v1.Customer.CustomerAttestationState);
 
                     /**
                      * Creates a new Customer instance using the specified properties.
@@ -982,6 +988,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Customer {
+
+                    /** CustomerAttestationState enum. */
+                    enum CustomerAttestationState {
+                        CUSTOMER_ATTESTATION_STATE_UNSPECIFIED = 0,
+                        EXEMPT = 1,
+                        NON_EXEMPT_AND_INFO_VERIFIED = 2
+                    }
                 }
 
                 /** Properties of a ContactInfo. */
@@ -17979,6 +17995,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -18019,6 +18038,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -21972,6 +21994,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -22223,7 +22248,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -22254,7 +22279,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -23393,7 +23418,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -23409,7 +23434,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
