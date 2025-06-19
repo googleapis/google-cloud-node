@@ -67,6 +67,8 @@
   "../../protos/google/cloud/aiplatform/v1beta1/machine_resources.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/manual_batch_tuning_parameters.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/match_service.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/memory_bank.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/memory_bank_service.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/metadata_schema.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/metadata_service.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/metadata_store.proto",

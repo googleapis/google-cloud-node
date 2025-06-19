@@ -267,6 +267,9 @@ export class GenAiCacheServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      memoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/memories/{memory}'
+      ),
       metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
       ),
@@ -2841,6 +2844,68 @@ export class GenAiCacheServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified memory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} memory
+   * @returns {string} Resource name string.
+   */
+  memoryPath(project:string,location:string,reasoningEngine:string,memory:string) {
+    return this.pathTemplates.memoryPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      memory: memory,
+    });
+  }
+
+  /**
+   * Parse the project from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).project;
+  }
+
+  /**
+   * Parse the location from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).reasoning_engine;
+  }
+
+  /**
+   * Parse the memory from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the memory.
+   */
+  matchMemoryFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).memory;
   }
 
   /**

@@ -523,6 +523,13 @@
   * [Llm_utility_service.count_tokens](#llm_utility_service.count_tokens)
   * [Match_service.find_neighbors](#match_service.find_neighbors)
   * [Match_service.read_index_datapoints](#match_service.read_index_datapoints)
+  * [Memory_bank_service.create_memory](#memory_bank_service.create_memory)
+  * [Memory_bank_service.delete_memory](#memory_bank_service.delete_memory)
+  * [Memory_bank_service.generate_memories](#memory_bank_service.generate_memories)
+  * [Memory_bank_service.get_memory](#memory_bank_service.get_memory)
+  * [Memory_bank_service.list_memories](#memory_bank_service.list_memories)
+  * [Memory_bank_service.retrieve_memories](#memory_bank_service.retrieve_memories)
+  * [Memory_bank_service.update_memory](#memory_bank_service.update_memory)
   * [Metadata_service.add_context_artifacts_and_executions](#metadata_service.add_context_artifacts_and_executions)
   * [Metadata_service.add_context_children](#metadata_service.add_context_children)
   * [Metadata_service.add_execution_events](#metadata_service.add_execution_events)
@@ -9426,6 +9433,125 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.read_index_datapoints.js`
+
+
+-----
+
+
+
+
+### Memory_bank_service.create_memory
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.create_memory.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.create_memory.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.create_memory.js`
+
+
+-----
+
+
+
+
+### Memory_bank_service.delete_memory
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.delete_memory.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.delete_memory.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.delete_memory.js`
+
+
+-----
+
+
+
+
+### Memory_bank_service.generate_memories
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.generate_memories.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.generate_memories.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.generate_memories.js`
+
+
+-----
+
+
+
+
+### Memory_bank_service.get_memory
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.get_memory.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.get_memory.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.get_memory.js`
+
+
+-----
+
+
+
+
+### Memory_bank_service.list_memories
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.list_memories.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.list_memories.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.list_memories.js`
+
+
+-----
+
+
+
+
+### Memory_bank_service.retrieve_memories
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.retrieve_memories.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.retrieve_memories.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.retrieve_memories.js`
+
+
+-----
+
+
+
+
+### Memory_bank_service.update_memory
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.update_memory.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.update_memory.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/memory_bank_service.update_memory.js`
 
 
 -----

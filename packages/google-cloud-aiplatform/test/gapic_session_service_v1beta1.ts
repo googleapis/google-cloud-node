@@ -3408,40 +3408,56 @@ describe('v1beta1.SessionServiceClient', () => {
             });
         });
 
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
+        describe('memory', async () => {
+            const fakePath = "/rendered/path/memory";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                memory: "memoryValue",
             };
             const client = new sessionserviceModule.v1beta1.SessionServiceClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
+            client.pathTemplates.memoryPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
+            client.pathTemplates.memoryPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('locationPath', () => {
-                const result = client.locationPath("projectValue", "locationValue");
+            it('memoryPath', () => {
+                const result = client.memoryPath("projectValue", "locationValue", "reasoningEngineValue", "memoryValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                assert((client.pathTemplates.memoryPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromLocationName', () => {
-                const result = client.matchProjectFromLocationName(fakePath);
+            it('matchProjectFromMemoryName', () => {
+                const result = client.matchProjectFromMemoryName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.memoryPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromLocationName', () => {
-                const result = client.matchLocationFromLocationName(fakePath);
+            it('matchLocationFromMemoryName', () => {
+                const result = client.matchLocationFromMemoryName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.memoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromMemoryName', () => {
+                const result = client.matchReasoningEngineFromMemoryName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.memoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMemoryFromMemoryName', () => {
+                const result = client.matchMemoryFromMemoryName(fakePath);
+                assert.strictEqual(result, "memoryValue");
+                assert((client.pathTemplates.memoryPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -4180,36 +4196,6 @@ describe('v1beta1.SessionServiceClient', () => {
                 const result = client.matchPipelineJobFromPipelineJobName(fakePath);
                 assert.strictEqual(result, "pipelineJobValue");
                 assert((client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new sessionserviceModule.v1beta1.SessionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -35,6 +35,7 @@ export {IndexServiceClient} from './index_service_client';
 export {JobServiceClient} from './job_service_client';
 export {LlmUtilityServiceClient} from './llm_utility_service_client';
 export {MatchServiceClient} from './match_service_client';
+export {MemoryBankServiceClient} from './memory_bank_service_client';
 export {MetadataServiceClient} from './metadata_service_client';
 export {MigrationServiceClient} from './migration_service_client';
 export {ModelGardenServiceClient} from './model_garden_service_client';
