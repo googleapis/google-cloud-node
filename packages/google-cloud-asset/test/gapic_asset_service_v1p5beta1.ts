@@ -29,745 +29,587 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1p5beta1.AssetServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudasset.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          assetserviceModule.v1p5beta1.AssetServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudasset.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          assetserviceModule.v1p5beta1.AssetServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudasset.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudasset.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudasset.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudasset.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudasset.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudasset.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new assetserviceModule.v1p5beta1.AssetServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = assetserviceModule.v1p5beta1.AssetServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = assetserviceModule.v1p5beta1.AssetServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudasset.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.assetServiceStub, undefined);
-      await client.initialize();
-      assert(client.assetServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.assetServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.assetServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('listAssets', () => {
-    it('invokes listAssets without error', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-      ];
-      client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAssets(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssets without error using callback', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-      ];
-      client.innerApiCalls.listAssets =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAssets(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.asset.v1p5beta1.IAsset[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssets with error', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAssets = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAssets(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAssets as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAssetsStream without error', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-      ];
-      client.descriptors.page.listAssets.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAssetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.asset.v1p5beta1.Asset[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.asset.v1p5beta1.Asset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssets, request)
-      );
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listAssetsStream with error', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listAssetsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.asset.v1p5beta1.Asset[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.asset.v1p5beta1.Asset) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAssets, request)
-      );
-      assert(
-        (client.descriptors.page.listAssets.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAssets without error', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-        generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
-      ];
-      client.descriptors.page.listAssets.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.asset.v1p5beta1.IAsset[] = [];
-      const iterable = client.listAssetsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listAssets with error', async () => {
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listAssetsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.asset.v1p5beta1.IAsset[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = assetserviceModule.v1p5beta1.AssetServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudasset.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudasset.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudasset.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudasset.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new assetserviceModule.v1p5beta1.AssetServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudasset.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new assetserviceModule.v1p5beta1.AssetServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = assetserviceModule.v1p5beta1.AssetServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.assetServiceStub, undefined);
+            await client.initialize();
+            assert(client.assetServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.assetServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.assetServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
 
-  describe('Path templates', () => {
-    describe('accessLevel', async () => {
-      const fakePath = '/rendered/path/accessLevel';
-      const expectedParameters = {
-        access_policy: 'accessPolicyValue',
-        access_level: 'accessLevelValue',
-      };
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.accessLevelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accessLevelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listAssets', () => {
+        it('invokes listAssets without error', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.asset.v1p5beta1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+            ];
+            client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAssets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('accessLevelPath', () => {
-        const result = client.accessLevelPath(
-          'accessPolicyValue',
-          'accessLevelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accessLevelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listAssets without error using callback', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.asset.v1p5beta1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+            ];
+            client.innerApiCalls.listAssets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAssets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.asset.v1p5beta1.IAsset[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchAccessPolicyFromAccessLevelName', () => {
-        const result = client.matchAccessPolicyFromAccessLevelName(fakePath);
-        assert.strictEqual(result, 'accessPolicyValue');
-        assert(
-          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listAssets with error', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.asset.v1p5beta1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAssets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAssets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAssets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchAccessLevelFromAccessLevelName', () => {
-        const result = client.matchAccessLevelFromAccessLevelName(fakePath);
-        assert.strictEqual(result, 'accessLevelValue');
-        assert(
-          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listAssetsStream without error', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.asset.v1p5beta1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+            ];
+            client.descriptors.page.listAssets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAssetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.asset.v1p5beta1.Asset[] = [];
+                stream.on('data', (response: protos.google.cloud.asset.v1p5beta1.Asset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAssets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssets, request));
+            assert(
+                (client.descriptors.page.listAssets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAssetsStream with error', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.asset.v1p5beta1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAssetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.asset.v1p5beta1.Asset[] = [];
+                stream.on('data', (response: protos.google.cloud.asset.v1p5beta1.Asset) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAssets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAssets, request));
+            assert(
+                (client.descriptors.page.listAssets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAssets without error', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.asset.v1p5beta1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+              generateSampleMessage(new protos.google.cloud.asset.v1p5beta1.Asset()),
+            ];
+            client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.asset.v1p5beta1.IAsset[] = [];
+            const iterable = client.listAssetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAssets with error', async () => {
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.asset.v1p5beta1.ListAssetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAssetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.asset.v1p5beta1.IAsset[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('accessPolicy', async () => {
-      const fakePath = '/rendered/path/accessPolicy';
-      const expectedParameters = {
-        access_policy: 'accessPolicyValue',
-      };
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.accessPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accessPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('accessPolicyPath', () => {
-        const result = client.accessPolicyPath('accessPolicyValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accessPolicyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('accessLevel', async () => {
+            const fakePath = "/rendered/path/accessLevel";
+            const expectedParameters = {
+                access_policy: "accessPolicyValue",
+                access_level: "accessLevelValue",
+            };
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accessLevelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accessLevelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchAccessPolicyFromAccessPolicyName', () => {
-        const result = client.matchAccessPolicyFromAccessPolicyName(fakePath);
-        assert.strictEqual(result, 'accessPolicyValue');
-        assert(
-          (client.pathTemplates.accessPolicyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('accessLevelPath', () => {
+                const result = client.accessLevelPath("accessPolicyValue", "accessLevelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accessLevelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccessPolicyFromAccessLevelName', () => {
+                const result = client.matchAccessPolicyFromAccessLevelName(fakePath);
+                assert.strictEqual(result, "accessPolicyValue");
+                assert((client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAccessLevelFromAccessLevelName', () => {
+                const result = client.matchAccessLevelFromAccessLevelName(fakePath);
+                assert.strictEqual(result, "accessLevelValue");
+                assert((client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('accessPolicy', async () => {
+            const fakePath = "/rendered/path/accessPolicy";
+            const expectedParameters = {
+                access_policy: "accessPolicyValue",
+            };
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accessPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accessPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accessPolicyPath', () => {
+                const result = client.accessPolicyPath("accessPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accessPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccessPolicyFromAccessPolicyName', () => {
+                const result = client.matchAccessPolicyFromAccessPolicyName(fakePath);
+                assert.strictEqual(result, "accessPolicyValue");
+                assert((client.pathTemplates.accessPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('servicePerimeter', async () => {
+            const fakePath = "/rendered/path/servicePerimeter";
+            const expectedParameters = {
+                access_policy: "accessPolicyValue",
+                service_perimeter: "servicePerimeterValue",
+            };
+            const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.servicePerimeterPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.servicePerimeterPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('servicePerimeterPath', () => {
+                const result = client.servicePerimeterPath("accessPolicyValue", "servicePerimeterValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.servicePerimeterPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccessPolicyFromServicePerimeterName', () => {
+                const result = client.matchAccessPolicyFromServicePerimeterName(fakePath);
+                assert.strictEqual(result, "accessPolicyValue");
+                assert((client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServicePerimeterFromServicePerimeterName', () => {
+                const result = client.matchServicePerimeterFromServicePerimeterName(fakePath);
+                assert.strictEqual(result, "servicePerimeterValue");
+                assert((client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('servicePerimeter', async () => {
-      const fakePath = '/rendered/path/servicePerimeter';
-      const expectedParameters = {
-        access_policy: 'accessPolicyValue',
-        service_perimeter: 'servicePerimeterValue',
-      };
-      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.servicePerimeterPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.servicePerimeterPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('servicePerimeterPath', () => {
-        const result = client.servicePerimeterPath(
-          'accessPolicyValue',
-          'servicePerimeterValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.servicePerimeterPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchAccessPolicyFromServicePerimeterName', () => {
-        const result =
-          client.matchAccessPolicyFromServicePerimeterName(fakePath);
-        assert.strictEqual(result, 'accessPolicyValue');
-        assert(
-          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServicePerimeterFromServicePerimeterName', () => {
-        const result =
-          client.matchServicePerimeterFromServicePerimeterName(fakePath);
-        assert.strictEqual(result, 'servicePerimeterValue');
-        assert(
-          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

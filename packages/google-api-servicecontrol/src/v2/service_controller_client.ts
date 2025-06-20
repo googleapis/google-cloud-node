@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -111,41 +106,20 @@ export class ServiceControllerClient {
    *     const client = new ServiceControllerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ServiceControllerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'servicecontrol.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -171,7 +145,7 @@ export class ServiceControllerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -185,7 +159,10 @@ export class ServiceControllerClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -204,11 +181,8 @@ export class ServiceControllerClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.api.servicecontrol.v2.ServiceController',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.api.servicecontrol.v2.ServiceController', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -239,35 +213,31 @@ export class ServiceControllerClient {
     // Put together the "service stub" for
     // google.api.servicecontrol.v2.ServiceController.
     this.serviceControllerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.api.servicecontrol.v2.ServiceController'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.api.servicecontrol.v2.ServiceController') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.api.servicecontrol.v2.ServiceController,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const serviceControllerStubMethods = ['check', 'report'];
+    const serviceControllerStubMethods =
+        ['check', 'report'];
     for (const methodName of serviceControllerStubMethods) {
       const callPromise = this.serviceControllerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -287,14 +257,8 @@ export class ServiceControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicecontrol.googleapis.com';
   }
@@ -305,14 +269,8 @@ export class ServiceControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicecontrol.googleapis.com';
   }
@@ -345,7 +303,7 @@ export class ServiceControllerClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/servicecontrol',
+      'https://www.googleapis.com/auth/servicecontrol'
     ];
   }
 
@@ -355,9 +313,8 @@ export class ServiceControllerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -368,288 +325,261 @@ export class ServiceControllerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Private Preview. This feature is only available for approved services.
-   *
-   * This method provides admission control for services that are integrated
-   * with [Service
-   * Infrastructure](https://cloud.google.com/service-infrastructure). It checks
-   * whether an operation should be allowed based on the service configuration
-   * and relevant policies. It must be called before the operation is executed.
-   * For more information, see
-   * [Admission
-   * Control](https://cloud.google.com/service-infrastructure/docs/admission-control).
-   *
-   * NOTE: The admission control has an expected policy propagation delay of
-   * 60s. The caller **must** not depend on the most recent policy changes.
-   *
-   * NOTE: The admission control has a hard limit of 1 referenced resources
-   * per call. If an operation refers to more than 1 resources, the caller
-   * must call the Check method multiple times.
-   *
-   * This method requires the `servicemanagement.services.check` permission
-   * on the specified service. For more information, see
-   * [Service Control API Access
-   * Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   The service name as specified in its service configuration. For example,
-   *   `"pubsub.googleapis.com"`.
-   *
-   *   See
-   *   [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
-   *   for the definition of a service name.
-   * @param {string} request.serviceConfigId
-   *   Specifies the version of the service configuration that should be used to
-   *   process the request. Must not be empty. Set this field to 'latest' to
-   *   specify using the latest configuration.
-   * @param {google.rpc.context.AttributeContext} request.attributes
-   *   Describes attributes about the operation being executed by the service.
-   * @param {number[]} request.resources
-   *   Describes the resources and the policies applied to each resource.
-   * @param {string} request.flags
-   *   Optional. Contains a comma-separated list of flags.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.servicecontrol.v2.CheckResponse|CheckResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/service_controller.check.js</caption>
-   * region_tag:servicecontrol_v2_generated_ServiceController_Check_async
-   */
+/**
+ * Private Preview. This feature is only available for approved services.
+ *
+ * This method provides admission control for services that are integrated
+ * with [Service
+ * Infrastructure](https://cloud.google.com/service-infrastructure). It checks
+ * whether an operation should be allowed based on the service configuration
+ * and relevant policies. It must be called before the operation is executed.
+ * For more information, see
+ * [Admission
+ * Control](https://cloud.google.com/service-infrastructure/docs/admission-control).
+ *
+ * NOTE: The admission control has an expected policy propagation delay of
+ * 60s. The caller **must** not depend on the most recent policy changes.
+ *
+ * NOTE: The admission control has a hard limit of 1 referenced resources
+ * per call. If an operation refers to more than 1 resources, the caller
+ * must call the Check method multiple times.
+ *
+ * This method requires the `servicemanagement.services.check` permission
+ * on the specified service. For more information, see
+ * [Service Control API Access
+ * Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   The service name as specified in its service configuration. For example,
+ *   `"pubsub.googleapis.com"`.
+ *
+ *   See
+ *   [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+ *   for the definition of a service name.
+ * @param {string} request.serviceConfigId
+ *   Specifies the version of the service configuration that should be used to
+ *   process the request. Must not be empty. Set this field to 'latest' to
+ *   specify using the latest configuration.
+ * @param {google.rpc.context.AttributeContext} request.attributes
+ *   Describes attributes about the operation being executed by the service.
+ * @param {number[]} request.resources
+ *   Describes the resources and the policies applied to each resource.
+ * @param {string} request.flags
+ *   Optional. Contains a comma-separated list of flags.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.servicecontrol.v2.CheckResponse|CheckResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/service_controller.check.js</caption>
+ * region_tag:servicecontrol_v2_generated_ServiceController_Check_async
+ */
   check(
-    request?: protos.google.api.servicecontrol.v2.ICheckRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicecontrol.v2.ICheckResponse,
-      protos.google.api.servicecontrol.v2.ICheckRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicecontrol.v2.ICheckRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.servicecontrol.v2.ICheckResponse,
+        protos.google.api.servicecontrol.v2.ICheckRequest|undefined, {}|undefined
+      ]>;
   check(
-    request: protos.google.api.servicecontrol.v2.ICheckRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.servicecontrol.v2.ICheckResponse,
-      protos.google.api.servicecontrol.v2.ICheckRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  check(
-    request: protos.google.api.servicecontrol.v2.ICheckRequest,
-    callback: Callback<
-      protos.google.api.servicecontrol.v2.ICheckResponse,
-      protos.google.api.servicecontrol.v2.ICheckRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  check(
-    request?: protos.google.api.servicecontrol.v2.ICheckRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.api.servicecontrol.v2.ICheckRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.servicecontrol.v2.ICheckResponse,
-          protos.google.api.servicecontrol.v2.ICheckRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.servicecontrol.v2.ICheckResponse,
-      protos.google.api.servicecontrol.v2.ICheckRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.servicecontrol.v2.ICheckResponse,
-      protos.google.api.servicecontrol.v2.ICheckRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.api.servicecontrol.v2.ICheckRequest|null|undefined,
+          {}|null|undefined>): void;
+  check(
+      request: protos.google.api.servicecontrol.v2.ICheckRequest,
+      callback: Callback<
+          protos.google.api.servicecontrol.v2.ICheckResponse,
+          protos.google.api.servicecontrol.v2.ICheckRequest|null|undefined,
+          {}|null|undefined>): void;
+  check(
+      request?: protos.google.api.servicecontrol.v2.ICheckRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.servicecontrol.v2.ICheckResponse,
+          protos.google.api.servicecontrol.v2.ICheckRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.servicecontrol.v2.ICheckResponse,
+          protos.google.api.servicecontrol.v2.ICheckRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.servicecontrol.v2.ICheckResponse,
+        protos.google.api.servicecontrol.v2.ICheckRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('check request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.servicecontrol.v2.ICheckResponse,
-          protos.google.api.servicecontrol.v2.ICheckRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.api.servicecontrol.v2.ICheckResponse,
+        protos.google.api.servicecontrol.v2.ICheckRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('check response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .check(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.servicecontrol.v2.ICheckResponse,
-          protos.google.api.servicecontrol.v2.ICheckRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('check response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.check(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.servicecontrol.v2.ICheckResponse,
+        protos.google.api.servicecontrol.v2.ICheckRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('check response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Private Preview. This feature is only available for approved services.
-   *
-   * This method provides telemetry reporting for services that are integrated
-   * with [Service
-   * Infrastructure](https://cloud.google.com/service-infrastructure). It
-   * reports a list of operations that have occurred on a service. It must be
-   * called after the operations have been executed. For more information, see
-   * [Telemetry
-   * Reporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting).
-   *
-   * NOTE: The telemetry reporting has a hard limit of 1000 operations and 1MB
-   * per Report call. It is recommended to have no more than 100 operations per
-   * call.
-   *
-   * This method requires the `servicemanagement.services.report` permission
-   * on the specified service. For more information, see
-   * [Service Control API Access
-   * Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   The service name as specified in its service configuration. For example,
-   *   `"pubsub.googleapis.com"`.
-   *
-   *   See
-   *   [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
-   *   for the definition of a service name.
-   * @param {string} request.serviceConfigId
-   *   Specifies the version of the service configuration that should be used to
-   *   process the request. Must not be empty. Set this field to 'latest' to
-   *   specify using the latest configuration.
-   * @param {number[]} request.operations
-   *   Describes the list of operations to be reported. Each operation is
-   *   represented as an AttributeContext, and contains all attributes around an
-   *   API access.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.servicecontrol.v2.ReportResponse|ReportResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/service_controller.report.js</caption>
-   * region_tag:servicecontrol_v2_generated_ServiceController_Report_async
-   */
+/**
+ * Private Preview. This feature is only available for approved services.
+ *
+ * This method provides telemetry reporting for services that are integrated
+ * with [Service
+ * Infrastructure](https://cloud.google.com/service-infrastructure). It
+ * reports a list of operations that have occurred on a service. It must be
+ * called after the operations have been executed. For more information, see
+ * [Telemetry
+ * Reporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting).
+ *
+ * NOTE: The telemetry reporting has a hard limit of 1000 operations and 1MB
+ * per Report call. It is recommended to have no more than 100 operations per
+ * call.
+ *
+ * This method requires the `servicemanagement.services.report` permission
+ * on the specified service. For more information, see
+ * [Service Control API Access
+ * Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   The service name as specified in its service configuration. For example,
+ *   `"pubsub.googleapis.com"`.
+ *
+ *   See
+ *   [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+ *   for the definition of a service name.
+ * @param {string} request.serviceConfigId
+ *   Specifies the version of the service configuration that should be used to
+ *   process the request. Must not be empty. Set this field to 'latest' to
+ *   specify using the latest configuration.
+ * @param {number[]} request.operations
+ *   Describes the list of operations to be reported. Each operation is
+ *   represented as an AttributeContext, and contains all attributes around an
+ *   API access.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.servicecontrol.v2.ReportResponse|ReportResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/service_controller.report.js</caption>
+ * region_tag:servicecontrol_v2_generated_ServiceController_Report_async
+ */
   report(
-    request?: protos.google.api.servicecontrol.v2.IReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicecontrol.v2.IReportResponse,
-      protos.google.api.servicecontrol.v2.IReportRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicecontrol.v2.IReportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.servicecontrol.v2.IReportResponse,
+        protos.google.api.servicecontrol.v2.IReportRequest|undefined, {}|undefined
+      ]>;
   report(
-    request: protos.google.api.servicecontrol.v2.IReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.servicecontrol.v2.IReportResponse,
-      protos.google.api.servicecontrol.v2.IReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  report(
-    request: protos.google.api.servicecontrol.v2.IReportRequest,
-    callback: Callback<
-      protos.google.api.servicecontrol.v2.IReportResponse,
-      protos.google.api.servicecontrol.v2.IReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  report(
-    request?: protos.google.api.servicecontrol.v2.IReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.api.servicecontrol.v2.IReportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.servicecontrol.v2.IReportResponse,
-          protos.google.api.servicecontrol.v2.IReportRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.servicecontrol.v2.IReportResponse,
-      protos.google.api.servicecontrol.v2.IReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.servicecontrol.v2.IReportResponse,
-      protos.google.api.servicecontrol.v2.IReportRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.api.servicecontrol.v2.IReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  report(
+      request: protos.google.api.servicecontrol.v2.IReportRequest,
+      callback: Callback<
+          protos.google.api.servicecontrol.v2.IReportResponse,
+          protos.google.api.servicecontrol.v2.IReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  report(
+      request?: protos.google.api.servicecontrol.v2.IReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.servicecontrol.v2.IReportResponse,
+          protos.google.api.servicecontrol.v2.IReportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.servicecontrol.v2.IReportResponse,
+          protos.google.api.servicecontrol.v2.IReportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.servicecontrol.v2.IReportResponse,
+        protos.google.api.servicecontrol.v2.IReportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('report request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.servicecontrol.v2.IReportResponse,
-          protos.google.api.servicecontrol.v2.IReportRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.api.servicecontrol.v2.IReportResponse,
+        protos.google.api.servicecontrol.v2.IReportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('report response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .report(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.servicecontrol.v2.IReportResponse,
-          protos.google.api.servicecontrol.v2.IReportRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('report response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.report(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.servicecontrol.v2.IReportResponse,
+        protos.google.api.servicecontrol.v2.IReportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('report response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

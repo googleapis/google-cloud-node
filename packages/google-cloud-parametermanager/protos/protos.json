@@ -14,7 +14,9 @@
                     "java_outer_classname": "V1mainProto",
                     "java_package": "com.google.cloud.parametermanager.v1",
                     "php_namespace": "Google\\Cloud\\ParameterManager\\V1",
-                    "ruby_package": "Google::Cloud::ParameterManager::V1"
+                    "ruby_package": "Google::Cloud::ParameterManager::V1",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "ParameterManager": {
@@ -309,6 +311,7 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey",
                             "proto3_optional": true
                           }
                         }

@@ -2235,6 +2235,11 @@
               "methods": [
                 "getPublisherModel"
               ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
+              ]
             }
           }
         },
@@ -2244,6 +2249,11 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
               ]
             }
           }
@@ -3591,6 +3601,11 @@
                 "getRagFile"
               ]
             },
+            "GetRagEngineConfig": {
+              "methods": [
+                "getRagEngineConfig"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -3614,6 +3629,11 @@
             "DeleteRagFile": {
               "methods": [
                 "deleteRagFile"
+              ]
+            },
+            "UpdateRagEngineConfig": {
+              "methods": [
+                "updateRagEngineConfig"
               ]
             },
             "ListRagCorpora": {
@@ -3650,6 +3670,11 @@
                 "getRagFile"
               ]
             },
+            "GetRagEngineConfig": {
+              "methods": [
+                "getRagEngineConfig"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -3673,6 +3698,11 @@
             "DeleteRagFile": {
               "methods": [
                 "deleteRagFile"
+              ]
+            },
+            "UpdateRagEngineConfig": {
+              "methods": [
+                "updateRagEngineConfig"
               ]
             },
             "ListRagCorpora": {
