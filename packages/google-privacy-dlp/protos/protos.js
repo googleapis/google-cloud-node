@@ -94813,6 +94813,232 @@
                         return ProcessingLocation;
                     })();
     
+                    v2.SaveToGcsFindingsOutput = (function() {
+    
+                        /**
+                         * Properties of a SaveToGcsFindingsOutput.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ISaveToGcsFindingsOutput
+                         * @property {Array.<google.privacy.dlp.v2.IFinding>|null} [findings] SaveToGcsFindingsOutput findings
+                         */
+    
+                        /**
+                         * Constructs a new SaveToGcsFindingsOutput.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a SaveToGcsFindingsOutput.
+                         * @implements ISaveToGcsFindingsOutput
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput=} [properties] Properties to set
+                         */
+                        function SaveToGcsFindingsOutput(properties) {
+                            this.findings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SaveToGcsFindingsOutput findings.
+                         * @member {Array.<google.privacy.dlp.v2.IFinding>} findings
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @instance
+                         */
+                        SaveToGcsFindingsOutput.prototype.findings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SaveToGcsFindingsOutput instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput instance
+                         */
+                        SaveToGcsFindingsOutput.create = function create(properties) {
+                            return new SaveToGcsFindingsOutput(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SaveToGcsFindingsOutput message. Does not implicitly {@link google.privacy.dlp.v2.SaveToGcsFindingsOutput.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput} message SaveToGcsFindingsOutput message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SaveToGcsFindingsOutput.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.findings != null && message.findings.length)
+                                for (var i = 0; i < message.findings.length; ++i)
+                                    $root.google.privacy.dlp.v2.Finding.encode(message.findings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SaveToGcsFindingsOutput message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SaveToGcsFindingsOutput.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput} message SaveToGcsFindingsOutput message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SaveToGcsFindingsOutput.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SaveToGcsFindingsOutput message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SaveToGcsFindingsOutput.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.SaveToGcsFindingsOutput();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.findings && message.findings.length))
+                                            message.findings = [];
+                                        message.findings.push($root.google.privacy.dlp.v2.Finding.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SaveToGcsFindingsOutput message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SaveToGcsFindingsOutput.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SaveToGcsFindingsOutput message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SaveToGcsFindingsOutput.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.findings != null && message.hasOwnProperty("findings")) {
+                                if (!Array.isArray(message.findings))
+                                    return "findings: array expected";
+                                for (var i = 0; i < message.findings.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.Finding.verify(message.findings[i]);
+                                    if (error)
+                                        return "findings." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SaveToGcsFindingsOutput message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput
+                         */
+                        SaveToGcsFindingsOutput.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.SaveToGcsFindingsOutput)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.SaveToGcsFindingsOutput();
+                            if (object.findings) {
+                                if (!Array.isArray(object.findings))
+                                    throw TypeError(".google.privacy.dlp.v2.SaveToGcsFindingsOutput.findings: array expected");
+                                message.findings = [];
+                                for (var i = 0; i < object.findings.length; ++i) {
+                                    if (typeof object.findings[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.SaveToGcsFindingsOutput.findings: object expected");
+                                    message.findings[i] = $root.google.privacy.dlp.v2.Finding.fromObject(object.findings[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SaveToGcsFindingsOutput message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.SaveToGcsFindingsOutput} message SaveToGcsFindingsOutput
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SaveToGcsFindingsOutput.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.findings = [];
+                            if (message.findings && message.findings.length) {
+                                object.findings = [];
+                                for (var j = 0; j < message.findings.length; ++j)
+                                    object.findings[j] = $root.google.privacy.dlp.v2.Finding.toObject(message.findings[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SaveToGcsFindingsOutput to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SaveToGcsFindingsOutput.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SaveToGcsFindingsOutput
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SaveToGcsFindingsOutput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.SaveToGcsFindingsOutput";
+                        };
+    
+                        return SaveToGcsFindingsOutput;
+                    })();
+    
                     v2.InfoType = (function() {
     
                         /**

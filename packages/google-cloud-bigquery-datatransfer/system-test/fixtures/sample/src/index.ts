@@ -19,9 +19,7 @@
 import {DataTransferServiceClient} from '@google-cloud/bigquery-data-transfer';
 
 // check that the client class type name can be used
-function doStuffWithDataTransferServiceClient(
-  client: DataTransferServiceClient
-) {
+function doStuffWithDataTransferServiceClient(client: DataTransferServiceClient) {
   client.close();
 }
 

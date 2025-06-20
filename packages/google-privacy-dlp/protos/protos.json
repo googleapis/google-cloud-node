@@ -8506,6 +8506,15 @@
                         }
                       }
                     },
+                    "SaveToGcsFindingsOutput": {
+                      "fields": {
+                        "findings": {
+                          "rule": "repeated",
+                          "type": "Finding",
+                          "id": 1
+                        }
+                      }
+                    },
                     "InfoType": {
                       "fields": {
                         "name": {

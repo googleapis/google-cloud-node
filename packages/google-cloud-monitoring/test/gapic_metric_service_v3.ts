@@ -29,4214 +29,2913 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v3.MetricServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new metricserviceModule.v3.MetricServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new metricserviceModule.v3.MetricServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          metricserviceModule.v3.MetricServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'monitoring.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          metricserviceModule.v3.MetricServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'monitoring.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'monitoring.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new metricserviceModule.v3.MetricServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'monitoring.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new metricserviceModule.v3.MetricServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new metricserviceModule.v3.MetricServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'monitoring.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new metricserviceModule.v3.MetricServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new metricserviceModule.v3.MetricServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = metricserviceModule.v3.MetricServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = metricserviceModule.v3.MetricServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'monitoring.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new metricserviceModule.v3.MetricServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.metricServiceStub, undefined);
-      await client.initialize();
-      assert(client.metricServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.metricServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.metricServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getMonitoredResourceDescriptor', () => {
-    it('invokes getMonitoredResourceDescriptor without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMonitoredResourceDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.MonitoredResourceDescriptor()
-      );
-      client.innerApiCalls.getMonitoredResourceDescriptor =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getMonitoredResourceDescriptor(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMonitoredResourceDescriptor without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMonitoredResourceDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.MonitoredResourceDescriptor()
-      );
-      client.innerApiCalls.getMonitoredResourceDescriptor =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMonitoredResourceDescriptor(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.IMonitoredResourceDescriptor | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMonitoredResourceDescriptor with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMonitoredResourceDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMonitoredResourceDescriptor = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getMonitoredResourceDescriptor(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMonitoredResourceDescriptor with closed client', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMonitoredResourceDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getMonitoredResourceDescriptor(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getMetricDescriptor', () => {
-    it('invokes getMetricDescriptor without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.MetricDescriptor()
-      );
-      client.innerApiCalls.getMetricDescriptor =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getMetricDescriptor(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMetricDescriptor without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.MetricDescriptor()
-      );
-      client.innerApiCalls.getMetricDescriptor =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMetricDescriptor(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.IMetricDescriptor | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMetricDescriptor with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMetricDescriptor = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getMetricDescriptor(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMetricDescriptor with closed client', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getMetricDescriptor(request), expectedError);
-    });
-  });
-
-  describe('createMetricDescriptor', () => {
-    it('invokes createMetricDescriptor without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.MetricDescriptor()
-      );
-      client.innerApiCalls.createMetricDescriptor =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createMetricDescriptor(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMetricDescriptor without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.MetricDescriptor()
-      );
-      client.innerApiCalls.createMetricDescriptor =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createMetricDescriptor(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.IMetricDescriptor | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMetricDescriptor with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createMetricDescriptor = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createMetricDescriptor(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMetricDescriptor with closed client', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createMetricDescriptor(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('deleteMetricDescriptor', () => {
-    it('invokes deleteMetricDescriptor without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteMetricDescriptor =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteMetricDescriptor(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMetricDescriptor without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteMetricDescriptor =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteMetricDescriptor(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMetricDescriptor with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteMetricDescriptor = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteMetricDescriptor(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteMetricDescriptor as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMetricDescriptor as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMetricDescriptor with closed client', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteMetricDescriptorRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteMetricDescriptor(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createTimeSeries', () => {
-    it('invokes createTimeSeries without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.createTimeSeries = stubSimpleCall(expectedResponse);
-      const [response] = await client.createTimeSeries(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTimeSeries without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.createTimeSeries =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTimeSeries(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTimeSeries with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTimeSeries = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTimeSeries(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTimeSeries with closed client', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createTimeSeries(request), expectedError);
-    });
-  });
-
-  describe('createServiceTimeSeries', () => {
-    it('invokes createServiceTimeSeries without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.createServiceTimeSeries =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createServiceTimeSeries(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createServiceTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createServiceTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createServiceTimeSeries without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.createServiceTimeSeries =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createServiceTimeSeries(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createServiceTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createServiceTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createServiceTimeSeries with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createServiceTimeSeries = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createServiceTimeSeries(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createServiceTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createServiceTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createServiceTimeSeries with closed client', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createServiceTimeSeries(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listMonitoredResourceDescriptors', () => {
-    it('invokes listMonitoredResourceDescriptors without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-      ];
-      client.innerApiCalls.listMonitoredResourceDescriptors =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listMonitoredResourceDescriptors(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMonitoredResourceDescriptors without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-      ];
-      client.innerApiCalls.listMonitoredResourceDescriptors =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listMonitoredResourceDescriptors(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.IMonitoredResourceDescriptor[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMonitoredResourceDescriptors with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listMonitoredResourceDescriptors = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listMonitoredResourceDescriptors(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMonitoredResourceDescriptorsStream without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-      ];
-      client.descriptors.page.listMonitoredResourceDescriptors.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listMonitoredResourceDescriptorsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.MonitoredResourceDescriptor[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.api.MonitoredResourceDescriptor) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(
-            client.innerApiCalls.listMonitoredResourceDescriptors,
-            request
-          )
-      );
-      assert(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listMonitoredResourceDescriptorsStream with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMonitoredResourceDescriptors.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listMonitoredResourceDescriptorsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.MonitoredResourceDescriptor[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.api.MonitoredResourceDescriptor) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(
-            client.innerApiCalls.listMonitoredResourceDescriptors,
-            request
-          )
-      );
-      assert(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listMonitoredResourceDescriptors without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-        generateSampleMessage(
-          new protos.google.api.MonitoredResourceDescriptor()
-        ),
-      ];
-      client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.IMonitoredResourceDescriptor[] = [];
-      const iterable = client.listMonitoredResourceDescriptorsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listMonitoredResourceDescriptors with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listMonitoredResourceDescriptorsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.IMonitoredResourceDescriptor[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = metricserviceModule.v3.MetricServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMonitoredResourceDescriptors
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listMetricDescriptors', () => {
-    it('invokes listMetricDescriptors without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMetricDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-      ];
-      client.innerApiCalls.listMetricDescriptors =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listMetricDescriptors(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMetricDescriptors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMetricDescriptors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMetricDescriptors without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMetricDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-      ];
-      client.innerApiCalls.listMetricDescriptors =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listMetricDescriptors(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.api.IMetricDescriptor[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMetricDescriptors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMetricDescriptors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMetricDescriptors with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMetricDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listMetricDescriptors = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listMetricDescriptors(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listMetricDescriptors as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMetricDescriptors as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMetricDescriptorsStream without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMetricDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-      ];
-      client.descriptors.page.listMetricDescriptors.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listMetricDescriptorsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.MetricDescriptor[] = [];
-        stream.on('data', (response: protos.google.api.MetricDescriptor) => {
-          responses.push(response);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'monitoring.example.com');
         });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMetricDescriptors, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listMetricDescriptorsStream with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMetricDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMetricDescriptors.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listMetricDescriptorsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.MetricDescriptor[] = [];
-        stream.on('data', (response: protos.google.api.MetricDescriptor) => {
-          responses.push(response);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'monitoring.example.com');
         });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMetricDescriptors, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listMetricDescriptors without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMetricDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-        generateSampleMessage(new protos.google.api.MetricDescriptor()),
-      ];
-      client.descriptors.page.listMetricDescriptors.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.api.IMetricDescriptor[] = [];
-      const iterable = client.listMetricDescriptorsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new metricserviceModule.v3.MetricServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'monitoring.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listMetricDescriptors with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListMetricDescriptorsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMetricDescriptors.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listMetricDescriptorsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.api.IMetricDescriptor[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new metricserviceModule.v3.MetricServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'monitoring.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMetricDescriptors
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new metricserviceModule.v3.MetricServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listTimeSeries', () => {
-    it('invokes listTimeSeries without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-      ];
-      client.innerApiCalls.listTimeSeries = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTimeSeries(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = metricserviceModule.v3.MetricServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new metricserviceModule.v3.MetricServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.metricServiceStub, undefined);
+            await client.initialize();
+            assert(client.metricServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.metricServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.metricServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listTimeSeries without error using callback', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-      ];
-      client.innerApiCalls.listTimeSeries =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTimeSeries(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.monitoring.v3.ITimeSeries[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getMonitoredResourceDescriptor', () => {
+        it('invokes getMonitoredResourceDescriptor without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMonitoredResourceDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.MonitoredResourceDescriptor()
+            );
+            client.innerApiCalls.getMonitoredResourceDescriptor = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMonitoredResourceDescriptor(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMonitoredResourceDescriptor without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMonitoredResourceDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.MonitoredResourceDescriptor()
+            );
+            client.innerApiCalls.getMonitoredResourceDescriptor = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMonitoredResourceDescriptor(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.IMonitoredResourceDescriptor|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMonitoredResourceDescriptor with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMonitoredResourceDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMonitoredResourceDescriptor = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMonitoredResourceDescriptor(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMonitoredResourceDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMonitoredResourceDescriptor with closed client', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMonitoredResourceDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMonitoredResourceDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMonitoredResourceDescriptor(request), expectedError);
+        });
+    });
+
+    describe('getMetricDescriptor', () => {
+        it('invokes getMetricDescriptor without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.MetricDescriptor()
+            );
+            client.innerApiCalls.getMetricDescriptor = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMetricDescriptor(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMetricDescriptor without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.MetricDescriptor()
+            );
+            client.innerApiCalls.getMetricDescriptor = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMetricDescriptor(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.IMetricDescriptor|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMetricDescriptor with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMetricDescriptor = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMetricDescriptor(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMetricDescriptor with closed client', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.GetMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.GetMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMetricDescriptor(request), expectedError);
+        });
+    });
+
+    describe('createMetricDescriptor', () => {
+        it('invokes createMetricDescriptor without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.MetricDescriptor()
+            );
+            client.innerApiCalls.createMetricDescriptor = stubSimpleCall(expectedResponse);
+            const [response] = await client.createMetricDescriptor(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetricDescriptor without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.MetricDescriptor()
+            );
+            client.innerApiCalls.createMetricDescriptor = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createMetricDescriptor(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.IMetricDescriptor|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetricDescriptor with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMetricDescriptor = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createMetricDescriptor(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetricDescriptor with closed client', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createMetricDescriptor(request), expectedError);
+        });
+    });
+
+    describe('deleteMetricDescriptor', () => {
+        it('invokes deleteMetricDescriptor without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.DeleteMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteMetricDescriptor = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteMetricDescriptor(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMetricDescriptor without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.DeleteMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteMetricDescriptor = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteMetricDescriptor(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMetricDescriptor with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.DeleteMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMetricDescriptor = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteMetricDescriptor(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMetricDescriptor as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMetricDescriptor as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMetricDescriptor with closed client', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.DeleteMetricDescriptorRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.DeleteMetricDescriptorRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteMetricDescriptor(request), expectedError);
+        });
+    });
+
+    describe('createTimeSeries', () => {
+        it('invokes createTimeSeries without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.createTimeSeries = stubSimpleCall(expectedResponse);
+            const [response] = await client.createTimeSeries(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTimeSeries without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.createTimeSeries = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createTimeSeries(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTimeSeries with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createTimeSeries = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createTimeSeries(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createTimeSeries with closed client', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createTimeSeries(request), expectedError);
+        });
+    });
+
+    describe('createServiceTimeSeries', () => {
+        it('invokes createServiceTimeSeries without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.createServiceTimeSeries = stubSimpleCall(expectedResponse);
+            const [response] = await client.createServiceTimeSeries(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createServiceTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServiceTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServiceTimeSeries without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.createServiceTimeSeries = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createServiceTimeSeries(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createServiceTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServiceTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServiceTimeSeries with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createServiceTimeSeries = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createServiceTimeSeries(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createServiceTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createServiceTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createServiceTimeSeries with closed client', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.CreateTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.CreateTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createServiceTimeSeries(request), expectedError);
+        });
+    });
+
+    describe('listMonitoredResourceDescriptors', () => {
+        it('invokes listMonitoredResourceDescriptors without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+            ];
+            client.innerApiCalls.listMonitoredResourceDescriptors = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMonitoredResourceDescriptors(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMonitoredResourceDescriptors without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+            ];
+            client.innerApiCalls.listMonitoredResourceDescriptors = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMonitoredResourceDescriptors(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.IMonitoredResourceDescriptor[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMonitoredResourceDescriptors with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMonitoredResourceDescriptors = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMonitoredResourceDescriptors(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMonitoredResourceDescriptors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMonitoredResourceDescriptorsStream without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+            ];
+            client.descriptors.page.listMonitoredResourceDescriptors.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMonitoredResourceDescriptorsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.MonitoredResourceDescriptor[] = [];
+                stream.on('data', (response: protos.google.api.MonitoredResourceDescriptor) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMonitoredResourceDescriptors.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMonitoredResourceDescriptors, request));
+            assert(
+                (client.descriptors.page.listMonitoredResourceDescriptors.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMonitoredResourceDescriptorsStream with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMonitoredResourceDescriptors.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMonitoredResourceDescriptorsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.MonitoredResourceDescriptor[] = [];
+                stream.on('data', (response: protos.google.api.MonitoredResourceDescriptor) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMonitoredResourceDescriptors.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMonitoredResourceDescriptors, request));
+            assert(
+                (client.descriptors.page.listMonitoredResourceDescriptors.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMonitoredResourceDescriptors without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+              generateSampleMessage(new protos.google.api.MonitoredResourceDescriptor()),
+            ];
+            client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.IMonitoredResourceDescriptor[] = [];
+            const iterable = client.listMonitoredResourceDescriptorsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTimeSeries with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTimeSeries = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listTimeSeries(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listTimeSeries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTimeSeries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTimeSeriesStream without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-      ];
-      client.descriptors.page.listTimeSeries.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTimeSeriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.TimeSeries[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.monitoring.v3.TimeSeries) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listMonitoredResourceDescriptors with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMonitoredResourceDescriptorsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.IMonitoredResourceDescriptor[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMonitoredResourceDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTimeSeries.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTimeSeries, request)
-      );
-      assert(
-        (client.descriptors.page.listTimeSeries.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listTimeSeriesStream with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTimeSeries.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listTimeSeriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.TimeSeries[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.monitoring.v3.TimeSeries) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listMetricDescriptors', () => {
+        it('invokes listMetricDescriptors without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMetricDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+            ];
+            client.innerApiCalls.listMetricDescriptors = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMetricDescriptors(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMetricDescriptors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetricDescriptors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listMetricDescriptors without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMetricDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+            ];
+            client.innerApiCalls.listMetricDescriptors = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMetricDescriptors(
+                    request,
+                    (err?: Error|null, result?: protos.google.api.IMetricDescriptor[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMetricDescriptors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetricDescriptors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTimeSeries.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTimeSeries, request)
-      );
-      assert(
-        (client.descriptors.page.listTimeSeries.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes listMetricDescriptors with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMetricDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMetricDescriptors = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMetricDescriptors(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMetricDescriptors as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetricDescriptors as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMetricDescriptorsStream without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMetricDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+            ];
+            client.descriptors.page.listMetricDescriptors.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMetricDescriptorsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.MetricDescriptor[] = [];
+                stream.on('data', (response: protos.google.api.MetricDescriptor) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMetricDescriptors.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMetricDescriptors, request));
+            assert(
+                (client.descriptors.page.listMetricDescriptors.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMetricDescriptorsStream with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMetricDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMetricDescriptors.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMetricDescriptorsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.api.MetricDescriptor[] = [];
+                stream.on('data', (response: protos.google.api.MetricDescriptor) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMetricDescriptors.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMetricDescriptors, request));
+            assert(
+                (client.descriptors.page.listMetricDescriptors.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMetricDescriptors without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMetricDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+              generateSampleMessage(new protos.google.api.MetricDescriptor()),
+            ];
+            client.descriptors.page.listMetricDescriptors.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.api.IMetricDescriptor[] = [];
+            const iterable = client.listMetricDescriptorsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMetricDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMetricDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMetricDescriptors with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListMetricDescriptorsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListMetricDescriptorsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMetricDescriptors.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMetricDescriptorsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.api.IMetricDescriptor[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMetricDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMetricDescriptors.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listTimeSeries without error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-        generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
-      ];
-      client.descriptors.page.listTimeSeries.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.monitoring.v3.ITimeSeries[] = [];
-      const iterable = client.listTimeSeriesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTimeSeries.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTimeSeries.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('listTimeSeries', () => {
+        it('invokes listTimeSeries without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+            ];
+            client.innerApiCalls.listTimeSeries = stubSimpleCall(expectedResponse);
+            const [response] = await client.listTimeSeries(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTimeSeries without error using callback', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+            ];
+            client.innerApiCalls.listTimeSeries = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listTimeSeries(
+                    request,
+                    (err?: Error|null, result?: protos.google.monitoring.v3.ITimeSeries[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTimeSeries with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listTimeSeries = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listTimeSeries(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listTimeSeries as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listTimeSeries as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listTimeSeriesStream without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+            ];
+            client.descriptors.page.listTimeSeries.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listTimeSeriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.monitoring.v3.TimeSeries[] = [];
+                stream.on('data', (response: protos.google.monitoring.v3.TimeSeries) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listTimeSeries.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTimeSeries, request));
+            assert(
+                (client.descriptors.page.listTimeSeries.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listTimeSeriesStream with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTimeSeries.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listTimeSeriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.monitoring.v3.TimeSeries[] = [];
+                stream.on('data', (response: protos.google.monitoring.v3.TimeSeries) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listTimeSeries.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listTimeSeries, request));
+            assert(
+                (client.descriptors.page.listTimeSeries.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listTimeSeries without error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+              generateSampleMessage(new protos.google.monitoring.v3.TimeSeries()),
+            ];
+            client.descriptors.page.listTimeSeries.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.monitoring.v3.ITimeSeries[] = [];
+            const iterable = client.listTimeSeriesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTimeSeries.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTimeSeries.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listTimeSeries with error', async () => {
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.monitoring.v3.ListTimeSeriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.monitoring.v3.ListTimeSeriesRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listTimeSeries.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listTimeSeriesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.monitoring.v3.ITimeSeries[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listTimeSeries.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listTimeSeries.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listTimeSeries with error', async () => {
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListTimeSeriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListTimeSeriesRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTimeSeries.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listTimeSeriesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.monitoring.v3.ITimeSeries[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTimeSeries.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTimeSeries.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('Path templates', () => {
+
+        describe('folderAlertPolicy', async () => {
+            const fakePath = "/rendered/path/folderAlertPolicy";
+            const expectedParameters = {
+                folder: "folderValue",
+                alert_policy: "alertPolicyValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderAlertPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderAlertPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderAlertPolicyPath', () => {
+                const result = client.folderAlertPolicyPath("folderValue", "alertPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderAlertPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderAlertPolicyName', () => {
+                const result = client.matchFolderFromFolderAlertPolicyName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderAlertPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAlertPolicyFromFolderAlertPolicyName', () => {
+                const result = client.matchAlertPolicyFromFolderAlertPolicyName(fakePath);
+                assert.strictEqual(result, "alertPolicyValue");
+                assert((client.pathTemplates.folderAlertPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderAlertPolicyCondition', async () => {
+            const fakePath = "/rendered/path/folderAlertPolicyCondition";
+            const expectedParameters = {
+                folder: "folderValue",
+                alert_policy: "alertPolicyValue",
+                condition: "conditionValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderAlertPolicyConditionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderAlertPolicyConditionPath', () => {
+                const result = client.folderAlertPolicyConditionPath("folderValue", "alertPolicyValue", "conditionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderAlertPolicyConditionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderAlertPolicyConditionName', () => {
+                const result = client.matchFolderFromFolderAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAlertPolicyFromFolderAlertPolicyConditionName', () => {
+                const result = client.matchAlertPolicyFromFolderAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "alertPolicyValue");
+                assert((client.pathTemplates.folderAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConditionFromFolderAlertPolicyConditionName', () => {
+                const result = client.matchConditionFromFolderAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "conditionValue");
+                assert((client.pathTemplates.folderAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderChannelDescriptor', async () => {
+            const fakePath = "/rendered/path/folderChannelDescriptor";
+            const expectedParameters = {
+                folder: "folderValue",
+                channel_descriptor: "channelDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderChannelDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderChannelDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderChannelDescriptorPath', () => {
+                const result = client.folderChannelDescriptorPath("folderValue", "channelDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderChannelDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderChannelDescriptorName', () => {
+                const result = client.matchFolderFromFolderChannelDescriptorName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderChannelDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChannelDescriptorFromFolderChannelDescriptorName', () => {
+                const result = client.matchChannelDescriptorFromFolderChannelDescriptorName(fakePath);
+                assert.strictEqual(result, "channelDescriptorValue");
+                assert((client.pathTemplates.folderChannelDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderGroup', async () => {
+            const fakePath = "/rendered/path/folderGroup";
+            const expectedParameters = {
+                folder: "folderValue",
+                group: "groupValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderGroupPath', () => {
+                const result = client.folderGroupPath("folderValue", "groupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderGroupName', () => {
+                const result = client.matchFolderFromFolderGroupName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGroupFromFolderGroupName', () => {
+                const result = client.matchGroupFromFolderGroupName(fakePath);
+                assert.strictEqual(result, "groupValue");
+                assert((client.pathTemplates.folderGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderMetricDescriptor', async () => {
+            const fakePath = "/rendered/path/folderMetricDescriptor";
+            const expectedParameters = {
+                folder: "folderValue",
+                metric_descriptor: "metricDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderMetricDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderMetricDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderMetricDescriptorPath', () => {
+                const result = client.folderMetricDescriptorPath("folderValue", "metricDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderMetricDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderMetricDescriptorName', () => {
+                const result = client.matchFolderFromFolderMetricDescriptorName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderMetricDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetricDescriptorFromFolderMetricDescriptorName', () => {
+                const result = client.matchMetricDescriptorFromFolderMetricDescriptorName(fakePath);
+                assert.strictEqual(result, "metricDescriptorValue");
+                assert((client.pathTemplates.folderMetricDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderMonitoredResourceDescriptor', async () => {
+            const fakePath = "/rendered/path/folderMonitoredResourceDescriptor";
+            const expectedParameters = {
+                folder: "folderValue",
+                monitored_resource_descriptor: "monitoredResourceDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderMonitoredResourceDescriptorPath', () => {
+                const result = client.folderMonitoredResourceDescriptorPath("folderValue", "monitoredResourceDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderMonitoredResourceDescriptorName', () => {
+                const result = client.matchFolderFromFolderMonitoredResourceDescriptorName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMonitoredResourceDescriptorFromFolderMonitoredResourceDescriptorName', () => {
+                const result = client.matchMonitoredResourceDescriptorFromFolderMonitoredResourceDescriptorName(fakePath);
+                assert.strictEqual(result, "monitoredResourceDescriptorValue");
+                assert((client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderNotificationChannel', async () => {
+            const fakePath = "/rendered/path/folderNotificationChannel";
+            const expectedParameters = {
+                folder: "folderValue",
+                notification_channel: "notificationChannelValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderNotificationChannelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderNotificationChannelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderNotificationChannelPath', () => {
+                const result = client.folderNotificationChannelPath("folderValue", "notificationChannelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderNotificationChannelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderNotificationChannelName', () => {
+                const result = client.matchFolderFromFolderNotificationChannelName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderNotificationChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotificationChannelFromFolderNotificationChannelName', () => {
+                const result = client.matchNotificationChannelFromFolderNotificationChannelName(fakePath);
+                assert.strictEqual(result, "notificationChannelValue");
+                assert((client.pathTemplates.folderNotificationChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderService', async () => {
+            const fakePath = "/rendered/path/folderService";
+            const expectedParameters = {
+                folder: "folderValue",
+                service: "serviceValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderServicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderServicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderServicePath', () => {
+                const result = client.folderServicePath("folderValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderServicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderServiceName', () => {
+                const result = client.matchFolderFromFolderServiceName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromFolderServiceName', () => {
+                const result = client.matchServiceFromFolderServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.folderServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderServiceServiceLevelObjective', async () => {
+            const fakePath = "/rendered/path/folderServiceServiceLevelObjective";
+            const expectedParameters = {
+                folder: "folderValue",
+                service: "serviceValue",
+                service_level_objective: "serviceLevelObjectiveValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderServiceServiceLevelObjectivePath', () => {
+                const result = client.folderServiceServiceLevelObjectivePath("folderValue", "serviceValue", "serviceLevelObjectiveValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderServiceServiceLevelObjectiveName', () => {
+                const result = client.matchFolderFromFolderServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromFolderServiceServiceLevelObjectiveName', () => {
+                const result = client.matchServiceFromFolderServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName', () => {
+                const result = client.matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "serviceLevelObjectiveValue");
+                assert((client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderUptimeCheckConfig', async () => {
+            const fakePath = "/rendered/path/folderUptimeCheckConfig";
+            const expectedParameters = {
+                folder: "folderValue",
+                uptime_check_config: "uptimeCheckConfigValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderUptimeCheckConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderUptimeCheckConfigPath', () => {
+                const result = client.folderUptimeCheckConfigPath("folderValue", "uptimeCheckConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderUptimeCheckConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderUptimeCheckConfigName', () => {
+                const result = client.matchFolderFromFolderUptimeCheckConfigName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderUptimeCheckConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUptimeCheckConfigFromFolderUptimeCheckConfigName', () => {
+                const result = client.matchUptimeCheckConfigFromFolderUptimeCheckConfigName(fakePath);
+                assert.strictEqual(result, "uptimeCheckConfigValue");
+                assert((client.pathTemplates.folderUptimeCheckConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationAlertPolicy', async () => {
+            const fakePath = "/rendered/path/organizationAlertPolicy";
+            const expectedParameters = {
+                organization: "organizationValue",
+                alert_policy: "alertPolicyValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationAlertPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationAlertPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationAlertPolicyPath', () => {
+                const result = client.organizationAlertPolicyPath("organizationValue", "alertPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationAlertPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationAlertPolicyName', () => {
+                const result = client.matchOrganizationFromOrganizationAlertPolicyName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationAlertPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAlertPolicyFromOrganizationAlertPolicyName', () => {
+                const result = client.matchAlertPolicyFromOrganizationAlertPolicyName(fakePath);
+                assert.strictEqual(result, "alertPolicyValue");
+                assert((client.pathTemplates.organizationAlertPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationAlertPolicyCondition', async () => {
+            const fakePath = "/rendered/path/organizationAlertPolicyCondition";
+            const expectedParameters = {
+                organization: "organizationValue",
+                alert_policy: "alertPolicyValue",
+                condition: "conditionValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationAlertPolicyConditionPath', () => {
+                const result = client.organizationAlertPolicyConditionPath("organizationValue", "alertPolicyValue", "conditionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationAlertPolicyConditionName', () => {
+                const result = client.matchOrganizationFromOrganizationAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAlertPolicyFromOrganizationAlertPolicyConditionName', () => {
+                const result = client.matchAlertPolicyFromOrganizationAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "alertPolicyValue");
+                assert((client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConditionFromOrganizationAlertPolicyConditionName', () => {
+                const result = client.matchConditionFromOrganizationAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "conditionValue");
+                assert((client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationChannelDescriptor', async () => {
+            const fakePath = "/rendered/path/organizationChannelDescriptor";
+            const expectedParameters = {
+                organization: "organizationValue",
+                channel_descriptor: "channelDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationChannelDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationChannelDescriptorPath', () => {
+                const result = client.organizationChannelDescriptorPath("organizationValue", "channelDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationChannelDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationChannelDescriptorName', () => {
+                const result = client.matchOrganizationFromOrganizationChannelDescriptorName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationChannelDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChannelDescriptorFromOrganizationChannelDescriptorName', () => {
+                const result = client.matchChannelDescriptorFromOrganizationChannelDescriptorName(fakePath);
+                assert.strictEqual(result, "channelDescriptorValue");
+                assert((client.pathTemplates.organizationChannelDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationGroup', async () => {
+            const fakePath = "/rendered/path/organizationGroup";
+            const expectedParameters = {
+                organization: "organizationValue",
+                group: "groupValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationGroupPath', () => {
+                const result = client.organizationGroupPath("organizationValue", "groupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationGroupName', () => {
+                const result = client.matchOrganizationFromOrganizationGroupName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGroupFromOrganizationGroupName', () => {
+                const result = client.matchGroupFromOrganizationGroupName(fakePath);
+                assert.strictEqual(result, "groupValue");
+                assert((client.pathTemplates.organizationGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationMetricDescriptor', async () => {
+            const fakePath = "/rendered/path/organizationMetricDescriptor";
+            const expectedParameters = {
+                organization: "organizationValue",
+                metric_descriptor: "metricDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationMetricDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationMetricDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationMetricDescriptorPath', () => {
+                const result = client.organizationMetricDescriptorPath("organizationValue", "metricDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationMetricDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationMetricDescriptorName', () => {
+                const result = client.matchOrganizationFromOrganizationMetricDescriptorName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationMetricDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetricDescriptorFromOrganizationMetricDescriptorName', () => {
+                const result = client.matchMetricDescriptorFromOrganizationMetricDescriptorName(fakePath);
+                assert.strictEqual(result, "metricDescriptorValue");
+                assert((client.pathTemplates.organizationMetricDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationMonitoredResourceDescriptor', async () => {
+            const fakePath = "/rendered/path/organizationMonitoredResourceDescriptor";
+            const expectedParameters = {
+                organization: "organizationValue",
+                monitored_resource_descriptor: "monitoredResourceDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationMonitoredResourceDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationMonitoredResourceDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationMonitoredResourceDescriptorPath', () => {
+                const result = client.organizationMonitoredResourceDescriptorPath("organizationValue", "monitoredResourceDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationMonitoredResourceDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationMonitoredResourceDescriptorName', () => {
+                const result = client.matchOrganizationFromOrganizationMonitoredResourceDescriptorName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationMonitoredResourceDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMonitoredResourceDescriptorFromOrganizationMonitoredResourceDescriptorName', () => {
+                const result = client.matchMonitoredResourceDescriptorFromOrganizationMonitoredResourceDescriptorName(fakePath);
+                assert.strictEqual(result, "monitoredResourceDescriptorValue");
+                assert((client.pathTemplates.organizationMonitoredResourceDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationNotificationChannel', async () => {
+            const fakePath = "/rendered/path/organizationNotificationChannel";
+            const expectedParameters = {
+                organization: "organizationValue",
+                notification_channel: "notificationChannelValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationNotificationChannelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationNotificationChannelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationNotificationChannelPath', () => {
+                const result = client.organizationNotificationChannelPath("organizationValue", "notificationChannelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationNotificationChannelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationNotificationChannelName', () => {
+                const result = client.matchOrganizationFromOrganizationNotificationChannelName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationNotificationChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotificationChannelFromOrganizationNotificationChannelName', () => {
+                const result = client.matchNotificationChannelFromOrganizationNotificationChannelName(fakePath);
+                assert.strictEqual(result, "notificationChannelValue");
+                assert((client.pathTemplates.organizationNotificationChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationService', async () => {
+            const fakePath = "/rendered/path/organizationService";
+            const expectedParameters = {
+                organization: "organizationValue",
+                service: "serviceValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationServicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationServicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationServicePath', () => {
+                const result = client.organizationServicePath("organizationValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationServicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationServiceName', () => {
+                const result = client.matchOrganizationFromOrganizationServiceName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromOrganizationServiceName', () => {
+                const result = client.matchServiceFromOrganizationServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.organizationServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationServiceServiceLevelObjective', async () => {
+            const fakePath = "/rendered/path/organizationServiceServiceLevelObjective";
+            const expectedParameters = {
+                organization: "organizationValue",
+                service: "serviceValue",
+                service_level_objective: "serviceLevelObjectiveValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationServiceServiceLevelObjectivePath', () => {
+                const result = client.organizationServiceServiceLevelObjectivePath("organizationValue", "serviceValue", "serviceLevelObjectiveValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationServiceServiceLevelObjectiveName', () => {
+                const result = client.matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromOrganizationServiceServiceLevelObjectiveName', () => {
+                const result = client.matchServiceFromOrganizationServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName', () => {
+                const result = client.matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "serviceLevelObjectiveValue");
+                assert((client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationUptimeCheckConfig', async () => {
+            const fakePath = "/rendered/path/organizationUptimeCheckConfig";
+            const expectedParameters = {
+                organization: "organizationValue",
+                uptime_check_config: "uptimeCheckConfigValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationUptimeCheckConfigPath', () => {
+                const result = client.organizationUptimeCheckConfigPath("organizationValue", "uptimeCheckConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationUptimeCheckConfigName', () => {
+                const result = client.matchOrganizationFromOrganizationUptimeCheckConfigName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName', () => {
+                const result = client.matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(fakePath);
+                assert.strictEqual(result, "uptimeCheckConfigValue");
+                assert((client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAlertPolicy', async () => {
+            const fakePath = "/rendered/path/projectAlertPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                alert_policy: "alertPolicyValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectAlertPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAlertPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAlertPolicyPath', () => {
+                const result = client.projectAlertPolicyPath("projectValue", "alertPolicyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAlertPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAlertPolicyName', () => {
+                const result = client.matchProjectFromProjectAlertPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAlertPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAlertPolicyFromProjectAlertPolicyName', () => {
+                const result = client.matchAlertPolicyFromProjectAlertPolicyName(fakePath);
+                assert.strictEqual(result, "alertPolicyValue");
+                assert((client.pathTemplates.projectAlertPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAlertPolicyCondition', async () => {
+            const fakePath = "/rendered/path/projectAlertPolicyCondition";
+            const expectedParameters = {
+                project: "projectValue",
+                alert_policy: "alertPolicyValue",
+                condition: "conditionValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAlertPolicyConditionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAlertPolicyConditionPath', () => {
+                const result = client.projectAlertPolicyConditionPath("projectValue", "alertPolicyValue", "conditionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAlertPolicyConditionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAlertPolicyConditionName', () => {
+                const result = client.matchProjectFromProjectAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAlertPolicyFromProjectAlertPolicyConditionName', () => {
+                const result = client.matchAlertPolicyFromProjectAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "alertPolicyValue");
+                assert((client.pathTemplates.projectAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConditionFromProjectAlertPolicyConditionName', () => {
+                const result = client.matchConditionFromProjectAlertPolicyConditionName(fakePath);
+                assert.strictEqual(result, "conditionValue");
+                assert((client.pathTemplates.projectAlertPolicyConditionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectChannelDescriptor', async () => {
+            const fakePath = "/rendered/path/projectChannelDescriptor";
+            const expectedParameters = {
+                project: "projectValue",
+                channel_descriptor: "channelDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectChannelDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectChannelDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectChannelDescriptorPath', () => {
+                const result = client.projectChannelDescriptorPath("projectValue", "channelDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectChannelDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectChannelDescriptorName', () => {
+                const result = client.matchProjectFromProjectChannelDescriptorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectChannelDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChannelDescriptorFromProjectChannelDescriptorName', () => {
+                const result = client.matchChannelDescriptorFromProjectChannelDescriptorName(fakePath);
+                assert.strictEqual(result, "channelDescriptorValue");
+                assert((client.pathTemplates.projectChannelDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectGroup', async () => {
+            const fakePath = "/rendered/path/projectGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                group: "groupValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectGroupPath', () => {
+                const result = client.projectGroupPath("projectValue", "groupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectGroupName', () => {
+                const result = client.matchProjectFromProjectGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGroupFromProjectGroupName', () => {
+                const result = client.matchGroupFromProjectGroupName(fakePath);
+                assert.strictEqual(result, "groupValue");
+                assert((client.pathTemplates.projectGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectMetricDescriptor', async () => {
+            const fakePath = "/rendered/path/projectMetricDescriptor";
+            const expectedParameters = {
+                project: "projectValue",
+                metric_descriptor: "metricDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectMetricDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectMetricDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectMetricDescriptorPath', () => {
+                const result = client.projectMetricDescriptorPath("projectValue", "metricDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectMetricDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectMetricDescriptorName', () => {
+                const result = client.matchProjectFromProjectMetricDescriptorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectMetricDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetricDescriptorFromProjectMetricDescriptorName', () => {
+                const result = client.matchMetricDescriptorFromProjectMetricDescriptorName(fakePath);
+                assert.strictEqual(result, "metricDescriptorValue");
+                assert((client.pathTemplates.projectMetricDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectMonitoredResourceDescriptor', async () => {
+            const fakePath = "/rendered/path/projectMonitoredResourceDescriptor";
+            const expectedParameters = {
+                project: "projectValue",
+                monitored_resource_descriptor: "monitoredResourceDescriptorValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectMonitoredResourceDescriptorPath', () => {
+                const result = client.projectMonitoredResourceDescriptorPath("projectValue", "monitoredResourceDescriptorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectMonitoredResourceDescriptorName', () => {
+                const result = client.matchProjectFromProjectMonitoredResourceDescriptorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMonitoredResourceDescriptorFromProjectMonitoredResourceDescriptorName', () => {
+                const result = client.matchMonitoredResourceDescriptorFromProjectMonitoredResourceDescriptorName(fakePath);
+                assert.strictEqual(result, "monitoredResourceDescriptorValue");
+                assert((client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectNotificationChannel', async () => {
+            const fakePath = "/rendered/path/projectNotificationChannel";
+            const expectedParameters = {
+                project: "projectValue",
+                notification_channel: "notificationChannelValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectNotificationChannelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectNotificationChannelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectNotificationChannelPath', () => {
+                const result = client.projectNotificationChannelPath("projectValue", "notificationChannelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectNotificationChannelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectNotificationChannelName', () => {
+                const result = client.matchProjectFromProjectNotificationChannelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectNotificationChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotificationChannelFromProjectNotificationChannelName', () => {
+                const result = client.matchNotificationChannelFromProjectNotificationChannelName(fakePath);
+                assert.strictEqual(result, "notificationChannelValue");
+                assert((client.pathTemplates.projectNotificationChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectService', async () => {
+            const fakePath = "/rendered/path/projectService";
+            const expectedParameters = {
+                project: "projectValue",
+                service: "serviceValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectServicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectServicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectServicePath', () => {
+                const result = client.projectServicePath("projectValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectServicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectServiceName', () => {
+                const result = client.matchProjectFromProjectServiceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromProjectServiceName', () => {
+                const result = client.matchServiceFromProjectServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.projectServicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectServiceServiceLevelObjective', async () => {
+            const fakePath = "/rendered/path/projectServiceServiceLevelObjective";
+            const expectedParameters = {
+                project: "projectValue",
+                service: "serviceValue",
+                service_level_objective: "serviceLevelObjectiveValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectServiceServiceLevelObjectivePath', () => {
+                const result = client.projectServiceServiceLevelObjectivePath("projectValue", "serviceValue", "serviceLevelObjectiveValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectServiceServiceLevelObjectiveName', () => {
+                const result = client.matchProjectFromProjectServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromProjectServiceServiceLevelObjectiveName', () => {
+                const result = client.matchServiceFromProjectServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName', () => {
+                const result = client.matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(fakePath);
+                assert.strictEqual(result, "serviceLevelObjectiveValue");
+                assert((client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectTimeSeries', async () => {
+            const fakePath = "/rendered/path/projectTimeSeries";
+            const expectedParameters = {
+                project: "projectValue",
+                time_series: "timeSeriesValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectTimeSeriesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectTimeSeriesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectTimeSeriesPath', () => {
+                const result = client.projectTimeSeriesPath("projectValue", "timeSeriesValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectTimeSeriesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectTimeSeriesName', () => {
+                const result = client.matchProjectFromProjectTimeSeriesName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectTimeSeriesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTimeSeriesFromProjectTimeSeriesName', () => {
+                const result = client.matchTimeSeriesFromProjectTimeSeriesName(fakePath);
+                assert.strictEqual(result, "timeSeriesValue");
+                assert((client.pathTemplates.projectTimeSeriesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectUptimeCheckConfig', async () => {
+            const fakePath = "/rendered/path/projectUptimeCheckConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                uptime_check_config: "uptimeCheckConfigValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectUptimeCheckConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectUptimeCheckConfigPath', () => {
+                const result = client.projectUptimeCheckConfigPath("projectValue", "uptimeCheckConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectUptimeCheckConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectUptimeCheckConfigName', () => {
+                const result = client.matchProjectFromProjectUptimeCheckConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectUptimeCheckConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchUptimeCheckConfigFromProjectUptimeCheckConfigName', () => {
+                const result = client.matchUptimeCheckConfigFromProjectUptimeCheckConfigName(fakePath);
+                assert.strictEqual(result, "uptimeCheckConfigValue");
+                assert((client.pathTemplates.projectUptimeCheckConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('snooze', async () => {
+            const fakePath = "/rendered/path/snooze";
+            const expectedParameters = {
+                project: "projectValue",
+                snooze: "snoozeValue",
+            };
+            const client = new metricserviceModule.v3.MetricServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.snoozePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.snoozePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('snoozePath', () => {
+                const result = client.snoozePath("projectValue", "snoozeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.snoozePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSnoozeName', () => {
+                const result = client.matchProjectFromSnoozeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.snoozePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSnoozeFromSnoozeName', () => {
+                const result = client.matchSnoozeFromSnoozeName(fakePath);
+                assert.strictEqual(result, "snoozeValue");
+                assert((client.pathTemplates.snoozePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('Path templates', () => {
-    describe('folderAlertPolicy', async () => {
-      const fakePath = '/rendered/path/folderAlertPolicy';
-      const expectedParameters = {
-        folder: 'folderValue',
-        alert_policy: 'alertPolicyValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderAlertPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderAlertPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderAlertPolicyPath', () => {
-        const result = client.folderAlertPolicyPath(
-          'folderValue',
-          'alertPolicyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderAlertPolicyPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderAlertPolicyName', () => {
-        const result = client.matchFolderFromFolderAlertPolicyName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderAlertPolicyPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAlertPolicyFromFolderAlertPolicyName', () => {
-        const result =
-          client.matchAlertPolicyFromFolderAlertPolicyName(fakePath);
-        assert.strictEqual(result, 'alertPolicyValue');
-        assert(
-          (
-            client.pathTemplates.folderAlertPolicyPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderAlertPolicyCondition', async () => {
-      const fakePath = '/rendered/path/folderAlertPolicyCondition';
-      const expectedParameters = {
-        folder: 'folderValue',
-        alert_policy: 'alertPolicyValue',
-        condition: 'conditionValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderAlertPolicyConditionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderAlertPolicyConditionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderAlertPolicyConditionPath', () => {
-        const result = client.folderAlertPolicyConditionPath(
-          'folderValue',
-          'alertPolicyValue',
-          'conditionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderAlertPolicyConditionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderAlertPolicyConditionName', () => {
-        const result =
-          client.matchFolderFromFolderAlertPolicyConditionName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAlertPolicyFromFolderAlertPolicyConditionName', () => {
-        const result =
-          client.matchAlertPolicyFromFolderAlertPolicyConditionName(fakePath);
-        assert.strictEqual(result, 'alertPolicyValue');
-        assert(
-          (
-            client.pathTemplates.folderAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConditionFromFolderAlertPolicyConditionName', () => {
-        const result =
-          client.matchConditionFromFolderAlertPolicyConditionName(fakePath);
-        assert.strictEqual(result, 'conditionValue');
-        assert(
-          (
-            client.pathTemplates.folderAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderChannelDescriptor', async () => {
-      const fakePath = '/rendered/path/folderChannelDescriptor';
-      const expectedParameters = {
-        folder: 'folderValue',
-        channel_descriptor: 'channelDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderChannelDescriptorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderChannelDescriptorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderChannelDescriptorPath', () => {
-        const result = client.folderChannelDescriptorPath(
-          'folderValue',
-          'channelDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderChannelDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderChannelDescriptorName', () => {
-        const result =
-          client.matchFolderFromFolderChannelDescriptorName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderChannelDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChannelDescriptorFromFolderChannelDescriptorName', () => {
-        const result =
-          client.matchChannelDescriptorFromFolderChannelDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'channelDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.folderChannelDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderGroup', async () => {
-      const fakePath = '/rendered/path/folderGroup';
-      const expectedParameters = {
-        folder: 'folderValue',
-        group: 'groupValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderGroupPath', () => {
-        const result = client.folderGroupPath('folderValue', 'groupValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.folderGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderGroupName', () => {
-        const result = client.matchFolderFromFolderGroupName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (client.pathTemplates.folderGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGroupFromFolderGroupName', () => {
-        const result = client.matchGroupFromFolderGroupName(fakePath);
-        assert.strictEqual(result, 'groupValue');
-        assert(
-          (client.pathTemplates.folderGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderMetricDescriptor', async () => {
-      const fakePath = '/rendered/path/folderMetricDescriptor';
-      const expectedParameters = {
-        folder: 'folderValue',
-        metric_descriptor: 'metricDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderMetricDescriptorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderMetricDescriptorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderMetricDescriptorPath', () => {
-        const result = client.folderMetricDescriptorPath(
-          'folderValue',
-          'metricDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderMetricDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderMetricDescriptorName', () => {
-        const result =
-          client.matchFolderFromFolderMetricDescriptorName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderMetricDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMetricDescriptorFromFolderMetricDescriptorName', () => {
-        const result =
-          client.matchMetricDescriptorFromFolderMetricDescriptorName(fakePath);
-        assert.strictEqual(result, 'metricDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.folderMetricDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderMonitoredResourceDescriptor', async () => {
-      const fakePath = '/rendered/path/folderMonitoredResourceDescriptor';
-      const expectedParameters = {
-        folder: 'folderValue',
-        monitored_resource_descriptor: 'monitoredResourceDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderMonitoredResourceDescriptorPath', () => {
-        const result = client.folderMonitoredResourceDescriptorPath(
-          'folderValue',
-          'monitoredResourceDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderMonitoredResourceDescriptorName', () => {
-        const result =
-          client.matchFolderFromFolderMonitoredResourceDescriptorName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMonitoredResourceDescriptorFromFolderMonitoredResourceDescriptorName', () => {
-        const result =
-          client.matchMonitoredResourceDescriptorFromFolderMonitoredResourceDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'monitoredResourceDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.folderMonitoredResourceDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderNotificationChannel', async () => {
-      const fakePath = '/rendered/path/folderNotificationChannel';
-      const expectedParameters = {
-        folder: 'folderValue',
-        notification_channel: 'notificationChannelValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderNotificationChannelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderNotificationChannelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderNotificationChannelPath', () => {
-        const result = client.folderNotificationChannelPath(
-          'folderValue',
-          'notificationChannelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderNotificationChannelPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderNotificationChannelName', () => {
-        const result =
-          client.matchFolderFromFolderNotificationChannelName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderNotificationChannelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNotificationChannelFromFolderNotificationChannelName', () => {
-        const result =
-          client.matchNotificationChannelFromFolderNotificationChannelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'notificationChannelValue');
-        assert(
-          (
-            client.pathTemplates.folderNotificationChannelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderService', async () => {
-      const fakePath = '/rendered/path/folderService';
-      const expectedParameters = {
-        folder: 'folderValue',
-        service: 'serviceValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderServicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderServicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderServicePath', () => {
-        const result = client.folderServicePath('folderValue', 'serviceValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.folderServicePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderServiceName', () => {
-        const result = client.matchFolderFromFolderServiceName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (client.pathTemplates.folderServicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromFolderServiceName', () => {
-        const result = client.matchServiceFromFolderServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.folderServicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderServiceServiceLevelObjective', async () => {
-      const fakePath = '/rendered/path/folderServiceServiceLevelObjective';
-      const expectedParameters = {
-        folder: 'folderValue',
-        service: 'serviceValue',
-        service_level_objective: 'serviceLevelObjectiveValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('folderServiceServiceLevelObjectivePath', () => {
-        const result = client.folderServiceServiceLevelObjectivePath(
-          'folderValue',
-          'serviceValue',
-          'serviceLevelObjectiveValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchFolderFromFolderServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromFolderServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchServiceFromFolderServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceLevelObjectiveValue');
-        assert(
-          (
-            client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('folderUptimeCheckConfig', async () => {
-      const fakePath = '/rendered/path/folderUptimeCheckConfig';
-      const expectedParameters = {
-        folder: 'folderValue',
-        uptime_check_config: 'uptimeCheckConfigValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.folderUptimeCheckConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.folderUptimeCheckConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('folderUptimeCheckConfigPath', () => {
-        const result = client.folderUptimeCheckConfigPath(
-          'folderValue',
-          'uptimeCheckConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.folderUptimeCheckConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchFolderFromFolderUptimeCheckConfigName', () => {
-        const result =
-          client.matchFolderFromFolderUptimeCheckConfigName(fakePath);
-        assert.strictEqual(result, 'folderValue');
-        assert(
-          (
-            client.pathTemplates.folderUptimeCheckConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchUptimeCheckConfigFromFolderUptimeCheckConfigName', () => {
-        const result =
-          client.matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'uptimeCheckConfigValue');
-        assert(
-          (
-            client.pathTemplates.folderUptimeCheckConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationAlertPolicy', async () => {
-      const fakePath = '/rendered/path/organizationAlertPolicy';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        alert_policy: 'alertPolicyValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationAlertPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationAlertPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationAlertPolicyPath', () => {
-        const result = client.organizationAlertPolicyPath(
-          'organizationValue',
-          'alertPolicyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationAlertPolicyPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationAlertPolicyName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationAlertPolicyName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationAlertPolicyPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAlertPolicyFromOrganizationAlertPolicyName', () => {
-        const result =
-          client.matchAlertPolicyFromOrganizationAlertPolicyName(fakePath);
-        assert.strictEqual(result, 'alertPolicyValue');
-        assert(
-          (
-            client.pathTemplates.organizationAlertPolicyPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationAlertPolicyCondition', async () => {
-      const fakePath = '/rendered/path/organizationAlertPolicyCondition';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        alert_policy: 'alertPolicyValue',
-        condition: 'conditionValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationAlertPolicyConditionPath', () => {
-        const result = client.organizationAlertPolicyConditionPath(
-          'organizationValue',
-          'alertPolicyValue',
-          'conditionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationAlertPolicyConditionName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationAlertPolicyConditionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAlertPolicyFromOrganizationAlertPolicyConditionName', () => {
-        const result =
-          client.matchAlertPolicyFromOrganizationAlertPolicyConditionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'alertPolicyValue');
-        assert(
-          (
-            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConditionFromOrganizationAlertPolicyConditionName', () => {
-        const result =
-          client.matchConditionFromOrganizationAlertPolicyConditionName(
-            fakePath
-          );
-        assert.strictEqual(result, 'conditionValue');
-        assert(
-          (
-            client.pathTemplates.organizationAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationChannelDescriptor', async () => {
-      const fakePath = '/rendered/path/organizationChannelDescriptor';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        channel_descriptor: 'channelDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationChannelDescriptorPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationChannelDescriptorPath', () => {
-        const result = client.organizationChannelDescriptorPath(
-          'organizationValue',
-          'channelDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationChannelDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationChannelDescriptorName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationChannelDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationChannelDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChannelDescriptorFromOrganizationChannelDescriptorName', () => {
-        const result =
-          client.matchChannelDescriptorFromOrganizationChannelDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'channelDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.organizationChannelDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationGroup', async () => {
-      const fakePath = '/rendered/path/organizationGroup';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        group: 'groupValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationGroupPath', () => {
-        const result = client.organizationGroupPath(
-          'organizationValue',
-          'groupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationGroupPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationGroupName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationGroupName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGroupFromOrganizationGroupName', () => {
-        const result = client.matchGroupFromOrganizationGroupName(fakePath);
-        assert.strictEqual(result, 'groupValue');
-        assert(
-          (
-            client.pathTemplates.organizationGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationMetricDescriptor', async () => {
-      const fakePath = '/rendered/path/organizationMetricDescriptor';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        metric_descriptor: 'metricDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationMetricDescriptorPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationMetricDescriptorPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationMetricDescriptorPath', () => {
-        const result = client.organizationMetricDescriptorPath(
-          'organizationValue',
-          'metricDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationMetricDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationMetricDescriptorName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationMetricDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationMetricDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMetricDescriptorFromOrganizationMetricDescriptorName', () => {
-        const result =
-          client.matchMetricDescriptorFromOrganizationMetricDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'metricDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.organizationMetricDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationMonitoredResourceDescriptor', async () => {
-      const fakePath = '/rendered/path/organizationMonitoredResourceDescriptor';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        monitored_resource_descriptor: 'monitoredResourceDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationMonitoredResourceDescriptorPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationMonitoredResourceDescriptorPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationMonitoredResourceDescriptorPath', () => {
-        const result = client.organizationMonitoredResourceDescriptorPath(
-          'organizationValue',
-          'monitoredResourceDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationMonitoredResourceDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationMonitoredResourceDescriptorName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationMonitoredResourceDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationMonitoredResourceDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMonitoredResourceDescriptorFromOrganizationMonitoredResourceDescriptorName', () => {
-        const result =
-          client.matchMonitoredResourceDescriptorFromOrganizationMonitoredResourceDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'monitoredResourceDescriptorValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationMonitoredResourceDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationNotificationChannel', async () => {
-      const fakePath = '/rendered/path/organizationNotificationChannel';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        notification_channel: 'notificationChannelValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationNotificationChannelPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationNotificationChannelPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationNotificationChannelPath', () => {
-        const result = client.organizationNotificationChannelPath(
-          'organizationValue',
-          'notificationChannelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationNotificationChannelPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationNotificationChannelName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationNotificationChannelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationNotificationChannelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNotificationChannelFromOrganizationNotificationChannelName', () => {
-        const result =
-          client.matchNotificationChannelFromOrganizationNotificationChannelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'notificationChannelValue');
-        assert(
-          (
-            client.pathTemplates.organizationNotificationChannelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationService', async () => {
-      const fakePath = '/rendered/path/organizationService';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        service: 'serviceValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationServicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationServicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationServicePath', () => {
-        const result = client.organizationServicePath(
-          'organizationValue',
-          'serviceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationServicePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationServiceName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationServiceName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationServicePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromOrganizationServiceName', () => {
-        const result = client.matchServiceFromOrganizationServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.organizationServicePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationServiceServiceLevelObjective', async () => {
-      const fakePath =
-        '/rendered/path/organizationServiceServiceLevelObjective';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        service: 'serviceValue',
-        service_level_objective: 'serviceLevelObjectiveValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationServiceServiceLevelObjectivePath', () => {
-        const result = client.organizationServiceServiceLevelObjectivePath(
-          'organizationValue',
-          'serviceValue',
-          'serviceLevelObjectiveValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .organizationServiceServiceLevelObjectivePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchServiceFromOrganizationServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceLevelObjectiveValue');
-        assert(
-          (
-            client.pathTemplates
-              .organizationServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationUptimeCheckConfig', async () => {
-      const fakePath = '/rendered/path/organizationUptimeCheckConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        uptime_check_config: 'uptimeCheckConfigValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('organizationUptimeCheckConfigPath', () => {
-        const result = client.organizationUptimeCheckConfigPath(
-          'organizationValue',
-          'uptimeCheckConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationUptimeCheckConfigName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationUptimeCheckConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName', () => {
-        const result =
-          client.matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'uptimeCheckConfigValue');
-        assert(
-          (
-            client.pathTemplates.organizationUptimeCheckConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectAlertPolicy', async () => {
-      const fakePath = '/rendered/path/projectAlertPolicy';
-      const expectedParameters = {
-        project: 'projectValue',
-        alert_policy: 'alertPolicyValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectAlertPolicyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectAlertPolicyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAlertPolicyPath', () => {
-        const result = client.projectAlertPolicyPath(
-          'projectValue',
-          'alertPolicyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectAlertPolicyPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAlertPolicyName', () => {
-        const result = client.matchProjectFromProjectAlertPolicyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectAlertPolicyPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAlertPolicyFromProjectAlertPolicyName', () => {
-        const result =
-          client.matchAlertPolicyFromProjectAlertPolicyName(fakePath);
-        assert.strictEqual(result, 'alertPolicyValue');
-        assert(
-          (
-            client.pathTemplates.projectAlertPolicyPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectAlertPolicyCondition', async () => {
-      const fakePath = '/rendered/path/projectAlertPolicyCondition';
-      const expectedParameters = {
-        project: 'projectValue',
-        alert_policy: 'alertPolicyValue',
-        condition: 'conditionValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectAlertPolicyConditionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectAlertPolicyConditionPath', () => {
-        const result = client.projectAlertPolicyConditionPath(
-          'projectValue',
-          'alertPolicyValue',
-          'conditionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectAlertPolicyConditionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectAlertPolicyConditionName', () => {
-        const result =
-          client.matchProjectFromProjectAlertPolicyConditionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAlertPolicyFromProjectAlertPolicyConditionName', () => {
-        const result =
-          client.matchAlertPolicyFromProjectAlertPolicyConditionName(fakePath);
-        assert.strictEqual(result, 'alertPolicyValue');
-        assert(
-          (
-            client.pathTemplates.projectAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConditionFromProjectAlertPolicyConditionName', () => {
-        const result =
-          client.matchConditionFromProjectAlertPolicyConditionName(fakePath);
-        assert.strictEqual(result, 'conditionValue');
-        assert(
-          (
-            client.pathTemplates.projectAlertPolicyConditionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectChannelDescriptor', async () => {
-      const fakePath = '/rendered/path/projectChannelDescriptor';
-      const expectedParameters = {
-        project: 'projectValue',
-        channel_descriptor: 'channelDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectChannelDescriptorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectChannelDescriptorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectChannelDescriptorPath', () => {
-        const result = client.projectChannelDescriptorPath(
-          'projectValue',
-          'channelDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectChannelDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectChannelDescriptorName', () => {
-        const result =
-          client.matchProjectFromProjectChannelDescriptorName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectChannelDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchChannelDescriptorFromProjectChannelDescriptorName', () => {
-        const result =
-          client.matchChannelDescriptorFromProjectChannelDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'channelDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.projectChannelDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectGroup', async () => {
-      const fakePath = '/rendered/path/projectGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        group: 'groupValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectGroupPath', () => {
-        const result = client.projectGroupPath('projectValue', 'groupValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectGroupName', () => {
-        const result = client.matchProjectFromProjectGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGroupFromProjectGroupName', () => {
-        const result = client.matchGroupFromProjectGroupName(fakePath);
-        assert.strictEqual(result, 'groupValue');
-        assert(
-          (client.pathTemplates.projectGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectMetricDescriptor', async () => {
-      const fakePath = '/rendered/path/projectMetricDescriptor';
-      const expectedParameters = {
-        project: 'projectValue',
-        metric_descriptor: 'metricDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectMetricDescriptorPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectMetricDescriptorPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectMetricDescriptorPath', () => {
-        const result = client.projectMetricDescriptorPath(
-          'projectValue',
-          'metricDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectMetricDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectMetricDescriptorName', () => {
-        const result =
-          client.matchProjectFromProjectMetricDescriptorName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectMetricDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMetricDescriptorFromProjectMetricDescriptorName', () => {
-        const result =
-          client.matchMetricDescriptorFromProjectMetricDescriptorName(fakePath);
-        assert.strictEqual(result, 'metricDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.projectMetricDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectMonitoredResourceDescriptor', async () => {
-      const fakePath = '/rendered/path/projectMonitoredResourceDescriptor';
-      const expectedParameters = {
-        project: 'projectValue',
-        monitored_resource_descriptor: 'monitoredResourceDescriptorValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectMonitoredResourceDescriptorPath', () => {
-        const result = client.projectMonitoredResourceDescriptorPath(
-          'projectValue',
-          'monitoredResourceDescriptorValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectMonitoredResourceDescriptorName', () => {
-        const result =
-          client.matchProjectFromProjectMonitoredResourceDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMonitoredResourceDescriptorFromProjectMonitoredResourceDescriptorName', () => {
-        const result =
-          client.matchMonitoredResourceDescriptorFromProjectMonitoredResourceDescriptorName(
-            fakePath
-          );
-        assert.strictEqual(result, 'monitoredResourceDescriptorValue');
-        assert(
-          (
-            client.pathTemplates.projectMonitoredResourceDescriptorPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectNotificationChannel', async () => {
-      const fakePath = '/rendered/path/projectNotificationChannel';
-      const expectedParameters = {
-        project: 'projectValue',
-        notification_channel: 'notificationChannelValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectNotificationChannelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectNotificationChannelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectNotificationChannelPath', () => {
-        const result = client.projectNotificationChannelPath(
-          'projectValue',
-          'notificationChannelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectNotificationChannelPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectNotificationChannelName', () => {
-        const result =
-          client.matchProjectFromProjectNotificationChannelName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectNotificationChannelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNotificationChannelFromProjectNotificationChannelName', () => {
-        const result =
-          client.matchNotificationChannelFromProjectNotificationChannelName(
-            fakePath
-          );
-        assert.strictEqual(result, 'notificationChannelValue');
-        assert(
-          (
-            client.pathTemplates.projectNotificationChannelPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectService', async () => {
-      const fakePath = '/rendered/path/projectService';
-      const expectedParameters = {
-        project: 'projectValue',
-        service: 'serviceValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectServicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectServicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectServicePath', () => {
-        const result = client.projectServicePath(
-          'projectValue',
-          'serviceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectServicePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectServiceName', () => {
-        const result = client.matchProjectFromProjectServiceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectServicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromProjectServiceName', () => {
-        const result = client.matchServiceFromProjectServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.projectServicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectServiceServiceLevelObjective', async () => {
-      const fakePath = '/rendered/path/projectServiceServiceLevelObjective';
-      const expectedParameters = {
-        project: 'projectValue',
-        service: 'serviceValue',
-        service_level_objective: 'serviceLevelObjectiveValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectServiceServiceLevelObjectivePath', () => {
-        const result = client.projectServiceServiceLevelObjectivePath(
-          'projectValue',
-          'serviceValue',
-          'serviceLevelObjectiveValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchProjectFromProjectServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromProjectServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchServiceFromProjectServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (
-            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName', () => {
-        const result =
-          client.matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
-            fakePath
-          );
-        assert.strictEqual(result, 'serviceLevelObjectiveValue');
-        assert(
-          (
-            client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectTimeSeries', async () => {
-      const fakePath = '/rendered/path/projectTimeSeries';
-      const expectedParameters = {
-        project: 'projectValue',
-        time_series: 'timeSeriesValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectTimeSeriesPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectTimeSeriesPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectTimeSeriesPath', () => {
-        const result = client.projectTimeSeriesPath(
-          'projectValue',
-          'timeSeriesValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectTimeSeriesPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectTimeSeriesName', () => {
-        const result = client.matchProjectFromProjectTimeSeriesName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectTimeSeriesPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTimeSeriesFromProjectTimeSeriesName', () => {
-        const result =
-          client.matchTimeSeriesFromProjectTimeSeriesName(fakePath);
-        assert.strictEqual(result, 'timeSeriesValue');
-        assert(
-          (
-            client.pathTemplates.projectTimeSeriesPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectUptimeCheckConfig', async () => {
-      const fakePath = '/rendered/path/projectUptimeCheckConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        uptime_check_config: 'uptimeCheckConfigValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectUptimeCheckConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectUptimeCheckConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectUptimeCheckConfigPath', () => {
-        const result = client.projectUptimeCheckConfigPath(
-          'projectValue',
-          'uptimeCheckConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectUptimeCheckConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectUptimeCheckConfigName', () => {
-        const result =
-          client.matchProjectFromProjectUptimeCheckConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectUptimeCheckConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchUptimeCheckConfigFromProjectUptimeCheckConfigName', () => {
-        const result =
-          client.matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
-            fakePath
-          );
-        assert.strictEqual(result, 'uptimeCheckConfigValue');
-        assert(
-          (
-            client.pathTemplates.projectUptimeCheckConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('snooze', async () => {
-      const fakePath = '/rendered/path/snooze';
-      const expectedParameters = {
-        project: 'projectValue',
-        snooze: 'snoozeValue',
-      };
-      const client = new metricserviceModule.v3.MetricServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.snoozePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.snoozePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('snoozePath', () => {
-        const result = client.snoozePath('projectValue', 'snoozeValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.snoozePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromSnoozeName', () => {
-        const result = client.matchProjectFromSnoozeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSnoozeFromSnoozeName', () => {
-        const result = client.matchSnoozeFromSnoozeName(fakePath);
-        assert.strictEqual(result, 'snoozeValue');
-        assert(
-          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

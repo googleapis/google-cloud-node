@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const dataexchange = require('@google-cloud/bigquery-data-exchange');
 
 function main() {
-  const analyticsHubServiceClient =
-    new dataexchange.AnalyticsHubServiceClient();
+  const analyticsHubServiceClient = new dataexchange.AnalyticsHubServiceClient();
 }
 
 main();
