@@ -1,0 +1,17 @@
+{
+  "name": "lustre",
+  "name_pretty": "Google Cloud Managed Lustre API",
+  "product_documentation": "https://cloud.google.com/managed-lustre/docs",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/lustre/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/lustre",
+  "api_id": "lustre.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "lustre"
+}
+

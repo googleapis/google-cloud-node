@@ -3898,6 +3898,7 @@
                              * Properties of a Subscription.
                              * @memberof google.apps.events.subscriptions.v1beta
                              * @interface ISubscription
+                             * @property {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions|null} [driveOptions] Subscription driveOptions
                              * @property {google.protobuf.ITimestamp|null} [expireTime] Subscription expireTime
                              * @property {google.protobuf.IDuration|null} [ttl] Subscription ttl
                              * @property {string|null} [name] Subscription name
@@ -3930,6 +3931,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * Subscription driveOptions.
+                             * @member {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions|null|undefined} driveOptions
+                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
+                             * @instance
+                             */
+                            Subscription.prototype.driveOptions = null;
     
                             /**
                              * Subscription expireTime.
@@ -4055,6 +4064,17 @@
                             var $oneOfFields;
     
                             /**
+                             * Subscription subscriptionOptions.
+                             * @member {"driveOptions"|undefined} subscriptionOptions
+                             * @memberof google.apps.events.subscriptions.v1beta.Subscription
+                             * @instance
+                             */
+                            Object.defineProperty(Subscription.prototype, "subscriptionOptions", {
+                                get: $util.oneOfGetter($oneOfFields = ["driveOptions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Subscription expiration.
                              * @member {"expireTime"|"ttl"|undefined} expiration
                              * @memberof google.apps.events.subscriptions.v1beta.Subscription
@@ -4120,6 +4140,8 @@
                                     writer.uint32(/* id 17, wireType 2 =*/138).string(message.etag);
                                 if (message.suspensionReason != null && Object.hasOwnProperty.call(message, "suspensionReason"))
                                     writer.uint32(/* id 18, wireType 0 =*/144).int32(message.suspensionReason);
+                                if (message.driveOptions != null && Object.hasOwnProperty.call(message, "driveOptions"))
+                                    $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.encode(message.driveOptions, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4156,6 +4178,10 @@
                                     if (tag === error)
                                         break;
                                     switch (tag >>> 3) {
+                                    case 20: {
+                                            message.driveOptions = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 13: {
                                             message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                             break;
@@ -4254,6 +4280,14 @@
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
                                 var properties = {};
+                                if (message.driveOptions != null && message.hasOwnProperty("driveOptions")) {
+                                    properties.subscriptionOptions = 1;
+                                    {
+                                        var error = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify(message.driveOptions);
+                                        if (error)
+                                            return "driveOptions." + error;
+                                    }
+                                }
                                 if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
                                     properties.expiration = 1;
                                     {
@@ -4356,6 +4390,11 @@
                                 if (object instanceof $root.google.apps.events.subscriptions.v1beta.Subscription)
                                     return object;
                                 var message = new $root.google.apps.events.subscriptions.v1beta.Subscription();
+                                if (object.driveOptions != null) {
+                                    if (typeof object.driveOptions !== "object")
+                                        throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.driveOptions: object expected");
+                                    message.driveOptions = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.fromObject(object.driveOptions);
+                                }
                                 if (object.expireTime != null) {
                                     if (typeof object.expireTime !== "object")
                                         throw TypeError(".google.apps.events.subscriptions.v1beta.Subscription.expireTime: object expected");
@@ -4540,6 +4579,11 @@
                                     object.etag = message.etag;
                                 if (message.suspensionReason != null && message.hasOwnProperty("suspensionReason"))
                                     object.suspensionReason = options.enums === String ? $root.google.apps.events.subscriptions.v1beta.Subscription.ErrorType[message.suspensionReason] === undefined ? message.suspensionReason : $root.google.apps.events.subscriptions.v1beta.Subscription.ErrorType[message.suspensionReason] : message.suspensionReason;
+                                if (message.driveOptions != null && message.hasOwnProperty("driveOptions")) {
+                                    object.driveOptions = $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.toObject(message.driveOptions, options);
+                                    if (options.oneofs)
+                                        object.subscriptionOptions = "driveOptions";
+                                }
                                 return object;
                             };
     
@@ -4568,6 +4612,211 @@
                                 }
                                 return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.Subscription";
                             };
+    
+                            Subscription.DriveOptions = (function() {
+    
+                                /**
+                                 * Properties of a DriveOptions.
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription
+                                 * @interface IDriveOptions
+                                 * @property {boolean|null} [includeDescendants] DriveOptions includeDescendants
+                                 */
+    
+                                /**
+                                 * Constructs a new DriveOptions.
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription
+                                 * @classdesc Represents a DriveOptions.
+                                 * @implements IDriveOptions
+                                 * @constructor
+                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions=} [properties] Properties to set
+                                 */
+                                function DriveOptions(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DriveOptions includeDescendants.
+                                 * @member {boolean} includeDescendants
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @instance
+                                 */
+                                DriveOptions.prototype.includeDescendants = false;
+    
+                                /**
+                                 * Creates a new DriveOptions instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions=} [properties] Properties to set
+                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions instance
+                                 */
+                                DriveOptions.create = function create(properties) {
+                                    return new DriveOptions(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DriveOptions message. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions} message DriveOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DriveOptions.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.includeDescendants != null && Object.hasOwnProperty.call(message, "includeDescendants"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.includeDescendants);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DriveOptions message, length delimited. Does not implicitly {@link google.apps.events.subscriptions.v1beta.Subscription.DriveOptions.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.IDriveOptions} message DriveOptions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DriveOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DriveOptions message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DriveOptions.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.includeDescendants = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DriveOptions message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DriveOptions.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DriveOptions message.
+                                 * @function verify
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DriveOptions.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.includeDescendants != null && message.hasOwnProperty("includeDescendants"))
+                                        if (typeof message.includeDescendants !== "boolean")
+                                            return "includeDescendants: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DriveOptions message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} DriveOptions
+                                 */
+                                DriveOptions.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions)
+                                        return object;
+                                    var message = new $root.google.apps.events.subscriptions.v1beta.Subscription.DriveOptions();
+                                    if (object.includeDescendants != null)
+                                        message.includeDescendants = Boolean(object.includeDescendants);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DriveOptions message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {google.apps.events.subscriptions.v1beta.Subscription.DriveOptions} message DriveOptions
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DriveOptions.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.includeDescendants = false;
+                                    if (message.includeDescendants != null && message.hasOwnProperty("includeDescendants"))
+                                        object.includeDescendants = message.includeDescendants;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DriveOptions to JSON.
+                                 * @function toJSON
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DriveOptions.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DriveOptions
+                                 * @function getTypeUrl
+                                 * @memberof google.apps.events.subscriptions.v1beta.Subscription.DriveOptions
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DriveOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.apps.events.subscriptions.v1beta.Subscription.DriveOptions";
+                                };
+    
+                                return DriveOptions;
+                            })();
     
                             /**
                              * State enum.

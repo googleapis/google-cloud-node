@@ -29,1901 +29,1404 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2.MigrationServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'bigquerymigration.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          migrationserviceModule.v2.MigrationServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'bigquerymigration.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          migrationserviceModule.v2.MigrationServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'bigquerymigration.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'bigquerymigration.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'bigquerymigration.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new migrationserviceModule.v2.MigrationServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'bigquerymigration.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'bigquerymigration.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new migrationserviceModule.v2.MigrationServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'bigquerymigration.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new migrationserviceModule.v2.MigrationServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = migrationserviceModule.v2.MigrationServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = migrationserviceModule.v2.MigrationServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'bigquerymigration.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.migrationServiceStub, undefined);
-      await client.initialize();
-      assert(client.migrationServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.migrationServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.migrationServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createMigrationWorkflow', () => {
-    it('invokes createMigrationWorkflow without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-      );
-      client.innerApiCalls.createMigrationWorkflow =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createMigrationWorkflow(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMigrationWorkflow without error using callback', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-      );
-      client.innerApiCalls.createMigrationWorkflow =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createMigrationWorkflow(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMigrationWorkflow with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createMigrationWorkflow = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createMigrationWorkflow(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMigrationWorkflow with closed client', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createMigrationWorkflow(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getMigrationWorkflow', () => {
-    it('invokes getMigrationWorkflow without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-      );
-      client.innerApiCalls.getMigrationWorkflow =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getMigrationWorkflow(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMigrationWorkflow without error using callback', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-      );
-      client.innerApiCalls.getMigrationWorkflow =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMigrationWorkflow(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMigrationWorkflow with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMigrationWorkflow = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getMigrationWorkflow(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMigrationWorkflow with closed client', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getMigrationWorkflow(request), expectedError);
-    });
-  });
-
-  describe('deleteMigrationWorkflow', () => {
-    it('invokes deleteMigrationWorkflow without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteMigrationWorkflow =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteMigrationWorkflow(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMigrationWorkflow without error using callback', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteMigrationWorkflow =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteMigrationWorkflow(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMigrationWorkflow with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteMigrationWorkflow = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteMigrationWorkflow(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteMigrationWorkflow with closed client', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteMigrationWorkflow(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('startMigrationWorkflow', () => {
-    it('invokes startMigrationWorkflow without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.startMigrationWorkflow =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.startMigrationWorkflow(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startMigrationWorkflow without error using callback', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.startMigrationWorkflow =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.startMigrationWorkflow(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.startMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startMigrationWorkflow with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.startMigrationWorkflow = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.startMigrationWorkflow(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.startMigrationWorkflow as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.startMigrationWorkflow as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes startMigrationWorkflow with closed client', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.startMigrationWorkflow(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getMigrationSubtask', () => {
-    it('invokes getMigrationSubtask without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-      );
-      client.innerApiCalls.getMigrationSubtask =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getMigrationSubtask(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMigrationSubtask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMigrationSubtask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMigrationSubtask without error using callback', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-      );
-      client.innerApiCalls.getMigrationSubtask =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMigrationSubtask(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.bigquery.migration.v2.IMigrationSubtask | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMigrationSubtask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMigrationSubtask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMigrationSubtask with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMigrationSubtask = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getMigrationSubtask(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getMigrationSubtask as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMigrationSubtask as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMigrationSubtask with closed client', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getMigrationSubtask(request), expectedError);
-    });
-  });
-
-  describe('listMigrationWorkflows', () => {
-    it('invokes listMigrationWorkflows without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-      ];
-      client.innerApiCalls.listMigrationWorkflows =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listMigrationWorkflows(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMigrationWorkflows as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMigrationWorkflows as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMigrationWorkflows without error using callback', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-      ];
-      client.innerApiCalls.listMigrationWorkflows =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listMigrationWorkflows(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMigrationWorkflows as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMigrationWorkflows as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMigrationWorkflows with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listMigrationWorkflows = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listMigrationWorkflows(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listMigrationWorkflows as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMigrationWorkflows as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMigrationWorkflowsStream without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-      ];
-      client.descriptors.page.listMigrationWorkflows.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listMigrationWorkflowsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMigrationWorkflows, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listMigrationWorkflowsStream with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMigrationWorkflows.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listMigrationWorkflowsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMigrationWorkflows, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listMigrationWorkflows without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
-        ),
-      ];
-      client.descriptors.page.listMigrationWorkflows.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[] =
-        [];
-      const iterable = client.listMigrationWorkflowsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listMigrationWorkflows with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMigrationWorkflows.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listMigrationWorkflowsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = migrationserviceModule.v2.MigrationServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'bigquerymigration.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationWorkflows
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listMigrationSubtasks', () => {
-    it('invokes listMigrationSubtasks without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-      ];
-      client.innerApiCalls.listMigrationSubtasks =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listMigrationSubtasks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMigrationSubtasks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMigrationSubtasks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMigrationSubtasks without error using callback', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-      ];
-      client.innerApiCalls.listMigrationSubtasks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listMigrationSubtasks(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMigrationSubtasks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMigrationSubtasks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMigrationSubtasks with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listMigrationSubtasks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listMigrationSubtasks(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listMigrationSubtasks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMigrationSubtasks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMigrationSubtasksStream without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-      ];
-      client.descriptors.page.listMigrationSubtasks.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listMigrationSubtasksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.migration.v2.MigrationSubtask[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.migration.v2.MigrationSubtask
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'bigquerymigration.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMigrationSubtasks, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('invokes listMigrationSubtasksStream with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMigrationSubtasks.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listMigrationSubtasksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.migration.v2.MigrationSubtask[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.migration.v2.MigrationSubtask
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'bigquerymigration.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMigrationSubtasks, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listMigrationSubtasks without error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
-        ),
-      ];
-      client.descriptors.page.listMigrationSubtasks.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[] =
-        [];
-      const iterable = client.listMigrationSubtasksAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new migrationserviceModule.v2.MigrationServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'bigquerymigration.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listMigrationSubtasks with error', async () => {
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMigrationSubtasks.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listMigrationSubtasksAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new migrationserviceModule.v2.MigrationServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'bigquerymigration.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listMigrationSubtasks
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new migrationserviceModule.v2.MigrationServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('Path templates', () => {
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = migrationserviceModule.v2.MigrationServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient();
+            assert(client);
+        });
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.migrationServiceStub, undefined);
+            await client.initialize();
+            assert(client.migrationServiceStub);
+        });
 
-    describe('migrationSubtask', async () => {
-      const fakePath = '/rendered/path/migrationSubtask';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        workflow: 'workflowValue',
-        subtask: 'subtaskValue',
-      };
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.migrationSubtaskPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.migrationSubtaskPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has close method for the initialized client', done => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.migrationServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('migrationSubtaskPath', () => {
-        const result = client.migrationSubtaskPath(
-          'projectValue',
-          'locationValue',
-          'workflowValue',
-          'subtaskValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.migrationSubtaskPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.migrationServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchProjectFromMigrationSubtaskName', () => {
-        const result = client.matchProjectFromMigrationSubtaskName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchLocationFromMigrationSubtaskName', () => {
-        const result = client.matchLocationFromMigrationSubtaskName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkflowFromMigrationSubtaskName', () => {
-        const result = client.matchWorkflowFromMigrationSubtaskName(fakePath);
-        assert.strictEqual(result, 'workflowValue');
-        assert(
-          (client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSubtaskFromMigrationSubtaskName', () => {
-        const result = client.matchSubtaskFromMigrationSubtaskName(fakePath);
-        assert.strictEqual(result, 'subtaskValue');
-        assert(
-          (client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('migrationWorkflow', async () => {
-      const fakePath = '/rendered/path/migrationWorkflow';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        workflow: 'workflowValue',
-      };
-      const client = new migrationserviceModule.v2.MigrationServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.migrationWorkflowPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.migrationWorkflowPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createMigrationWorkflow', () => {
+        it('invokes createMigrationWorkflow without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
+            );
+            client.innerApiCalls.createMigrationWorkflow = stubSimpleCall(expectedResponse);
+            const [response] = await client.createMigrationWorkflow(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('migrationWorkflowPath', () => {
-        const result = client.migrationWorkflowPath(
-          'projectValue',
-          'locationValue',
-          'workflowValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.migrationWorkflowPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createMigrationWorkflow without error using callback', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
+            );
+            client.innerApiCalls.createMigrationWorkflow = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createMigrationWorkflow(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchProjectFromMigrationWorkflowName', () => {
-        const result = client.matchProjectFromMigrationWorkflowName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.migrationWorkflowPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createMigrationWorkflow with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMigrationWorkflow = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createMigrationWorkflow(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchLocationFromMigrationWorkflowName', () => {
-        const result = client.matchLocationFromMigrationWorkflowName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.migrationWorkflowPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchWorkflowFromMigrationWorkflowName', () => {
-        const result = client.matchWorkflowFromMigrationWorkflowName(fakePath);
-        assert.strictEqual(result, 'workflowValue');
-        assert(
-          (
-            client.pathTemplates.migrationWorkflowPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createMigrationWorkflow with closed client', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createMigrationWorkflow(request), expectedError);
+        });
     });
-  });
+
+    describe('getMigrationWorkflow', () => {
+        it('invokes getMigrationWorkflow without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
+            );
+            client.innerApiCalls.getMigrationWorkflow = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMigrationWorkflow(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMigrationWorkflow without error using callback', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()
+            );
+            client.innerApiCalls.getMigrationWorkflow = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMigrationWorkflow(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMigrationWorkflow with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMigrationWorkflow = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMigrationWorkflow(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMigrationWorkflow with closed client', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMigrationWorkflow(request), expectedError);
+        });
+    });
+
+    describe('deleteMigrationWorkflow', () => {
+        it('invokes deleteMigrationWorkflow without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteMigrationWorkflow = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteMigrationWorkflow(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMigrationWorkflow without error using callback', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteMigrationWorkflow = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteMigrationWorkflow(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMigrationWorkflow with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMigrationWorkflow = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteMigrationWorkflow(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMigrationWorkflow with closed client', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteMigrationWorkflow(request), expectedError);
+        });
+    });
+
+    describe('startMigrationWorkflow', () => {
+        it('invokes startMigrationWorkflow without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.startMigrationWorkflow = stubSimpleCall(expectedResponse);
+            const [response] = await client.startMigrationWorkflow(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startMigrationWorkflow without error using callback', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.startMigrationWorkflow = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.startMigrationWorkflow(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.startMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startMigrationWorkflow with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.startMigrationWorkflow = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.startMigrationWorkflow(request), expectedError);
+            const actualRequest = (client.innerApiCalls.startMigrationWorkflow as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.startMigrationWorkflow as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes startMigrationWorkflow with closed client', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.startMigrationWorkflow(request), expectedError);
+        });
+    });
+
+    describe('getMigrationSubtask', () => {
+        it('invokes getMigrationSubtask without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
+            );
+            client.innerApiCalls.getMigrationSubtask = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMigrationSubtask(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMigrationSubtask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMigrationSubtask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMigrationSubtask without error using callback', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()
+            );
+            client.innerApiCalls.getMigrationSubtask = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMigrationSubtask(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.migration.v2.IMigrationSubtask|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMigrationSubtask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMigrationSubtask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMigrationSubtask with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMigrationSubtask = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMigrationSubtask(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMigrationSubtask as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMigrationSubtask as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMigrationSubtask with closed client', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMigrationSubtask(request), expectedError);
+        });
+    });
+
+    describe('listMigrationWorkflows', () => {
+        it('invokes listMigrationWorkflows without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+            ];
+            client.innerApiCalls.listMigrationWorkflows = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMigrationWorkflows(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMigrationWorkflows as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMigrationWorkflows as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMigrationWorkflows without error using callback', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+            ];
+            client.innerApiCalls.listMigrationWorkflows = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMigrationWorkflows(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMigrationWorkflows as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMigrationWorkflows as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMigrationWorkflows with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMigrationWorkflows = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMigrationWorkflows(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMigrationWorkflows as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMigrationWorkflows as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMigrationWorkflowsStream without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+            ];
+            client.descriptors.page.listMigrationWorkflows.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMigrationWorkflowsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMigrationWorkflows.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMigrationWorkflows, request));
+            assert(
+                (client.descriptors.page.listMigrationWorkflows.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMigrationWorkflowsStream with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMigrationWorkflows.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMigrationWorkflowsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.migration.v2.MigrationWorkflow) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMigrationWorkflows.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMigrationWorkflows, request));
+            assert(
+                (client.descriptors.page.listMigrationWorkflows.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMigrationWorkflows without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationWorkflow()),
+            ];
+            client.descriptors.page.listMigrationWorkflows.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[] = [];
+            const iterable = client.listMigrationWorkflowsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMigrationWorkflows.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMigrationWorkflows.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMigrationWorkflows with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMigrationWorkflows.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMigrationWorkflowsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.migration.v2.IMigrationWorkflow[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMigrationWorkflows.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMigrationWorkflows.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listMigrationSubtasks', () => {
+        it('invokes listMigrationSubtasks without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+            ];
+            client.innerApiCalls.listMigrationSubtasks = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMigrationSubtasks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMigrationSubtasks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMigrationSubtasks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMigrationSubtasks without error using callback', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+            ];
+            client.innerApiCalls.listMigrationSubtasks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMigrationSubtasks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMigrationSubtasks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMigrationSubtasks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMigrationSubtasks with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMigrationSubtasks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMigrationSubtasks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMigrationSubtasks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMigrationSubtasks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMigrationSubtasksStream without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+            ];
+            client.descriptors.page.listMigrationSubtasks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMigrationSubtasksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.migration.v2.MigrationSubtask[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.migration.v2.MigrationSubtask) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMigrationSubtasks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMigrationSubtasks, request));
+            assert(
+                (client.descriptors.page.listMigrationSubtasks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMigrationSubtasksStream with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMigrationSubtasks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMigrationSubtasksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.bigquery.migration.v2.MigrationSubtask[] = [];
+                stream.on('data', (response: protos.google.cloud.bigquery.migration.v2.MigrationSubtask) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMigrationSubtasks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMigrationSubtasks, request));
+            assert(
+                (client.descriptors.page.listMigrationSubtasks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMigrationSubtasks without error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+              generateSampleMessage(new protos.google.cloud.bigquery.migration.v2.MigrationSubtask()),
+            ];
+            client.descriptors.page.listMigrationSubtasks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[] = [];
+            const iterable = client.listMigrationSubtasksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMigrationSubtasks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMigrationSubtasks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMigrationSubtasks with error', async () => {
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMigrationSubtasks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMigrationSubtasksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.bigquery.migration.v2.IMigrationSubtask[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMigrationSubtasks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMigrationSubtasks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('migrationSubtask', async () => {
+            const fakePath = "/rendered/path/migrationSubtask";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                workflow: "workflowValue",
+                subtask: "subtaskValue",
+            };
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.migrationSubtaskPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.migrationSubtaskPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('migrationSubtaskPath', () => {
+                const result = client.migrationSubtaskPath("projectValue", "locationValue", "workflowValue", "subtaskValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.migrationSubtaskPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMigrationSubtaskName', () => {
+                const result = client.matchProjectFromMigrationSubtaskName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMigrationSubtaskName', () => {
+                const result = client.matchLocationFromMigrationSubtaskName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkflowFromMigrationSubtaskName', () => {
+                const result = client.matchWorkflowFromMigrationSubtaskName(fakePath);
+                assert.strictEqual(result, "workflowValue");
+                assert((client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSubtaskFromMigrationSubtaskName', () => {
+                const result = client.matchSubtaskFromMigrationSubtaskName(fakePath);
+                assert.strictEqual(result, "subtaskValue");
+                assert((client.pathTemplates.migrationSubtaskPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('migrationWorkflow', async () => {
+            const fakePath = "/rendered/path/migrationWorkflow";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                workflow: "workflowValue",
+            };
+            const client = new migrationserviceModule.v2.MigrationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.migrationWorkflowPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.migrationWorkflowPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('migrationWorkflowPath', () => {
+                const result = client.migrationWorkflowPath("projectValue", "locationValue", "workflowValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.migrationWorkflowPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMigrationWorkflowName', () => {
+                const result = client.matchProjectFromMigrationWorkflowName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.migrationWorkflowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMigrationWorkflowName', () => {
+                const result = client.matchLocationFromMigrationWorkflowName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.migrationWorkflowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkflowFromMigrationWorkflowName', () => {
+                const result = client.matchWorkflowFromMigrationWorkflowName(fakePath);
+                assert.strictEqual(result, "workflowValue");
+                assert((client.pathTemplates.migrationWorkflowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

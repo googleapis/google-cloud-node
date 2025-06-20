@@ -48,7 +48,7 @@
     "test": "c8 mocha build/test/*_v2.js && c8 mocha build/test/*_v2beta1.js"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

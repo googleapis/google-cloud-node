@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const subscriptions = require('@google-cloud/subscriptions');
 
 function main() {
-  const subscriptionsServiceClient =
-    new subscriptions.SubscriptionsServiceClient();
+  const subscriptionsServiceClient = new subscriptions.SubscriptionsServiceClient();
 }
 
 main();

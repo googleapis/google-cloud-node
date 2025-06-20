@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const clientgateways = require('@google-cloud/clientgateways');
 
 function main() {
-  const clientGatewaysServiceClient =
-    new clientgateways.ClientGatewaysServiceClient();
+  const clientGatewaysServiceClient = new clientgateways.ClientGatewaysServiceClient();
 }
 
 main();

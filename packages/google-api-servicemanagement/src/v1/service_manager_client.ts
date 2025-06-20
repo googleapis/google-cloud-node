@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +102,20 @@ export class ServiceManagerClient {
    *     const client = new ServiceManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ServiceManagerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'servicemanagement.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +141,7 @@ export class ServiceManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +154,13 @@ export class ServiceManagerClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -209,142 +181,78 @@ export class ServiceManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'services'
-      ),
-      listServiceConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'serviceConfigs'
-      ),
-      listServiceRollouts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'rollouts'
-      ),
+      listServices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services'),
+      listServiceConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'serviceConfigs'),
+      listServiceRollouts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rollouts')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/v1/{resource=services/*}:getIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=services/*/consumers/*}:getIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=services/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=services/*/consumers/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=services/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=services/*/consumers/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=services/*}:getIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=services/*/consumers/*}:getIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=services/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=services/*/consumers/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=services/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=services/*/consumers/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createServiceResponse = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.ManagedService'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.ManagedService') as gax.protobuf.Type;
     const createServiceMetadata = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteServiceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteServiceMetadata = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.OperationMetadata') as gax.protobuf.Type;
     const undeleteServiceResponse = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.UndeleteServiceResponse'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.UndeleteServiceResponse') as gax.protobuf.Type;
     const undeleteServiceMetadata = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.OperationMetadata') as gax.protobuf.Type;
     const submitConfigSourceResponse = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.SubmitConfigSourceResponse'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.SubmitConfigSourceResponse') as gax.protobuf.Type;
     const submitConfigSourceMetadata = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.OperationMetadata') as gax.protobuf.Type;
     const createServiceRolloutResponse = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.Rollout'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.Rollout') as gax.protobuf.Type;
     const createServiceRolloutMetadata = protoFilesRoot.lookup(
-      '.google.api.servicemanagement.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.api.servicemanagement.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createServiceResponse.decode.bind(createServiceResponse),
-        createServiceMetadata.decode.bind(createServiceMetadata)
-      ),
+        createServiceMetadata.decode.bind(createServiceMetadata)),
       deleteService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteServiceResponse.decode.bind(deleteServiceResponse),
-        deleteServiceMetadata.decode.bind(deleteServiceMetadata)
-      ),
+        deleteServiceMetadata.decode.bind(deleteServiceMetadata)),
       undeleteService: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         undeleteServiceResponse.decode.bind(undeleteServiceResponse),
-        undeleteServiceMetadata.decode.bind(undeleteServiceMetadata)
-      ),
+        undeleteServiceMetadata.decode.bind(undeleteServiceMetadata)),
       submitConfigSource: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         submitConfigSourceResponse.decode.bind(submitConfigSourceResponse),
-        submitConfigSourceMetadata.decode.bind(submitConfigSourceMetadata)
-      ),
+        submitConfigSourceMetadata.decode.bind(submitConfigSourceMetadata)),
       createServiceRollout: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createServiceRolloutResponse.decode.bind(createServiceRolloutResponse),
-        createServiceRolloutMetadata.decode.bind(createServiceRolloutMetadata)
-      ),
+        createServiceRolloutMetadata.decode.bind(createServiceRolloutMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.api.servicemanagement.v1.ServiceManager',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.api.servicemanagement.v1.ServiceManager', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -375,47 +283,28 @@ export class ServiceManagerClient {
     // Put together the "service stub" for
     // google.api.servicemanagement.v1.ServiceManager.
     this.serviceManagerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.api.servicemanagement.v1.ServiceManager'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.api.servicemanagement.v1.ServiceManager') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.api.servicemanagement.v1.ServiceManager,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const serviceManagerStubMethods = [
-      'listServices',
-      'getService',
-      'createService',
-      'deleteService',
-      'undeleteService',
-      'listServiceConfigs',
-      'getServiceConfig',
-      'createServiceConfig',
-      'submitConfigSource',
-      'listServiceRollouts',
-      'getServiceRollout',
-      'createServiceRollout',
-      'generateConfigReport',
-    ];
+    const serviceManagerStubMethods =
+        ['listServices', 'getService', 'createService', 'deleteService', 'undeleteService', 'listServiceConfigs', 'getServiceConfig', 'createServiceConfig', 'submitConfigSource', 'listServiceRollouts', 'getServiceRollout', 'createServiceRollout', 'generateConfigReport'];
     for (const methodName of serviceManagerStubMethods) {
       const callPromise = this.serviceManagerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -440,14 +329,8 @@ export class ServiceManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicemanagement.googleapis.com';
   }
@@ -458,14 +341,8 @@ export class ServiceManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicemanagement.googleapis.com';
   }
@@ -500,7 +377,7 @@ export class ServiceManagerClient {
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/cloud-platform.read-only',
       'https://www.googleapis.com/auth/service.management',
-      'https://www.googleapis.com/auth/service.management.readonly',
+      'https://www.googleapis.com/auth/service.management.readonly'
     ];
   }
 
@@ -510,9 +387,8 @@ export class ServiceManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -523,1698 +399,1204 @@ export class ServiceManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a managed service. Authentication is required unless the service is
-   * public.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the `ServiceManager` overview for
-   *   naming requirements.  For example: `example.googleapis.com`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.get_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_GetService_async
-   */
+/**
+ * Gets a managed service. Authentication is required unless the service is
+ * public.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the `ServiceManager` overview for
+ *   naming requirements.  For example: `example.googleapis.com`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.get_service.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_GetService_async
+ */
   getService(
-    request?: protos.google.api.servicemanagement.v1.IGetServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IManagedService,
-      protos.google.api.servicemanagement.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.IGetServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IManagedService,
+        protos.google.api.servicemanagement.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>;
   getService(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.servicemanagement.v1.IManagedService,
-      | protos.google.api.servicemanagement.v1.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRequest,
-    callback: Callback<
-      protos.google.api.servicemanagement.v1.IManagedService,
-      | protos.google.api.servicemanagement.v1.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request?: protos.google.api.servicemanagement.v1.IGetServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.api.servicemanagement.v1.IGetServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.servicemanagement.v1.IManagedService,
-          | protos.google.api.servicemanagement.v1.IGetServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.servicemanagement.v1.IManagedService,
-      | protos.google.api.servicemanagement.v1.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IManagedService,
-      protos.google.api.servicemanagement.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.api.servicemanagement.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request: protos.google.api.servicemanagement.v1.IGetServiceRequest,
+      callback: Callback<
+          protos.google.api.servicemanagement.v1.IManagedService,
+          protos.google.api.servicemanagement.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request?: protos.google.api.servicemanagement.v1.IGetServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.servicemanagement.v1.IManagedService,
+          protos.google.api.servicemanagement.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.servicemanagement.v1.IManagedService,
+          protos.google.api.servicemanagement.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IManagedService,
+        protos.google.api.servicemanagement.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.servicemanagement.v1.IManagedService,
-          | protos.google.api.servicemanagement.v1.IGetServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.api.servicemanagement.v1.IManagedService,
+        protos.google.api.servicemanagement.v1.IGetServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.servicemanagement.v1.IManagedService,
-          protos.google.api.servicemanagement.v1.IGetServiceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.servicemanagement.v1.IManagedService,
+        protos.google.api.servicemanagement.v1.IGetServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a service configuration (version) for a managed service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.configId
-   *   Required. The id of the service configuration resource.
-   *
-   *   This field must be specified for the server to return all fields, including
-   *   `SourceInfo`.
-   * @param {google.api.servicemanagement.v1.GetServiceConfigRequest.ConfigView} request.view
-   *   Specifies which parts of the Service Config should be returned in the
-   *   response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.get_service_config.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_GetServiceConfig_async
-   */
+/**
+ * Gets a service configuration (version) for a managed service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.configId
+ *   Required. The id of the service configuration resource.
+ *
+ *   This field must be specified for the server to return all fields, including
+ *   `SourceInfo`.
+ * @param {google.api.servicemanagement.v1.GetServiceConfigRequest.ConfigView} request.view
+ *   Specifies which parts of the Service Config should be returned in the
+ *   response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.get_service_config.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_GetServiceConfig_async
+ */
   getServiceConfig(
-    request?: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IService,
-      (
-        | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|undefined, {}|undefined
+      ]>;
   getServiceConfig(
-    request: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IService,
-      | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServiceConfig(
-    request: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
-    callback: Callback<
-      protos.google.api.IService,
-      | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServiceConfig(
-    request?: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.IService,
-          | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.IService,
-      | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.IService,
-      (
-        | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServiceConfig(
+      request: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
+      callback: Callback<
+          protos.google.api.IService,
+          protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServiceConfig(
+      request?: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.IService,
+          protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.IService,
+          protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-        config_id: request.configId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
+      'config_id': request.configId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getServiceConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.IService,
-          | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getServiceConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getServiceConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.IService,
-          (
-            | protos.google.api.servicemanagement.v1.IGetServiceConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getServiceConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getServiceConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.IGetServiceConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getServiceConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new service configuration (version) for a managed service.
-   * This method only stores the service configuration. To roll out the service
-   * configuration to backend systems please call
-   * {@link protos.google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout|CreateServiceRollout}.
-   *
-   * Only the 100 most recent service configurations and ones referenced by
-   * existing rollouts are kept for each service. The rest will be deleted
-   * eventually.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {google.api.Service} request.serviceConfig
-   *   Required. The service configuration resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.create_service_config.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_CreateServiceConfig_async
-   */
+/**
+ * Creates a new service configuration (version) for a managed service.
+ * This method only stores the service configuration. To roll out the service
+ * configuration to backend systems please call
+ * {@link protos.google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout|CreateServiceRollout}.
+ *
+ * Only the 100 most recent service configurations and ones referenced by
+ * existing rollouts are kept for each service. The rest will be deleted
+ * eventually.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {google.api.Service} request.serviceConfig
+ *   Required. The service configuration resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.create_service_config.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_CreateServiceConfig_async
+ */
   createServiceConfig(
-    request?: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IService,
-      (
-        | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|undefined, {}|undefined
+      ]>;
   createServiceConfig(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IService,
-      | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createServiceConfig(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
-    callback: Callback<
-      protos.google.api.IService,
-      | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createServiceConfig(
-    request?: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.IService,
-          | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.IService,
-      | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.IService,
-      (
-        | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createServiceConfig(
+      request: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
+      callback: Callback<
+          protos.google.api.IService,
+          protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createServiceConfig(
+      request?: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.IService,
+          protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.IService,
+          protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createServiceConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.IService,
-          | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createServiceConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createServiceConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.IService,
-          (
-            | protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createServiceConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createServiceConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.IService,
+        protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createServiceConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
-  }
-  /**
-   * Gets a service configuration
-   * {@link protos.google.api.servicemanagement.v1.Rollout|rollout}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.rolloutId
-   *   Required. The id of the rollout resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.servicemanagement.v1.Rollout|Rollout}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.get_service_rollout.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_GetServiceRollout_async
-   */
-  getServiceRollout(
-    request?: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IRollout,
-      (
-        | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  getServiceRollout(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.servicemanagement.v1.IRollout,
-      | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServiceRollout(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
-    callback: Callback<
-      protos.google.api.servicemanagement.v1.IRollout,
-      | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServiceRollout(
-    request?: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.api.servicemanagement.v1.IRollout,
-          | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.servicemanagement.v1.IRollout,
-      | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IRollout,
-      (
-        | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-        rollout_id: request.rolloutId ?? '',
+        throw error;
       });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('getServiceRollout request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.servicemanagement.v1.IRollout,
-          | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('getServiceRollout response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .getServiceRollout(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.servicemanagement.v1.IRollout,
-          (
-            | protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getServiceRollout response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
   }
-  /**
-   * Generates and returns a report (errors, warnings and changes from
-   * existing configurations) associated with
-   * GenerateConfigReportRequest.new_value
-   *
-   * If GenerateConfigReportRequest.old_value is specified,
-   * GenerateConfigReportRequest will contain a single ChangeReport based on the
-   * comparison between GenerateConfigReportRequest.new_value and
-   * GenerateConfigReportRequest.old_value.
-   * If GenerateConfigReportRequest.old_value is not specified, this method
-   * will compare GenerateConfigReportRequest.new_value with the last pushed
-   * service configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.Any} request.newConfig
-   *   Required. Service configuration for which we want to generate the report.
-   *   For this version of API, the supported types are
-   *   {@link protos.google.api.servicemanagement.v1.ConfigRef|google.api.servicemanagement.v1.ConfigRef},
-   *   {@link protos.google.api.servicemanagement.v1.ConfigSource|google.api.servicemanagement.v1.ConfigSource},
-   *   and {@link protos.google.api.Service|google.api.Service}
-   * @param {google.protobuf.Any} [request.oldConfig]
-   *   Optional. Service configuration against which the comparison will be done.
-   *   For this version of API, the supported types are
-   *   {@link protos.google.api.servicemanagement.v1.ConfigRef|google.api.servicemanagement.v1.ConfigRef},
-   *   {@link protos.google.api.servicemanagement.v1.ConfigSource|google.api.servicemanagement.v1.ConfigSource},
-   *   and {@link protos.google.api.Service|google.api.Service}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.servicemanagement.v1.GenerateConfigReportResponse|GenerateConfigReportResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.generate_config_report.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_GenerateConfigReport_async
-   */
-  generateConfigReport(
-    request?: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-      (
-        | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  generateConfigReport(
-    request: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-      | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateConfigReport(
-    request: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
-    callback: Callback<
-      protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-      | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateConfigReport(
-    request?: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-          | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-      | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-      (
-        | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+/**
+ * Gets a service configuration
+ * {@link protos.google.api.servicemanagement.v1.Rollout|rollout}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.rolloutId
+ *   Required. The id of the rollout resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.servicemanagement.v1.Rollout|Rollout}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.get_service_rollout.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_GetServiceRollout_async
+ */
+  getServiceRollout(
+      request?: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IRollout,
+        protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|undefined, {}|undefined
+      ]>;
+  getServiceRollout(
+      request: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.api.servicemanagement.v1.IRollout,
+          protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServiceRollout(
+      request: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
+      callback: Callback<
+          protos.google.api.servicemanagement.v1.IRollout,
+          protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServiceRollout(
+      request?: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.servicemanagement.v1.IRollout,
+          protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.servicemanagement.v1.IRollout,
+          protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IRollout,
+        protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
+      'rollout_id': request.rolloutId ?? '',
     });
-    this._log.info('generateConfigReport request %j', request);
-    const wrappedCallback:
-      | Callback<
+    this.initialize().catch(err => {throw err});
+    this._log.info('getServiceRollout request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.api.servicemanagement.v1.IRollout,
+        protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServiceRollout response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getServiceRollout(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.servicemanagement.v1.IRollout,
+        protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getServiceRollout response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Generates and returns a report (errors, warnings and changes from
+ * existing configurations) associated with
+ * GenerateConfigReportRequest.new_value
+ *
+ * If GenerateConfigReportRequest.old_value is specified,
+ * GenerateConfigReportRequest will contain a single ChangeReport based on the
+ * comparison between GenerateConfigReportRequest.new_value and
+ * GenerateConfigReportRequest.old_value.
+ * If GenerateConfigReportRequest.old_value is not specified, this method
+ * will compare GenerateConfigReportRequest.new_value with the last pushed
+ * service configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.Any} request.newConfig
+ *   Required. Service configuration for which we want to generate the report.
+ *   For this version of API, the supported types are
+ *   {@link protos.google.api.servicemanagement.v1.ConfigRef|google.api.servicemanagement.v1.ConfigRef},
+ *   {@link protos.google.api.servicemanagement.v1.ConfigSource|google.api.servicemanagement.v1.ConfigSource},
+ *   and {@link protos.google.api.Service|google.api.Service}
+ * @param {google.protobuf.Any} [request.oldConfig]
+ *   Optional. Service configuration against which the comparison will be done.
+ *   For this version of API, the supported types are
+ *   {@link protos.google.api.servicemanagement.v1.ConfigRef|google.api.servicemanagement.v1.ConfigRef},
+ *   {@link protos.google.api.servicemanagement.v1.ConfigSource|google.api.servicemanagement.v1.ConfigSource},
+ *   and {@link protos.google.api.Service|google.api.Service}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.servicemanagement.v1.GenerateConfigReportResponse|GenerateConfigReportResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.generate_config_report.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_GenerateConfigReport_async
+ */
+  generateConfigReport(
+      request?: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|undefined, {}|undefined
+      ]>;
+  generateConfigReport(
+      request: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-          | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateConfigReport(
+      request: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
+      callback: Callback<
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateConfigReport(
+      request?: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+          protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {throw err});
+    this._log.info('generateConfigReport request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateConfigReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateConfigReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
-          (
-            | protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateConfigReport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.generateConfigReport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportResponse,
+        protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateConfigReport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new managed service.
-   *
-   * A managed service is immutable, and is subject to mandatory 30-day
-   * data retention. You cannot move a service or recreate it within 30 days
-   * after deletion.
-   *
-   * One producer project can own no more than 500 services. For security and
-   * reliability purposes, a production service should be hosted in a
-   * dedicated producer project.
-   *
-   * Operation<response: ManagedService>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.api.servicemanagement.v1.ManagedService} request.service
-   *   Required. Initial values for the service resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.create_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_CreateService_async
-   */
+/**
+ * Creates a new managed service.
+ *
+ * A managed service is immutable, and is subject to mandatory 30-day
+ * data retention. You cannot move a service or recreate it within 30 days
+ * after deletion.
+ *
+ * One producer project can own no more than 500 services. For security and
+ * reliability purposes, a production service should be hosted in a
+ * dedicated producer project.
+ *
+ * Operation<response: ManagedService>
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.api.servicemanagement.v1.ManagedService} request.service
+ *   Required. Initial values for the service resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.create_service.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_CreateService_async
+ */
   createService(
-    request?: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IManagedService,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createService(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IManagedService,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createService(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IManagedService,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createService(
-    request?: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IManagedService,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IManagedService,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IManagedService,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IManagedService,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createService request %j', request);
-    return this.innerApiCalls
-      .createService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.api.servicemanagement.v1.IManagedService,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.api.servicemanagement.v1.IManagedService, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.create_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_CreateService_async
-   */
-  async checkCreateServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.api.servicemanagement.v1.ManagedService,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.create_service.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_CreateService_async
+ */
+  async checkCreateServiceProgress(name: string): Promise<LROperation<protos.google.api.servicemanagement.v1.ManagedService, protos.google.api.servicemanagement.v1.OperationMetadata>>{
     this._log.info('createService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.api.servicemanagement.v1.ManagedService,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.api.servicemanagement.v1.ManagedService, protos.google.api.servicemanagement.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a managed service. This method will change the service to the
-   * `Soft-Delete` state for 30 days. Within this period, service producers may
-   * call
-   * {@link protos.google.api.servicemanagement.v1.ServiceManager.UndeleteService|UndeleteService}
-   * to restore the service. After 30 days, the service will be permanently
-   * deleted.
-   *
-   * Operation<response: google.protobuf.Empty>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.delete_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_DeleteService_async
-   */
+/**
+ * Deletes a managed service. This method will change the service to the
+ * `Soft-Delete` state for 30 days. Within this period, service producers may
+ * call
+ * {@link protos.google.api.servicemanagement.v1.ServiceManager.UndeleteService|UndeleteService}
+ * to restore the service. After 30 days, the service will be permanently
+ * deleted.
+ *
+ * Operation<response: google.protobuf.Empty>
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.delete_service.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_DeleteService_async
+ */
   deleteService(
-    request?: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteService(
-    request: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteService(
-    request?: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteService request %j', request);
-    return this.innerApiCalls
-      .deleteService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.delete_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_DeleteService_async
-   */
-  async checkDeleteServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.delete_service.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_DeleteService_async
+ */
+  async checkDeleteServiceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.api.servicemanagement.v1.OperationMetadata>>{
     this._log.info('deleteService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.api.servicemanagement.v1.OperationMetadata>;
   }
-  /**
-   * Revives a previously deleted managed service. The method restores the
-   * service using the configuration at the time the service was deleted.
-   * The target service must exist and must have been deleted within the
-   * last 30 days.
-   *
-   * Operation<response: UndeleteServiceResponse>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service. See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements. For example: `example.googleapis.com`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.undelete_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_UndeleteService_async
-   */
+/**
+ * Revives a previously deleted managed service. The method restores the
+ * service using the configuration at the time the service was deleted.
+ * The target service must exist and must have been deleted within the
+ * last 30 days.
+ *
+ * Operation<response: UndeleteServiceResponse>
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service. See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements. For example: `example.googleapis.com`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.undelete_service.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_UndeleteService_async
+ */
   undeleteService(
-    request?: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   undeleteService(
-    request: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   undeleteService(
-    request: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   undeleteService(
-    request?: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('undeleteService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('undeleteService request %j', request);
-    return this.innerApiCalls
-      .undeleteService(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.api.servicemanagement.v1.IUndeleteServiceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('undeleteService response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.undeleteService(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.api.servicemanagement.v1.IUndeleteServiceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('undeleteService response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `undeleteService()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.undelete_service.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_UndeleteService_async
-   */
-  async checkUndeleteServiceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.api.servicemanagement.v1.UndeleteServiceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `undeleteService()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.undelete_service.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_UndeleteService_async
+ */
+  async checkUndeleteServiceProgress(name: string): Promise<LROperation<protos.google.api.servicemanagement.v1.UndeleteServiceResponse, protos.google.api.servicemanagement.v1.OperationMetadata>>{
     this._log.info('undeleteService long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.undeleteService,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.api.servicemanagement.v1.UndeleteServiceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.undeleteService, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.api.servicemanagement.v1.UndeleteServiceResponse, protos.google.api.servicemanagement.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new service configuration (version) for a managed service based
-   * on
-   * user-supplied configuration source files (for example: OpenAPI
-   * Specification). This method stores the source configurations as well as the
-   * generated service configuration. To rollout the service configuration to
-   * other services,
-   * please call
-   * {@link protos.google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout|CreateServiceRollout}.
-   *
-   * Only the 100 most recent configuration sources and ones referenced by
-   * existing service configurtions are kept for each service. The rest will be
-   * deleted eventually.
-   *
-   * Operation<response: SubmitConfigSourceResponse>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {google.api.servicemanagement.v1.ConfigSource} request.configSource
-   *   Required. The source configuration for the service.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set, this will result in the generation of a
-   *   `google.api.Service` configuration based on the `ConfigSource` provided,
-   *   but the generated config and the sources will NOT be persisted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.submit_config_source.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_async
-   */
+/**
+ * Creates a new service configuration (version) for a managed service based
+ * on
+ * user-supplied configuration source files (for example: OpenAPI
+ * Specification). This method stores the source configurations as well as the
+ * generated service configuration. To rollout the service configuration to
+ * other services,
+ * please call
+ * {@link protos.google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout|CreateServiceRollout}.
+ *
+ * Only the 100 most recent configuration sources and ones referenced by
+ * existing service configurtions are kept for each service. The rest will be
+ * deleted eventually.
+ *
+ * Operation<response: SubmitConfigSourceResponse>
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {google.api.servicemanagement.v1.ConfigSource} request.configSource
+ *   Required. The source configuration for the service.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, this will result in the generation of a
+ *   `google.api.Service` configuration based on the `ConfigSource` provided,
+ *   but the generated config and the sources will NOT be persisted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.submit_config_source.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_async
+ */
   submitConfigSource(
-    request?: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   submitConfigSource(
-    request: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   submitConfigSource(
-    request: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   submitConfigSource(
-    request?: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('submitConfigSource response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('submitConfigSource request %j', request);
-    return this.innerApiCalls
-      .submitConfigSource(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('submitConfigSource response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.submitConfigSource(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.api.servicemanagement.v1.ISubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('submitConfigSource response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `submitConfigSource()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.submit_config_source.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_async
-   */
-  async checkSubmitConfigSourceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.api.servicemanagement.v1.SubmitConfigSourceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `submitConfigSource()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.submit_config_source.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_async
+ */
+  async checkSubmitConfigSourceProgress(name: string): Promise<LROperation<protos.google.api.servicemanagement.v1.SubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.OperationMetadata>>{
     this._log.info('submitConfigSource long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.submitConfigSource,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.api.servicemanagement.v1.SubmitConfigSourceResponse,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.submitConfigSource, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.api.servicemanagement.v1.SubmitConfigSourceResponse, protos.google.api.servicemanagement.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new service configuration rollout. Based on rollout, the
-   * Google Service Management will roll out the service configurations to
-   * different backend services. For example, the logging configuration will be
-   * pushed to Google Cloud Logging.
-   *
-   * Please note that any previous pending and running Rollouts and associated
-   * Operations will be automatically cancelled so that the latest Rollout will
-   * not be blocked by previous Rollouts.
-   *
-   * Only the 100 most recent (in any state) and the last 10 successful (if not
-   * already part of the set of 100 most recent) rollouts are kept for each
-   * service. The rest will be deleted eventually.
-   *
-   * Operation<response: Rollout>
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {google.api.servicemanagement.v1.Rollout} request.rollout
-   *   Required. The rollout resource. The `service_name` field is output only.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.create_service_rollout.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_CreateServiceRollout_async
-   */
+/**
+ * Creates a new service configuration rollout. Based on rollout, the
+ * Google Service Management will roll out the service configurations to
+ * different backend services. For example, the logging configuration will be
+ * pushed to Google Cloud Logging.
+ *
+ * Please note that any previous pending and running Rollouts and associated
+ * Operations will be automatically cancelled so that the latest Rollout will
+ * not be blocked by previous Rollouts.
+ *
+ * Only the 100 most recent (in any state) and the last 10 successful (if not
+ * already part of the set of 100 most recent) rollouts are kept for each
+ * service. The rest will be deleted eventually.
+ *
+ * Operation<response: Rollout>
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {google.api.servicemanagement.v1.Rollout} request.rollout
+ *   Required. The rollout resource. The `service_name` field is output only.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.create_service_rollout.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_CreateServiceRollout_async
+ */
   createServiceRollout(
-    request?: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IRollout,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createServiceRollout(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IRollout,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createServiceRollout(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IRollout,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
+      callback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createServiceRollout(
-    request?: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IRollout,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.api.servicemanagement.v1.IRollout,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.api.servicemanagement.v1.IRollout,
-        protos.google.api.servicemanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.api.servicemanagement.v1.IRollout,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createServiceRollout response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createServiceRollout request %j', request);
-    return this.innerApiCalls
-      .createServiceRollout(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.api.servicemanagement.v1.IRollout,
-            protos.google.api.servicemanagement.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createServiceRollout response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createServiceRollout(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.api.servicemanagement.v1.IRollout, protos.google.api.servicemanagement.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createServiceRollout response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createServiceRollout()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.create_service_rollout.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_CreateServiceRollout_async
-   */
-  async checkCreateServiceRolloutProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.api.servicemanagement.v1.Rollout,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createServiceRollout()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.create_service_rollout.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_CreateServiceRollout_async
+ */
+  async checkCreateServiceRolloutProgress(name: string): Promise<LROperation<protos.google.api.servicemanagement.v1.Rollout, protos.google.api.servicemanagement.v1.OperationMetadata>>{
     this._log.info('createServiceRollout long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createServiceRollout,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.api.servicemanagement.v1.Rollout,
-      protos.google.api.servicemanagement.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createServiceRollout, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.api.servicemanagement.v1.Rollout, protos.google.api.servicemanagement.v1.OperationMetadata>;
   }
-  /**
-   * Lists managed services.
-   *
-   * Returns all public services. For authenticated users, also returns all
-   * services the calling user has "servicemanagement.services.get" permission
-   * for.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.producerProjectId
-   *   Include services produced by the specified project.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 500.
-   * @param {string} request.pageToken
-   *   Token identifying which result to start with; returned by a previous list
-   *   call.
-   * @param {string} request.consumerId
-   *   Include services consumed by the specified consumer.
-   *
-   *   The Google Service Management implementation accepts the following
-   *   forms:
-   *   - project:<project_id>
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists managed services.
+ *
+ * Returns all public services. For authenticated users, also returns all
+ * services the calling user has "servicemanagement.services.get" permission
+ * for.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.producerProjectId
+ *   Include services produced by the specified project.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 500.
+ * @param {string} request.pageToken
+ *   Token identifying which result to start with; returned by a previous list
+ *   call.
+ * @param {string} request.consumerId
+ *   Include services consumed by the specified consumer.
+ *
+ *   The Google Service Management implementation accepts the following
+ *   forms:
+ *   - project:<project_id>
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServices(
-    request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IManagedService[],
-      protos.google.api.servicemanagement.v1.IListServicesRequest | null,
-      protos.google.api.servicemanagement.v1.IListServicesResponse,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IManagedService[],
+        protos.google.api.servicemanagement.v1.IListServicesRequest|null,
+        protos.google.api.servicemanagement.v1.IListServicesResponse
+      ]>;
   listServices(
-    request: protos.google.api.servicemanagement.v1.IListServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServicesRequest,
-      | protos.google.api.servicemanagement.v1.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.api.servicemanagement.v1.IManagedService
-    >
-  ): void;
-  listServices(
-    request: protos.google.api.servicemanagement.v1.IListServicesRequest,
-    callback: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServicesRequest,
-      | protos.google.api.servicemanagement.v1.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.api.servicemanagement.v1.IManagedService
-    >
-  ): void;
-  listServices(
-    request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.api.servicemanagement.v1.IListServicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.api.servicemanagement.v1.IListServicesRequest,
-          | protos.google.api.servicemanagement.v1.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.api.servicemanagement.v1.IManagedService
-        >,
-    callback?: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServicesRequest,
-      | protos.google.api.servicemanagement.v1.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.api.servicemanagement.v1.IManagedService
-    >
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IManagedService[],
-      protos.google.api.servicemanagement.v1.IListServicesRequest | null,
-      protos.google.api.servicemanagement.v1.IListServicesResponse,
-    ]
-  > | void {
+          protos.google.api.servicemanagement.v1.IListServicesResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IManagedService>): void;
+  listServices(
+      request: protos.google.api.servicemanagement.v1.IListServicesRequest,
+      callback: PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServicesRequest,
+          protos.google.api.servicemanagement.v1.IListServicesResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IManagedService>): void;
+  listServices(
+      request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServicesRequest,
+          protos.google.api.servicemanagement.v1.IListServicesResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IManagedService>,
+      callback?: PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServicesRequest,
+          protos.google.api.servicemanagement.v1.IListServicesResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IManagedService>):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IManagedService[],
+        protos.google.api.servicemanagement.v1.IListServicesRequest|null,
+        protos.google.api.servicemanagement.v1.IListServicesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.api.servicemanagement.v1.IListServicesRequest,
-          | protos.google.api.servicemanagement.v1.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.api.servicemanagement.v1.IManagedService
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.api.servicemanagement.v1.IListServicesRequest,
+      protos.google.api.servicemanagement.v1.IListServicesResponse|null|undefined,
+      protos.google.api.servicemanagement.v1.IManagedService>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2223,60 +1605,56 @@ export class ServiceManagerClient {
     this._log.info('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.api.servicemanagement.v1.IManagedService[],
-          protos.google.api.servicemanagement.v1.IListServicesRequest | null,
-          protos.google.api.servicemanagement.v1.IListServicesResponse,
-        ]) => {
-          this._log.info('listServices values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.api.servicemanagement.v1.IManagedService[],
+        protos.google.api.servicemanagement.v1.IListServicesRequest|null,
+        protos.google.api.servicemanagement.v1.IListServicesResponse
+      ]) => {
+        this._log.info('listServices values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServices`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.producerProjectId
-   *   Include services produced by the specified project.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 500.
-   * @param {string} request.pageToken
-   *   Token identifying which result to start with; returned by a previous list
-   *   call.
-   * @param {string} request.consumerId
-   *   Include services consumed by the specified consumer.
-   *
-   *   The Google Service Management implementation accepts the following
-   *   forms:
-   *   - project:<project_id>
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServices`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.producerProjectId
+ *   Include services produced by the specified project.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 500.
+ * @param {string} request.pageToken
+ *   Token identifying which result to start with; returned by a previous list
+ *   call.
+ * @param {string} request.consumerId
+ *   Include services consumed by the specified consumer.
+ *
+ *   The Google Service Management implementation accepts the following
+ *   forms:
+ *   - project:<project_id>
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServicesStream(
-    request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -2285,51 +1663,49 @@ export class ServiceManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listServices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.producerProjectId
-   *   Include services produced by the specified project.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 500.
-   * @param {string} request.pageToken
-   *   Token identifying which result to start with; returned by a previous list
-   *   call.
-   * @param {string} request.consumerId
-   *   Include services consumed by the specified consumer.
-   *
-   *   The Google Service Management implementation accepts the following
-   *   forms:
-   *   - project:<project_id>
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.list_services.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_ListServices_async
-   */
+/**
+ * Equivalent to `listServices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.producerProjectId
+ *   Include services produced by the specified project.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 500.
+ * @param {string} request.pageToken
+ *   Token identifying which result to start with; returned by a previous list
+ *   call.
+ * @param {string} request.consumerId
+ *   Include services consumed by the specified consumer.
+ *
+ *   The Google Service Management implementation accepts the following
+ *   forms:
+ *   - project:<project_id>
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.api.servicemanagement.v1.ManagedService|ManagedService}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.list_services.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_ListServices_async
+ */
   listServicesAsync(
-    request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.api.servicemanagement.v1.IManagedService> {
+      request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.api.servicemanagement.v1.IManagedService>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -2337,116 +1713,91 @@ export class ServiceManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.api.servicemanagement.v1.IManagedService>;
   }
-  /**
-   * Lists the history of the service configuration for a managed service,
-   * from the newest to the oldest.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.pageToken
-   *   The token of the page to retrieve.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 100.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.api.Service|Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServiceConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the history of the service configuration for a managed service,
+ * from the newest to the oldest.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.pageToken
+ *   The token of the page to retrieve.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 100.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.api.Service|Service}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServiceConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServiceConfigs(
-    request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IService[],
-      protos.google.api.servicemanagement.v1.IListServiceConfigsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceConfigsResponse,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.IService[],
+        protos.google.api.servicemanagement.v1.IListServiceConfigsRequest|null,
+        protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
+      ]>;
   listServiceConfigs(
-    request: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-      | protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
-      | null
-      | undefined,
-      protos.google.api.IService
-    >
-  ): void;
-  listServiceConfigs(
-    request: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-      | protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
-      | null
-      | undefined,
-      protos.google.api.IService
-    >
-  ): void;
-  listServiceConfigs(
-    request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-          | protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
-          | null
-          | undefined,
-          protos.google.api.IService
-        >,
-    callback?: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-      | protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
-      | null
-      | undefined,
-      protos.google.api.IService
-    >
-  ): Promise<
-    [
-      protos.google.api.IService[],
-      protos.google.api.servicemanagement.v1.IListServiceConfigsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceConfigsResponse,
-    ]
-  > | void {
+          protos.google.api.servicemanagement.v1.IListServiceConfigsResponse|null|undefined,
+          protos.google.api.IService>): void;
+  listServiceConfigs(
+      request: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+          protos.google.api.servicemanagement.v1.IListServiceConfigsResponse|null|undefined,
+          protos.google.api.IService>): void;
+  listServiceConfigs(
+      request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+          protos.google.api.servicemanagement.v1.IListServiceConfigsResponse|null|undefined,
+          protos.google.api.IService>,
+      callback?: PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+          protos.google.api.servicemanagement.v1.IListServiceConfigsResponse|null|undefined,
+          protos.google.api.IService>):
+      Promise<[
+        protos.google.api.IService[],
+        protos.google.api.servicemanagement.v1.IListServiceConfigsRequest|null,
+        protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-          | protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
-          | null
-          | undefined,
-          protos.google.api.IService
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+      protos.google.api.servicemanagement.v1.IListServiceConfigsResponse|null|undefined,
+      protos.google.api.IService>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServiceConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2455,59 +1806,56 @@ export class ServiceManagerClient {
     this._log.info('listServiceConfigs request %j', request);
     return this.innerApiCalls
       .listServiceConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.api.IService[],
-          protos.google.api.servicemanagement.v1.IListServiceConfigsRequest | null,
-          protos.google.api.servicemanagement.v1.IListServiceConfigsResponse,
-        ]) => {
-          this._log.info('listServiceConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.api.IService[],
+        protos.google.api.servicemanagement.v1.IListServiceConfigsRequest|null,
+        protos.google.api.servicemanagement.v1.IListServiceConfigsResponse
+      ]) => {
+        this._log.info('listServiceConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServiceConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.pageToken
-   *   The token of the page to retrieve.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 100.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.api.Service|Service} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServiceConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServiceConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.pageToken
+ *   The token of the page to retrieve.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 100.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.api.Service|Service} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServiceConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServiceConfigsStream(
-    request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
+    });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServiceConfigs stream %j', request);
     return this.descriptors.page.listServiceConfigs.createStream(
       this.innerApiCalls.listServiceConfigs as GaxCall,
@@ -2516,50 +1864,49 @@ export class ServiceManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listServiceConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.pageToken
-   *   The token of the page to retrieve.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 100.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.api.Service|Service}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.list_service_configs.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_ListServiceConfigs_async
-   */
+/**
+ * Equivalent to `listServiceConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.pageToken
+ *   The token of the page to retrieve.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 100.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.api.Service|Service}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.list_service_configs.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_ListServiceConfigs_async
+ */
   listServiceConfigsAsync(
-    request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.api.IService> {
+      request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.api.IService>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
+    });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServiceConfigs iterate %j', request);
     return this.descriptors.page.listServiceConfigs.asyncIterate(
       this.innerApiCalls['listServiceConfigs'] as GaxCall,
@@ -2567,127 +1914,102 @@ export class ServiceManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.api.IService>;
   }
-  /**
-   * Lists the history of the service configuration rollouts for a managed
-   * service, from the newest to the oldest.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.pageToken
-   *   The token of the page to retrieve.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 100.
-   * @param {string} request.filter
-   *   Required. Use `filter` to return subset of rollouts.
-   *   The following filters are supported:
-   *
-   *    -- By [status]
-   *    [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
-   *    `filter='status=SUCCESS'`
-   *
-   *    -- By [strategy]
-   *    [google.api.servicemanagement.v1.Rollout.strategy]. For example,
-   *    `filter='strategy=TrafficPercentStrategy'`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.api.servicemanagement.v1.Rollout|Rollout}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServiceRolloutsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the history of the service configuration rollouts for a managed
+ * service, from the newest to the oldest.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.pageToken
+ *   The token of the page to retrieve.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 100.
+ * @param {string} request.filter
+ *   Required. Use `filter` to return subset of rollouts.
+ *   The following filters are supported:
+ *
+ *    -- By [status]
+ *    [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
+ *    `filter='status=SUCCESS'`
+ *
+ *    -- By [strategy]
+ *    [google.api.servicemanagement.v1.Rollout.strategy]. For example,
+ *    `filter='strategy=TrafficPercentStrategy'`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.api.servicemanagement.v1.Rollout|Rollout}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServiceRolloutsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServiceRollouts(
-    request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IRollout[],
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse,
-    ]
-  >;
+      request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IRollout[],
+        protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest|null,
+        protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
+      ]>;
   listServiceRollouts(
-    request: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-      | protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
-      | null
-      | undefined,
-      protos.google.api.servicemanagement.v1.IRollout
-    >
-  ): void;
-  listServiceRollouts(
-    request: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-    callback: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-      | protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
-      | null
-      | undefined,
-      protos.google.api.servicemanagement.v1.IRollout
-    >
-  ): void;
-  listServiceRollouts(
-    request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-          | protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
-          | null
-          | undefined,
-          protos.google.api.servicemanagement.v1.IRollout
-        >,
-    callback?: PaginationCallback<
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-      | protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
-      | null
-      | undefined,
-      protos.google.api.servicemanagement.v1.IRollout
-    >
-  ): Promise<
-    [
-      protos.google.api.servicemanagement.v1.IRollout[],
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest | null,
-      protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse,
-    ]
-  > | void {
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IRollout>): void;
+  listServiceRollouts(
+      request: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+      callback: PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IRollout>): void;
+  listServiceRollouts(
+      request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IRollout>,
+      callback?: PaginationCallback<
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+          protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse|null|undefined,
+          protos.google.api.servicemanagement.v1.IRollout>):
+      Promise<[
+        protos.google.api.servicemanagement.v1.IRollout[],
+        protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest|null,
+        protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-          | protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
-          | null
-          | undefined,
-          protos.google.api.servicemanagement.v1.IRollout
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+      protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse|null|undefined,
+      protos.google.api.servicemanagement.v1.IRollout>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServiceRollouts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2696,70 +2018,67 @@ export class ServiceManagerClient {
     this._log.info('listServiceRollouts request %j', request);
     return this.innerApiCalls
       .listServiceRollouts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.api.servicemanagement.v1.IRollout[],
-          protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest | null,
-          protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse,
-        ]) => {
-          this._log.info('listServiceRollouts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.api.servicemanagement.v1.IRollout[],
+        protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest|null,
+        protos.google.api.servicemanagement.v1.IListServiceRolloutsResponse
+      ]) => {
+        this._log.info('listServiceRollouts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServiceRollouts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.pageToken
-   *   The token of the page to retrieve.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 100.
-   * @param {string} request.filter
-   *   Required. Use `filter` to return subset of rollouts.
-   *   The following filters are supported:
-   *
-   *    -- By [status]
-   *    [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
-   *    `filter='status=SUCCESS'`
-   *
-   *    -- By [strategy]
-   *    [google.api.servicemanagement.v1.Rollout.strategy]. For example,
-   *    `filter='strategy=TrafficPercentStrategy'`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.api.servicemanagement.v1.Rollout|Rollout} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServiceRolloutsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServiceRollouts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.pageToken
+ *   The token of the page to retrieve.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 100.
+ * @param {string} request.filter
+ *   Required. Use `filter` to return subset of rollouts.
+ *   The following filters are supported:
+ *
+ *    -- By [status]
+ *    [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
+ *    `filter='status=SUCCESS'`
+ *
+ *    -- By [strategy]
+ *    [google.api.servicemanagement.v1.Rollout.strategy]. For example,
+ *    `filter='strategy=TrafficPercentStrategy'`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.api.servicemanagement.v1.Rollout|Rollout} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServiceRolloutsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServiceRolloutsStream(
-    request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
+    });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServiceRollouts stream %j', request);
     return this.descriptors.page.listServiceRollouts.createStream(
       this.innerApiCalls.listServiceRollouts as GaxCall,
@@ -2768,61 +2087,60 @@ export class ServiceManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listServiceRollouts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.serviceName
-   *   Required. The name of the service.  See the
-   *   [overview](https://cloud.google.com/service-management/overview) for naming
-   *   requirements.  For example: `example.googleapis.com`.
-   * @param {string} request.pageToken
-   *   The token of the page to retrieve.
-   * @param {number} request.pageSize
-   *   The max number of items to include in the response list. Page size is 50
-   *   if not specified. Maximum value is 100.
-   * @param {string} request.filter
-   *   Required. Use `filter` to return subset of rollouts.
-   *   The following filters are supported:
-   *
-   *    -- By [status]
-   *    [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
-   *    `filter='status=SUCCESS'`
-   *
-   *    -- By [strategy]
-   *    [google.api.servicemanagement.v1.Rollout.strategy]. For example,
-   *    `filter='strategy=TrafficPercentStrategy'`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.api.servicemanagement.v1.Rollout|Rollout}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/service_manager.list_service_rollouts.js</caption>
-   * region_tag:servicemanagement_v1_generated_ServiceManager_ListServiceRollouts_async
-   */
+/**
+ * Equivalent to `listServiceRollouts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.serviceName
+ *   Required. The name of the service.  See the
+ *   [overview](https://cloud.google.com/service-management/overview) for naming
+ *   requirements.  For example: `example.googleapis.com`.
+ * @param {string} request.pageToken
+ *   The token of the page to retrieve.
+ * @param {number} request.pageSize
+ *   The max number of items to include in the response list. Page size is 50
+ *   if not specified. Maximum value is 100.
+ * @param {string} request.filter
+ *   Required. Use `filter` to return subset of rollouts.
+ *   The following filters are supported:
+ *
+ *    -- By [status]
+ *    [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
+ *    `filter='status=SUCCESS'`
+ *
+ *    -- By [strategy]
+ *    [google.api.servicemanagement.v1.Rollout.strategy]. For example,
+ *    `filter='strategy=TrafficPercentStrategy'`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.api.servicemanagement.v1.Rollout|Rollout}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/service_manager.list_service_rollouts.js</caption>
+ * region_tag:servicemanagement_v1_generated_ServiceManager_ListServiceRollouts_async
+ */
   listServiceRolloutsAsync(
-    request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.api.servicemanagement.v1.IRollout> {
+      request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.api.servicemanagement.v1.IRollout>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_name': request.serviceName ?? '',
+    });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServiceRollouts iterate %j', request);
     return this.descriptors.page.listServiceRollouts.asyncIterate(
       this.innerApiCalls['listServiceRollouts'] as GaxCall,
@@ -2830,31 +2148,31 @@ export class ServiceManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.api.servicemanagement.v1.IRollout>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -2869,39 +2187,39 @@ export class ServiceManagerClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -2916,40 +2234,40 @@ export class ServiceManagerClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -2964,11 +2282,11 @@ export class ServiceManagerClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3013,20 +2331,20 @@ export class ServiceManagerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3063,13 +2381,13 @@ export class ServiceManagerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3103,7 +2421,7 @@ export class ServiceManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3118,20 +2436,20 @@ export class ServiceManagerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3175,22 +2493,23 @@ export class ServiceManagerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -3204,9 +2523,7 @@ export class ServiceManagerClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

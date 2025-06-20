@@ -35,27 +35,7 @@ type ServicesClient = v1.ServicesClient;
 const VersionsClient = v1.VersionsClient;
 type VersionsClient = v1.VersionsClient;
 
-export {
-  v1,
-  ApplicationsClient,
-  AuthorizedCertificatesClient,
-  AuthorizedDomainsClient,
-  DomainMappingsClient,
-  FirewallClient,
-  InstancesClient,
-  ServicesClient,
-  VersionsClient,
-};
-export default {
-  v1,
-  ApplicationsClient,
-  AuthorizedCertificatesClient,
-  AuthorizedDomainsClient,
-  DomainMappingsClient,
-  FirewallClient,
-  InstancesClient,
-  ServicesClient,
-  VersionsClient,
-};
+export {v1, ApplicationsClient, AuthorizedCertificatesClient, AuthorizedDomainsClient, DomainMappingsClient, FirewallClient, InstancesClient, ServicesClient, VersionsClient};
+export default {v1, ApplicationsClient, AuthorizedCertificatesClient, AuthorizedDomainsClient, DomainMappingsClient, FirewallClient, InstancesClient, ServicesClient, VersionsClient};
 import * as protos from '../protos/protos';
 export {protos};

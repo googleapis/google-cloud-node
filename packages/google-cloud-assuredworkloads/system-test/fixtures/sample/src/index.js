@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const assuredworkloads = require('@google-cloud/assured-workloads');
 
 function main() {
-  const assuredWorkloadsServiceClient =
-    new assuredworkloads.AssuredWorkloadsServiceClient();
+  const assuredWorkloadsServiceClient = new assuredworkloads.AssuredWorkloadsServiceClient();
 }
 
 main();

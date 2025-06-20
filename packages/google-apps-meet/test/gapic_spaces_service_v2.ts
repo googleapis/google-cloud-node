@@ -27,1096 +27,860 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v2.SpacesServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'meet.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          spacesserviceModule.v2.SpacesServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'meet.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          spacesserviceModule.v2.SpacesServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'meet.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'meet.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'meet.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new spacesserviceModule.v2.SpacesServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'meet.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'meet.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new spacesserviceModule.v2.SpacesServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'meet.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new spacesserviceModule.v2.SpacesServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = spacesserviceModule.v2.SpacesServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'meet.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = spacesserviceModule.v2.SpacesServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'meet.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'meet.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = spacesserviceModule.v2.SpacesServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'meet.example.com');
+        });
 
-    it('should create a client with no option', () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient();
-      assert(client);
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new spacesserviceModule.v2.SpacesServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'meet.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with gRPC fallback', () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new spacesserviceModule.v2.SpacesServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'meet.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new spacesserviceModule.v2.SpacesServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.spacesServiceStub, undefined);
-      await client.initialize();
-      assert(client.spacesServiceStub);
-    });
+        it('has port', () => {
+            const port = spacesserviceModule.v2.SpacesServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.spacesServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.spacesServiceStub, undefined);
+            await client.initialize();
+            assert(client.spacesServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.spacesServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.spacesServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.spacesServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('createSpace', () => {
+        it('invokes createSpace without error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.CreateSpaceRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.apps.meet.v2.Space()
+            );
+            client.innerApiCalls.createSpace = stubSimpleCall(expectedResponse);
+            const [response] = await client.createSpace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createSpace without error using callback', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.CreateSpaceRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.apps.meet.v2.Space()
+            );
+            client.innerApiCalls.createSpace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSpace(
+                    request,
+                    (err?: Error|null, result?: protos.google.apps.meet.v2.ISpace|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes createSpace with error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.CreateSpaceRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSpace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createSpace(request), expectedError);
+        });
+
+        it('invokes createSpace with closed client', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.CreateSpaceRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createSpace(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('getSpace', () => {
+        it('invokes getSpace without error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.GetSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.GetSpaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.apps.meet.v2.Space()
+            );
+            client.innerApiCalls.getSpace = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSpace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('createSpace', () => {
-    it('invokes createSpace without error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.CreateSpaceRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.apps.meet.v2.Space()
-      );
-      client.innerApiCalls.createSpace = stubSimpleCall(expectedResponse);
-      const [response] = await client.createSpace(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
+        it('invokes getSpace without error using callback', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.GetSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.GetSpaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.apps.meet.v2.Space()
+            );
+            client.innerApiCalls.getSpace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSpace(
+                    request,
+                    (err?: Error|null, result?: protos.google.apps.meet.v2.ISpace|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes createSpace without error using callback', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.CreateSpaceRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.apps.meet.v2.Space()
-      );
-      client.innerApiCalls.createSpace =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSpace(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.apps.meet.v2.ISpace | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
+        it('invokes getSpace with error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.GetSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.GetSpaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSpace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSpace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('invokes createSpace with error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.CreateSpaceRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSpace = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSpace(request), expectedError);
-    });
-
-    it('invokes createSpace with closed client', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.CreateSpaceRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createSpace(request), expectedError);
-    });
-  });
-
-  describe('getSpace', () => {
-    it('invokes getSpace without error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.GetSpaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.GetSpaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.apps.meet.v2.Space()
-      );
-      client.innerApiCalls.getSpace = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSpace(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSpace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSpace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes getSpace with closed client', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.GetSpaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.GetSpaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSpace(request), expectedError);
+        });
     });
 
-    it('invokes getSpace without error using callback', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.GetSpaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.GetSpaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.apps.meet.v2.Space()
-      );
-      client.innerApiCalls.getSpace =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSpace(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.apps.meet.v2.ISpace | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSpace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSpace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('updateSpace', () => {
+        it('invokes updateSpace without error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.UpdateSpaceRequest()
+            );
+            request.space ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.UpdateSpaceRequest', ['space', 'name']);
+            request.space.name = defaultValue1;
+            const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.apps.meet.v2.Space()
+            );
+            client.innerApiCalls.updateSpace = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateSpace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSpace without error using callback', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.UpdateSpaceRequest()
+            );
+            request.space ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.UpdateSpaceRequest', ['space', 'name']);
+            request.space.name = defaultValue1;
+            const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.apps.meet.v2.Space()
+            );
+            client.innerApiCalls.updateSpace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSpace(
+                    request,
+                    (err?: Error|null, result?: protos.google.apps.meet.v2.ISpace|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSpace with error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.UpdateSpaceRequest()
+            );
+            request.space ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.UpdateSpaceRequest', ['space', 'name']);
+            request.space.name = defaultValue1;
+            const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSpace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateSpace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSpace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSpace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSpace with closed client', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.UpdateSpaceRequest()
+            );
+            request.space ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.UpdateSpaceRequest', ['space', 'name']);
+            request.space.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateSpace(request), expectedError);
+        });
     });
 
-    it('invokes getSpace with error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.GetSpaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.GetSpaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSpace = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSpace(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSpace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSpace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('endActiveConference', () => {
+        it('invokes endActiveConference without error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.EndActiveConferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.EndActiveConferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.endActiveConference = stubSimpleCall(expectedResponse);
+            const [response] = await client.endActiveConference(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.endActiveConference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.endActiveConference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes endActiveConference without error using callback', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.EndActiveConferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.EndActiveConferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.endActiveConference = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.endActiveConference(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.endActiveConference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.endActiveConference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes endActiveConference with error', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.EndActiveConferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.EndActiveConferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.endActiveConference = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.endActiveConference(request), expectedError);
+            const actualRequest = (client.innerApiCalls.endActiveConference as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.endActiveConference as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes endActiveConference with closed client', async () => {
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.apps.meet.v2.EndActiveConferenceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.apps.meet.v2.EndActiveConferenceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.endActiveConference(request), expectedError);
+        });
     });
 
-    it('invokes getSpace with closed client', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.GetSpaceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.GetSpaceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSpace(request), expectedError);
+    describe('Path templates', () => {
+
+        describe('conferenceRecord', async () => {
+            const fakePath = "/rendered/path/conferenceRecord";
+            const expectedParameters = {
+                conference_record: "conferenceRecordValue",
+            };
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.conferenceRecordPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.conferenceRecordPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('conferenceRecordPath', () => {
+                const result = client.conferenceRecordPath("conferenceRecordValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.conferenceRecordPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchConferenceRecordFromConferenceRecordName', () => {
+                const result = client.matchConferenceRecordFromConferenceRecordName(fakePath);
+                assert.strictEqual(result, "conferenceRecordValue");
+                assert((client.pathTemplates.conferenceRecordPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('participant', async () => {
+            const fakePath = "/rendered/path/participant";
+            const expectedParameters = {
+                conference_record: "conferenceRecordValue",
+                participant: "participantValue",
+            };
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.participantPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.participantPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('participantPath', () => {
+                const result = client.participantPath("conferenceRecordValue", "participantValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.participantPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchConferenceRecordFromParticipantName', () => {
+                const result = client.matchConferenceRecordFromParticipantName(fakePath);
+                assert.strictEqual(result, "conferenceRecordValue");
+                assert((client.pathTemplates.participantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchParticipantFromParticipantName', () => {
+                const result = client.matchParticipantFromParticipantName(fakePath);
+                assert.strictEqual(result, "participantValue");
+                assert((client.pathTemplates.participantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('participantSession', async () => {
+            const fakePath = "/rendered/path/participantSession";
+            const expectedParameters = {
+                conference_record: "conferenceRecordValue",
+                participant: "participantValue",
+                participant_session: "participantSessionValue",
+            };
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.participantSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.participantSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('participantSessionPath', () => {
+                const result = client.participantSessionPath("conferenceRecordValue", "participantValue", "participantSessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.participantSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchConferenceRecordFromParticipantSessionName', () => {
+                const result = client.matchConferenceRecordFromParticipantSessionName(fakePath);
+                assert.strictEqual(result, "conferenceRecordValue");
+                assert((client.pathTemplates.participantSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchParticipantFromParticipantSessionName', () => {
+                const result = client.matchParticipantFromParticipantSessionName(fakePath);
+                assert.strictEqual(result, "participantValue");
+                assert((client.pathTemplates.participantSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchParticipantSessionFromParticipantSessionName', () => {
+                const result = client.matchParticipantSessionFromParticipantSessionName(fakePath);
+                assert.strictEqual(result, "participantSessionValue");
+                assert((client.pathTemplates.participantSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('recording', async () => {
+            const fakePath = "/rendered/path/recording";
+            const expectedParameters = {
+                conference_record: "conferenceRecordValue",
+                recording: "recordingValue",
+            };
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.recordingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.recordingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('recordingPath', () => {
+                const result = client.recordingPath("conferenceRecordValue", "recordingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.recordingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchConferenceRecordFromRecordingName', () => {
+                const result = client.matchConferenceRecordFromRecordingName(fakePath);
+                assert.strictEqual(result, "conferenceRecordValue");
+                assert((client.pathTemplates.recordingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRecordingFromRecordingName', () => {
+                const result = client.matchRecordingFromRecordingName(fakePath);
+                assert.strictEqual(result, "recordingValue");
+                assert((client.pathTemplates.recordingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('space', async () => {
+            const fakePath = "/rendered/path/space";
+            const expectedParameters = {
+                space: "spaceValue",
+            };
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.spacePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.spacePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('spacePath', () => {
+                const result = client.spacePath("spaceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.spacePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchSpaceFromSpaceName', () => {
+                const result = client.matchSpaceFromSpaceName(fakePath);
+                assert.strictEqual(result, "spaceValue");
+                assert((client.pathTemplates.spacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('transcript', async () => {
+            const fakePath = "/rendered/path/transcript";
+            const expectedParameters = {
+                conference_record: "conferenceRecordValue",
+                transcript: "transcriptValue",
+            };
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.transcriptPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.transcriptPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('transcriptPath', () => {
+                const result = client.transcriptPath("conferenceRecordValue", "transcriptValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.transcriptPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchConferenceRecordFromTranscriptName', () => {
+                const result = client.matchConferenceRecordFromTranscriptName(fakePath);
+                assert.strictEqual(result, "conferenceRecordValue");
+                assert((client.pathTemplates.transcriptPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTranscriptFromTranscriptName', () => {
+                const result = client.matchTranscriptFromTranscriptName(fakePath);
+                assert.strictEqual(result, "transcriptValue");
+                assert((client.pathTemplates.transcriptPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('transcriptEntry', async () => {
+            const fakePath = "/rendered/path/transcriptEntry";
+            const expectedParameters = {
+                conference_record: "conferenceRecordValue",
+                transcript: "transcriptValue",
+                entry: "entryValue",
+            };
+            const client = new spacesserviceModule.v2.SpacesServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.transcriptEntryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.transcriptEntryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('transcriptEntryPath', () => {
+                const result = client.transcriptEntryPath("conferenceRecordValue", "transcriptValue", "entryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.transcriptEntryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchConferenceRecordFromTranscriptEntryName', () => {
+                const result = client.matchConferenceRecordFromTranscriptEntryName(fakePath);
+                assert.strictEqual(result, "conferenceRecordValue");
+                assert((client.pathTemplates.transcriptEntryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchTranscriptFromTranscriptEntryName', () => {
+                const result = client.matchTranscriptFromTranscriptEntryName(fakePath);
+                assert.strictEqual(result, "transcriptValue");
+                assert((client.pathTemplates.transcriptEntryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryFromTranscriptEntryName', () => {
+                const result = client.matchEntryFromTranscriptEntryName(fakePath);
+                assert.strictEqual(result, "entryValue");
+                assert((client.pathTemplates.transcriptEntryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('updateSpace', () => {
-    it('invokes updateSpace without error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.UpdateSpaceRequest()
-      );
-      request.space ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.UpdateSpaceRequest',
-        ['space', 'name']
-      );
-      request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.apps.meet.v2.Space()
-      );
-      client.innerApiCalls.updateSpace = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSpace(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSpace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSpace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSpace without error using callback', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.UpdateSpaceRequest()
-      );
-      request.space ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.UpdateSpaceRequest',
-        ['space', 'name']
-      );
-      request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.apps.meet.v2.Space()
-      );
-      client.innerApiCalls.updateSpace =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSpace(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.apps.meet.v2.ISpace | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSpace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSpace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSpace with error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.UpdateSpaceRequest()
-      );
-      request.space ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.UpdateSpaceRequest',
-        ['space', 'name']
-      );
-      request.space.name = defaultValue1;
-      const expectedHeaderRequestParams = `space.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSpace = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSpace(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSpace as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSpace as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSpace with closed client', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.UpdateSpaceRequest()
-      );
-      request.space ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.UpdateSpaceRequest',
-        ['space', 'name']
-      );
-      request.space.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateSpace(request), expectedError);
-    });
-  });
-
-  describe('endActiveConference', () => {
-    it('invokes endActiveConference without error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.EndActiveConferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.EndActiveConferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.endActiveConference =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.endActiveConference(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.endActiveConference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.endActiveConference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes endActiveConference without error using callback', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.EndActiveConferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.EndActiveConferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.endActiveConference =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.endActiveConference(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.endActiveConference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.endActiveConference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes endActiveConference with error', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.EndActiveConferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.EndActiveConferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.endActiveConference = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.endActiveConference(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.endActiveConference as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.endActiveConference as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes endActiveConference with closed client', async () => {
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.apps.meet.v2.EndActiveConferenceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.apps.meet.v2.EndActiveConferenceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.endActiveConference(request), expectedError);
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('conferenceRecord', async () => {
-      const fakePath = '/rendered/path/conferenceRecord';
-      const expectedParameters = {
-        conference_record: 'conferenceRecordValue',
-      };
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.conferenceRecordPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.conferenceRecordPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('conferenceRecordPath', () => {
-        const result = client.conferenceRecordPath('conferenceRecordValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.conferenceRecordPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchConferenceRecordFromConferenceRecordName', () => {
-        const result =
-          client.matchConferenceRecordFromConferenceRecordName(fakePath);
-        assert.strictEqual(result, 'conferenceRecordValue');
-        assert(
-          (client.pathTemplates.conferenceRecordPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('participant', async () => {
-      const fakePath = '/rendered/path/participant';
-      const expectedParameters = {
-        conference_record: 'conferenceRecordValue',
-        participant: 'participantValue',
-      };
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.participantPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.participantPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('participantPath', () => {
-        const result = client.participantPath(
-          'conferenceRecordValue',
-          'participantValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.participantPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchConferenceRecordFromParticipantName', () => {
-        const result =
-          client.matchConferenceRecordFromParticipantName(fakePath);
-        assert.strictEqual(result, 'conferenceRecordValue');
-        assert(
-          (client.pathTemplates.participantPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchParticipantFromParticipantName', () => {
-        const result = client.matchParticipantFromParticipantName(fakePath);
-        assert.strictEqual(result, 'participantValue');
-        assert(
-          (client.pathTemplates.participantPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('participantSession', async () => {
-      const fakePath = '/rendered/path/participantSession';
-      const expectedParameters = {
-        conference_record: 'conferenceRecordValue',
-        participant: 'participantValue',
-        participant_session: 'participantSessionValue',
-      };
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.participantSessionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.participantSessionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('participantSessionPath', () => {
-        const result = client.participantSessionPath(
-          'conferenceRecordValue',
-          'participantValue',
-          'participantSessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.participantSessionPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchConferenceRecordFromParticipantSessionName', () => {
-        const result =
-          client.matchConferenceRecordFromParticipantSessionName(fakePath);
-        assert.strictEqual(result, 'conferenceRecordValue');
-        assert(
-          (
-            client.pathTemplates.participantSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchParticipantFromParticipantSessionName', () => {
-        const result =
-          client.matchParticipantFromParticipantSessionName(fakePath);
-        assert.strictEqual(result, 'participantValue');
-        assert(
-          (
-            client.pathTemplates.participantSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchParticipantSessionFromParticipantSessionName', () => {
-        const result =
-          client.matchParticipantSessionFromParticipantSessionName(fakePath);
-        assert.strictEqual(result, 'participantSessionValue');
-        assert(
-          (
-            client.pathTemplates.participantSessionPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('recording', async () => {
-      const fakePath = '/rendered/path/recording';
-      const expectedParameters = {
-        conference_record: 'conferenceRecordValue',
-        recording: 'recordingValue',
-      };
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.recordingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.recordingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('recordingPath', () => {
-        const result = client.recordingPath(
-          'conferenceRecordValue',
-          'recordingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.recordingPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchConferenceRecordFromRecordingName', () => {
-        const result = client.matchConferenceRecordFromRecordingName(fakePath);
-        assert.strictEqual(result, 'conferenceRecordValue');
-        assert(
-          (client.pathTemplates.recordingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRecordingFromRecordingName', () => {
-        const result = client.matchRecordingFromRecordingName(fakePath);
-        assert.strictEqual(result, 'recordingValue');
-        assert(
-          (client.pathTemplates.recordingPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('space', async () => {
-      const fakePath = '/rendered/path/space';
-      const expectedParameters = {
-        space: 'spaceValue',
-      };
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.spacePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.spacePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('spacePath', () => {
-        const result = client.spacePath('spaceValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.spacePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchSpaceFromSpaceName', () => {
-        const result = client.matchSpaceFromSpaceName(fakePath);
-        assert.strictEqual(result, 'spaceValue');
-        assert(
-          (client.pathTemplates.spacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('transcript', async () => {
-      const fakePath = '/rendered/path/transcript';
-      const expectedParameters = {
-        conference_record: 'conferenceRecordValue',
-        transcript: 'transcriptValue',
-      };
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.transcriptPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.transcriptPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('transcriptPath', () => {
-        const result = client.transcriptPath(
-          'conferenceRecordValue',
-          'transcriptValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.transcriptPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchConferenceRecordFromTranscriptName', () => {
-        const result = client.matchConferenceRecordFromTranscriptName(fakePath);
-        assert.strictEqual(result, 'conferenceRecordValue');
-        assert(
-          (client.pathTemplates.transcriptPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTranscriptFromTranscriptName', () => {
-        const result = client.matchTranscriptFromTranscriptName(fakePath);
-        assert.strictEqual(result, 'transcriptValue');
-        assert(
-          (client.pathTemplates.transcriptPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('transcriptEntry', async () => {
-      const fakePath = '/rendered/path/transcriptEntry';
-      const expectedParameters = {
-        conference_record: 'conferenceRecordValue',
-        transcript: 'transcriptValue',
-        entry: 'entryValue',
-      };
-      const client = new spacesserviceModule.v2.SpacesServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.transcriptEntryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.transcriptEntryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('transcriptEntryPath', () => {
-        const result = client.transcriptEntryPath(
-          'conferenceRecordValue',
-          'transcriptValue',
-          'entryValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.transcriptEntryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchConferenceRecordFromTranscriptEntryName', () => {
-        const result =
-          client.matchConferenceRecordFromTranscriptEntryName(fakePath);
-        assert.strictEqual(result, 'conferenceRecordValue');
-        assert(
-          (client.pathTemplates.transcriptEntryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTranscriptFromTranscriptEntryName', () => {
-        const result = client.matchTranscriptFromTranscriptEntryName(fakePath);
-        assert.strictEqual(result, 'transcriptValue');
-        assert(
-          (client.pathTemplates.transcriptEntryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEntryFromTranscriptEntryName', () => {
-        const result = client.matchEntryFromTranscriptEntryName(fakePath);
-        assert.strictEqual(result, 'entryValue');
-        assert(
-          (client.pathTemplates.transcriptEntryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

@@ -160,18 +160,6 @@ export namespace google {
                     /** CitationSource license. */
                     public license?: (string|null);
 
-                    /** CitationSource _startIndex. */
-                    public _startIndex?: "startIndex";
-
-                    /** CitationSource _endIndex. */
-                    public _endIndex?: "endIndex";
-
-                    /** CitationSource _uri. */
-                    public _uri?: "uri";
-
-                    /** CitationSource _license. */
-                    public _license?: "license";
-
                     /**
                      * Creates a new CitationSource instance using the specified properties.
                      * @param [properties] Properties to set
@@ -476,7 +464,7 @@ export namespace google {
                     mimeType?: (string|null);
 
                     /** Blob data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Blob. */
@@ -492,7 +480,7 @@ export namespace google {
                     public mimeType: string;
 
                     /** Blob data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Blob instance using the specified properties.
@@ -854,9 +842,6 @@ export namespace google {
                     /** GenerateContentRequest generationConfig. */
                     public generationConfig?: (google.ai.generativelanguage.v1.IGenerationConfig|null);
 
-                    /** GenerateContentRequest _generationConfig. */
-                    public _generationConfig?: "generationConfig";
-
                     /**
                      * Creates a new GenerateContentRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1019,39 +1004,6 @@ export namespace google {
 
                     /** GenerationConfig enableEnhancedCivicAnswers. */
                     public enableEnhancedCivicAnswers?: (boolean|null);
-
-                    /** GenerationConfig _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerationConfig _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** GenerationConfig _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerationConfig _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerationConfig _topK. */
-                    public _topK?: "topK";
-
-                    /** GenerationConfig _seed. */
-                    public _seed?: "seed";
-
-                    /** GenerationConfig _presencePenalty. */
-                    public _presencePenalty?: "presencePenalty";
-
-                    /** GenerationConfig _frequencyPenalty. */
-                    public _frequencyPenalty?: "frequencyPenalty";
-
-                    /** GenerationConfig _responseLogprobs. */
-                    public _responseLogprobs?: "responseLogprobs";
-
-                    /** GenerationConfig _logprobs. */
-                    public _logprobs?: "logprobs";
-
-                    /** GenerationConfig _enableEnhancedCivicAnswers. */
-                    public _enableEnhancedCivicAnswers?: "enableEnhancedCivicAnswers";
 
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
@@ -1577,9 +1529,6 @@ export namespace google {
                     /** Candidate logprobsResult. */
                     public logprobsResult?: (google.ai.generativelanguage.v1.ILogprobsResult|null);
 
-                    /** Candidate _index. */
-                    public _index?: "index";
-
                     /**
                      * Creates a new Candidate instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1812,15 +1761,6 @@ export namespace google {
 
                         /** Candidate logProbability. */
                         public logProbability?: (number|null);
-
-                        /** Candidate _token. */
-                        public _token?: "token";
-
-                        /** Candidate _tokenId. */
-                        public _tokenId?: "tokenId";
-
-                        /** Candidate _logProbability. */
-                        public _logProbability?: "logProbability";
 
                         /**
                          * Creates a new Candidate instance using the specified properties.
@@ -2138,12 +2078,6 @@ export namespace google {
                     /** GroundingMetadata webSearchQueries. */
                     public webSearchQueries: string[];
 
-                    /** GroundingMetadata _searchEntryPoint. */
-                    public _searchEntryPoint?: "searchEntryPoint";
-
-                    /** GroundingMetadata _retrievalMetadata. */
-                    public _retrievalMetadata?: "retrievalMetadata";
-
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2229,7 +2163,7 @@ export namespace google {
                     renderedContent?: (string|null);
 
                     /** SearchEntryPoint sdkBlob */
-                    sdkBlob?: (Uint8Array|string|null);
+                    sdkBlob?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a SearchEntryPoint. */
@@ -2245,7 +2179,7 @@ export namespace google {
                     public renderedContent: string;
 
                     /** SearchEntryPoint sdkBlob. */
-                    public sdkBlob: (Uint8Array|string);
+                    public sdkBlob: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new SearchEntryPoint instance using the specified properties.
@@ -2451,12 +2385,6 @@ export namespace google {
 
                         /** Web title. */
                         public title?: (string|null);
-
-                        /** Web _uri. */
-                        public _uri?: "uri";
-
-                        /** Web _title. */
-                        public _title?: "title";
 
                         /**
                          * Creates a new Web instance using the specified properties.
@@ -2683,9 +2611,6 @@ export namespace google {
                     /** GroundingSupport confidenceScores. */
                     public confidenceScores: number[];
 
-                    /** GroundingSupport _segment. */
-                    public _segment?: "segment";
-
                     /**
                      * Creates a new GroundingSupport instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2806,15 +2731,6 @@ export namespace google {
 
                     /** EmbedContentRequest outputDimensionality. */
                     public outputDimensionality?: (number|null);
-
-                    /** EmbedContentRequest _taskType. */
-                    public _taskType?: "taskType";
-
-                    /** EmbedContentRequest _title. */
-                    public _title?: "title";
-
-                    /** EmbedContentRequest _outputDimensionality. */
-                    public _outputDimensionality?: "outputDimensionality";
 
                     /**
                      * Creates a new EmbedContentRequest instance using the specified properties.
@@ -3843,18 +3759,6 @@ export namespace google {
 
                     /** Model topK. */
                     public topK?: (number|null);
-
-                    /** Model _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** Model _maxTemperature. */
-                    public _maxTemperature?: "maxTemperature";
-
-                    /** Model _topP. */
-                    public _topP?: "topP";
-
-                    /** Model _topK. */
-                    public _topK?: "topK";
 
                     /**
                      * Creates a new Model instance using the specified properties.
@@ -5124,21 +5028,6 @@ export namespace google {
                     /** CachedContent expiration. */
                     public expiration?: ("expireTime"|"ttl");
 
-                    /** CachedContent _name. */
-                    public _name?: "name";
-
-                    /** CachedContent _displayName. */
-                    public _displayName?: "displayName";
-
-                    /** CachedContent _model. */
-                    public _model?: "model";
-
-                    /** CachedContent _systemInstruction. */
-                    public _systemInstruction?: "systemInstruction";
-
-                    /** CachedContent _toolConfig. */
-                    public _toolConfig?: "toolConfig";
-
                     /**
                      * Creates a new CachedContent instance using the specified properties.
                      * @param [properties] Properties to set
@@ -5574,7 +5463,7 @@ export namespace google {
                     mimeType?: (string|null);
 
                     /** Blob data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Blob. */
@@ -5590,7 +5479,7 @@ export namespace google {
                     public mimeType: string;
 
                     /** Blob data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Blob instance using the specified properties.
@@ -6330,9 +6219,6 @@ export namespace google {
                     /** DynamicRetrievalConfig dynamicThreshold. */
                     public dynamicThreshold?: (number|null);
 
-                    /** DynamicRetrievalConfig _dynamicThreshold. */
-                    public _dynamicThreshold?: "dynamicThreshold";
-
                     /**
                      * Creates a new DynamicRetrievalConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6759,12 +6645,6 @@ export namespace google {
                     /** FunctionDeclaration response. */
                     public response?: (google.ai.generativelanguage.v1alpha.ISchema|null);
 
-                    /** FunctionDeclaration _parameters. */
-                    public _parameters?: "parameters";
-
-                    /** FunctionDeclaration _response. */
-                    public _response?: "response";
-
                     /**
                      * Creates a new FunctionDeclaration instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6873,9 +6753,6 @@ export namespace google {
 
                     /** FunctionCall args. */
                     public args?: (google.protobuf.IStruct|null);
-
-                    /** FunctionCall _args. */
-                    public _args?: "args";
 
                     /**
                      * Creates a new FunctionCall instance using the specified properties.
@@ -7136,9 +7013,6 @@ export namespace google {
 
                     /** Schema required. */
                     public required: string[];
-
-                    /** Schema _items. */
-                    public _items?: "items";
 
                     /**
                      * Creates a new Schema instance using the specified properties.
@@ -7552,18 +7426,6 @@ export namespace google {
                     /** CitationSource license. */
                     public license?: (string|null);
 
-                    /** CitationSource _startIndex. */
-                    public _startIndex?: "startIndex";
-
-                    /** CitationSource _endIndex. */
-                    public _endIndex?: "endIndex";
-
-                    /** CitationSource _uri. */
-                    public _uri?: "uri";
-
-                    /** CitationSource _license. */
-                    public _license?: "license";
-
                     /**
                      * Creates a new CitationSource instance using the specified properties.
                      * @param [properties] Properties to set
@@ -7756,18 +7618,6 @@ export namespace google {
 
                     /** GenerateMessageRequest topK. */
                     public topK?: (number|null);
-
-                    /** GenerateMessageRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateMessageRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateMessageRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateMessageRequest _topK. */
-                    public _topK?: "topK";
 
                     /**
                      * Creates a new GenerateMessageRequest instance using the specified properties.
@@ -7986,9 +7836,6 @@ export namespace google {
 
                     /** Message citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1alpha.ICitationMetadata|null);
-
-                    /** Message _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
 
                     /**
                      * Creates a new Message instance using the specified properties.
@@ -8521,9 +8368,6 @@ export namespace google {
                     /** ContentFilter message. */
                     public message?: (string|null);
 
-                    /** ContentFilter _message. */
-                    public _message?: "message";
-
                     /**
                      * Creates a new ContentFilter instance using the specified properties.
                      * @param [properties] Properties to set
@@ -8980,7 +8824,7 @@ export namespace google {
                     expirationTime?: (google.protobuf.ITimestamp|null);
 
                     /** File sha256Hash */
-                    sha256Hash?: (Uint8Array|string|null);
+                    sha256Hash?: (Uint8Array|Buffer|string|null);
 
                     /** File uri */
                     uri?: (string|null);
@@ -9026,7 +8870,7 @@ export namespace google {
                     public expirationTime?: (google.protobuf.ITimestamp|null);
 
                     /** File sha256Hash. */
-                    public sha256Hash: (Uint8Array|string);
+                    public sha256Hash: (Uint8Array|Buffer|string);
 
                     /** File uri. */
                     public uri: string;
@@ -10172,15 +10016,6 @@ export namespace google {
                     /** GenerateContentRequest cachedContent. */
                     public cachedContent?: (string|null);
 
-                    /** GenerateContentRequest _systemInstruction. */
-                    public _systemInstruction?: "systemInstruction";
-
-                    /** GenerateContentRequest _generationConfig. */
-                    public _generationConfig?: "generationConfig";
-
-                    /** GenerateContentRequest _cachedContent. */
-                    public _cachedContent?: "cachedContent";
-
                     /**
                      * Creates a new GenerateContentRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10277,9 +10112,6 @@ export namespace google {
 
                     /** PrebuiltVoiceConfig voiceName. */
                     public voiceName?: (string|null);
-
-                    /** PrebuiltVoiceConfig _voiceName. */
-                    public _voiceName?: "voiceName";
 
                     /**
                      * Creates a new PrebuiltVoiceConfig instance using the specified properties.
@@ -10659,39 +10491,6 @@ export namespace google {
                     /** GenerationConfig speechConfig. */
                     public speechConfig?: (google.ai.generativelanguage.v1alpha.ISpeechConfig|null);
 
-                    /** GenerationConfig _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerationConfig _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** GenerationConfig _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerationConfig _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerationConfig _topK. */
-                    public _topK?: "topK";
-
-                    /** GenerationConfig _presencePenalty. */
-                    public _presencePenalty?: "presencePenalty";
-
-                    /** GenerationConfig _frequencyPenalty. */
-                    public _frequencyPenalty?: "frequencyPenalty";
-
-                    /** GenerationConfig _responseLogprobs. */
-                    public _responseLogprobs?: "responseLogprobs";
-
-                    /** GenerationConfig _logprobs. */
-                    public _logprobs?: "logprobs";
-
-                    /** GenerationConfig _enableEnhancedCivicAnswers. */
-                    public _enableEnhancedCivicAnswers?: "enableEnhancedCivicAnswers";
-
-                    /** GenerationConfig _speechConfig. */
-                    public _speechConfig?: "speechConfig";
-
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10823,12 +10622,6 @@ export namespace google {
 
                     /** SemanticRetrieverConfig minimumRelevanceScore. */
                     public minimumRelevanceScore?: (number|null);
-
-                    /** SemanticRetrieverConfig _maxChunksCount. */
-                    public _maxChunksCount?: "maxChunksCount";
-
-                    /** SemanticRetrieverConfig _minimumRelevanceScore. */
-                    public _minimumRelevanceScore?: "minimumRelevanceScore";
 
                     /**
                      * Creates a new SemanticRetrieverConfig instance using the specified properties.
@@ -11330,9 +11123,6 @@ export namespace google {
                     /** Candidate logprobsResult. */
                     public logprobsResult?: (google.ai.generativelanguage.v1alpha.ILogprobsResult|null);
 
-                    /** Candidate _index. */
-                    public _index?: "index";
-
                     /**
                      * Creates a new Candidate instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11565,15 +11355,6 @@ export namespace google {
 
                         /** Candidate logProbability. */
                         public logProbability?: (number|null);
-
-                        /** Candidate _token. */
-                        public _token?: "token";
-
-                        /** Candidate _tokenId. */
-                        public _tokenId?: "tokenId";
-
-                        /** Candidate _logProbability. */
-                        public _logProbability?: "logProbability";
 
                         /**
                          * Creates a new Candidate instance using the specified properties.
@@ -12309,12 +12090,6 @@ export namespace google {
                     /** GroundingMetadata webSearchQueries. */
                     public webSearchQueries: string[];
 
-                    /** GroundingMetadata _searchEntryPoint. */
-                    public _searchEntryPoint?: "searchEntryPoint";
-
-                    /** GroundingMetadata _retrievalMetadata. */
-                    public _retrievalMetadata?: "retrievalMetadata";
-
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
                      * @param [properties] Properties to set
@@ -12400,7 +12175,7 @@ export namespace google {
                     renderedContent?: (string|null);
 
                     /** SearchEntryPoint sdkBlob */
-                    sdkBlob?: (Uint8Array|string|null);
+                    sdkBlob?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a SearchEntryPoint. */
@@ -12416,7 +12191,7 @@ export namespace google {
                     public renderedContent: string;
 
                     /** SearchEntryPoint sdkBlob. */
-                    public sdkBlob: (Uint8Array|string);
+                    public sdkBlob: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new SearchEntryPoint instance using the specified properties.
@@ -12622,12 +12397,6 @@ export namespace google {
 
                         /** Web title. */
                         public title?: (string|null);
-
-                        /** Web _uri. */
-                        public _uri?: "uri";
-
-                        /** Web _title. */
-                        public _title?: "title";
 
                         /**
                          * Creates a new Web instance using the specified properties.
@@ -12854,9 +12623,6 @@ export namespace google {
                     /** GroundingSupport confidenceScores. */
                     public confidenceScores: number[];
 
-                    /** GroundingSupport _segment. */
-                    public _segment?: "segment";
-
                     /**
                      * Creates a new GroundingSupport instance using the specified properties.
                      * @param [properties] Properties to set
@@ -12993,9 +12759,6 @@ export namespace google {
                     /** GenerateAnswerRequest groundingSource. */
                     public groundingSource?: ("inlinePassages"|"semanticRetriever");
 
-                    /** GenerateAnswerRequest _temperature. */
-                    public _temperature?: "temperature";
-
                     /**
                      * Creates a new GenerateAnswerRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -13116,12 +12879,6 @@ export namespace google {
                     /** GenerateAnswerResponse inputFeedback. */
                     public inputFeedback?: (google.ai.generativelanguage.v1alpha.GenerateAnswerResponse.IInputFeedback|null);
 
-                    /** GenerateAnswerResponse _answerableProbability. */
-                    public _answerableProbability?: "answerableProbability";
-
-                    /** GenerateAnswerResponse _inputFeedback. */
-                    public _inputFeedback?: "inputFeedback";
-
                     /**
                      * Creates a new GenerateAnswerResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -13226,9 +12983,6 @@ export namespace google {
 
                         /** InputFeedback safetyRatings. */
                         public safetyRatings: google.ai.generativelanguage.v1alpha.ISafetyRating[];
-
-                        /** InputFeedback _blockReason. */
-                        public _blockReason?: "blockReason";
 
                         /**
                          * Creates a new InputFeedback instance using the specified properties.
@@ -13361,15 +13115,6 @@ export namespace google {
 
                     /** EmbedContentRequest outputDimensionality. */
                     public outputDimensionality?: (number|null);
-
-                    /** EmbedContentRequest _taskType. */
-                    public _taskType?: "taskType";
-
-                    /** EmbedContentRequest _title. */
-                    public _title?: "title";
-
-                    /** EmbedContentRequest _outputDimensionality. */
-                    public _outputDimensionality?: "outputDimensionality";
 
                     /**
                      * Creates a new EmbedContentRequest instance using the specified properties.
@@ -14712,9 +14457,6 @@ export namespace google {
 
                     /** BidiGenerateContentServerContent groundingMetadata. */
                     public groundingMetadata?: (google.ai.generativelanguage.v1alpha.IGroundingMetadata|null);
-
-                    /** BidiGenerateContentServerContent _modelTurn. */
-                    public _modelTurn?: "modelTurn";
 
                     /**
                      * Creates a new BidiGenerateContentServerContent instance using the specified properties.
@@ -16111,18 +15853,6 @@ export namespace google {
                     /** Model topK. */
                     public topK?: (number|null);
 
-                    /** Model _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** Model _maxTemperature. */
-                    public _maxTemperature?: "maxTemperature";
-
-                    /** Model _topP. */
-                    public _topP?: "topP";
-
-                    /** Model _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new Model instance using the specified properties.
                      * @param [properties] Properties to set
@@ -17009,9 +16739,6 @@ export namespace google {
                     /** CreateTunedModelRequest tunedModel. */
                     public tunedModel?: (google.ai.generativelanguage.v1alpha.ITunedModel|null);
 
-                    /** CreateTunedModelRequest _tunedModelId. */
-                    public _tunedModelId?: "tunedModelId";
-
                     /**
                      * Creates a new CreateTunedModelRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -17505,15 +17232,6 @@ export namespace google {
                     /** TunedModel sourceModel. */
                     public sourceModel?: ("tunedModelSource"|"baseModel");
 
-                    /** TunedModel _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** TunedModel _topP. */
-                    public _topP?: "topP";
-
-                    /** TunedModel _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new TunedModel instance using the specified properties.
                      * @param [properties] Properties to set
@@ -17866,12 +17584,6 @@ export namespace google {
 
                     /** Hyperparameters learningRateOption. */
                     public learningRateOption?: ("learningRate"|"learningRateMultiplier");
-
-                    /** Hyperparameters _epochCount. */
-                    public _epochCount?: "epochCount";
-
-                    /** Hyperparameters _batchSize. */
-                    public _batchSize?: "batchSize";
 
                     /**
                      * Creates a new Hyperparameters instance using the specified properties.
@@ -18382,9 +18094,6 @@ export namespace google {
                     /** TuningMultiturnExample contents. */
                     public contents: google.ai.generativelanguage.v1alpha.ITuningContent[];
 
-                    /** TuningMultiturnExample _systemInstruction. */
-                    public _systemInstruction?: "systemInstruction";
-
                     /**
                      * Creates a new TuningMultiturnExample instance using the specified properties.
                      * @param [properties] Properties to set
@@ -18720,15 +18429,6 @@ export namespace google {
 
                     /** Permission role. */
                     public role?: (google.ai.generativelanguage.v1alpha.Permission.Role|keyof typeof google.ai.generativelanguage.v1alpha.Permission.Role|null);
-
-                    /** Permission _granteeType. */
-                    public _granteeType?: "granteeType";
-
-                    /** Permission _emailAddress. */
-                    public _emailAddress?: "emailAddress";
-
-                    /** Permission _role. */
-                    public _role?: "role";
 
                     /**
                      * Creates a new Permission instance using the specified properties.
@@ -23519,21 +23219,6 @@ export namespace google {
                     /** GenerateTextRequest stopSequences. */
                     public stopSequences: string[];
 
-                    /** GenerateTextRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateTextRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateTextRequest _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** GenerateTextRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateTextRequest _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new GenerateTextRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -23849,9 +23534,6 @@ export namespace google {
                     /** TextCompletion citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1alpha.ICitationMetadata|null);
 
-                    /** TextCompletion _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
-
                     /**
                      * Creates a new TextCompletion instance using the specified properties.
                      * @param [properties] Properties to set
@@ -24051,9 +23733,6 @@ export namespace google {
 
                     /** EmbedTextResponse embedding. */
                     public embedding?: (google.ai.generativelanguage.v1alpha.IEmbedding|null);
-
-                    /** EmbedTextResponse _embedding. */
-                    public _embedding?: "embedding";
 
                     /**
                      * Creates a new EmbedTextResponse instance using the specified properties.
@@ -25457,21 +25136,6 @@ export namespace google {
                     /** CachedContent expiration. */
                     public expiration?: ("expireTime"|"ttl");
 
-                    /** CachedContent _name. */
-                    public _name?: "name";
-
-                    /** CachedContent _displayName. */
-                    public _displayName?: "displayName";
-
-                    /** CachedContent _model. */
-                    public _model?: "model";
-
-                    /** CachedContent _systemInstruction. */
-                    public _systemInstruction?: "systemInstruction";
-
-                    /** CachedContent _toolConfig. */
-                    public _toolConfig?: "toolConfig";
-
                     /**
                      * Creates a new CachedContent instance using the specified properties.
                      * @param [properties] Properties to set
@@ -25924,7 +25588,7 @@ export namespace google {
                     mimeType?: (string|null);
 
                     /** Blob data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Blob. */
@@ -25940,7 +25604,7 @@ export namespace google {
                     public mimeType: string;
 
                     /** Blob data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Blob instance using the specified properties.
@@ -26680,9 +26344,6 @@ export namespace google {
                     /** DynamicRetrievalConfig dynamicThreshold. */
                     public dynamicThreshold?: (number|null);
 
-                    /** DynamicRetrievalConfig _dynamicThreshold. */
-                    public _dynamicThreshold?: "dynamicThreshold";
-
                     /**
                      * Creates a new DynamicRetrievalConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -27110,12 +26771,6 @@ export namespace google {
                     /** FunctionDeclaration response. */
                     public response?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
-                    /** FunctionDeclaration _parameters. */
-                    public _parameters?: "parameters";
-
-                    /** FunctionDeclaration _response. */
-                    public _response?: "response";
-
                     /**
                      * Creates a new FunctionDeclaration instance using the specified properties.
                      * @param [properties] Properties to set
@@ -27224,9 +26879,6 @@ export namespace google {
 
                     /** FunctionCall args. */
                     public args?: (google.protobuf.IStruct|null);
-
-                    /** FunctionCall _args. */
-                    public _args?: "args";
 
                     /**
                      * Creates a new FunctionCall instance using the specified properties.
@@ -27523,15 +27175,6 @@ export namespace google {
 
                     /** Schema default. */
                     public default?: (google.protobuf.IValue|null);
-
-                    /** Schema _items. */
-                    public _items?: "items";
-
-                    /** Schema _minimum. */
-                    public _minimum?: "minimum";
-
-                    /** Schema _maximum. */
-                    public _maximum?: "maximum";
 
                     /**
                      * Creates a new Schema instance using the specified properties.
@@ -28048,18 +27691,6 @@ export namespace google {
                     /** CitationSource license. */
                     public license?: (string|null);
 
-                    /** CitationSource _startIndex. */
-                    public _startIndex?: "startIndex";
-
-                    /** CitationSource _endIndex. */
-                    public _endIndex?: "endIndex";
-
-                    /** CitationSource _uri. */
-                    public _uri?: "uri";
-
-                    /** CitationSource _license. */
-                    public _license?: "license";
-
                     /**
                      * Creates a new CitationSource instance using the specified properties.
                      * @param [properties] Properties to set
@@ -28252,18 +27883,6 @@ export namespace google {
 
                     /** GenerateMessageRequest topK. */
                     public topK?: (number|null);
-
-                    /** GenerateMessageRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateMessageRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateMessageRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateMessageRequest _topK. */
-                    public _topK?: "topK";
 
                     /**
                      * Creates a new GenerateMessageRequest instance using the specified properties.
@@ -28482,9 +28101,6 @@ export namespace google {
 
                     /** Message citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1beta.ICitationMetadata|null);
-
-                    /** Message _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
 
                     /**
                      * Creates a new Message instance using the specified properties.
@@ -29017,9 +28633,6 @@ export namespace google {
                     /** ContentFilter message. */
                     public message?: (string|null);
 
-                    /** ContentFilter _message. */
-                    public _message?: "message";
-
                     /**
                      * Creates a new ContentFilter instance using the specified properties.
                      * @param [properties] Properties to set
@@ -29476,7 +29089,7 @@ export namespace google {
                     expirationTime?: (google.protobuf.ITimestamp|null);
 
                     /** File sha256Hash */
-                    sha256Hash?: (Uint8Array|string|null);
+                    sha256Hash?: (Uint8Array|Buffer|string|null);
 
                     /** File uri */
                     uri?: (string|null);
@@ -29528,7 +29141,7 @@ export namespace google {
                     public expirationTime?: (google.protobuf.ITimestamp|null);
 
                     /** File sha256Hash. */
-                    public sha256Hash: (Uint8Array|string);
+                    public sha256Hash: (Uint8Array|Buffer|string);
 
                     /** File uri. */
                     public uri: string;
@@ -30897,15 +30510,6 @@ export namespace google {
                     /** GenerateContentRequest cachedContent. */
                     public cachedContent?: (string|null);
 
-                    /** GenerateContentRequest _systemInstruction. */
-                    public _systemInstruction?: "systemInstruction";
-
-                    /** GenerateContentRequest _generationConfig. */
-                    public _generationConfig?: "generationConfig";
-
-                    /** GenerateContentRequest _cachedContent. */
-                    public _cachedContent?: "cachedContent";
-
                     /**
                      * Creates a new GenerateContentRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31002,9 +30606,6 @@ export namespace google {
 
                     /** PrebuiltVoiceConfig voiceName. */
                     public voiceName?: (string|null);
-
-                    /** PrebuiltVoiceConfig _voiceName. */
-                    public _voiceName?: "voiceName";
 
                     /**
                      * Creates a new PrebuiltVoiceConfig instance using the specified properties.
@@ -31312,12 +30913,6 @@ export namespace google {
                     /** ThinkingConfig thinkingBudget. */
                     public thinkingBudget?: (number|null);
 
-                    /** ThinkingConfig _includeThoughts. */
-                    public _includeThoughts?: "includeThoughts";
-
-                    /** ThinkingConfig _thinkingBudget. */
-                    public _thinkingBudget?: "thinkingBudget";
-
                     /**
                      * Creates a new ThinkingConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31517,48 +31112,6 @@ export namespace google {
                     /** GenerationConfig mediaResolution. */
                     public mediaResolution?: (google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|keyof typeof google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|null);
 
-                    /** GenerationConfig _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerationConfig _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** GenerationConfig _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerationConfig _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerationConfig _topK. */
-                    public _topK?: "topK";
-
-                    /** GenerationConfig _seed. */
-                    public _seed?: "seed";
-
-                    /** GenerationConfig _presencePenalty. */
-                    public _presencePenalty?: "presencePenalty";
-
-                    /** GenerationConfig _frequencyPenalty. */
-                    public _frequencyPenalty?: "frequencyPenalty";
-
-                    /** GenerationConfig _responseLogprobs. */
-                    public _responseLogprobs?: "responseLogprobs";
-
-                    /** GenerationConfig _logprobs. */
-                    public _logprobs?: "logprobs";
-
-                    /** GenerationConfig _enableEnhancedCivicAnswers. */
-                    public _enableEnhancedCivicAnswers?: "enableEnhancedCivicAnswers";
-
-                    /** GenerationConfig _speechConfig. */
-                    public _speechConfig?: "speechConfig";
-
-                    /** GenerationConfig _thinkingConfig. */
-                    public _thinkingConfig?: "thinkingConfig";
-
-                    /** GenerationConfig _mediaResolution. */
-                    public _mediaResolution?: "mediaResolution";
-
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31698,12 +31251,6 @@ export namespace google {
 
                     /** SemanticRetrieverConfig minimumRelevanceScore. */
                     public minimumRelevanceScore?: (number|null);
-
-                    /** SemanticRetrieverConfig _maxChunksCount. */
-                    public _maxChunksCount?: "maxChunksCount";
-
-                    /** SemanticRetrieverConfig _minimumRelevanceScore. */
-                    public _minimumRelevanceScore?: "minimumRelevanceScore";
 
                     /**
                      * Creates a new SemanticRetrieverConfig instance using the specified properties.
@@ -32241,9 +31788,6 @@ export namespace google {
                     /** Candidate logprobsResult. */
                     public logprobsResult?: (google.ai.generativelanguage.v1beta.ILogprobsResult|null);
 
-                    /** Candidate _index. */
-                    public _index?: "index";
-
                     /**
                      * Creates a new Candidate instance using the specified properties.
                      * @param [properties] Properties to set
@@ -32476,15 +32020,6 @@ export namespace google {
 
                         /** Candidate logProbability. */
                         public logProbability?: (number|null);
-
-                        /** Candidate _token. */
-                        public _token?: "token";
-
-                        /** Candidate _tokenId. */
-                        public _tokenId?: "tokenId";
-
-                        /** Candidate _logProbability. */
-                        public _logProbability?: "logProbability";
 
                         /**
                          * Creates a new Candidate instance using the specified properties.
@@ -33220,12 +32755,6 @@ export namespace google {
                     /** GroundingMetadata webSearchQueries. */
                     public webSearchQueries: string[];
 
-                    /** GroundingMetadata _searchEntryPoint. */
-                    public _searchEntryPoint?: "searchEntryPoint";
-
-                    /** GroundingMetadata _retrievalMetadata. */
-                    public _retrievalMetadata?: "retrievalMetadata";
-
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
                      * @param [properties] Properties to set
@@ -33311,7 +32840,7 @@ export namespace google {
                     renderedContent?: (string|null);
 
                     /** SearchEntryPoint sdkBlob */
-                    sdkBlob?: (Uint8Array|string|null);
+                    sdkBlob?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a SearchEntryPoint. */
@@ -33327,7 +32856,7 @@ export namespace google {
                     public renderedContent: string;
 
                     /** SearchEntryPoint sdkBlob. */
-                    public sdkBlob: (Uint8Array|string);
+                    public sdkBlob: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new SearchEntryPoint instance using the specified properties.
@@ -33533,12 +33062,6 @@ export namespace google {
 
                         /** Web title. */
                         public title?: (string|null);
-
-                        /** Web _uri. */
-                        public _uri?: "uri";
-
-                        /** Web _title. */
-                        public _title?: "title";
 
                         /**
                          * Creates a new Web instance using the specified properties.
@@ -33765,9 +33288,6 @@ export namespace google {
                     /** GroundingSupport confidenceScores. */
                     public confidenceScores: number[];
 
-                    /** GroundingSupport _segment. */
-                    public _segment?: "segment";
-
                     /**
                      * Creates a new GroundingSupport instance using the specified properties.
                      * @param [properties] Properties to set
@@ -33904,9 +33424,6 @@ export namespace google {
                     /** GenerateAnswerRequest groundingSource. */
                     public groundingSource?: ("inlinePassages"|"semanticRetriever");
 
-                    /** GenerateAnswerRequest _temperature. */
-                    public _temperature?: "temperature";
-
                     /**
                      * Creates a new GenerateAnswerRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -34027,12 +33544,6 @@ export namespace google {
                     /** GenerateAnswerResponse inputFeedback. */
                     public inputFeedback?: (google.ai.generativelanguage.v1beta.GenerateAnswerResponse.IInputFeedback|null);
 
-                    /** GenerateAnswerResponse _answerableProbability. */
-                    public _answerableProbability?: "answerableProbability";
-
-                    /** GenerateAnswerResponse _inputFeedback. */
-                    public _inputFeedback?: "inputFeedback";
-
                     /**
                      * Creates a new GenerateAnswerResponse instance using the specified properties.
                      * @param [properties] Properties to set
@@ -34137,9 +33648,6 @@ export namespace google {
 
                         /** InputFeedback safetyRatings. */
                         public safetyRatings: google.ai.generativelanguage.v1beta.ISafetyRating[];
-
-                        /** InputFeedback _blockReason. */
-                        public _blockReason?: "blockReason";
 
                         /**
                          * Creates a new InputFeedback instance using the specified properties.
@@ -34272,15 +33780,6 @@ export namespace google {
 
                     /** EmbedContentRequest outputDimensionality. */
                     public outputDimensionality?: (number|null);
-
-                    /** EmbedContentRequest _taskType. */
-                    public _taskType?: "taskType";
-
-                    /** EmbedContentRequest _title. */
-                    public _title?: "title";
-
-                    /** EmbedContentRequest _outputDimensionality. */
-                    public _outputDimensionality?: "outputDimensionality";
 
                     /**
                      * Creates a new EmbedContentRequest instance using the specified properties.
@@ -35009,12 +34508,6 @@ export namespace google {
                     /** RealtimeInputConfig turnCoverage. */
                     public turnCoverage?: (google.ai.generativelanguage.v1beta.RealtimeInputConfig.TurnCoverage|keyof typeof google.ai.generativelanguage.v1beta.RealtimeInputConfig.TurnCoverage|null);
 
-                    /** RealtimeInputConfig _activityHandling. */
-                    public _activityHandling?: "activityHandling";
-
-                    /** RealtimeInputConfig _turnCoverage. */
-                    public _turnCoverage?: "turnCoverage";
-
                     /**
                      * Creates a new RealtimeInputConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -35137,21 +34630,6 @@ export namespace google {
 
                         /** AutomaticActivityDetection silenceDurationMs. */
                         public silenceDurationMs?: (number|null);
-
-                        /** AutomaticActivityDetection _disabled. */
-                        public _disabled?: "disabled";
-
-                        /** AutomaticActivityDetection _startOfSpeechSensitivity. */
-                        public _startOfSpeechSensitivity?: "startOfSpeechSensitivity";
-
-                        /** AutomaticActivityDetection _prefixPaddingMs. */
-                        public _prefixPaddingMs?: "prefixPaddingMs";
-
-                        /** AutomaticActivityDetection _endOfSpeechSensitivity. */
-                        public _endOfSpeechSensitivity?: "endOfSpeechSensitivity";
-
-                        /** AutomaticActivityDetection _silenceDurationMs. */
-                        public _silenceDurationMs?: "silenceDurationMs";
 
                         /**
                          * Creates a new AutomaticActivityDetection instance using the specified properties.
@@ -35282,9 +34760,6 @@ export namespace google {
                     /** SessionResumptionConfig handle. */
                     public handle?: (string|null);
 
-                    /** SessionResumptionConfig _handle. */
-                    public _handle?: "handle";
-
                     /**
                      * Creates a new SessionResumptionConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -35391,9 +34866,6 @@ export namespace google {
                     /** ContextWindowCompressionConfig compressionMechanism. */
                     public compressionMechanism?: "slidingWindow";
 
-                    /** ContextWindowCompressionConfig _triggerTokens. */
-                    public _triggerTokens?: "triggerTokens";
-
                     /**
                      * Creates a new ContextWindowCompressionConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -35492,9 +34964,6 @@ export namespace google {
 
                         /** SlidingWindow targetTokens. */
                         public targetTokens?: (number|Long|string|null);
-
-                        /** SlidingWindow _targetTokens. */
-                        public _targetTokens?: "targetTokens";
 
                         /**
                          * Creates a new SlidingWindow instance using the specified properties.
@@ -35962,12 +35431,6 @@ export namespace google {
 
                     /** BidiGenerateContentRealtimeInput activityEnd. */
                     public activityEnd?: (google.ai.generativelanguage.v1beta.BidiGenerateContentRealtimeInput.IActivityEnd|null);
-
-                    /** BidiGenerateContentRealtimeInput _audioStreamEnd. */
-                    public _audioStreamEnd?: "audioStreamEnd";
-
-                    /** BidiGenerateContentRealtimeInput _text. */
-                    public _text?: "text";
 
                     /**
                      * Creates a new BidiGenerateContentRealtimeInput instance using the specified properties.
@@ -36586,9 +36049,6 @@ export namespace google {
 
                     /** BidiGenerateContentServerContent outputTranscription. */
                     public outputTranscription?: (google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null);
-
-                    /** BidiGenerateContentServerContent _modelTurn. */
-                    public _modelTurn?: "modelTurn";
 
                     /**
                      * Creates a new BidiGenerateContentServerContent instance using the specified properties.
@@ -38451,18 +37911,6 @@ export namespace google {
                     /** Model topK. */
                     public topK?: (number|null);
 
-                    /** Model _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** Model _maxTemperature. */
-                    public _maxTemperature?: "maxTemperature";
-
-                    /** Model _topP. */
-                    public _topP?: "topP";
-
-                    /** Model _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new Model instance using the specified properties.
                      * @param [properties] Properties to set
@@ -39349,9 +38797,6 @@ export namespace google {
                     /** CreateTunedModelRequest tunedModel. */
                     public tunedModel?: (google.ai.generativelanguage.v1beta.ITunedModel|null);
 
-                    /** CreateTunedModelRequest _tunedModelId. */
-                    public _tunedModelId?: "tunedModelId";
-
                     /**
                      * Creates a new CreateTunedModelRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -39845,15 +39290,6 @@ export namespace google {
                     /** TunedModel sourceModel. */
                     public sourceModel?: ("tunedModelSource"|"baseModel");
 
-                    /** TunedModel _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** TunedModel _topP. */
-                    public _topP?: "topP";
-
-                    /** TunedModel _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new TunedModel instance using the specified properties.
                      * @param [properties] Properties to set
@@ -40206,12 +39642,6 @@ export namespace google {
 
                     /** Hyperparameters learningRateOption. */
                     public learningRateOption?: ("learningRate"|"learningRateMultiplier");
-
-                    /** Hyperparameters _epochCount. */
-                    public _epochCount?: "epochCount";
-
-                    /** Hyperparameters _batchSize. */
-                    public _batchSize?: "batchSize";
 
                     /**
                      * Creates a new Hyperparameters instance using the specified properties.
@@ -40745,15 +40175,6 @@ export namespace google {
 
                     /** Permission role. */
                     public role?: (google.ai.generativelanguage.v1beta.Permission.Role|keyof typeof google.ai.generativelanguage.v1beta.Permission.Role|null);
-
-                    /** Permission _granteeType. */
-                    public _granteeType?: "granteeType";
-
-                    /** Permission _emailAddress. */
-                    public _emailAddress?: "emailAddress";
-
-                    /** Permission _role. */
-                    public _role?: "role";
 
                     /**
                      * Creates a new Permission instance using the specified properties.
@@ -42484,7 +41905,7 @@ export namespace google {
                 interface IVideo {
 
                     /** Video video */
-                    video?: (Uint8Array|string|null);
+                    video?: (Uint8Array|Buffer|string|null);
 
                     /** Video uri */
                     uri?: (string|null);
@@ -42500,7 +41921,7 @@ export namespace google {
                     constructor(properties?: google.ai.generativelanguage.v1beta.IVideo);
 
                     /** Video video. */
-                    public video?: (Uint8Array|string|null);
+                    public video?: (Uint8Array|Buffer|string|null);
 
                     /** Video uri. */
                     public uri?: (string|null);
@@ -46180,21 +45601,6 @@ export namespace google {
                     /** GenerateTextRequest stopSequences. */
                     public stopSequences: string[];
 
-                    /** GenerateTextRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateTextRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateTextRequest _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** GenerateTextRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateTextRequest _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new GenerateTextRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -46510,9 +45916,6 @@ export namespace google {
                     /** TextCompletion citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1beta.ICitationMetadata|null);
 
-                    /** TextCompletion _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
-
                     /**
                      * Creates a new TextCompletion instance using the specified properties.
                      * @param [properties] Properties to set
@@ -46712,9 +46115,6 @@ export namespace google {
 
                     /** EmbedTextResponse embedding. */
                     public embedding?: (google.ai.generativelanguage.v1beta.IEmbedding|null);
-
-                    /** EmbedTextResponse _embedding. */
-                    public _embedding?: "embedding";
 
                     /**
                      * Creates a new EmbedTextResponse instance using the specified properties.
@@ -47435,18 +46835,6 @@ export namespace google {
                     /** CitationSource license. */
                     public license?: (string|null);
 
-                    /** CitationSource _startIndex. */
-                    public _startIndex?: "startIndex";
-
-                    /** CitationSource _endIndex. */
-                    public _endIndex?: "endIndex";
-
-                    /** CitationSource _uri. */
-                    public _uri?: "uri";
-
-                    /** CitationSource _license. */
-                    public _license?: "license";
-
                     /**
                      * Creates a new CitationSource instance using the specified properties.
                      * @param [properties] Properties to set
@@ -47639,18 +47027,6 @@ export namespace google {
 
                     /** GenerateMessageRequest topK. */
                     public topK?: (number|null);
-
-                    /** GenerateMessageRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateMessageRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateMessageRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateMessageRequest _topK. */
-                    public _topK?: "topK";
 
                     /**
                      * Creates a new GenerateMessageRequest instance using the specified properties.
@@ -47869,9 +47245,6 @@ export namespace google {
 
                     /** Message citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1beta2.ICitationMetadata|null);
-
-                    /** Message _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
 
                     /**
                      * Creates a new Message instance using the specified properties.
@@ -48399,9 +47772,6 @@ export namespace google {
                     /** ContentFilter message. */
                     public message?: (string|null);
 
-                    /** ContentFilter _message. */
-                    public _message?: "message";
-
                     /**
                      * Creates a new ContentFilter instance using the specified properties.
                      * @param [properties] Properties to set
@@ -48900,15 +48270,6 @@ export namespace google {
 
                     /** Model topK. */
                     public topK?: (number|null);
-
-                    /** Model _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** Model _topP. */
-                    public _topP?: "topP";
-
-                    /** Model _topK. */
-                    public _topK?: "topK";
 
                     /**
                      * Creates a new Model instance using the specified properties.
@@ -49490,21 +48851,6 @@ export namespace google {
                     /** GenerateTextRequest stopSequences. */
                     public stopSequences: string[];
 
-                    /** GenerateTextRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateTextRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateTextRequest _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** GenerateTextRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateTextRequest _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new GenerateTextRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -49820,9 +49166,6 @@ export namespace google {
                     /** TextCompletion citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1beta2.ICitationMetadata|null);
 
-                    /** TextCompletion _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
-
                     /**
                      * Creates a new TextCompletion instance using the specified properties.
                      * @param [properties] Properties to set
@@ -50022,9 +49365,6 @@ export namespace google {
 
                     /** EmbedTextResponse embedding. */
                     public embedding?: (google.ai.generativelanguage.v1beta2.IEmbedding|null);
-
-                    /** EmbedTextResponse _embedding. */
-                    public _embedding?: "embedding";
 
                     /**
                      * Creates a new EmbedTextResponse instance using the specified properties.
@@ -50339,18 +49679,6 @@ export namespace google {
                     /** CitationSource license. */
                     public license?: (string|null);
 
-                    /** CitationSource _startIndex. */
-                    public _startIndex?: "startIndex";
-
-                    /** CitationSource _endIndex. */
-                    public _endIndex?: "endIndex";
-
-                    /** CitationSource _uri. */
-                    public _uri?: "uri";
-
-                    /** CitationSource _license. */
-                    public _license?: "license";
-
                     /**
                      * Creates a new CitationSource instance using the specified properties.
                      * @param [properties] Properties to set
@@ -50543,18 +49871,6 @@ export namespace google {
 
                     /** GenerateMessageRequest topK. */
                     public topK?: (number|null);
-
-                    /** GenerateMessageRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateMessageRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateMessageRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateMessageRequest _topK. */
-                    public _topK?: "topK";
 
                     /**
                      * Creates a new GenerateMessageRequest instance using the specified properties.
@@ -50773,9 +50089,6 @@ export namespace google {
 
                     /** Message citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1beta3.ICitationMetadata|null);
-
-                    /** Message _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
 
                     /**
                      * Creates a new Message instance using the specified properties.
@@ -51303,9 +50616,6 @@ export namespace google {
                     /** ContentFilter message. */
                     public message?: (string|null);
 
-                    /** ContentFilter _message. */
-                    public _message?: "message";
-
                     /**
                      * Creates a new ContentFilter instance using the specified properties.
                      * @param [properties] Properties to set
@@ -51805,15 +51115,6 @@ export namespace google {
 
                     /** Model topK. */
                     public topK?: (number|null);
-
-                    /** Model _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** Model _topP. */
-                    public _topP?: "topP";
-
-                    /** Model _topK. */
-                    public _topK?: "topK";
 
                     /**
                      * Creates a new Model instance using the specified properties.
@@ -52695,9 +51996,6 @@ export namespace google {
                     /** CreateTunedModelRequest tunedModel. */
                     public tunedModel?: (google.ai.generativelanguage.v1beta3.ITunedModel|null);
 
-                    /** CreateTunedModelRequest _tunedModelId. */
-                    public _tunedModelId?: "tunedModelId";
-
                     /**
                      * Creates a new CreateTunedModelRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -53185,15 +52483,6 @@ export namespace google {
                     /** TunedModel sourceModel. */
                     public sourceModel?: ("tunedModelSource"|"baseModel");
 
-                    /** TunedModel _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** TunedModel _topP. */
-                    public _topP?: "topP";
-
-                    /** TunedModel _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new TunedModel instance using the specified properties.
                      * @param [properties] Properties to set
@@ -53537,15 +52826,6 @@ export namespace google {
 
                     /** Hyperparameters learningRate. */
                     public learningRate?: (number|null);
-
-                    /** Hyperparameters _epochCount. */
-                    public _epochCount?: "epochCount";
-
-                    /** Hyperparameters _batchSize. */
-                    public _batchSize?: "batchSize";
-
-                    /** Hyperparameters _learningRate. */
-                    public _learningRate?: "learningRate";
 
                     /**
                      * Creates a new Hyperparameters instance using the specified properties.
@@ -54079,15 +53359,6 @@ export namespace google {
 
                     /** Permission role. */
                     public role?: (google.ai.generativelanguage.v1beta3.Permission.Role|keyof typeof google.ai.generativelanguage.v1beta3.Permission.Role|null);
-
-                    /** Permission _granteeType. */
-                    public _granteeType?: "granteeType";
-
-                    /** Permission _emailAddress. */
-                    public _emailAddress?: "emailAddress";
-
-                    /** Permission _role. */
-                    public _role?: "role";
 
                     /**
                      * Creates a new Permission instance using the specified properties.
@@ -55317,21 +54588,6 @@ export namespace google {
                     /** GenerateTextRequest stopSequences. */
                     public stopSequences: string[];
 
-                    /** GenerateTextRequest _temperature. */
-                    public _temperature?: "temperature";
-
-                    /** GenerateTextRequest _candidateCount. */
-                    public _candidateCount?: "candidateCount";
-
-                    /** GenerateTextRequest _maxOutputTokens. */
-                    public _maxOutputTokens?: "maxOutputTokens";
-
-                    /** GenerateTextRequest _topP. */
-                    public _topP?: "topP";
-
-                    /** GenerateTextRequest _topK. */
-                    public _topK?: "topK";
-
                     /**
                      * Creates a new GenerateTextRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -55647,9 +54903,6 @@ export namespace google {
                     /** TextCompletion citationMetadata. */
                     public citationMetadata?: (google.ai.generativelanguage.v1beta3.ICitationMetadata|null);
 
-                    /** TextCompletion _citationMetadata. */
-                    public _citationMetadata?: "citationMetadata";
-
                     /**
                      * Creates a new TextCompletion instance using the specified properties.
                      * @param [properties] Properties to set
@@ -55849,9 +55102,6 @@ export namespace google {
 
                     /** EmbedTextResponse embedding. */
                     public embedding?: (google.ai.generativelanguage.v1beta3.IEmbedding|null);
-
-                    /** EmbedTextResponse _embedding. */
-                    public _embedding?: "embedding";
 
                     /**
                      * Creates a new EmbedTextResponse instance using the specified properties.
@@ -57099,6 +56349,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -57139,6 +56392,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -61344,6 +60600,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -61595,7 +60854,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -61626,7 +60885,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -63385,7 +62644,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -63401,7 +62660,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
