@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@google-cloud/asset": "^6.1.0",
-    "@google-cloud/bigquery": "^7.0.0",
+    "@google-cloud/bigquery": "^8.0.0",
     "@google-cloud/compute": "^5.0.0",
     "@google-cloud/storage": "^7.0.0",
     "uuid": "^9.0.0",

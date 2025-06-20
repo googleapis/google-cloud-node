@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +103,20 @@ export class TextServiceClient {
    *     const client = new TextServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TextServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +142,7 @@ export class TextServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +156,10 @@ export class TextServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -209,30 +186,33 @@ export class TextServiceClient {
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
-      corpusPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      corpusPathTemplate: new this._gaxModule.PathTemplate(
+        'corpora/{corpus}'
+      ),
+      corpusPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/permissions/{permission}'
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
-      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
+      filePathTemplate: new this._gaxModule.PathTemplate(
+        'files/{file}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'models/{model}'
+      ),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
       ),
-      tunedModelPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      tunedModelPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}/permissions/{permission}'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ai.generativelanguage.v1beta.TextService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ai.generativelanguage.v1beta.TextService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -263,40 +243,31 @@ export class TextServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1beta.TextService.
     this.textServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ai.generativelanguage.v1beta.TextService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1beta.TextService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.ai.generativelanguage.v1beta.TextService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const textServiceStubMethods = [
-      'generateText',
-      'embedText',
-      'batchEmbedText',
-      'countTextTokens',
-    ];
+    const textServiceStubMethods =
+        ['generateText', 'embedText', 'batchEmbedText', 'countTextTokens'];
     for (const methodName of textServiceStubMethods) {
       const callPromise = this.textServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -316,14 +287,8 @@ export class TextServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -334,14 +299,8 @@ export class TextServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -381,9 +340,8 @@ export class TextServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -394,597 +352,471 @@ export class TextServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Generates a response from the model given an input message.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The name of the `Model` or `TunedModel` to use for generating the
-   *   completion.
-   *   Examples:
-   *    models/text-bison-001
-   *    tunedModels/sentence-translator-u3b7m
-   * @param {google.ai.generativelanguage.v1beta.TextPrompt} request.prompt
-   *   Required. The free-form input text given to the model as a prompt.
-   *
-   *   Given a prompt, the model will generate a TextCompletion response it
-   *   predicts as the completion of the input text.
-   * @param {number} [request.temperature]
-   *   Optional. Controls the randomness of the output.
-   *   Note: The default value varies by model, see the `Model.temperature`
-   *   attribute of the `Model` returned the `getModel` function.
-   *
-   *   Values can range from [0.0,1.0],
-   *   inclusive. A value closer to 1.0 will produce responses that are more
-   *   varied and creative, while a value closer to 0.0 will typically result in
-   *   more straightforward responses from the model.
-   * @param {number} [request.candidateCount]
-   *   Optional. Number of generated responses to return.
-   *
-   *   This value must be between [1, 8], inclusive. If unset, this will default
-   *   to 1.
-   * @param {number} [request.maxOutputTokens]
-   *   Optional. The maximum number of tokens to include in a candidate.
-   *
-   *   If unset, this will default to output_token_limit specified in the `Model`
-   *   specification.
-   * @param {number} [request.topP]
-   *   Optional. The maximum cumulative probability of tokens to consider when
-   *   sampling.
-   *
-   *   The model uses combined Top-k and nucleus sampling.
-   *
-   *   Tokens are sorted based on their assigned probabilities so that only the
-   *   most likely tokens are considered. Top-k sampling directly limits the
-   *   maximum number of tokens to consider, while Nucleus sampling limits number
-   *   of tokens based on the cumulative probability.
-   *
-   *   Note: The default value varies by model, see the `Model.top_p`
-   *   attribute of the `Model` returned the `getModel` function.
-   * @param {number} [request.topK]
-   *   Optional. The maximum number of tokens to consider when sampling.
-   *
-   *   The model uses combined Top-k and nucleus sampling.
-   *
-   *   Top-k sampling considers the set of `top_k` most probable tokens.
-   *   Defaults to 40.
-   *
-   *   Note: The default value varies by model, see the `Model.top_k`
-   *   attribute of the `Model` returned the `getModel` function.
-   * @param {number[]} [request.safetySettings]
-   *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
-   *   content.
-   *
-   *   that will be enforced on the `GenerateTextRequest.prompt` and
-   *   `GenerateTextResponse.candidates`. There should not be more than one
-   *   setting for each `SafetyCategory` type. The API will block any prompts and
-   *   responses that fail to meet the thresholds set by these settings. This list
-   *   overrides the default settings for each `SafetyCategory` specified in the
-   *   safety_settings. If there is no `SafetySetting` for a given
-   *   `SafetyCategory` provided in the list, the API will use the default safety
-   *   setting for that category. Harm categories HARM_CATEGORY_DEROGATORY,
-   *   HARM_CATEGORY_TOXICITY, HARM_CATEGORY_VIOLENCE, HARM_CATEGORY_SEXUAL,
-   *   HARM_CATEGORY_MEDICAL, HARM_CATEGORY_DANGEROUS are supported in text
-   *   service.
-   * @param {string[]} request.stopSequences
-   *   The set of character sequences (up to 5) that will stop output generation.
-   *   If specified, the API will stop at the first appearance of a stop
-   *   sequence. The stop sequence will not be included as part of the response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.GenerateTextResponse|GenerateTextResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/text_service.generate_text.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_TextService_GenerateText_async
-   */
+/**
+ * Generates a response from the model given an input message.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the `Model` or `TunedModel` to use for generating the
+ *   completion.
+ *   Examples:
+ *    models/text-bison-001
+ *    tunedModels/sentence-translator-u3b7m
+ * @param {google.ai.generativelanguage.v1beta.TextPrompt} request.prompt
+ *   Required. The free-form input text given to the model as a prompt.
+ *
+ *   Given a prompt, the model will generate a TextCompletion response it
+ *   predicts as the completion of the input text.
+ * @param {number} [request.temperature]
+ *   Optional. Controls the randomness of the output.
+ *   Note: The default value varies by model, see the `Model.temperature`
+ *   attribute of the `Model` returned the `getModel` function.
+ *
+ *   Values can range from [0.0,1.0],
+ *   inclusive. A value closer to 1.0 will produce responses that are more
+ *   varied and creative, while a value closer to 0.0 will typically result in
+ *   more straightforward responses from the model.
+ * @param {number} [request.candidateCount]
+ *   Optional. Number of generated responses to return.
+ *
+ *   This value must be between [1, 8], inclusive. If unset, this will default
+ *   to 1.
+ * @param {number} [request.maxOutputTokens]
+ *   Optional. The maximum number of tokens to include in a candidate.
+ *
+ *   If unset, this will default to output_token_limit specified in the `Model`
+ *   specification.
+ * @param {number} [request.topP]
+ *   Optional. The maximum cumulative probability of tokens to consider when
+ *   sampling.
+ *
+ *   The model uses combined Top-k and nucleus sampling.
+ *
+ *   Tokens are sorted based on their assigned probabilities so that only the
+ *   most likely tokens are considered. Top-k sampling directly limits the
+ *   maximum number of tokens to consider, while Nucleus sampling limits number
+ *   of tokens based on the cumulative probability.
+ *
+ *   Note: The default value varies by model, see the `Model.top_p`
+ *   attribute of the `Model` returned the `getModel` function.
+ * @param {number} [request.topK]
+ *   Optional. The maximum number of tokens to consider when sampling.
+ *
+ *   The model uses combined Top-k and nucleus sampling.
+ *
+ *   Top-k sampling considers the set of `top_k` most probable tokens.
+ *   Defaults to 40.
+ *
+ *   Note: The default value varies by model, see the `Model.top_k`
+ *   attribute of the `Model` returned the `getModel` function.
+ * @param {number[]} [request.safetySettings]
+ *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
+ *   content.
+ *
+ *   that will be enforced on the `GenerateTextRequest.prompt` and
+ *   `GenerateTextResponse.candidates`. There should not be more than one
+ *   setting for each `SafetyCategory` type. The API will block any prompts and
+ *   responses that fail to meet the thresholds set by these settings. This list
+ *   overrides the default settings for each `SafetyCategory` specified in the
+ *   safety_settings. If there is no `SafetySetting` for a given
+ *   `SafetyCategory` provided in the list, the API will use the default safety
+ *   setting for that category. Harm categories HARM_CATEGORY_DEROGATORY,
+ *   HARM_CATEGORY_TOXICITY, HARM_CATEGORY_VIOLENCE, HARM_CATEGORY_SEXUAL,
+ *   HARM_CATEGORY_MEDICAL, HARM_CATEGORY_DANGEROUS are supported in text
+ *   service.
+ * @param {string[]} request.stopSequences
+ *   The set of character sequences (up to 5) that will stop output generation.
+ *   If specified, the API will stop at the first appearance of a stop
+ *   sequence. The stop sequence will not be included as part of the response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.GenerateTextResponse|GenerateTextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/text_service.generate_text.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_TextService_GenerateText_async
+ */
   generateText(
-    request?: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|undefined, {}|undefined
+      ]>;
   generateText(
-    request: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateText(
-    request: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateText(
-    request?: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-          | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateText(
+      request: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateText(
+      request?: protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateText request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-          | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateText(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateText response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.generateText(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateText response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Generates an embedding from the model given an input message.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The model name to use with the format model=models/{model}.
-   * @param {string} [request.text]
-   *   Optional. The free-form input text that the model will turn into an
-   *   embedding.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.EmbedTextResponse|EmbedTextResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/text_service.embed_text.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_TextService_EmbedText_async
-   */
+/**
+ * Generates an embedding from the model given an input message.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The model name to use with the format model=models/{model}.
+ * @param {string} [request.text]
+ *   Optional. The free-form input text that the model will turn into an
+ *   embedding.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.EmbedTextResponse|EmbedTextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/text_service.embed_text.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_TextService_EmbedText_async
+ */
   embedText(
-    request?: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-      protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|undefined, {}|undefined
+      ]>;
   embedText(
-    request: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  embedText(
-    request: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  embedText(
-    request?: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-          | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-      protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedText(
+      request: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedText(
+      request?: protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('embedText request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-          | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('embedText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .embedText(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('embedText response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.embedText(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('embedText response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Generates multiple embeddings from the model given input text in a
-   * synchronous call.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The name of the `Model` to use for generating the embedding.
-   *   Examples:
-   *    models/embedding-gecko-001
-   * @param {string[]} [request.texts]
-   *   Optional. The free-form input texts that the model will turn into an
-   *   embedding. The current limit is 100 texts, over which an error will be
-   *   thrown.
-   * @param {number[]} [request.requests]
-   *   Optional. Embed requests for the batch. Only one of `texts` or `requests`
-   *   can be set.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.BatchEmbedTextResponse|BatchEmbedTextResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/text_service.batch_embed_text.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_TextService_BatchEmbedText_async
-   */
+/**
+ * Generates multiple embeddings from the model given input text in a
+ * synchronous call.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the `Model` to use for generating the embedding.
+ *   Examples:
+ *    models/embedding-gecko-001
+ * @param {string[]} [request.texts]
+ *   Optional. The free-form input texts that the model will turn into an
+ *   embedding. The current limit is 100 texts, over which an error will be
+ *   thrown.
+ * @param {number[]} [request.requests]
+ *   Optional. Embed requests for the batch. Only one of `texts` or `requests`
+ *   can be set.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.BatchEmbedTextResponse|BatchEmbedTextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/text_service.batch_embed_text.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_TextService_BatchEmbedText_async
+ */
   batchEmbedText(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|undefined, {}|undefined
+      ]>;
   batchEmbedText(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchEmbedText(
-    request: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchEmbedText(
-    request?: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-          | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-      | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchEmbedText(
+      request: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchEmbedText(
+      request?: protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchEmbedText request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-          | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchEmbedText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchEmbedText(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchEmbedText response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchEmbedText(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+        protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchEmbedText response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Runs a model's tokenizer on a text and returns the token count.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The model's resource name. This serves as an ID for the Model to
-   *   use.
-   *
-   *   This name should match a model name returned by the `ListModels` method.
-   *
-   *   Format: `models/{model}`
-   * @param {google.ai.generativelanguage.v1beta.TextPrompt} request.prompt
-   *   Required. The free-form input text given to the model as a prompt.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CountTextTokensResponse|CountTextTokensResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/text_service.count_text_tokens.js</caption>
-   * region_tag:generativelanguage_v1beta_generated_TextService_CountTextTokens_async
-   */
+/**
+ * Runs a model's tokenizer on a text and returns the token count.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The model's resource name. This serves as an ID for the Model to
+ *   use.
+ *
+ *   This name should match a model name returned by the `ListModels` method.
+ *
+ *   Format: `models/{model}`
+ * @param {google.ai.generativelanguage.v1beta.TextPrompt} request.prompt
+ *   Required. The free-form input text given to the model as a prompt.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CountTextTokensResponse|CountTextTokensResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/text_service.count_text_tokens.js</caption>
+ * region_tag:generativelanguage_v1beta_generated_TextService_CountTextTokens_async
+ */
   countTextTokens(
-    request?: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|undefined, {}|undefined
+      ]>;
   countTextTokens(
-    request: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-      | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  countTextTokens(
-    request: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-      | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  countTextTokens(
-    request?: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-          | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-      | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|null|undefined,
+          {}|null|undefined>): void;
+  countTextTokens(
+      request: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|null|undefined,
+          {}|null|undefined>): void;
+  countTextTokens(
+      request?: protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('countTextTokens request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-          | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('countTextTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .countTextTokens(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('countTextTokens response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.countTextTokens(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+        protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('countTextTokens response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -997,7 +829,7 @@ export class TextServiceClient {
    * @param {string} id
    * @returns {string} Resource name string.
    */
-  cachedContentPath(id: string) {
+  cachedContentPath(id:string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       id: id,
     });
@@ -1011,8 +843,7 @@ export class TextServiceClient {
    * @returns {string} A string representing the id.
    */
   matchIdFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .id;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).id;
   }
 
   /**
@@ -1023,7 +854,7 @@ export class TextServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus: string, document: string, chunk: string) {
+  chunkPath(corpus:string,document:string,chunk:string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1070,7 +901,7 @@ export class TextServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus: string) {
+  corpusPath(corpus:string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -1088,43 +919,39 @@ export class TextServiceClient {
   }
 
   /**
-   * Return a fully-qualified corpusPermission resource name string.
+   * Return a fully-qualified corpusPermissions resource name string.
    *
    * @param {string} corpus
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionPath(corpus: string, permission: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.render({
+  corpusPermissionsPath(corpus:string,permission:string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.render({
       corpus: corpus,
       permission: permission,
     });
   }
 
   /**
-   * Parse the corpus from CorpusPermission resource.
+   * Parse the corpus from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the corpus.
    */
-  matchCorpusFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).corpus;
+  matchCorpusFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).corpus;
   }
 
   /**
-   * Parse the permission from CorpusPermission resource.
+   * Parse the permission from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).permission;
+  matchPermissionFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).permission;
   }
 
   /**
@@ -1134,7 +961,7 @@ export class TextServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus: string, document: string) {
+  documentPath(corpus:string,document:string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1169,7 +996,7 @@ export class TextServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file: string) {
+  filePath(file:string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -1192,7 +1019,7 @@ export class TextServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model: string) {
+  modelPath(model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -1215,7 +1042,7 @@ export class TextServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel: string) {
+  tunedModelPath(tunedModel:string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -1229,52 +1056,43 @@ export class TextServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
-      .tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
   }
 
   /**
-   * Return a fully-qualified tunedModelPermission resource name string.
+   * Return a fully-qualified tunedModelPermissions resource name string.
    *
    * @param {string} tuned_model
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionPath(tunedModel: string, permission: string) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.render({
+  tunedModelPermissionsPath(tunedModel:string,permission:string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
     });
   }
 
   /**
-   * Parse the tuned_model from TunedModelPermission resource.
+   * Parse the tuned_model from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).tuned_model;
+  matchTunedModelFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).tuned_model;
   }
 
   /**
-   * Parse the permission from TunedModelPermission resource.
+   * Parse the permission from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).permission;
+  matchPermissionFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).permission;
   }
 
   /**

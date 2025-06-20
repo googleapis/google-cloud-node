@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -106,41 +101,20 @@ export class GenerativeServiceClient {
    *     const client = new GenerativeServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GenerativeServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -166,7 +140,7 @@ export class GenerativeServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -180,7 +154,10 @@ export class GenerativeServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -201,26 +178,21 @@ export class GenerativeServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'models/{model}'
+      ),
     };
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      streamGenerateContent: new this._gaxModule.StreamDescriptor(
-        this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback,
-        !!opts.gaxServerStreamingRetries
-      ),
+      streamGenerateContent: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ai.generativelanguage.v1.GenerativeService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ai.generativelanguage.v1.GenerativeService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -251,54 +223,39 @@ export class GenerativeServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1.GenerativeService.
     this.generativeServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ai.generativelanguage.v1.GenerativeService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1
-            .GenerativeService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1.GenerativeService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1.GenerativeService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const generativeServiceStubMethods = [
-      'generateContent',
-      'streamGenerateContent',
-      'embedContent',
-      'batchEmbedContents',
-      'countTokens',
-    ];
+    const generativeServiceStubMethods =
+        ['generateContent', 'streamGenerateContent', 'embedContent', 'batchEmbedContents', 'countTokens'];
     for (const methodName of generativeServiceStubMethods) {
       const callPromise = this.generativeServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({objectMode: true});
-                setImmediate(() => {
-                  stream.emit(
-                    'error',
-                    new this._gaxModule.GoogleError(
-                      'The client has already been closed.'
-                    )
-                  );
-                });
-                return stream;
-              }
-              return Promise.reject('The client has already been closed.');
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
             }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.stream[methodName] || undefined;
+      const descriptor =
+        this.descriptors.stream[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -318,14 +275,8 @@ export class GenerativeServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -336,14 +287,8 @@ export class GenerativeServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -383,9 +328,8 @@ export class GenerativeServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -396,653 +340,532 @@ export class GenerativeServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Generates a model response given an input `GenerateContentRequest`.
-   * Refer to the [text generation
-   * guide](https://ai.google.dev/gemini-api/docs/text-generation) for detailed
-   * usage information. Input capabilities differ between models, including
-   * tuned models. Refer to the [model
-   * guide](https://ai.google.dev/gemini-api/docs/models/gemini) and [tuning
-   * guide](https://ai.google.dev/gemini-api/docs/model-tuning) for details.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The name of the `Model` to use for generating the completion.
-   *
-   *   Format: `models/{model}`.
-   * @param {number[]} request.contents
-   *   Required. The content of the current conversation with the model.
-   *
-   *   For single-turn queries, this is a single instance. For multi-turn queries
-   *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
-   *   this is a repeated field that contains the conversation history and the
-   *   latest request.
-   * @param {number[]} [request.safetySettings]
-   *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
-   *   content.
-   *
-   *   This will be enforced on the `GenerateContentRequest.contents` and
-   *   `GenerateContentResponse.candidates`. There should not be more than one
-   *   setting for each `SafetyCategory` type. The API will block any contents and
-   *   responses that fail to meet the thresholds set by these settings. This list
-   *   overrides the default settings for each `SafetyCategory` specified in the
-   *   safety_settings. If there is no `SafetySetting` for a given
-   *   `SafetyCategory` provided in the list, the API will use the default safety
-   *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
-   *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *   HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
-   *   Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
-   *   for detailed information on available safety settings. Also refer to the
-   *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
-   *   learn how to incorporate safety considerations in your AI applications.
-   * @param {google.ai.generativelanguage.v1.GenerationConfig} [request.generationConfig]
-   *   Optional. Configuration options for model generation and outputs.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.GenerateContentResponse|GenerateContentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/generative_service.generate_content.js</caption>
-   * region_tag:generativelanguage_v1_generated_GenerativeService_GenerateContent_async
-   */
+/**
+ * Generates a model response given an input `GenerateContentRequest`.
+ * Refer to the [text generation
+ * guide](https://ai.google.dev/gemini-api/docs/text-generation) for detailed
+ * usage information. Input capabilities differ between models, including
+ * tuned models. Refer to the [model
+ * guide](https://ai.google.dev/gemini-api/docs/models/gemini) and [tuning
+ * guide](https://ai.google.dev/gemini-api/docs/model-tuning) for details.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the `Model` to use for generating the completion.
+ *
+ *   Format: `models/{model}`.
+ * @param {number[]} request.contents
+ *   Required. The content of the current conversation with the model.
+ *
+ *   For single-turn queries, this is a single instance. For multi-turn queries
+ *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
+ *   this is a repeated field that contains the conversation history and the
+ *   latest request.
+ * @param {number[]} [request.safetySettings]
+ *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
+ *   content.
+ *
+ *   This will be enforced on the `GenerateContentRequest.contents` and
+ *   `GenerateContentResponse.candidates`. There should not be more than one
+ *   setting for each `SafetyCategory` type. The API will block any contents and
+ *   responses that fail to meet the thresholds set by these settings. This list
+ *   overrides the default settings for each `SafetyCategory` specified in the
+ *   safety_settings. If there is no `SafetySetting` for a given
+ *   `SafetyCategory` provided in the list, the API will use the default safety
+ *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
+ *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
+ *   HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+ *   Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+ *   for detailed information on available safety settings. Also refer to the
+ *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+ *   learn how to incorporate safety considerations in your AI applications.
+ * @param {google.ai.generativelanguage.v1.GenerationConfig} [request.generationConfig]
+ *   Optional. Configuration options for model generation and outputs.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.GenerateContentResponse|GenerateContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/generative_service.generate_content.js</caption>
+ * region_tag:generativelanguage_v1_generated_GenerativeService_GenerateContent_async
+ */
   generateContent(
-    request?: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-      (
-        | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
+        protos.google.ai.generativelanguage.v1.IGenerateContentRequest|undefined, {}|undefined
+      ]>;
   generateContent(
-    request: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-      | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateContent(
-    request: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-      | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateContent(
-    request?: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-          | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-      | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-      (
-        | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateContent(
+      request: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
+          protos.google.ai.generativelanguage.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateContent(
+      request?: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
+          protos.google.ai.generativelanguage.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
+          protos.google.ai.generativelanguage.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
+        protos.google.ai.generativelanguage.v1.IGenerateContentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-          | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
+        protos.google.ai.generativelanguage.v1.IGenerateContentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
-          (
-            | protos.google.ai.generativelanguage.v1.IGenerateContentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateContent response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.generateContent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1.IGenerateContentResponse,
+        protos.google.ai.generativelanguage.v1.IGenerateContentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateContent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Generates a text embedding vector from the input `Content` using the
-   * specified [Gemini Embedding
-   * model](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The model's resource name. This serves as an ID for the Model to
-   *   use.
-   *
-   *   This name should match a model name returned by the `ListModels` method.
-   *
-   *   Format: `models/{model}`
-   * @param {google.ai.generativelanguage.v1.Content} request.content
-   *   Required. The content to embed. Only the `parts.text` fields will be
-   *   counted.
-   * @param {google.ai.generativelanguage.v1.TaskType} [request.taskType]
-   *   Optional. Optional task type for which the embeddings will be used. Not
-   *   supported on earlier models (`models/embedding-001`).
-   * @param {string} [request.title]
-   *   Optional. An optional title for the text. Only applicable when TaskType is
-   *   `RETRIEVAL_DOCUMENT`.
-   *
-   *   Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
-   *   embeddings for retrieval.
-   * @param {number} [request.outputDimensionality]
-   *   Optional. Optional reduced dimension for the output embedding. If set,
-   *   excessive values in the output embedding are truncated from the end.
-   *   Supported by newer models since 2024 only. You cannot set this value if
-   *   using the earlier model (`models/embedding-001`).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.EmbedContentResponse|EmbedContentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/generative_service.embed_content.js</caption>
-   * region_tag:generativelanguage_v1_generated_GenerativeService_EmbedContent_async
-   */
+/**
+ * Generates a text embedding vector from the input `Content` using the
+ * specified [Gemini Embedding
+ * model](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The model's resource name. This serves as an ID for the Model to
+ *   use.
+ *
+ *   This name should match a model name returned by the `ListModels` method.
+ *
+ *   Format: `models/{model}`
+ * @param {google.ai.generativelanguage.v1.Content} request.content
+ *   Required. The content to embed. Only the `parts.text` fields will be
+ *   counted.
+ * @param {google.ai.generativelanguage.v1.TaskType} [request.taskType]
+ *   Optional. Optional task type for which the embeddings will be used. Not
+ *   supported on earlier models (`models/embedding-001`).
+ * @param {string} [request.title]
+ *   Optional. An optional title for the text. Only applicable when TaskType is
+ *   `RETRIEVAL_DOCUMENT`.
+ *
+ *   Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
+ *   embeddings for retrieval.
+ * @param {number} [request.outputDimensionality]
+ *   Optional. Optional reduced dimension for the output embedding. If set,
+ *   excessive values in the output embedding are truncated from the end.
+ *   Supported by newer models since 2024 only. You cannot set this value if
+ *   using the earlier model (`models/embedding-001`).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.EmbedContentResponse|EmbedContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/generative_service.embed_content.js</caption>
+ * region_tag:generativelanguage_v1_generated_GenerativeService_EmbedContent_async
+ */
   embedContent(
-    request?: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-      protos.google.ai.generativelanguage.v1.IEmbedContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
+        protos.google.ai.generativelanguage.v1.IEmbedContentRequest|undefined, {}|undefined
+      ]>;
   embedContent(
-    request: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-      | protos.google.ai.generativelanguage.v1.IEmbedContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  embedContent(
-    request: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-      | protos.google.ai.generativelanguage.v1.IEmbedContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  embedContent(
-    request?: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-          | protos.google.ai.generativelanguage.v1.IEmbedContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-      | protos.google.ai.generativelanguage.v1.IEmbedContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-      protos.google.ai.generativelanguage.v1.IEmbedContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedContent(
+      request: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
+          protos.google.ai.generativelanguage.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedContent(
+      request?: protos.google.ai.generativelanguage.v1.IEmbedContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
+          protos.google.ai.generativelanguage.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
+          protos.google.ai.generativelanguage.v1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
+        protos.google.ai.generativelanguage.v1.IEmbedContentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('embedContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-          | protos.google.ai.generativelanguage.v1.IEmbedContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
+        protos.google.ai.generativelanguage.v1.IEmbedContentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('embedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .embedContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
-          (
-            | protos.google.ai.generativelanguage.v1.IEmbedContentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('embedContent response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.embedContent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1.IEmbedContentResponse,
+        protos.google.ai.generativelanguage.v1.IEmbedContentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('embedContent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Generates multiple embedding vectors from the input `Content` which
-   * consists of a batch of strings represented as `EmbedContentRequest`
-   * objects.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The model's resource name. This serves as an ID for the Model to
-   *   use.
-   *
-   *   This name should match a model name returned by the `ListModels` method.
-   *
-   *   Format: `models/{model}`
-   * @param {number[]} request.requests
-   *   Required. Embed requests for the batch. The model in each of these requests
-   *   must match the model specified `BatchEmbedContentsRequest.model`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.BatchEmbedContentsResponse|BatchEmbedContentsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/generative_service.batch_embed_contents.js</caption>
-   * region_tag:generativelanguage_v1_generated_GenerativeService_BatchEmbedContents_async
-   */
+/**
+ * Generates multiple embedding vectors from the input `Content` which
+ * consists of a batch of strings represented as `EmbedContentRequest`
+ * objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The model's resource name. This serves as an ID for the Model to
+ *   use.
+ *
+ *   This name should match a model name returned by the `ListModels` method.
+ *
+ *   Format: `models/{model}`
+ * @param {number[]} request.requests
+ *   Required. Embed requests for the batch. The model in each of these requests
+ *   must match the model specified `BatchEmbedContentsRequest.model`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.BatchEmbedContentsResponse|BatchEmbedContentsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/generative_service.batch_embed_contents.js</caption>
+ * region_tag:generativelanguage_v1_generated_GenerativeService_BatchEmbedContents_async
+ */
   batchEmbedContents(
-    request?: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-      (
-        | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|undefined, {}|undefined
+      ]>;
   batchEmbedContents(
-    request: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-      | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchEmbedContents(
-    request: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-      | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchEmbedContents(
-    request?: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-          | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-      | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-      (
-        | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchEmbedContents(
+      request: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
+          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchEmbedContents(
+      request?: protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
+          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
+          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchEmbedContents request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-          | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchEmbedContents response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchEmbedContents(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
-          (
-            | protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchEmbedContents response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchEmbedContents(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsResponse,
+        protos.google.ai.generativelanguage.v1.IBatchEmbedContentsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchEmbedContents response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Runs a model's tokenizer on input `Content` and returns the token count.
-   * Refer to the [tokens guide](https://ai.google.dev/gemini-api/docs/tokens)
-   * to learn more about tokens.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The model's resource name. This serves as an ID for the Model to
-   *   use.
-   *
-   *   This name should match a model name returned by the `ListModels` method.
-   *
-   *   Format: `models/{model}`
-   * @param {number[]} [request.contents]
-   *   Optional. The input given to the model as a prompt. This field is ignored
-   *   when `generate_content_request` is set.
-   * @param {google.ai.generativelanguage.v1.GenerateContentRequest} [request.generateContentRequest]
-   *   Optional. The overall input given to the `Model`. This includes the prompt
-   *   as well as other model steering information like [system
-   *   instructions](https://ai.google.dev/gemini-api/docs/system-instructions),
-   *   and/or function declarations for [function
-   *   calling](https://ai.google.dev/gemini-api/docs/function-calling).
-   *   `Model`s/`Content`s and `generate_content_request`s are mutually
-   *   exclusive. You can either send `Model` + `Content`s or a
-   *   `generate_content_request`, but never both.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.CountTokensResponse|CountTokensResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/generative_service.count_tokens.js</caption>
-   * region_tag:generativelanguage_v1_generated_GenerativeService_CountTokens_async
-   */
+/**
+ * Runs a model's tokenizer on input `Content` and returns the token count.
+ * Refer to the [tokens guide](https://ai.google.dev/gemini-api/docs/tokens)
+ * to learn more about tokens.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The model's resource name. This serves as an ID for the Model to
+ *   use.
+ *
+ *   This name should match a model name returned by the `ListModels` method.
+ *
+ *   Format: `models/{model}`
+ * @param {number[]} [request.contents]
+ *   Optional. The input given to the model as a prompt. This field is ignored
+ *   when `generate_content_request` is set.
+ * @param {google.ai.generativelanguage.v1.GenerateContentRequest} [request.generateContentRequest]
+ *   Optional. The overall input given to the `Model`. This includes the prompt
+ *   as well as other model steering information like [system
+ *   instructions](https://ai.google.dev/gemini-api/docs/system-instructions),
+ *   and/or function declarations for [function
+ *   calling](https://ai.google.dev/gemini-api/docs/function-calling).
+ *   `Model`s/`Content`s and `generate_content_request`s are mutually
+ *   exclusive. You can either send `Model` + `Content`s or a
+ *   `generate_content_request`, but never both.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1.CountTokensResponse|CountTokensResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/generative_service.count_tokens.js</caption>
+ * region_tag:generativelanguage_v1_generated_GenerativeService_CountTokens_async
+ */
   countTokens(
-    request?: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-      protos.google.ai.generativelanguage.v1.ICountTokensRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.ICountTokensResponse,
+        protos.google.ai.generativelanguage.v1.ICountTokensRequest|undefined, {}|undefined
+      ]>;
   countTokens(
-    request: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-      | protos.google.ai.generativelanguage.v1.ICountTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  countTokens(
-    request: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-      | protos.google.ai.generativelanguage.v1.ICountTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  countTokens(
-    request?: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-          | protos.google.ai.generativelanguage.v1.ICountTokensRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-      | protos.google.ai.generativelanguage.v1.ICountTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-      protos.google.ai.generativelanguage.v1.ICountTokensRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1.ICountTokensRequest|null|undefined,
+          {}|null|undefined>): void;
+  countTokens(
+      request: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1.ICountTokensResponse,
+          protos.google.ai.generativelanguage.v1.ICountTokensRequest|null|undefined,
+          {}|null|undefined>): void;
+  countTokens(
+      request?: protos.google.ai.generativelanguage.v1.ICountTokensRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1.ICountTokensResponse,
+          protos.google.ai.generativelanguage.v1.ICountTokensRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1.ICountTokensResponse,
+          protos.google.ai.generativelanguage.v1.ICountTokensRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1.ICountTokensResponse,
+        protos.google.ai.generativelanguage.v1.ICountTokensRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('countTokens request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-          | protos.google.ai.generativelanguage.v1.ICountTokensRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1.ICountTokensResponse,
+        protos.google.ai.generativelanguage.v1.ICountTokensRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('countTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .countTokens(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1.ICountTokensResponse,
-          (
-            | protos.google.ai.generativelanguage.v1.ICountTokensRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('countTokens response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.countTokens(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1.ICountTokensResponse,
+        protos.google.ai.generativelanguage.v1.ICountTokensRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('countTokens response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Generates a [streamed
-   * response](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#generate-a-text-stream)
-   * from the model given an input `GenerateContentRequest`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The name of the `Model` to use for generating the completion.
-   *
-   *   Format: `models/{model}`.
-   * @param {number[]} request.contents
-   *   Required. The content of the current conversation with the model.
-   *
-   *   For single-turn queries, this is a single instance. For multi-turn queries
-   *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
-   *   this is a repeated field that contains the conversation history and the
-   *   latest request.
-   * @param {number[]} [request.safetySettings]
-   *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
-   *   content.
-   *
-   *   This will be enforced on the `GenerateContentRequest.contents` and
-   *   `GenerateContentResponse.candidates`. There should not be more than one
-   *   setting for each `SafetyCategory` type. The API will block any contents and
-   *   responses that fail to meet the thresholds set by these settings. This list
-   *   overrides the default settings for each `SafetyCategory` specified in the
-   *   safety_settings. If there is no `SafetySetting` for a given
-   *   `SafetyCategory` provided in the list, the API will use the default safety
-   *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
-   *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *   HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
-   *   Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
-   *   for detailed information on available safety settings. Also refer to the
-   *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
-   *   learn how to incorporate safety considerations in your AI applications.
-   * @param {google.ai.generativelanguage.v1.GenerationConfig} [request.generationConfig]
-   *   Optional. Configuration options for model generation and outputs.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits {@link protos.google.ai.generativelanguage.v1.GenerateContentResponse|GenerateContentResponse} on 'data' event.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/generative_service.stream_generate_content.js</caption>
-   * region_tag:generativelanguage_v1_generated_GenerativeService_StreamGenerateContent_async
-   */
+/**
+ * Generates a [streamed
+ * response](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#generate-a-text-stream)
+ * from the model given an input `GenerateContentRequest`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the `Model` to use for generating the completion.
+ *
+ *   Format: `models/{model}`.
+ * @param {number[]} request.contents
+ *   Required. The content of the current conversation with the model.
+ *
+ *   For single-turn queries, this is a single instance. For multi-turn queries
+ *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
+ *   this is a repeated field that contains the conversation history and the
+ *   latest request.
+ * @param {number[]} [request.safetySettings]
+ *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
+ *   content.
+ *
+ *   This will be enforced on the `GenerateContentRequest.contents` and
+ *   `GenerateContentResponse.candidates`. There should not be more than one
+ *   setting for each `SafetyCategory` type. The API will block any contents and
+ *   responses that fail to meet the thresholds set by these settings. This list
+ *   overrides the default settings for each `SafetyCategory` specified in the
+ *   safety_settings. If there is no `SafetySetting` for a given
+ *   `SafetyCategory` provided in the list, the API will use the default safety
+ *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
+ *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
+ *   HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+ *   Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+ *   for detailed information on available safety settings. Also refer to the
+ *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+ *   learn how to incorporate safety considerations in your AI applications.
+ * @param {google.ai.generativelanguage.v1.GenerationConfig} [request.generationConfig]
+ *   Optional. Configuration options for model generation and outputs.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits {@link protos.google.ai.generativelanguage.v1.GenerateContentResponse|GenerateContentResponse} on 'data' event.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/generative_service.stream_generate_content.js</caption>
+ * region_tag:generativelanguage_v1_generated_GenerativeService_StreamGenerateContent_async
+ */
   streamGenerateContent(
-    request?: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
-    options?: CallOptions
-  ): gax.CancellableStream {
+      request?: protos.google.ai.generativelanguage.v1.IGenerateContentRequest,
+      options?: CallOptions):
+    gax.CancellableStream{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('streamGenerateContent stream %j', options);
     return this.innerApiCalls.streamGenerateContent(request, options);
   }
@@ -1057,7 +880,7 @@ export class GenerativeServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model: string) {
+  modelPath(model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });

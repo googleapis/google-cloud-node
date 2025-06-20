@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +103,20 @@ export class DiscussServiceClient {
    *     const client = new DiscussServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DiscussServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +142,7 @@ export class DiscussServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +156,10 @@ export class DiscussServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -203,7 +180,9 @@ export class DiscussServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'models/{model}'
+      ),
       permissionPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}/permissions/{permission}'
       ),
@@ -214,11 +193,8 @@ export class DiscussServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ai.generativelanguage.v1beta3.DiscussService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ai.generativelanguage.v1beta3.DiscussService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -249,36 +225,31 @@ export class DiscussServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1beta3.DiscussService.
     this.discussServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ai.generativelanguage.v1beta3.DiscussService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1beta3
-            .DiscussService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1beta3.DiscussService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1beta3.DiscussService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const discussServiceStubMethods = ['generateMessage', 'countMessageTokens'];
+    const discussServiceStubMethods =
+        ['generateMessage', 'countMessageTokens'];
     for (const methodName of discussServiceStubMethods) {
       const callPromise = this.discussServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -298,14 +269,8 @@ export class DiscussServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -316,14 +281,8 @@ export class DiscussServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -363,9 +322,8 @@ export class DiscussServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -376,300 +334,234 @@ export class DiscussServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Generates a response from the model given an input `MessagePrompt`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The name of the model to use.
-   *
-   *   Format: `name=models/{model}`.
-   * @param {google.ai.generativelanguage.v1beta3.MessagePrompt} request.prompt
-   *   Required. The structured textual input given to the model as a prompt.
-   *
-   *   Given a
-   *   prompt, the model will return what it predicts is the next message in the
-   *   discussion.
-   * @param {number} [request.temperature]
-   *   Optional. Controls the randomness of the output.
-   *
-   *   Values can range over `[0.0,1.0]`,
-   *   inclusive. A value closer to `1.0` will produce responses that are more
-   *   varied, while a value closer to `0.0` will typically result in
-   *   less surprising responses from the model.
-   * @param {number} [request.candidateCount]
-   *   Optional. The number of generated response messages to return.
-   *
-   *   This value must be between
-   *   `[1, 8]`, inclusive. If unset, this will default to `1`.
-   * @param {number} [request.topP]
-   *   Optional. The maximum cumulative probability of tokens to consider when
-   *   sampling.
-   *
-   *   The model uses combined Top-k and nucleus sampling.
-   *
-   *   Nucleus sampling considers the smallest set of tokens whose probability
-   *   sum is at least `top_p`.
-   * @param {number} [request.topK]
-   *   Optional. The maximum number of tokens to consider when sampling.
-   *
-   *   The model uses combined Top-k and nucleus sampling.
-   *
-   *   Top-k sampling considers the set of `top_k` most probable tokens.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta3.GenerateMessageResponse|GenerateMessageResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/discuss_service.generate_message.js</caption>
-   * region_tag:generativelanguage_v1beta3_generated_DiscussService_GenerateMessage_async
-   */
+/**
+ * Generates a response from the model given an input `MessagePrompt`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the model to use.
+ *
+ *   Format: `name=models/{model}`.
+ * @param {google.ai.generativelanguage.v1beta3.MessagePrompt} request.prompt
+ *   Required. The structured textual input given to the model as a prompt.
+ *
+ *   Given a
+ *   prompt, the model will return what it predicts is the next message in the
+ *   discussion.
+ * @param {number} [request.temperature]
+ *   Optional. Controls the randomness of the output.
+ *
+ *   Values can range over `[0.0,1.0]`,
+ *   inclusive. A value closer to `1.0` will produce responses that are more
+ *   varied, while a value closer to `0.0` will typically result in
+ *   less surprising responses from the model.
+ * @param {number} [request.candidateCount]
+ *   Optional. The number of generated response messages to return.
+ *
+ *   This value must be between
+ *   `[1, 8]`, inclusive. If unset, this will default to `1`.
+ * @param {number} [request.topP]
+ *   Optional. The maximum cumulative probability of tokens to consider when
+ *   sampling.
+ *
+ *   The model uses combined Top-k and nucleus sampling.
+ *
+ *   Nucleus sampling considers the smallest set of tokens whose probability
+ *   sum is at least `top_p`.
+ * @param {number} [request.topK]
+ *   Optional. The maximum number of tokens to consider when sampling.
+ *
+ *   The model uses combined Top-k and nucleus sampling.
+ *
+ *   Top-k sampling considers the set of `top_k` most probable tokens.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta3.GenerateMessageResponse|GenerateMessageResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/discuss_service.generate_message.js</caption>
+ * region_tag:generativelanguage_v1beta3_generated_DiscussService_GenerateMessage_async
+ */
   generateMessage(
-    request?: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|undefined, {}|undefined
+      ]>;
   generateMessage(
-    request: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-      | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateMessage(
-    request: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-      | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateMessage(
-    request?: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-          | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-      | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateMessage(
+      request: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
+          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateMessage(
+      request?: protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
+          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
+          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateMessage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-          | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateMessage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateMessage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('generateMessage response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.generateMessage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageResponse,
+        protos.google.ai.generativelanguage.v1beta3.IGenerateMessageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateMessage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Runs a model's tokenizer on a string and returns the token count.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The model's resource name. This serves as an ID for the Model to
-   *   use.
-   *
-   *   This name should match a model name returned by the `ListModels` method.
-   *
-   *   Format: `models/{model}`
-   * @param {google.ai.generativelanguage.v1beta3.MessagePrompt} request.prompt
-   *   Required. The prompt, whose token count is to be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta3.CountMessageTokensResponse|CountMessageTokensResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/discuss_service.count_message_tokens.js</caption>
-   * region_tag:generativelanguage_v1beta3_generated_DiscussService_CountMessageTokens_async
-   */
+/**
+ * Runs a model's tokenizer on a string and returns the token count.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The model's resource name. This serves as an ID for the Model to
+ *   use.
+ *
+ *   This name should match a model name returned by the `ListModels` method.
+ *
+ *   Format: `models/{model}`
+ * @param {google.ai.generativelanguage.v1beta3.MessagePrompt} request.prompt
+ *   Required. The prompt, whose token count is to be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta3.CountMessageTokensResponse|CountMessageTokensResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/discuss_service.count_message_tokens.js</caption>
+ * region_tag:generativelanguage_v1beta3_generated_DiscussService_CountMessageTokens_async
+ */
   countMessageTokens(
-    request?: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|undefined, {}|undefined
+      ]>;
   countMessageTokens(
-    request: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-      | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  countMessageTokens(
-    request: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-      | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  countMessageTokens(
-    request?: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-          | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-      | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-      (
-        | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|null|undefined,
+          {}|null|undefined>): void;
+  countMessageTokens(
+      request: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
+          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|null|undefined,
+          {}|null|undefined>): void;
+  countMessageTokens(
+      request?: protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
+          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
+          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('countMessageTokens request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-          | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('countMessageTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .countMessageTokens(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
-          (
-            | protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('countMessageTokens response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.countMessageTokens(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensResponse,
+        protos.google.ai.generativelanguage.v1beta3.ICountMessageTokensRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('countMessageTokens response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -682,7 +574,7 @@ export class DiscussServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model: string) {
+  modelPath(model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -706,7 +598,7 @@ export class DiscussServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  permissionPath(tunedModel: string, permission: string) {
+  permissionPath(tunedModel:string,permission:string) {
     return this.pathTemplates.permissionPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
@@ -721,8 +613,7 @@ export class DiscussServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromPermissionName(permissionName: string) {
-    return this.pathTemplates.permissionPathTemplate.match(permissionName)
-      .tuned_model;
+    return this.pathTemplates.permissionPathTemplate.match(permissionName).tuned_model;
   }
 
   /**
@@ -733,8 +624,7 @@ export class DiscussServiceClient {
    * @returns {string} A string representing the permission.
    */
   matchPermissionFromPermissionName(permissionName: string) {
-    return this.pathTemplates.permissionPathTemplate.match(permissionName)
-      .permission;
+    return this.pathTemplates.permissionPathTemplate.match(permissionName).permission;
   }
 
   /**
@@ -743,7 +633,7 @@ export class DiscussServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel: string) {
+  tunedModelPath(tunedModel:string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -757,8 +647,7 @@ export class DiscussServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
-      .tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
   }
 
   /**

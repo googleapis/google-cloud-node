@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class SubscriptionsServiceClient {
    *     const client = new SubscriptionsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SubscriptionsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'workspaceevents.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class SubscriptionsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class SubscriptionsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -214,92 +187,63 @@ export class SubscriptionsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSubscriptions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'subscriptions'
-      ),
+      listSubscriptions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'subscriptions')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=operations/**}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=operations/**}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createSubscriptionResponse = protoFilesRoot.lookup(
-      '.google.apps.events.subscriptions.v1beta.Subscription'
-    ) as gax.protobuf.Type;
+      '.google.apps.events.subscriptions.v1beta.Subscription') as gax.protobuf.Type;
     const createSubscriptionMetadata = protoFilesRoot.lookup(
-      '.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata'
-    ) as gax.protobuf.Type;
+      '.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata') as gax.protobuf.Type;
     const deleteSubscriptionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteSubscriptionMetadata = protoFilesRoot.lookup(
-      '.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata'
-    ) as gax.protobuf.Type;
+      '.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata') as gax.protobuf.Type;
     const updateSubscriptionResponse = protoFilesRoot.lookup(
-      '.google.apps.events.subscriptions.v1beta.Subscription'
-    ) as gax.protobuf.Type;
+      '.google.apps.events.subscriptions.v1beta.Subscription') as gax.protobuf.Type;
     const updateSubscriptionMetadata = protoFilesRoot.lookup(
-      '.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata'
-    ) as gax.protobuf.Type;
+      '.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata') as gax.protobuf.Type;
     const reactivateSubscriptionResponse = protoFilesRoot.lookup(
-      '.google.apps.events.subscriptions.v1beta.Subscription'
-    ) as gax.protobuf.Type;
+      '.google.apps.events.subscriptions.v1beta.Subscription') as gax.protobuf.Type;
     const reactivateSubscriptionMetadata = protoFilesRoot.lookup(
-      '.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata'
-    ) as gax.protobuf.Type;
+      '.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createSubscription: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSubscriptionResponse.decode.bind(createSubscriptionResponse),
-        createSubscriptionMetadata.decode.bind(createSubscriptionMetadata)
-      ),
+        createSubscriptionMetadata.decode.bind(createSubscriptionMetadata)),
       deleteSubscription: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSubscriptionResponse.decode.bind(deleteSubscriptionResponse),
-        deleteSubscriptionMetadata.decode.bind(deleteSubscriptionMetadata)
-      ),
+        deleteSubscriptionMetadata.decode.bind(deleteSubscriptionMetadata)),
       updateSubscription: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateSubscriptionResponse.decode.bind(updateSubscriptionResponse),
-        updateSubscriptionMetadata.decode.bind(updateSubscriptionMetadata)
-      ),
+        updateSubscriptionMetadata.decode.bind(updateSubscriptionMetadata)),
       reactivateSubscription: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        reactivateSubscriptionResponse.decode.bind(
-          reactivateSubscriptionResponse
-        ),
-        reactivateSubscriptionMetadata.decode.bind(
-          reactivateSubscriptionMetadata
-        )
-      ),
+        reactivateSubscriptionResponse.decode.bind(reactivateSubscriptionResponse),
+        reactivateSubscriptionMetadata.decode.bind(reactivateSubscriptionMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.apps.events.subscriptions.v1beta.SubscriptionsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.apps.events.subscriptions.v1beta.SubscriptionsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -330,41 +274,28 @@ export class SubscriptionsServiceClient {
     // Put together the "service stub" for
     // google.apps.events.subscriptions.v1beta.SubscriptionsService.
     this.subscriptionsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.apps.events.subscriptions.v1beta.SubscriptionsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.apps.events.subscriptions.v1beta
-            .SubscriptionsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.apps.events.subscriptions.v1beta.SubscriptionsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.apps.events.subscriptions.v1beta.SubscriptionsService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const subscriptionsServiceStubMethods = [
-      'createSubscription',
-      'deleteSubscription',
-      'getSubscription',
-      'listSubscriptions',
-      'updateSubscription',
-      'reactivateSubscription',
-    ];
+    const subscriptionsServiceStubMethods =
+        ['createSubscription', 'deleteSubscription', 'getSubscription', 'listSubscriptions', 'updateSubscription', 'reactivateSubscription'];
     for (const methodName of subscriptionsServiceStubMethods) {
       const callPromise = this.subscriptionsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -389,14 +320,8 @@ export class SubscriptionsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'workspaceevents.googleapis.com';
   }
@@ -407,14 +332,8 @@ export class SubscriptionsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'workspaceevents.googleapis.com';
   }
@@ -460,7 +379,7 @@ export class SubscriptionsServiceClient {
       'https://www.googleapis.com/auth/drive.metadata.readonly',
       'https://www.googleapis.com/auth/drive.readonly',
       'https://www.googleapis.com/auth/meetings.space.created',
-      'https://www.googleapis.com/auth/meetings.space.readonly',
+      'https://www.googleapis.com/auth/meetings.space.readonly'
     ];
   }
 
@@ -470,9 +389,8 @@ export class SubscriptionsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -483,1005 +401,697 @@ export class SubscriptionsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details about a Google Workspace subscription. To learn how to use
-   * this method, see [Get details about a Google Workspace
-   * subscription](https://developers.google.com/workspace/events/guides/get-subscription).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the subscription.
-   *
-   *   Format: `subscriptions/{subscription}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.get_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_GetSubscription_async
-   */
+/**
+ * Gets details about a Google Workspace subscription. To learn how to use
+ * this method, see [Get details about a Google Workspace
+ * subscription](https://developers.google.com/workspace/events/guides/get-subscription).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the subscription.
+ *
+ *   Format: `subscriptions/{subscription}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.get_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_GetSubscription_async
+ */
   getSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.events.subscriptions.v1beta.ISubscription,
-      (
-        | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.events.subscriptions.v1beta.ISubscription,
+        protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|undefined, {}|undefined
+      ]>;
   getSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.apps.events.subscriptions.v1beta.ISubscription,
-      | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
-    callback: Callback<
-      protos.google.apps.events.subscriptions.v1beta.ISubscription,
-      | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.apps.events.subscriptions.v1beta.ISubscription,
-          | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.apps.events.subscriptions.v1beta.ISubscription,
-      | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.apps.events.subscriptions.v1beta.ISubscription,
-      (
-        | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSubscription(
+      request: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
+      callback: Callback<
+          protos.google.apps.events.subscriptions.v1beta.ISubscription,
+          protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSubscription(
+      request?: protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.apps.events.subscriptions.v1beta.ISubscription,
+          protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.apps.events.subscriptions.v1beta.ISubscription,
+          protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.apps.events.subscriptions.v1beta.ISubscription,
+        protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSubscription request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.apps.events.subscriptions.v1beta.ISubscription,
-          | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.apps.events.subscriptions.v1beta.ISubscription,
+        protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSubscription response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.apps.events.subscriptions.v1beta.ISubscription,
-          (
-            | protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getSubscription response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSubscription(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.apps.events.subscriptions.v1beta.ISubscription,
+        protos.google.apps.events.subscriptions.v1beta.IGetSubscriptionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSubscription response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a Google Workspace subscription. To learn how to use this
-   * method, see [Create a Google Workspace
-   * subscription](https://developers.google.com/workspace/events/guides/create-subscription).
-   *
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.apps.events.subscriptions.v1beta.Subscription} request.subscription
-   *   Required. The subscription resource to create.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set to `true`, validates and previews the request, but doesn't
-   *   create the subscription.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.create_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_CreateSubscription_async
-   */
+/**
+ * Creates a Google Workspace subscription. To learn how to use this
+ * method, see [Create a Google Workspace
+ * subscription](https://developers.google.com/workspace/events/guides/create-subscription).
+ *
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.apps.events.subscriptions.v1beta.Subscription} request.subscription
+ *   Required. The subscription resource to create.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set to `true`, validates and previews the request, but doesn't
+ *   create the subscription.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.create_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_CreateSubscription_async
+ */
   createSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
+      callback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSubscription request %j', request);
-    return this.innerApiCalls
-      .createSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createSubscription response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createSubscription(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.ICreateSubscriptionMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createSubscription response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createSubscription()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.create_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_CreateSubscription_async
-   */
-  async checkCreateSubscriptionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.apps.events.subscriptions.v1beta.Subscription,
-      protos.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createSubscription()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.create_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_CreateSubscription_async
+ */
+  async checkCreateSubscriptionProgress(name: string): Promise<LROperation<protos.google.apps.events.subscriptions.v1beta.Subscription, protos.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata>>{
     this._log.info('createSubscription long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createSubscription,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.apps.events.subscriptions.v1beta.Subscription,
-      protos.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSubscription, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.apps.events.subscriptions.v1beta.Subscription, protos.google.apps.events.subscriptions.v1beta.CreateSubscriptionMetadata>;
   }
-  /**
-   * Deletes a Google Workspace subscription.
-   * To learn how to use this method, see [Delete a Google Workspace
-   * subscription](https://developers.google.com/workspace/events/guides/delete-subscription).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the subscription to delete.
-   *
-   *   Format: `subscriptions/{subscription}`
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set to `true`, validates and previews the request, but doesn't
-   *   delete the subscription.
-   * @param {boolean} [request.allowMissing]
-   *   Optional. If set to `true` and the subscription isn't found, the request
-   *   succeeds but doesn't delete the subscription.
-   * @param {string} [request.etag]
-   *   Optional. Etag of the subscription.
-   *
-   *   If present, it must match with the server's etag. Otherwise, request
-   *   fails with the status `ABORTED`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.delete_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_DeleteSubscription_async
-   */
+/**
+ * Deletes a Google Workspace subscription.
+ * To learn how to use this method, see [Delete a Google Workspace
+ * subscription](https://developers.google.com/workspace/events/guides/delete-subscription).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the subscription to delete.
+ *
+ *   Format: `subscriptions/{subscription}`
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set to `true`, validates and previews the request, but doesn't
+ *   delete the subscription.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to `true` and the subscription isn't found, the request
+ *   succeeds but doesn't delete the subscription.
+ * @param {string} [request.etag]
+ *   Optional. Etag of the subscription.
+ *
+ *   If present, it must match with the server's etag. Otherwise, request
+ *   fails with the status `ABORTED`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.delete_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_DeleteSubscription_async
+ */
   deleteSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSubscription request %j', request);
-    return this.innerApiCalls
-      .deleteSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSubscription response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteSubscription(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.apps.events.subscriptions.v1beta.IDeleteSubscriptionMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteSubscription response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteSubscription()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.delete_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_DeleteSubscription_async
-   */
-  async checkDeleteSubscriptionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteSubscription()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.delete_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_DeleteSubscription_async
+ */
+  async checkDeleteSubscriptionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata>>{
     this._log.info('deleteSubscription long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteSubscription,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSubscription, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.apps.events.subscriptions.v1beta.DeleteSubscriptionMetadata>;
   }
-  /**
-   * Updates or renews a Google Workspace subscription. To learn how to use this
-   * method, see [Update or renew a Google Workspace
-   * subscription](https://developers.google.com/workspace/events/guides/update-subscription).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.apps.events.subscriptions.v1beta.Subscription} request.subscription
-   *   Required. The subscription to update.
-   *
-   *   The subscription's `name` field is used to identify the subscription to
-   *   update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The field to update. If omitted, updates any fields included in
-   *   the request.
-   *
-   *   You can update one of the following fields in a subscription:
-   *
-   *   * {@link protos.google.apps.events.subscriptions.v1beta.Subscription.expire_time|`expire_time`}: The timestamp when the
-   *     subscription expires.
-   *   * {@link protos.google.apps.events.subscriptions.v1beta.Subscription.ttl|`ttl`}: The
-   *   time-to-live (TTL) or duration of the
-   *     subscription.
-   *   * {@link protos.google.apps.events.subscriptions.v1beta.Subscription.event_types|`event_types`}: The list of event types to
-   *   receive about the target resource.
-   *
-   *   To fully replace the subscription (the equivalent of `PUT`), use `*`. Any
-   *   omitted fields are updated with empty values.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. If set to `true`, validates and previews the request, but doesn't
-   *   update the subscription.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.update_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_UpdateSubscription_async
-   */
+/**
+ * Updates or renews a Google Workspace subscription. To learn how to use this
+ * method, see [Update or renew a Google Workspace
+ * subscription](https://developers.google.com/workspace/events/guides/update-subscription).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.apps.events.subscriptions.v1beta.Subscription} request.subscription
+ *   Required. The subscription to update.
+ *
+ *   The subscription's `name` field is used to identify the subscription to
+ *   update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The field to update. If omitted, updates any fields included in
+ *   the request.
+ *
+ *   You can update one of the following fields in a subscription:
+ *
+ *   * {@link protos.google.apps.events.subscriptions.v1beta.Subscription.expire_time|`expire_time`}: The timestamp when the
+ *     subscription expires.
+ *   * {@link protos.google.apps.events.subscriptions.v1beta.Subscription.ttl|`ttl`}: The
+ *   time-to-live (TTL) or duration of the
+ *     subscription.
+ *   * {@link protos.google.apps.events.subscriptions.v1beta.Subscription.event_types|`event_types`}: The list of event types to
+ *   receive about the target resource.
+ *
+ *   To fully replace the subscription (the equivalent of `PUT`), use `*`. Any
+ *   omitted fields are updated with empty values.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set to `true`, validates and previews the request, but doesn't
+ *   update the subscription.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.update_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_UpdateSubscription_async
+ */
   updateSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
+      callback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'subscription.name': request.subscription!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'subscription.name': request.subscription!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateSubscription request %j', request);
-    return this.innerApiCalls
-      .updateSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateSubscription response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateSubscription(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IUpdateSubscriptionMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateSubscription response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateSubscription()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.update_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_UpdateSubscription_async
-   */
-  async checkUpdateSubscriptionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.apps.events.subscriptions.v1beta.Subscription,
-      protos.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateSubscription()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.update_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_UpdateSubscription_async
+ */
+  async checkUpdateSubscriptionProgress(name: string): Promise<LROperation<protos.google.apps.events.subscriptions.v1beta.Subscription, protos.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata>>{
     this._log.info('updateSubscription long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSubscription,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.apps.events.subscriptions.v1beta.Subscription,
-      protos.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateSubscription, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.apps.events.subscriptions.v1beta.Subscription, protos.google.apps.events.subscriptions.v1beta.UpdateSubscriptionMetadata>;
   }
-  /**
-   * Reactivates a suspended Google Workspace subscription.
-   *
-   *  This method resets your subscription's `State` field to `ACTIVE`. Before
-   *  you use this method, you must fix the error that suspended the
-   *  subscription. This method will ignore or reject any subscription that
-   *  isn't currently in a suspended state. To learn how to use this method, see
-   * [Reactivate a Google Workspace
-   *  subscription](https://developers.google.com/workspace/events/guides/reactivate-subscription).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the subscription.
-   *
-   *   Format: `subscriptions/{subscription}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.reactivate_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_ReactivateSubscription_async
-   */
+/**
+ * Reactivates a suspended Google Workspace subscription.
+ *
+ *  This method resets your subscription's `State` field to `ACTIVE`. Before
+ *  you use this method, you must fix the error that suspended the
+ *  subscription. This method will ignore or reject any subscription that
+ *  isn't currently in a suspended state. To learn how to use this method, see
+ * [Reactivate a Google Workspace
+ *  subscription](https://developers.google.com/workspace/events/guides/reactivate-subscription).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the subscription.
+ *
+ *   Format: `subscriptions/{subscription}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.reactivate_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_ReactivateSubscription_async
+ */
   reactivateSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   reactivateSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reactivateSubscription(
-    request: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
+      callback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   reactivateSubscription(
-    request?: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.apps.events.subscriptions.v1beta.ISubscription,
-        protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('reactivateSubscription response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('reactivateSubscription request %j', request);
-    return this.innerApiCalls
-      .reactivateSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.apps.events.subscriptions.v1beta.ISubscription,
-            protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('reactivateSubscription response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.reactivateSubscription(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.apps.events.subscriptions.v1beta.ISubscription, protos.google.apps.events.subscriptions.v1beta.IReactivateSubscriptionMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('reactivateSubscription response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `reactivateSubscription()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.reactivate_subscription.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_ReactivateSubscription_async
-   */
-  async checkReactivateSubscriptionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.apps.events.subscriptions.v1beta.Subscription,
-      protos.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `reactivateSubscription()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.reactivate_subscription.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_ReactivateSubscription_async
+ */
+  async checkReactivateSubscriptionProgress(name: string): Promise<LROperation<protos.google.apps.events.subscriptions.v1beta.Subscription, protos.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata>>{
     this._log.info('reactivateSubscription long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.reactivateSubscription,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.apps.events.subscriptions.v1beta.Subscription,
-      protos.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.reactivateSubscription, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.apps.events.subscriptions.v1beta.Subscription, protos.google.apps.events.subscriptions.v1beta.ReactivateSubscriptionMetadata>;
   }
-  /**
-   * Lists Google Workspace subscriptions. To learn how to use this method, see
-   * [List Google Workspace
-   * subscriptions](https://developers.google.com/workspace/events/guides/list-subscriptions).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of subscriptions to return. The service might
-   *   return fewer than this value.
-   *
-   *   If unspecified or set to `0`, up to 50 subscriptions are returned.
-   *
-   *   The maximum value is 100. If you specify a value more than 100, the system
-   *   only returns 100 subscriptions.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous list subscriptions call.
-   *   Provide this parameter to retrieve the subsequent page.
-   *
-   *   When paginating, the filter value should match the call that provided the
-   *   page token. Passing a different value might lead to unexpected results.
-   * @param {string} request.filter
-   *   Required. A query filter.
-   *
-   *   You can filter subscriptions by event type (`event_types`)
-   *   and target resource (`target_resource`).
-   *
-   *   You must specify at least one event type in your query. To filter for
-   *   multiple event types, use the `OR` operator.
-   *
-   *   To filter by both event type and target resource, use the `AND` operator
-   *   and specify the full resource name, such as
-   *   `//chat.googleapis.com/spaces/{space}`.
-   *
-   *   For example, the following queries are valid:
-   *
-   *   ```
-   *   event_types:"google.workspace.chat.membership.v1.updated" OR
-   *     event_types:"google.workspace.chat.message.v1.created"
-   *
-   *   event_types:"google.workspace.chat.message.v1.created" AND
-   *     target_resource="//chat.googleapis.com/spaces/{space}"
-   *
-   *   ( event_types:"google.workspace.chat.membership.v1.updated" OR
-   *     event_types:"google.workspace.chat.message.v1.created" ) AND
-   *     target_resource="//chat.googleapis.com/spaces/{space}"
-   *   ```
-   *
-   *   The server rejects invalid queries with an `INVALID_ARGUMENT`
-   *   error.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSubscriptionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Google Workspace subscriptions. To learn how to use this method, see
+ * [List Google Workspace
+ * subscriptions](https://developers.google.com/workspace/events/guides/list-subscriptions).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of subscriptions to return. The service might
+ *   return fewer than this value.
+ *
+ *   If unspecified or set to `0`, up to 50 subscriptions are returned.
+ *
+ *   The maximum value is 100. If you specify a value more than 100, the system
+ *   only returns 100 subscriptions.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list subscriptions call.
+ *   Provide this parameter to retrieve the subsequent page.
+ *
+ *   When paginating, the filter value should match the call that provided the
+ *   page token. Passing a different value might lead to unexpected results.
+ * @param {string} request.filter
+ *   Required. A query filter.
+ *
+ *   You can filter subscriptions by event type (`event_types`)
+ *   and target resource (`target_resource`).
+ *
+ *   You must specify at least one event type in your query. To filter for
+ *   multiple event types, use the `OR` operator.
+ *
+ *   To filter by both event type and target resource, use the `AND` operator
+ *   and specify the full resource name, such as
+ *   `//chat.googleapis.com/spaces/{space}`.
+ *
+ *   For example, the following queries are valid:
+ *
+ *   ```
+ *   event_types:"google.workspace.chat.membership.v1.updated" OR
+ *     event_types:"google.workspace.chat.message.v1.created"
+ *
+ *   event_types:"google.workspace.chat.message.v1.created" AND
+ *     target_resource="//chat.googleapis.com/spaces/{space}"
+ *
+ *   ( event_types:"google.workspace.chat.membership.v1.updated" OR
+ *     event_types:"google.workspace.chat.message.v1.created" ) AND
+ *     target_resource="//chat.googleapis.com/spaces/{space}"
+ *   ```
+ *
+ *   The server rejects invalid queries with an `INVALID_ARGUMENT`
+ *   error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSubscriptionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSubscriptions(
-    request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.apps.events.subscriptions.v1beta.ISubscription[],
-      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest | null,
-      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse,
-    ]
-  >;
+      request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.apps.events.subscriptions.v1beta.ISubscription[],
+        protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest|null,
+        protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
+      ]>;
   listSubscriptions(
-    request: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-      | protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
-      | null
-      | undefined,
-      protos.google.apps.events.subscriptions.v1beta.ISubscription
-    >
-  ): void;
-  listSubscriptions(
-    request: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-    callback: PaginationCallback<
-      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-      | protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
-      | null
-      | undefined,
-      protos.google.apps.events.subscriptions.v1beta.ISubscription
-    >
-  ): void;
-  listSubscriptions(
-    request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-          | protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
-          | null
-          | undefined,
-          protos.google.apps.events.subscriptions.v1beta.ISubscription
-        >,
-    callback?: PaginationCallback<
-      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-      | protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
-      | null
-      | undefined,
-      protos.google.apps.events.subscriptions.v1beta.ISubscription
-    >
-  ): Promise<
-    [
-      protos.google.apps.events.subscriptions.v1beta.ISubscription[],
-      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest | null,
-      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse,
-    ]
-  > | void {
+          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse|null|undefined,
+          protos.google.apps.events.subscriptions.v1beta.ISubscription>): void;
+  listSubscriptions(
+      request: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+      callback: PaginationCallback<
+          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse|null|undefined,
+          protos.google.apps.events.subscriptions.v1beta.ISubscription>): void;
+  listSubscriptions(
+      request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse|null|undefined,
+          protos.google.apps.events.subscriptions.v1beta.ISubscription>,
+      callback?: PaginationCallback<
+          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse|null|undefined,
+          protos.google.apps.events.subscriptions.v1beta.ISubscription>):
+      Promise<[
+        protos.google.apps.events.subscriptions.v1beta.ISubscription[],
+        protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest|null,
+        protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-          | protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
-          | null
-          | undefined,
-          protos.google.apps.events.subscriptions.v1beta.ISubscription
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+      protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse|null|undefined,
+      protos.google.apps.events.subscriptions.v1beta.ISubscription>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSubscriptions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1490,89 +1100,85 @@ export class SubscriptionsServiceClient {
     this._log.info('listSubscriptions request %j', request);
     return this.innerApiCalls
       .listSubscriptions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.apps.events.subscriptions.v1beta.ISubscription[],
-          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest | null,
-          protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse,
-        ]) => {
-          this._log.info('listSubscriptions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.apps.events.subscriptions.v1beta.ISubscription[],
+        protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest|null,
+        protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsResponse
+      ]) => {
+        this._log.info('listSubscriptions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listSubscriptions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of subscriptions to return. The service might
-   *   return fewer than this value.
-   *
-   *   If unspecified or set to `0`, up to 50 subscriptions are returned.
-   *
-   *   The maximum value is 100. If you specify a value more than 100, the system
-   *   only returns 100 subscriptions.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous list subscriptions call.
-   *   Provide this parameter to retrieve the subsequent page.
-   *
-   *   When paginating, the filter value should match the call that provided the
-   *   page token. Passing a different value might lead to unexpected results.
-   * @param {string} request.filter
-   *   Required. A query filter.
-   *
-   *   You can filter subscriptions by event type (`event_types`)
-   *   and target resource (`target_resource`).
-   *
-   *   You must specify at least one event type in your query. To filter for
-   *   multiple event types, use the `OR` operator.
-   *
-   *   To filter by both event type and target resource, use the `AND` operator
-   *   and specify the full resource name, such as
-   *   `//chat.googleapis.com/spaces/{space}`.
-   *
-   *   For example, the following queries are valid:
-   *
-   *   ```
-   *   event_types:"google.workspace.chat.membership.v1.updated" OR
-   *     event_types:"google.workspace.chat.message.v1.created"
-   *
-   *   event_types:"google.workspace.chat.message.v1.created" AND
-   *     target_resource="//chat.googleapis.com/spaces/{space}"
-   *
-   *   ( event_types:"google.workspace.chat.membership.v1.updated" OR
-   *     event_types:"google.workspace.chat.message.v1.created" ) AND
-   *     target_resource="//chat.googleapis.com/spaces/{space}"
-   *   ```
-   *
-   *   The server rejects invalid queries with an `INVALID_ARGUMENT`
-   *   error.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSubscriptionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listSubscriptions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of subscriptions to return. The service might
+ *   return fewer than this value.
+ *
+ *   If unspecified or set to `0`, up to 50 subscriptions are returned.
+ *
+ *   The maximum value is 100. If you specify a value more than 100, the system
+ *   only returns 100 subscriptions.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list subscriptions call.
+ *   Provide this parameter to retrieve the subsequent page.
+ *
+ *   When paginating, the filter value should match the call that provided the
+ *   page token. Passing a different value might lead to unexpected results.
+ * @param {string} request.filter
+ *   Required. A query filter.
+ *
+ *   You can filter subscriptions by event type (`event_types`)
+ *   and target resource (`target_resource`).
+ *
+ *   You must specify at least one event type in your query. To filter for
+ *   multiple event types, use the `OR` operator.
+ *
+ *   To filter by both event type and target resource, use the `AND` operator
+ *   and specify the full resource name, such as
+ *   `//chat.googleapis.com/spaces/{space}`.
+ *
+ *   For example, the following queries are valid:
+ *
+ *   ```
+ *   event_types:"google.workspace.chat.membership.v1.updated" OR
+ *     event_types:"google.workspace.chat.message.v1.created"
+ *
+ *   event_types:"google.workspace.chat.message.v1.created" AND
+ *     target_resource="//chat.googleapis.com/spaces/{space}"
+ *
+ *   ( event_types:"google.workspace.chat.membership.v1.updated" OR
+ *     event_types:"google.workspace.chat.message.v1.created" ) AND
+ *     target_resource="//chat.googleapis.com/spaces/{space}"
+ *   ```
+ *
+ *   The server rejects invalid queries with an `INVALID_ARGUMENT`
+ *   error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSubscriptionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listSubscriptionsStream(
-    request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSubscriptions stream %j', request);
     return this.descriptors.page.listSubscriptions.createStream(
       this.innerApiCalls.listSubscriptions as GaxCall,
@@ -1581,80 +1187,78 @@ export class SubscriptionsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listSubscriptions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of subscriptions to return. The service might
-   *   return fewer than this value.
-   *
-   *   If unspecified or set to `0`, up to 50 subscriptions are returned.
-   *
-   *   The maximum value is 100. If you specify a value more than 100, the system
-   *   only returns 100 subscriptions.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous list subscriptions call.
-   *   Provide this parameter to retrieve the subsequent page.
-   *
-   *   When paginating, the filter value should match the call that provided the
-   *   page token. Passing a different value might lead to unexpected results.
-   * @param {string} request.filter
-   *   Required. A query filter.
-   *
-   *   You can filter subscriptions by event type (`event_types`)
-   *   and target resource (`target_resource`).
-   *
-   *   You must specify at least one event type in your query. To filter for
-   *   multiple event types, use the `OR` operator.
-   *
-   *   To filter by both event type and target resource, use the `AND` operator
-   *   and specify the full resource name, such as
-   *   `//chat.googleapis.com/spaces/{space}`.
-   *
-   *   For example, the following queries are valid:
-   *
-   *   ```
-   *   event_types:"google.workspace.chat.membership.v1.updated" OR
-   *     event_types:"google.workspace.chat.message.v1.created"
-   *
-   *   event_types:"google.workspace.chat.message.v1.created" AND
-   *     target_resource="//chat.googleapis.com/spaces/{space}"
-   *
-   *   ( event_types:"google.workspace.chat.membership.v1.updated" OR
-   *     event_types:"google.workspace.chat.message.v1.created" ) AND
-   *     target_resource="//chat.googleapis.com/spaces/{space}"
-   *   ```
-   *
-   *   The server rejects invalid queries with an `INVALID_ARGUMENT`
-   *   error.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/subscriptions_service.list_subscriptions.js</caption>
-   * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_ListSubscriptions_async
-   */
+/**
+ * Equivalent to `listSubscriptions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of subscriptions to return. The service might
+ *   return fewer than this value.
+ *
+ *   If unspecified or set to `0`, up to 50 subscriptions are returned.
+ *
+ *   The maximum value is 100. If you specify a value more than 100, the system
+ *   only returns 100 subscriptions.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list subscriptions call.
+ *   Provide this parameter to retrieve the subsequent page.
+ *
+ *   When paginating, the filter value should match the call that provided the
+ *   page token. Passing a different value might lead to unexpected results.
+ * @param {string} request.filter
+ *   Required. A query filter.
+ *
+ *   You can filter subscriptions by event type (`event_types`)
+ *   and target resource (`target_resource`).
+ *
+ *   You must specify at least one event type in your query. To filter for
+ *   multiple event types, use the `OR` operator.
+ *
+ *   To filter by both event type and target resource, use the `AND` operator
+ *   and specify the full resource name, such as
+ *   `//chat.googleapis.com/spaces/{space}`.
+ *
+ *   For example, the following queries are valid:
+ *
+ *   ```
+ *   event_types:"google.workspace.chat.membership.v1.updated" OR
+ *     event_types:"google.workspace.chat.message.v1.created"
+ *
+ *   event_types:"google.workspace.chat.message.v1.created" AND
+ *     target_resource="//chat.googleapis.com/spaces/{space}"
+ *
+ *   ( event_types:"google.workspace.chat.membership.v1.updated" OR
+ *     event_types:"google.workspace.chat.message.v1.created" ) AND
+ *     target_resource="//chat.googleapis.com/spaces/{space}"
+ *   ```
+ *
+ *   The server rejects invalid queries with an `INVALID_ARGUMENT`
+ *   error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.apps.events.subscriptions.v1beta.Subscription|Subscription}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/subscriptions_service.list_subscriptions.js</caption>
+ * region_tag:workspaceevents_v1beta_generated_SubscriptionsService_ListSubscriptions_async
+ */
   listSubscriptionsAsync(
-    request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.apps.events.subscriptions.v1beta.ISubscription> {
+      request?: protos.google.apps.events.subscriptions.v1beta.IListSubscriptionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.apps.events.subscriptions.v1beta.ISubscription>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSubscriptions iterate %j', request);
     return this.descriptors.page.listSubscriptions.asyncIterate(
       this.innerApiCalls['listSubscriptions'] as GaxCall,
@@ -1662,7 +1266,7 @@ export class SubscriptionsServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.apps.events.subscriptions.v1beta.ISubscription>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1707,20 +1311,20 @@ export class SubscriptionsServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1757,13 +1361,13 @@ export class SubscriptionsServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1797,7 +1401,7 @@ export class SubscriptionsServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1812,20 +1416,20 @@ export class SubscriptionsServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1869,20 +1473,20 @@ export class SubscriptionsServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1896,7 +1500,7 @@ export class SubscriptionsServiceClient {
    * @param {string} subscription
    * @returns {string} Resource name string.
    */
-  subscriptionPath(subscription: string) {
+  subscriptionPath(subscription:string) {
     return this.pathTemplates.subscriptionPathTemplate.render({
       subscription: subscription,
     });
@@ -1910,8 +1514,7 @@ export class SubscriptionsServiceClient {
    * @returns {string} A string representing the subscription.
    */
   matchSubscriptionFromSubscriptionName(subscriptionName: string) {
-    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
-      .subscription;
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName).subscription;
   }
 
   /**

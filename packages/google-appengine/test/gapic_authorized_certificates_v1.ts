@@ -29,1317 +29,967 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.AuthorizedCertificatesClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'appengine.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          authorizedcertificatesModule.v1.AuthorizedCertificatesClient
-            .servicePath;
-        assert.strictEqual(servicePath, 'appengine.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          authorizedcertificatesModule.v1.AuthorizedCertificatesClient
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'appengine.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'appengine.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'appengine.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'appengine.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'appengine.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = authorizedcertificatesModule.v1.AuthorizedCertificatesClient.servicePath;
+                assert.strictEqual(servicePath, 'appengine.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'appengine.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        authorizedcertificatesModule.v1.AuthorizedCertificatesClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.authorizedCertificatesStub, undefined);
-      await client.initialize();
-      assert(client.authorizedCertificatesStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.authorizedCertificatesStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.authorizedCertificatesStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getAuthorizedCertificate', () => {
-    it('invokes getAuthorizedCertificate without error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.GetAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.appengine.v1.AuthorizedCertificate()
-      );
-      client.innerApiCalls.getAuthorizedCertificate =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getAuthorizedCertificate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAuthorizedCertificate without error using callback', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.GetAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.appengine.v1.AuthorizedCertificate()
-      );
-      client.innerApiCalls.getAuthorizedCertificate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAuthorizedCertificate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.appengine.v1.IAuthorizedCertificate | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAuthorizedCertificate with error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.GetAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAuthorizedCertificate = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getAuthorizedCertificate(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAuthorizedCertificate with closed client', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.GetAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getAuthorizedCertificate(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createAuthorizedCertificate', () => {
-    it('invokes createAuthorizedCertificate without error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.appengine.v1.AuthorizedCertificate()
-      );
-      client.innerApiCalls.createAuthorizedCertificate =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createAuthorizedCertificate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAuthorizedCertificate without error using callback', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.appengine.v1.AuthorizedCertificate()
-      );
-      client.innerApiCalls.createAuthorizedCertificate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createAuthorizedCertificate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.appengine.v1.IAuthorizedCertificate | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAuthorizedCertificate with error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAuthorizedCertificate = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createAuthorizedCertificate(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createAuthorizedCertificate with closed client', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.createAuthorizedCertificate(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('updateAuthorizedCertificate', () => {
-    it('invokes updateAuthorizedCertificate without error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.appengine.v1.AuthorizedCertificate()
-      );
-      client.innerApiCalls.updateAuthorizedCertificate =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAuthorizedCertificate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAuthorizedCertificate without error using callback', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.appengine.v1.AuthorizedCertificate()
-      );
-      client.innerApiCalls.updateAuthorizedCertificate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAuthorizedCertificate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.appengine.v1.IAuthorizedCertificate | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAuthorizedCertificate with error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateAuthorizedCertificate = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateAuthorizedCertificate(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.updateAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateAuthorizedCertificate with closed client', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.updateAuthorizedCertificate(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('deleteAuthorizedCertificate', () => {
-    it('invokes deleteAuthorizedCertificate without error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAuthorizedCertificate =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteAuthorizedCertificate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAuthorizedCertificate without error using callback', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteAuthorizedCertificate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteAuthorizedCertificate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAuthorizedCertificate with error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAuthorizedCertificate = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteAuthorizedCertificate(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteAuthorizedCertificate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteAuthorizedCertificate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteAuthorizedCertificate with closed client', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.deleteAuthorizedCertificate(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('listAuthorizedCertificates', () => {
-    it('invokes listAuthorizedCertificates without error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-      ];
-      client.innerApiCalls.listAuthorizedCertificates =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAuthorizedCertificates(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAuthorizedCertificates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAuthorizedCertificates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAuthorizedCertificates without error using callback', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-      ];
-      client.innerApiCalls.listAuthorizedCertificates =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAuthorizedCertificates(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.appengine.v1.IAuthorizedCertificate[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAuthorizedCertificates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAuthorizedCertificates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAuthorizedCertificates with error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAuthorizedCertificates = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listAuthorizedCertificates(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listAuthorizedCertificates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAuthorizedCertificates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAuthorizedCertificatesStream without error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-      ];
-      client.descriptors.page.listAuthorizedCertificates.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAuthorizedCertificatesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.appengine.v1.AuthorizedCertificate[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.appengine.v1.AuthorizedCertificate) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAuthorizedCertificates, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listAuthorizedCertificatesStream with error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAuthorizedCertificates.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAuthorizedCertificatesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.appengine.v1.AuthorizedCertificate[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.appengine.v1.AuthorizedCertificate) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAuthorizedCertificates, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAuthorizedCertificates without error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-        generateSampleMessage(
-          new protos.google.appengine.v1.AuthorizedCertificate()
-        ),
-      ];
-      client.descriptors.page.listAuthorizedCertificates.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.appengine.v1.IAuthorizedCertificate[] = [];
-      const iterable = client.listAuthorizedCertificatesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAuthorizedCertificates with error', async () => {
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAuthorizedCertificates.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAuthorizedCertificatesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.appengine.v1.IAuthorizedCertificate[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = authorizedcertificatesModule.v1.AuthorizedCertificatesClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'appengine.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listAuthorizedCertificates
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('instance', async () => {
-      const fakePath = '/rendered/path/instance';
-      const expectedParameters = {
-        app: 'appValue',
-        service: 'serviceValue',
-        version: 'versionValue',
-        instance: 'instanceValue',
-      };
-      const client =
-        new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'appengine.example.com');
         });
-      await client.initialize();
-      client.pathTemplates.instancePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.instancePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('instancePath', () => {
-        const result = client.instancePath(
-          'appValue',
-          'serviceValue',
-          'versionValue',
-          'instanceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.instancePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'appengine.example.com');
+        });
 
-      it('matchAppFromInstanceName', () => {
-        const result = client.matchAppFromInstanceName(fakePath);
-        assert.strictEqual(result, 'appValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'appengine.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchServiceFromInstanceName', () => {
-        const result = client.matchServiceFromInstanceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'appengine.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-      it('matchVersionFromInstanceName', () => {
-        const result = client.matchVersionFromInstanceName(fakePath);
-        assert.strictEqual(result, 'versionValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has port', () => {
+            const port = authorizedcertificatesModule.v1.AuthorizedCertificatesClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('matchInstanceFromInstanceName', () => {
-        const result = client.matchInstanceFromInstanceName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.authorizedCertificatesStub, undefined);
+            await client.initialize();
+            assert(client.authorizedCertificatesStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.authorizedCertificatesStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.authorizedCertificatesStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
+
+    describe('getAuthorizedCertificate', () => {
+        it('invokes getAuthorizedCertificate without error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.GetAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.appengine.v1.AuthorizedCertificate()
+            );
+            client.innerApiCalls.getAuthorizedCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAuthorizedCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthorizedCertificate without error using callback', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.GetAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.appengine.v1.AuthorizedCertificate()
+            );
+            client.innerApiCalls.getAuthorizedCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAuthorizedCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.appengine.v1.IAuthorizedCertificate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthorizedCertificate with error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.GetAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAuthorizedCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAuthorizedCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getAuthorizedCertificate with closed client', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.GetAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAuthorizedCertificate(request), expectedError);
+        });
+    });
+
+    describe('createAuthorizedCertificate', () => {
+        it('invokes createAuthorizedCertificate without error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.CreateAuthorizedCertificateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.appengine.v1.AuthorizedCertificate()
+            );
+            client.innerApiCalls.createAuthorizedCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.createAuthorizedCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthorizedCertificate without error using callback', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.CreateAuthorizedCertificateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.appengine.v1.AuthorizedCertificate()
+            );
+            client.innerApiCalls.createAuthorizedCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createAuthorizedCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.appengine.v1.IAuthorizedCertificate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthorizedCertificate with error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.CreateAuthorizedCertificateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createAuthorizedCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createAuthorizedCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createAuthorizedCertificate with closed client', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.CreateAuthorizedCertificateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createAuthorizedCertificate(request), expectedError);
+        });
+    });
+
+    describe('updateAuthorizedCertificate', () => {
+        it('invokes updateAuthorizedCertificate without error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.UpdateAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.appengine.v1.AuthorizedCertificate()
+            );
+            client.innerApiCalls.updateAuthorizedCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateAuthorizedCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthorizedCertificate without error using callback', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.UpdateAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.appengine.v1.AuthorizedCertificate()
+            );
+            client.innerApiCalls.updateAuthorizedCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateAuthorizedCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.appengine.v1.IAuthorizedCertificate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthorizedCertificate with error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.UpdateAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateAuthorizedCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateAuthorizedCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateAuthorizedCertificate with closed client', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.UpdateAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateAuthorizedCertificate(request), expectedError);
+        });
+    });
+
+    describe('deleteAuthorizedCertificate', () => {
+        it('invokes deleteAuthorizedCertificate without error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.DeleteAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAuthorizedCertificate = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteAuthorizedCertificate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthorizedCertificate without error using callback', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.DeleteAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteAuthorizedCertificate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteAuthorizedCertificate(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthorizedCertificate with error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.DeleteAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteAuthorizedCertificate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteAuthorizedCertificate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAuthorizedCertificate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAuthorizedCertificate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteAuthorizedCertificate with closed client', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.DeleteAuthorizedCertificateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteAuthorizedCertificate(request), expectedError);
+        });
+    });
+
+    describe('listAuthorizedCertificates', () => {
+        it('invokes listAuthorizedCertificates without error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.ListAuthorizedCertificatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+            ];
+            client.innerApiCalls.listAuthorizedCertificates = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAuthorizedCertificates(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthorizedCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthorizedCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthorizedCertificates without error using callback', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.ListAuthorizedCertificatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+            ];
+            client.innerApiCalls.listAuthorizedCertificates = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAuthorizedCertificates(
+                    request,
+                    (err?: Error|null, result?: protos.google.appengine.v1.IAuthorizedCertificate[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAuthorizedCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthorizedCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthorizedCertificates with error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.ListAuthorizedCertificatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAuthorizedCertificates = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAuthorizedCertificates(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAuthorizedCertificates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAuthorizedCertificates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAuthorizedCertificatesStream without error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.ListAuthorizedCertificatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+            ];
+            client.descriptors.page.listAuthorizedCertificates.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAuthorizedCertificatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.appengine.v1.AuthorizedCertificate[] = [];
+                stream.on('data', (response: protos.google.appengine.v1.AuthorizedCertificate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAuthorizedCertificates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthorizedCertificates, request));
+            assert(
+                (client.descriptors.page.listAuthorizedCertificates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAuthorizedCertificatesStream with error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.ListAuthorizedCertificatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthorizedCertificates.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAuthorizedCertificatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.appengine.v1.AuthorizedCertificate[] = [];
+                stream.on('data', (response: protos.google.appengine.v1.AuthorizedCertificate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAuthorizedCertificates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAuthorizedCertificates, request));
+            assert(
+                (client.descriptors.page.listAuthorizedCertificates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAuthorizedCertificates without error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.ListAuthorizedCertificatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+              generateSampleMessage(new protos.google.appengine.v1.AuthorizedCertificate()),
+            ];
+            client.descriptors.page.listAuthorizedCertificates.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.appengine.v1.IAuthorizedCertificate[] = [];
+            const iterable = client.listAuthorizedCertificatesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthorizedCertificates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthorizedCertificates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listAuthorizedCertificates with error', async () => {
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.appengine.v1.ListAuthorizedCertificatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAuthorizedCertificates.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAuthorizedCertificatesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.appengine.v1.IAuthorizedCertificate[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAuthorizedCertificates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAuthorizedCertificates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('instance', async () => {
+            const fakePath = "/rendered/path/instance";
+            const expectedParameters = {
+                app: "appValue",
+                service: "serviceValue",
+                version: "versionValue",
+                instance: "instanceValue",
+            };
+            const client = new authorizedcertificatesModule.v1.AuthorizedCertificatesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('instancePath', () => {
+                const result = client.instancePath("appValue", "serviceValue", "versionValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAppFromInstanceName', () => {
+                const result = client.matchAppFromInstanceName(fakePath);
+                assert.strictEqual(result, "appValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromInstanceName', () => {
+                const result = client.matchServiceFromInstanceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVersionFromInstanceName', () => {
+                const result = client.matchVersionFromInstanceName(fakePath);
+                assert.strictEqual(result, "versionValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromInstanceName', () => {
+                const result = client.matchInstanceFromInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

@@ -610,7 +610,8 @@
                             "filterAction",
                             "twowaySynonymsAction",
                             "forceReturnFacetAction",
-                            "removeFacetAction"
+                            "removeFacetAction",
+                            "pinAction"
                           ]
                         }
                       },
@@ -654,6 +655,10 @@
                         "removeFacetAction": {
                           "type": "RemoveFacetAction",
                           "id": 13
+                        },
+                        "pinAction": {
+                          "type": "PinAction",
+                          "id": 14
                         },
                         "condition": {
                           "type": "Condition",
@@ -794,6 +799,18 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "PinAction": {
+                          "fields": {
+                            "pinMap": {
+                              "keyType": "int64",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }
@@ -1025,23 +1042,57 @@
                       "fields": {
                         "placeId": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "priceInfo": {
                           "type": "PriceInfo",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "attributes": {
                           "keyType": "string",
                           "type": "CustomAttribute",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "fulfillmentTypes": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PinControlMetadata": {
+                      "fields": {
+                        "allMatchedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 1
+                        },
+                        "droppedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ProductPins": {
+                          "fields": {
+                            "productId": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -4434,6 +4485,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 43,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "placeId": {
+                          "type": "string",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4737,6 +4809,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 12
+                        },
+                        "pinControlMetadata": {
+                          "type": "PinControlMetadata",
+                          "id": 22
                         },
                         "invalidConditionBoostSpecs": {
                           "rule": "repeated",
@@ -5382,12 +5458,18 @@
                           "requestType": "CollectUserEventRequest",
                           "responseType": "google.api.HttpBody",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                                "get": "/v2/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -6253,7 +6335,8 @@
                             "filterAction",
                             "twowaySynonymsAction",
                             "forceReturnFacetAction",
-                            "removeFacetAction"
+                            "removeFacetAction",
+                            "pinAction"
                           ]
                         }
                       },
@@ -6297,6 +6380,10 @@
                         "removeFacetAction": {
                           "type": "RemoveFacetAction",
                           "id": 13
+                        },
+                        "pinAction": {
+                          "type": "PinAction",
+                          "id": 14
                         },
                         "condition": {
                           "type": "Condition",
@@ -6437,6 +6524,18 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "PinAction": {
+                          "fields": {
+                            "pinMap": {
+                              "keyType": "int64",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }
@@ -6668,24 +6767,94 @@
                       "fields": {
                         "placeId": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "priceInfo": {
                           "type": "PriceInfo",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "availability": {
+                          "type": "Availability",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "attributes": {
                           "keyType": "string",
                           "type": "CustomAttribute",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "fulfillmentTypes": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      },
+                      "nested": {
+                        "Availability": {
+                          "values": {
+                            "AVAILABILITY_UNSPECIFIED": 0,
+                            "IN_STOCK": 1,
+                            "OUT_OF_STOCK": 2,
+                            "PREORDER": 3,
+                            "BACKORDER": 4
+                          }
+                        }
+                      }
+                    },
+                    "PinControlMetadata": {
+                      "fields": {
+                        "allMatchedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 1
+                        },
+                        "droppedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ProductPins": {
+                          "fields": {
+                            "productId": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "StringList": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DoubleList": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 1
                         }
                       }
                     },
@@ -7108,7 +7277,14 @@
                       "fields": {
                         "primaryFeedId": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "dataSourceId": {
+                          "type": "int64",
+                          "id": 3
                         },
                         "primaryFeedName": {
                           "type": "string",
@@ -8541,6 +8717,35 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 43,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "placeId": {
+                          "type": "string",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userAttributes": {
+                          "keyType": "string",
+                          "type": "StringList",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8854,6 +9059,10 @@
                           "type": "string",
                           "id": 12
                         },
+                        "pinControlMetadata": {
+                          "type": "PinControlMetadata",
+                          "id": 22
+                        },
                         "invalidConditionBoostSpecs": {
                           "rule": "repeated",
                           "type": "SearchRequest.BoostSpec.ConditionBoostSpec",
@@ -8902,6 +9111,11 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 7
+                            },
+                            "modelScores": {
+                              "keyType": "string",
+                              "type": "DoubleList",
+                              "id": 8
                             }
                           }
                         },
@@ -9347,6 +9561,282 @@
                         }
                       }
                     },
+                    "ConversationalSearchService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ConversationalSearch": {
+                          "requestType": "ConversationalSearchRequest",
+                          "responseType": "ConversationalSearchResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{placement=projects/*/locations/*/catalogs/*/placements/*}:conversationalSearch",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2alpha/{placement=projects/*/locations/*/catalogs/*/servingConfigs/*}:conversationalSearch",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{placement=projects/*/locations/*/catalogs/*/placements/*}:conversationalSearch",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2alpha/{placement=projects/*/locations/*/catalogs/*/servingConfigs/*}:conversationalSearch",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ConversationalSearchRequest": {
+                      "fields": {
+                        "placement": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "branch": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Branch"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageCategories": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversationId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "searchParams": {
+                          "type": "SearchParams",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "visitorId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "userInfo": {
+                          "type": "UserInfo",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversationalFilteringSpec": {
+                          "type": "ConversationalFilteringSpec",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SearchParams": {
+                          "fields": {
+                            "filter": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "canonicalFilter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sortBy": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "boostSpec": {
+                              "type": "SearchRequest.BoostSpec",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "UserAnswer": {
+                          "oneofs": {
+                            "type": {
+                              "oneof": [
+                                "textAnswer",
+                                "selectedAnswer"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "textAnswer": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "selectedAnswer": {
+                              "type": "SelectedAnswer",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SelectedAnswer": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ConversationalFilteringSpec": {
+                          "fields": {
+                            "enableConversationalFiltering": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "userAnswer": {
+                              "type": "UserAnswer",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "conversationalFilteringMode": {
+                              "type": "Mode",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "CONVERSATIONAL_FILTER_ONLY": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ConversationalSearchResponse": {
+                      "fields": {
+                        "conversationId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "refinedSearch": {
+                          "rule": "repeated",
+                          "type": "RefinedSearch",
+                          "id": 6
+                        },
+                        "conversationalFilteringResult": {
+                          "type": "ConversationalFilteringResult",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "FollowupQuestion": {
+                          "fields": {
+                            "followupQuestion": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "suggestedAnswers": {
+                              "rule": "repeated",
+                              "type": "SuggestedAnswer",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SuggestedAnswer": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "RefinedSearch": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ConversationalFilteringResult": {
+                          "fields": {
+                            "followupQuestion": {
+                              "type": "FollowupQuestion",
+                              "id": 1
+                            },
+                            "additionalFilter": {
+                              "type": "AdditionalFilter",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "AdditionalFilter": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "GenerativeQuestionsFeatureConfig": {
                       "fields": {
                         "catalog": {
@@ -9705,7 +10195,14 @@
                           "fields": {
                             "primaryFeedId": {
                               "type": "int64",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "dataSourceId": {
+                              "type": "int64",
+                              "id": 3
                             },
                             "primaryFeedName": {
                               "type": "string",
@@ -10100,26 +10597,6 @@
                             "frequentlyBoughtTogetherConfig": {
                               "type": "FrequentlyBoughtTogetherFeaturesConfig",
                               "id": 1
-                            },
-                            "llmEmbeddingConfig": {
-                              "type": "LlmEmbeddingConfig",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "LlmEmbeddingConfig": {
-                              "fields": {
-                                "llmEmbeddingVersion": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
-                              }
                             }
                           }
                         },
@@ -12197,12 +12674,18 @@
                           "requestType": "CollectUserEventRequest",
                           "responseType": "google.api.HttpBody",
                           "options": {
-                            "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                            "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                                "get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                "additional_bindings": {
+                                  "post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -13151,7 +13634,8 @@
                             "filterAction",
                             "twowaySynonymsAction",
                             "forceReturnFacetAction",
-                            "removeFacetAction"
+                            "removeFacetAction",
+                            "pinAction"
                           ]
                         }
                       },
@@ -13195,6 +13679,10 @@
                         "removeFacetAction": {
                           "type": "RemoveFacetAction",
                           "id": 13
+                        },
+                        "pinAction": {
+                          "type": "PinAction",
+                          "id": 14
                         },
                         "condition": {
                           "type": "Condition",
@@ -13335,6 +13823,18 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "PinAction": {
+                          "fields": {
+                            "pinMap": {
+                              "keyType": "int64",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }
@@ -13566,23 +14066,57 @@
                       "fields": {
                         "placeId": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "priceInfo": {
                           "type": "PriceInfo",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "attributes": {
                           "keyType": "string",
                           "type": "CustomAttribute",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "fulfillmentTypes": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PinControlMetadata": {
+                      "fields": {
+                        "allMatchedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 1
+                        },
+                        "droppedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ProductPins": {
+                          "fields": {
+                            "productId": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -15216,6 +15750,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 43,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "placeId": {
+                          "type": "string",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -15519,6 +16074,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 12
+                        },
+                        "pinControlMetadata": {
+                          "type": "PinControlMetadata",
+                          "id": 22
                         },
                         "invalidConditionBoostSpecs": {
                           "rule": "repeated",
@@ -18134,12 +18693,18 @@
                           "requestType": "CollectUserEventRequest",
                           "responseType": "google.api.HttpBody",
                           "options": {
-                            "(google.api.http).get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                            "(google.api.http).get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.post": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                                "get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                "additional_bindings": {
+                                  "post": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -18459,6 +19024,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -18567,6 +19137,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -18742,7 +19316,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -18865,6 +19442,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -18874,6 +19452,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -18889,6 +19468,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -18906,18 +19486,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -18958,6 +19532,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -19040,6 +19615,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -19113,6 +19689,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -19192,6 +19769,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -19204,6 +19782,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -19245,6 +19824,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -19261,6 +19841,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -19278,6 +19859,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -19312,6 +19894,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -19453,6 +20036,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -19526,6 +20110,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -19587,10 +20172,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -19674,6 +20256,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -19693,6 +20276,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -19736,6 +20320,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -19769,6 +20354,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -19795,6 +20381,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -19837,6 +20424,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -19886,6 +20474,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -19958,8 +20547,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -20015,6 +20616,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -20046,6 +20648,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -20059,12 +20662,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -20084,6 +20693,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -20097,7 +20707,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

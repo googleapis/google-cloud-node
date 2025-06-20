@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -111,41 +104,20 @@ export class PredictionServiceClient {
    *     const client = new PredictionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PredictionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'automl.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -171,7 +143,7 @@ export class PredictionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -185,7 +157,10 @@ export class PredictionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -220,106 +195,37 @@ export class PredictionServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/datasets/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/datasets/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/**}:testIamPermissions',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-        {
-          selector: 'google.longrunning.Operations.WaitOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:wait',
-          body: '*',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/datasets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/datasets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/**}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',},{selector: 'google.longrunning.Operations.WaitOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:wait',body: '*',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const batchPredictResponse = protoFilesRoot.lookup(
-      '.google.cloud.automl.v1.BatchPredictResult'
-    ) as gax.protobuf.Type;
+      '.google.cloud.automl.v1.BatchPredictResult') as gax.protobuf.Type;
     const batchPredictMetadata = protoFilesRoot.lookup(
-      '.google.cloud.automl.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.automl.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       batchPredict: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchPredictResponse.decode.bind(batchPredictResponse),
-        batchPredictMetadata.decode.bind(batchPredictMetadata)
-      ),
+        batchPredictMetadata.decode.bind(batchPredictMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.automl.v1.PredictionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.automl.v1.PredictionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -350,35 +256,32 @@ export class PredictionServiceClient {
     // Put together the "service stub" for
     // google.cloud.automl.v1.PredictionService.
     this.predictionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.automl.v1.PredictionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.automl.v1.PredictionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.automl.v1.PredictionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods = ['predict', 'batchPredict'];
+    const predictionServiceStubMethods =
+        ['predict', 'batchPredict'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -398,14 +301,8 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'automl.googleapis.com';
   }
@@ -416,14 +313,8 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'automl.googleapis.com';
   }
@@ -454,7 +345,9 @@ export class PredictionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -463,9 +356,8 @@ export class PredictionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -476,456 +368,380 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Perform an online prediction. The prediction result is directly
-   * returned in the response.
-   * Available for following ML scenarios, and their expected request payloads:
-   *
-   * AutoML Vision Classification
-   *
-   * * An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.
-   *
-   * AutoML Vision Object Detection
-   *
-   * * An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.
-   *
-   * AutoML Natural Language Classification
-   *
-   * * A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
-   * .PDF, .TIF or .TIFF format with size upto 2MB.
-   *
-   * AutoML Natural Language Entity Extraction
-   *
-   * * A TextSnippet up to 10,000 characters, UTF-8 NFC encoded or a document
-   *  in .PDF, .TIF or .TIFF format with size upto 20MB.
-   *
-   * AutoML Natural Language Sentiment Analysis
-   *
-   * * A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
-   * .PDF, .TIF or .TIFF format with size upto 2MB.
-   *
-   * AutoML Translation
-   *
-   * * A TextSnippet up to 25,000 characters, UTF-8 encoded.
-   *
-   * AutoML Tables
-   *
-   * * A row with column values matching
-   *   the columns of the model, up to 5MB. Not available for FORECASTING
-   *   `prediction_type`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the model requested to serve the prediction.
-   * @param {google.cloud.automl.v1.ExamplePayload} request.payload
-   *   Required. Payload to perform a prediction on. The payload must match the
-   *   problem type that the model was trained to solve.
-   * @param {number[]} request.params
-   *   Additional domain-specific parameters, any string must be up to 25000
-   *   characters long.
-   *
-   *   AutoML Vision Classification
-   *
-   *   `score_threshold`
-   *   : (float) A value from 0.0 to 1.0. When the model
-   *     makes predictions for an image, it will only produce results that have
-   *     at least this confidence score. The default is 0.5.
-   *
-   *   AutoML Vision Object Detection
-   *
-   *   `score_threshold`
-   *   : (float) When Model detects objects on the image,
-   *     it will only produce bounding boxes which have at least this
-   *     confidence score. Value in 0 to 1 range, default is 0.5.
-   *
-   *   `max_bounding_box_count`
-   *   : (int64) The maximum number of bounding
-   *     boxes returned. The default is 100. The
-   *     number of returned bounding boxes might be limited by the server.
-   *
-   *   AutoML Tables
-   *
-   *   `feature_importance`
-   *   : (boolean) Whether
-   *   {@link protos.google.cloud.automl.v1.TablesModelColumnInfo.feature_importance|feature_importance}
-   *     is populated in the returned list of
-   *     {@link protos.google.cloud.automl.v1.TablesAnnotation|TablesAnnotation}
-   *     objects. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.automl.v1.PredictResponse|PredictResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/prediction_service.predict.js</caption>
-   * region_tag:automl_v1_generated_PredictionService_Predict_async
-   */
+/**
+ * Perform an online prediction. The prediction result is directly
+ * returned in the response.
+ * Available for following ML scenarios, and their expected request payloads:
+ *
+ * AutoML Vision Classification
+ *
+ * * An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.
+ *
+ * AutoML Vision Object Detection
+ *
+ * * An image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB.
+ *
+ * AutoML Natural Language Classification
+ *
+ * * A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
+ * .PDF, .TIF or .TIFF format with size upto 2MB.
+ *
+ * AutoML Natural Language Entity Extraction
+ *
+ * * A TextSnippet up to 10,000 characters, UTF-8 NFC encoded or a document
+ *  in .PDF, .TIF or .TIFF format with size upto 20MB.
+ *
+ * AutoML Natural Language Sentiment Analysis
+ *
+ * * A TextSnippet up to 60,000 characters, UTF-8 encoded or a document in
+ * .PDF, .TIF or .TIFF format with size upto 2MB.
+ *
+ * AutoML Translation
+ *
+ * * A TextSnippet up to 25,000 characters, UTF-8 encoded.
+ *
+ * AutoML Tables
+ *
+ * * A row with column values matching
+ *   the columns of the model, up to 5MB. Not available for FORECASTING
+ *   `prediction_type`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the model requested to serve the prediction.
+ * @param {google.cloud.automl.v1.ExamplePayload} request.payload
+ *   Required. Payload to perform a prediction on. The payload must match the
+ *   problem type that the model was trained to solve.
+ * @param {number[]} request.params
+ *   Additional domain-specific parameters, any string must be up to 25000
+ *   characters long.
+ *
+ *   AutoML Vision Classification
+ *
+ *   `score_threshold`
+ *   : (float) A value from 0.0 to 1.0. When the model
+ *     makes predictions for an image, it will only produce results that have
+ *     at least this confidence score. The default is 0.5.
+ *
+ *   AutoML Vision Object Detection
+ *
+ *   `score_threshold`
+ *   : (float) When Model detects objects on the image,
+ *     it will only produce bounding boxes which have at least this
+ *     confidence score. Value in 0 to 1 range, default is 0.5.
+ *
+ *   `max_bounding_box_count`
+ *   : (int64) The maximum number of bounding
+ *     boxes returned. The default is 100. The
+ *     number of returned bounding boxes might be limited by the server.
+ *
+ *   AutoML Tables
+ *
+ *   `feature_importance`
+ *   : (boolean) Whether
+ *   {@link protos.google.cloud.automl.v1.TablesModelColumnInfo.feature_importance|feature_importance}
+ *     is populated in the returned list of
+ *     {@link protos.google.cloud.automl.v1.TablesAnnotation|TablesAnnotation}
+ *     objects. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.automl.v1.PredictResponse|PredictResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.predict.js</caption>
+ * region_tag:automl_v1_generated_PredictionService_Predict_async
+ */
   predict(
-    request?: protos.google.cloud.automl.v1.IPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1.IPredictResponse,
-      protos.google.cloud.automl.v1.IPredictRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.automl.v1.IPredictRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.automl.v1.IPredictResponse,
+        protos.google.cloud.automl.v1.IPredictRequest|undefined, {}|undefined
+      ]>;
   predict(
-    request: protos.google.cloud.automl.v1.IPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.automl.v1.IPredictResponse,
-      protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request: protos.google.cloud.automl.v1.IPredictRequest,
-    callback: Callback<
-      protos.google.cloud.automl.v1.IPredictResponse,
-      protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request?: protos.google.cloud.automl.v1.IPredictRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.automl.v1.IPredictRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.automl.v1.IPredictResponse,
-          protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.automl.v1.IPredictResponse,
-      protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1.IPredictResponse,
-      protos.google.cloud.automl.v1.IPredictRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.automl.v1.IPredictRequest|null|undefined,
+          {}|null|undefined>): void;
+  predict(
+      request: protos.google.cloud.automl.v1.IPredictRequest,
+      callback: Callback<
+          protos.google.cloud.automl.v1.IPredictResponse,
+          protos.google.cloud.automl.v1.IPredictRequest|null|undefined,
+          {}|null|undefined>): void;
+  predict(
+      request?: protos.google.cloud.automl.v1.IPredictRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.automl.v1.IPredictResponse,
+          protos.google.cloud.automl.v1.IPredictRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.automl.v1.IPredictResponse,
+          protos.google.cloud.automl.v1.IPredictRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.automl.v1.IPredictResponse,
+        protos.google.cloud.automl.v1.IPredictRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('predict request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.automl.v1.IPredictResponse,
-          protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.automl.v1.IPredictResponse,
+        protos.google.cloud.automl.v1.IPredictRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('predict response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .predict(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.automl.v1.IPredictResponse,
-          protos.google.cloud.automl.v1.IPredictRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('predict response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.predict(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.automl.v1.IPredictResponse,
+        protos.google.cloud.automl.v1.IPredictRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('predict response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Perform a batch prediction. Unlike the online {@link protos.google.cloud.automl.v1.PredictionService.Predict|Predict}, batch
-   * prediction result won't be immediately available in the response. Instead,
-   * a long running operation object is returned. User can poll the operation
-   * result via {@link protos.google.longrunning.Operations.GetOperation|GetOperation}
-   * method. Once the operation is done, {@link protos.google.cloud.automl.v1.BatchPredictResult|BatchPredictResult} is returned in
-   * the {@link protos.google.longrunning.Operation.response|response} field.
-   * Available for following ML scenarios:
-   *
-   * * AutoML Vision Classification
-   * * AutoML Vision Object Detection
-   * * AutoML Video Intelligence Classification
-   * * AutoML Video Intelligence Object Tracking * AutoML Natural Language Classification
-   * * AutoML Natural Language Entity Extraction
-   * * AutoML Natural Language Sentiment Analysis
-   * * AutoML Tables
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the model requested to serve the batch prediction.
-   * @param {google.cloud.automl.v1.BatchPredictInputConfig} request.inputConfig
-   *   Required. The input configuration for batch prediction.
-   * @param {google.cloud.automl.v1.BatchPredictOutputConfig} request.outputConfig
-   *   Required. The Configuration specifying where output predictions should
-   *   be written.
-   * @param {number[]} request.params
-   *   Additional domain-specific parameters for the predictions, any string must
-   *   be up to 25000 characters long.
-   *
-   *   AutoML Natural Language Classification
-   *
-   *   `score_threshold`
-   *   : (float) A value from 0.0 to 1.0. When the model
-   *     makes predictions for a text snippet, it will only produce results
-   *     that have at least this confidence score. The default is 0.5.
-   *
-   *
-   *   AutoML Vision Classification
-   *
-   *   `score_threshold`
-   *   : (float) A value from 0.0 to 1.0. When the model
-   *     makes predictions for an image, it will only produce results that
-   *     have at least this confidence score. The default is 0.5.
-   *
-   *   AutoML Vision Object Detection
-   *
-   *   `score_threshold`
-   *   : (float) When Model detects objects on the image,
-   *     it will only produce bounding boxes which have at least this
-   *     confidence score. Value in 0 to 1 range, default is 0.5.
-   *
-   *   `max_bounding_box_count`
-   *   : (int64) The maximum number of bounding
-   *     boxes returned per image. The default is 100, the
-   *     number of bounding boxes returned might be limited by the server.
-   *   AutoML Video Intelligence Classification
-   *
-   *   `score_threshold`
-   *   : (float) A value from 0.0 to 1.0. When the model
-   *     makes predictions for a video, it will only produce results that
-   *     have at least this confidence score. The default is 0.5.
-   *
-   *   `segment_classification`
-   *   : (boolean) Set to true to request
-   *     segment-level classification. AutoML Video Intelligence returns
-   *     labels and their confidence scores for the entire segment of the
-   *     video that user specified in the request configuration.
-   *     The default is true.
-   *
-   *   `shot_classification`
-   *   : (boolean) Set to true to request shot-level
-   *     classification. AutoML Video Intelligence determines the boundaries
-   *     for each camera shot in the entire segment of the video that user
-   *     specified in the request configuration. AutoML Video Intelligence
-   *     then returns labels and their confidence scores for each detected
-   *     shot, along with the start and end time of the shot.
-   *     The default is false.
-   *
-   *     WARNING: Model evaluation is not done for this classification type,
-   *     the quality of it depends on training data, but there are no metrics
-   *     provided to describe that quality.
-   *
-   *   `1s_interval_classification`
-   *   : (boolean) Set to true to request
-   *     classification for a video at one-second intervals. AutoML Video
-   *     Intelligence returns labels and their confidence scores for each
-   *     second of the entire segment of the video that user specified in the
-   *     request configuration. The default is false.
-   *
-   *     WARNING: Model evaluation is not done for this classification
-   *     type, the quality of it depends on training data, but there are no
-   *     metrics provided to describe that quality.
-   *
-   *   AutoML Video Intelligence Object Tracking
-   *
-   *   `score_threshold`
-   *   : (float) When Model detects objects on video frames,
-   *     it will only produce bounding boxes which have at least this
-   *     confidence score. Value in 0 to 1 range, default is 0.5.
-   *
-   *   `max_bounding_box_count`
-   *   : (int64) The maximum number of bounding
-   *     boxes returned per image. The default is 100, the
-   *     number of bounding boxes returned might be limited by the server.
-   *
-   *   `min_bounding_box_size`
-   *   : (float) Only bounding boxes with shortest edge
-   *     at least that long as a relative value of video frame size are
-   *     returned. Value in 0 to 1 range. Default is 0.
-   *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/prediction_service.batch_predict.js</caption>
-   * region_tag:automl_v1_generated_PredictionService_BatchPredict_async
-   */
+/**
+ * Perform a batch prediction. Unlike the online {@link protos.google.cloud.automl.v1.PredictionService.Predict|Predict}, batch
+ * prediction result won't be immediately available in the response. Instead,
+ * a long running operation object is returned. User can poll the operation
+ * result via {@link protos.google.longrunning.Operations.GetOperation|GetOperation}
+ * method. Once the operation is done, {@link protos.google.cloud.automl.v1.BatchPredictResult|BatchPredictResult} is returned in
+ * the {@link protos.google.longrunning.Operation.response|response} field.
+ * Available for following ML scenarios:
+ *
+ * * AutoML Vision Classification
+ * * AutoML Vision Object Detection
+ * * AutoML Video Intelligence Classification
+ * * AutoML Video Intelligence Object Tracking * AutoML Natural Language Classification
+ * * AutoML Natural Language Entity Extraction
+ * * AutoML Natural Language Sentiment Analysis
+ * * AutoML Tables
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the model requested to serve the batch prediction.
+ * @param {google.cloud.automl.v1.BatchPredictInputConfig} request.inputConfig
+ *   Required. The input configuration for batch prediction.
+ * @param {google.cloud.automl.v1.BatchPredictOutputConfig} request.outputConfig
+ *   Required. The Configuration specifying where output predictions should
+ *   be written.
+ * @param {number[]} request.params
+ *   Additional domain-specific parameters for the predictions, any string must
+ *   be up to 25000 characters long.
+ *
+ *   AutoML Natural Language Classification
+ *
+ *   `score_threshold`
+ *   : (float) A value from 0.0 to 1.0. When the model
+ *     makes predictions for a text snippet, it will only produce results
+ *     that have at least this confidence score. The default is 0.5.
+ *
+ *
+ *   AutoML Vision Classification
+ *
+ *   `score_threshold`
+ *   : (float) A value from 0.0 to 1.0. When the model
+ *     makes predictions for an image, it will only produce results that
+ *     have at least this confidence score. The default is 0.5.
+ *
+ *   AutoML Vision Object Detection
+ *
+ *   `score_threshold`
+ *   : (float) When Model detects objects on the image,
+ *     it will only produce bounding boxes which have at least this
+ *     confidence score. Value in 0 to 1 range, default is 0.5.
+ *
+ *   `max_bounding_box_count`
+ *   : (int64) The maximum number of bounding
+ *     boxes returned per image. The default is 100, the
+ *     number of bounding boxes returned might be limited by the server.
+ *   AutoML Video Intelligence Classification
+ *
+ *   `score_threshold`
+ *   : (float) A value from 0.0 to 1.0. When the model
+ *     makes predictions for a video, it will only produce results that
+ *     have at least this confidence score. The default is 0.5.
+ *
+ *   `segment_classification`
+ *   : (boolean) Set to true to request
+ *     segment-level classification. AutoML Video Intelligence returns
+ *     labels and their confidence scores for the entire segment of the
+ *     video that user specified in the request configuration.
+ *     The default is true.
+ *
+ *   `shot_classification`
+ *   : (boolean) Set to true to request shot-level
+ *     classification. AutoML Video Intelligence determines the boundaries
+ *     for each camera shot in the entire segment of the video that user
+ *     specified in the request configuration. AutoML Video Intelligence
+ *     then returns labels and their confidence scores for each detected
+ *     shot, along with the start and end time of the shot.
+ *     The default is false.
+ *
+ *     WARNING: Model evaluation is not done for this classification type,
+ *     the quality of it depends on training data, but there are no metrics
+ *     provided to describe that quality.
+ *
+ *   `1s_interval_classification`
+ *   : (boolean) Set to true to request
+ *     classification for a video at one-second intervals. AutoML Video
+ *     Intelligence returns labels and their confidence scores for each
+ *     second of the entire segment of the video that user specified in the
+ *     request configuration. The default is false.
+ *
+ *     WARNING: Model evaluation is not done for this classification
+ *     type, the quality of it depends on training data, but there are no
+ *     metrics provided to describe that quality.
+ *
+ *   AutoML Video Intelligence Object Tracking
+ *
+ *   `score_threshold`
+ *   : (float) When Model detects objects on video frames,
+ *     it will only produce bounding boxes which have at least this
+ *     confidence score. Value in 0 to 1 range, default is 0.5.
+ *
+ *   `max_bounding_box_count`
+ *   : (int64) The maximum number of bounding
+ *     boxes returned per image. The default is 100, the
+ *     number of bounding boxes returned might be limited by the server.
+ *
+ *   `min_bounding_box_size`
+ *   : (float) Only bounding boxes with shortest edge
+ *     at least that long as a relative value of video frame size are
+ *     returned. Value in 0 to 1 range. Default is 0.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.batch_predict.js</caption>
+ * region_tag:automl_v1_generated_PredictionService_BatchPredict_async
+ */
   batchPredict(
-    request?: protos.google.cloud.automl.v1.IBatchPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.automl.v1.IBatchPredictResult,
-        protos.google.cloud.automl.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.automl.v1.IBatchPredictRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   batchPredict(
-    request: protos.google.cloud.automl.v1.IBatchPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.automl.v1.IBatchPredictResult,
-        protos.google.cloud.automl.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.automl.v1.IBatchPredictRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchPredict(
-    request: protos.google.cloud.automl.v1.IBatchPredictRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.automl.v1.IBatchPredictResult,
-        protos.google.cloud.automl.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.automl.v1.IBatchPredictRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchPredict(
-    request?: protos.google.cloud.automl.v1.IBatchPredictRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.automl.v1.IBatchPredictResult,
-            protos.google.cloud.automl.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.automl.v1.IBatchPredictResult,
-        protos.google.cloud.automl.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.automl.v1.IBatchPredictResult,
-        protos.google.cloud.automl.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.automl.v1.IBatchPredictRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.automl.v1.IBatchPredictResult,
-            protos.google.cloud.automl.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchPredict response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchPredict request %j', request);
-    return this.innerApiCalls
-      .batchPredict(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.automl.v1.IBatchPredictResult,
-            protos.google.cloud.automl.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchPredict response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.batchPredict(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.automl.v1.IBatchPredictResult, protos.google.cloud.automl.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchPredict response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `batchPredict()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/prediction_service.batch_predict.js</caption>
-   * region_tag:automl_v1_generated_PredictionService_BatchPredict_async
-   */
-  async checkBatchPredictProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.automl.v1.BatchPredictResult,
-      protos.google.cloud.automl.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `batchPredict()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.batch_predict.js</caption>
+ * region_tag:automl_v1_generated_PredictionService_BatchPredict_async
+ */
+  async checkBatchPredictProgress(name: string): Promise<LROperation<protos.google.cloud.automl.v1.BatchPredictResult, protos.google.cloud.automl.v1.OperationMetadata>>{
     this._log.info('batchPredict long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.batchPredict,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.automl.v1.BatchPredictResult,
-      protos.google.cloud.automl.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchPredict, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.automl.v1.BatchPredictResult, protos.google.cloud.automl.v1.OperationMetadata>;
   }
   // --------------------
   // -- Path templates --
@@ -940,12 +756,7 @@ export class PredictionServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(
-    project: string,
-    location: string,
-    dataset: string,
-    annotationSpec: string
-  ) {
+  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -962,9 +773,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
   }
 
   /**
@@ -975,9 +784,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
   }
 
   /**
@@ -988,9 +795,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
   }
 
   /**
@@ -1001,9 +806,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
   }
 
   /**
@@ -1014,7 +817,7 @@ export class PredictionServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, location: string, dataset: string) {
+  datasetPath(project:string,location:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -1063,7 +866,7 @@ export class PredictionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, model: string) {
+  modelPath(project:string,location:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1113,12 +916,7 @@ export class PredictionServiceClient {
    * @param {string} model_evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(
-    project: string,
-    location: string,
-    model: string,
-    modelEvaluation: string
-  ) {
+  modelEvaluationPath(project:string,location:string,model:string,modelEvaluation:string) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -1135,9 +933,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
   }
 
   /**
@@ -1148,9 +944,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
   }
 
   /**
@@ -1161,9 +955,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
   }
 
   /**
@@ -1174,9 +966,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the model_evaluation.
    */
   matchModelEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).model_evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model_evaluation;
   }
 
   /**
