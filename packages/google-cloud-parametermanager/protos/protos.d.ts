@@ -351,9 +351,6 @@ export namespace google {
                     /** Parameter kmsKey. */
                     public kmsKey?: (string|null);
 
-                    /** Parameter _kmsKey. */
-                    public _kmsKey?: "kmsKey";
-
                     /**
                      * Creates a new Parameter instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1135,9 +1132,6 @@ export namespace google {
                     /** ParameterVersion kmsKeyVersion. */
                     public kmsKeyVersion?: (string|null);
 
-                    /** ParameterVersion _kmsKeyVersion. */
-                    public _kmsKeyVersion?: "kmsKeyVersion";
-
                     /**
                      * Creates a new ParameterVersion instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1220,7 +1214,7 @@ export namespace google {
                 interface IParameterVersionPayload {
 
                     /** ParameterVersionPayload data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ParameterVersionPayload. */
@@ -1233,7 +1227,7 @@ export namespace google {
                     constructor(properties?: google.cloud.parametermanager.v1.IParameterVersionPayload);
 
                     /** ParameterVersionPayload data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ParameterVersionPayload instance using the specified properties.
@@ -1753,7 +1747,7 @@ export namespace google {
                     payload?: (google.cloud.parametermanager.v1.IParameterVersionPayload|null);
 
                     /** RenderParameterVersionResponse renderedPayload */
-                    renderedPayload?: (Uint8Array|string|null);
+                    renderedPayload?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a RenderParameterVersionResponse. */
@@ -1772,7 +1766,7 @@ export namespace google {
                     public payload?: (google.cloud.parametermanager.v1.IParameterVersionPayload|null);
 
                     /** RenderParameterVersionResponse renderedPayload. */
-                    public renderedPayload: (Uint8Array|string);
+                    public renderedPayload: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new RenderParameterVersionResponse instance using the specified properties.
@@ -2837,6 +2831,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -2877,6 +2874,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -7207,6 +7207,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -7455,7 +7458,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7486,7 +7489,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

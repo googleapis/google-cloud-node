@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const admanager = require('@google-ads/admanager');
 
@@ -23,19 +24,15 @@ function main() {
   const adUnitServiceClient = new admanager.AdUnitServiceClient();
   const companyServiceClient = new admanager.CompanyServiceClient();
   const customFieldServiceClient = new admanager.CustomFieldServiceClient();
-  const customTargetingKeyServiceClient =
-    new admanager.CustomTargetingKeyServiceClient();
-  const customTargetingValueServiceClient =
-    new admanager.CustomTargetingValueServiceClient();
-  const entitySignalsMappingServiceClient =
-    new admanager.EntitySignalsMappingServiceClient();
+  const customTargetingKeyServiceClient = new admanager.CustomTargetingKeyServiceClient();
+  const customTargetingValueServiceClient = new admanager.CustomTargetingValueServiceClient();
+  const entitySignalsMappingServiceClient = new admanager.EntitySignalsMappingServiceClient();
   const networkServiceClient = new admanager.NetworkServiceClient();
   const orderServiceClient = new admanager.OrderServiceClient();
   const placementServiceClient = new admanager.PlacementServiceClient();
   const reportServiceClient = new admanager.ReportServiceClient();
   const roleServiceClient = new admanager.RoleServiceClient();
-  const taxonomyCategoryServiceClient =
-    new admanager.TaxonomyCategoryServiceClient();
+  const taxonomyCategoryServiceClient = new admanager.TaxonomyCategoryServiceClient();
   const userServiceClient = new admanager.UserServiceClient();
 }
 

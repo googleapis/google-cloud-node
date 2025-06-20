@@ -15,7 +15,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/bigquery": "^7.0.0",
+    "@google-cloud/bigquery": "^8.0.0",
     "@google-cloud/datacatalog": "^5.1.0",
     "uuid": "^9.0.0"
   },
