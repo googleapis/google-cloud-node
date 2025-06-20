@@ -22,14 +22,14 @@
 
 function main(parent) {
   // [START configdelivery_quickstart]
-  /**
+/**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
    * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent value for ListRolloutsRequest
+   *  Required. Parent value for ListFleetPackagesRequest.
    */
   // const parent = 'abc123'
   /**
@@ -56,20 +56,20 @@ function main(parent) {
   // Instantiates a client
   const configdeliveryClient = new ConfigDeliveryClient();
 
-  async function callListRollouts() {
+  async function callListFleetPackages() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = configdeliveryClient.listRolloutsAsync(request);
+    const iterable = configdeliveryClient.listFleetPackagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListRollouts();
+  callListFleetPackages();
   // [END configdelivery_quickstart]
 }
 
