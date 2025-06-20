@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -114,41 +105,20 @@ export class DlpServiceClient {
    *     const client = new DlpServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DlpServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dlp.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +144,7 @@ export class DlpServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +160,13 @@ export class DlpServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -225,48 +199,39 @@ export class DlpServiceClient {
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      organizationDeidentifyTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/deidentifyTemplates/{deidentify_template}'
-        ),
+      organizationDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/deidentifyTemplates/{deidentify_template}'
+      ),
       organizationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/inspectTemplates/{inspect_template}'
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
       ),
-      organizationLocationColumnDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/columnDataProfiles/{column_data_profile}'
-        ),
-      organizationLocationConnectionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/connections/{connection}'
-        ),
-      organizationLocationDeidentifyTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/deidentifyTemplates/{deidentify_template}'
-        ),
-      organizationLocationFileStoreDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}'
-        ),
-      organizationLocationInspectTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/inspectTemplates/{inspect_template}'
-        ),
-      organizationLocationProjectDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/projectDataProfiles/{project_data_profile}'
-        ),
-      organizationLocationStoredInfoTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/storedInfoTypes/{stored_info_type}'
-        ),
-      organizationLocationTableDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/tableDataProfiles/{table_data_profile}'
-        ),
+      organizationLocationColumnDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/columnDataProfiles/{column_data_profile}'
+      ),
+      organizationLocationConnectionPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/connections/{connection}'
+      ),
+      organizationLocationDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/deidentifyTemplates/{deidentify_template}'
+      ),
+      organizationLocationFileStoreDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}'
+      ),
+      organizationLocationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/inspectTemplates/{inspect_template}'
+      ),
+      organizationLocationProjectDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/projectDataProfiles/{project_data_profile}'
+      ),
+      organizationLocationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/storedInfoTypes/{stored_info_type}'
+      ),
+      organizationLocationTableDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/tableDataProfiles/{table_data_profile}'
+      ),
       organizationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/storedInfoTypes/{stored_info_type}'
       ),
@@ -288,43 +253,36 @@ export class DlpServiceClient {
       projectJobTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/jobTriggers/{job_trigger}'
       ),
-      projectLocationColumnDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/columnDataProfiles/{column_data_profile}'
-        ),
+      projectLocationColumnDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/columnDataProfiles/{column_data_profile}'
+      ),
       projectLocationConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}'
       ),
-      projectLocationDeidentifyTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}'
-        ),
+      projectLocationDeidentifyTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}'
+      ),
       projectLocationDlpJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dlpJobs/{dlp_job}'
       ),
-      projectLocationFileStoreDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}'
-        ),
-      projectLocationInspectTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/inspectTemplates/{inspect_template}'
-        ),
+      projectLocationFileStoreDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}'
+      ),
+      projectLocationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/inspectTemplates/{inspect_template}'
+      ),
       projectLocationJobTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobTriggers/{job_trigger}'
       ),
-      projectLocationProjectDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/projectDataProfiles/{project_data_profile}'
-        ),
-      projectLocationStoredInfoTypePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/storedInfoTypes/{stored_info_type}'
-        ),
-      projectLocationTableDataProfilePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/tableDataProfiles/{table_data_profile}'
-        ),
+      projectLocationProjectDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/projectDataProfiles/{project_data_profile}'
+      ),
+      projectLocationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/storedInfoTypes/{stored_info_type}'
+      ),
+      projectLocationTableDataProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tableDataProfiles/{table_data_profile}'
+      ),
       projectStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/storedInfoTypes/{stored_info_type}'
       ),
@@ -334,75 +292,36 @@ export class DlpServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listInspectTemplates: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'inspectTemplates'
-      ),
-      listDeidentifyTemplates: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'deidentifyTemplates'
-      ),
-      listJobTriggers: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'jobTriggers'
-      ),
-      listDiscoveryConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'discoveryConfigs'
-      ),
-      listDlpJobs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'jobs'
-      ),
-      listStoredInfoTypes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'storedInfoTypes'
-      ),
-      listProjectDataProfiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'projectDataProfiles'
-      ),
-      listTableDataProfiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tableDataProfiles'
-      ),
-      listColumnDataProfiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'columnDataProfiles'
-      ),
-      listFileStoreDataProfiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'fileStoreDataProfiles'
-      ),
-      listConnections: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'connections'
-      ),
-      searchConnections: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'connections'
-      ),
+      listInspectTemplates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'inspectTemplates'),
+      listDeidentifyTemplates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deidentifyTemplates'),
+      listJobTriggers:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobTriggers'),
+      listDiscoveryConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'discoveryConfigs'),
+      listDlpJobs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs'),
+      listStoredInfoTypes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'storedInfoTypes'),
+      listProjectDataProfiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'projectDataProfiles'),
+      listTableDataProfiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tableDataProfiles'),
+      listColumnDataProfiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'columnDataProfiles'),
+      listFileStoreDataProfiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'fileStoreDataProfiles'),
+      listConnections:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'connections'),
+      searchConnections:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'connections')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.privacy.dlp.v2.DlpService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.privacy.dlp.v2.DlpService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -433,91 +352,32 @@ export class DlpServiceClient {
     // Put together the "service stub" for
     // google.privacy.dlp.v2.DlpService.
     this.dlpServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.privacy.dlp.v2.DlpService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.privacy.dlp.v2.DlpService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.privacy.dlp.v2.DlpService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dlpServiceStubMethods = [
-      'inspectContent',
-      'redactImage',
-      'deidentifyContent',
-      'reidentifyContent',
-      'listInfoTypes',
-      'createInspectTemplate',
-      'updateInspectTemplate',
-      'getInspectTemplate',
-      'listInspectTemplates',
-      'deleteInspectTemplate',
-      'createDeidentifyTemplate',
-      'updateDeidentifyTemplate',
-      'getDeidentifyTemplate',
-      'listDeidentifyTemplates',
-      'deleteDeidentifyTemplate',
-      'createJobTrigger',
-      'updateJobTrigger',
-      'hybridInspectJobTrigger',
-      'getJobTrigger',
-      'listJobTriggers',
-      'deleteJobTrigger',
-      'activateJobTrigger',
-      'createDiscoveryConfig',
-      'updateDiscoveryConfig',
-      'getDiscoveryConfig',
-      'listDiscoveryConfigs',
-      'deleteDiscoveryConfig',
-      'createDlpJob',
-      'listDlpJobs',
-      'getDlpJob',
-      'deleteDlpJob',
-      'cancelDlpJob',
-      'createStoredInfoType',
-      'updateStoredInfoType',
-      'getStoredInfoType',
-      'listStoredInfoTypes',
-      'deleteStoredInfoType',
-      'listProjectDataProfiles',
-      'listTableDataProfiles',
-      'listColumnDataProfiles',
-      'getProjectDataProfile',
-      'listFileStoreDataProfiles',
-      'getFileStoreDataProfile',
-      'deleteFileStoreDataProfile',
-      'getTableDataProfile',
-      'getColumnDataProfile',
-      'deleteTableDataProfile',
-      'hybridInspectDlpJob',
-      'finishDlpJob',
-      'createConnection',
-      'getConnection',
-      'listConnections',
-      'searchConnections',
-      'deleteConnection',
-      'updateConnection',
-    ];
+    const dlpServiceStubMethods =
+        ['inspectContent', 'redactImage', 'deidentifyContent', 'reidentifyContent', 'listInfoTypes', 'createInspectTemplate', 'updateInspectTemplate', 'getInspectTemplate', 'listInspectTemplates', 'deleteInspectTemplate', 'createDeidentifyTemplate', 'updateDeidentifyTemplate', 'getDeidentifyTemplate', 'listDeidentifyTemplates', 'deleteDeidentifyTemplate', 'createJobTrigger', 'updateJobTrigger', 'hybridInspectJobTrigger', 'getJobTrigger', 'listJobTriggers', 'deleteJobTrigger', 'activateJobTrigger', 'createDiscoveryConfig', 'updateDiscoveryConfig', 'getDiscoveryConfig', 'listDiscoveryConfigs', 'deleteDiscoveryConfig', 'createDlpJob', 'listDlpJobs', 'getDlpJob', 'deleteDlpJob', 'cancelDlpJob', 'createStoredInfoType', 'updateStoredInfoType', 'getStoredInfoType', 'listStoredInfoTypes', 'deleteStoredInfoType', 'listProjectDataProfiles', 'listTableDataProfiles', 'listColumnDataProfiles', 'getProjectDataProfile', 'listFileStoreDataProfiles', 'getFileStoreDataProfile', 'deleteFileStoreDataProfile', 'getTableDataProfile', 'getColumnDataProfile', 'deleteTableDataProfile', 'hybridInspectDlpJob', 'finishDlpJob', 'createConnection', 'getConnection', 'listConnections', 'searchConnections', 'deleteConnection', 'updateConnection'];
     for (const methodName of dlpServiceStubMethods) {
       const callPromise = this.dlpServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -537,14 +397,8 @@ export class DlpServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dlp.googleapis.com';
   }
@@ -555,14 +409,8 @@ export class DlpServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dlp.googleapis.com';
   }
@@ -593,7 +441,9 @@ export class DlpServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -602,9 +452,8 @@ export class DlpServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -615,5642 +464,4684 @@ export class DlpServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Finds potentially sensitive info in content.
-   * This method has limits on input size, processing time, and output size.
-   *
-   * When no InfoTypes or CustomInfoTypes are specified in this request, the
-   * system will automatically choose what detectors to run. By default this may
-   * be all types, but may change over time as detectors are updated.
-   *
-   * For how to guides, see
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-images
-   * and
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-text,
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
-   *   Configuration for the inspector. What specified here will override
-   *   the template referenced by the inspect_template_name argument.
-   * @param {google.privacy.dlp.v2.ContentItem} request.item
-   *   The item to inspect.
-   * @param {string} request.inspectTemplateName
-   *   Template to use. Any configuration directly specified in
-   *   inspect_config will override those set in the template. Singular fields
-   *   that are set in this request will replace their corresponding fields in the
-   *   template. Repeated fields are appended. Singular sub-messages and groups
-   *   are recursively merged.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectContentResponse|InspectContentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.inspect_content.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_InspectContent_async
-   */
+/**
+ * Finds potentially sensitive info in content.
+ * This method has limits on input size, processing time, and output size.
+ *
+ * When no InfoTypes or CustomInfoTypes are specified in this request, the
+ * system will automatically choose what detectors to run. By default this may
+ * be all types, but may change over time as detectors are updated.
+ *
+ * For how to guides, see
+ * https://cloud.google.com/sensitive-data-protection/docs/inspecting-images
+ * and
+ * https://cloud.google.com/sensitive-data-protection/docs/inspecting-text,
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
+ *   Configuration for the inspector. What specified here will override
+ *   the template referenced by the inspect_template_name argument.
+ * @param {google.privacy.dlp.v2.ContentItem} request.item
+ *   The item to inspect.
+ * @param {string} request.inspectTemplateName
+ *   Template to use. Any configuration directly specified in
+ *   inspect_config will override those set in the template. Singular fields
+ *   that are set in this request will replace their corresponding fields in the
+ *   template. Repeated fields are appended. Singular sub-messages and groups
+ *   are recursively merged.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectContentResponse|InspectContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.inspect_content.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_InspectContent_async
+ */
   inspectContent(
-    request?: protos.google.privacy.dlp.v2.IInspectContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectContentResponse,
-      protos.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IInspectContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectContentResponse,
+        protos.google.privacy.dlp.v2.IInspectContentRequest|undefined, {}|undefined
+      ]>;
   inspectContent(
-    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectContentResponse,
-      protos.google.privacy.dlp.v2.IInspectContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  inspectContent(
-    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectContentResponse,
-      protos.google.privacy.dlp.v2.IInspectContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  inspectContent(
-    request?: protos.google.privacy.dlp.v2.IInspectContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IInspectContentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IInspectContentResponse,
-          | protos.google.privacy.dlp.v2.IInspectContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IInspectContentResponse,
-      protos.google.privacy.dlp.v2.IInspectContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectContentResponse,
-      protos.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IInspectContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  inspectContent(
+      request: protos.google.privacy.dlp.v2.IInspectContentRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IInspectContentResponse,
+          protos.google.privacy.dlp.v2.IInspectContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  inspectContent(
+      request?: protos.google.privacy.dlp.v2.IInspectContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IInspectContentResponse,
+          protos.google.privacy.dlp.v2.IInspectContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IInspectContentResponse,
+          protos.google.privacy.dlp.v2.IInspectContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectContentResponse,
+        protos.google.privacy.dlp.v2.IInspectContentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('inspectContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IInspectContentResponse,
-          | protos.google.privacy.dlp.v2.IInspectContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IInspectContentResponse,
+        protos.google.privacy.dlp.v2.IInspectContentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('inspectContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .inspectContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IInspectContentResponse,
-          protos.google.privacy.dlp.v2.IInspectContentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('inspectContent response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.inspectContent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IInspectContentResponse,
+        protos.google.privacy.dlp.v2.IInspectContentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('inspectContent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Redacts potentially sensitive info from an image.
-   * This method has limits on input size, processing time, and output size.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
-   * to learn more.
-   *
-   * When no InfoTypes or CustomInfoTypes are specified in this request, the
-   * system will automatically choose what detectors to run. By default this may
-   * be all types, but may change over time as detectors are updated.
-   *
-   * Only the first frame of each multiframe image is redacted. Metadata and
-   * other frames are omitted in the response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
-   *   Configuration for the inspector.
-   * @param {number[]} request.imageRedactionConfigs
-   *   The configuration for specifying what content to redact from images.
-   * @param {boolean} request.includeFindings
-   *   Whether the response should include findings along with the redacted
-   *   image.
-   * @param {google.privacy.dlp.v2.ByteContentItem} request.byteItem
-   *   The content must be PNG, JPEG, SVG or BMP.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.RedactImageResponse|RedactImageResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.redact_image.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_RedactImage_async
-   */
+/**
+ * Redacts potentially sensitive info from an image.
+ * This method has limits on input size, processing time, and output size.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
+ * to learn more.
+ *
+ * When no InfoTypes or CustomInfoTypes are specified in this request, the
+ * system will automatically choose what detectors to run. By default this may
+ * be all types, but may change over time as detectors are updated.
+ *
+ * Only the first frame of each multiframe image is redacted. Metadata and
+ * other frames are omitted in the response.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
+ *   Configuration for the inspector.
+ * @param {number[]} request.imageRedactionConfigs
+ *   The configuration for specifying what content to redact from images.
+ * @param {boolean} request.includeFindings
+ *   Whether the response should include findings along with the redacted
+ *   image.
+ * @param {google.privacy.dlp.v2.ByteContentItem} request.byteItem
+ *   The content must be PNG, JPEG, SVG or BMP.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.RedactImageResponse|RedactImageResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.redact_image.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_RedactImage_async
+ */
   redactImage(
-    request?: protos.google.privacy.dlp.v2.IRedactImageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IRedactImageResponse,
-      protos.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IRedactImageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IRedactImageResponse,
+        protos.google.privacy.dlp.v2.IRedactImageRequest|undefined, {}|undefined
+      ]>;
   redactImage(
-    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IRedactImageResponse,
-      protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  redactImage(
-    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IRedactImageResponse,
-      protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  redactImage(
-    request?: protos.google.privacy.dlp.v2.IRedactImageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IRedactImageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IRedactImageResponse,
-          protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IRedactImageResponse,
-      protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IRedactImageResponse,
-      protos.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IRedactImageRequest|null|undefined,
+          {}|null|undefined>): void;
+  redactImage(
+      request: protos.google.privacy.dlp.v2.IRedactImageRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IRedactImageResponse,
+          protos.google.privacy.dlp.v2.IRedactImageRequest|null|undefined,
+          {}|null|undefined>): void;
+  redactImage(
+      request?: protos.google.privacy.dlp.v2.IRedactImageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IRedactImageResponse,
+          protos.google.privacy.dlp.v2.IRedactImageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IRedactImageResponse,
+          protos.google.privacy.dlp.v2.IRedactImageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IRedactImageResponse,
+        protos.google.privacy.dlp.v2.IRedactImageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('redactImage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IRedactImageResponse,
-          protos.google.privacy.dlp.v2.IRedactImageRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IRedactImageResponse,
+        protos.google.privacy.dlp.v2.IRedactImageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('redactImage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .redactImage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IRedactImageResponse,
-          protos.google.privacy.dlp.v2.IRedactImageRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('redactImage response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.redactImage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IRedactImageResponse,
+        protos.google.privacy.dlp.v2.IRedactImageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('redactImage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * De-identifies potentially sensitive info from a ContentItem.
-   * This method has limits on input size and output size.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
-   * to learn more.
-   *
-   * When no InfoTypes or CustomInfoTypes are specified in this request, the
-   * system will automatically choose what detectors to run. By default this may
-   * be all types, but may change over time as detectors are updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.DeidentifyConfig} request.deidentifyConfig
-   *   Configuration for the de-identification of the content item.
-   *   Items specified here will override the template referenced by the
-   *   deidentify_template_name argument.
-   * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
-   *   Configuration for the inspector.
-   *   Items specified here will override the template referenced by the
-   *   inspect_template_name argument.
-   * @param {google.privacy.dlp.v2.ContentItem} request.item
-   *   The item to de-identify. Will be treated as text.
-   *
-   *   This value must be of type
-   *   {@link protos.google.privacy.dlp.v2.Table|Table} if your
-   *   {@link protos.google.privacy.dlp.v2.DeidentifyContentRequest.deidentify_config|deidentify_config}
-   *   is a
-   *   {@link protos.google.privacy.dlp.v2.RecordTransformations|RecordTransformations}
-   *   object.
-   * @param {string} request.inspectTemplateName
-   *   Template to use. Any configuration directly specified in
-   *   inspect_config will override those set in the template. Singular fields
-   *   that are set in this request will replace their corresponding fields in the
-   *   template. Repeated fields are appended. Singular sub-messages and groups
-   *   are recursively merged.
-   * @param {string} request.deidentifyTemplateName
-   *   Template to use. Any configuration directly specified in
-   *   deidentify_config will override those set in the template. Singular fields
-   *   that are set in this request will replace their corresponding fields in the
-   *   template. Repeated fields are appended. Singular sub-messages and groups
-   *   are recursively merged.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyContentResponse|DeidentifyContentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.deidentify_content.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeidentifyContent_async
-   */
+/**
+ * De-identifies potentially sensitive info from a ContentItem.
+ * This method has limits on input size and output size.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
+ * to learn more.
+ *
+ * When no InfoTypes or CustomInfoTypes are specified in this request, the
+ * system will automatically choose what detectors to run. By default this may
+ * be all types, but may change over time as detectors are updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.DeidentifyConfig} request.deidentifyConfig
+ *   Configuration for the de-identification of the content item.
+ *   Items specified here will override the template referenced by the
+ *   deidentify_template_name argument.
+ * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
+ *   Configuration for the inspector.
+ *   Items specified here will override the template referenced by the
+ *   inspect_template_name argument.
+ * @param {google.privacy.dlp.v2.ContentItem} request.item
+ *   The item to de-identify. Will be treated as text.
+ *
+ *   This value must be of type
+ *   {@link protos.google.privacy.dlp.v2.Table|Table} if your
+ *   {@link protos.google.privacy.dlp.v2.DeidentifyContentRequest.deidentify_config|deidentify_config}
+ *   is a
+ *   {@link protos.google.privacy.dlp.v2.RecordTransformations|RecordTransformations}
+ *   object.
+ * @param {string} request.inspectTemplateName
+ *   Template to use. Any configuration directly specified in
+ *   inspect_config will override those set in the template. Singular fields
+ *   that are set in this request will replace their corresponding fields in the
+ *   template. Repeated fields are appended. Singular sub-messages and groups
+ *   are recursively merged.
+ * @param {string} request.deidentifyTemplateName
+ *   Template to use. Any configuration directly specified in
+ *   deidentify_config will override those set in the template. Singular fields
+ *   that are set in this request will replace their corresponding fields in the
+ *   template. Repeated fields are appended. Singular sub-messages and groups
+ *   are recursively merged.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyContentResponse|DeidentifyContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.deidentify_content.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeidentifyContent_async
+ */
   deidentifyContent(
-    request?: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IDeidentifyContentRequest|undefined, {}|undefined
+      ]>;
   deidentifyContent(
-    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deidentifyContent(
-    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deidentifyContent(
-    request?: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-          | protos.google.privacy.dlp.v2.IDeidentifyContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeidentifyContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deidentifyContent(
+      request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+          protos.google.privacy.dlp.v2.IDeidentifyContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  deidentifyContent(
+      request?: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+          protos.google.privacy.dlp.v2.IDeidentifyContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+          protos.google.privacy.dlp.v2.IDeidentifyContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IDeidentifyContentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deidentifyContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-          | protos.google.privacy.dlp.v2.IDeidentifyContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IDeidentifyContentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deidentifyContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deidentifyContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
-          protos.google.privacy.dlp.v2.IDeidentifyContentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deidentifyContent response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deidentifyContent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDeidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IDeidentifyContentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deidentifyContent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Re-identifies content that has been de-identified.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.DeidentifyConfig} request.reidentifyConfig
-   *   Configuration for the re-identification of the content item.
-   *   This field shares the same proto message type that is used for
-   *   de-identification, however its usage here is for the reversal of the
-   *   previous de-identification. Re-identification is performed by examining
-   *   the transformations used to de-identify the items and executing the
-   *   reverse. This requires that only reversible transformations
-   *   be provided here. The reversible transformations are:
-   *
-   *    - `CryptoDeterministicConfig`
-   *    - `CryptoReplaceFfxFpeConfig`
-   * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
-   *   Configuration for the inspector.
-   * @param {google.privacy.dlp.v2.ContentItem} request.item
-   *   The item to re-identify. Will be treated as text.
-   * @param {string} request.inspectTemplateName
-   *   Template to use. Any configuration directly specified in
-   *   `inspect_config` will override those set in the template. Singular fields
-   *   that are set in this request will replace their corresponding fields in the
-   *   template. Repeated fields are appended. Singular sub-messages and groups
-   *   are recursively merged.
-   * @param {string} request.reidentifyTemplateName
-   *   Template to use. References an instance of `DeidentifyTemplate`.
-   *   Any configuration directly specified in `reidentify_config` or
-   *   `inspect_config` will override those set in the template. The
-   *   `DeidentifyTemplate` used must include only reversible transformations.
-   *   Singular fields that are set in this request will replace their
-   *   corresponding fields in the template. Repeated fields are appended.
-   *   Singular sub-messages and groups are recursively merged.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ReidentifyContentResponse|ReidentifyContentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.reidentify_content.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ReidentifyContent_async
-   */
+/**
+ * Re-identifies content that has been de-identified.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.DeidentifyConfig} request.reidentifyConfig
+ *   Configuration for the re-identification of the content item.
+ *   This field shares the same proto message type that is used for
+ *   de-identification, however its usage here is for the reversal of the
+ *   previous de-identification. Re-identification is performed by examining
+ *   the transformations used to de-identify the items and executing the
+ *   reverse. This requires that only reversible transformations
+ *   be provided here. The reversible transformations are:
+ *
+ *    - `CryptoDeterministicConfig`
+ *    - `CryptoReplaceFfxFpeConfig`
+ * @param {google.privacy.dlp.v2.InspectConfig} request.inspectConfig
+ *   Configuration for the inspector.
+ * @param {google.privacy.dlp.v2.ContentItem} request.item
+ *   The item to re-identify. Will be treated as text.
+ * @param {string} request.inspectTemplateName
+ *   Template to use. Any configuration directly specified in
+ *   `inspect_config` will override those set in the template. Singular fields
+ *   that are set in this request will replace their corresponding fields in the
+ *   template. Repeated fields are appended. Singular sub-messages and groups
+ *   are recursively merged.
+ * @param {string} request.reidentifyTemplateName
+ *   Template to use. References an instance of `DeidentifyTemplate`.
+ *   Any configuration directly specified in `reidentify_config` or
+ *   `inspect_config` will override those set in the template. The
+ *   `DeidentifyTemplate` used must include only reversible transformations.
+ *   Singular fields that are set in this request will replace their
+ *   corresponding fields in the template. Repeated fields are appended.
+ *   Singular sub-messages and groups are recursively merged.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ReidentifyContentResponse|ReidentifyContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.reidentify_content.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ReidentifyContent_async
+ */
   reidentifyContent(
-    request?: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IReidentifyContentRequest|undefined, {}|undefined
+      ]>;
   reidentifyContent(
-    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IReidentifyContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reidentifyContent(
-    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IReidentifyContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reidentifyContent(
-    request?: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-          | protos.google.privacy.dlp.v2.IReidentifyContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IReidentifyContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-      protos.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IReidentifyContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  reidentifyContent(
+      request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+          protos.google.privacy.dlp.v2.IReidentifyContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  reidentifyContent(
+      request?: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+          protos.google.privacy.dlp.v2.IReidentifyContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+          protos.google.privacy.dlp.v2.IReidentifyContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IReidentifyContentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('reidentifyContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-          | protos.google.privacy.dlp.v2.IReidentifyContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IReidentifyContentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('reidentifyContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .reidentifyContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IReidentifyContentResponse,
-          protos.google.privacy.dlp.v2.IReidentifyContentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('reidentifyContent response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.reidentifyContent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IReidentifyContentResponse,
+        protos.google.privacy.dlp.v2.IReidentifyContentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('reidentifyContent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns a list of the sensitive information types that the DLP API
-   * supports. See
-   * https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent resource name.
-   *
-   *   The format of this value is as follows:
-   *
-   *       `locations/{location_id}`
-   * @param {string} request.languageCode
-   *   BCP-47 language code for localized infoType friendly
-   *   names. If omitted, or if localized strings are not available,
-   *   en-US strings will be returned.
-   * @param {string} request.filter
-   *   filter to only return infoTypes supported by certain parts of the
-   *   API. Defaults to supported_by=INSPECT.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ListInfoTypesResponse|ListInfoTypesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_info_types.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListInfoTypes_async
-   */
+/**
+ * Returns a list of the sensitive information types that the DLP API
+ * supports. See
+ * https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The parent resource name.
+ *
+ *   The format of this value is as follows:
+ *
+ *       `locations/{location_id}`
+ * @param {string} request.languageCode
+ *   BCP-47 language code for localized infoType friendly
+ *   names. If omitted, or if localized strings are not available,
+ *   en-US strings will be returned.
+ * @param {string} request.filter
+ *   filter to only return infoTypes supported by certain parts of the
+ *   API. Defaults to supported_by=INSPECT.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ListInfoTypesResponse|ListInfoTypesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_info_types.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListInfoTypes_async
+ */
   listInfoTypes(
-    request?: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protos.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+        protos.google.privacy.dlp.v2.IListInfoTypesRequest|undefined, {}|undefined
+      ]>;
   listInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listInfoTypes(
-    request?: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-          protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-      protos.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListInfoTypesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listInfoTypes(
+      request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+          protos.google.privacy.dlp.v2.IListInfoTypesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listInfoTypes(
+      request?: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+          protos.google.privacy.dlp.v2.IListInfoTypesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+          protos.google.privacy.dlp.v2.IListInfoTypesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+        protos.google.privacy.dlp.v2.IListInfoTypesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInfoTypes request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-          protos.google.privacy.dlp.v2.IListInfoTypesRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+        protos.google.privacy.dlp.v2.IListInfoTypesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listInfoTypes response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listInfoTypes(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IListInfoTypesResponse,
-          protos.google.privacy.dlp.v2.IListInfoTypesRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listInfoTypes response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listInfoTypes(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IListInfoTypesResponse,
+        protos.google.privacy.dlp.v2.IListInfoTypesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listInfoTypes response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates an InspectTemplate for reusing frequently used configuration
-   * for inspecting content, images, and storage.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
-   *   Required. The InspectTemplate to create.
-   * @param {string} request.templateId
-   *   The template id can contain uppercase and lowercase letters,
-   *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *   characters. Can be empty to allow the system to generate one.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.create_inspect_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CreateInspectTemplate_async
-   */
+/**
+ * Creates an InspectTemplate for reusing frequently used configuration
+ * for inspecting content, images, and storage.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
+ *   Required. The InspectTemplate to create.
+ * @param {string} request.templateId
+ *   The template id can contain uppercase and lowercase letters,
+ *   numbers, and hyphens; that is, it must match the regular
+ *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+ *   characters. Can be empty to allow the system to generate one.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.create_inspect_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CreateInspectTemplate_async
+ */
   createInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|undefined, {}|undefined
+      ]>;
   createInspectTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createInspectTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IInspectTemplate,
-          | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createInspectTemplate(
+      request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createInspectTemplate(
+      request?: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createInspectTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IInspectTemplate,
-          | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createInspectTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createInspectTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IInspectTemplate,
-          (
-            | protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createInspectTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createInspectTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createInspectTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the InspectTemplate.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of organization and inspectTemplate to be updated,
-   *   for example `organizations/433245324/inspectTemplates/432452342` or
-   *   projects/project-id/inspectTemplates/432452342.
-   * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
-   *   New InspectTemplate value.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.update_inspect_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_UpdateInspectTemplate_async
-   */
+/**
+ * Updates the InspectTemplate.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of organization and inspectTemplate to be updated,
+ *   for example `organizations/433245324/inspectTemplates/432452342` or
+ *   projects/project-id/inspectTemplates/432452342.
+ * @param {google.privacy.dlp.v2.InspectTemplate} request.inspectTemplate
+ *   New InspectTemplate value.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Mask to control which fields get updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.update_inspect_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_UpdateInspectTemplate_async
+ */
   updateInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|undefined, {}|undefined
+      ]>;
   updateInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IInspectTemplate,
-          | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateInspectTemplate(
+      request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateInspectTemplate(
+      request?: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateInspectTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IInspectTemplate,
-          | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateInspectTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateInspectTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IInspectTemplate,
-          (
-            | protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateInspectTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateInspectTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateInspectTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an InspectTemplate.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the organization and inspectTemplate to be read,
-   *   for example `organizations/433245324/inspectTemplates/432452342` or
-   *   projects/project-id/inspectTemplates/432452342.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_inspect_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetInspectTemplate_async
-   */
+/**
+ * Gets an InspectTemplate.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the organization and inspectTemplate to be read,
+ *   for example `organizations/433245324/inspectTemplates/432452342` or
+ *   projects/project-id/inspectTemplates/432452342.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_inspect_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetInspectTemplate_async
+ */
   getInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      protos.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|undefined, {}|undefined
+      ]>;
   getInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IInspectTemplate,
-          | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate,
-      protos.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInspectTemplate(
+      request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInspectTemplate(
+      request?: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IInspectTemplate,
+          protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInspectTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IInspectTemplate,
-          | protos.google.privacy.dlp.v2.IGetInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInspectTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInspectTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IInspectTemplate,
-          protos.google.privacy.dlp.v2.IGetInspectTemplateRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getInspectTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getInspectTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IInspectTemplate,
+        protos.google.privacy.dlp.v2.IGetInspectTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInspectTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an InspectTemplate.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the organization and inspectTemplate to be
-   *   deleted, for example `organizations/433245324/inspectTemplates/432452342`
-   *   or projects/project-id/inspectTemplates/432452342.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_inspect_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteInspectTemplate_async
-   */
+/**
+ * Deletes an InspectTemplate.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the organization and inspectTemplate to be
+ *   deleted, for example `organizations/433245324/inspectTemplates/432452342`
+ *   or projects/project-id/inspectTemplates/432452342.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_inspect_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteInspectTemplate_async
+ */
   deleteInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|undefined, {}|undefined
+      ]>;
   deleteInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteInspectTemplate(
-    request?: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteInspectTemplate(
+      request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteInspectTemplate(
+      request?: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteInspectTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteInspectTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteInspectTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteInspectTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteInspectTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteInspectTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a DeidentifyTemplate for reusing frequently used configuration
-   * for de-identifying content, images, and storage.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
-   *   Required. The DeidentifyTemplate to create.
-   * @param {string} request.templateId
-   *   The template id can contain uppercase and lowercase letters,
-   *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *   characters. Can be empty to allow the system to generate one.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.create_deidentify_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CreateDeidentifyTemplate_async
-   */
+/**
+ * Creates a DeidentifyTemplate for reusing frequently used configuration
+ * for de-identifying content, images, and storage.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
+ *   Required. The DeidentifyTemplate to create.
+ * @param {string} request.templateId
+ *   The template id can contain uppercase and lowercase letters,
+ *   numbers, and hyphens; that is, it must match the regular
+ *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+ *   characters. Can be empty to allow the system to generate one.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.create_deidentify_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CreateDeidentifyTemplate_async
+ */
   createDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>;
   createDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeidentifyTemplate(
+      request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeidentifyTemplate(
+      request?: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDeidentifyTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDeidentifyTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDeidentifyTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          (
-            | protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDeidentifyTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDeidentifyTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDeidentifyTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the DeidentifyTemplate.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of organization and deidentify template to be
-   *   updated, for example
-   *   `organizations/433245324/deidentifyTemplates/432452342` or
-   *   projects/project-id/deidentifyTemplates/432452342.
-   * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
-   *   New DeidentifyTemplate value.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.update_deidentify_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_UpdateDeidentifyTemplate_async
-   */
+/**
+ * Updates the DeidentifyTemplate.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of organization and deidentify template to be
+ *   updated, for example
+ *   `organizations/433245324/deidentifyTemplates/432452342` or
+ *   projects/project-id/deidentifyTemplates/432452342.
+ * @param {google.privacy.dlp.v2.DeidentifyTemplate} request.deidentifyTemplate
+ *   New DeidentifyTemplate value.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Mask to control which fields get updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.update_deidentify_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_UpdateDeidentifyTemplate_async
+ */
   updateDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>;
   updateDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeidentifyTemplate(
+      request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeidentifyTemplate(
+      request?: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDeidentifyTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDeidentifyTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDeidentifyTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          (
-            | protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDeidentifyTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDeidentifyTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDeidentifyTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a DeidentifyTemplate.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the organization and deidentify template to be
-   *   read, for example `organizations/433245324/deidentifyTemplates/432452342`
-   *   or projects/project-id/deidentifyTemplates/432452342.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_deidentify_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetDeidentifyTemplate_async
-   */
+/**
+ * Gets a DeidentifyTemplate.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the organization and deidentify template to be
+ *   read, for example `organizations/433245324/deidentifyTemplates/432452342`
+ *   or projects/project-id/deidentifyTemplates/432452342.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_deidentify_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetDeidentifyTemplate_async
+ */
   getDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>;
   getDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-      protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeidentifyTemplate(
+      request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeidentifyTemplate(
+      request?: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+          protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDeidentifyTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDeidentifyTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDeidentifyTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate,
-          (
-            | protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDeidentifyTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDeidentifyTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate,
+        protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeidentifyTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a DeidentifyTemplate.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the organization and deidentify template to be
-   *   deleted, for example
-   *   `organizations/433245324/deidentifyTemplates/432452342` or
-   *   projects/project-id/deidentifyTemplates/432452342.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_deidentify_template.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteDeidentifyTemplate_async
-   */
+/**
+ * Deletes a DeidentifyTemplate.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the organization and deidentify template to be
+ *   deleted, for example
+ *   `organizations/433245324/deidentifyTemplates/432452342` or
+ *   projects/project-id/deidentifyTemplates/432452342.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_deidentify_template.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteDeidentifyTemplate_async
+ */
   deleteDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>;
   deleteDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDeidentifyTemplate(
-    request?: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDeidentifyTemplate(
+      request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDeidentifyTemplate(
+      request?: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDeidentifyTemplate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDeidentifyTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDeidentifyTemplate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDeidentifyTemplate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDeidentifyTemplate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDeidentifyTemplate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a job trigger to run DLP actions such as scanning storage for
-   * sensitive information on a set schedule.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.JobTrigger} request.jobTrigger
-   *   Required. The JobTrigger to create.
-   * @param {string} request.triggerId
-   *   The trigger id can contain uppercase and lowercase letters,
-   *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *   characters. Can be empty to allow the system to generate one.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.create_job_trigger.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CreateJobTrigger_async
-   */
+/**
+ * Creates a job trigger to run DLP actions such as scanning storage for
+ * sensitive information on a set schedule.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.JobTrigger} request.jobTrigger
+ *   Required. The JobTrigger to create.
+ * @param {string} request.triggerId
+ *   The trigger id can contain uppercase and lowercase letters,
+ *   numbers, and hyphens; that is, it must match the regular
+ *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+ *   characters. Can be empty to allow the system to generate one.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.create_job_trigger.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CreateJobTrigger_async
+ */
   createJobTrigger(
-    request?: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|undefined, {}|undefined
+      ]>;
   createJobTrigger(
-    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createJobTrigger(
-    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createJobTrigger(
-    request?: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IJobTrigger,
-          | protos.google.privacy.dlp.v2.ICreateJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  createJobTrigger(
+      request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  createJobTrigger(
+      request?: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createJobTrigger request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IJobTrigger,
-          | protos.google.privacy.dlp.v2.ICreateJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createJobTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createJobTrigger(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IJobTrigger,
-          protos.google.privacy.dlp.v2.ICreateJobTriggerRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createJobTrigger response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createJobTrigger(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.ICreateJobTriggerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createJobTrigger response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a job trigger.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the project and the triggeredJob, for example
-   *   `projects/dlp-test-project/jobTriggers/53234423`.
-   * @param {google.privacy.dlp.v2.JobTrigger} request.jobTrigger
-   *   New JobTrigger value.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.update_job_trigger.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_UpdateJobTrigger_async
-   */
+/**
+ * Updates a job trigger.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the project and the triggeredJob, for example
+ *   `projects/dlp-test-project/jobTriggers/53234423`.
+ * @param {google.privacy.dlp.v2.JobTrigger} request.jobTrigger
+ *   New JobTrigger value.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Mask to control which fields get updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.update_job_trigger.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_UpdateJobTrigger_async
+ */
   updateJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|undefined, {}|undefined
+      ]>;
   updateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IJobTrigger,
-          | protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateJobTrigger(
+      request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateJobTrigger(
+      request?: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateJobTrigger request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IJobTrigger,
-          | protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateJobTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateJobTrigger(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IJobTrigger,
-          protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateJobTrigger response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateJobTrigger(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateJobTrigger response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Inspect hybrid content and store findings to a trigger. The inspection
-   * will be processed asynchronously. To review the findings monitor the
-   * jobs within the trigger.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the trigger to execute a hybrid inspect on, for
-   *   example `projects/dlp-test-project/jobTriggers/53234423`.
-   * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
-   *   The item to inspect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.HybridInspectResponse|HybridInspectResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_HybridInspectJobTrigger_async
-   */
+/**
+ * Inspect hybrid content and store findings to a trigger. The inspection
+ * will be processed asynchronously. To review the findings monitor the
+ * jobs within the trigger.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the trigger to execute a hybrid inspect on, for
+ *   example `projects/dlp-test-project/jobTriggers/53234423`.
+ * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
+ *   The item to inspect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.HybridInspectResponse|HybridInspectResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_HybridInspectJobTrigger_async
+ */
   hybridInspectJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|undefined, {}|undefined
+      ]>;
   hybridInspectJobTrigger(
-    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  hybridInspectJobTrigger(
-    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  hybridInspectJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IHybridInspectResponse,
-          | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  hybridInspectJobTrigger(
+      request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  hybridInspectJobTrigger(
+      request?: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('hybridInspectJobTrigger request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IHybridInspectResponse,
-          | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('hybridInspectJobTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .hybridInspectJobTrigger(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IHybridInspectResponse,
-          (
-            | protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('hybridInspectJobTrigger response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.hybridInspectJobTrigger(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('hybridInspectJobTrigger response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a job trigger.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the project and the triggeredJob, for example
-   *   `projects/dlp-test-project/jobTriggers/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_job_trigger.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetJobTrigger_async
-   */
+/**
+ * Gets a job trigger.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the project and the triggeredJob, for example
+ *   `projects/dlp-test-project/jobTriggers/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_job_trigger.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetJobTrigger_async
+ */
   getJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IGetJobTriggerRequest|undefined, {}|undefined
+      ]>;
   getJobTrigger(
-    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJobTrigger(
-    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IJobTrigger,
-          protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger,
-      protos.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJobTrigger(
+      request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.IGetJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJobTrigger(
+      request?: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.IGetJobTriggerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IJobTrigger,
+          protos.google.privacy.dlp.v2.IGetJobTriggerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IGetJobTriggerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getJobTrigger request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IJobTrigger,
-          protos.google.privacy.dlp.v2.IGetJobTriggerRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IGetJobTriggerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getJobTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getJobTrigger(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IJobTrigger,
-          protos.google.privacy.dlp.v2.IGetJobTriggerRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getJobTrigger response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getJobTrigger(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IJobTrigger,
+        protos.google.privacy.dlp.v2.IGetJobTriggerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getJobTrigger response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a job trigger.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the project and the triggeredJob, for example
-   *   `projects/dlp-test-project/jobTriggers/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_job_trigger.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteJobTrigger_async
-   */
+/**
+ * Deletes a job trigger.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the project and the triggeredJob, for example
+ *   `projects/dlp-test-project/jobTriggers/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_job_trigger.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteJobTrigger_async
+ */
   deleteJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|undefined, {}|undefined
+      ]>;
   deleteJobTrigger(
-    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteJobTrigger(
-    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteJobTrigger(
+      request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteJobTrigger(
+      request?: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteJobTrigger request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteJobTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteJobTrigger(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteJobTrigger response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteJobTrigger(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteJobTrigger response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Activate a job trigger. Causes the immediate execute of a trigger
-   * instead of waiting on the trigger event to occur.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the trigger to activate, for example
-   *   `projects/dlp-test-project/jobTriggers/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.activate_job_trigger.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ActivateJobTrigger_async
-   */
+/**
+ * Activate a job trigger. Causes the immediate execute of a trigger
+ * instead of waiting on the trigger event to occur.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the trigger to activate, for example
+ *   `projects/dlp-test-project/jobTriggers/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.activate_job_trigger.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ActivateJobTrigger_async
+ */
   activateJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|undefined, {}|undefined
+      ]>;
   activateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  activateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  activateJobTrigger(
-    request?: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDlpJob,
-          | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  activateJobTrigger(
+      request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|null|undefined,
+          {}|null|undefined>): void;
+  activateJobTrigger(
+      request?: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('activateJobTrigger request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDlpJob,
-          | protos.google.privacy.dlp.v2.IActivateJobTriggerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('activateJobTrigger response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .activateJobTrigger(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDlpJob,
-          protos.google.privacy.dlp.v2.IActivateJobTriggerRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('activateJobTrigger response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.activateJobTrigger(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IActivateJobTriggerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('activateJobTrigger response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a config for discovery to scan and profile storage.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization):
-   *
-   *   + Projects scope:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Organizations scope:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.DiscoveryConfig} request.discoveryConfig
-   *   Required. The DiscoveryConfig to create.
-   * @param {string} request.configId
-   *   The config ID can contain uppercase and lowercase letters,
-   *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *   characters. Can be empty to allow the system to generate one.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.create_discovery_config.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CreateDiscoveryConfig_async
-   */
+/**
+ * Creates a config for discovery to scan and profile storage.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization):
+ *
+ *   + Projects scope:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Organizations scope:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.DiscoveryConfig} request.discoveryConfig
+ *   Required. The DiscoveryConfig to create.
+ * @param {string} request.configId
+ *   The config ID can contain uppercase and lowercase letters,
+ *   numbers, and hyphens; that is, it must match the regular
+ *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+ *   characters. Can be empty to allow the system to generate one.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.create_discovery_config.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CreateDiscoveryConfig_async
+ */
   createDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|undefined, {}|undefined
+      ]>;
   createDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDiscoveryConfig(
+      request: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDiscoveryConfig(
+      request?: protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDiscoveryConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDiscoveryConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDiscoveryConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          (
-            | protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDiscoveryConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDiscoveryConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.ICreateDiscoveryConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDiscoveryConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a discovery configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the project and the configuration, for example
-   *   `projects/dlp-test-project/discoveryConfigs/53234423`.
-   * @param {google.privacy.dlp.v2.DiscoveryConfig} request.discoveryConfig
-   *   Required. New DiscoveryConfig value.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.update_discovery_config.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_UpdateDiscoveryConfig_async
-   */
+/**
+ * Updates a discovery configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the project and the configuration, for example
+ *   `projects/dlp-test-project/discoveryConfigs/53234423`.
+ * @param {google.privacy.dlp.v2.DiscoveryConfig} request.discoveryConfig
+ *   Required. New DiscoveryConfig value.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Mask to control which fields get updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.update_discovery_config.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_UpdateDiscoveryConfig_async
+ */
   updateDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|undefined, {}|undefined
+      ]>;
   updateDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDiscoveryConfig(
+      request: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDiscoveryConfig(
+      request?: protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDiscoveryConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDiscoveryConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDiscoveryConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          (
-            | protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDiscoveryConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDiscoveryConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IUpdateDiscoveryConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDiscoveryConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a discovery configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the project and the configuration, for example
-   *   `projects/dlp-test-project/discoveryConfigs/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_discovery_config.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetDiscoveryConfig_async
-   */
+/**
+ * Gets a discovery configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the project and the configuration, for example
+ *   `projects/dlp-test-project/discoveryConfigs/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_discovery_config.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetDiscoveryConfig_async
+ */
   getDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|undefined, {}|undefined
+      ]>;
   getDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig,
-      protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiscoveryConfig(
+      request: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDiscoveryConfig(
+      request?: protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDiscoveryConfig,
+          protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDiscoveryConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          | protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDiscoveryConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDiscoveryConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDiscoveryConfig,
-          protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getDiscoveryConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDiscoveryConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDiscoveryConfig,
+        protos.google.privacy.dlp.v2.IGetDiscoveryConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDiscoveryConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a discovery configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the project and the config, for example
-   *   `projects/dlp-test-project/discoveryConfigs/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_discovery_config.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteDiscoveryConfig_async
-   */
+/**
+ * Deletes a discovery configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the project and the config, for example
+ *   `projects/dlp-test-project/discoveryConfigs/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_discovery_config.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteDiscoveryConfig_async
+ */
   deleteDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|undefined, {}|undefined
+      ]>;
   deleteDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDiscoveryConfig(
-    request: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDiscoveryConfig(
-    request?: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDiscoveryConfig(
+      request: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDiscoveryConfig(
+      request?: protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDiscoveryConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDiscoveryConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDiscoveryConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDiscoveryConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDiscoveryConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDiscoveryConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDiscoveryConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new job to inspect storage or calculate risk metrics.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
-   * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
-   * to learn more.
-   *
-   * When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
-   * system will automatically choose what detectors to run. By default this may
-   * be all types, but may change over time as detectors are updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.InspectJobConfig} request.inspectJob
-   *   An inspection job scans a storage repository for InfoTypes.
-   * @param {google.privacy.dlp.v2.RiskAnalysisJobConfig} request.riskJob
-   *   A risk analysis job calculates re-identification risk metrics for a
-   *   BigQuery table.
-   * @param {string} request.jobId
-   *   The job id can contain uppercase and lowercase letters,
-   *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *   characters. Can be empty to allow the system to generate one.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.create_dlp_job.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CreateDlpJob_async
-   */
+/**
+ * Creates a new job to inspect storage or calculate risk metrics.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+ * and
+ * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+ * to learn more.
+ *
+ * When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
+ * system will automatically choose what detectors to run. By default this may
+ * be all types, but may change over time as detectors are updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.InspectJobConfig} request.inspectJob
+ *   An inspection job scans a storage repository for InfoTypes.
+ * @param {google.privacy.dlp.v2.RiskAnalysisJobConfig} request.riskJob
+ *   A risk analysis job calculates re-identification risk metrics for a
+ *   BigQuery table.
+ * @param {string} request.jobId
+ *   The job id can contain uppercase and lowercase letters,
+ *   numbers, and hyphens; that is, it must match the regular
+ *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+ *   characters. Can be empty to allow the system to generate one.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.create_dlp_job.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CreateDlpJob_async
+ */
   createDlpJob(
-    request?: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.ICreateDlpJobRequest|undefined, {}|undefined
+      ]>;
   createDlpJob(
-    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDlpJob(
-    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDlpJob(
-    request?: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDlpJob,
-          protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICreateDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDlpJob(
+      request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.ICreateDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDlpJob(
+      request?: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.ICreateDlpJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.ICreateDlpJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.ICreateDlpJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDlpJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDlpJob,
-          protos.google.privacy.dlp.v2.ICreateDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.ICreateDlpJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDlpJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDlpJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDlpJob,
-          protos.google.privacy.dlp.v2.ICreateDlpJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDlpJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDlpJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.ICreateDlpJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDlpJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the latest state of a long-running DlpJob.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
-   * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the DlpJob resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_dlp_job.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetDlpJob_async
-   */
+/**
+ * Gets the latest state of a long-running DlpJob.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+ * and
+ * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the DlpJob resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_dlp_job.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetDlpJob_async
+ */
   getDlpJob(
-    request?: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IGetDlpJobRequest|undefined, {}|undefined
+      ]>;
   getDlpJob(
-    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDlpJob(
-    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDlpJob(
-    request?: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IDlpJob,
-          protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob,
-      protos.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDlpJob(
+      request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.IGetDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDlpJob(
+      request?: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.IGetDlpJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IDlpJob,
+          protos.google.privacy.dlp.v2.IGetDlpJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IGetDlpJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDlpJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IDlpJob,
-          protos.google.privacy.dlp.v2.IGetDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IGetDlpJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDlpJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDlpJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IDlpJob,
-          protos.google.privacy.dlp.v2.IGetDlpJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getDlpJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDlpJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IDlpJob,
+        protos.google.privacy.dlp.v2.IGetDlpJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDlpJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a long-running DlpJob. This method indicates that the client is
-   * no longer interested in the DlpJob result. The job will be canceled if
-   * possible.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
-   * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the DlpJob resource to be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_dlp_job.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteDlpJob_async
-   */
+/**
+ * Deletes a long-running DlpJob. This method indicates that the client is
+ * no longer interested in the DlpJob result. The job will be canceled if
+ * possible.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+ * and
+ * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the DlpJob resource to be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_dlp_job.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteDlpJob_async
+ */
   deleteDlpJob(
-    request?: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|undefined, {}|undefined
+      ]>;
   deleteDlpJob(
-    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDlpJob(
-    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDlpJob(
-    request?: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDlpJob(
+      request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDlpJob(
+      request?: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDlpJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDlpJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDlpJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IDeleteDlpJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDlpJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDlpJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteDlpJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDlpJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Starts asynchronous cancellation on a long-running DlpJob. The server
-   * makes a best effort to cancel the DlpJob, but success is not
-   * guaranteed.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
-   * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the DlpJob resource to be cancelled.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.cancel_dlp_job.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CancelDlpJob_async
-   */
+/**
+ * Starts asynchronous cancellation on a long-running DlpJob. The server
+ * makes a best effort to cancel the DlpJob, but success is not
+ * guaranteed.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+ * and
+ * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the DlpJob resource to be cancelled.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.cancel_dlp_job.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CancelDlpJob_async
+ */
   cancelDlpJob(
-    request?: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.ICancelDlpJobRequest|undefined, {}|undefined
+      ]>;
   cancelDlpJob(
-    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelDlpJob(
-    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelDlpJob(
-    request?: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICancelDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelDlpJob(
+      request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.ICancelDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelDlpJob(
+      request?: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.ICancelDlpJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.ICancelDlpJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.ICancelDlpJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('cancelDlpJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.ICancelDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.ICancelDlpJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelDlpJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .cancelDlpJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.ICancelDlpJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('cancelDlpJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.cancelDlpJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.ICancelDlpJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('cancelDlpJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a pre-built stored infoType to be used for inspection.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
-   *   Required. Configuration of the storedInfoType to create.
-   * @param {string} request.storedInfoTypeId
-   *   The storedInfoType ID can contain uppercase and lowercase letters,
-   *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
-   *   characters. Can be empty to allow the system to generate one.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.create_stored_info_type.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CreateStoredInfoType_async
-   */
+/**
+ * Creates a pre-built stored infoType to be used for inspection.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
+ *   Required. Configuration of the storedInfoType to create.
+ * @param {string} request.storedInfoTypeId
+ *   The storedInfoType ID can contain uppercase and lowercase letters,
+ *   numbers, and hyphens; that is, it must match the regular
+ *   expression: `[a-zA-Z\d-_]+`. The maximum length is 100
+ *   characters. Can be empty to allow the system to generate one.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.create_stored_info_type.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CreateStoredInfoType_async
+ */
   createStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|undefined, {}|undefined
+      ]>;
   createStoredInfoType(
-    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createStoredInfoType(
-    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IStoredInfoType,
-          | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  createStoredInfoType(
+      request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  createStoredInfoType(
+      request?: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createStoredInfoType request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IStoredInfoType,
-          | protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createStoredInfoType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createStoredInfoType(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IStoredInfoType,
-          protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createStoredInfoType response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createStoredInfoType(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createStoredInfoType response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the stored infoType by creating a new version. The existing version
-   * will continue to be used until the new version is ready.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of organization and storedInfoType to be updated,
-   *   for example `organizations/433245324/storedInfoTypes/432452342` or
-   *   projects/project-id/storedInfoTypes/432452342.
-   * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
-   *   Updated configuration for the storedInfoType. If not provided, a new
-   *   version of the storedInfoType will be created with the existing
-   *   configuration.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.update_stored_info_type.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_UpdateStoredInfoType_async
-   */
+/**
+ * Updates the stored infoType by creating a new version. The existing version
+ * will continue to be used until the new version is ready.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of organization and storedInfoType to be updated,
+ *   for example `organizations/433245324/storedInfoTypes/432452342` or
+ *   projects/project-id/storedInfoTypes/432452342.
+ * @param {google.privacy.dlp.v2.StoredInfoTypeConfig} request.config
+ *   Updated configuration for the storedInfoType. If not provided, a new
+ *   version of the storedInfoType will be created with the existing
+ *   configuration.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Mask to control which fields get updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.update_stored_info_type.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_UpdateStoredInfoType_async
+ */
   updateStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|undefined, {}|undefined
+      ]>;
   updateStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IStoredInfoType,
-          | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateStoredInfoType(
+      request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateStoredInfoType(
+      request?: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateStoredInfoType request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IStoredInfoType,
-          | protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateStoredInfoType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateStoredInfoType(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IStoredInfoType,
-          protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateStoredInfoType response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateStoredInfoType(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateStoredInfoType response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a stored infoType.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the organization and storedInfoType to be read,
-   *   for example `organizations/433245324/storedInfoTypes/432452342` or
-   *   projects/project-id/storedInfoTypes/432452342.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_stored_info_type.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetStoredInfoType_async
-   */
+/**
+ * Gets a stored infoType.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the organization and storedInfoType to be read,
+ *   for example `organizations/433245324/storedInfoTypes/432452342` or
+ *   projects/project-id/storedInfoTypes/432452342.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_stored_info_type.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetStoredInfoType_async
+ */
   getStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|undefined, {}|undefined
+      ]>;
   getStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IStoredInfoType,
-          | protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType,
-      protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStoredInfoType(
+      request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStoredInfoType(
+      request?: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IStoredInfoType,
+          protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getStoredInfoType request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IStoredInfoType,
-          | protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getStoredInfoType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getStoredInfoType(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IStoredInfoType,
-          protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getStoredInfoType response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getStoredInfoType(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IStoredInfoType,
+        protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getStoredInfoType response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a stored infoType.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the organization and storedInfoType to be
-   *   deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
-   *   projects/project-id/storedInfoTypes/432452342.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_stored_info_type.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteStoredInfoType_async
-   */
+/**
+ * Deletes a stored infoType.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the organization and storedInfoType to be
+ *   deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
+ *   projects/project-id/storedInfoTypes/432452342.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_stored_info_type.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteStoredInfoType_async
+ */
   deleteStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|undefined, {}|undefined
+      ]>;
   deleteStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteStoredInfoType(
-    request?: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteStoredInfoType(
+      request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteStoredInfoType(
+      request?: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteStoredInfoType request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteStoredInfoType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteStoredInfoType(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteStoredInfoType response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteStoredInfoType(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteStoredInfoType response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a project data profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name, for example
-   *   `organizations/12345/locations/us/projectDataProfiles/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_project_data_profile.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetProjectDataProfile_async
-   */
+/**
+ * Gets a project data profile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name, for example
+ *   `organizations/12345/locations/us/projectDataProfiles/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_project_data_profile.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetProjectDataProfile_async
+ */
   getProjectDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IProjectDataProfile,
-      protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IProjectDataProfile,
+        protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|undefined, {}|undefined
+      ]>;
   getProjectDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IProjectDataProfile,
-      | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProjectDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IProjectDataProfile,
-      | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProjectDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IProjectDataProfile,
-          | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IProjectDataProfile,
-      | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IProjectDataProfile,
-      protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProjectDataProfile(
+      request: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IProjectDataProfile,
+          protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProjectDataProfile(
+      request?: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IProjectDataProfile,
+          protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IProjectDataProfile,
+          protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IProjectDataProfile,
+        protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getProjectDataProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IProjectDataProfile,
-          | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IProjectDataProfile,
+        protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProjectDataProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getProjectDataProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IProjectDataProfile,
-          (
-            | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getProjectDataProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getProjectDataProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IProjectDataProfile,
+        protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getProjectDataProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a file store data profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name, for example
-   *   `organizations/12345/locations/us/fileStoreDataProfiles/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_file_store_data_profile.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetFileStoreDataProfile_async
-   */
+/**
+ * Gets a file store data profile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name, for example
+ *   `organizations/12345/locations/us/fileStoreDataProfiles/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_file_store_data_profile.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetFileStoreDataProfile_async
+ */
   getFileStoreDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-      protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+        protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|undefined, {}|undefined
+      ]>;
   getFileStoreDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-      | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFileStoreDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-      | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFileStoreDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-          | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-      | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-      protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFileStoreDataProfile(
+      request: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+          protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFileStoreDataProfile(
+      request?: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+          protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+          protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+        protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getFileStoreDataProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-          | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+        protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFileStoreDataProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getFileStoreDataProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IFileStoreDataProfile,
-          (
-            | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getFileStoreDataProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getFileStoreDataProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+        protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getFileStoreDataProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Delete a FileStoreDataProfile. Will not prevent the profile from being
-   * regenerated if the resource is still included in a discovery configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the file store data profile.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_file_store_data_profile.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteFileStoreDataProfile_async
-   */
+/**
+ * Delete a FileStoreDataProfile. Will not prevent the profile from being
+ * regenerated if the resource is still included in a discovery configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the file store data profile.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_file_store_data_profile.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteFileStoreDataProfile_async
+ */
   deleteFileStoreDataProfile(
-    request?: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|undefined, {}|undefined
+      ]>;
   deleteFileStoreDataProfile(
-    request: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteFileStoreDataProfile(
-    request: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteFileStoreDataProfile(
-    request?: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteFileStoreDataProfile(
+      request: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteFileStoreDataProfile(
+      request?: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteFileStoreDataProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteFileStoreDataProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteFileStoreDataProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteFileStoreDataProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteFileStoreDataProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteFileStoreDataProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a table data profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name, for example
-   *   `organizations/12345/locations/us/tableDataProfiles/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_table_data_profile.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetTableDataProfile_async
-   */
+/**
+ * Gets a table data profile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name, for example
+ *   `organizations/12345/locations/us/tableDataProfiles/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_table_data_profile.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetTableDataProfile_async
+ */
   getTableDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.ITableDataProfile,
-      protos.google.privacy.dlp.v2.IGetTableDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.ITableDataProfile,
+        protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|undefined, {}|undefined
+      ]>;
   getTableDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.ITableDataProfile,
-      | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTableDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.ITableDataProfile,
-      | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTableDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.ITableDataProfile,
-          | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.ITableDataProfile,
-      | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.ITableDataProfile,
-      protos.google.privacy.dlp.v2.IGetTableDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTableDataProfile(
+      request: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.ITableDataProfile,
+          protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTableDataProfile(
+      request?: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.ITableDataProfile,
+          protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.ITableDataProfile,
+          protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.ITableDataProfile,
+        protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTableDataProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.ITableDataProfile,
-          | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.ITableDataProfile,
+        protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTableDataProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTableDataProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.ITableDataProfile,
-          protos.google.privacy.dlp.v2.IGetTableDataProfileRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTableDataProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTableDataProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.ITableDataProfile,
+        protos.google.privacy.dlp.v2.IGetTableDataProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTableDataProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a column data profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name, for example
-   *   `organizations/12345/locations/us/columnDataProfiles/53234423`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_column_data_profile.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetColumnDataProfile_async
-   */
+/**
+ * Gets a column data profile.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name, for example
+ *   `organizations/12345/locations/us/columnDataProfiles/53234423`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_column_data_profile.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetColumnDataProfile_async
+ */
   getColumnDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IColumnDataProfile,
-      protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IColumnDataProfile,
+        protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|undefined, {}|undefined
+      ]>;
   getColumnDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IColumnDataProfile,
-      | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getColumnDataProfile(
-    request: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IColumnDataProfile,
-      | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getColumnDataProfile(
-    request?: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IColumnDataProfile,
-          | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IColumnDataProfile,
-      | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IColumnDataProfile,
-      protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getColumnDataProfile(
+      request: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IColumnDataProfile,
+          protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getColumnDataProfile(
+      request?: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IColumnDataProfile,
+          protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IColumnDataProfile,
+          protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IColumnDataProfile,
+        protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getColumnDataProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IColumnDataProfile,
-          | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IColumnDataProfile,
+        protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getColumnDataProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getColumnDataProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IColumnDataProfile,
-          protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getColumnDataProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getColumnDataProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IColumnDataProfile,
+        protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getColumnDataProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Delete a TableDataProfile. Will not prevent the profile from being
-   * regenerated if the table is still included in a discovery configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the table data profile.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_table_data_profile.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteTableDataProfile_async
-   */
+/**
+ * Delete a TableDataProfile. Will not prevent the profile from being
+ * regenerated if the table is still included in a discovery configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the table data profile.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_table_data_profile.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteTableDataProfile_async
+ */
   deleteTableDataProfile(
-    request?: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|undefined, {}|undefined
+      ]>;
   deleteTableDataProfile(
-    request: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTableDataProfile(
-    request: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTableDataProfile(
-    request?: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTableDataProfile(
+      request: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTableDataProfile(
+      request?: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteTableDataProfile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTableDataProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteTableDataProfile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTableDataProfile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteTableDataProfile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteTableDataProfile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Inspect hybrid content and store findings to a job.
-   * To review the findings, inspect the job. Inspection will occur
-   * asynchronously.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the job to execute a hybrid inspect on, for
-   *   example `projects/dlp-test-project/dlpJob/53234423`.
-   * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
-   *   The item to inspect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.HybridInspectResponse|HybridInspectResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_HybridInspectDlpJob_async
-   */
+/**
+ * Inspect hybrid content and store findings to a job.
+ * To review the findings, inspect the job. Inspection will occur
+ * asynchronously.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the job to execute a hybrid inspect on, for
+ *   example `projects/dlp-test-project/dlpJob/53234423`.
+ * @param {google.privacy.dlp.v2.HybridContentItem} request.hybridItem
+ *   The item to inspect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.HybridInspectResponse|HybridInspectResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_HybridInspectDlpJob_async
+ */
   hybridInspectDlpJob(
-    request?: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|undefined, {}|undefined
+      ]>;
   hybridInspectDlpJob(
-    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  hybridInspectDlpJob(
-    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  hybridInspectDlpJob(
-    request?: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IHybridInspectResponse,
-          | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IHybridInspectResponse,
-      protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  hybridInspectDlpJob(
+      request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  hybridInspectDlpJob(
+      request?: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IHybridInspectResponse,
+          protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('hybridInspectDlpJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IHybridInspectResponse,
-          | protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('hybridInspectDlpJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .hybridInspectDlpJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IHybridInspectResponse,
-          protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('hybridInspectDlpJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.hybridInspectDlpJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IHybridInspectResponse,
+        protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('hybridInspectDlpJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Finish a running hybrid DlpJob. Triggers the finalization steps and running
-   * of any enabled actions that have not yet run.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the DlpJob resource to be finished.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.finish_dlp_job.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_FinishDlpJob_async
-   */
+/**
+ * Finish a running hybrid DlpJob. Triggers the finalization steps and running
+ * of any enabled actions that have not yet run.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the DlpJob resource to be finished.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.finish_dlp_job.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_FinishDlpJob_async
+ */
   finishDlpJob(
-    request?: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IFinishDlpJobRequest|undefined, {}|undefined
+      ]>;
   finishDlpJob(
-    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  finishDlpJob(
-    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  finishDlpJob(
-    request?: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IFinishDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  finishDlpJob(
+      request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IFinishDlpJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  finishDlpJob(
+      request?: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IFinishDlpJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IFinishDlpJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IFinishDlpJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('finishDlpJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IFinishDlpJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IFinishDlpJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('finishDlpJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .finishDlpJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IFinishDlpJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('finishDlpJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.finishDlpJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IFinishDlpJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('finishDlpJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Create a Connection to an external data source.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization):
-   *
-   *   + Projects scope:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Organizations scope:
-   *     `organizations/{org_id}/locations/{location_id}`
-   * @param {google.privacy.dlp.v2.Connection} request.connection
-   *   Required. The connection resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.create_connection.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_CreateConnection_async
-   */
+/**
+ * Create a Connection to an external data source.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization):
+ *
+ *   + Projects scope:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Organizations scope:
+ *     `organizations/{org_id}/locations/{location_id}`
+ * @param {google.privacy.dlp.v2.Connection} request.connection
+ *   Required. The connection resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.create_connection.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_CreateConnection_async
+ */
   createConnection(
-    request?: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.ICreateConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.ICreateConnectionRequest|undefined, {}|undefined
+      ]>;
   createConnection(
-    request: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.ICreateConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConnection(
-    request: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.ICreateConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConnection(
-    request?: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IConnection,
-          | protos.google.privacy.dlp.v2.ICreateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.ICreateConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.ICreateConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createConnection(
+      request: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createConnection(
+      request?: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.ICreateConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IConnection,
-          | protos.google.privacy.dlp.v2.ICreateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.ICreateConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IConnection,
-          protos.google.privacy.dlp.v2.ICreateConnectionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.ICreateConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get a Connection by name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name in the format:
-   *   `projects/{project}/locations/{location}/connections/{connection}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.get_connection.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_GetConnection_async
-   */
+/**
+ * Get a Connection by name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name in the format:
+ *   `projects/{project}/locations/{location}/connections/{connection}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.get_connection.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_GetConnection_async
+ */
   getConnection(
-    request?: protos.google.privacy.dlp.v2.IGetConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IGetConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IGetConnectionRequest|undefined, {}|undefined
+      ]>;
   getConnection(
-    request: protos.google.privacy.dlp.v2.IGetConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request: protos.google.privacy.dlp.v2.IGetConnectionRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request?: protos.google.privacy.dlp.v2.IGetConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IConnection,
-          protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IGetConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request?: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IGetConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IConnection,
-          protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IGetConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IConnection,
-          protos.google.privacy.dlp.v2.IGetConnectionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IGetConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Delete a Connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the Connection to be deleted, in the format:
-   *   `projects/{project}/locations/{location}/connections/{connection}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.delete_connection.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_DeleteConnection_async
-   */
+/**
+ * Delete a Connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the Connection to be deleted, in the format:
+ *   `projects/{project}/locations/{location}/connections/{connection}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.delete_connection.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_DeleteConnection_async
+ */
   deleteConnection(
-    request?: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteConnectionRequest|undefined, {}|undefined
+      ]>;
   deleteConnection(
-    request: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConnection(
-    request: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConnection(
-    request?: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConnection(
+      request: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConnection(
+      request?: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.privacy.dlp.v2.IDeleteConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.privacy.dlp.v2.IDeleteConnectionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.privacy.dlp.v2.IDeleteConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update a Connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name in the format:
-   *   `projects/{project}/locations/{location}/connections/{connection}`.
-   * @param {google.privacy.dlp.v2.Connection} request.connection
-   *   Required. The connection with new values for the relevant fields.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.update_connection.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_UpdateConnection_async
-   */
+/**
+ * Update a Connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name in the format:
+ *   `projects/{project}/locations/{location}/connections/{connection}`.
+ * @param {google.privacy.dlp.v2.Connection} request.connection
+ *   Required. The connection with new values for the relevant fields.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Mask to control which fields get updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.update_connection.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_UpdateConnection_async
+ */
   updateConnection(
-    request?: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IUpdateConnectionRequest|undefined, {}|undefined
+      ]>;
   updateConnection(
-    request: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConnection(
-    request: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
-    callback: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConnection(
-    request?: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.privacy.dlp.v2.IConnection,
-          | protos.google.privacy.dlp.v2.IUpdateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection,
-      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConnection(
+      request: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+      callback: Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConnection(
+      request?: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IUpdateConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.privacy.dlp.v2.IConnection,
-          | protos.google.privacy.dlp.v2.IUpdateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IUpdateConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.privacy.dlp.v2.IConnection,
-          protos.google.privacy.dlp.v2.IUpdateConnectionRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.privacy.dlp.v2.IConnection,
+        protos.google.privacy.dlp.v2.IUpdateConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists InspectTemplates.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListInspectTemplates`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the template was created.
-   *   - `update_time`: corresponds to the time the template was last updated.
-   *   - `name`: corresponds to the template's name.
-   *   - `display_name`: corresponds to the template's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listInspectTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists InspectTemplates.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListInspectTemplates`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the template was created.
+ *   - `update_time`: corresponds to the time the template was last updated.
+ *   - `name`: corresponds to the template's name.
+ *   - `display_name`: corresponds to the template's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listInspectTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInspectTemplates(
-    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate[],
-      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate[],
+        protos.google.privacy.dlp.v2.IListInspectTemplatesRequest|null,
+        protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      ]>;
   listInspectTemplates(
-    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-      | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IInspectTemplate
-    >
-  ): void;
-  listInspectTemplates(
-    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-      | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IInspectTemplate
-    >
-  ): void;
-  listInspectTemplates(
-    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-          | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IInspectTemplate
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-      | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IInspectTemplate
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IInspectTemplate[],
-      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListInspectTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IInspectTemplate>): void;
+  listInspectTemplates(
+      request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+          protos.google.privacy.dlp.v2.IListInspectTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IInspectTemplate>): void;
+  listInspectTemplates(
+      request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+          protos.google.privacy.dlp.v2.IListInspectTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IInspectTemplate>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+          protos.google.privacy.dlp.v2.IListInspectTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IInspectTemplate>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IInspectTemplate[],
+        protos.google.privacy.dlp.v2.IListInspectTemplatesRequest|null,
+        protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-          | protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IInspectTemplate
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      protos.google.privacy.dlp.v2.IListInspectTemplatesResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IInspectTemplate>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInspectTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6259,93 +5150,90 @@ export class DlpServiceClient {
     this._log.info('listInspectTemplates request %j', request);
     return this.innerApiCalls
       .listInspectTemplates(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IInspectTemplate[],
-          protos.google.privacy.dlp.v2.IListInspectTemplatesRequest | null,
-          protos.google.privacy.dlp.v2.IListInspectTemplatesResponse,
-        ]) => {
-          this._log.info('listInspectTemplates values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IInspectTemplate[],
+        protos.google.privacy.dlp.v2.IListInspectTemplatesRequest|null,
+        protos.google.privacy.dlp.v2.IListInspectTemplatesResponse
+      ]) => {
+        this._log.info('listInspectTemplates values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listInspectTemplates`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListInspectTemplates`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the template was created.
-   *   - `update_time`: corresponds to the time the template was last updated.
-   *   - `name`: corresponds to the template's name.
-   *   - `display_name`: corresponds to the template's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listInspectTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listInspectTemplates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListInspectTemplates`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the template was created.
+ *   - `update_time`: corresponds to the time the template was last updated.
+ *   - `name`: corresponds to the template's name.
+ *   - `display_name`: corresponds to the template's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listInspectTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInspectTemplatesStream(
-    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInspectTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInspectTemplates stream %j', request);
     return this.descriptors.page.listInspectTemplates.createStream(
       this.innerApiCalls.listInspectTemplates as GaxCall,
@@ -6354,84 +5242,83 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listInspectTemplates`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListInspectTemplates`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the template was created.
-   *   - `update_time`: corresponds to the time the template was last updated.
-   *   - `name`: corresponds to the template's name.
-   *   - `display_name`: corresponds to the template's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_inspect_templates.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListInspectTemplates_async
-   */
+/**
+ * Equivalent to `listInspectTemplates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListInspectTemplates`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the template was created.
+ *   - `update_time`: corresponds to the time the template was last updated.
+ *   - `name`: corresponds to the template's name.
+ *   - `display_name`: corresponds to the template's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.InspectTemplate|InspectTemplate}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_inspect_templates.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListInspectTemplates_async
+ */
   listInspectTemplatesAsync(
-    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate> {
+      request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInspectTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInspectTemplates iterate %j', request);
     return this.descriptors.page.listInspectTemplates.asyncIterate(
       this.innerApiCalls['listInspectTemplates'] as GaxCall,
@@ -6439,152 +5326,127 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate>;
   }
-  /**
-   * Lists DeidentifyTemplates.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListDeidentifyTemplates`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the template was created.
-   *   - `update_time`: corresponds to the time the template was last updated.
-   *   - `name`: corresponds to the template's name.
-   *   - `display_name`: corresponds to the template's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDeidentifyTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists DeidentifyTemplates.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListDeidentifyTemplates`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the template was created.
+ *   - `update_time`: corresponds to the time the template was last updated.
+ *   - `name`: corresponds to the template's name.
+ *   - `display_name`: corresponds to the template's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeidentifyTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeidentifyTemplates(
-    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
+        protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest|null,
+        protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      ]>;
   listDeidentifyTemplates(
-    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-      | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate
-    >
-  ): void;
-  listDeidentifyTemplates(
-    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-      | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate
-    >
-  ): void;
-  listDeidentifyTemplates(
-    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-          | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-      | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate>): void;
+  listDeidentifyTemplates(
+      request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate>): void;
+  listDeidentifyTemplates(
+      request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDeidentifyTemplate>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
+        protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest|null,
+        protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-          | protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IDeidentifyTemplate>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeidentifyTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6593,93 +5455,90 @@ export class DlpServiceClient {
     this._log.info('listDeidentifyTemplates request %j', request);
     return this.innerApiCalls
       .listDeidentifyTemplates(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
-          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest | null,
-          protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse,
-        ]) => {
-          this._log.info('listDeidentifyTemplates values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IDeidentifyTemplate[],
+        protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest|null,
+        protos.google.privacy.dlp.v2.IListDeidentifyTemplatesResponse
+      ]) => {
+        this._log.info('listDeidentifyTemplates values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDeidentifyTemplates`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListDeidentifyTemplates`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the template was created.
-   *   - `update_time`: corresponds to the time the template was last updated.
-   *   - `name`: corresponds to the template's name.
-   *   - `display_name`: corresponds to the template's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDeidentifyTemplatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDeidentifyTemplates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListDeidentifyTemplates`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the template was created.
+ *   - `update_time`: corresponds to the time the template was last updated.
+ *   - `name`: corresponds to the template's name.
+ *   - `display_name`: corresponds to the template's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeidentifyTemplatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeidentifyTemplatesStream(
-    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeidentifyTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeidentifyTemplates stream %j', request);
     return this.descriptors.page.listDeidentifyTemplates.createStream(
       this.innerApiCalls.listDeidentifyTemplates as GaxCall,
@@ -6688,84 +5547,83 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDeidentifyTemplates`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *   + Organizations scope, location specified:
-   *     `organizations/{org_id}/locations/{location_id}`
-   *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/{org_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListDeidentifyTemplates`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the template was created.
-   *   - `update_time`: corresponds to the time the template was last updated.
-   *   - `name`: corresponds to the template's name.
-   *   - `display_name`: corresponds to the template's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_deidentify_templates.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListDeidentifyTemplates_async
-   */
+/**
+ * Equivalent to `listDeidentifyTemplates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *   + Organizations scope, location specified:
+ *     `organizations/{org_id}/locations/{location_id}`
+ *   + Organizations scope, no location specified (defaults to global):
+ *     `organizations/{org_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListDeidentifyTemplates`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the template was created.
+ *   - `update_time`: corresponds to the time the template was last updated.
+ *   - `name`: corresponds to the template's name.
+ *   - `display_name`: corresponds to the template's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.DeidentifyTemplate|DeidentifyTemplate}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_deidentify_templates.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListDeidentifyTemplates_async
+ */
   listDeidentifyTemplatesAsync(
-    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate> {
+      request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeidentifyTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeidentifyTemplates iterate %j', request);
     return this.descriptors.page.listDeidentifyTemplates.asyncIterate(
       this.innerApiCalls['listDeidentifyTemplates'] as GaxCall,
@@ -6773,171 +5631,152 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate>;
   }
-  /**
-   * Lists job triggers.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to ListJobTriggers. `order_by` field must not
-   *   change for subsequent calls.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by a server.
-   * @param {string} request.orderBy
-   *   Comma-separated list of triggeredJob fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the JobTrigger was created.
-   *   - `update_time`: corresponds to the time the JobTrigger was last updated.
-   *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
-   *   - `name`: corresponds to the JobTrigger's name.
-   *   - `display_name`: corresponds to the JobTrigger's display name.
-   *   - `status`: corresponds to JobTrigger's status.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values for inspect triggers:
-   *       - `status` - HEALTHY|PAUSED|CANCELLED
-   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-   *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
-   *       quotation marks. Nanoseconds are ignored.
-   *       - 'error_count' - Number of errors that have occurred while running.
-   *   * The operator must be `=` or `!=` for status and inspected_storage.
-   *
-   *   Examples:
-   *
-   *   * inspected_storage = cloud_storage AND status = HEALTHY
-   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
-   *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
-   *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {google.privacy.dlp.v2.DlpJobType} request.type
-   *   The type of jobs. Will use `DlpJobType.INSPECT` if not set.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listJobTriggersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists job triggers.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to ListJobTriggers. `order_by` field must not
+ *   change for subsequent calls.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by a server.
+ * @param {string} request.orderBy
+ *   Comma-separated list of triggeredJob fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the JobTrigger was created.
+ *   - `update_time`: corresponds to the time the JobTrigger was last updated.
+ *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
+ *   - `name`: corresponds to the JobTrigger's name.
+ *   - `display_name`: corresponds to the JobTrigger's display name.
+ *   - `status`: corresponds to JobTrigger's status.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values for inspect triggers:
+ *       - `status` - HEALTHY|PAUSED|CANCELLED
+ *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+ *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+ *       quotation marks. Nanoseconds are ignored.
+ *       - 'error_count' - Number of errors that have occurred while running.
+ *   * The operator must be `=` or `!=` for status and inspected_storage.
+ *
+ *   Examples:
+ *
+ *   * inspected_storage = cloud_storage AND status = HEALTHY
+ *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+ *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+ *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {google.privacy.dlp.v2.DlpJobType} request.type
+ *   The type of jobs. Will use `DlpJobType.INSPECT` if not set.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listJobTriggersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listJobTriggers(
-    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger[],
-      protos.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protos.google.privacy.dlp.v2.IListJobTriggersResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger[],
+        protos.google.privacy.dlp.v2.IListJobTriggersRequest|null,
+        protos.google.privacy.dlp.v2.IListJobTriggersResponse
+      ]>;
   listJobTriggers(
-    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-      protos.google.privacy.dlp.v2.IListJobTriggersResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IJobTrigger
-    >
-  ): void;
-  listJobTriggers(
-    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-      protos.google.privacy.dlp.v2.IListJobTriggersResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IJobTrigger
-    >
-  ): void;
-  listJobTriggers(
-    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-          | protos.google.privacy.dlp.v2.IListJobTriggersResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IJobTrigger
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-      protos.google.privacy.dlp.v2.IListJobTriggersResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IJobTrigger
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IJobTrigger[],
-      protos.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-      protos.google.privacy.dlp.v2.IListJobTriggersResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListJobTriggersResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IJobTrigger>): void;
+  listJobTriggers(
+      request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+          protos.google.privacy.dlp.v2.IListJobTriggersResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IJobTrigger>): void;
+  listJobTriggers(
+      request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+          protos.google.privacy.dlp.v2.IListJobTriggersResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IJobTrigger>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+          protos.google.privacy.dlp.v2.IListJobTriggersResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IJobTrigger>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IJobTrigger[],
+        protos.google.privacy.dlp.v2.IListJobTriggersRequest|null,
+        protos.google.privacy.dlp.v2.IListJobTriggersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-          | protos.google.privacy.dlp.v2.IListJobTriggersResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IJobTrigger
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      protos.google.privacy.dlp.v2.IListJobTriggersResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IJobTrigger>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listJobTriggers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6946,118 +5785,115 @@ export class DlpServiceClient {
     this._log.info('listJobTriggers request %j', request);
     return this.innerApiCalls
       .listJobTriggers(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IJobTrigger[],
-          protos.google.privacy.dlp.v2.IListJobTriggersRequest | null,
-          protos.google.privacy.dlp.v2.IListJobTriggersResponse,
-        ]) => {
-          this._log.info('listJobTriggers values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IJobTrigger[],
+        protos.google.privacy.dlp.v2.IListJobTriggersRequest|null,
+        protos.google.privacy.dlp.v2.IListJobTriggersResponse
+      ]) => {
+        this._log.info('listJobTriggers values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listJobTriggers`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to ListJobTriggers. `order_by` field must not
-   *   change for subsequent calls.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by a server.
-   * @param {string} request.orderBy
-   *   Comma-separated list of triggeredJob fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the JobTrigger was created.
-   *   - `update_time`: corresponds to the time the JobTrigger was last updated.
-   *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
-   *   - `name`: corresponds to the JobTrigger's name.
-   *   - `display_name`: corresponds to the JobTrigger's display name.
-   *   - `status`: corresponds to JobTrigger's status.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values for inspect triggers:
-   *       - `status` - HEALTHY|PAUSED|CANCELLED
-   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-   *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
-   *       quotation marks. Nanoseconds are ignored.
-   *       - 'error_count' - Number of errors that have occurred while running.
-   *   * The operator must be `=` or `!=` for status and inspected_storage.
-   *
-   *   Examples:
-   *
-   *   * inspected_storage = cloud_storage AND status = HEALTHY
-   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
-   *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
-   *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {google.privacy.dlp.v2.DlpJobType} request.type
-   *   The type of jobs. Will use `DlpJobType.INSPECT` if not set.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listJobTriggersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listJobTriggers`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to ListJobTriggers. `order_by` field must not
+ *   change for subsequent calls.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by a server.
+ * @param {string} request.orderBy
+ *   Comma-separated list of triggeredJob fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the JobTrigger was created.
+ *   - `update_time`: corresponds to the time the JobTrigger was last updated.
+ *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
+ *   - `name`: corresponds to the JobTrigger's name.
+ *   - `display_name`: corresponds to the JobTrigger's display name.
+ *   - `status`: corresponds to JobTrigger's status.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values for inspect triggers:
+ *       - `status` - HEALTHY|PAUSED|CANCELLED
+ *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+ *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+ *       quotation marks. Nanoseconds are ignored.
+ *       - 'error_count' - Number of errors that have occurred while running.
+ *   * The operator must be `=` or `!=` for status and inspected_storage.
+ *
+ *   Examples:
+ *
+ *   * inspected_storage = cloud_storage AND status = HEALTHY
+ *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+ *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+ *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {google.privacy.dlp.v2.DlpJobType} request.type
+ *   The type of jobs. Will use `DlpJobType.INSPECT` if not set.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listJobTriggersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listJobTriggersStream(
-    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listJobTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listJobTriggers stream %j', request);
     return this.descriptors.page.listJobTriggers.createStream(
       this.innerApiCalls.listJobTriggers as GaxCall,
@@ -7066,109 +5902,108 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listJobTriggers`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to ListJobTriggers. `order_by` field must not
-   *   change for subsequent calls.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by a server.
-   * @param {string} request.orderBy
-   *   Comma-separated list of triggeredJob fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the JobTrigger was created.
-   *   - `update_time`: corresponds to the time the JobTrigger was last updated.
-   *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
-   *   - `name`: corresponds to the JobTrigger's name.
-   *   - `display_name`: corresponds to the JobTrigger's display name.
-   *   - `status`: corresponds to JobTrigger's status.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values for inspect triggers:
-   *       - `status` - HEALTHY|PAUSED|CANCELLED
-   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-   *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
-   *       quotation marks. Nanoseconds are ignored.
-   *       - 'error_count' - Number of errors that have occurred while running.
-   *   * The operator must be `=` or `!=` for status and inspected_storage.
-   *
-   *   Examples:
-   *
-   *   * inspected_storage = cloud_storage AND status = HEALTHY
-   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
-   *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
-   *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {google.privacy.dlp.v2.DlpJobType} request.type
-   *   The type of jobs. Will use `DlpJobType.INSPECT` if not set.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_job_triggers.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListJobTriggers_async
-   */
+/**
+ * Equivalent to `listJobTriggers`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to ListJobTriggers. `order_by` field must not
+ *   change for subsequent calls.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by a server.
+ * @param {string} request.orderBy
+ *   Comma-separated list of triggeredJob fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the JobTrigger was created.
+ *   - `update_time`: corresponds to the time the JobTrigger was last updated.
+ *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
+ *   - `name`: corresponds to the JobTrigger's name.
+ *   - `display_name`: corresponds to the JobTrigger's display name.
+ *   - `status`: corresponds to JobTrigger's status.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values for inspect triggers:
+ *       - `status` - HEALTHY|PAUSED|CANCELLED
+ *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+ *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+ *       quotation marks. Nanoseconds are ignored.
+ *       - 'error_count' - Number of errors that have occurred while running.
+ *   * The operator must be `=` or `!=` for status and inspected_storage.
+ *
+ *   Examples:
+ *
+ *   * inspected_storage = cloud_storage AND status = HEALTHY
+ *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+ *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+ *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {google.privacy.dlp.v2.DlpJobType} request.type
+ *   The type of jobs. Will use `DlpJobType.INSPECT` if not set.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.JobTrigger|JobTrigger}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_job_triggers.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListJobTriggers_async
+ */
   listJobTriggersAsync(
-    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger> {
+      request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listJobTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listJobTriggers iterate %j', request);
     return this.descriptors.page.listJobTriggers.asyncIterate(
       this.innerApiCalls['listJobTriggers'] as GaxCall,
@@ -7176,136 +6011,111 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger>;
   }
-  /**
-   * Lists discovery configurations.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value is as follows:
-   *   `projects/{project_id}/locations/{location_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to ListDiscoveryConfigs. `order_by` field must not
-   *   change for subsequent calls.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by a server.
-   * @param {string} request.orderBy
-   *   Comma-separated list of config fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
-   *   - `name`: corresponds to the DiscoveryConfig's name.
-   *   - `status`: corresponds to DiscoveryConfig's status.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDiscoveryConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists discovery configurations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value is as follows:
+ *   `projects/{project_id}/locations/{location_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to ListDiscoveryConfigs. `order_by` field must not
+ *   change for subsequent calls.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by a server.
+ * @param {string} request.orderBy
+ *   Comma-separated list of config fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+ *   - `name`: corresponds to the DiscoveryConfig's name.
+ *   - `status`: corresponds to DiscoveryConfig's status.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDiscoveryConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDiscoveryConfigs(
-    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig[],
-      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest | null,
-      protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig[],
+        protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest|null,
+        protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
+      ]>;
   listDiscoveryConfigs(
-    request: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-      | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IDiscoveryConfig
-    >
-  ): void;
-  listDiscoveryConfigs(
-    request: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-      | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IDiscoveryConfig
-    >
-  ): void;
-  listDiscoveryConfigs(
-    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-          | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IDiscoveryConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-      | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IDiscoveryConfig
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDiscoveryConfig[],
-      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest | null,
-      protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDiscoveryConfig>): void;
+  listDiscoveryConfigs(
+      request: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDiscoveryConfig>): void;
+  listDiscoveryConfigs(
+      request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDiscoveryConfig>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+          protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDiscoveryConfig>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDiscoveryConfig[],
+        protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest|null,
+        protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-          | protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IDiscoveryConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IDiscoveryConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDiscoveryConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7314,80 +6124,77 @@ export class DlpServiceClient {
     this._log.info('listDiscoveryConfigs request %j', request);
     return this.innerApiCalls
       .listDiscoveryConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IDiscoveryConfig[],
-          protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest | null,
-          protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse,
-        ]) => {
-          this._log.info('listDiscoveryConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IDiscoveryConfig[],
+        protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest|null,
+        protos.google.privacy.dlp.v2.IListDiscoveryConfigsResponse
+      ]) => {
+        this._log.info('listDiscoveryConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDiscoveryConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value is as follows:
-   *   `projects/{project_id}/locations/{location_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to ListDiscoveryConfigs. `order_by` field must not
-   *   change for subsequent calls.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by a server.
-   * @param {string} request.orderBy
-   *   Comma-separated list of config fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
-   *   - `name`: corresponds to the DiscoveryConfig's name.
-   *   - `status`: corresponds to DiscoveryConfig's status.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDiscoveryConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDiscoveryConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value is as follows:
+ *   `projects/{project_id}/locations/{location_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to ListDiscoveryConfigs. `order_by` field must not
+ *   change for subsequent calls.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by a server.
+ * @param {string} request.orderBy
+ *   Comma-separated list of config fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+ *   - `name`: corresponds to the DiscoveryConfig's name.
+ *   - `status`: corresponds to DiscoveryConfig's status.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDiscoveryConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDiscoveryConfigsStream(
-    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDiscoveryConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDiscoveryConfigs stream %j', request);
     return this.descriptors.page.listDiscoveryConfigs.createStream(
       this.innerApiCalls.listDiscoveryConfigs as GaxCall,
@@ -7396,71 +6203,70 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDiscoveryConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value is as follows:
-   *   `projects/{project_id}/locations/{location_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to ListDiscoveryConfigs. `order_by` field must not
-   *   change for subsequent calls.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by a server.
-   * @param {string} request.orderBy
-   *   Comma-separated list of config fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc,update_time, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
-   *   - `name`: corresponds to the DiscoveryConfig's name.
-   *   - `status`: corresponds to DiscoveryConfig's status.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_discovery_configs.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListDiscoveryConfigs_async
-   */
+/**
+ * Equivalent to `listDiscoveryConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value is as follows:
+ *   `projects/{project_id}/locations/{location_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to ListDiscoveryConfigs. `order_by` field must not
+ *   change for subsequent calls.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by a server.
+ * @param {string} request.orderBy
+ *   Comma-separated list of config fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `last_run_time`: corresponds to the last time the DiscoveryConfig ran.
+ *   - `name`: corresponds to the DiscoveryConfig's name.
+ *   - `status`: corresponds to DiscoveryConfig's status.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.DiscoveryConfig|DiscoveryConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_discovery_configs.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListDiscoveryConfigs_async
+ */
   listDiscoveryConfigsAsync(
-    request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IDiscoveryConfig> {
+      request?: protos.google.privacy.dlp.v2.IListDiscoveryConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IDiscoveryConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDiscoveryConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDiscoveryConfigs iterate %j', request);
     return this.descriptors.page.listDiscoveryConfigs.asyncIterate(
       this.innerApiCalls['listDiscoveryConfigs'] as GaxCall,
@@ -7468,169 +6274,154 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IDiscoveryConfig>;
   }
-  /**
-   * Lists DlpJobs that match the specified filter in the request.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
-   * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values for inspect jobs:
-   *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
-   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-   *       - `trigger_name` - The name of the trigger that created the job.
-   *       - 'end_time` - Corresponds to the time the job finished.
-   *       - 'start_time` - Corresponds to the time the job finished.
-   *   * Supported fields for risk analysis jobs:
-   *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
-   *       - 'end_time` - Corresponds to the time the job finished.
-   *       - 'start_time` - Corresponds to the time the job finished.
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * inspected_storage = cloud_storage AND state = done
-   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
-   *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
-   *   * end_time > \"2017-12-12T00:00:00+00:00\"
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   * @param {google.privacy.dlp.v2.DlpJobType} request.type
-   *   The type of job. Defaults to `DlpJobType.INSPECT`
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc, end_time asc, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the job was created.
-   *   - `end_time`: corresponds to the time the job ended.
-   *   - `name`: corresponds to the job's name.
-   *   - `state`: corresponds to `state`
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDlpJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists DlpJobs that match the specified filter in the request.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+ * and
+ * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values for inspect jobs:
+ *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
+ *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+ *       - `trigger_name` - The name of the trigger that created the job.
+ *       - 'end_time` - Corresponds to the time the job finished.
+ *       - 'start_time` - Corresponds to the time the job finished.
+ *   * Supported fields for risk analysis jobs:
+ *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
+ *       - 'end_time` - Corresponds to the time the job finished.
+ *       - 'start_time` - Corresponds to the time the job finished.
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * inspected_storage = cloud_storage AND state = done
+ *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+ *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
+ *   * end_time > \"2017-12-12T00:00:00+00:00\"
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ * @param {google.privacy.dlp.v2.DlpJobType} request.type
+ *   The type of job. Defaults to `DlpJobType.INSPECT`
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, end_time asc, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the job was created.
+ *   - `end_time`: corresponds to the time the job ended.
+ *   - `name`: corresponds to the job's name.
+ *   - `state`: corresponds to `state`
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDlpJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDlpJobs(
-    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob[],
-      protos.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protos.google.privacy.dlp.v2.IListDlpJobsResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob[],
+        protos.google.privacy.dlp.v2.IListDlpJobsRequest|null,
+        protos.google.privacy.dlp.v2.IListDlpJobsResponse
+      ]>;
   listDlpJobs(
-    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-      protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IDlpJob
-    >
-  ): void;
-  listDlpJobs(
-    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-      protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IDlpJob
-    >
-  ): void;
-  listDlpJobs(
-    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-          protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
-          protos.google.privacy.dlp.v2.IDlpJob
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-      protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IDlpJob
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IDlpJob[],
-      protos.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-      protos.google.privacy.dlp.v2.IListDlpJobsResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListDlpJobsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDlpJob>): void;
+  listDlpJobs(
+      request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+          protos.google.privacy.dlp.v2.IListDlpJobsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDlpJob>): void;
+  listDlpJobs(
+      request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+          protos.google.privacy.dlp.v2.IListDlpJobsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDlpJob>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+          protos.google.privacy.dlp.v2.IListDlpJobsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IDlpJob>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IDlpJob[],
+        protos.google.privacy.dlp.v2.IListDlpJobsRequest|null,
+        protos.google.privacy.dlp.v2.IListDlpJobsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-          protos.google.privacy.dlp.v2.IListDlpJobsResponse | null | undefined,
-          protos.google.privacy.dlp.v2.IDlpJob
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      protos.google.privacy.dlp.v2.IListDlpJobsResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IDlpJob>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDlpJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7639,118 +6430,115 @@ export class DlpServiceClient {
     this._log.info('listDlpJobs request %j', request);
     return this.innerApiCalls
       .listDlpJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IDlpJob[],
-          protos.google.privacy.dlp.v2.IListDlpJobsRequest | null,
-          protos.google.privacy.dlp.v2.IListDlpJobsResponse,
-        ]) => {
-          this._log.info('listDlpJobs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IDlpJob[],
+        protos.google.privacy.dlp.v2.IListDlpJobsRequest|null,
+        protos.google.privacy.dlp.v2.IListDlpJobsResponse
+      ]) => {
+        this._log.info('listDlpJobs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDlpJobs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values for inspect jobs:
-   *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
-   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-   *       - `trigger_name` - The name of the trigger that created the job.
-   *       - 'end_time` - Corresponds to the time the job finished.
-   *       - 'start_time` - Corresponds to the time the job finished.
-   *   * Supported fields for risk analysis jobs:
-   *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
-   *       - 'end_time` - Corresponds to the time the job finished.
-   *       - 'start_time` - Corresponds to the time the job finished.
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * inspected_storage = cloud_storage AND state = done
-   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
-   *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
-   *   * end_time > \"2017-12-12T00:00:00+00:00\"
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   * @param {google.privacy.dlp.v2.DlpJobType} request.type
-   *   The type of job. Defaults to `DlpJobType.INSPECT`
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc, end_time asc, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the job was created.
-   *   - `end_time`: corresponds to the time the job ended.
-   *   - `name`: corresponds to the job's name.
-   *   - `state`: corresponds to `state`
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDlpJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDlpJobs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values for inspect jobs:
+ *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
+ *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+ *       - `trigger_name` - The name of the trigger that created the job.
+ *       - 'end_time` - Corresponds to the time the job finished.
+ *       - 'start_time` - Corresponds to the time the job finished.
+ *   * Supported fields for risk analysis jobs:
+ *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
+ *       - 'end_time` - Corresponds to the time the job finished.
+ *       - 'start_time` - Corresponds to the time the job finished.
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * inspected_storage = cloud_storage AND state = done
+ *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+ *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
+ *   * end_time > \"2017-12-12T00:00:00+00:00\"
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ * @param {google.privacy.dlp.v2.DlpJobType} request.type
+ *   The type of job. Defaults to `DlpJobType.INSPECT`
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, end_time asc, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the job was created.
+ *   - `end_time`: corresponds to the time the job ended.
+ *   - `name`: corresponds to the job's name.
+ *   - `state`: corresponds to `state`
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDlpJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDlpJobsStream(
-    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDlpJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDlpJobs stream %j', request);
     return this.descriptors.page.listDlpJobs.createStream(
       this.innerApiCalls.listDlpJobs as GaxCall,
@@ -7759,109 +6547,108 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDlpJobs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on whether you have [specified a
-   *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values for inspect jobs:
-   *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
-   *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-   *       - `trigger_name` - The name of the trigger that created the job.
-   *       - 'end_time` - Corresponds to the time the job finished.
-   *       - 'start_time` - Corresponds to the time the job finished.
-   *   * Supported fields for risk analysis jobs:
-   *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
-   *       - 'end_time` - Corresponds to the time the job finished.
-   *       - 'start_time` - Corresponds to the time the job finished.
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * inspected_storage = cloud_storage AND state = done
-   *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
-   *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
-   *   * end_time > \"2017-12-12T00:00:00+00:00\"
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   * @param {google.privacy.dlp.v2.DlpJobType} request.type
-   *   The type of job. Defaults to `DlpJobType.INSPECT`
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc, end_time asc, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the job was created.
-   *   - `end_time`: corresponds to the time the job ended.
-   *   - `name`: corresponds to the job's name.
-   *   - `state`: corresponds to `state`
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_dlp_jobs.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListDlpJobs_async
-   */
+/**
+ * Equivalent to `listDlpJobs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on whether you have [specified a
+ *   processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values for inspect jobs:
+ *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
+ *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+ *       - `trigger_name` - The name of the trigger that created the job.
+ *       - 'end_time` - Corresponds to the time the job finished.
+ *       - 'start_time` - Corresponds to the time the job finished.
+ *   * Supported fields for risk analysis jobs:
+ *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
+ *       - 'end_time` - Corresponds to the time the job finished.
+ *       - 'start_time` - Corresponds to the time the job finished.
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * inspected_storage = cloud_storage AND state = done
+ *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+ *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
+ *   * end_time > \"2017-12-12T00:00:00+00:00\"
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ * @param {google.privacy.dlp.v2.DlpJobType} request.type
+ *   The type of job. Defaults to `DlpJobType.INSPECT`
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, end_time asc, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the job was created.
+ *   - `end_time`: corresponds to the time the job ended.
+ *   - `name`: corresponds to the job's name.
+ *   - `state`: corresponds to `state`
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.DlpJob|DlpJob}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_dlp_jobs.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListDlpJobs_async
+ */
   listDlpJobsAsync(
-    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob> {
+      request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDlpJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDlpJobs iterate %j', request);
     return this.descriptors.page.listDlpJobs.asyncIterate(
       this.innerApiCalls['listDlpJobs'] as GaxCall,
@@ -7869,149 +6656,124 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob>;
   }
-  /**
-   * Lists stored infoTypes.
-   * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
-   * to learn more.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListStoredInfoTypes`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc, display_name, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the most recent version of the
-   *   resource was created.
-   *   - `state`: corresponds to the state of the resource.
-   *   - `name`: corresponds to resource name.
-   *   - `display_name`: corresponds to info type's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listStoredInfoTypesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists stored infoTypes.
+ * See
+ * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+ * to learn more.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListStoredInfoTypes`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, display_name, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the most recent version of the
+ *   resource was created.
+ *   - `state`: corresponds to the state of the resource.
+ *   - `name`: corresponds to resource name.
+ *   - `display_name`: corresponds to info type's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listStoredInfoTypesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listStoredInfoTypes(
-    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType[],
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType[],
+        protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest|null,
+        protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      ]>;
   listStoredInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-      | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IStoredInfoType
-    >
-  ): void;
-  listStoredInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-      | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IStoredInfoType
-    >
-  ): void;
-  listStoredInfoTypes(
-    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-          | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IStoredInfoType
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-      | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IStoredInfoType
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IStoredInfoType[],
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IStoredInfoType>): void;
+  listStoredInfoTypes(
+      request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IStoredInfoType>): void;
+  listStoredInfoTypes(
+      request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IStoredInfoType>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+          protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IStoredInfoType>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IStoredInfoType[],
+        protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest|null,
+        protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-          | protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IStoredInfoType
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IStoredInfoType>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listStoredInfoTypes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8020,90 +6782,87 @@ export class DlpServiceClient {
     this._log.info('listStoredInfoTypes request %j', request);
     return this.innerApiCalls
       .listStoredInfoTypes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IStoredInfoType[],
-          protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest | null,
-          protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse,
-        ]) => {
-          this._log.info('listStoredInfoTypes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IStoredInfoType[],
+        protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest|null,
+        protos.google.privacy.dlp.v2.IListStoredInfoTypesResponse
+      ]) => {
+        this._log.info('listStoredInfoTypes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listStoredInfoTypes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListStoredInfoTypes`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc, display_name, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the most recent version of the
-   *   resource was created.
-   *   - `state`: corresponds to the state of the resource.
-   *   - `name`: corresponds to resource name.
-   *   - `display_name`: corresponds to info type's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listStoredInfoTypesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listStoredInfoTypes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListStoredInfoTypes`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, display_name, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the most recent version of the
+ *   resource was created.
+ *   - `state`: corresponds to the state of the resource.
+ *   - `name`: corresponds to resource name.
+ *   - `display_name`: corresponds to info type's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listStoredInfoTypesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listStoredInfoTypesStream(
-    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listStoredInfoTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listStoredInfoTypes stream %j', request);
     return this.descriptors.page.listStoredInfoTypes.createStream(
       this.innerApiCalls.listStoredInfoTypes as GaxCall,
@@ -8112,81 +6871,80 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listStoredInfoTypes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *
-   *   The format of this value varies depending on the scope of the request
-   *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *
-   *   + Projects scope, location specified:
-   *     `projects/{project_id}/locations/{location_id}`
-   *   + Projects scope, no location specified (defaults to global):
-   *     `projects/{project_id}`
-   *
-   *   The following example `parent` string specifies a parent project with the
-   *   identifier `example-project`, and specifies the `europe-west3` location
-   *   for processing data:
-   *
-   *       parent=projects/example-project/locations/europe-west3
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval. Comes from the previous call
-   *   to `ListStoredInfoTypes`.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by,
-   *   followed by `asc` or `desc` postfix. This list is case insensitive. The
-   *   default sorting order is ascending. Redundant space characters are
-   *   insignificant.
-   *
-   *   Example: `name asc, display_name, create_time desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `create_time`: corresponds to the time the most recent version of the
-   *   resource was created.
-   *   - `state`: corresponds to the state of the resource.
-   *   - `name`: corresponds to resource name.
-   *   - `display_name`: corresponds to info type's display name.
-   * @param {string} request.locationId
-   *   Deprecated. This field has no effect.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_stored_info_types.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListStoredInfoTypes_async
-   */
+/**
+ * Equivalent to `listStoredInfoTypes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *
+ *   The format of this value varies depending on the scope of the request
+ *   (project or organization) and whether you have [specified a processing
+ *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+ *
+ *   + Projects scope, location specified:
+ *     `projects/{project_id}/locations/{location_id}`
+ *   + Projects scope, no location specified (defaults to global):
+ *     `projects/{project_id}`
+ *
+ *   The following example `parent` string specifies a parent project with the
+ *   identifier `example-project`, and specifies the `europe-west3` location
+ *   for processing data:
+ *
+ *       parent=projects/example-project/locations/europe-west3
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval. Comes from the previous call
+ *   to `ListStoredInfoTypes`.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case insensitive. The
+ *   default sorting order is ascending. Redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, display_name, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to the time the most recent version of the
+ *   resource was created.
+ *   - `state`: corresponds to the state of the resource.
+ *   - `name`: corresponds to resource name.
+ *   - `display_name`: corresponds to info type's display name.
+ * @param {string} request.locationId
+ *   Deprecated. This field has no effect.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.StoredInfoType|StoredInfoType}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_stored_info_types.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListStoredInfoTypes_async
+ */
   listStoredInfoTypesAsync(
-    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType> {
+      request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listStoredInfoTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listStoredInfoTypes iterate %j', request);
     return this.descriptors.page.listStoredInfoTypes.asyncIterate(
       this.innerApiCalls['listStoredInfoTypes'] as GaxCall,
@@ -8194,152 +6952,127 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType>;
   }
-  /**
-   * Lists project data profiles for an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. organizations/{org_id}/locations/{loc_id}
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *   * `project_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: Google Cloud project ID
-   *   - `sensitivity_level`: How sensitive the data in a project is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listProjectDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists project data profiles for an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. organizations/{org_id}/locations/{loc_id}
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *   * `project_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: Google Cloud project ID
+ *   - `sensitivity_level`: How sensitive the data in a project is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listProjectDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listProjectDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IProjectDataProfile[],
-      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IProjectDataProfile[],
+        protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
+      ]>;
   listProjectDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IProjectDataProfile
-    >
-  ): void;
-  listProjectDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IProjectDataProfile
-    >
-  ): void;
-  listProjectDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IProjectDataProfile
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IProjectDataProfile
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IProjectDataProfile[],
-      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IProjectDataProfile>): void;
+  listProjectDataProfiles(
+      request: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IProjectDataProfile>): void;
+  listProjectDataProfiles(
+      request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IProjectDataProfile>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IProjectDataProfile>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IProjectDataProfile[],
+        protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IProjectDataProfile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IProjectDataProfile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProjectDataProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8348,96 +7081,93 @@ export class DlpServiceClient {
     this._log.info('listProjectDataProfiles request %j', request);
     return this.innerApiCalls
       .listProjectDataProfiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IProjectDataProfile[],
-          protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest | null,
-          protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse,
-        ]) => {
-          this._log.info('listProjectDataProfiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IProjectDataProfile[],
+        protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
+      ]) => {
+        this._log.info('listProjectDataProfiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listProjectDataProfiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. organizations/{org_id}/locations/{loc_id}
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *   * `project_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: Google Cloud project ID
-   *   - `sensitivity_level`: How sensitive the data in a project is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listProjectDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listProjectDataProfiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. organizations/{org_id}/locations/{loc_id}
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *   * `project_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: Google Cloud project ID
+ *   - `sensitivity_level`: How sensitive the data in a project is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listProjectDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listProjectDataProfilesStream(
-    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listProjectDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listProjectDataProfiles stream %j', request);
     return this.descriptors.page.listProjectDataProfiles.createStream(
       this.innerApiCalls.listProjectDataProfiles as GaxCall,
@@ -8446,87 +7176,86 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listProjectDataProfiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. organizations/{org_id}/locations/{loc_id}
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *   * `project_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: Google Cloud project ID
-   *   - `sensitivity_level`: How sensitive the data in a project is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_project_data_profiles.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListProjectDataProfiles_async
-   */
+/**
+ * Equivalent to `listProjectDataProfiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. organizations/{org_id}/locations/{loc_id}
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *   * `project_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: Google Cloud project ID
+ *   - `sensitivity_level`: How sensitive the data in a project is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_project_data_profiles.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListProjectDataProfiles_async
+ */
   listProjectDataProfilesAsync(
-    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IProjectDataProfile> {
+      request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IProjectDataProfile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listProjectDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listProjectDataProfiles iterate %j', request);
     return this.descriptors.page.listProjectDataProfiles.asyncIterate(
       this.innerApiCalls['listProjectDataProfiles'] as GaxCall,
@@ -8534,165 +7263,140 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IProjectDataProfile>;
   }
-  /**
-   * Lists table data profiles for an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *   * `project_id asc`
-   *   * `table_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `dataset_id`: The ID of a BigQuery dataset.
-   *   - `table_id`: The ID of a BigQuery table.
-   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   *   - `last_modified`: The last time the resource was modified.
-   *   - `resource_visibility`: Visibility restriction for this resource.
-   *   - `row_count`: Number of rows in this resource.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `project_id` - The Google Cloud project ID.
-   *       - `dataset_id` - The BigQuery dataset ID.
-   *       - `table_id` - The ID of the BigQuery table.
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `resource_visibility`: PUBLIC|RESTRICTED
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTableDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists table data profiles for an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *   * `project_id asc`
+ *   * `table_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `dataset_id`: The ID of a BigQuery dataset.
+ *   - `table_id`: The ID of a BigQuery table.
+ *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ *   - `last_modified`: The last time the resource was modified.
+ *   - `resource_visibility`: Visibility restriction for this resource.
+ *   - `row_count`: Number of rows in this resource.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `project_id` - The Google Cloud project ID.
+ *       - `dataset_id` - The BigQuery dataset ID.
+ *       - `table_id` - The ID of the BigQuery table.
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `resource_visibility`: PUBLIC|RESTRICTED
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTableDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTableDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.ITableDataProfile[],
-      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListTableDataProfilesResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.ITableDataProfile[],
+        protos.google.privacy.dlp.v2.IListTableDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
+      ]>;
   listTableDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.ITableDataProfile
-    >
-  ): void;
-  listTableDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.ITableDataProfile
-    >
-  ): void;
-  listTableDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.ITableDataProfile
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.ITableDataProfile
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.ITableDataProfile[],
-      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListTableDataProfilesResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListTableDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.ITableDataProfile>): void;
+  listTableDataProfiles(
+      request: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListTableDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.ITableDataProfile>): void;
+  listTableDataProfiles(
+      request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListTableDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.ITableDataProfile>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListTableDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.ITableDataProfile>):
+      Promise<[
+        protos.google.privacy.dlp.v2.ITableDataProfile[],
+        protos.google.privacy.dlp.v2.IListTableDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.ITableDataProfile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      protos.google.privacy.dlp.v2.IListTableDataProfilesResponse|null|undefined,
+      protos.google.privacy.dlp.v2.ITableDataProfile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTableDataProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8701,109 +7405,106 @@ export class DlpServiceClient {
     this._log.info('listTableDataProfiles request %j', request);
     return this.innerApiCalls
       .listTableDataProfiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.ITableDataProfile[],
-          protos.google.privacy.dlp.v2.IListTableDataProfilesRequest | null,
-          protos.google.privacy.dlp.v2.IListTableDataProfilesResponse,
-        ]) => {
-          this._log.info('listTableDataProfiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.ITableDataProfile[],
+        protos.google.privacy.dlp.v2.IListTableDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
+      ]) => {
+        this._log.info('listTableDataProfiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTableDataProfiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *   * `project_id asc`
-   *   * `table_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `dataset_id`: The ID of a BigQuery dataset.
-   *   - `table_id`: The ID of a BigQuery table.
-   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   *   - `last_modified`: The last time the resource was modified.
-   *   - `resource_visibility`: Visibility restriction for this resource.
-   *   - `row_count`: Number of rows in this resource.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `project_id` - The Google Cloud project ID.
-   *       - `dataset_id` - The BigQuery dataset ID.
-   *       - `table_id` - The ID of the BigQuery table.
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `resource_visibility`: PUBLIC|RESTRICTED
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTableDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTableDataProfiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *   * `project_id asc`
+ *   * `table_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `dataset_id`: The ID of a BigQuery dataset.
+ *   - `table_id`: The ID of a BigQuery table.
+ *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ *   - `last_modified`: The last time the resource was modified.
+ *   - `resource_visibility`: Visibility restriction for this resource.
+ *   - `row_count`: Number of rows in this resource.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `project_id` - The Google Cloud project ID.
+ *       - `dataset_id` - The BigQuery dataset ID.
+ *       - `table_id` - The ID of the BigQuery table.
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `resource_visibility`: PUBLIC|RESTRICTED
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTableDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTableDataProfilesStream(
-    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTableDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTableDataProfiles stream %j', request);
     return this.descriptors.page.listTableDataProfiles.createStream(
       this.innerApiCalls.listTableDataProfiles as GaxCall,
@@ -8812,100 +7513,99 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listTableDataProfiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *   * `project_id asc`
-   *   * `table_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `dataset_id`: The ID of a BigQuery dataset.
-   *   - `table_id`: The ID of a BigQuery table.
-   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   *   - `last_modified`: The last time the resource was modified.
-   *   - `resource_visibility`: Visibility restriction for this resource.
-   *   - `row_count`: Number of rows in this resource.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `project_id` - The Google Cloud project ID.
-   *       - `dataset_id` - The BigQuery dataset ID.
-   *       - `table_id` - The ID of the BigQuery table.
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `resource_visibility`: PUBLIC|RESTRICTED
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_table_data_profiles.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListTableDataProfiles_async
-   */
+/**
+ * Equivalent to `listTableDataProfiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *   * `project_id asc`
+ *   * `table_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `dataset_id`: The ID of a BigQuery dataset.
+ *   - `table_id`: The ID of a BigQuery table.
+ *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ *   - `last_modified`: The last time the resource was modified.
+ *   - `resource_visibility`: Visibility restriction for this resource.
+ *   - `row_count`: Number of rows in this resource.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `project_id` - The Google Cloud project ID.
+ *       - `dataset_id` - The BigQuery dataset ID.
+ *       - `table_id` - The ID of the BigQuery table.
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `resource_visibility`: PUBLIC|RESTRICTED
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_table_data_profiles.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListTableDataProfiles_async
+ */
   listTableDataProfilesAsync(
-    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.ITableDataProfile> {
+      request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.ITableDataProfile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTableDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTableDataProfiles iterate %j', request);
     return this.descriptors.page.listTableDataProfiles.asyncIterate(
       this.innerApiCalls['listTableDataProfiles'] as GaxCall,
@@ -8913,167 +7613,142 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.ITableDataProfile>;
   }
-  /**
-   * Lists column data profiles for an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *
-   *   * `project_id asc`
-   *   * `table_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `dataset_id`: The ID of a BigQuery dataset.
-   *   - `table_id`: The ID of a BigQuery table.
-   *   - `sensitivity_level`: How sensitive the data in a column is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `table_data_profile_name` - The name of the related table data
-   *       profile.
-   *       - `project_id` - The Google Cloud project ID. (REQUIRED)
-   *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
-   *       - `table_id` - The BigQuery table ID. (REQUIRED)
-   *       - `field_id` - The ID of the BigQuery field.
-   *       - `info_type` - The infotype detected in the resource.
-   *       - `sensitivity_level` - HIGH|MEDIUM|LOW
-   *       - `data_risk_level`: How much risk is associated with this data.
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
-   *     filters also support `!=`.
-   *
-   *   Examples:
-   *
-   *   * project_id = 12345 AND status_code = 1
-   *   * project_id = 12345 AND sensitivity_level = HIGH
-   *   * project_id = 12345 AND info_type = STREET_ADDRESS
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listColumnDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists column data profiles for an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *
+ *   * `project_id asc`
+ *   * `table_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `dataset_id`: The ID of a BigQuery dataset.
+ *   - `table_id`: The ID of a BigQuery table.
+ *   - `sensitivity_level`: How sensitive the data in a column is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `table_data_profile_name` - The name of the related table data
+ *       profile.
+ *       - `project_id` - The Google Cloud project ID. (REQUIRED)
+ *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+ *       - `table_id` - The BigQuery table ID. (REQUIRED)
+ *       - `field_id` - The ID of the BigQuery field.
+ *       - `info_type` - The infotype detected in the resource.
+ *       - `sensitivity_level` - HIGH|MEDIUM|LOW
+ *       - `data_risk_level`: How much risk is associated with this data.
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
+ *     filters also support `!=`.
+ *
+ *   Examples:
+ *
+ *   * project_id = 12345 AND status_code = 1
+ *   * project_id = 12345 AND sensitivity_level = HIGH
+ *   * project_id = 12345 AND info_type = STREET_ADDRESS
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listColumnDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listColumnDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IColumnDataProfile[],
-      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IColumnDataProfile[],
+        protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
+      ]>;
   listColumnDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IColumnDataProfile
-    >
-  ): void;
-  listColumnDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IColumnDataProfile
-    >
-  ): void;
-  listColumnDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IColumnDataProfile
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IColumnDataProfile
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IColumnDataProfile[],
-      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IColumnDataProfile>): void;
+  listColumnDataProfiles(
+      request: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IColumnDataProfile>): void;
+  listColumnDataProfiles(
+      request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IColumnDataProfile>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IColumnDataProfile>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IColumnDataProfile[],
+        protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IColumnDataProfile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IColumnDataProfile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listColumnDataProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -9082,111 +7757,108 @@ export class DlpServiceClient {
     this._log.info('listColumnDataProfiles request %j', request);
     return this.innerApiCalls
       .listColumnDataProfiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IColumnDataProfile[],
-          protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest | null,
-          protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse,
-        ]) => {
-          this._log.info('listColumnDataProfiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IColumnDataProfile[],
+        protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
+      ]) => {
+        this._log.info('listColumnDataProfiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listColumnDataProfiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *
-   *   * `project_id asc`
-   *   * `table_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `dataset_id`: The ID of a BigQuery dataset.
-   *   - `table_id`: The ID of a BigQuery table.
-   *   - `sensitivity_level`: How sensitive the data in a column is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `table_data_profile_name` - The name of the related table data
-   *       profile.
-   *       - `project_id` - The Google Cloud project ID. (REQUIRED)
-   *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
-   *       - `table_id` - The BigQuery table ID. (REQUIRED)
-   *       - `field_id` - The ID of the BigQuery field.
-   *       - `info_type` - The infotype detected in the resource.
-   *       - `sensitivity_level` - HIGH|MEDIUM|LOW
-   *       - `data_risk_level`: How much risk is associated with this data.
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
-   *     filters also support `!=`.
-   *
-   *   Examples:
-   *
-   *   * project_id = 12345 AND status_code = 1
-   *   * project_id = 12345 AND sensitivity_level = HIGH
-   *   * project_id = 12345 AND info_type = STREET_ADDRESS
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listColumnDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listColumnDataProfiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *
+ *   * `project_id asc`
+ *   * `table_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `dataset_id`: The ID of a BigQuery dataset.
+ *   - `table_id`: The ID of a BigQuery table.
+ *   - `sensitivity_level`: How sensitive the data in a column is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `table_data_profile_name` - The name of the related table data
+ *       profile.
+ *       - `project_id` - The Google Cloud project ID. (REQUIRED)
+ *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+ *       - `table_id` - The BigQuery table ID. (REQUIRED)
+ *       - `field_id` - The ID of the BigQuery field.
+ *       - `info_type` - The infotype detected in the resource.
+ *       - `sensitivity_level` - HIGH|MEDIUM|LOW
+ *       - `data_risk_level`: How much risk is associated with this data.
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
+ *     filters also support `!=`.
+ *
+ *   Examples:
+ *
+ *   * project_id = 12345 AND status_code = 1
+ *   * project_id = 12345 AND sensitivity_level = HIGH
+ *   * project_id = 12345 AND info_type = STREET_ADDRESS
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listColumnDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listColumnDataProfilesStream(
-    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listColumnDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listColumnDataProfiles stream %j', request);
     return this.descriptors.page.listColumnDataProfiles.createStream(
       this.innerApiCalls.listColumnDataProfiles as GaxCall,
@@ -9195,102 +7867,101 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listColumnDataProfiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} request.pageToken
-   *   Page token to continue retrieval.
-   * @param {number} request.pageSize
-   *   Size of the page. This value can be limited by the server. If zero, server
-   *   returns a page of max size 100.
-   * @param {string} request.orderBy
-   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
-   *   postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *
-   *   * `project_id asc`
-   *   * `table_id`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `dataset_id`: The ID of a BigQuery dataset.
-   *   - `table_id`: The ID of a BigQuery table.
-   *   - `sensitivity_level`: How sensitive the data in a column is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   * @param {string} request.filter
-   *   Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `table_data_profile_name` - The name of the related table data
-   *       profile.
-   *       - `project_id` - The Google Cloud project ID. (REQUIRED)
-   *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
-   *       - `table_id` - The BigQuery table ID. (REQUIRED)
-   *       - `field_id` - The ID of the BigQuery field.
-   *       - `info_type` - The infotype detected in the resource.
-   *       - `sensitivity_level` - HIGH|MEDIUM|LOW
-   *       - `data_risk_level`: How much risk is associated with this data.
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
-   *     filters also support `!=`.
-   *
-   *   Examples:
-   *
-   *   * project_id = 12345 AND status_code = 1
-   *   * project_id = 12345 AND sensitivity_level = HIGH
-   *   * project_id = 12345 AND info_type = STREET_ADDRESS
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_column_data_profiles.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListColumnDataProfiles_async
-   */
+/**
+ * Equivalent to `listColumnDataProfiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} request.pageToken
+ *   Page token to continue retrieval.
+ * @param {number} request.pageSize
+ *   Size of the page. This value can be limited by the server. If zero, server
+ *   returns a page of max size 100.
+ * @param {string} request.orderBy
+ *   Comma-separated list of fields to order by, followed by `asc` or `desc`
+ *   postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *
+ *   * `project_id asc`
+ *   * `table_id`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `dataset_id`: The ID of a BigQuery dataset.
+ *   - `table_id`: The ID of a BigQuery table.
+ *   - `sensitivity_level`: How sensitive the data in a column is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ * @param {string} request.filter
+ *   Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `table_data_profile_name` - The name of the related table data
+ *       profile.
+ *       - `project_id` - The Google Cloud project ID. (REQUIRED)
+ *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+ *       - `table_id` - The BigQuery table ID. (REQUIRED)
+ *       - `field_id` - The ID of the BigQuery field.
+ *       - `info_type` - The infotype detected in the resource.
+ *       - `sensitivity_level` - HIGH|MEDIUM|LOW
+ *       - `data_risk_level`: How much risk is associated with this data.
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
+ *     filters also support `!=`.
+ *
+ *   Examples:
+ *
+ *   * project_id = 12345 AND status_code = 1
+ *   * project_id = 12345 AND sensitivity_level = HIGH
+ *   * project_id = 12345 AND info_type = STREET_ADDRESS
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_column_data_profiles.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListColumnDataProfiles_async
+ */
   listColumnDataProfilesAsync(
-    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IColumnDataProfile> {
+      request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IColumnDataProfile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listColumnDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listColumnDataProfiles iterate %j', request);
     return this.descriptors.page.listColumnDataProfiles.asyncIterate(
       this.innerApiCalls['listColumnDataProfiles'] as GaxCall,
@@ -9298,170 +7969,145 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IColumnDataProfile>;
   }
-  /**
-   * Lists file store data profiles for an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token to continue retrieval.
-   * @param {number} [request.pageSize]
-   *   Optional. Size of the page. This value can be limited by the server. If
-   *   zero, server returns a page of max size 100.
-   * @param {string} [request.orderBy]
-   *   Optional. Comma-separated list of fields to order by, followed by `asc` or
-   *   `desc` postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *
-   *   * `project_id asc`
-   *   * `name`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   *   - `last_modified`: The last time the resource was modified.
-   *   - `resource_visibility`: Visibility restriction for this resource.
-   *   - `name`: The name of the profile.
-   *   - `create_time`: The time the file store was first created.
-   * @param {string} [request.filter]
-   *   Optional. Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `project_id` - The Google Cloud project ID.
-   *       - `account_id` - The AWS account ID.
-   *       - `file_store_path` - The path like "gs://bucket".
-   *       - `data_source_type` - The profile's data source type, like
-   *       "google/storage/bucket".
-   *       - `data_storage_location` - The location where the file store's data is
-   *       stored, like "us-central1".
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `resource_visibility`: PUBLIC|RESTRICTED
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
-   *   * `file_store_path = "gs://mybucket"`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listFileStoreDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists file store data profiles for an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token to continue retrieval.
+ * @param {number} [request.pageSize]
+ *   Optional. Size of the page. This value can be limited by the server. If
+ *   zero, server returns a page of max size 100.
+ * @param {string} [request.orderBy]
+ *   Optional. Comma-separated list of fields to order by, followed by `asc` or
+ *   `desc` postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *
+ *   * `project_id asc`
+ *   * `name`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ *   - `last_modified`: The last time the resource was modified.
+ *   - `resource_visibility`: Visibility restriction for this resource.
+ *   - `name`: The name of the profile.
+ *   - `create_time`: The time the file store was first created.
+ * @param {string} [request.filter]
+ *   Optional. Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `project_id` - The Google Cloud project ID.
+ *       - `account_id` - The AWS account ID.
+ *       - `file_store_path` - The path like "gs://bucket".
+ *       - `data_source_type` - The profile's data source type, like
+ *       "google/storage/bucket".
+ *       - `data_storage_location` - The location where the file store's data is
+ *       stored, like "us-central1".
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `resource_visibility`: PUBLIC|RESTRICTED
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *   * `file_store_path = "gs://mybucket"`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listFileStoreDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFileStoreDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
-      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
+        protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
+      ]>;
   listFileStoreDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile
-    >
-  ): void;
-  listFileStoreDataProfiles(
-    request: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile
-    >
-  ): void;
-  listFileStoreDataProfiles(
-    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IFileStoreDataProfile
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-      | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
-      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest | null,
-      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile>): void;
+  listFileStoreDataProfiles(
+      request: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile>): void;
+  listFileStoreDataProfiles(
+      request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
+        protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-          | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IFileStoreDataProfile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFileStoreDataProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -9470,114 +8116,111 @@ export class DlpServiceClient {
     this._log.info('listFileStoreDataProfiles request %j', request);
     return this.innerApiCalls
       .listFileStoreDataProfiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
-          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest | null,
-          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse,
-        ]) => {
-          this._log.info('listFileStoreDataProfiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
+        protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest|null,
+        protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
+      ]) => {
+        this._log.info('listFileStoreDataProfiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listFileStoreDataProfiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token to continue retrieval.
-   * @param {number} [request.pageSize]
-   *   Optional. Size of the page. This value can be limited by the server. If
-   *   zero, server returns a page of max size 100.
-   * @param {string} [request.orderBy]
-   *   Optional. Comma-separated list of fields to order by, followed by `asc` or
-   *   `desc` postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *
-   *   * `project_id asc`
-   *   * `name`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   *   - `last_modified`: The last time the resource was modified.
-   *   - `resource_visibility`: Visibility restriction for this resource.
-   *   - `name`: The name of the profile.
-   *   - `create_time`: The time the file store was first created.
-   * @param {string} [request.filter]
-   *   Optional. Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `project_id` - The Google Cloud project ID.
-   *       - `account_id` - The AWS account ID.
-   *       - `file_store_path` - The path like "gs://bucket".
-   *       - `data_source_type` - The profile's data source type, like
-   *       "google/storage/bucket".
-   *       - `data_storage_location` - The location where the file store's data is
-   *       stored, like "us-central1".
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `resource_visibility`: PUBLIC|RESTRICTED
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
-   *   * `file_store_path = "gs://mybucket"`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listFileStoreDataProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listFileStoreDataProfiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token to continue retrieval.
+ * @param {number} [request.pageSize]
+ *   Optional. Size of the page. This value can be limited by the server. If
+ *   zero, server returns a page of max size 100.
+ * @param {string} [request.orderBy]
+ *   Optional. Comma-separated list of fields to order by, followed by `asc` or
+ *   `desc` postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *
+ *   * `project_id asc`
+ *   * `name`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ *   - `last_modified`: The last time the resource was modified.
+ *   - `resource_visibility`: Visibility restriction for this resource.
+ *   - `name`: The name of the profile.
+ *   - `create_time`: The time the file store was first created.
+ * @param {string} [request.filter]
+ *   Optional. Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `project_id` - The Google Cloud project ID.
+ *       - `account_id` - The AWS account ID.
+ *       - `file_store_path` - The path like "gs://bucket".
+ *       - `data_source_type` - The profile's data source type, like
+ *       "google/storage/bucket".
+ *       - `data_storage_location` - The location where the file store's data is
+ *       stored, like "us-central1".
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `resource_visibility`: PUBLIC|RESTRICTED
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *   * `file_store_path = "gs://mybucket"`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listFileStoreDataProfilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFileStoreDataProfilesStream(
-    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFileStoreDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFileStoreDataProfiles stream %j', request);
     return this.descriptors.page.listFileStoreDataProfiles.createStream(
       this.innerApiCalls.listFileStoreDataProfiles as GaxCall,
@@ -9586,105 +8229,104 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listFileStoreDataProfiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token to continue retrieval.
-   * @param {number} [request.pageSize]
-   *   Optional. Size of the page. This value can be limited by the server. If
-   *   zero, server returns a page of max size 100.
-   * @param {string} [request.orderBy]
-   *   Optional. Comma-separated list of fields to order by, followed by `asc` or
-   *   `desc` postfix. This list is case insensitive. The default sorting order is
-   *   ascending. Redundant space characters are insignificant. Only one order
-   *   field at a time is allowed.
-   *
-   *   Examples:
-   *
-   *   * `project_id asc`
-   *   * `name`
-   *   * `sensitivity_level desc`
-   *
-   *   Supported fields are:
-   *
-   *   - `project_id`: The Google Cloud project ID.
-   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
-   *   - `data_risk_level`: How much risk is associated with this data.
-   *   - `profile_last_generated`: When the profile was last updated in epoch
-   *   seconds.
-   *   - `last_modified`: The last time the resource was modified.
-   *   - `resource_visibility`: Visibility restriction for this resource.
-   *   - `name`: The name of the profile.
-   *   - `create_time`: The time the file store was first created.
-   * @param {string} [request.filter]
-   *   Optional. Allows filtering.
-   *
-   *   Supported syntax:
-   *
-   *   * Filter expressions are made up of one or more restrictions.
-   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
-   *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `{field} {operator} {value}`.
-   *   * Supported fields/values:
-   *       - `project_id` - The Google Cloud project ID.
-   *       - `account_id` - The AWS account ID.
-   *       - `file_store_path` - The path like "gs://bucket".
-   *       - `data_source_type` - The profile's data source type, like
-   *       "google/storage/bucket".
-   *       - `data_storage_location` - The location where the file store's data is
-   *       stored, like "us-central1".
-   *       - `sensitivity_level` - HIGH|MODERATE|LOW
-   *       - `data_risk_level` - HIGH|MODERATE|LOW
-   *       - `resource_visibility`: PUBLIC|RESTRICTED
-   *       - `status_code` - an RPC status code as defined in
-   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *   * The operator must be `=` or `!=`.
-   *
-   *   Examples:
-   *
-   *   * `project_id = 12345 AND status_code = 1`
-   *   * `project_id = 12345 AND sensitivity_level = HIGH`
-   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
-   *   * `file_store_path = "gs://mybucket"`
-   *
-   *   The length of this field should be no more than 500 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_file_store_data_profiles.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListFileStoreDataProfiles_async
-   */
+/**
+ * Equivalent to `listFileStoreDataProfiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token to continue retrieval.
+ * @param {number} [request.pageSize]
+ *   Optional. Size of the page. This value can be limited by the server. If
+ *   zero, server returns a page of max size 100.
+ * @param {string} [request.orderBy]
+ *   Optional. Comma-separated list of fields to order by, followed by `asc` or
+ *   `desc` postfix. This list is case insensitive. The default sorting order is
+ *   ascending. Redundant space characters are insignificant. Only one order
+ *   field at a time is allowed.
+ *
+ *   Examples:
+ *
+ *   * `project_id asc`
+ *   * `name`
+ *   * `sensitivity_level desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `project_id`: The Google Cloud project ID.
+ *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+ *   - `data_risk_level`: How much risk is associated with this data.
+ *   - `profile_last_generated`: When the profile was last updated in epoch
+ *   seconds.
+ *   - `last_modified`: The last time the resource was modified.
+ *   - `resource_visibility`: Visibility restriction for this resource.
+ *   - `name`: The name of the profile.
+ *   - `create_time`: The time the file store was first created.
+ * @param {string} [request.filter]
+ *   Optional. Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
+ *   * Supported fields/values:
+ *       - `project_id` - The Google Cloud project ID.
+ *       - `account_id` - The AWS account ID.
+ *       - `file_store_path` - The path like "gs://bucket".
+ *       - `data_source_type` - The profile's data source type, like
+ *       "google/storage/bucket".
+ *       - `data_storage_location` - The location where the file store's data is
+ *       stored, like "us-central1".
+ *       - `sensitivity_level` - HIGH|MODERATE|LOW
+ *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *       - `resource_visibility`: PUBLIC|RESTRICTED
+ *       - `status_code` - an RPC status code as defined in
+ *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *   * The operator must be `=` or `!=`.
+ *
+ *   Examples:
+ *
+ *   * `project_id = 12345 AND status_code = 1`
+ *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *   * `file_store_path = "gs://mybucket"`
+ *
+ *   The length of this field should be no more than 500 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_file_store_data_profiles.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListFileStoreDataProfiles_async
+ */
   listFileStoreDataProfilesAsync(
-    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IFileStoreDataProfile> {
+      request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IFileStoreDataProfile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFileStoreDataProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFileStoreDataProfiles iterate %j', request);
     return this.descriptors.page.listFileStoreDataProfiles.asyncIterate(
       this.innerApiCalls['listFileStoreDataProfiles'] as GaxCall,
@@ -9692,112 +8334,93 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IFileStoreDataProfile>;
   }
-  /**
-   * Lists Connections in a parent. Use SearchConnections to see all connections
-   * within an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example, `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results per page, max 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token from a previous page to return the next set of
-   *   results. If set, all other request fields must match the original request.
-   * @param {string} [request.filter]
-   *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.Connection|Connection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Connections in a parent. Use SearchConnections to see all connections
+ * within an organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example, `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results per page, max 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from a previous page to return the next set of
+ *   results. If set, all other request fields must match the original request.
+ * @param {string} [request.filter]
+ *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnections(
-    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection[],
-      protos.google.privacy.dlp.v2.IListConnectionsRequest | null,
-      protos.google.privacy.dlp.v2.IListConnectionsResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection[],
+        protos.google.privacy.dlp.v2.IListConnectionsRequest|null,
+        protos.google.privacy.dlp.v2.IListConnectionsResponse
+      ]>;
   listConnections(
-    request: protos.google.privacy.dlp.v2.IListConnectionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListConnectionsRequest,
-      protos.google.privacy.dlp.v2.IListConnectionsResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IConnection
-    >
-  ): void;
-  listConnections(
-    request: protos.google.privacy.dlp.v2.IListConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListConnectionsRequest,
-      protos.google.privacy.dlp.v2.IListConnectionsResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IConnection
-    >
-  ): void;
-  listConnections(
-    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.IListConnectionsRequest,
-          | protos.google.privacy.dlp.v2.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IConnection
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.IListConnectionsRequest,
-      protos.google.privacy.dlp.v2.IListConnectionsResponse | null | undefined,
-      protos.google.privacy.dlp.v2.IConnection
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection[],
-      protos.google.privacy.dlp.v2.IListConnectionsRequest | null,
-      protos.google.privacy.dlp.v2.IListConnectionsResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.IListConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>): void;
+  listConnections(
+      request: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListConnectionsRequest,
+          protos.google.privacy.dlp.v2.IListConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>): void;
+  listConnections(
+      request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.IListConnectionsRequest,
+          protos.google.privacy.dlp.v2.IListConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.IListConnectionsRequest,
+          protos.google.privacy.dlp.v2.IListConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection[],
+        protos.google.privacy.dlp.v2.IListConnectionsRequest|null,
+        protos.google.privacy.dlp.v2.IListConnectionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.IListConnectionsRequest,
-          | protos.google.privacy.dlp.v2.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IConnection
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      protos.google.privacy.dlp.v2.IListConnectionsResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IConnection>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -9806,61 +8429,58 @@ export class DlpServiceClient {
     this._log.info('listConnections request %j', request);
     return this.innerApiCalls
       .listConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IConnection[],
-          protos.google.privacy.dlp.v2.IListConnectionsRequest | null,
-          protos.google.privacy.dlp.v2.IListConnectionsResponse,
-        ]) => {
-          this._log.info('listConnections values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IConnection[],
+        protos.google.privacy.dlp.v2.IListConnectionsRequest|null,
+        protos.google.privacy.dlp.v2.IListConnectionsResponse
+      ]) => {
+        this._log.info('listConnections values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example, `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results per page, max 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token from a previous page to return the next set of
-   *   results. If set, all other request fields must match the original request.
-   * @param {string} [request.filter]
-   *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConnections`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example, `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results per page, max 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from a previous page to return the next set of
+ *   results. If set, all other request fields must match the original request.
+ * @param {string} [request.filter]
+ *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectionsStream(
-    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -9869,52 +8489,51 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project, for
-   *   example, `organizations/433245324/locations/europe` or
-   *   `projects/project-id/locations/asia`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results per page, max 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token from a previous page to return the next set of
-   *   results. If set, all other request fields must match the original request.
-   * @param {string} [request.filter]
-   *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.list_connections.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_ListConnections_async
-   */
+/**
+ * Equivalent to `listConnections`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project, for
+ *   example, `organizations/433245324/locations/europe` or
+ *   `projects/project-id/locations/asia`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results per page, max 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from a previous page to return the next set of
+ *   results. If set, all other request fields must match the original request.
+ * @param {string} [request.filter]
+ *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.list_connections.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_ListConnections_async
+ */
   listConnectionsAsync(
-    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IConnection> {
+      request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IConnection>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
@@ -9922,117 +8541,92 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IConnection>;
   }
-  /**
-   * Searches for Connections in a parent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project with a wildcard
-   *   location, for example, `organizations/433245324/locations/-` or
-   *   `projects/project-id/locations/-`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results per page, max 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token from a previous page to return the next set of
-   *   results. If set, all other request fields must match the original request.
-   * @param {string} [request.filter]
-   *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.Connection|Connection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches for Connections in a parent.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project with a wildcard
+ *   location, for example, `organizations/433245324/locations/-` or
+ *   `projects/project-id/locations/-`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results per page, max 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from a previous page to return the next set of
+ *   results. If set, all other request fields must match the original request.
+ * @param {string} [request.filter]
+ *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchConnections(
-    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection[],
-      protos.google.privacy.dlp.v2.ISearchConnectionsRequest | null,
-      protos.google.privacy.dlp.v2.ISearchConnectionsResponse,
-    ]
-  >;
+      request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection[],
+        protos.google.privacy.dlp.v2.ISearchConnectionsRequest|null,
+        protos.google.privacy.dlp.v2.ISearchConnectionsResponse
+      ]>;
   searchConnections(
-    request: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-      | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IConnection
-    >
-  ): void;
-  searchConnections(
-    request: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-      | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IConnection
-    >
-  ): void;
-  searchConnections(
-    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-          | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IConnection
-        >,
-    callback?: PaginationCallback<
-      protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-      | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
-      | null
-      | undefined,
-      protos.google.privacy.dlp.v2.IConnection
-    >
-  ): Promise<
-    [
-      protos.google.privacy.dlp.v2.IConnection[],
-      protos.google.privacy.dlp.v2.ISearchConnectionsRequest | null,
-      protos.google.privacy.dlp.v2.ISearchConnectionsResponse,
-    ]
-  > | void {
+          protos.google.privacy.dlp.v2.ISearchConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>): void;
+  searchConnections(
+      request: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      callback: PaginationCallback<
+          protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+          protos.google.privacy.dlp.v2.ISearchConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>): void;
+  searchConnections(
+      request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+          protos.google.privacy.dlp.v2.ISearchConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>,
+      callback?: PaginationCallback<
+          protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+          protos.google.privacy.dlp.v2.ISearchConnectionsResponse|null|undefined,
+          protos.google.privacy.dlp.v2.IConnection>):
+      Promise<[
+        protos.google.privacy.dlp.v2.IConnection[],
+        protos.google.privacy.dlp.v2.ISearchConnectionsRequest|null,
+        protos.google.privacy.dlp.v2.ISearchConnectionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-          | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
-          | null
-          | undefined,
-          protos.google.privacy.dlp.v2.IConnection
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      protos.google.privacy.dlp.v2.ISearchConnectionsResponse|null|undefined,
+      protos.google.privacy.dlp.v2.IConnection>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -10041,61 +8635,58 @@ export class DlpServiceClient {
     this._log.info('searchConnections request %j', request);
     return this.innerApiCalls
       .searchConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.privacy.dlp.v2.IConnection[],
-          protos.google.privacy.dlp.v2.ISearchConnectionsRequest | null,
-          protos.google.privacy.dlp.v2.ISearchConnectionsResponse,
-        ]) => {
-          this._log.info('searchConnections values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.privacy.dlp.v2.IConnection[],
+        protos.google.privacy.dlp.v2.ISearchConnectionsRequest|null,
+        protos.google.privacy.dlp.v2.ISearchConnectionsResponse
+      ]) => {
+        this._log.info('searchConnections values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchConnections`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project with a wildcard
-   *   location, for example, `organizations/433245324/locations/-` or
-   *   `projects/project-id/locations/-`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results per page, max 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token from a previous page to return the next set of
-   *   results. If set, all other request fields must match the original request.
-   * @param {string} [request.filter]
-   *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchConnections`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project with a wildcard
+ *   location, for example, `organizations/433245324/locations/-` or
+ *   `projects/project-id/locations/-`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results per page, max 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from a previous page to return the next set of
+ *   results. If set, all other request fields must match the original request.
+ * @param {string} [request.filter]
+ *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchConnectionsStream(
-    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchConnections stream %j', request);
     return this.descriptors.page.searchConnections.createStream(
       this.innerApiCalls.searchConnections as GaxCall,
@@ -10104,52 +8695,51 @@ export class DlpServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchConnections`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the organization or project with a wildcard
-   *   location, for example, `organizations/433245324/locations/-` or
-   *   `projects/project-id/locations/-`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results per page, max 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token from a previous page to return the next set of
-   *   results. If set, all other request fields must match the original request.
-   * @param {string} [request.filter]
-   *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.privacy.dlp.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/dlp_service.search_connections.js</caption>
-   * region_tag:dlp_v2_generated_DlpService_SearchConnections_async
-   */
+/**
+ * Equivalent to `searchConnections`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of the organization or project with a wildcard
+ *   location, for example, `organizations/433245324/locations/-` or
+ *   `projects/project-id/locations/-`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results per page, max 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token from a previous page to return the next set of
+ *   results. If set, all other request fields must match the original request.
+ * @param {string} [request.filter]
+ *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.privacy.dlp.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/dlp_service.search_connections.js</caption>
+ * region_tag:dlp_v2_generated_DlpService_SearchConnections_async
+ */
   searchConnectionsAsync(
-    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.privacy.dlp.v2.IConnection> {
+      request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.privacy.dlp.v2.IConnection>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchConnections iterate %j', request);
     return this.descriptors.page.searchConnections.asyncIterate(
       this.innerApiCalls['searchConnections'] as GaxCall,
@@ -10157,7 +8747,7 @@ export class DlpServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IConnection>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -10197,7 +8787,7 @@ export class DlpServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -10247,11 +8837,7 @@ export class DlpServiceClient {
    * @param {string} discovery_config
    * @returns {string} Resource name string.
    */
-  discoveryConfigPath(
-    project: string,
-    location: string,
-    discoveryConfig: string
-  ) {
+  discoveryConfigPath(project:string,location:string,discoveryConfig:string) {
     return this.pathTemplates.discoveryConfigPathTemplate.render({
       project: project,
       location: location,
@@ -10267,9 +8853,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDiscoveryConfigName(discoveryConfigName: string) {
-    return this.pathTemplates.discoveryConfigPathTemplate.match(
-      discoveryConfigName
-    ).project;
+    return this.pathTemplates.discoveryConfigPathTemplate.match(discoveryConfigName).project;
   }
 
   /**
@@ -10280,9 +8864,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDiscoveryConfigName(discoveryConfigName: string) {
-    return this.pathTemplates.discoveryConfigPathTemplate.match(
-      discoveryConfigName
-    ).location;
+    return this.pathTemplates.discoveryConfigPathTemplate.match(discoveryConfigName).location;
   }
 
   /**
@@ -10293,9 +8875,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the discovery_config.
    */
   matchDiscoveryConfigFromDiscoveryConfigName(discoveryConfigName: string) {
-    return this.pathTemplates.discoveryConfigPathTemplate.match(
-      discoveryConfigName
-    ).discovery_config;
+    return this.pathTemplates.discoveryConfigPathTemplate.match(discoveryConfigName).discovery_config;
   }
 
   /**
@@ -10306,7 +8886,7 @@ export class DlpServiceClient {
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  findingPath(project: string, location: string, finding: string) {
+  findingPath(project:string,location:string,finding:string) {
     return this.pathTemplates.findingPathTemplate.render({
       project: project,
       location: location,
@@ -10354,7 +8934,7 @@ export class DlpServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -10389,7 +8969,7 @@ export class DlpServiceClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -10403,8 +8983,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -10414,16 +8993,11 @@ export class DlpServiceClient {
    * @param {string} deidentify_template
    * @returns {string} Resource name string.
    */
-  organizationDeidentifyTemplatePath(
-    organization: string,
-    deidentifyTemplate: string
-  ) {
-    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.render(
-      {
-        organization: organization,
-        deidentify_template: deidentifyTemplate,
-      }
-    );
+  organizationDeidentifyTemplatePath(organization:string,deidentifyTemplate:string) {
+    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.render({
+      organization: organization,
+      deidentify_template: deidentifyTemplate,
+    });
   }
 
   /**
@@ -10433,12 +9007,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_deidentify_template resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationDeidentifyTemplateName(
-    organizationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.match(
-      organizationDeidentifyTemplateName
-    ).organization;
+  matchOrganizationFromOrganizationDeidentifyTemplateName(organizationDeidentifyTemplateName: string) {
+    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.match(organizationDeidentifyTemplateName).organization;
   }
 
   /**
@@ -10448,12 +9018,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_deidentify_template resource.
    * @returns {string} A string representing the deidentify_template.
    */
-  matchDeidentifyTemplateFromOrganizationDeidentifyTemplateName(
-    organizationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.match(
-      organizationDeidentifyTemplateName
-    ).deidentify_template;
+  matchDeidentifyTemplateFromOrganizationDeidentifyTemplateName(organizationDeidentifyTemplateName: string) {
+    return this.pathTemplates.organizationDeidentifyTemplatePathTemplate.match(organizationDeidentifyTemplateName).deidentify_template;
   }
 
   /**
@@ -10463,10 +9029,7 @@ export class DlpServiceClient {
    * @param {string} inspect_template
    * @returns {string} Resource name string.
    */
-  organizationInspectTemplatePath(
-    organization: string,
-    inspectTemplate: string
-  ) {
+  organizationInspectTemplatePath(organization:string,inspectTemplate:string) {
     return this.pathTemplates.organizationInspectTemplatePathTemplate.render({
       organization: organization,
       inspect_template: inspectTemplate,
@@ -10480,12 +9043,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_inspect_template resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationInspectTemplateName(
-    organizationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.organizationInspectTemplatePathTemplate.match(
-      organizationInspectTemplateName
-    ).organization;
+  matchOrganizationFromOrganizationInspectTemplateName(organizationInspectTemplateName: string) {
+    return this.pathTemplates.organizationInspectTemplatePathTemplate.match(organizationInspectTemplateName).organization;
   }
 
   /**
@@ -10495,12 +9054,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_inspect_template resource.
    * @returns {string} A string representing the inspect_template.
    */
-  matchInspectTemplateFromOrganizationInspectTemplateName(
-    organizationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.organizationInspectTemplatePathTemplate.match(
-      organizationInspectTemplateName
-    ).inspect_template;
+  matchInspectTemplateFromOrganizationInspectTemplateName(organizationInspectTemplateName: string) {
+    return this.pathTemplates.organizationInspectTemplatePathTemplate.match(organizationInspectTemplateName).inspect_template;
   }
 
   /**
@@ -10510,7 +9065,7 @@ export class DlpServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationPath(organization: string, location: string) {
+  organizationLocationPath(organization:string,location:string) {
     return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
@@ -10524,12 +9079,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing OrganizationLocation resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationName(
-    organizationLocationName: string
-  ) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(
-      organizationLocationName
-    ).organization;
+  matchOrganizationFromOrganizationLocationName(organizationLocationName: string) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).organization;
   }
 
   /**
@@ -10540,9 +9091,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(
-      organizationLocationName
-    ).location;
+    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
   }
 
   /**
@@ -10553,18 +9102,12 @@ export class DlpServiceClient {
    * @param {string} column_data_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationColumnDataProfilePath(
-    organization: string,
-    location: string,
-    columnDataProfile: string
-  ) {
-    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        column_data_profile: columnDataProfile,
-      }
-    );
+  organizationLocationColumnDataProfilePath(organization:string,location:string,columnDataProfile:string) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.render({
+      organization: organization,
+      location: location,
+      column_data_profile: columnDataProfile,
+    });
   }
 
   /**
@@ -10574,12 +9117,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_column_data_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationColumnDataProfileName(
-    organizationLocationColumnDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(
-      organizationLocationColumnDataProfileName
-    ).organization;
+  matchOrganizationFromOrganizationLocationColumnDataProfileName(organizationLocationColumnDataProfileName: string) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(organizationLocationColumnDataProfileName).organization;
   }
 
   /**
@@ -10589,12 +9128,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_column_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationColumnDataProfileName(
-    organizationLocationColumnDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(
-      organizationLocationColumnDataProfileName
-    ).location;
+  matchLocationFromOrganizationLocationColumnDataProfileName(organizationLocationColumnDataProfileName: string) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(organizationLocationColumnDataProfileName).location;
   }
 
   /**
@@ -10604,12 +9139,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_column_data_profile resource.
    * @returns {string} A string representing the column_data_profile.
    */
-  matchColumnDataProfileFromOrganizationLocationColumnDataProfileName(
-    organizationLocationColumnDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(
-      organizationLocationColumnDataProfileName
-    ).column_data_profile;
+  matchColumnDataProfileFromOrganizationLocationColumnDataProfileName(organizationLocationColumnDataProfileName: string) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(organizationLocationColumnDataProfileName).column_data_profile;
   }
 
   /**
@@ -10620,18 +9151,12 @@ export class DlpServiceClient {
    * @param {string} connection
    * @returns {string} Resource name string.
    */
-  organizationLocationConnectionPath(
-    organization: string,
-    location: string,
-    connection: string
-  ) {
-    return this.pathTemplates.organizationLocationConnectionPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        connection: connection,
-      }
-    );
+  organizationLocationConnectionPath(organization:string,location:string,connection:string) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.render({
+      organization: organization,
+      location: location,
+      connection: connection,
+    });
   }
 
   /**
@@ -10641,12 +9166,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_connection resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationConnectionName(
-    organizationLocationConnectionName: string
-  ) {
-    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(
-      organizationLocationConnectionName
-    ).organization;
+  matchOrganizationFromOrganizationLocationConnectionName(organizationLocationConnectionName: string) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(organizationLocationConnectionName).organization;
   }
 
   /**
@@ -10656,12 +9177,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_connection resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationConnectionName(
-    organizationLocationConnectionName: string
-  ) {
-    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(
-      organizationLocationConnectionName
-    ).location;
+  matchLocationFromOrganizationLocationConnectionName(organizationLocationConnectionName: string) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(organizationLocationConnectionName).location;
   }
 
   /**
@@ -10671,12 +9188,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_connection resource.
    * @returns {string} A string representing the connection.
    */
-  matchConnectionFromOrganizationLocationConnectionName(
-    organizationLocationConnectionName: string
-  ) {
-    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(
-      organizationLocationConnectionName
-    ).connection;
+  matchConnectionFromOrganizationLocationConnectionName(organizationLocationConnectionName: string) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(organizationLocationConnectionName).connection;
   }
 
   /**
@@ -10687,18 +9200,12 @@ export class DlpServiceClient {
    * @param {string} deidentify_template
    * @returns {string} Resource name string.
    */
-  organizationLocationDeidentifyTemplatePath(
-    organization: string,
-    location: string,
-    deidentifyTemplate: string
-  ) {
-    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        deidentify_template: deidentifyTemplate,
-      }
-    );
+  organizationLocationDeidentifyTemplatePath(organization:string,location:string,deidentifyTemplate:string) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render({
+      organization: organization,
+      location: location,
+      deidentify_template: deidentifyTemplate,
+    });
   }
 
   /**
@@ -10708,12 +9215,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_deidentify_template resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationDeidentifyTemplateName(
-    organizationLocationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
-      organizationLocationDeidentifyTemplateName
-    ).organization;
+  matchOrganizationFromOrganizationLocationDeidentifyTemplateName(organizationLocationDeidentifyTemplateName: string) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(organizationLocationDeidentifyTemplateName).organization;
   }
 
   /**
@@ -10723,12 +9226,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_deidentify_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationDeidentifyTemplateName(
-    organizationLocationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
-      organizationLocationDeidentifyTemplateName
-    ).location;
+  matchLocationFromOrganizationLocationDeidentifyTemplateName(organizationLocationDeidentifyTemplateName: string) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(organizationLocationDeidentifyTemplateName).location;
   }
 
   /**
@@ -10738,12 +9237,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_deidentify_template resource.
    * @returns {string} A string representing the deidentify_template.
    */
-  matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(
-    organizationLocationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
-      organizationLocationDeidentifyTemplateName
-    ).deidentify_template;
+  matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(organizationLocationDeidentifyTemplateName: string) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(organizationLocationDeidentifyTemplateName).deidentify_template;
   }
 
   /**
@@ -10754,18 +9249,12 @@ export class DlpServiceClient {
    * @param {string} file_store_data_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationFileStoreDataProfilePath(
-    organization: string,
-    location: string,
-    fileStoreDataProfile: string
-  ) {
-    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        file_store_data_profile: fileStoreDataProfile,
-      }
-    );
+  organizationLocationFileStoreDataProfilePath(organization:string,location:string,fileStoreDataProfile:string) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.render({
+      organization: organization,
+      location: location,
+      file_store_data_profile: fileStoreDataProfile,
+    });
   }
 
   /**
@@ -10775,12 +9264,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_file_store_data_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFileStoreDataProfileName(
-    organizationLocationFileStoreDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(
-      organizationLocationFileStoreDataProfileName
-    ).organization;
+  matchOrganizationFromOrganizationLocationFileStoreDataProfileName(organizationLocationFileStoreDataProfileName: string) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(organizationLocationFileStoreDataProfileName).organization;
   }
 
   /**
@@ -10790,12 +9275,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_file_store_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFileStoreDataProfileName(
-    organizationLocationFileStoreDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(
-      organizationLocationFileStoreDataProfileName
-    ).location;
+  matchLocationFromOrganizationLocationFileStoreDataProfileName(organizationLocationFileStoreDataProfileName: string) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(organizationLocationFileStoreDataProfileName).location;
   }
 
   /**
@@ -10805,12 +9286,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_file_store_data_profile resource.
    * @returns {string} A string representing the file_store_data_profile.
    */
-  matchFileStoreDataProfileFromOrganizationLocationFileStoreDataProfileName(
-    organizationLocationFileStoreDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(
-      organizationLocationFileStoreDataProfileName
-    ).file_store_data_profile;
+  matchFileStoreDataProfileFromOrganizationLocationFileStoreDataProfileName(organizationLocationFileStoreDataProfileName: string) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(organizationLocationFileStoreDataProfileName).file_store_data_profile;
   }
 
   /**
@@ -10821,18 +9298,12 @@ export class DlpServiceClient {
    * @param {string} inspect_template
    * @returns {string} Resource name string.
    */
-  organizationLocationInspectTemplatePath(
-    organization: string,
-    location: string,
-    inspectTemplate: string
-  ) {
-    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        inspect_template: inspectTemplate,
-      }
-    );
+  organizationLocationInspectTemplatePath(organization:string,location:string,inspectTemplate:string) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.render({
+      organization: organization,
+      location: location,
+      inspect_template: inspectTemplate,
+    });
   }
 
   /**
@@ -10842,12 +9313,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_inspect_template resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationInspectTemplateName(
-    organizationLocationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
-      organizationLocationInspectTemplateName
-    ).organization;
+  matchOrganizationFromOrganizationLocationInspectTemplateName(organizationLocationInspectTemplateName: string) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(organizationLocationInspectTemplateName).organization;
   }
 
   /**
@@ -10857,12 +9324,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_inspect_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationInspectTemplateName(
-    organizationLocationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
-      organizationLocationInspectTemplateName
-    ).location;
+  matchLocationFromOrganizationLocationInspectTemplateName(organizationLocationInspectTemplateName: string) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(organizationLocationInspectTemplateName).location;
   }
 
   /**
@@ -10872,12 +9335,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_inspect_template resource.
    * @returns {string} A string representing the inspect_template.
    */
-  matchInspectTemplateFromOrganizationLocationInspectTemplateName(
-    organizationLocationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
-      organizationLocationInspectTemplateName
-    ).inspect_template;
+  matchInspectTemplateFromOrganizationLocationInspectTemplateName(organizationLocationInspectTemplateName: string) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(organizationLocationInspectTemplateName).inspect_template;
   }
 
   /**
@@ -10888,18 +9347,12 @@ export class DlpServiceClient {
    * @param {string} project_data_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationProjectDataProfilePath(
-    organization: string,
-    location: string,
-    projectDataProfile: string
-  ) {
-    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        project_data_profile: projectDataProfile,
-      }
-    );
+  organizationLocationProjectDataProfilePath(organization:string,location:string,projectDataProfile:string) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.render({
+      organization: organization,
+      location: location,
+      project_data_profile: projectDataProfile,
+    });
   }
 
   /**
@@ -10909,12 +9362,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_project_data_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationProjectDataProfileName(
-    organizationLocationProjectDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(
-      organizationLocationProjectDataProfileName
-    ).organization;
+  matchOrganizationFromOrganizationLocationProjectDataProfileName(organizationLocationProjectDataProfileName: string) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(organizationLocationProjectDataProfileName).organization;
   }
 
   /**
@@ -10924,12 +9373,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_project_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationProjectDataProfileName(
-    organizationLocationProjectDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(
-      organizationLocationProjectDataProfileName
-    ).location;
+  matchLocationFromOrganizationLocationProjectDataProfileName(organizationLocationProjectDataProfileName: string) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(organizationLocationProjectDataProfileName).location;
   }
 
   /**
@@ -10939,12 +9384,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_project_data_profile resource.
    * @returns {string} A string representing the project_data_profile.
    */
-  matchProjectDataProfileFromOrganizationLocationProjectDataProfileName(
-    organizationLocationProjectDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(
-      organizationLocationProjectDataProfileName
-    ).project_data_profile;
+  matchProjectDataProfileFromOrganizationLocationProjectDataProfileName(organizationLocationProjectDataProfileName: string) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(organizationLocationProjectDataProfileName).project_data_profile;
   }
 
   /**
@@ -10955,18 +9396,12 @@ export class DlpServiceClient {
    * @param {string} stored_info_type
    * @returns {string} Resource name string.
    */
-  organizationLocationStoredInfoTypePath(
-    organization: string,
-    location: string,
-    storedInfoType: string
-  ) {
-    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        stored_info_type: storedInfoType,
-      }
-    );
+  organizationLocationStoredInfoTypePath(organization:string,location:string,storedInfoType:string) {
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.render({
+      organization: organization,
+      location: location,
+      stored_info_type: storedInfoType,
+    });
   }
 
   /**
@@ -10976,12 +9411,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_stored_info_type resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationStoredInfoTypeName(
-    organizationLocationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
-      organizationLocationStoredInfoTypeName
-    ).organization;
+  matchOrganizationFromOrganizationLocationStoredInfoTypeName(organizationLocationStoredInfoTypeName: string) {
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(organizationLocationStoredInfoTypeName).organization;
   }
 
   /**
@@ -10991,12 +9422,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_stored_info_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationStoredInfoTypeName(
-    organizationLocationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
-      organizationLocationStoredInfoTypeName
-    ).location;
+  matchLocationFromOrganizationLocationStoredInfoTypeName(organizationLocationStoredInfoTypeName: string) {
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(organizationLocationStoredInfoTypeName).location;
   }
 
   /**
@@ -11006,12 +9433,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_stored_info_type resource.
    * @returns {string} A string representing the stored_info_type.
    */
-  matchStoredInfoTypeFromOrganizationLocationStoredInfoTypeName(
-    organizationLocationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
-      organizationLocationStoredInfoTypeName
-    ).stored_info_type;
+  matchStoredInfoTypeFromOrganizationLocationStoredInfoTypeName(organizationLocationStoredInfoTypeName: string) {
+    return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(organizationLocationStoredInfoTypeName).stored_info_type;
   }
 
   /**
@@ -11022,18 +9445,12 @@ export class DlpServiceClient {
    * @param {string} table_data_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationTableDataProfilePath(
-    organization: string,
-    location: string,
-    tableDataProfile: string
-  ) {
-    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        table_data_profile: tableDataProfile,
-      }
-    );
+  organizationLocationTableDataProfilePath(organization:string,location:string,tableDataProfile:string) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.render({
+      organization: organization,
+      location: location,
+      table_data_profile: tableDataProfile,
+    });
   }
 
   /**
@@ -11043,12 +9460,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_table_data_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationTableDataProfileName(
-    organizationLocationTableDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(
-      organizationLocationTableDataProfileName
-    ).organization;
+  matchOrganizationFromOrganizationLocationTableDataProfileName(organizationLocationTableDataProfileName: string) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(organizationLocationTableDataProfileName).organization;
   }
 
   /**
@@ -11058,12 +9471,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_table_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationTableDataProfileName(
-    organizationLocationTableDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(
-      organizationLocationTableDataProfileName
-    ).location;
+  matchLocationFromOrganizationLocationTableDataProfileName(organizationLocationTableDataProfileName: string) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(organizationLocationTableDataProfileName).location;
   }
 
   /**
@@ -11073,12 +9482,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_location_table_data_profile resource.
    * @returns {string} A string representing the table_data_profile.
    */
-  matchTableDataProfileFromOrganizationLocationTableDataProfileName(
-    organizationLocationTableDataProfileName: string
-  ) {
-    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(
-      organizationLocationTableDataProfileName
-    ).table_data_profile;
+  matchTableDataProfileFromOrganizationLocationTableDataProfileName(organizationLocationTableDataProfileName: string) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(organizationLocationTableDataProfileName).table_data_profile;
   }
 
   /**
@@ -11088,7 +9493,7 @@ export class DlpServiceClient {
    * @param {string} stored_info_type
    * @returns {string} Resource name string.
    */
-  organizationStoredInfoTypePath(organization: string, storedInfoType: string) {
+  organizationStoredInfoTypePath(organization:string,storedInfoType:string) {
     return this.pathTemplates.organizationStoredInfoTypePathTemplate.render({
       organization: organization,
       stored_info_type: storedInfoType,
@@ -11102,12 +9507,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_stored_info_type resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationStoredInfoTypeName(
-    organizationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.organizationStoredInfoTypePathTemplate.match(
-      organizationStoredInfoTypeName
-    ).organization;
+  matchOrganizationFromOrganizationStoredInfoTypeName(organizationStoredInfoTypeName: string) {
+    return this.pathTemplates.organizationStoredInfoTypePathTemplate.match(organizationStoredInfoTypeName).organization;
   }
 
   /**
@@ -11117,12 +9518,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing organization_stored_info_type resource.
    * @returns {string} A string representing the stored_info_type.
    */
-  matchStoredInfoTypeFromOrganizationStoredInfoTypeName(
-    organizationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.organizationStoredInfoTypePathTemplate.match(
-      organizationStoredInfoTypeName
-    ).stored_info_type;
+  matchStoredInfoTypeFromOrganizationStoredInfoTypeName(organizationStoredInfoTypeName: string) {
+    return this.pathTemplates.organizationStoredInfoTypePathTemplate.match(organizationStoredInfoTypeName).stored_info_type;
   }
 
   /**
@@ -11131,7 +9528,7 @@ export class DlpServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -11155,7 +9552,7 @@ export class DlpServiceClient {
    * @param {string} deidentify_template
    * @returns {string} Resource name string.
    */
-  projectDeidentifyTemplatePath(project: string, deidentifyTemplate: string) {
+  projectDeidentifyTemplatePath(project:string,deidentifyTemplate:string) {
     return this.pathTemplates.projectDeidentifyTemplatePathTemplate.render({
       project: project,
       deidentify_template: deidentifyTemplate,
@@ -11169,12 +9566,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_deidentify_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectDeidentifyTemplateName(
-    projectDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.projectDeidentifyTemplatePathTemplate.match(
-      projectDeidentifyTemplateName
-    ).project;
+  matchProjectFromProjectDeidentifyTemplateName(projectDeidentifyTemplateName: string) {
+    return this.pathTemplates.projectDeidentifyTemplatePathTemplate.match(projectDeidentifyTemplateName).project;
   }
 
   /**
@@ -11184,12 +9577,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_deidentify_template resource.
    * @returns {string} A string representing the deidentify_template.
    */
-  matchDeidentifyTemplateFromProjectDeidentifyTemplateName(
-    projectDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.projectDeidentifyTemplatePathTemplate.match(
-      projectDeidentifyTemplateName
-    ).deidentify_template;
+  matchDeidentifyTemplateFromProjectDeidentifyTemplateName(projectDeidentifyTemplateName: string) {
+    return this.pathTemplates.projectDeidentifyTemplatePathTemplate.match(projectDeidentifyTemplateName).deidentify_template;
   }
 
   /**
@@ -11198,7 +9587,7 @@ export class DlpServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectDlpContentPath(project: string) {
+  projectDlpContentPath(project:string) {
     return this.pathTemplates.projectDlpContentPathTemplate.render({
       project: project,
     });
@@ -11212,9 +9601,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectDlpContentName(projectDlpContentName: string) {
-    return this.pathTemplates.projectDlpContentPathTemplate.match(
-      projectDlpContentName
-    ).project;
+    return this.pathTemplates.projectDlpContentPathTemplate.match(projectDlpContentName).project;
   }
 
   /**
@@ -11224,7 +9611,7 @@ export class DlpServiceClient {
    * @param {string} dlp_job
    * @returns {string} Resource name string.
    */
-  projectDlpJobPath(project: string, dlpJob: string) {
+  projectDlpJobPath(project:string,dlpJob:string) {
     return this.pathTemplates.projectDlpJobPathTemplate.render({
       project: project,
       dlp_job: dlpJob,
@@ -11239,8 +9626,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectDlpJobName(projectDlpJobName: string) {
-    return this.pathTemplates.projectDlpJobPathTemplate.match(projectDlpJobName)
-      .project;
+    return this.pathTemplates.projectDlpJobPathTemplate.match(projectDlpJobName).project;
   }
 
   /**
@@ -11251,8 +9637,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the dlp_job.
    */
   matchDlpJobFromProjectDlpJobName(projectDlpJobName: string) {
-    return this.pathTemplates.projectDlpJobPathTemplate.match(projectDlpJobName)
-      .dlp_job;
+    return this.pathTemplates.projectDlpJobPathTemplate.match(projectDlpJobName).dlp_job;
   }
 
   /**
@@ -11262,7 +9647,7 @@ export class DlpServiceClient {
    * @param {string} inspect_template
    * @returns {string} Resource name string.
    */
-  projectInspectTemplatePath(project: string, inspectTemplate: string) {
+  projectInspectTemplatePath(project:string,inspectTemplate:string) {
     return this.pathTemplates.projectInspectTemplatePathTemplate.render({
       project: project,
       inspect_template: inspectTemplate,
@@ -11276,12 +9661,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_inspect_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectInspectTemplateName(
-    projectInspectTemplateName: string
-  ) {
-    return this.pathTemplates.projectInspectTemplatePathTemplate.match(
-      projectInspectTemplateName
-    ).project;
+  matchProjectFromProjectInspectTemplateName(projectInspectTemplateName: string) {
+    return this.pathTemplates.projectInspectTemplatePathTemplate.match(projectInspectTemplateName).project;
   }
 
   /**
@@ -11291,12 +9672,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_inspect_template resource.
    * @returns {string} A string representing the inspect_template.
    */
-  matchInspectTemplateFromProjectInspectTemplateName(
-    projectInspectTemplateName: string
-  ) {
-    return this.pathTemplates.projectInspectTemplatePathTemplate.match(
-      projectInspectTemplateName
-    ).inspect_template;
+  matchInspectTemplateFromProjectInspectTemplateName(projectInspectTemplateName: string) {
+    return this.pathTemplates.projectInspectTemplatePathTemplate.match(projectInspectTemplateName).inspect_template;
   }
 
   /**
@@ -11306,7 +9683,7 @@ export class DlpServiceClient {
    * @param {string} job_trigger
    * @returns {string} Resource name string.
    */
-  projectJobTriggerPath(project: string, jobTrigger: string) {
+  projectJobTriggerPath(project:string,jobTrigger:string) {
     return this.pathTemplates.projectJobTriggerPathTemplate.render({
       project: project,
       job_trigger: jobTrigger,
@@ -11321,9 +9698,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectJobTriggerName(projectJobTriggerName: string) {
-    return this.pathTemplates.projectJobTriggerPathTemplate.match(
-      projectJobTriggerName
-    ).project;
+    return this.pathTemplates.projectJobTriggerPathTemplate.match(projectJobTriggerName).project;
   }
 
   /**
@@ -11334,9 +9709,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the job_trigger.
    */
   matchJobTriggerFromProjectJobTriggerName(projectJobTriggerName: string) {
-    return this.pathTemplates.projectJobTriggerPathTemplate.match(
-      projectJobTriggerName
-    ).job_trigger;
+    return this.pathTemplates.projectJobTriggerPathTemplate.match(projectJobTriggerName).job_trigger;
   }
 
   /**
@@ -11347,18 +9720,12 @@ export class DlpServiceClient {
    * @param {string} column_data_profile
    * @returns {string} Resource name string.
    */
-  projectLocationColumnDataProfilePath(
-    project: string,
-    location: string,
-    columnDataProfile: string
-  ) {
-    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        column_data_profile: columnDataProfile,
-      }
-    );
+  projectLocationColumnDataProfilePath(project:string,location:string,columnDataProfile:string) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.render({
+      project: project,
+      location: location,
+      column_data_profile: columnDataProfile,
+    });
   }
 
   /**
@@ -11368,12 +9735,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_column_data_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationColumnDataProfileName(
-    projectLocationColumnDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(
-      projectLocationColumnDataProfileName
-    ).project;
+  matchProjectFromProjectLocationColumnDataProfileName(projectLocationColumnDataProfileName: string) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(projectLocationColumnDataProfileName).project;
   }
 
   /**
@@ -11383,12 +9746,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_column_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationColumnDataProfileName(
-    projectLocationColumnDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(
-      projectLocationColumnDataProfileName
-    ).location;
+  matchLocationFromProjectLocationColumnDataProfileName(projectLocationColumnDataProfileName: string) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(projectLocationColumnDataProfileName).location;
   }
 
   /**
@@ -11398,12 +9757,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_column_data_profile resource.
    * @returns {string} A string representing the column_data_profile.
    */
-  matchColumnDataProfileFromProjectLocationColumnDataProfileName(
-    projectLocationColumnDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(
-      projectLocationColumnDataProfileName
-    ).column_data_profile;
+  matchColumnDataProfileFromProjectLocationColumnDataProfileName(projectLocationColumnDataProfileName: string) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(projectLocationColumnDataProfileName).column_data_profile;
   }
 
   /**
@@ -11414,11 +9769,7 @@ export class DlpServiceClient {
    * @param {string} connection
    * @returns {string} Resource name string.
    */
-  projectLocationConnectionPath(
-    project: string,
-    location: string,
-    connection: string
-  ) {
+  projectLocationConnectionPath(project:string,location:string,connection:string) {
     return this.pathTemplates.projectLocationConnectionPathTemplate.render({
       project: project,
       location: location,
@@ -11433,12 +9784,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_connection resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConnectionName(
-    projectLocationConnectionName: string
-  ) {
-    return this.pathTemplates.projectLocationConnectionPathTemplate.match(
-      projectLocationConnectionName
-    ).project;
+  matchProjectFromProjectLocationConnectionName(projectLocationConnectionName: string) {
+    return this.pathTemplates.projectLocationConnectionPathTemplate.match(projectLocationConnectionName).project;
   }
 
   /**
@@ -11448,12 +9795,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_connection resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConnectionName(
-    projectLocationConnectionName: string
-  ) {
-    return this.pathTemplates.projectLocationConnectionPathTemplate.match(
-      projectLocationConnectionName
-    ).location;
+  matchLocationFromProjectLocationConnectionName(projectLocationConnectionName: string) {
+    return this.pathTemplates.projectLocationConnectionPathTemplate.match(projectLocationConnectionName).location;
   }
 
   /**
@@ -11463,12 +9806,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_connection resource.
    * @returns {string} A string representing the connection.
    */
-  matchConnectionFromProjectLocationConnectionName(
-    projectLocationConnectionName: string
-  ) {
-    return this.pathTemplates.projectLocationConnectionPathTemplate.match(
-      projectLocationConnectionName
-    ).connection;
+  matchConnectionFromProjectLocationConnectionName(projectLocationConnectionName: string) {
+    return this.pathTemplates.projectLocationConnectionPathTemplate.match(projectLocationConnectionName).connection;
   }
 
   /**
@@ -11479,18 +9818,12 @@ export class DlpServiceClient {
    * @param {string} deidentify_template
    * @returns {string} Resource name string.
    */
-  projectLocationDeidentifyTemplatePath(
-    project: string,
-    location: string,
-    deidentifyTemplate: string
-  ) {
-    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        deidentify_template: deidentifyTemplate,
-      }
-    );
+  projectLocationDeidentifyTemplatePath(project:string,location:string,deidentifyTemplate:string) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      deidentify_template: deidentifyTemplate,
+    });
   }
 
   /**
@@ -11500,12 +9833,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_deidentify_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDeidentifyTemplateName(
-    projectLocationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
-      projectLocationDeidentifyTemplateName
-    ).project;
+  matchProjectFromProjectLocationDeidentifyTemplateName(projectLocationDeidentifyTemplateName: string) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(projectLocationDeidentifyTemplateName).project;
   }
 
   /**
@@ -11515,12 +9844,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_deidentify_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDeidentifyTemplateName(
-    projectLocationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
-      projectLocationDeidentifyTemplateName
-    ).location;
+  matchLocationFromProjectLocationDeidentifyTemplateName(projectLocationDeidentifyTemplateName: string) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(projectLocationDeidentifyTemplateName).location;
   }
 
   /**
@@ -11530,12 +9855,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_deidentify_template resource.
    * @returns {string} A string representing the deidentify_template.
    */
-  matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(
-    projectLocationDeidentifyTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
-      projectLocationDeidentifyTemplateName
-    ).deidentify_template;
+  matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(projectLocationDeidentifyTemplateName: string) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(projectLocationDeidentifyTemplateName).deidentify_template;
   }
 
   /**
@@ -11546,7 +9867,7 @@ export class DlpServiceClient {
    * @param {string} dlp_job
    * @returns {string} Resource name string.
    */
-  projectLocationDlpJobPath(project: string, location: string, dlpJob: string) {
+  projectLocationDlpJobPath(project:string,location:string,dlpJob:string) {
     return this.pathTemplates.projectLocationDlpJobPathTemplate.render({
       project: project,
       location: location,
@@ -11562,9 +9883,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationDlpJobName(projectLocationDlpJobName: string) {
-    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(
-      projectLocationDlpJobName
-    ).project;
+    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(projectLocationDlpJobName).project;
   }
 
   /**
@@ -11574,12 +9893,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_dlp_job resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDlpJobName(
-    projectLocationDlpJobName: string
-  ) {
-    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(
-      projectLocationDlpJobName
-    ).location;
+  matchLocationFromProjectLocationDlpJobName(projectLocationDlpJobName: string) {
+    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(projectLocationDlpJobName).location;
   }
 
   /**
@@ -11590,9 +9905,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the dlp_job.
    */
   matchDlpJobFromProjectLocationDlpJobName(projectLocationDlpJobName: string) {
-    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(
-      projectLocationDlpJobName
-    ).dlp_job;
+    return this.pathTemplates.projectLocationDlpJobPathTemplate.match(projectLocationDlpJobName).dlp_job;
   }
 
   /**
@@ -11603,18 +9916,12 @@ export class DlpServiceClient {
    * @param {string} file_store_data_profile
    * @returns {string} Resource name string.
    */
-  projectLocationFileStoreDataProfilePath(
-    project: string,
-    location: string,
-    fileStoreDataProfile: string
-  ) {
-    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        file_store_data_profile: fileStoreDataProfile,
-      }
-    );
+  projectLocationFileStoreDataProfilePath(project:string,location:string,fileStoreDataProfile:string) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.render({
+      project: project,
+      location: location,
+      file_store_data_profile: fileStoreDataProfile,
+    });
   }
 
   /**
@@ -11624,12 +9931,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_file_store_data_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFileStoreDataProfileName(
-    projectLocationFileStoreDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(
-      projectLocationFileStoreDataProfileName
-    ).project;
+  matchProjectFromProjectLocationFileStoreDataProfileName(projectLocationFileStoreDataProfileName: string) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(projectLocationFileStoreDataProfileName).project;
   }
 
   /**
@@ -11639,12 +9942,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_file_store_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFileStoreDataProfileName(
-    projectLocationFileStoreDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(
-      projectLocationFileStoreDataProfileName
-    ).location;
+  matchLocationFromProjectLocationFileStoreDataProfileName(projectLocationFileStoreDataProfileName: string) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(projectLocationFileStoreDataProfileName).location;
   }
 
   /**
@@ -11654,12 +9953,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_file_store_data_profile resource.
    * @returns {string} A string representing the file_store_data_profile.
    */
-  matchFileStoreDataProfileFromProjectLocationFileStoreDataProfileName(
-    projectLocationFileStoreDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(
-      projectLocationFileStoreDataProfileName
-    ).file_store_data_profile;
+  matchFileStoreDataProfileFromProjectLocationFileStoreDataProfileName(projectLocationFileStoreDataProfileName: string) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(projectLocationFileStoreDataProfileName).file_store_data_profile;
   }
 
   /**
@@ -11670,18 +9965,12 @@ export class DlpServiceClient {
    * @param {string} inspect_template
    * @returns {string} Resource name string.
    */
-  projectLocationInspectTemplatePath(
-    project: string,
-    location: string,
-    inspectTemplate: string
-  ) {
-    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        inspect_template: inspectTemplate,
-      }
-    );
+  projectLocationInspectTemplatePath(project:string,location:string,inspectTemplate:string) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      inspect_template: inspectTemplate,
+    });
   }
 
   /**
@@ -11691,12 +9980,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_inspect_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationInspectTemplateName(
-    projectLocationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
-      projectLocationInspectTemplateName
-    ).project;
+  matchProjectFromProjectLocationInspectTemplateName(projectLocationInspectTemplateName: string) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(projectLocationInspectTemplateName).project;
   }
 
   /**
@@ -11706,12 +9991,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_inspect_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationInspectTemplateName(
-    projectLocationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
-      projectLocationInspectTemplateName
-    ).location;
+  matchLocationFromProjectLocationInspectTemplateName(projectLocationInspectTemplateName: string) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(projectLocationInspectTemplateName).location;
   }
 
   /**
@@ -11721,12 +10002,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_inspect_template resource.
    * @returns {string} A string representing the inspect_template.
    */
-  matchInspectTemplateFromProjectLocationInspectTemplateName(
-    projectLocationInspectTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
-      projectLocationInspectTemplateName
-    ).inspect_template;
+  matchInspectTemplateFromProjectLocationInspectTemplateName(projectLocationInspectTemplateName: string) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(projectLocationInspectTemplateName).inspect_template;
   }
 
   /**
@@ -11737,11 +10014,7 @@ export class DlpServiceClient {
    * @param {string} job_trigger
    * @returns {string} Resource name string.
    */
-  projectLocationJobTriggerPath(
-    project: string,
-    location: string,
-    jobTrigger: string
-  ) {
+  projectLocationJobTriggerPath(project:string,location:string,jobTrigger:string) {
     return this.pathTemplates.projectLocationJobTriggerPathTemplate.render({
       project: project,
       location: location,
@@ -11756,12 +10029,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_job_trigger resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationJobTriggerName(
-    projectLocationJobTriggerName: string
-  ) {
-    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(
-      projectLocationJobTriggerName
-    ).project;
+  matchProjectFromProjectLocationJobTriggerName(projectLocationJobTriggerName: string) {
+    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(projectLocationJobTriggerName).project;
   }
 
   /**
@@ -11771,12 +10040,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_job_trigger resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationJobTriggerName(
-    projectLocationJobTriggerName: string
-  ) {
-    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(
-      projectLocationJobTriggerName
-    ).location;
+  matchLocationFromProjectLocationJobTriggerName(projectLocationJobTriggerName: string) {
+    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(projectLocationJobTriggerName).location;
   }
 
   /**
@@ -11786,12 +10051,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_job_trigger resource.
    * @returns {string} A string representing the job_trigger.
    */
-  matchJobTriggerFromProjectLocationJobTriggerName(
-    projectLocationJobTriggerName: string
-  ) {
-    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(
-      projectLocationJobTriggerName
-    ).job_trigger;
+  matchJobTriggerFromProjectLocationJobTriggerName(projectLocationJobTriggerName: string) {
+    return this.pathTemplates.projectLocationJobTriggerPathTemplate.match(projectLocationJobTriggerName).job_trigger;
   }
 
   /**
@@ -11802,18 +10063,12 @@ export class DlpServiceClient {
    * @param {string} project_data_profile
    * @returns {string} Resource name string.
    */
-  projectLocationProjectDataProfilePath(
-    project: string,
-    location: string,
-    projectDataProfile: string
-  ) {
-    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        project_data_profile: projectDataProfile,
-      }
-    );
+  projectLocationProjectDataProfilePath(project:string,location:string,projectDataProfile:string) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.render({
+      project: project,
+      location: location,
+      project_data_profile: projectDataProfile,
+    });
   }
 
   /**
@@ -11823,12 +10078,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_project_data_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationProjectDataProfileName(
-    projectLocationProjectDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(
-      projectLocationProjectDataProfileName
-    ).project;
+  matchProjectFromProjectLocationProjectDataProfileName(projectLocationProjectDataProfileName: string) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(projectLocationProjectDataProfileName).project;
   }
 
   /**
@@ -11838,12 +10089,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_project_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationProjectDataProfileName(
-    projectLocationProjectDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(
-      projectLocationProjectDataProfileName
-    ).location;
+  matchLocationFromProjectLocationProjectDataProfileName(projectLocationProjectDataProfileName: string) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(projectLocationProjectDataProfileName).location;
   }
 
   /**
@@ -11853,12 +10100,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_project_data_profile resource.
    * @returns {string} A string representing the project_data_profile.
    */
-  matchProjectDataProfileFromProjectLocationProjectDataProfileName(
-    projectLocationProjectDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(
-      projectLocationProjectDataProfileName
-    ).project_data_profile;
+  matchProjectDataProfileFromProjectLocationProjectDataProfileName(projectLocationProjectDataProfileName: string) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(projectLocationProjectDataProfileName).project_data_profile;
   }
 
   /**
@@ -11869,11 +10112,7 @@ export class DlpServiceClient {
    * @param {string} stored_info_type
    * @returns {string} Resource name string.
    */
-  projectLocationStoredInfoTypePath(
-    project: string,
-    location: string,
-    storedInfoType: string
-  ) {
+  projectLocationStoredInfoTypePath(project:string,location:string,storedInfoType:string) {
     return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.render({
       project: project,
       location: location,
@@ -11888,12 +10127,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_stored_info_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationStoredInfoTypeName(
-    projectLocationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
-      projectLocationStoredInfoTypeName
-    ).project;
+  matchProjectFromProjectLocationStoredInfoTypeName(projectLocationStoredInfoTypeName: string) {
+    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(projectLocationStoredInfoTypeName).project;
   }
 
   /**
@@ -11903,12 +10138,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_stored_info_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationStoredInfoTypeName(
-    projectLocationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
-      projectLocationStoredInfoTypeName
-    ).location;
+  matchLocationFromProjectLocationStoredInfoTypeName(projectLocationStoredInfoTypeName: string) {
+    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(projectLocationStoredInfoTypeName).location;
   }
 
   /**
@@ -11918,12 +10149,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_stored_info_type resource.
    * @returns {string} A string representing the stored_info_type.
    */
-  matchStoredInfoTypeFromProjectLocationStoredInfoTypeName(
-    projectLocationStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
-      projectLocationStoredInfoTypeName
-    ).stored_info_type;
+  matchStoredInfoTypeFromProjectLocationStoredInfoTypeName(projectLocationStoredInfoTypeName: string) {
+    return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(projectLocationStoredInfoTypeName).stored_info_type;
   }
 
   /**
@@ -11934,18 +10161,12 @@ export class DlpServiceClient {
    * @param {string} table_data_profile
    * @returns {string} Resource name string.
    */
-  projectLocationTableDataProfilePath(
-    project: string,
-    location: string,
-    tableDataProfile: string
-  ) {
-    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        table_data_profile: tableDataProfile,
-      }
-    );
+  projectLocationTableDataProfilePath(project:string,location:string,tableDataProfile:string) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.render({
+      project: project,
+      location: location,
+      table_data_profile: tableDataProfile,
+    });
   }
 
   /**
@@ -11955,12 +10176,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_table_data_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationTableDataProfileName(
-    projectLocationTableDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(
-      projectLocationTableDataProfileName
-    ).project;
+  matchProjectFromProjectLocationTableDataProfileName(projectLocationTableDataProfileName: string) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(projectLocationTableDataProfileName).project;
   }
 
   /**
@@ -11970,12 +10187,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_table_data_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationTableDataProfileName(
-    projectLocationTableDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(
-      projectLocationTableDataProfileName
-    ).location;
+  matchLocationFromProjectLocationTableDataProfileName(projectLocationTableDataProfileName: string) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(projectLocationTableDataProfileName).location;
   }
 
   /**
@@ -11985,12 +10198,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_location_table_data_profile resource.
    * @returns {string} A string representing the table_data_profile.
    */
-  matchTableDataProfileFromProjectLocationTableDataProfileName(
-    projectLocationTableDataProfileName: string
-  ) {
-    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(
-      projectLocationTableDataProfileName
-    ).table_data_profile;
+  matchTableDataProfileFromProjectLocationTableDataProfileName(projectLocationTableDataProfileName: string) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(projectLocationTableDataProfileName).table_data_profile;
   }
 
   /**
@@ -12000,7 +10209,7 @@ export class DlpServiceClient {
    * @param {string} stored_info_type
    * @returns {string} Resource name string.
    */
-  projectStoredInfoTypePath(project: string, storedInfoType: string) {
+  projectStoredInfoTypePath(project:string,storedInfoType:string) {
     return this.pathTemplates.projectStoredInfoTypePathTemplate.render({
       project: project,
       stored_info_type: storedInfoType,
@@ -12015,9 +10224,7 @@ export class DlpServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectStoredInfoTypeName(projectStoredInfoTypeName: string) {
-    return this.pathTemplates.projectStoredInfoTypePathTemplate.match(
-      projectStoredInfoTypeName
-    ).project;
+    return this.pathTemplates.projectStoredInfoTypePathTemplate.match(projectStoredInfoTypeName).project;
   }
 
   /**
@@ -12027,12 +10234,8 @@ export class DlpServiceClient {
    *   A fully-qualified path representing project_stored_info_type resource.
    * @returns {string} A string representing the stored_info_type.
    */
-  matchStoredInfoTypeFromProjectStoredInfoTypeName(
-    projectStoredInfoTypeName: string
-  ) {
-    return this.pathTemplates.projectStoredInfoTypePathTemplate.match(
-      projectStoredInfoTypeName
-    ).stored_info_type;
+  matchStoredInfoTypeFromProjectStoredInfoTypeName(projectStoredInfoTypeName: string) {
+    return this.pathTemplates.projectStoredInfoTypePathTemplate.match(projectStoredInfoTypeName).stored_info_type;
   }
 
   /**
@@ -12047,9 +10250,7 @@ export class DlpServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

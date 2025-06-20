@@ -23,7 +23,7 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as modelgardenserviceModule from '../src';
 
-import {protobuf, IamProtos, LocationProtos} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -50,6 +50,22 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -337,6 +353,160 @@ describe('v1.ModelGardenServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getPublisherModel(request), expectedError);
+        });
+    });
+
+    describe('deploy', () => {
+        it('invokes deploy without error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.DeployRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeployRequest', ['destination']);
+            request.destination = defaultValue1;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deploy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deploy(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deploy without error using callback', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.DeployRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeployRequest', ['destination']);
+            request.destination = defaultValue1;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deploy = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deploy(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.aiplatform.v1.IDeployResponse, protos.google.cloud.aiplatform.v1.IDeployOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1.IDeployResponse, protos.google.cloud.aiplatform.v1.IDeployOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deploy with call error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.DeployRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeployRequest', ['destination']);
+            request.destination = defaultValue1;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deploy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deploy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deploy with LRO error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.DeployRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.DeployRequest', ['destination']);
+            request.destination = defaultValue1;
+            const expectedHeaderRequestParams = `destination=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deploy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deploy(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deploy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeployProgress without error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeployProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeployProgress with error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeployProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
         });
     });
     describe('getIamPolicy', () => {
@@ -779,6 +949,261 @@ describe('v1.ModelGardenServiceClient', () => {
                         expectedHeaderRequestParams
                     )
             );
+        });
+    });
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
     });
 
@@ -1884,6 +2309,44 @@ describe('v1.ModelGardenServiceClient', () => {
             });
         });
 
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('metadataSchema', async () => {
             const fakePath = "/rendered/path/metadataSchema";
             const expectedParameters = {
@@ -2568,8 +3031,8 @@ describe('v1.ModelGardenServiceClient', () => {
             });
         });
 
-        describe('projectLocationFeatureGroupFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeatureGroupFeature";
+        describe('projectLocationFeatureGroupFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeatureGroupFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -2581,49 +3044,49 @@ describe('v1.ModelGardenServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeatureGroupFeaturePath', () => {
-                const result = client.projectLocationFeatureGroupFeaturePath("projectValue", "locationValue", "featureGroupValue", "featureValue");
+            it('projectLocationFeatureGroupFeaturesPath', () => {
+                const result = client.projectLocationFeatureGroupFeaturesPath("projectValue", "locationValue", "featureGroupValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
 
-        describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeature";
+        describe('projectLocationFeaturestoreEntityTypeFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -2636,50 +3099,50 @@ describe('v1.ModelGardenServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeaturestoreEntityTypeFeaturePath', () => {
-                const result = client.projectLocationFeaturestoreEntityTypeFeaturePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
+            it('projectLocationFeaturestoreEntityTypeFeaturesPath', () => {
+                const result = client.projectLocationFeaturestoreEntityTypeFeaturesPath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -2818,6 +3281,44 @@ describe('v1.ModelGardenServiceClient', () => {
                 const result = client.matchRagCorpusFromRagCorpusName(fakePath);
                 assert.strictEqual(result, "ragCorpusValue");
                 assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragEngineConfig', async () => {
+            const fakePath = "/rendered/path/ragEngineConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragEngineConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragEngineConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragEngineConfigPath', () => {
+                const result = client.ragEngineConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagEngineConfigName', () => {
+                const result = client.matchProjectFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagEngineConfigName', () => {
+                const result = client.matchLocationFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

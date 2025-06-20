@@ -4825,8 +4825,12 @@ export class DatastreamClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch(err => {
+          throw err;
+        });
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

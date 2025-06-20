@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const meet = require('@google-apps/meet');
 
 function main() {
-  const conferenceRecordsServiceClient =
-    new meet.ConferenceRecordsServiceClient();
+  const conferenceRecordsServiceClient = new meet.ConferenceRecordsServiceClient();
   const spacesServiceClient = new meet.SpacesServiceClient();
 }
 

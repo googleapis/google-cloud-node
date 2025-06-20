@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,41 +100,20 @@ export class ConnectionServiceClient {
    *     const client = new ConnectionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ConnectionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'bigqueryconnection.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -165,7 +139,7 @@ export class ConnectionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -179,7 +153,10 @@ export class ConnectionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -210,11 +187,8 @@ export class ConnectionServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.bigquery.connection.v1beta1.ConnectionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.bigquery.connection.v1beta1.ConnectionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -245,46 +219,31 @@ export class ConnectionServiceClient {
     // Put together the "service stub" for
     // google.cloud.bigquery.connection.v1beta1.ConnectionService.
     this.connectionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.bigquery.connection.v1beta1.ConnectionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.bigquery.connection.v1beta1
-            .ConnectionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.bigquery.connection.v1beta1.ConnectionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.bigquery.connection.v1beta1.ConnectionService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const connectionServiceStubMethods = [
-      'createConnection',
-      'getConnection',
-      'listConnections',
-      'updateConnection',
-      'updateConnectionCredential',
-      'deleteConnection',
-      'getIamPolicy',
-      'setIamPolicy',
-      'testIamPermissions',
-    ];
+    const connectionServiceStubMethods =
+        ['createConnection', 'getConnection', 'listConnections', 'updateConnection', 'updateConnectionCredential', 'deleteConnection', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of connectionServiceStubMethods) {
       const callPromise = this.connectionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -304,14 +263,8 @@ export class ConnectionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigqueryconnection.googleapis.com';
   }
@@ -322,14 +275,8 @@ export class ConnectionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'bigqueryconnection.googleapis.com';
   }
@@ -362,7 +309,7 @@ export class ConnectionServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -372,9 +319,8 @@ export class ConnectionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -385,1145 +331,905 @@ export class ConnectionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *   Must be in the format `projects/{project_id}/locations/{location_id}`
-   * @param {string} [request.connectionId]
-   *   Optional. Connection id that should be assigned to the created connection.
-   * @param {google.cloud.bigquery.connection.v1beta1.Connection} request.connection
-   *   Required. Connection to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.create_connection.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_CreateConnection_async
-   */
+/**
+ * Creates a new connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *   Must be in the format `projects/{project_id}/locations/{location_id}`
+ * @param {string} [request.connectionId]
+ *   Optional. Connection id that should be assigned to the created connection.
+ * @param {google.cloud.bigquery.connection.v1beta1.Connection} request.connection
+ *   Required. Connection to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.create_connection.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_CreateConnection_async
+ */
   createConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|undefined, {}|undefined
+      ]>;
   createConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createConnection(
+      request: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createConnection(
+      request?: protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          (
-            | protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.ICreateConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns specified connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the requested connection, for example:
-   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.get_connection.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_GetConnection_async
-   */
+/**
+ * Returns specified connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the requested connection, for example:
+ *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.get_connection.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_GetConnection_async
+ */
   getConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|undefined, {}|undefined
+      ]>;
   getConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          (
-            | protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IGetConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns a list of connections in the given project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *   Must be in the form: `projects/{project_id}/locations/{location_id}`
-   * @param {google.protobuf.UInt32Value} request.maxResults
-   *   Required. Maximum number of results per page.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse|ListConnectionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.list_connections.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_ListConnections_async
-   */
+/**
+ * Returns a list of connections in the given project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource name.
+ *   Must be in the form: `projects/{project_id}/locations/{location_id}`
+ * @param {google.protobuf.UInt32Value} request.maxResults
+ *   Required. Maximum number of results per page.
+ * @param {string} request.pageToken
+ *   Page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse|ListConnectionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.list_connections.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_ListConnections_async
+ */
   listConnections(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|undefined, {}|undefined
+      ]>;
   listConnections(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-      | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listConnections(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-      | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listConnections(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-          | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-      | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listConnections(
+      request: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listConnections(
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-          | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listConnections response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
-          (
-            | protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('listConnections response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listConnections(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsResponse,
+        protos.google.cloud.bigquery.connection.v1beta1.IListConnectionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listConnections response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the specified connection. For security reasons, also resets
-   * credential if connection properties are in the update field mask.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the connection to update, for example:
-   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
-   * @param {google.cloud.bigquery.connection.v1beta1.Connection} request.connection
-   *   Required. Connection containing the updated fields.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Update mask for the connection fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.update_connection.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnection_async
-   */
+/**
+ * Updates the specified connection. For security reasons, also resets
+ * credential if connection properties are in the update field mask.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the connection to update, for example:
+ *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
+ * @param {google.cloud.bigquery.connection.v1beta1.Connection} request.connection
+ *   Required. Connection containing the updated fields.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Update mask for the connection fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.connection.v1beta1.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.update_connection.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnection_async
+ */
   updateConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|undefined, {}|undefined
+      ]>;
   updateConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConnection(
+      request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConnection(
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.bigquery.connection.v1beta1.IConnection,
-          (
-            | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.connection.v1beta1.IConnection,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the credential for the specified connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the connection, for example:
-   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}/credential`
-   * @param {google.cloud.bigquery.connection.v1beta1.ConnectionCredential} request.credential
-   *   Required. Credential to use with the connection.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.update_connection_credential.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnectionCredential_async
-   */
+/**
+ * Sets the credential for the specified connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the connection, for example:
+ *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}/credential`
+ * @param {google.cloud.bigquery.connection.v1beta1.ConnectionCredential} request.credential
+ *   Required. Credential to use with the connection.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.update_connection_credential.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnectionCredential_async
+ */
   updateConnectionCredential(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|undefined, {}|undefined
+      ]>;
   updateConnectionCredential(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConnectionCredential(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConnectionCredential(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConnectionCredential(
+      request: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateConnectionCredential(
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateConnectionCredential request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateConnectionCredential response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateConnectionCredential(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConnectionCredential response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateConnectionCredential(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IUpdateConnectionCredentialRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateConnectionCredential response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes connection and associated credential.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the deleted connection, for example:
-   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.delete_connection.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_DeleteConnection_async
-   */
+/**
+ * Deletes connection and associated credential.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the deleted connection, for example:
+ *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.delete_connection.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_DeleteConnection_async
+ */
   deleteConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|undefined, {}|undefined
+      ]>;
   deleteConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConnection(
-    request: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConnection(
-    request?: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConnection(
+      request: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConnection(
+      request?: protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.connection.v1beta1.IDeleteConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the access control policy for a resource.
-   * Returns an empty policy if the resource exists and does not have a policy
-   * set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.get_iam_policy.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy for a resource.
+ * Returns an empty policy if the resource exists and does not have a policy
+ * set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.get_iam_policy.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the access control policy on the specified resource. Replaces any
-   * existing policy.
-   *
-   * Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.set_iam_policy.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on the specified resource. Replaces any
+ * existing policy.
+ *
+ * Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.set_iam_policy.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   * If the resource does not exist, this will return an empty set of
-   * permissions, not a `NOT_FOUND` error.
-   *
-   * Note: This operation is designed to be used for building permission-aware
-   * UIs and command-line tools, not for authorization checking. This operation
-   * may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/connection_service.test_iam_permissions.js</caption>
-   * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_TestIamPermissions_async
-   */
+/**
+ * Returns permissions that a caller has on the specified resource.
+ * If the resource does not exist, this will return an empty set of
+ * permissions, not a `NOT_FOUND` error.
+ *
+ * Note: This operation is designed to be used for building permission-aware
+ * UIs and command-line tools, not for authorization checking. This operation
+ * may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/connection_service.test_iam_permissions.js</caption>
+ * region_tag:bigqueryconnection_v1beta1_generated_ConnectionService_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -1538,7 +1244,7 @@ export class ConnectionServiceClient {
    * @param {string} connection
    * @returns {string} Resource name string.
    */
-  connectionPath(project: string, location: string, connection: string) {
+  connectionPath(project:string,location:string,connection:string) {
     return this.pathTemplates.connectionPathTemplate.render({
       project: project,
       location: location,
@@ -1554,8 +1260,7 @@ export class ConnectionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .project;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).project;
   }
 
   /**
@@ -1566,8 +1271,7 @@ export class ConnectionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .location;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).location;
   }
 
   /**
@@ -1578,8 +1282,7 @@ export class ConnectionServiceClient {
    * @returns {string} A string representing the connection.
    */
   matchConnectionFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .connection;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).connection;
   }
 
   /**
@@ -1589,7 +1292,7 @@ export class ConnectionServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,

@@ -494,9 +494,6 @@ export namespace google {
                     /** AdUnit effectiveAdsenseEnabled. */
                     public effectiveAdsenseEnabled: boolean;
 
-                    /** AdUnit _appliedAdsenseEnabled. */
-                    public _appliedAdsenseEnabled?: "appliedAdsenseEnabled";
-
                     /**
                      * Creates a new AdUnit instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1130,15 +1127,6 @@ export namespace google {
 
                     /** FrequencyCap timeUnit. */
                     public timeUnit?: (google.ads.admanager.v1.TimeUnitEnum.TimeUnit|keyof typeof google.ads.admanager.v1.TimeUnitEnum.TimeUnit|null);
-
-                    /** FrequencyCap _maxImpressions. */
-                    public _maxImpressions?: "maxImpressions";
-
-                    /** FrequencyCap _timeAmount. */
-                    public _timeAmount?: "timeAmount";
-
-                    /** FrequencyCap _timeUnit. */
-                    public _timeUnit?: "timeUnit";
 
                     /**
                      * Creates a new FrequencyCap instance using the specified properties.
@@ -2535,9 +2523,6 @@ export namespace google {
 
                     /** Company thirdPartyCompanyId. */
                     public thirdPartyCompanyId: (number|Long|string);
-
-                    /** Company _primaryContact. */
-                    public _primaryContact?: "primaryContact";
 
                     /**
                      * Creates a new Company instance using the specified properties.
@@ -4304,9 +4289,6 @@ export namespace google {
 
                     /** CustomFieldValue value. */
                     public value?: (google.ads.admanager.v1.CustomFieldValue.IValue|null);
-
-                    /** CustomFieldValue _value. */
-                    public _value?: "value";
 
                     /**
                      * Creates a new CustomFieldValue instance using the specified properties.
@@ -9616,7 +9598,7 @@ export namespace google {
                         stringListValue?: (google.ads.admanager.v1.Report.Value.IStringList|null);
 
                         /** Value bytesValue */
-                        bytesValue?: (Uint8Array|string|null);
+                        bytesValue?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents a Value. */
@@ -9647,7 +9629,7 @@ export namespace google {
                         public stringListValue?: (google.ads.admanager.v1.Report.Value.IStringList|null);
 
                         /** Value bytesValue. */
-                        public bytesValue?: (Uint8Array|string|null);
+                        public bytesValue?: (Uint8Array|Buffer|string|null);
 
                         /** Value value. */
                         public value?: ("intValue"|"doubleValue"|"stringValue"|"boolValue"|"intListValue"|"stringListValue"|"bytesValue");
@@ -9969,15 +9951,6 @@ export namespace google {
 
                         /** Sort metricValueType. */
                         public metricValueType?: (google.ads.admanager.v1.Report.MetricValueType|keyof typeof google.ads.admanager.v1.Report.MetricValueType|null);
-
-                        /** Sort _slice. */
-                        public _slice?: "slice";
-
-                        /** Sort _timePeriodIndex. */
-                        public _timePeriodIndex?: "timePeriodIndex";
-
-                        /** Sort _metricValueType. */
-                        public _metricValueType?: "metricValueType";
 
                         /**
                          * Creates a new Sort instance using the specified properties.
@@ -10764,15 +10737,6 @@ export namespace google {
 
                             /** FieldFilter metricValueType. */
                             public metricValueType?: (google.ads.admanager.v1.Report.MetricValueType|keyof typeof google.ads.admanager.v1.Report.MetricValueType|null);
-
-                            /** FieldFilter _slice. */
-                            public _slice?: "slice";
-
-                            /** FieldFilter _timePeriodIndex. */
-                            public _timePeriodIndex?: "timePeriodIndex";
-
-                            /** FieldFilter _metricValueType. */
-                            public _metricValueType?: "metricValueType";
 
                             /**
                              * Creates a new FieldFilter instance using the specified properties.
@@ -13240,9 +13204,6 @@ export namespace google {
 
                     /** ReportDefinition sorts. */
                     public sorts: google.ads.admanager.v1.Report.ISort[];
-
-                    /** ReportDefinition _comparisonDateRange. */
-                    public _comparisonDateRange?: "comparisonDateRange";
 
                     /**
                      * Creates a new ReportDefinition instance using the specified properties.
@@ -16362,6 +16323,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -16402,6 +16366,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -20355,6 +20322,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -20606,7 +20576,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -20637,7 +20607,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -21879,7 +21849,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -21895,7 +21865,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

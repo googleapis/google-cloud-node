@@ -33,7 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -257,7 +257,7 @@ export class ModelServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -601,7 +601,23 @@ export class ModelServiceClient {
           this._log.info('getModel response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Pauses the training of an existing model.
@@ -711,7 +727,23 @@ export class ModelServiceClient {
           this._log.info('pauseModel response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Resumes the training of an existing model.
@@ -821,7 +853,23 @@ export class ModelServiceClient {
           this._log.info('resumeModel response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes an existing model.
@@ -931,7 +979,23 @@ export class ModelServiceClient {
           this._log.info('deleteModel response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Update of model metadata. Only fields that
@@ -1045,7 +1109,23 @@ export class ModelServiceClient {
           this._log.info('updateModel response %j', response);
           return [response, options, rawResponse];
         }
-      );
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -2375,8 +2455,10 @@ export class ModelServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
