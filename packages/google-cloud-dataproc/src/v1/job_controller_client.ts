@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +102,20 @@ export class JobControllerClient {
    *     const client = new JobControllerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof JobControllerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataproc.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +141,7 @@ export class JobControllerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +154,13 @@ export class JobControllerClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -215,22 +187,18 @@ export class JobControllerClient {
       nodeGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}'
       ),
-      projectLocationAutoscalingPolicyPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
-        ),
-      projectLocationWorkflowTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
-        ),
-      projectRegionAutoscalingPolicyPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
-        ),
-      projectRegionWorkflowTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
-        ),
+      projectLocationAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
+      ),
+      projectLocationWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
+      ),
+      projectRegionAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
+      ),
+      projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
+      ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sessions/{session}'
       ),
@@ -243,172 +211,46 @@ export class JobControllerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listJobs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'jobs'
-      ),
+      listJobs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/v1/{resource=projects/*/regions/*/clusters/*}:getIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/regions/*/jobs/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/operations/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:getIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/regions/*/clusters/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/regions/*/jobs/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/operations/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/regions/*/clusters/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/regions/*/jobs/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/operations/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',
-          additional_bindings: [
-            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/regions/*/operations/*}',
-          additional_bindings: [
-            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/regions/*/operations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/regions/*/operations}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*/operations}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/regions/*/clusters/*}:getIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:getIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/regions/*/clusters/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/regions/*/clusters/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',additional_bindings: [{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/regions/*/operations/*}',additional_bindings: [{delete: '/v1/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/regions/*/operations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/regions/*/operations}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/operations}',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const submitJobAsOperationResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.Job'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.Job') as gax.protobuf.Type;
     const submitJobAsOperationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.JobMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.JobMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       submitJobAsOperation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         submitJobAsOperationResponse.decode.bind(submitJobAsOperationResponse),
-        submitJobAsOperationMetadata.decode.bind(submitJobAsOperationMetadata)
-      ),
+        submitJobAsOperationMetadata.decode.bind(submitJobAsOperationMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataproc.v1.JobController',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dataproc.v1.JobController', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -439,41 +281,28 @@ export class JobControllerClient {
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.JobController.
     this.jobControllerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataproc.v1.JobController'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.JobController') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataproc.v1.JobController,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const jobControllerStubMethods = [
-      'submitJob',
-      'submitJobAsOperation',
-      'getJob',
-      'listJobs',
-      'updateJob',
-      'cancelJob',
-      'deleteJob',
-    ];
+    const jobControllerStubMethods =
+        ['submitJob', 'submitJobAsOperation', 'getJob', 'listJobs', 'updateJob', 'cancelJob', 'deleteJob'];
     for (const methodName of jobControllerStubMethods) {
       const callPromise = this.jobControllerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -498,14 +327,8 @@ export class JobControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataproc.googleapis.com';
   }
@@ -516,14 +339,8 @@ export class JobControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataproc.googleapis.com';
   }
@@ -554,7 +371,9 @@ export class JobControllerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -563,9 +382,8 @@ export class JobControllerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -576,920 +394,773 @@ export class JobControllerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Submits a job to a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {google.cloud.dataproc.v1.Job} request.job
-   *   Required. The job resource.
-   * @param {string} [request.requestId]
-   *   Optional. A unique id used to identify the request. If the server
-   *   receives two
-   *   [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
-   *   with the same id, then the second request will be ignored and the
-   *   first {@link protos.google.cloud.dataproc.v1.Job|Job} created and stored in the backend
-   *   is returned.
-   *
-   *   It is recommended to always set this value to a
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
-   *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
-   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.submit_job.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_SubmitJob_async
-   */
+/**
+ * Submits a job to a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {google.cloud.dataproc.v1.Job} request.job
+ *   Required. The job resource.
+ * @param {string} [request.requestId]
+ *   Optional. A unique id used to identify the request. If the server
+ *   receives two
+ *   [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
+ *   with the same id, then the second request will be ignored and the
+ *   first {@link protos.google.cloud.dataproc.v1.Job|Job} created and stored in the backend
+ *   is returned.
+ *
+ *   It is recommended to always set this value to a
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+ *
+ *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.submit_job.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_SubmitJob_async
+ */
   submitJob(
-    request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ISubmitJobRequest|undefined, {}|undefined
+      ]>;
   submitJob(
-    request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ISubmitJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  submitJob(
-    request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ISubmitJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  submitJob(
-    request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.ISubmitJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ISubmitJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataproc.v1.ISubmitJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  submitJob(
+      request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      callback: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.ISubmitJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  submitJob(
+      request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.ISubmitJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.ISubmitJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ISubmitJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('submitJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.ISubmitJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ISubmitJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('submitJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .submitJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('submitJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.submitJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ISubmitJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('submitJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the resource representation for a job in a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {string} request.jobId
-   *   Required. The job ID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.get_job.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_GetJob_async
-   */
+/**
+ * Gets the resource representation for a job in a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {string} request.jobId
+ *   Required. The job ID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.get_job.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_GetJob_async
+ */
   getJob(
-    request?: protos.google.cloud.dataproc.v1.IGetJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.IGetJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IGetJobRequest|undefined, {}|undefined
+      ]>;
   getJob(
-    request: protos.google.cloud.dataproc.v1.IGetJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IGetJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJob(
-    request: protos.google.cloud.dataproc.v1.IGetJobRequest,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IGetJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJob(
-    request?: protos.google.cloud.dataproc.v1.IGetJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataproc.v1.IGetJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.IGetJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IGetJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataproc.v1.IGetJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJob(
+      request: protos.google.cloud.dataproc.v1.IGetJobRequest,
+      callback: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.IGetJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJob(
+      request?: protos.google.cloud.dataproc.v1.IGetJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.IGetJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.IGetJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IGetJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-        job_id: request.jobId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
+      'job_id': request.jobId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.IGetJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IGetJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IGetJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a job in a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {string} request.jobId
-   *   Required. The job ID.
-   * @param {google.cloud.dataproc.v1.Job} request.job
-   *   Required. The changes to the job.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Specifies the path, relative to <code>Job</code>, of
-   *   the field to update. For example, to update the labels of a Job the
-   *   <code>update_mask</code> parameter would be specified as
-   *   <code>labels</code>, and the `PATCH` request body would specify the new
-   *   value. <strong>Note:</strong> Currently, <code>labels</code> is the only
-   *   field that can be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.update_job.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_UpdateJob_async
-   */
+/**
+ * Updates a job in a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {string} request.jobId
+ *   Required. The job ID.
+ * @param {google.cloud.dataproc.v1.Job} request.job
+ *   Required. The changes to the job.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Specifies the path, relative to <code>Job</code>, of
+ *   the field to update. For example, to update the labels of a Job the
+ *   <code>update_mask</code> parameter would be specified as
+ *   <code>labels</code>, and the `PATCH` request body would specify the new
+ *   value. <strong>Note:</strong> Currently, <code>labels</code> is the only
+ *   field that can be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.update_job.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_UpdateJob_async
+ */
   updateJob(
-    request?: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IUpdateJobRequest|undefined, {}|undefined
+      ]>;
   updateJob(
-    request: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IUpdateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateJob(
-    request: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IUpdateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateJob(
-    request?: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.IUpdateJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IUpdateJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataproc.v1.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateJob(
+      request: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
+      callback: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateJob(
+      request?: protos.google.cloud.dataproc.v1.IUpdateJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.IUpdateJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IUpdateJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-        job_id: request.jobId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
+      'job_id': request.jobId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.IUpdateJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IUpdateJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.IUpdateJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Starts a job cancellation request. To access the job resource
-   * after cancellation, call
-   * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list)
-   * or
-   * [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {string} request.jobId
-   *   Required. The job ID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.cancel_job.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_CancelJob_async
-   */
+/**
+ * Starts a job cancellation request. To access the job resource
+ * after cancellation, call
+ * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list)
+ * or
+ * [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {string} request.jobId
+ *   Required. The job ID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.cancel_job.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_CancelJob_async
+ */
   cancelJob(
-    request?: protos.google.cloud.dataproc.v1.ICancelJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.ICancelJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ICancelJobRequest|undefined, {}|undefined
+      ]>;
   cancelJob(
-    request: protos.google.cloud.dataproc.v1.ICancelJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ICancelJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelJob(
-    request: protos.google.cloud.dataproc.v1.ICancelJobRequest,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ICancelJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelJob(
-    request?: protos.google.cloud.dataproc.v1.ICancelJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataproc.v1.ICancelJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.ICancelJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ICancelJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob,
-      protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataproc.v1.ICancelJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelJob(
+      request: protos.google.cloud.dataproc.v1.ICancelJobRequest,
+      callback: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.ICancelJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelJob(
+      request?: protos.google.cloud.dataproc.v1.ICancelJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.ICancelJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataproc.v1.IJob,
+          protos.google.cloud.dataproc.v1.ICancelJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ICancelJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-        job_id: request.jobId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
+      'job_id': request.jobId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('cancelJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.ICancelJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ICancelJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .cancelJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataproc.v1.IJob,
-          protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('cancelJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.cancelJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataproc.v1.IJob,
+        protos.google.cloud.dataproc.v1.ICancelJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('cancelJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the job from the project. If the job is active, the delete fails,
-   * and the response returns `FAILED_PRECONDITION`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {string} request.jobId
-   *   Required. The job ID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.delete_job.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_DeleteJob_async
-   */
+/**
+ * Deletes the job from the project. If the job is active, the delete fails,
+ * and the response returns `FAILED_PRECONDITION`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {string} request.jobId
+ *   Required. The job ID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.delete_job.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_DeleteJob_async
+ */
   deleteJob(
-    request?: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1.IDeleteJobRequest|undefined, {}|undefined
+      ]>;
   deleteJob(
-    request: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataproc.v1.IDeleteJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteJob(
-    request: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataproc.v1.IDeleteJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteJob(
-    request?: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataproc.v1.IDeleteJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataproc.v1.IDeleteJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataproc.v1.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteJob(
+      request: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataproc.v1.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteJob(
+      request?: protos.google.cloud.dataproc.v1.IDeleteJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataproc.v1.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataproc.v1.IDeleteJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1.IDeleteJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-        job_id: request.jobId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
+      'job_id': request.jobId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataproc.v1.IDeleteJobRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1.IDeleteJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataproc.v1.IDeleteJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Submits job to a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {google.cloud.dataproc.v1.Job} request.job
-   *   Required. The job resource.
-   * @param {string} [request.requestId]
-   *   Optional. A unique id used to identify the request. If the server
-   *   receives two
-   *   [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
-   *   with the same id, then the second request will be ignored and the
-   *   first {@link protos.google.cloud.dataproc.v1.Job|Job} created and stored in the backend
-   *   is returned.
-   *
-   *   It is recommended to always set this value to a
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
-   *
-   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
-   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_SubmitJobAsOperation_async
-   */
+/**
+ * Submits job to a cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {google.cloud.dataproc.v1.Job} request.job
+ *   Required. The job resource.
+ * @param {string} [request.requestId]
+ *   Optional. A unique id used to identify the request. If the server
+ *   receives two
+ *   [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
+ *   with the same id, then the second request will be ignored and the
+ *   first {@link protos.google.cloud.dataproc.v1.Job|Job} created and stored in the backend
+ *   is returned.
+ *
+ *   It is recommended to always set this value to a
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+ *
+ *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_SubmitJobAsOperation_async
+ */
   submitJobAsOperation(
-    request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataproc.v1.IJob,
-        protos.google.cloud.dataproc.v1.IJobMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   submitJobAsOperation(
-    request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.IJob,
-        protos.google.cloud.dataproc.v1.IJobMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   submitJobAsOperation(
-    request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.IJob,
-        protos.google.cloud.dataproc.v1.IJobMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   submitJobAsOperation(
-    request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataproc.v1.IJob,
-            protos.google.cloud.dataproc.v1.IJobMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.IJob,
-        protos.google.cloud.dataproc.v1.IJobMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataproc.v1.IJob,
-        protos.google.cloud.dataproc.v1.IJobMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataproc.v1.ISubmitJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataproc.v1.IJob,
-            protos.google.cloud.dataproc.v1.IJobMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('submitJobAsOperation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('submitJobAsOperation request %j', request);
-    return this.innerApiCalls
-      .submitJobAsOperation(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataproc.v1.IJob,
-            protos.google.cloud.dataproc.v1.IJobMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('submitJobAsOperation response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.submitJobAsOperation(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataproc.v1.IJob, protos.google.cloud.dataproc.v1.IJobMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('submitJobAsOperation response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `submitJobAsOperation()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_SubmitJobAsOperation_async
-   */
-  async checkSubmitJobAsOperationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataproc.v1.Job,
-      protos.google.cloud.dataproc.v1.JobMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `submitJobAsOperation()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_SubmitJobAsOperation_async
+ */
+  async checkSubmitJobAsOperationProgress(name: string): Promise<LROperation<protos.google.cloud.dataproc.v1.Job, protos.google.cloud.dataproc.v1.JobMetadata>>{
     this._log.info('submitJobAsOperation long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.submitJobAsOperation,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataproc.v1.Job,
-      protos.google.cloud.dataproc.v1.JobMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.submitJobAsOperation, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataproc.v1.Job, protos.google.cloud.dataproc.v1.JobMetadata>;
   }
-  /**
-   * Lists regions/{region}/jobs in a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of results to return in each response.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, returned by a previous call, to request the
-   *   next page of results.
-   * @param {string} [request.clusterName]
-   *   Optional. If set, the returned jobs list includes only jobs that were
-   *   submitted to the named cluster.
-   * @param {google.cloud.dataproc.v1.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
-   *   Optional. Specifies enumerated categories of jobs to list.
-   *   (default = match ALL jobs).
-   *
-   *   If `filter` is provided, `jobStateMatcher` will be ignored.
-   * @param {string} [request.filter]
-   *   Optional. A filter constraining the jobs to list. Filters are
-   *   case-sensitive and have the following syntax:
-   *
-   *   [field = value] AND [field [= value]] ...
-   *
-   *   where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
-   *   key. **value** can be `*` to match all values.
-   *   `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
-   *
-   *   Example filter:
-   *
-   *   status.state = ACTIVE AND labels.env = staging AND labels.starred = *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataproc.v1.Job|Job}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists regions/{region}/jobs in a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of results to return in each response.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, returned by a previous call, to request the
+ *   next page of results.
+ * @param {string} [request.clusterName]
+ *   Optional. If set, the returned jobs list includes only jobs that were
+ *   submitted to the named cluster.
+ * @param {google.cloud.dataproc.v1.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
+ *   Optional. Specifies enumerated categories of jobs to list.
+ *   (default = match ALL jobs).
+ *
+ *   If `filter` is provided, `jobStateMatcher` will be ignored.
+ * @param {string} [request.filter]
+ *   Optional. A filter constraining the jobs to list. Filters are
+ *   case-sensitive and have the following syntax:
+ *
+ *   [field = value] AND [field [= value]] ...
+ *
+ *   where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
+ *   key. **value** can be `*` to match all values.
+ *   `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
+ *   Only the logical `AND` operator is supported; space-separated items are
+ *   treated as having an implicit `AND` operator.
+ *
+ *   Example filter:
+ *
+ *   status.state = ACTIVE AND labels.env = staging AND labels.starred = *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataproc.v1.Job|Job}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listJobs(
-    request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob[],
-      protos.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protos.google.cloud.dataproc.v1.IListJobsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob[],
+        protos.google.cloud.dataproc.v1.IListJobsRequest|null,
+        protos.google.cloud.dataproc.v1.IListJobsResponse
+      ]>;
   listJobs(
-    request: protos.google.cloud.dataproc.v1.IListJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListJobsRequest,
-      protos.google.cloud.dataproc.v1.IListJobsResponse | null | undefined,
-      protos.google.cloud.dataproc.v1.IJob
-    >
-  ): void;
-  listJobs(
-    request: protos.google.cloud.dataproc.v1.IListJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListJobsRequest,
-      protos.google.cloud.dataproc.v1.IListJobsResponse | null | undefined,
-      protos.google.cloud.dataproc.v1.IJob
-    >
-  ): void;
-  listJobs(
-    request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataproc.v1.IListJobsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataproc.v1.IListJobsRequest,
-          protos.google.cloud.dataproc.v1.IListJobsResponse | null | undefined,
-          protos.google.cloud.dataproc.v1.IJob
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListJobsRequest,
-      protos.google.cloud.dataproc.v1.IListJobsResponse | null | undefined,
-      protos.google.cloud.dataproc.v1.IJob
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IJob[],
-      protos.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protos.google.cloud.dataproc.v1.IListJobsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataproc.v1.IListJobsResponse|null|undefined,
+          protos.google.cloud.dataproc.v1.IJob>): void;
+  listJobs(
+      request: protos.google.cloud.dataproc.v1.IListJobsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListJobsRequest,
+          protos.google.cloud.dataproc.v1.IListJobsResponse|null|undefined,
+          protos.google.cloud.dataproc.v1.IJob>): void;
+  listJobs(
+      request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListJobsRequest,
+          protos.google.cloud.dataproc.v1.IListJobsResponse|null|undefined,
+          protos.google.cloud.dataproc.v1.IJob>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListJobsRequest,
+          protos.google.cloud.dataproc.v1.IListJobsResponse|null|undefined,
+          protos.google.cloud.dataproc.v1.IJob>):
+      Promise<[
+        protos.google.cloud.dataproc.v1.IJob[],
+        protos.google.cloud.dataproc.v1.IListJobsRequest|null,
+        protos.google.cloud.dataproc.v1.IListJobsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataproc.v1.IListJobsRequest,
-          protos.google.cloud.dataproc.v1.IListJobsResponse | null | undefined,
-          protos.google.cloud.dataproc.v1.IJob
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListJobsRequest,
+      protos.google.cloud.dataproc.v1.IListJobsResponse|null|undefined,
+      protos.google.cloud.dataproc.v1.IJob>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1498,84 +1169,81 @@ export class JobControllerClient {
     this._log.info('listJobs request %j', request);
     return this.innerApiCalls
       .listJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataproc.v1.IJob[],
-          protos.google.cloud.dataproc.v1.IListJobsRequest | null,
-          protos.google.cloud.dataproc.v1.IListJobsResponse,
-        ]) => {
-          this._log.info('listJobs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataproc.v1.IJob[],
+        protos.google.cloud.dataproc.v1.IListJobsRequest|null,
+        protos.google.cloud.dataproc.v1.IListJobsResponse
+      ]) => {
+        this._log.info('listJobs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listJobs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of results to return in each response.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, returned by a previous call, to request the
-   *   next page of results.
-   * @param {string} [request.clusterName]
-   *   Optional. If set, the returned jobs list includes only jobs that were
-   *   submitted to the named cluster.
-   * @param {google.cloud.dataproc.v1.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
-   *   Optional. Specifies enumerated categories of jobs to list.
-   *   (default = match ALL jobs).
-   *
-   *   If `filter` is provided, `jobStateMatcher` will be ignored.
-   * @param {string} [request.filter]
-   *   Optional. A filter constraining the jobs to list. Filters are
-   *   case-sensitive and have the following syntax:
-   *
-   *   [field = value] AND [field [= value]] ...
-   *
-   *   where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
-   *   key. **value** can be `*` to match all values.
-   *   `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
-   *
-   *   Example filter:
-   *
-   *   status.state = ACTIVE AND labels.env = staging AND labels.starred = *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataproc.v1.Job|Job} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listJobs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of results to return in each response.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, returned by a previous call, to request the
+ *   next page of results.
+ * @param {string} [request.clusterName]
+ *   Optional. If set, the returned jobs list includes only jobs that were
+ *   submitted to the named cluster.
+ * @param {google.cloud.dataproc.v1.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
+ *   Optional. Specifies enumerated categories of jobs to list.
+ *   (default = match ALL jobs).
+ *
+ *   If `filter` is provided, `jobStateMatcher` will be ignored.
+ * @param {string} [request.filter]
+ *   Optional. A filter constraining the jobs to list. Filters are
+ *   case-sensitive and have the following syntax:
+ *
+ *   [field = value] AND [field [= value]] ...
+ *
+ *   where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
+ *   key. **value** can be `*` to match all values.
+ *   `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
+ *   Only the logical `AND` operator is supported; space-separated items are
+ *   treated as having an implicit `AND` operator.
+ *
+ *   Example filter:
+ *
+ *   status.state = ACTIVE AND labels.env = staging AND labels.starred = *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataproc.v1.Job|Job} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listJobsStream(
-    request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
+    });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
@@ -1584,75 +1252,74 @@ export class JobControllerClient {
     );
   }
 
-  /**
-   * Equivalent to `listJobs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform project that the job
-   *   belongs to.
-   * @param {string} request.region
-   *   Required. The Dataproc region in which to handle the request.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of results to return in each response.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, returned by a previous call, to request the
-   *   next page of results.
-   * @param {string} [request.clusterName]
-   *   Optional. If set, the returned jobs list includes only jobs that were
-   *   submitted to the named cluster.
-   * @param {google.cloud.dataproc.v1.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
-   *   Optional. Specifies enumerated categories of jobs to list.
-   *   (default = match ALL jobs).
-   *
-   *   If `filter` is provided, `jobStateMatcher` will be ignored.
-   * @param {string} [request.filter]
-   *   Optional. A filter constraining the jobs to list. Filters are
-   *   case-sensitive and have the following syntax:
-   *
-   *   [field = value] AND [field [= value]] ...
-   *
-   *   where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
-   *   key. **value** can be `*` to match all values.
-   *   `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
-   *
-   *   Example filter:
-   *
-   *   status.state = ACTIVE AND labels.env = staging AND labels.starred = *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataproc.v1.Job|Job}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/job_controller.list_jobs.js</caption>
-   * region_tag:dataproc_v1_generated_JobController_ListJobs_async
-   */
+/**
+ * Equivalent to `listJobs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   Required. The ID of the Google Cloud Platform project that the job
+ *   belongs to.
+ * @param {string} request.region
+ *   Required. The Dataproc region in which to handle the request.
+ * @param {number} [request.pageSize]
+ *   Optional. The number of results to return in each response.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, returned by a previous call, to request the
+ *   next page of results.
+ * @param {string} [request.clusterName]
+ *   Optional. If set, the returned jobs list includes only jobs that were
+ *   submitted to the named cluster.
+ * @param {google.cloud.dataproc.v1.ListJobsRequest.JobStateMatcher} [request.jobStateMatcher]
+ *   Optional. Specifies enumerated categories of jobs to list.
+ *   (default = match ALL jobs).
+ *
+ *   If `filter` is provided, `jobStateMatcher` will be ignored.
+ * @param {string} [request.filter]
+ *   Optional. A filter constraining the jobs to list. Filters are
+ *   case-sensitive and have the following syntax:
+ *
+ *   [field = value] AND [field [= value]] ...
+ *
+ *   where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
+ *   key. **value** can be `*` to match all values.
+ *   `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
+ *   Only the logical `AND` operator is supported; space-separated items are
+ *   treated as having an implicit `AND` operator.
+ *
+ *   Example filter:
+ *
+ *   status.state = ACTIVE AND labels.env = staging AND labels.starred = *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataproc.v1.Job|Job}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/job_controller.list_jobs.js</caption>
+ * region_tag:dataproc_v1_generated_JobController_ListJobs_async
+ */
   listJobsAsync(
-    request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataproc.v1.IJob> {
+      request?: protos.google.cloud.dataproc.v1.IListJobsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataproc.v1.IJob>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        region: request.region ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'region': request.region ?? '',
+    });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
@@ -1660,31 +1327,31 @@ export class JobControllerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataproc.v1.IJob>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1699,39 +1366,39 @@ export class JobControllerClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1746,40 +1413,40 @@ export class JobControllerClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1794,11 +1461,11 @@ export class JobControllerClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1843,20 +1510,20 @@ export class JobControllerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1893,13 +1560,13 @@ export class JobControllerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1933,7 +1600,7 @@ export class JobControllerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1948,20 +1615,20 @@ export class JobControllerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2005,20 +1672,20 @@ export class JobControllerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2034,7 +1701,7 @@ export class JobControllerClient {
    * @param {string} batch
    * @returns {string} Resource name string.
    */
-  batchPath(project: string, location: string, batch: string) {
+  batchPath(project:string,location:string,batch:string) {
     return this.pathTemplates.batchPathTemplate.render({
       project: project,
       location: location,
@@ -2084,12 +1751,7 @@ export class JobControllerClient {
    * @param {string} node_group
    * @returns {string} Resource name string.
    */
-  nodeGroupPath(
-    project: string,
-    region: string,
-    cluster: string,
-    nodeGroup: string
-  ) {
+  nodeGroupPath(project:string,region:string,cluster:string,nodeGroup:string) {
     return this.pathTemplates.nodeGroupPathTemplate.render({
       project: project,
       region: region,
@@ -2106,8 +1768,7 @@ export class JobControllerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
-      .project;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).project;
   }
 
   /**
@@ -2129,8 +1790,7 @@ export class JobControllerClient {
    * @returns {string} A string representing the cluster.
    */
   matchClusterFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
-      .cluster;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).cluster;
   }
 
   /**
@@ -2141,8 +1801,7 @@ export class JobControllerClient {
    * @returns {string} A string representing the node_group.
    */
   matchNodeGroupFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
-      .node_group;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).node_group;
   }
 
   /**
@@ -2153,18 +1812,12 @@ export class JobControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectLocationAutoscalingPolicyPath(
-    project: string,
-    location: string,
-    autoscalingPolicy: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        autoscaling_policy: autoscalingPolicy,
-      }
-    );
+  projectLocationAutoscalingPolicyPath(project:string,location:string,autoscalingPolicy:string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      autoscaling_policy: autoscalingPolicy,
+    });
   }
 
   /**
@@ -2174,12 +1827,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAutoscalingPolicyName(
-    projectLocationAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
-      projectLocationAutoscalingPolicyName
-    ).project;
+  matchProjectFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).project;
   }
 
   /**
@@ -2189,12 +1838,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAutoscalingPolicyName(
-    projectLocationAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
-      projectLocationAutoscalingPolicyName
-    ).location;
+  matchLocationFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).location;
   }
 
   /**
@@ -2204,12 +1849,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
-    projectLocationAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
-      projectLocationAutoscalingPolicyName
-    ).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).autoscaling_policy;
   }
 
   /**
@@ -2220,18 +1861,12 @@ export class JobControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectLocationWorkflowTemplatePath(
-    project: string,
-    location: string,
-    workflowTemplate: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        workflow_template: workflowTemplate,
-      }
-    );
+  projectLocationWorkflowTemplatePath(project:string,location:string,workflowTemplate:string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      workflow_template: workflowTemplate,
+    });
   }
 
   /**
@@ -2241,12 +1876,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationWorkflowTemplateName(
-    projectLocationWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
-      projectLocationWorkflowTemplateName
-    ).project;
+  matchProjectFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).project;
   }
 
   /**
@@ -2256,12 +1887,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationWorkflowTemplateName(
-    projectLocationWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
-      projectLocationWorkflowTemplateName
-    ).location;
+  matchLocationFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).location;
   }
 
   /**
@@ -2271,12 +1898,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
-    projectLocationWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
-      projectLocationWorkflowTemplateName
-    ).workflow_template;
+  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).workflow_template;
   }
 
   /**
@@ -2287,18 +1910,12 @@ export class JobControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectRegionAutoscalingPolicyPath(
-    project: string,
-    region: string,
-    autoscalingPolicy: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render(
-      {
-        project: project,
-        region: region,
-        autoscaling_policy: autoscalingPolicy,
-      }
-    );
+  projectRegionAutoscalingPolicyPath(project:string,region:string,autoscalingPolicy:string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render({
+      project: project,
+      region: region,
+      autoscaling_policy: autoscalingPolicy,
+    });
   }
 
   /**
@@ -2308,12 +1925,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionAutoscalingPolicyName(
-    projectRegionAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
-      projectRegionAutoscalingPolicyName
-    ).project;
+  matchProjectFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).project;
   }
 
   /**
@@ -2323,12 +1936,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionAutoscalingPolicyName(
-    projectRegionAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
-      projectRegionAutoscalingPolicyName
-    ).region;
+  matchRegionFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).region;
   }
 
   /**
@@ -2338,12 +1947,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
-    projectRegionAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
-      projectRegionAutoscalingPolicyName
-    ).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).autoscaling_policy;
   }
 
   /**
@@ -2354,11 +1959,7 @@ export class JobControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectRegionWorkflowTemplatePath(
-    project: string,
-    region: string,
-    workflowTemplate: string
-  ) {
+  projectRegionWorkflowTemplatePath(project:string,region:string,workflowTemplate:string) {
     return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render({
       project: project,
       region: region,
@@ -2373,12 +1974,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionWorkflowTemplateName(
-    projectRegionWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
-      projectRegionWorkflowTemplateName
-    ).project;
+  matchProjectFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).project;
   }
 
   /**
@@ -2388,12 +1985,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionWorkflowTemplateName(
-    projectRegionWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
-      projectRegionWorkflowTemplateName
-    ).region;
+  matchRegionFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).region;
   }
 
   /**
@@ -2403,12 +1996,8 @@ export class JobControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
-    projectRegionWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
-      projectRegionWorkflowTemplateName
-    ).workflow_template;
+  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).workflow_template;
   }
 
   /**
@@ -2419,7 +2008,7 @@ export class JobControllerClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(project: string, location: string, session: string) {
+  sessionPath(project:string,location:string,session:string) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -2468,7 +2057,7 @@ export class JobControllerClient {
    * @param {string} template
    * @returns {string} Resource name string.
    */
-  sessionTemplatePath(project: string, location: string, template: string) {
+  sessionTemplatePath(project:string,location:string,template:string) {
     return this.pathTemplates.sessionTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -2484,9 +2073,7 @@ export class JobControllerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(
-      sessionTemplateName
-    ).project;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).project;
   }
 
   /**
@@ -2497,9 +2084,7 @@ export class JobControllerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(
-      sessionTemplateName
-    ).location;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).location;
   }
 
   /**
@@ -2510,9 +2095,7 @@ export class JobControllerClient {
    * @returns {string} A string representing the template.
    */
   matchTemplateFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(
-      sessionTemplateName
-    ).template;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).template;
   }
 
   /**
@@ -2527,9 +2110,7 @@ export class JobControllerClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,42 +101,20 @@ export class AuthorizedCertificatesClient {
    *     const client = new AuthorizedCertificatesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof AuthorizedCertificatesClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof AuthorizedCertificatesClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'appengine.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -169,7 +140,7 @@ export class AuthorizedCertificatesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -183,7 +154,10 @@ export class AuthorizedCertificatesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -213,20 +187,14 @@ export class AuthorizedCertificatesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAuthorizedCertificates: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificates'
-      ),
+      listAuthorizedCertificates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificates')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.appengine.v1.AuthorizedCertificates',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.appengine.v1.AuthorizedCertificates', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -257,41 +225,32 @@ export class AuthorizedCertificatesClient {
     // Put together the "service stub" for
     // google.appengine.v1.AuthorizedCertificates.
     this.authorizedCertificatesStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.appengine.v1.AuthorizedCertificates'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.appengine.v1.AuthorizedCertificates') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.appengine.v1.AuthorizedCertificates,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const authorizedCertificatesStubMethods = [
-      'listAuthorizedCertificates',
-      'getAuthorizedCertificate',
-      'createAuthorizedCertificate',
-      'updateAuthorizedCertificate',
-      'deleteAuthorizedCertificate',
-    ];
+    const authorizedCertificatesStubMethods =
+        ['listAuthorizedCertificates', 'getAuthorizedCertificate', 'createAuthorizedCertificate', 'updateAuthorizedCertificate', 'deleteAuthorizedCertificate'];
     for (const methodName of authorizedCertificatesStubMethods) {
       const callPromise = this.authorizedCertificatesStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -311,14 +270,8 @@ export class AuthorizedCertificatesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -329,14 +282,8 @@ export class AuthorizedCertificatesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -370,7 +317,7 @@ export class AuthorizedCertificatesClient {
     return [
       'https://www.googleapis.com/auth/appengine.admin',
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -380,9 +327,8 @@ export class AuthorizedCertificatesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -393,634 +339,483 @@ export class AuthorizedCertificatesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the specified SSL certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/authorizedCertificates/12345`.
-   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
-   *   Controls the set of fields returned in the `GET` response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/authorized_certificates.get_authorized_certificate.js</caption>
-   * region_tag:appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_async
-   */
+/**
+ * Gets the specified SSL certificate.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource requested. Example:
+ *   `apps/myapp/authorizedCertificates/12345`.
+ * @param {google.appengine.v1.AuthorizedCertificateView} request.view
+ *   Controls the set of fields returned in the `GET` response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/authorized_certificates.get_authorized_certificate.js</caption>
+ * region_tag:appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_async
+ */
   getAuthorizedCertificate(
-    request?: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      protos.google.appengine.v1.IGetAuthorizedCertificateRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IGetAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>;
   getAuthorizedCertificate(
-    request: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAuthorizedCertificate(
-    request: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
-    callback: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAuthorizedCertificate(
-    request?: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.appengine.v1.IAuthorizedCertificate,
-          | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      protos.google.appengine.v1.IGetAuthorizedCertificateRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.IGetAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthorizedCertificate(
+      request: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
+      callback: Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.IGetAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthorizedCertificate(
+      request?: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.IGetAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.IGetAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IGetAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAuthorizedCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.appengine.v1.IAuthorizedCertificate,
-          | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IGetAuthorizedCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAuthorizedCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAuthorizedCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.appengine.v1.IAuthorizedCertificate,
-          (
-            | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAuthorizedCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IGetAuthorizedCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAuthorizedCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Uploads the specified SSL certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent `Application` resource. Example: `apps/myapp`.
-   * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
-   *   SSL certificate data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/authorized_certificates.create_authorized_certificate.js</caption>
-   * region_tag:appengine_v1_generated_AuthorizedCertificates_CreateAuthorizedCertificate_async
-   */
+/**
+ * Uploads the specified SSL certificate.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent `Application` resource. Example: `apps/myapp`.
+ * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
+ *   SSL certificate data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/authorized_certificates.create_authorized_certificate.js</caption>
+ * region_tag:appengine_v1_generated_AuthorizedCertificates_CreateAuthorizedCertificate_async
+ */
   createAuthorizedCertificate(
-    request?: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      (
-        | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>;
   createAuthorizedCertificate(
-    request: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAuthorizedCertificate(
-    request: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
-    callback: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAuthorizedCertificate(
-    request?: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.appengine.v1.IAuthorizedCertificate,
-          | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      (
-        | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAuthorizedCertificate(
+      request: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
+      callback: Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAuthorizedCertificate(
+      request?: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createAuthorizedCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.appengine.v1.IAuthorizedCertificate,
-          | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAuthorizedCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createAuthorizedCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.appengine.v1.IAuthorizedCertificate,
-          (
-            | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createAuthorizedCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.ICreateAuthorizedCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createAuthorizedCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the specified SSL certificate. To renew a certificate and maintain
-   * its existing domain mappings, update `certificate_data` with a new
-   * certificate. The new certificate must be applicable to the same domains as
-   * the original certificate. The certificate `display_name` may also be
-   * updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to update. Example:
-   *   `apps/myapp/authorizedCertificates/12345`.
-   * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
-   *   An `AuthorizedCertificate` containing the updated resource. Only fields set
-   *   in the field mask will be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated. Updates are only
-   *   supported on the `certificate_raw_data` and `display_name` fields.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/authorized_certificates.update_authorized_certificate.js</caption>
-   * region_tag:appengine_v1_generated_AuthorizedCertificates_UpdateAuthorizedCertificate_async
-   */
+/**
+ * Updates the specified SSL certificate. To renew a certificate and maintain
+ * its existing domain mappings, update `certificate_data` with a new
+ * certificate. The new certificate must be applicable to the same domains as
+ * the original certificate. The certificate `display_name` may also be
+ * updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource to update. Example:
+ *   `apps/myapp/authorizedCertificates/12345`.
+ * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
+ *   An `AuthorizedCertificate` containing the updated resource. Only fields set
+ *   in the field mask will be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Standard field mask for the set of fields to be updated. Updates are only
+ *   supported on the `certificate_raw_data` and `display_name` fields.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/authorized_certificates.update_authorized_certificate.js</caption>
+ * region_tag:appengine_v1_generated_AuthorizedCertificates_UpdateAuthorizedCertificate_async
+ */
   updateAuthorizedCertificate(
-    request?: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      (
-        | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>;
   updateAuthorizedCertificate(
-    request: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAuthorizedCertificate(
-    request: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
-    callback: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAuthorizedCertificate(
-    request?: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.appengine.v1.IAuthorizedCertificate,
-          | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate,
-      (
-        | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthorizedCertificate(
+      request: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
+      callback: Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthorizedCertificate(
+      request?: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateAuthorizedCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.appengine.v1.IAuthorizedCertificate,
-          | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateAuthorizedCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateAuthorizedCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.appengine.v1.IAuthorizedCertificate,
-          (
-            | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAuthorizedCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.appengine.v1.IAuthorizedCertificate,
+        protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateAuthorizedCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the specified SSL certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to delete. Example:
-   *   `apps/myapp/authorizedCertificates/12345`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/authorized_certificates.delete_authorized_certificate.js</caption>
-   * region_tag:appengine_v1_generated_AuthorizedCertificates_DeleteAuthorizedCertificate_async
-   */
+/**
+ * Deletes the specified SSL certificate.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the resource to delete. Example:
+ *   `apps/myapp/authorizedCertificates/12345`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/authorized_certificates.delete_authorized_certificate.js</caption>
+ * region_tag:appengine_v1_generated_AuthorizedCertificates_DeleteAuthorizedCertificate_async
+ */
   deleteAuthorizedCertificate(
-    request?: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>;
   deleteAuthorizedCertificate(
-    request: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAuthorizedCertificate(
-    request: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAuthorizedCertificate(
-    request?: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthorizedCertificate(
+      request: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthorizedCertificate(
+      request?: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAuthorizedCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAuthorizedCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAuthorizedCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAuthorizedCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteAuthorizedCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists all SSL certificates the user is authorized to administer.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent `Application` resource. Example: `apps/myapp`.
-   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
-   *   Controls the set of fields returned in the `LIST` response.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAuthorizedCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all SSL certificates the user is authorized to administer.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent `Application` resource. Example: `apps/myapp`.
+ * @param {google.appengine.v1.AuthorizedCertificateView} request.view
+ *   Controls the set of fields returned in the `LIST` response.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAuthorizedCertificatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAuthorizedCertificates(
-    request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate[],
-      protos.google.appengine.v1.IListAuthorizedCertificatesRequest | null,
-      protos.google.appengine.v1.IListAuthorizedCertificatesResponse,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate[],
+        protos.google.appengine.v1.IListAuthorizedCertificatesRequest|null,
+        protos.google.appengine.v1.IListAuthorizedCertificatesResponse
+      ]>;
   listAuthorizedCertificates(
-    request: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-      | protos.google.appengine.v1.IListAuthorizedCertificatesResponse
-      | null
-      | undefined,
-      protos.google.appengine.v1.IAuthorizedCertificate
-    >
-  ): void;
-  listAuthorizedCertificates(
-    request: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-      | protos.google.appengine.v1.IListAuthorizedCertificatesResponse
-      | null
-      | undefined,
-      protos.google.appengine.v1.IAuthorizedCertificate
-    >
-  ): void;
-  listAuthorizedCertificates(
-    request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-          | protos.google.appengine.v1.IListAuthorizedCertificatesResponse
-          | null
-          | undefined,
-          protos.google.appengine.v1.IAuthorizedCertificate
-        >,
-    callback?: PaginationCallback<
-      protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-      | protos.google.appengine.v1.IListAuthorizedCertificatesResponse
-      | null
-      | undefined,
-      protos.google.appengine.v1.IAuthorizedCertificate
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IAuthorizedCertificate[],
-      protos.google.appengine.v1.IListAuthorizedCertificatesRequest | null,
-      protos.google.appengine.v1.IListAuthorizedCertificatesResponse,
-    ]
-  > | void {
+          protos.google.appengine.v1.IListAuthorizedCertificatesResponse|null|undefined,
+          protos.google.appengine.v1.IAuthorizedCertificate>): void;
+  listAuthorizedCertificates(
+      request: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+      callback: PaginationCallback<
+          protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+          protos.google.appengine.v1.IListAuthorizedCertificatesResponse|null|undefined,
+          protos.google.appengine.v1.IAuthorizedCertificate>): void;
+  listAuthorizedCertificates(
+      request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+          protos.google.appengine.v1.IListAuthorizedCertificatesResponse|null|undefined,
+          protos.google.appengine.v1.IAuthorizedCertificate>,
+      callback?: PaginationCallback<
+          protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+          protos.google.appengine.v1.IListAuthorizedCertificatesResponse|null|undefined,
+          protos.google.appengine.v1.IAuthorizedCertificate>):
+      Promise<[
+        protos.google.appengine.v1.IAuthorizedCertificate[],
+        protos.google.appengine.v1.IListAuthorizedCertificatesRequest|null,
+        protos.google.appengine.v1.IListAuthorizedCertificatesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-          | protos.google.appengine.v1.IListAuthorizedCertificatesResponse
-          | null
-          | undefined,
-          protos.google.appengine.v1.IAuthorizedCertificate
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+      protos.google.appengine.v1.IListAuthorizedCertificatesResponse|null|undefined,
+      protos.google.appengine.v1.IAuthorizedCertificate>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAuthorizedCertificates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1029,58 +824,55 @@ export class AuthorizedCertificatesClient {
     this._log.info('listAuthorizedCertificates request %j', request);
     return this.innerApiCalls
       .listAuthorizedCertificates(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.appengine.v1.IAuthorizedCertificate[],
-          protos.google.appengine.v1.IListAuthorizedCertificatesRequest | null,
-          protos.google.appengine.v1.IListAuthorizedCertificatesResponse,
-        ]) => {
-          this._log.info('listAuthorizedCertificates values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.appengine.v1.IAuthorizedCertificate[],
+        protos.google.appengine.v1.IListAuthorizedCertificatesRequest|null,
+        protos.google.appengine.v1.IListAuthorizedCertificatesResponse
+      ]) => {
+        this._log.info('listAuthorizedCertificates values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAuthorizedCertificates`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent `Application` resource. Example: `apps/myapp`.
-   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
-   *   Controls the set of fields returned in the `LIST` response.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAuthorizedCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAuthorizedCertificates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent `Application` resource. Example: `apps/myapp`.
+ * @param {google.appengine.v1.AuthorizedCertificateView} request.view
+ *   Controls the set of fields returned in the `LIST` response.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAuthorizedCertificatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAuthorizedCertificatesStream(
-    request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAuthorizedCertificates stream %j', request);
     return this.descriptors.page.listAuthorizedCertificates.createStream(
       this.innerApiCalls.listAuthorizedCertificates as GaxCall,
@@ -1089,49 +881,48 @@ export class AuthorizedCertificatesClient {
     );
   }
 
-  /**
-   * Equivalent to `listAuthorizedCertificates`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent `Application` resource. Example: `apps/myapp`.
-   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
-   *   Controls the set of fields returned in the `LIST` response.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/authorized_certificates.list_authorized_certificates.js</caption>
-   * region_tag:appengine_v1_generated_AuthorizedCertificates_ListAuthorizedCertificates_async
-   */
+/**
+ * Equivalent to `listAuthorizedCertificates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Name of the parent `Application` resource. Example: `apps/myapp`.
+ * @param {google.appengine.v1.AuthorizedCertificateView} request.view
+ *   Controls the set of fields returned in the `LIST` response.
+ * @param {number} request.pageSize
+ *   Maximum results to return per page.
+ * @param {string} request.pageToken
+ *   Continuation token for fetching the next page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.appengine.v1.AuthorizedCertificate|AuthorizedCertificate}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/authorized_certificates.list_authorized_certificates.js</caption>
+ * region_tag:appengine_v1_generated_AuthorizedCertificates_ListAuthorizedCertificates_async
+ */
   listAuthorizedCertificatesAsync(
-    request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.appengine.v1.IAuthorizedCertificate> {
+      request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.appengine.v1.IAuthorizedCertificate>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAuthorizedCertificates iterate %j', request);
     return this.descriptors.page.listAuthorizedCertificates.asyncIterate(
       this.innerApiCalls['listAuthorizedCertificates'] as GaxCall,
@@ -1152,12 +943,7 @@ export class AuthorizedCertificatesClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(
-    app: string,
-    service: string,
-    version: string,
-    instance: string
-  ) {
+  instancePath(app:string,service:string,version:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       app: app,
       service: service,
