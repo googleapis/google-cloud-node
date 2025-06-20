@@ -639,12 +639,6 @@ export namespace google {
                     /** MergeFieldsOptions replaceRepeatedFields. */
                     public replaceRepeatedFields?: (boolean|null);
 
-                    /** MergeFieldsOptions _replaceMessageFields. */
-                    public _replaceMessageFields?: "replaceMessageFields";
-
-                    /** MergeFieldsOptions _replaceRepeatedFields. */
-                    public _replaceRepeatedFields?: "replaceRepeatedFields";
-
                     /**
                      * Creates a new MergeFieldsOptions instance using the specified properties.
                      * @param [properties] Properties to set
@@ -791,7 +785,7 @@ export namespace google {
                     rawDocumentPath?: (string|null);
 
                     /** Document inlineRawDocument */
-                    inlineRawDocument?: (Uint8Array|string|null);
+                    inlineRawDocument?: (Uint8Array|Buffer|string|null);
 
                     /** Document properties */
                     properties?: (google.cloud.contentwarehouse.v1.IProperty[]|null);
@@ -870,7 +864,7 @@ export namespace google {
                     public rawDocumentPath?: (string|null);
 
                     /** Document inlineRawDocument. */
-                    public inlineRawDocument?: (Uint8Array|string|null);
+                    public inlineRawDocument?: (Uint8Array|Buffer|string|null);
 
                     /** Document properties. */
                     public properties: google.cloud.contentwarehouse.v1.IProperty[];
@@ -13356,7 +13350,7 @@ export namespace google {
                     uri?: (string|null);
 
                     /** Document content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** Document docid */
                     docid?: (string|null);
@@ -13411,7 +13405,7 @@ export namespace google {
                     public uri?: (string|null);
 
                     /** Document content. */
-                    public content?: (Uint8Array|string|null);
+                    public content?: (Uint8Array|Buffer|string|null);
 
                     /** Document docid. */
                     public docid: string;
@@ -14197,7 +14191,7 @@ export namespace google {
                         interface IImage {
 
                             /** Image content */
-                            content?: (Uint8Array|string|null);
+                            content?: (Uint8Array|Buffer|string|null);
 
                             /** Image mimeType */
                             mimeType?: (string|null);
@@ -14219,7 +14213,7 @@ export namespace google {
                             constructor(properties?: google.cloud.documentai.v1.Document.Page.IImage);
 
                             /** Image content. */
-                            public content: (Uint8Array|string);
+                            public content: (Uint8Array|Buffer|string);
 
                             /** Image mimeType. */
                             public mimeType: string;
@@ -14321,7 +14315,7 @@ export namespace google {
                             type?: (number|null);
 
                             /** Matrix data */
-                            data?: (Uint8Array|string|null);
+                            data?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a Matrix. */
@@ -14343,7 +14337,7 @@ export namespace google {
                             public type: number;
 
                             /** Matrix data. */
-                            public data: (Uint8Array|string);
+                            public data: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new Matrix instance using the specified properties.
@@ -20680,6 +20674,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -20720,6 +20717,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -24673,6 +24673,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -24924,7 +24927,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -24955,7 +24958,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -26191,7 +26194,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -26207,7 +26210,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -27067,7 +27070,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -27080,7 +27083,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
@@ -28450,7 +28453,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|string|null);
+                etag?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Policy. */
@@ -28472,7 +28475,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|string);
+                public etag: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.
