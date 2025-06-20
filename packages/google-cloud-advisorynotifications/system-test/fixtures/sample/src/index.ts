@@ -19,19 +19,14 @@
 import {AdvisoryNotificationsServiceClient} from '@google-cloud/advisorynotifications';
 
 // check that the client class type name can be used
-function doStuffWithAdvisoryNotificationsServiceClient(
-  client: AdvisoryNotificationsServiceClient
-) {
+function doStuffWithAdvisoryNotificationsServiceClient(client: AdvisoryNotificationsServiceClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const advisoryNotificationsServiceClient =
-    new AdvisoryNotificationsServiceClient();
-  doStuffWithAdvisoryNotificationsServiceClient(
-    advisoryNotificationsServiceClient
-  );
+  const advisoryNotificationsServiceClient = new AdvisoryNotificationsServiceClient();
+  doStuffWithAdvisoryNotificationsServiceClient(advisoryNotificationsServiceClient);
 }
 
 main();

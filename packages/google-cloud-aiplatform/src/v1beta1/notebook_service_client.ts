@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOption
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -316,10 +316,10 @@ export class NotebookServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      projectLocationFeatureGroupFeaturePathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationFeatureGroupFeaturesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
       ),
-      projectLocationFeaturestoreEntityTypeFeaturePathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationFeaturestoreEntityTypeFeaturesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
       ),
       projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
@@ -393,7 +393,7 @@ export class NotebookServiceClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'notebookExecutionJobs')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -727,6 +727,12 @@ export class NotebookServiceClient {
       ]) => {
         this._log.info('getNotebookRuntimeTemplate response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -822,6 +828,12 @@ export class NotebookServiceClient {
       ]) => {
         this._log.info('updateNotebookRuntimeTemplate response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -913,6 +925,12 @@ export class NotebookServiceClient {
       ]) => {
         this._log.info('getNotebookRuntime response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1003,6 +1021,12 @@ export class NotebookServiceClient {
       ]) => {
         this._log.info('getNotebookExecutionJob response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -5774,7 +5798,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationFeatureGroupFeature resource name string.
+   * Return a fully-qualified projectLocationFeatureGroupFeatures resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -5782,8 +5806,8 @@ export class NotebookServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeatureGroupFeaturePath(project:string,location:string,featureGroup:string,feature:string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render({
+  projectLocationFeatureGroupFeaturesPath(project:string,location:string,featureGroup:string,feature:string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render({
       project: project,
       location: location,
       feature_group: featureGroup,
@@ -5792,51 +5816,51 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Parse the project from ProjectLocationFeatureGroupFeature resource.
+   * Parse the project from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).project;
+  matchProjectFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationFeatureGroupFeature resource.
+   * Parse the location from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).location;
+  matchLocationFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).location;
   }
 
   /**
-   * Parse the feature_group from ProjectLocationFeatureGroupFeature resource.
+   * Parse the feature_group from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the feature_group.
    */
-  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature_group;
+  matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).feature_group;
   }
 
   /**
-   * Parse the feature from ProjectLocationFeatureGroupFeature resource.
+   * Parse the feature from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature;
+  matchFeatureFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).feature;
   }
 
   /**
-   * Return a fully-qualified projectLocationFeaturestoreEntityTypeFeature resource name string.
+   * Return a fully-qualified projectLocationFeaturestoreEntityTypeFeatures resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -5845,8 +5869,8 @@ export class NotebookServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeaturestoreEntityTypeFeaturePath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render({
+  projectLocationFeaturestoreEntityTypeFeaturesPath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render({
       project: project,
       location: location,
       featurestore: featurestore,
@@ -5856,58 +5880,58 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Parse the project from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the project from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).project;
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the location from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).location;
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).location;
   }
 
   /**
-   * Parse the featurestore from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the featurestore from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the featurestore.
    */
-  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).featurestore;
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).featurestore;
   }
 
   /**
-   * Parse the entity_type from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the entity_type from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).entity_type;
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).entity_type;
   }
 
   /**
-   * Parse the feature from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the feature from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).feature;
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).feature;
   }
 
   /**

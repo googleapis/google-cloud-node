@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  IamClient,
-  IamProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, IamClient, IamProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -112,41 +103,20 @@ export class NodeGroupControllerClient {
    *     const client = new NodeGroupControllerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof NodeGroupControllerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataproc.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -172,7 +142,7 @@ export class NodeGroupControllerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -185,9 +155,13 @@ export class NodeGroupControllerClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -220,22 +194,18 @@ export class NodeGroupControllerClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectLocationAutoscalingPolicyPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
-        ),
-      projectLocationWorkflowTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
-        ),
-      projectRegionAutoscalingPolicyPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
-        ),
-      projectRegionWorkflowTemplatePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
-        ),
+      projectLocationAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
+      ),
+      projectLocationWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
+      ),
+      projectRegionAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
+      ),
+      projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
+      ),
       regionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}'
       ),
@@ -247,176 +217,50 @@ export class NodeGroupControllerClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/v1/{resource=projects/*/regions/*/clusters/*}:getIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/regions/*/jobs/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/operations/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:getIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:getIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/regions/*/clusters/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/regions/*/jobs/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/operations/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/regions/*/clusters/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/regions/*/jobs/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/operations/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',
-          additional_bindings: [
-            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/regions/*/operations/*}',
-          additional_bindings: [
-            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/regions/*/operations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/regions/*/operations}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*/operations}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/regions/*/clusters/*}:getIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:getIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/regions/*/clusters/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/regions/*/clusters/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',additional_bindings: [{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/regions/*/operations/*}',additional_bindings: [{delete: '/v1/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/regions/*/operations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/regions/*/operations}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/operations}',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createNodeGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.NodeGroup'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.NodeGroup') as gax.protobuf.Type;
     const createNodeGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.NodeGroupOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.NodeGroupOperationMetadata') as gax.protobuf.Type;
     const resizeNodeGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.NodeGroup'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.NodeGroup') as gax.protobuf.Type;
     const resizeNodeGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.NodeGroupOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.NodeGroupOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createNodeGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createNodeGroupResponse.decode.bind(createNodeGroupResponse),
-        createNodeGroupMetadata.decode.bind(createNodeGroupMetadata)
-      ),
+        createNodeGroupMetadata.decode.bind(createNodeGroupMetadata)),
       resizeNodeGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         resizeNodeGroupResponse.decode.bind(resizeNodeGroupResponse),
-        resizeNodeGroupMetadata.decode.bind(resizeNodeGroupMetadata)
-      ),
+        resizeNodeGroupMetadata.decode.bind(resizeNodeGroupMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataproc.v1.NodeGroupController',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dataproc.v1.NodeGroupController', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -447,39 +291,32 @@ export class NodeGroupControllerClient {
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.NodeGroupController.
     this.nodeGroupControllerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataproc.v1.NodeGroupController'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.NodeGroupController') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataproc.v1.NodeGroupController,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const nodeGroupControllerStubMethods = [
-      'createNodeGroup',
-      'resizeNodeGroup',
-      'getNodeGroup',
-    ];
+    const nodeGroupControllerStubMethods =
+        ['createNodeGroup', 'resizeNodeGroup', 'getNodeGroup'];
     for (const methodName of nodeGroupControllerStubMethods) {
       const callPromise = this.nodeGroupControllerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -499,14 +336,8 @@ export class NodeGroupControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataproc.googleapis.com';
   }
@@ -517,14 +348,8 @@ export class NodeGroupControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataproc.googleapis.com';
   }
@@ -555,7 +380,9 @@ export class NodeGroupControllerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -564,9 +391,8 @@ export class NodeGroupControllerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -577,543 +403,401 @@ export class NodeGroupControllerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the resource representation for a node group in a
-   * cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the node group to retrieve.
-   *   Format:
-   *   `projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{nodeGroup}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.NodeGroup|NodeGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/node_group_controller.get_node_group.js</caption>
-   * region_tag:dataproc_v1_generated_NodeGroupController_GetNodeGroup_async
-   */
+/**
+ * Gets the resource representation for a node group in a
+ * cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the node group to retrieve.
+ *   Format:
+ *   `projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{nodeGroup}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.NodeGroup|NodeGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/node_group_controller.get_node_group.js</caption>
+ * region_tag:dataproc_v1_generated_NodeGroupController_GetNodeGroup_async
+ */
   getNodeGroup(
-    request?: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.INodeGroup,
-      protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataproc.v1.INodeGroup,
+        protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|undefined, {}|undefined
+      ]>;
   getNodeGroup(
-    request: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.INodeGroup,
-      protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNodeGroup(
-    request: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.INodeGroup,
-      protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNodeGroup(
-    request?: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataproc.v1.INodeGroup,
-          | protos.google.cloud.dataproc.v1.IGetNodeGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataproc.v1.INodeGroup,
-      protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.INodeGroup,
-      protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNodeGroup(
+      request: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
+      callback: Callback<
+          protos.google.cloud.dataproc.v1.INodeGroup,
+          protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNodeGroup(
+      request?: protos.google.cloud.dataproc.v1.IGetNodeGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataproc.v1.INodeGroup,
+          protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataproc.v1.INodeGroup,
+          protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataproc.v1.INodeGroup,
+        protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNodeGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataproc.v1.INodeGroup,
-          | protos.google.cloud.dataproc.v1.IGetNodeGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataproc.v1.INodeGroup,
+        protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNodeGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNodeGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataproc.v1.INodeGroup,
-          protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getNodeGroup response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNodeGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataproc.v1.INodeGroup,
+        protos.google.cloud.dataproc.v1.IGetNodeGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNodeGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a node group in a cluster. The returned
-   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} is
-   * [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this node group will be created.
-   *   Format: `projects/{project}/regions/{region}/clusters/{cluster}`
-   * @param {google.cloud.dataproc.v1.NodeGroup} request.nodeGroup
-   *   Required. The node group to create.
-   * @param {string} [request.nodeGroupId]
-   *   Optional. An optional node group ID. Generated if not specified.
-   *
-   *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
-   *   underscores (_), and hyphens (-). Cannot begin or end with underscore
-   *   or hyphen. Must consist of from 3 to 33 characters.
-   * @param {string} [request.requestId]
-   *   Optional. A unique ID used to identify the request. If the server receives
-   *   two
-   *   [CreateNodeGroupRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequests)
-   *   with the same ID, the second request is ignored and the
-   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
-   *   and stored in the backend is returned.
-   *
-   *   Recommendation: Set this value to a
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
-   *
-   *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
-   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/node_group_controller.create_node_group.js</caption>
-   * region_tag:dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async
-   */
+/**
+ * Creates a node group in a cluster. The returned
+ * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} is
+ * [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this node group will be created.
+ *   Format: `projects/{project}/regions/{region}/clusters/{cluster}`
+ * @param {google.cloud.dataproc.v1.NodeGroup} request.nodeGroup
+ *   Required. The node group to create.
+ * @param {string} [request.nodeGroupId]
+ *   Optional. An optional node group ID. Generated if not specified.
+ *
+ *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). Cannot begin or end with underscore
+ *   or hyphen. Must consist of from 3 to 33 characters.
+ * @param {string} [request.requestId]
+ *   Optional. A unique ID used to identify the request. If the server receives
+ *   two
+ *   [CreateNodeGroupRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequests)
+ *   with the same ID, the second request is ignored and the
+ *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
+ *   and stored in the backend is returned.
+ *
+ *   Recommendation: Set this value to a
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+ *
+ *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/node_group_controller.create_node_group.js</caption>
+ * region_tag:dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async
+ */
   createNodeGroup(
-    request?: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createNodeGroup(
-    request: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createNodeGroup(
-    request: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createNodeGroup(
-    request?: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataproc.v1.INodeGroup,
-            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataproc.v1.ICreateNodeGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataproc.v1.INodeGroup,
-            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createNodeGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createNodeGroup request %j', request);
-    return this.innerApiCalls
-      .createNodeGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataproc.v1.INodeGroup,
-            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createNodeGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createNodeGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createNodeGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createNodeGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/node_group_controller.create_node_group.js</caption>
-   * region_tag:dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async
-   */
-  async checkCreateNodeGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataproc.v1.NodeGroup,
-      protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createNodeGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/node_group_controller.create_node_group.js</caption>
+ * region_tag:dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async
+ */
+  async checkCreateNodeGroupProgress(name: string): Promise<LROperation<protos.google.cloud.dataproc.v1.NodeGroup, protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata>>{
     this._log.info('createNodeGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createNodeGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataproc.v1.NodeGroup,
-      protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createNodeGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataproc.v1.NodeGroup, protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata>;
   }
-  /**
-   * Resizes a node group in a cluster. The returned
-   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} is
-   * [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the node group to resize.
-   *   Format:
-   *   `projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{nodeGroup}`
-   * @param {number} request.size
-   *   Required. The number of running instances for the node group to maintain.
-   *   The group adds or removes instances to maintain the number of instances
-   *   specified by this parameter.
-   * @param {string} [request.requestId]
-   *   Optional. A unique ID used to identify the request. If the server receives
-   *   two
-   *   [ResizeNodeGroupRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.ResizeNodeGroupRequests)
-   *   with the same ID, the second request is ignored and the
-   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
-   *   and stored in the backend is returned.
-   *
-   *   Recommendation: Set this value to a
-   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
-   *
-   *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
-   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
-   * @param {google.protobuf.Duration} [request.gracefulDecommissionTimeout]
-   *   Optional. Timeout for graceful YARN decommissioning. [Graceful
-   *   decommissioning]
-   *   (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/scaling-clusters#graceful_decommissioning)
-   *   allows the removal of nodes from the Compute Engine node group
-   *   without interrupting jobs in progress. This timeout specifies how long to
-   *   wait for jobs in progress to finish before forcefully removing nodes (and
-   *   potentially interrupting jobs). Default timeout is 0 (for forceful
-   *   decommission), and the maximum allowed timeout is 1 day. (see JSON
-   *   representation of
-   *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
-   *
-   *   Only supported on Dataproc image versions 1.2 and higher.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/node_group_controller.resize_node_group.js</caption>
-   * region_tag:dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async
-   */
+/**
+ * Resizes a node group in a cluster. The returned
+ * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} is
+ * [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the node group to resize.
+ *   Format:
+ *   `projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{nodeGroup}`
+ * @param {number} request.size
+ *   Required. The number of running instances for the node group to maintain.
+ *   The group adds or removes instances to maintain the number of instances
+ *   specified by this parameter.
+ * @param {string} [request.requestId]
+ *   Optional. A unique ID used to identify the request. If the server receives
+ *   two
+ *   [ResizeNodeGroupRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.ResizeNodeGroupRequests)
+ *   with the same ID, the second request is ignored and the
+ *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
+ *   and stored in the backend is returned.
+ *
+ *   Recommendation: Set this value to a
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+ *
+ *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+ * @param {google.protobuf.Duration} [request.gracefulDecommissionTimeout]
+ *   Optional. Timeout for graceful YARN decommissioning. [Graceful
+ *   decommissioning]
+ *   (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/scaling-clusters#graceful_decommissioning)
+ *   allows the removal of nodes from the Compute Engine node group
+ *   without interrupting jobs in progress. This timeout specifies how long to
+ *   wait for jobs in progress to finish before forcefully removing nodes (and
+ *   potentially interrupting jobs). Default timeout is 0 (for forceful
+ *   decommission), and the maximum allowed timeout is 1 day. (see JSON
+ *   representation of
+ *   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+ *
+ *   Only supported on Dataproc image versions 1.2 and higher.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/node_group_controller.resize_node_group.js</caption>
+ * region_tag:dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async
+ */
   resizeNodeGroup(
-    request?: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   resizeNodeGroup(
-    request: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   resizeNodeGroup(
-    request: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   resizeNodeGroup(
-    request?: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataproc.v1.INodeGroup,
-            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataproc.v1.INodeGroup,
-        protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataproc.v1.IResizeNodeGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataproc.v1.INodeGroup,
-            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('resizeNodeGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('resizeNodeGroup request %j', request);
-    return this.innerApiCalls
-      .resizeNodeGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataproc.v1.INodeGroup,
-            protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('resizeNodeGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.resizeNodeGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataproc.v1.INodeGroup, protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('resizeNodeGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `resizeNodeGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/node_group_controller.resize_node_group.js</caption>
-   * region_tag:dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async
-   */
-  async checkResizeNodeGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataproc.v1.NodeGroup,
-      protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `resizeNodeGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/node_group_controller.resize_node_group.js</caption>
+ * region_tag:dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async
+ */
+  async checkResizeNodeGroupProgress(name: string): Promise<LROperation<protos.google.cloud.dataproc.v1.NodeGroup, protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata>>{
     this._log.info('resizeNodeGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.resizeNodeGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataproc.v1.NodeGroup,
-      protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.resizeNodeGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataproc.v1.NodeGroup, protos.google.cloud.dataproc.v1.NodeGroupOperationMetadata>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1128,39 +812,39 @@ export class NodeGroupControllerClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1175,40 +859,40 @@ export class NodeGroupControllerClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1223,11 +907,11 @@ export class NodeGroupControllerClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1272,20 +956,20 @@ export class NodeGroupControllerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1322,13 +1006,13 @@ export class NodeGroupControllerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1362,7 +1046,7 @@ export class NodeGroupControllerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1377,20 +1061,20 @@ export class NodeGroupControllerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1434,20 +1118,20 @@ export class NodeGroupControllerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1463,7 +1147,7 @@ export class NodeGroupControllerClient {
    * @param {string} batch
    * @returns {string} Resource name string.
    */
-  batchPath(project: string, location: string, batch: string) {
+  batchPath(project:string,location:string,batch:string) {
     return this.pathTemplates.batchPathTemplate.render({
       project: project,
       location: location,
@@ -1512,7 +1196,7 @@ export class NodeGroupControllerClient {
    * @param {string} cluster
    * @returns {string} Resource name string.
    */
-  clusterRegionPath(project: string, region: string, cluster: string) {
+  clusterRegionPath(project:string,region:string,cluster:string) {
     return this.pathTemplates.clusterRegionPathTemplate.render({
       project: project,
       region: region,
@@ -1528,8 +1212,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromClusterRegionName(clusterRegionName: string) {
-    return this.pathTemplates.clusterRegionPathTemplate.match(clusterRegionName)
-      .project;
+    return this.pathTemplates.clusterRegionPathTemplate.match(clusterRegionName).project;
   }
 
   /**
@@ -1540,8 +1223,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the region.
    */
   matchRegionFromClusterRegionName(clusterRegionName: string) {
-    return this.pathTemplates.clusterRegionPathTemplate.match(clusterRegionName)
-      .region;
+    return this.pathTemplates.clusterRegionPathTemplate.match(clusterRegionName).region;
   }
 
   /**
@@ -1552,8 +1234,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the cluster.
    */
   matchClusterFromClusterRegionName(clusterRegionName: string) {
-    return this.pathTemplates.clusterRegionPathTemplate.match(clusterRegionName)
-      .cluster;
+    return this.pathTemplates.clusterRegionPathTemplate.match(clusterRegionName).cluster;
   }
 
   /**
@@ -1565,12 +1246,7 @@ export class NodeGroupControllerClient {
    * @param {string} node_group
    * @returns {string} Resource name string.
    */
-  nodeGroupPath(
-    project: string,
-    region: string,
-    cluster: string,
-    nodeGroup: string
-  ) {
+  nodeGroupPath(project:string,region:string,cluster:string,nodeGroup:string) {
     return this.pathTemplates.nodeGroupPathTemplate.render({
       project: project,
       region: region,
@@ -1587,8 +1263,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
-      .project;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).project;
   }
 
   /**
@@ -1610,8 +1285,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the cluster.
    */
   matchClusterFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
-      .cluster;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).cluster;
   }
 
   /**
@@ -1622,8 +1296,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the node_group.
    */
   matchNodeGroupFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
-      .node_group;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).node_group;
   }
 
   /**
@@ -1632,7 +1305,7 @@ export class NodeGroupControllerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1657,18 +1330,12 @@ export class NodeGroupControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectLocationAutoscalingPolicyPath(
-    project: string,
-    location: string,
-    autoscalingPolicy: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        autoscaling_policy: autoscalingPolicy,
-      }
-    );
+  projectLocationAutoscalingPolicyPath(project:string,location:string,autoscalingPolicy:string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      autoscaling_policy: autoscalingPolicy,
+    });
   }
 
   /**
@@ -1678,12 +1345,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAutoscalingPolicyName(
-    projectLocationAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
-      projectLocationAutoscalingPolicyName
-    ).project;
+  matchProjectFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).project;
   }
 
   /**
@@ -1693,12 +1356,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAutoscalingPolicyName(
-    projectLocationAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
-      projectLocationAutoscalingPolicyName
-    ).location;
+  matchLocationFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).location;
   }
 
   /**
@@ -1708,12 +1367,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
-    projectLocationAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
-      projectLocationAutoscalingPolicyName
-    ).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).autoscaling_policy;
   }
 
   /**
@@ -1724,18 +1379,12 @@ export class NodeGroupControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectLocationWorkflowTemplatePath(
-    project: string,
-    location: string,
-    workflowTemplate: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render(
-      {
-        project: project,
-        location: location,
-        workflow_template: workflowTemplate,
-      }
-    );
+  projectLocationWorkflowTemplatePath(project:string,location:string,workflowTemplate:string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      workflow_template: workflowTemplate,
+    });
   }
 
   /**
@@ -1745,12 +1394,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationWorkflowTemplateName(
-    projectLocationWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
-      projectLocationWorkflowTemplateName
-    ).project;
+  matchProjectFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).project;
   }
 
   /**
@@ -1760,12 +1405,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationWorkflowTemplateName(
-    projectLocationWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
-      projectLocationWorkflowTemplateName
-    ).location;
+  matchLocationFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).location;
   }
 
   /**
@@ -1775,12 +1416,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
-    projectLocationWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
-      projectLocationWorkflowTemplateName
-    ).workflow_template;
+  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).workflow_template;
   }
 
   /**
@@ -1791,18 +1428,12 @@ export class NodeGroupControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectRegionAutoscalingPolicyPath(
-    project: string,
-    region: string,
-    autoscalingPolicy: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render(
-      {
-        project: project,
-        region: region,
-        autoscaling_policy: autoscalingPolicy,
-      }
-    );
+  projectRegionAutoscalingPolicyPath(project:string,region:string,autoscalingPolicy:string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render({
+      project: project,
+      region: region,
+      autoscaling_policy: autoscalingPolicy,
+    });
   }
 
   /**
@@ -1812,12 +1443,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionAutoscalingPolicyName(
-    projectRegionAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
-      projectRegionAutoscalingPolicyName
-    ).project;
+  matchProjectFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).project;
   }
 
   /**
@@ -1827,12 +1454,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionAutoscalingPolicyName(
-    projectRegionAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
-      projectRegionAutoscalingPolicyName
-    ).region;
+  matchRegionFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).region;
   }
 
   /**
@@ -1842,12 +1465,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
-    projectRegionAutoscalingPolicyName: string
-  ) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
-      projectRegionAutoscalingPolicyName
-    ).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).autoscaling_policy;
   }
 
   /**
@@ -1858,11 +1477,7 @@ export class NodeGroupControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectRegionWorkflowTemplatePath(
-    project: string,
-    region: string,
-    workflowTemplate: string
-  ) {
+  projectRegionWorkflowTemplatePath(project:string,region:string,workflowTemplate:string) {
     return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render({
       project: project,
       region: region,
@@ -1877,12 +1492,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionWorkflowTemplateName(
-    projectRegionWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
-      projectRegionWorkflowTemplateName
-    ).project;
+  matchProjectFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).project;
   }
 
   /**
@@ -1892,12 +1503,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionWorkflowTemplateName(
-    projectRegionWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
-      projectRegionWorkflowTemplateName
-    ).region;
+  matchRegionFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).region;
   }
 
   /**
@@ -1907,12 +1514,8 @@ export class NodeGroupControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
-    projectRegionWorkflowTemplateName: string
-  ) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
-      projectRegionWorkflowTemplateName
-    ).workflow_template;
+  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).workflow_template;
   }
 
   /**
@@ -1922,7 +1525,7 @@ export class NodeGroupControllerClient {
    * @param {string} region
    * @returns {string} Resource name string.
    */
-  regionPath(project: string, region: string) {
+  regionPath(project:string,region:string) {
     return this.pathTemplates.regionPathTemplate.render({
       project: project,
       region: region,
@@ -1959,7 +1562,7 @@ export class NodeGroupControllerClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(project: string, location: string, session: string) {
+  sessionPath(project:string,location:string,session:string) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -2008,7 +1611,7 @@ export class NodeGroupControllerClient {
    * @param {string} template
    * @returns {string} Resource name string.
    */
-  sessionTemplatePath(project: string, location: string, template: string) {
+  sessionTemplatePath(project:string,location:string,template:string) {
     return this.pathTemplates.sessionTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -2024,9 +1627,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(
-      sessionTemplateName
-    ).project;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).project;
   }
 
   /**
@@ -2037,9 +1638,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(
-      sessionTemplateName
-    ).location;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).location;
   }
 
   /**
@@ -2050,9 +1649,7 @@ export class NodeGroupControllerClient {
    * @returns {string} A string representing the template.
    */
   matchTemplateFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(
-      sessionTemplateName
-    ).template;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).template;
   }
 
   /**
@@ -2067,9 +1664,7 @@ export class NodeGroupControllerClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

@@ -8720,6 +8720,66 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_ModelGardenService_Deploy_async",
+            "title": "DatasetService deploy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deploys a model to a new endpoint.",
+            "canonical": true,
+            "file": "model_garden_service.deploy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 82,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Deploy",
+                "fullName": "google.cloud.aiplatform.v1.ModelGardenService.Deploy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "publisher_model_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "hugging_face_model_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_config",
+                        "type": ".google.cloud.aiplatform.v1.DeployRequest.ModelConfig"
+                    },
+                    {
+                        "name": "endpoint_config",
+                        "type": ".google.cloud.aiplatform.v1.DeployRequest.EndpointConfig"
+                    },
+                    {
+                        "name": "deploy_config",
+                        "type": ".google.cloud.aiplatform.v1.DeployRequest.DeployConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelGardenServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelGardenServiceClient"
+                },
+                "method": {
+                    "shortName": "Deploy",
+                    "fullName": "google.cloud.aiplatform.v1.ModelGardenService.Deploy",
+                    "service": {
+                        "shortName": "ModelGardenService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelGardenService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_ModelService_UploadModel_async",
             "title": "DatasetService uploadModel Sample",
             "origin": "API_DEFINITION",
@@ -14476,6 +14536,86 @@
                 "method": {
                     "shortName": "DeleteRagFile",
                     "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.DeleteRagFile",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_UpdateRagEngineConfig_async",
+            "title": "DatasetService updateRagEngineConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a RagEngineConfig.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.update_rag_engine_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateRagEngineConfig",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.UpdateRagEngineConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "rag_engine_config",
+                        "type": ".google.cloud.aiplatform.v1.RagEngineConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateRagEngineConfig",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.UpdateRagEngineConfig",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_GetRagEngineConfig_async",
+            "title": "DatasetService getRagEngineConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a RagEngineConfig.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.get_rag_engine_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRagEngineConfig",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagEngineConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.RagEngineConfig",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "GetRagEngineConfig",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagEngineConfig",
                     "service": {
                         "shortName": "VertexRagDataService",
                         "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
