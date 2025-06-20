@@ -24,38 +24,16 @@ const ApiHubDependenciesClient = v1.ApiHubDependenciesClient;
 type ApiHubDependenciesClient = v1.ApiHubDependenciesClient;
 const ApiHubPluginClient = v1.ApiHubPluginClient;
 type ApiHubPluginClient = v1.ApiHubPluginClient;
-const HostProjectRegistrationServiceClient =
-  v1.HostProjectRegistrationServiceClient;
-type HostProjectRegistrationServiceClient =
-  v1.HostProjectRegistrationServiceClient;
+const HostProjectRegistrationServiceClient = v1.HostProjectRegistrationServiceClient;
+type HostProjectRegistrationServiceClient = v1.HostProjectRegistrationServiceClient;
 const LintingServiceClient = v1.LintingServiceClient;
 type LintingServiceClient = v1.LintingServiceClient;
 const ProvisioningClient = v1.ProvisioningClient;
 type ProvisioningClient = v1.ProvisioningClient;
-const RuntimeProjectAttachmentServiceClient =
-  v1.RuntimeProjectAttachmentServiceClient;
-type RuntimeProjectAttachmentServiceClient =
-  v1.RuntimeProjectAttachmentServiceClient;
+const RuntimeProjectAttachmentServiceClient = v1.RuntimeProjectAttachmentServiceClient;
+type RuntimeProjectAttachmentServiceClient = v1.RuntimeProjectAttachmentServiceClient;
 
-export {
-  v1,
-  ApiHubClient,
-  ApiHubDependenciesClient,
-  ApiHubPluginClient,
-  HostProjectRegistrationServiceClient,
-  LintingServiceClient,
-  ProvisioningClient,
-  RuntimeProjectAttachmentServiceClient,
-};
-export default {
-  v1,
-  ApiHubClient,
-  ApiHubDependenciesClient,
-  ApiHubPluginClient,
-  HostProjectRegistrationServiceClient,
-  LintingServiceClient,
-  ProvisioningClient,
-  RuntimeProjectAttachmentServiceClient,
-};
+export {v1, ApiHubClient, ApiHubDependenciesClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient};
+export default {v1, ApiHubClient, ApiHubDependenciesClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

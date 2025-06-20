@@ -280,12 +280,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AlertPolicy.decode = function decode(reader, length) {
+                    AlertPolicy.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -817,12 +819,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Documentation.decode = function decode(reader, length) {
+                        Documentation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Documentation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.content = reader.string();
@@ -1085,12 +1089,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Link.decode = function decode(reader, length) {
+                            Link.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Documentation.Link();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.displayName = reader.string();
@@ -1395,12 +1401,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Condition.decode = function decode(reader, length) {
+                        Condition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 12: {
                                         message.name = reader.string();
@@ -1776,12 +1784,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Trigger.decode = function decode(reader, length) {
+                            Trigger.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.Trigger();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.count = reader.int32();
@@ -2122,12 +2132,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetricThreshold.decode = function decode(reader, length) {
+                            MetricThreshold.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 2: {
                                             message.filter = reader.string();
@@ -2559,12 +2571,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ForecastOptions.decode = function decode(reader, length) {
+                                ForecastOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MetricThreshold.ForecastOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.forecastHorizon = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -2805,12 +2819,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MetricAbsence.decode = function decode(reader, length) {
+                            MetricAbsence.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MetricAbsence();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.filter = reader.string();
@@ -3088,12 +3104,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LogMatch.decode = function decode(reader, length) {
+                            LogMatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.LogMatch(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.filter = reader.string();
@@ -3370,12 +3388,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MonitoringQueryLanguageCondition.decode = function decode(reader, length) {
+                            MonitoringQueryLanguageCondition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.query = reader.string();
@@ -3717,12 +3737,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PrometheusQueryLanguageCondition.decode = function decode(reader, length) {
+                            PrometheusQueryLanguageCondition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.PrometheusQueryLanguageCondition(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.query = reader.string();
@@ -4117,12 +4139,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SqlCondition.decode = function decode(reader, length) {
+                            SqlCondition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.query = reader.string();
@@ -4434,12 +4458,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Minutes.decode = function decode(reader, length) {
+                                Minutes.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Minutes();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.periodicity = reader.int32();
@@ -4596,12 +4622,7 @@
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
-                                /**
-                                 * Hourly _minuteOffset.
-                                 * @member {"minuteOffset"|undefined} _minuteOffset
-                                 * @memberof google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(Hourly.prototype, "_minuteOffset", {
                                     get: $util.oneOfGetter($oneOfFields = ["minuteOffset"]),
                                     set: $util.oneOfSetter($oneOfFields)
@@ -4662,12 +4683,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Hourly.decode = function decode(reader, length) {
+                                Hourly.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Hourly();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.periodicity = reader.int32();
@@ -4893,12 +4916,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Daily.decode = function decode(reader, length) {
+                                Daily.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.Daily();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.periodicity = reader.int32();
@@ -5125,12 +5150,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RowCountTest.decode = function decode(reader, length) {
+                                RowCountTest.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.RowCountTest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.comparison = reader.int32();
@@ -5399,12 +5426,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                BooleanTest.decode = function decode(reader, length) {
+                                BooleanTest.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.Condition.SqlCondition.BooleanTest();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.column = reader.string();
@@ -5666,12 +5695,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AlertStrategy.decode = function decode(reader, length) {
+                        AlertStrategy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.notificationRateLimit = $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit.decode(reader, reader.uint32());
@@ -5977,12 +6008,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NotificationRateLimit.decode = function decode(reader, length) {
+                            NotificationRateLimit.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.period = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -6214,12 +6247,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NotificationChannelStrategy.decode = function decode(reader, length) {
+                            NotificationChannelStrategy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationChannelStrategy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.notificationChannelNames && message.notificationChannelNames.length))
@@ -6531,12 +6566,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TypedValue.decode = function decode(reader, length) {
+                    TypedValue.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TypedValue();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.boolValue = reader.bool();
@@ -6837,12 +6874,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeInterval.decode = function decode(reader, length) {
+                    TimeInterval.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeInterval();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -7098,12 +7137,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Aggregation.decode = function decode(reader, length) {
+                    Aggregation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Aggregation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.alignmentPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -7678,12 +7719,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MutationRecord.decode = function decode(reader, length) {
+                    MutationRecord.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.MutationRecord();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.mutateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -8110,12 +8153,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateAlertPolicyRequest.decode = function decode(reader, length) {
+                    CreateAlertPolicyRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -8331,12 +8376,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetAlertPolicyRequest.decode = function decode(reader, length) {
+                    GetAlertPolicyRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -8578,12 +8625,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAlertPoliciesRequest.decode = function decode(reader, length) {
+                    ListAlertPoliciesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListAlertPoliciesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.name = reader.string();
@@ -8854,12 +8903,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAlertPoliciesResponse.decode = function decode(reader, length) {
+                    ListAlertPoliciesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListAlertPoliciesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     if (!(message.alertPolicies && message.alertPolicies.length))
@@ -9113,12 +9164,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateAlertPolicyRequest.decode = function decode(reader, length) {
+                    UpdateAlertPolicyRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -9339,12 +9392,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteAlertPolicyRequest.decode = function decode(reader, length) {
+                    DeleteAlertPolicyRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteAlertPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -9544,12 +9599,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DroppedLabels.decode = function decode(reader, length) {
+                    DroppedLabels.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DroppedLabels(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (message.label === $util.emptyObject)
@@ -9824,12 +9881,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Group.decode = function decode(reader, length) {
+                    Group.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Group();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -10378,12 +10437,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupsRequest.decode = function decode(reader, length) {
+                    ListGroupsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 7: {
                                     message.name = reader.string();
@@ -10672,12 +10733,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupsResponse.decode = function decode(reader, length) {
+                    ListGroupsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.group && message.group.length))
@@ -10907,12 +10970,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetGroupRequest.decode = function decode(reader, length) {
+                    GetGroupRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -11132,12 +11197,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateGroupRequest.decode = function decode(reader, length) {
+                    CreateGroupRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.name = reader.string();
@@ -11376,12 +11443,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateGroupRequest.decode = function decode(reader, length) {
+                    UpdateGroupRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.group = $root.google.monitoring.v3.Group.decode(reader, reader.uint32());
@@ -11608,12 +11677,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteGroupRequest.decode = function decode(reader, length) {
+                    DeleteGroupRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteGroupRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -11868,12 +11939,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupMembersRequest.decode = function decode(reader, length) {
+                    ListGroupMembersRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupMembersRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 7: {
                                     message.name = reader.string();
@@ -12149,12 +12222,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListGroupMembersResponse.decode = function decode(reader, length) {
+                    ListGroupMembersResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListGroupMembersResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.members && message.members.length))
@@ -12408,12 +12483,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Point.decode = function decode(reader, length) {
+                    Point.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Point();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.interval = $root.google.monitoring.v3.TimeInterval.decode(reader, reader.uint32());
@@ -12713,12 +12790,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeries.decode = function decode(reader, length) {
+                    TimeSeries.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeries();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.metric = $root.google.api.Metric.decode(reader, reader.uint32());
@@ -13124,12 +13203,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeriesDescriptor.decode = function decode(reader, length) {
+                    TimeSeriesDescriptor.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesDescriptor();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.labelDescriptors && message.labelDescriptors.length))
@@ -13408,12 +13489,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ValueDescriptor.decode = function decode(reader, length) {
+                        ValueDescriptor.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.key = reader.string();
@@ -13739,12 +13822,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeriesData.decode = function decode(reader, length) {
+                    TimeSeriesData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.labelValues && message.labelValues.length))
@@ -14003,12 +14088,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PointData.decode = function decode(reader, length) {
+                        PointData.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesData.PointData();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.values && message.values.length))
@@ -14282,12 +14369,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LabelValue.decode = function decode(reader, length) {
+                    LabelValue.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.LabelValue();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.boolValue = reader.bool();
@@ -14546,12 +14635,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryError.decode = function decode(reader, length) {
+                    QueryError.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.locator = $root.google.monitoring.v3.TextLocator.decode(reader, reader.uint32());
@@ -14811,12 +14902,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TextLocator.decode = function decode(reader, length) {
+                    TextLocator.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TextLocator();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.source = reader.string();
@@ -15086,12 +15179,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Position.decode = function decode(reader, length) {
+                        Position.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TextLocator.Position();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.line = reader.int32();
@@ -15670,12 +15765,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMonitoredResourceDescriptorsRequest.decode = function decode(reader, length) {
+                    ListMonitoredResourceDescriptorsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMonitoredResourceDescriptorsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.name = reader.string();
@@ -15923,12 +16020,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMonitoredResourceDescriptorsResponse.decode = function decode(reader, length) {
+                    ListMonitoredResourceDescriptorsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMonitoredResourceDescriptorsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.resourceDescriptors && message.resourceDescriptors.length))
@@ -16158,12 +16257,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetMonitoredResourceDescriptorRequest.decode = function decode(reader, length) {
+                    GetMonitoredResourceDescriptorRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetMonitoredResourceDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -16405,12 +16506,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMetricDescriptorsRequest.decode = function decode(reader, length) {
+                    ListMetricDescriptorsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMetricDescriptorsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.name = reader.string();
@@ -16670,12 +16773,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMetricDescriptorsResponse.decode = function decode(reader, length) {
+                    ListMetricDescriptorsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListMetricDescriptorsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.metricDescriptors && message.metricDescriptors.length))
@@ -16905,12 +17010,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetMetricDescriptorRequest.decode = function decode(reader, length) {
+                    GetMetricDescriptorRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetMetricDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -17119,12 +17226,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateMetricDescriptorRequest.decode = function decode(reader, length) {
+                    CreateMetricDescriptorRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateMetricDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -17340,12 +17449,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteMetricDescriptorRequest.decode = function decode(reader, length) {
+                    DeleteMetricDescriptorRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteMetricDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -17631,12 +17742,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListTimeSeriesRequest.decode = function decode(reader, length) {
+                    ListTimeSeriesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListTimeSeriesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 10: {
                                     message.name = reader.string();
@@ -18016,12 +18129,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListTimeSeriesResponse.decode = function decode(reader, length) {
+                    ListTimeSeriesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListTimeSeriesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.timeSeries && message.timeSeries.length))
@@ -18309,12 +18424,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateTimeSeriesRequest.decode = function decode(reader, length) {
+                    CreateTimeSeriesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -18555,12 +18672,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateTimeSeriesError.decode = function decode(reader, length) {
+                    CreateTimeSeriesError.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesError();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.timeSeries = $root.google.monitoring.v3.TimeSeries.decode(reader, reader.uint32());
@@ -18805,12 +18924,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateTimeSeriesSummary.decode = function decode(reader, length) {
+                    CreateTimeSeriesSummary.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesSummary();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.totalPointCount = reader.int32();
@@ -19061,12 +19182,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Error.decode = function decode(reader, length) {
+                        Error.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesSummary.Error();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
@@ -19318,12 +19441,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryTimeSeriesRequest.decode = function decode(reader, length) {
+                    QueryTimeSeriesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryTimeSeriesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -19595,12 +19720,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryTimeSeriesResponse.decode = function decode(reader, length) {
+                    QueryTimeSeriesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryTimeSeriesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 8: {
                                     message.timeSeriesDescriptor = $root.google.monitoring.v3.TimeSeriesDescriptor.decode(reader, reader.uint32());
@@ -19893,12 +20020,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QueryErrorList.decode = function decode(reader, length) {
+                    QueryErrorList.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.QueryErrorList();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.errors && message.errors.length))
@@ -20201,12 +20330,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NotificationChannelDescriptor.decode = function decode(reader, length) {
+                    NotificationChannelDescriptor.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.NotificationChannelDescriptor();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 6: {
                                     message.name = reader.string();
@@ -20695,12 +20826,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NotificationChannel.decode = function decode(reader, length) {
+                    NotificationChannel.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.NotificationChannel(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.type = reader.string();
@@ -21531,12 +21664,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelDescriptorsRequest.decode = function decode(reader, length) {
+                    ListNotificationChannelDescriptorsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelDescriptorsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.name = reader.string();
@@ -21772,12 +21907,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelDescriptorsResponse.decode = function decode(reader, length) {
+                    ListNotificationChannelDescriptorsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelDescriptorsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.channelDescriptors && message.channelDescriptors.length))
@@ -22007,12 +22144,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelDescriptorRequest.decode = function decode(reader, length) {
+                    GetNotificationChannelDescriptorRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelDescriptorRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -22221,12 +22360,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateNotificationChannelRequest.decode = function decode(reader, length) {
+                    CreateNotificationChannelRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -22486,12 +22627,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelsRequest.decode = function decode(reader, length) {
+                    ListNotificationChannelsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.name = reader.string();
@@ -22762,12 +22905,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListNotificationChannelsResponse.decode = function decode(reader, length) {
+                    ListNotificationChannelsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListNotificationChannelsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     if (!(message.notificationChannels && message.notificationChannels.length))
@@ -23010,12 +23155,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelRequest.decode = function decode(reader, length) {
+                    GetNotificationChannelRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -23224,12 +23371,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateNotificationChannelRequest.decode = function decode(reader, length) {
+                    UpdateNotificationChannelRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -23461,12 +23610,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteNotificationChannelRequest.decode = function decode(reader, length) {
+                    DeleteNotificationChannelRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.name = reader.string();
@@ -23677,12 +23828,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SendNotificationChannelVerificationCodeRequest.decode = function decode(reader, length) {
+                    SendNotificationChannelVerificationCodeRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SendNotificationChannelVerificationCodeRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -23891,12 +24044,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelVerificationCodeRequest.decode = function decode(reader, length) {
+                    GetNotificationChannelVerificationCodeRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelVerificationCodeRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -24123,12 +24278,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetNotificationChannelVerificationCodeResponse.decode = function decode(reader, length) {
+                    GetNotificationChannelVerificationCodeResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetNotificationChannelVerificationCodeResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.code = reader.string();
@@ -24355,12 +24512,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VerifyNotificationChannelRequest.decode = function decode(reader, length) {
+                    VerifyNotificationChannelRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.VerifyNotificationChannelRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -24809,12 +24968,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Service.decode = function decode(reader, length) {
+                    Service.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -25330,12 +25491,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Custom.decode = function decode(reader, length) {
+                        Custom.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.Custom();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -25516,12 +25679,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AppEngine.decode = function decode(reader, length) {
+                        AppEngine.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.AppEngine();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.moduleId = reader.string();
@@ -25719,12 +25884,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudEndpoints.decode = function decode(reader, length) {
+                        CloudEndpoints.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.CloudEndpoints();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.service = reader.string();
@@ -25955,12 +26122,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ClusterIstio.decode = function decode(reader, length) {
+                        ClusterIstio.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.ClusterIstio();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.location = reader.string();
@@ -26217,12 +26386,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MeshIstio.decode = function decode(reader, length) {
+                        MeshIstio.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.MeshIstio();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.meshUid = reader.string();
@@ -26467,12 +26638,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IstioCanonicalService.decode = function decode(reader, length) {
+                        IstioCanonicalService.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.IstioCanonicalService();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.meshUid = reader.string();
@@ -26706,12 +26879,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudRun.decode = function decode(reader, length) {
+                        CloudRun.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.CloudRun();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.serviceName = reader.string();
@@ -26955,12 +27130,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GkeNamespace.decode = function decode(reader, length) {
+                        GkeNamespace.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.GkeNamespace();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectId = reader.string();
@@ -27250,12 +27427,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GkeWorkload.decode = function decode(reader, length) {
+                        GkeWorkload.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.GkeWorkload();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectId = reader.string();
@@ -27558,12 +27737,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GkeService.decode = function decode(reader, length) {
+                        GkeService.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.GkeService();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectId = reader.string();
@@ -27823,12 +28004,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BasicService.decode = function decode(reader, length) {
+                        BasicService.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.BasicService(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.serviceType = reader.string();
@@ -28072,12 +28255,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Telemetry.decode = function decode(reader, length) {
+                        Telemetry.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.Telemetry();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resourceName = reader.string();
@@ -28360,12 +28545,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ServiceLevelObjective.decode = function decode(reader, length) {
+                    ServiceLevelObjective.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ServiceLevelObjective(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -28793,12 +28980,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ServiceLevelIndicator.decode = function decode(reader, length) {
+                    ServiceLevelIndicator.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ServiceLevelIndicator();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.basicSli = $root.google.monitoring.v3.BasicSli.decode(reader, reader.uint32());
@@ -29118,12 +29307,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BasicSli.decode = function decode(reader, length) {
+                    BasicSli.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 7: {
                                     if (!(message.method && message.method.length))
@@ -29421,12 +29612,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AvailabilityCriteria.decode = function decode(reader, length) {
+                        AvailabilityCriteria.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli.AvailabilityCriteria();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -29607,12 +29800,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LatencyCriteria.decode = function decode(reader, length) {
+                        LatencyCriteria.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli.LatencyCriteria();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.threshold = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -29829,12 +30024,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Range.decode = function decode(reader, length) {
+                    Range.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Range();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.min = reader.double();
@@ -30070,12 +30267,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    RequestBasedSli.decode = function decode(reader, length) {
+                    RequestBasedSli.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.RequestBasedSli();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.goodTotalRatio = $root.google.monitoring.v3.TimeSeriesRatio.decode(reader, reader.uint32());
@@ -30329,12 +30528,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TimeSeriesRatio.decode = function decode(reader, length) {
+                    TimeSeriesRatio.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesRatio();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.goodServiceFilter = reader.string();
@@ -30568,12 +30769,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DistributionCut.decode = function decode(reader, length) {
+                    DistributionCut.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DistributionCut();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 4: {
                                     message.distributionFilter = reader.string();
@@ -30847,12 +31050,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    WindowsBasedSli.decode = function decode(reader, length) {
+                    WindowsBasedSli.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 5: {
                                     message.goodBadMetricFilter = reader.string();
@@ -31177,12 +31382,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PerformanceThreshold.decode = function decode(reader, length) {
+                        PerformanceThreshold.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.performance = $root.google.monitoring.v3.RequestBasedSli.decode(reader, reader.uint32());
@@ -31438,12 +31645,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MetricRange.decode = function decode(reader, length) {
+                        MetricRange.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli.MetricRange();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.timeSeries = reader.string();
@@ -32049,12 +32258,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateServiceRequest.decode = function decode(reader, length) {
+                    CreateServiceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -32282,12 +32493,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetServiceRequest.decode = function decode(reader, length) {
+                    GetServiceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -32518,12 +32731,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServicesRequest.decode = function decode(reader, length) {
+                    ListServicesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServicesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -32771,12 +32986,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServicesResponse.decode = function decode(reader, length) {
+                    ListServicesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServicesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.services && message.services.length))
@@ -33017,12 +33234,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateServiceRequest.decode = function decode(reader, length) {
+                    UpdateServiceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.service = $root.google.monitoring.v3.Service.decode(reader, reader.uint32());
@@ -33243,12 +33462,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteServiceRequest.decode = function decode(reader, length) {
+                    DeleteServiceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -33468,12 +33689,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                    CreateServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -33712,12 +33935,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                    GetServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -33996,12 +34221,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServiceLevelObjectivesRequest.decode = function decode(reader, length) {
+                    ListServiceLevelObjectivesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServiceLevelObjectivesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -34285,12 +34512,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServiceLevelObjectivesResponse.decode = function decode(reader, length) {
+                    ListServiceLevelObjectivesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServiceLevelObjectivesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.serviceLevelObjectives && message.serviceLevelObjectives.length))
@@ -34531,12 +34760,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                    UpdateServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.decode(reader, reader.uint32());
@@ -34757,12 +34988,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                    DeleteServiceLevelObjectiveRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteServiceLevelObjectiveRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -34993,12 +35226,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Snooze.decode = function decode(reader, length) {
+                    Snooze.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Snooze();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -35253,12 +35488,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Criteria.decode = function decode(reader, length) {
+                        Criteria.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Snooze.Criteria();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.policies && message.policies.length))
@@ -35664,12 +35901,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateSnoozeRequest.decode = function decode(reader, length) {
+                    CreateSnoozeRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateSnoozeRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -35918,12 +36157,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListSnoozesRequest.decode = function decode(reader, length) {
+                    ListSnoozesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListSnoozesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -36171,12 +36412,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListSnoozesResponse.decode = function decode(reader, length) {
+                    ListSnoozesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListSnoozesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.snoozes && message.snoozes.length))
@@ -36406,12 +36649,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetSnoozeRequest.decode = function decode(reader, length) {
+                    GetSnoozeRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetSnoozeRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -36620,12 +36865,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateSnoozeRequest.decode = function decode(reader, length) {
+                    UpdateSnoozeRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateSnoozeRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.snooze = $root.google.monitoring.v3.Snooze.decode(reader, reader.uint32());
@@ -36846,12 +37093,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpanContext.decode = function decode(reader, length) {
+                    SpanContext.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SpanContext();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.spanName = reader.string();
@@ -37104,12 +37353,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    InternalChecker.decode = function decode(reader, length) {
+                    InternalChecker.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.InternalChecker();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -37422,12 +37673,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SyntheticMonitorTarget.decode = function decode(reader, length) {
+                    SyntheticMonitorTarget.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SyntheticMonitorTarget();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.cloudFunctionV2 = $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target.decode(reader, reader.uint32());
@@ -37643,12 +37896,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudFunctionV2Target.decode = function decode(reader, length) {
+                        CloudFunctionV2Target.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -38057,12 +38312,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UptimeCheckConfig.decode = function decode(reader, length) {
+                    UptimeCheckConfig.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -38670,12 +38927,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ResourceGroup.decode = function decode(reader, length) {
+                        ResourceGroup.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.ResourceGroup();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.groupId = reader.string();
@@ -38910,12 +39169,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PingConfig.decode = function decode(reader, length) {
+                        PingConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.PingConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pingsCount = reader.int32();
@@ -39274,12 +39535,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HttpCheck.decode = function decode(reader, length) {
+                        HttpCheck.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 8: {
                                         message.requestMethod = reader.int32();
@@ -39790,12 +40053,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BasicAuthentication.decode = function decode(reader, length) {
+                            BasicAuthentication.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.BasicAuthentication();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.username = reader.string();
@@ -40047,12 +40312,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ResponseStatusCode.decode = function decode(reader, length) {
+                            ResponseStatusCode.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.statusValue = reader.int32();
@@ -40340,12 +40607,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ServiceAgentAuthentication.decode = function decode(reader, length) {
+                            ServiceAgentAuthentication.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.type = reader.int32();
@@ -40590,12 +40859,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TcpCheck.decode = function decode(reader, length) {
+                        TcpCheck.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.TcpCheck();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.port = reader.int32();
@@ -40847,12 +41118,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentMatcher.decode = function decode(reader, length) {
+                        ContentMatcher.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.content = reader.string();
@@ -41162,12 +41435,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            JsonPathMatcher.decode = function decode(reader, length) {
+                            JsonPathMatcher.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.jsonPath = reader.string();
@@ -41462,12 +41737,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UptimeCheckIp.decode = function decode(reader, length) {
+                    UptimeCheckIp.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UptimeCheckIp();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.region = reader.int32();
@@ -42047,12 +42324,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckConfigsRequest.decode = function decode(reader, length) {
+                    ListUptimeCheckConfigsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckConfigsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -42311,12 +42590,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckConfigsResponse.decode = function decode(reader, length) {
+                    ListUptimeCheckConfigsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckConfigsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.uptimeCheckConfigs && message.uptimeCheckConfigs.length))
@@ -42559,12 +42840,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetUptimeCheckConfigRequest.decode = function decode(reader, length) {
+                    GetUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -42773,12 +43056,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateUptimeCheckConfigRequest.decode = function decode(reader, length) {
+                    CreateUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -43005,12 +43290,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateUptimeCheckConfigRequest.decode = function decode(reader, length) {
+                    UpdateUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -43231,12 +43518,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteUptimeCheckConfigRequest.decode = function decode(reader, length) {
+                    DeleteUptimeCheckConfigRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteUptimeCheckConfigRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -43445,12 +43734,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckIpsRequest.decode = function decode(reader, length) {
+                    ListUptimeCheckIpsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckIpsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.pageSize = reader.int32();
@@ -43674,12 +43965,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListUptimeCheckIpsResponse.decode = function decode(reader, length) {
+                    ListUptimeCheckIpsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListUptimeCheckIpsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.uptimeCheckIps && message.uptimeCheckIps.length))
@@ -44025,12 +44318,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -44420,12 +44715,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -44709,12 +45006,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Distribution.decode = function decode(reader, length) {
+                Distribution.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.count = reader.int64();
@@ -45067,12 +45366,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Range.decode = function decode(reader, length) {
+                    Range.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.Range();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.min = reader.double();
@@ -45319,12 +45620,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BucketOptions.decode = function decode(reader, length) {
+                    BucketOptions.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.linearBuckets = $root.google.api.Distribution.BucketOptions.Linear.decode(reader, reader.uint32());
@@ -45599,12 +45902,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Linear.decode = function decode(reader, length) {
+                        Linear.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Linear();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.numFiniteBuckets = reader.int32();
@@ -45849,12 +46154,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Exponential.decode = function decode(reader, length) {
+                        Exponential.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Exponential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.numFiniteBuckets = reader.int32();
@@ -46082,12 +46389,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Explicit.decode = function decode(reader, length) {
+                        Explicit.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Explicit();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.bounds && message.bounds.length))
@@ -46331,12 +46640,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Exemplar.decode = function decode(reader, length) {
+                    Exemplar.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.Exemplar();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.value = reader.double();
@@ -46600,12 +46911,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -46950,12 +47263,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -47334,12 +47649,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -47566,12 +47883,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -47935,12 +48254,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -48279,6 +48600,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -48380,6 +48702,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -48426,6 +48756,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -48453,12 +48785,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -48504,6 +48838,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -48598,6 +48936,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -48692,6 +49033,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -48721,6 +49064,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -48751,6 +49095,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -48892,12 +49238,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -49159,12 +49507,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -49367,12 +49717,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -49575,12 +49927,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -49783,12 +50137,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -50056,12 +50412,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -50435,12 +50793,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -50643,12 +51003,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -50875,12 +51237,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -51153,12 +51517,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -51536,12 +51902,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MonitoredResourceDescriptor.decode = function decode(reader, length) {
+                MonitoredResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 5: {
                                 message.name = reader.string();
@@ -51882,12 +52250,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MonitoredResource.decode = function decode(reader, length) {
+                MonitoredResource.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResource(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -52144,12 +52514,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MonitoredResourceMetadata.decode = function decode(reader, length) {
+                MonitoredResourceMetadata.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MonitoredResourceMetadata(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.systemLabels = $root.google.protobuf.Struct.decode(reader, reader.uint32());
@@ -52420,12 +52792,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                LabelDescriptor.decode = function decode(reader, length) {
+                LabelDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.LabelDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.key = reader.string();
@@ -52802,12 +53176,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MetricDescriptor.decode = function decode(reader, length) {
+                MetricDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -53349,12 +53725,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MetricDescriptorMetadata.decode = function decode(reader, length) {
+                    MetricDescriptorMetadata.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MetricDescriptor.MetricDescriptorMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.launchStage = reader.int32();
@@ -53652,12 +54030,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Metric.decode = function decode(reader, length) {
+                Metric.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Metric(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 3: {
                                 message.type = reader.string();
@@ -53901,12 +54281,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldInfo.decode = function decode(reader, length) {
+                FieldInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
@@ -54172,12 +54554,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -54572,12 +54956,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -55239,12 +55625,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -55724,12 +56112,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -55968,12 +56358,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -56224,12 +56616,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -56569,12 +56963,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -56948,12 +57344,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -57473,12 +57871,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -57744,12 +58144,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -58063,12 +58465,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -58304,12 +58708,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -58561,12 +58967,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -58869,12 +59277,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -59373,12 +59783,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -59993,12 +60405,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -60450,12 +60864,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
@@ -60487,12 +60898,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -61235,12 +61648,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -61531,12 +61946,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -61817,12 +62234,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -62129,12 +62548,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -62320,6 +62741,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -62379,6 +62801,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -62413,6 +62843,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -62440,12 +62872,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -62467,6 +62901,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -62527,6 +62965,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -62563,6 +63004,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -62586,6 +63029,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -62600,6 +63044,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -62776,12 +63222,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -63193,12 +63641,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -63532,12 +63982,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -63808,12 +64260,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -64343,12 +64797,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -64727,12 +65183,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -65017,12 +65475,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -65292,12 +65752,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -65603,12 +66065,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -65871,12 +66335,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -66197,12 +66663,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -66433,12 +66901,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -66674,12 +67144,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -66904,12 +67376,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DoubleValue.decode = function decode(reader, length) {
+                DoubleValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.double();
@@ -67107,12 +67581,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FloatValue.decode = function decode(reader, length) {
+                FloatValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.float();
@@ -67310,12 +67786,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int64Value.decode = function decode(reader, length) {
+                Int64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int64();
@@ -67527,12 +68005,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt64Value.decode = function decode(reader, length) {
+                UInt64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint64();
@@ -67744,12 +68224,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int32Value.decode = function decode(reader, length) {
+                Int32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int32();
@@ -67947,12 +68429,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt32Value.decode = function decode(reader, length) {
+                UInt32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint32();
@@ -68150,12 +68634,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BoolValue.decode = function decode(reader, length) {
+                BoolValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bool();
@@ -68353,12 +68839,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                StringValue.decode = function decode(reader, length) {
+                StringValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.string();
@@ -68556,12 +69044,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BytesValue.decode = function decode(reader, length) {
+                BytesValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bytes();
@@ -68757,12 +69247,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -68945,12 +69437,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -69166,12 +69660,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Struct.decode = function decode(reader, length) {
+                Struct.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (message.fields === $util.emptyObject)
@@ -69476,12 +69972,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Value.decode = function decode(reader, length) {
+                Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.nullValue = reader.int32();
@@ -69813,12 +70311,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListValue.decode = function decode(reader, length) {
+                ListValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.values && message.values.length))
@@ -70071,12 +70571,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();
@@ -70364,12 +70866,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                TimeOfDay.decode = function decode(reader, length) {
+                TimeOfDay.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.hours = reader.int32();

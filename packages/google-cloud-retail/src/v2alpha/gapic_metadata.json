@@ -303,6 +303,24 @@
         }
       }
     },
+    "ConversationalSearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversationalSearchServiceClient",
+          "rpcs": {
+            "ConversationalSearch": {
+              "methods": [
+                "conversationalSearch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversationalSearchServiceClient",
+          "rpcs": {}
+        }
+      }
+    },
     "GenerativeQuestionService": {
       "clients": {
         "grpc": {

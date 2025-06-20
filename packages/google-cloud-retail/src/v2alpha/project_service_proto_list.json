@@ -8,6 +8,7 @@
   "../../protos/google/cloud/retail/v2alpha/completion_service.proto",
   "../../protos/google/cloud/retail/v2alpha/control.proto",
   "../../protos/google/cloud/retail/v2alpha/control_service.proto",
+  "../../protos/google/cloud/retail/v2alpha/conversational_search_service.proto",
   "../../protos/google/cloud/retail/v2alpha/export_config.proto",
   "../../protos/google/cloud/retail/v2alpha/generative_question.proto",
   "../../protos/google/cloud/retail/v2alpha/generative_question_service.proto",

@@ -29,311 +29,253 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
-function stubBidiStreamingCall<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  return sinon.stub().returns(mockStream);
+function stubBidiStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    return sinon.stub().returns(mockStream);
 }
 
 describe('v1.TetherClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new tetherModule.v1.TetherClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'apigeeconnect.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new tetherModule.v1.TetherClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = tetherModule.v1.TetherClient.servicePath;
-        assert.strictEqual(servicePath, 'apigeeconnect.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = tetherModule.v1.TetherClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'apigeeconnect.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new tetherModule.v1.TetherClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'apigeeconnect.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new tetherModule.v1.TetherClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'apigeeconnect.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new tetherModule.v1.TetherClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'apigeeconnect.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new tetherModule.v1.TetherClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'apigeeconnect.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new tetherModule.v1.TetherClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'apigeeconnect.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new tetherModule.v1.TetherClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new tetherModule.v1.TetherClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = tetherModule.v1.TetherClient.servicePath;
+                assert.strictEqual(servicePath, 'apigeeconnect.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = tetherModule.v1.TetherClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'apigeeconnect.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new tetherModule.v1.TetherClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'apigeeconnect.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = tetherModule.v1.TetherClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new tetherModule.v1.TetherClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'apigeeconnect.example.com');
+        });
 
-    it('should create a client with no option', () => {
-      const client = new tetherModule.v1.TetherClient();
-      assert(client);
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new tetherModule.v1.TetherClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'apigeeconnect.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with gRPC fallback', () => {
-      const client = new tetherModule.v1.TetherClient({
-        fallback: true,
-      });
-      assert(client);
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new tetherModule.v1.TetherClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'apigeeconnect.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new tetherModule.v1.TetherClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new tetherModule.v1.TetherClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.tetherStub, undefined);
-      await client.initialize();
-      assert(client.tetherStub);
-    });
+        it('has port', () => {
+            const port = tetherModule.v1.TetherClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new tetherModule.v1.TetherClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.tetherStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new tetherModule.v1.TetherClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new tetherModule.v1.TetherClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new tetherModule.v1.TetherClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.tetherStub, undefined);
+            await client.initialize();
+            assert(client.tetherStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new tetherModule.v1.TetherClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.tetherStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new tetherModule.v1.TetherClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.tetherStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new tetherModule.v1.TetherClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new tetherModule.v1.TetherClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new tetherModule.v1.TetherClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.tetherStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('egress', () => {
+        it('invokes egress without error', async () => {
+            const client = new tetherModule.v1.TetherClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apigeeconnect.v1.EgressResponse()
+            );
+            
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.apigeeconnect.v1.EgressRequest()
+            );
+            client.innerApiCalls.egress = stubBidiStreamingCall(expectedResponse);
+            const stream = client.egress();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.apigeeconnect.v1.EgressRequest) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.egress as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
+
+        it('invokes egress with error', async () => {
+            const client = new tetherModule.v1.TetherClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.apigeeconnect.v1.EgressResponse()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.egress = stubBidiStreamingCall(undefined, expectedError);
+            const stream = client.egress();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.apigeeconnect.v1.EgressRequest) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.innerApiCalls.egress as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
         });
     });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new tetherModule.v1.TetherClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new tetherModule.v1.TetherClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('egress', () => {
-    it('invokes egress without error', async () => {
-      const client = new tetherModule.v1.TetherClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.apigeeconnect.v1.EgressResponse()
-      );
-
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.apigeeconnect.v1.EgressRequest()
-      );
-      client.innerApiCalls.egress = stubBidiStreamingCall(expectedResponse);
-      const stream = client.egress();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (response: protos.google.cloud.apigeeconnect.v1.EgressRequest) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.egress as SinonStub).getCall(0).calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
-    });
-
-    it('invokes egress with error', async () => {
-      const client = new tetherModule.v1.TetherClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.apigeeconnect.v1.EgressResponse()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.egress = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.egress();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (response: protos.google.cloud.apigeeconnect.v1.EgressRequest) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.innerApiCalls.egress as SinonStub).getCall(0).calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
-    });
-  });
 });

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class ConnectionServiceClient {
    *     const client = new ConnectionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ConnectionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'apigeeconnect.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class ConnectionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class ConnectionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -211,20 +186,14 @@ export class ConnectionServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConnections: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'connections'
-      ),
+      listConnections:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'connections')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.apigeeconnect.v1.ConnectionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.apigeeconnect.v1.ConnectionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -255,35 +224,32 @@ export class ConnectionServiceClient {
     // Put together the "service stub" for
     // google.cloud.apigeeconnect.v1.ConnectionService.
     this.connectionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.apigeeconnect.v1.ConnectionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.apigeeconnect.v1.ConnectionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apigeeconnect.v1.ConnectionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const connectionServiceStubMethods = ['listConnections'];
+    const connectionServiceStubMethods =
+        ['listConnections'];
     for (const methodName of connectionServiceStubMethods) {
       const callPromise = this.connectionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -303,14 +269,8 @@ export class ConnectionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apigeeconnect.googleapis.com';
   }
@@ -321,14 +281,8 @@ export class ConnectionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apigeeconnect.googleapis.com';
   }
@@ -359,7 +313,9 @@ export class ConnectionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -368,9 +324,8 @@ export class ConnectionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -382,120 +337,95 @@ export class ConnectionServiceClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Lists connections that are currently active for the given Apigee Connect
-   * endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent name of the form:
-   *       `projects/{project_number or project_id}/endpoints/{endpoint}`.
-   * @param {number} request.pageSize
-   *   The maximum number of connections to return. The service may return fewer
-   *   than this value. If unspecified, at most 100 connections will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListConnections` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConnections` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.apigeeconnect.v1.Connection|Connection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists connections that are currently active for the given Apigee Connect
+ * endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent name of the form:
+ *       `projects/{project_number or project_id}/endpoints/{endpoint}`.
+ * @param {number} request.pageSize
+ *   The maximum number of connections to return. The service may return fewer
+ *   than this value. If unspecified, at most 100 connections will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListConnections` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListConnections` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apigeeconnect.v1.Connection|Connection}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnections(
-    request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigeeconnect.v1.IConnection[],
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest | null,
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apigeeconnect.v1.IConnection[],
+        protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest|null,
+        protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
+      ]>;
   listConnections(
-    request: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-      | protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigeeconnect.v1.IConnection
-    >
-  ): void;
-  listConnections(
-    request: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-      | protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigeeconnect.v1.IConnection
-    >
-  ): void;
-  listConnections(
-    request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-          | protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigeeconnect.v1.IConnection
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-      | protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.apigeeconnect.v1.IConnection
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apigeeconnect.v1.IConnection[],
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest | null,
-      protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.apigeeconnect.v1.IConnection>): void;
+  listConnections(
+      request: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+          protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.apigeeconnect.v1.IConnection>): void;
+  listConnections(
+      request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+          protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.apigeeconnect.v1.IConnection>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+          protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse|null|undefined,
+          protos.google.cloud.apigeeconnect.v1.IConnection>):
+      Promise<[
+        protos.google.cloud.apigeeconnect.v1.IConnection[],
+        protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest|null,
+        protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-          | protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.apigeeconnect.v1.IConnection
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+      protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse|null|undefined,
+      protos.google.cloud.apigeeconnect.v1.IConnection>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -504,63 +434,60 @@ export class ConnectionServiceClient {
     this._log.info('listConnections request %j', request);
     return this.innerApiCalls
       .listConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.apigeeconnect.v1.IConnection[],
-          protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest | null,
-          protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse,
-        ]) => {
-          this._log.info('listConnections values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apigeeconnect.v1.IConnection[],
+        protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest|null,
+        protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse
+      ]) => {
+        this._log.info('listConnections values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent name of the form:
-   *       `projects/{project_number or project_id}/endpoints/{endpoint}`.
-   * @param {number} request.pageSize
-   *   The maximum number of connections to return. The service may return fewer
-   *   than this value. If unspecified, at most 100 connections will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListConnections` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConnections` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.apigeeconnect.v1.Connection|Connection} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConnections`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent name of the form:
+ *       `projects/{project_number or project_id}/endpoints/{endpoint}`.
+ * @param {number} request.pageSize
+ *   The maximum number of connections to return. The service may return fewer
+ *   than this value. If unspecified, at most 100 connections will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListConnections` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListConnections` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apigeeconnect.v1.Connection|Connection} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectionsStream(
-    request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -569,54 +496,53 @@ export class ConnectionServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent name of the form:
-   *       `projects/{project_number or project_id}/endpoints/{endpoint}`.
-   * @param {number} request.pageSize
-   *   The maximum number of connections to return. The service may return fewer
-   *   than this value. If unspecified, at most 100 connections will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListConnections` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConnections` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.apigeeconnect.v1.Connection|Connection}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/connection_service.list_connections.js</caption>
-   * region_tag:apigeeconnect_v1_generated_ConnectionService_ListConnections_async
-   */
+/**
+ * Equivalent to `listConnections`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent name of the form:
+ *       `projects/{project_number or project_id}/endpoints/{endpoint}`.
+ * @param {number} request.pageSize
+ *   The maximum number of connections to return. The service may return fewer
+ *   than this value. If unspecified, at most 100 connections will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListConnections` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListConnections` must
+ *   match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apigeeconnect.v1.Connection|Connection}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/connection_service.list_connections.js</caption>
+ * region_tag:apigeeconnect_v1_generated_ConnectionService_ListConnections_async
+ */
   listConnectionsAsync(
-    request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.apigeeconnect.v1.IConnection> {
+      request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apigeeconnect.v1.IConnection>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
@@ -635,7 +561,7 @@ export class ConnectionServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  endpointPath(project: string, endpoint: string) {
+  endpointPath(project:string,endpoint:string) {
     return this.pathTemplates.endpointPathTemplate.render({
       project: project,
       endpoint: endpoint,

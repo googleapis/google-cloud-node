@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,41 +100,20 @@ export class PredictionServiceClient {
    *     const client = new PredictionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PredictionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -165,7 +139,7 @@ export class PredictionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -179,7 +153,10 @@ export class PredictionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -206,30 +183,33 @@ export class PredictionServiceClient {
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
-      corpusPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      corpusPathTemplate: new this._gaxModule.PathTemplate(
+        'corpora/{corpus}'
+      ),
+      corpusPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/permissions/{permission}'
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
-      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
+      filePathTemplate: new this._gaxModule.PathTemplate(
+        'files/{file}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'models/{model}'
+      ),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
       ),
-      tunedModelPermissionPathTemplate: new this._gaxModule.PathTemplate(
+      tunedModelPermissionsPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}/permissions/{permission}'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ai.generativelanguage.v1alpha.PredictionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ai.generativelanguage.v1alpha.PredictionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -260,36 +240,31 @@ export class PredictionServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1alpha.PredictionService.
     this.predictionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ai.generativelanguage.v1alpha.PredictionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1alpha
-            .PredictionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1alpha.PredictionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1alpha.PredictionService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods = ['predict'];
+    const predictionServiceStubMethods =
+        ['predict'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -309,14 +284,8 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -327,14 +296,8 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -374,9 +337,8 @@ export class PredictionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -387,131 +349,104 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Performs a prediction request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.model
-   *   Required. The name of the model for prediction.
-   *   Format: `name=models/{model}`.
-   * @param {number[]} request.instances
-   *   Required. The instances that are the input to the prediction call.
-   * @param {google.protobuf.Value} [request.parameters]
-   *   Optional. The parameters that govern the prediction call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.PredictResponse|PredictResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/prediction_service.predict.js</caption>
-   * region_tag:generativelanguage_v1alpha_generated_PredictionService_Predict_async
-   */
+/**
+ * Performs a prediction request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the model for prediction.
+ *   Format: `name=models/{model}`.
+ * @param {number[]} request.instances
+ *   Required. The instances that are the input to the prediction call.
+ * @param {google.protobuf.Value} [request.parameters]
+ *   Optional. The parameters that govern the prediction call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1alpha.PredictResponse|PredictResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/prediction_service.predict.js</caption>
+ * region_tag:generativelanguage_v1alpha_generated_PredictionService_Predict_async
+ */
   predict(
-    request?: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-      protos.google.ai.generativelanguage.v1alpha.IPredictRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
+        protos.google.ai.generativelanguage.v1alpha.IPredictRequest|undefined, {}|undefined
+      ]>;
   predict(
-    request: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-      | protos.google.ai.generativelanguage.v1alpha.IPredictRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
-    callback: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-      | protos.google.ai.generativelanguage.v1alpha.IPredictRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request?: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-          | protos.google.ai.generativelanguage.v1alpha.IPredictRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-      | protos.google.ai.generativelanguage.v1alpha.IPredictRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-      protos.google.ai.generativelanguage.v1alpha.IPredictRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ai.generativelanguage.v1alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>): void;
+  predict(
+      request: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
+      callback: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
+          protos.google.ai.generativelanguage.v1alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>): void;
+  predict(
+      request?: protos.google.ai.generativelanguage.v1alpha.IPredictRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
+          protos.google.ai.generativelanguage.v1alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
+          protos.google.ai.generativelanguage.v1alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
+        protos.google.ai.generativelanguage.v1alpha.IPredictRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        model: request.model ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('predict request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-          | protos.google.ai.generativelanguage.v1alpha.IPredictRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
+        protos.google.ai.generativelanguage.v1alpha.IPredictRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('predict response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .predict(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
-          (
-            | protos.google.ai.generativelanguage.v1alpha.IPredictRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('predict response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.predict(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ai.generativelanguage.v1alpha.IPredictResponse,
+        protos.google.ai.generativelanguage.v1alpha.IPredictRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('predict response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -524,7 +459,7 @@ export class PredictionServiceClient {
    * @param {string} id
    * @returns {string} Resource name string.
    */
-  cachedContentPath(id: string) {
+  cachedContentPath(id:string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       id: id,
     });
@@ -538,8 +473,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the id.
    */
   matchIdFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
-      .id;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).id;
   }
 
   /**
@@ -550,7 +484,7 @@ export class PredictionServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus: string, document: string, chunk: string) {
+  chunkPath(corpus:string,document:string,chunk:string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -597,7 +531,7 @@ export class PredictionServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus: string) {
+  corpusPath(corpus:string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -615,43 +549,39 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Return a fully-qualified corpusPermission resource name string.
+   * Return a fully-qualified corpusPermissions resource name string.
    *
    * @param {string} corpus
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionPath(corpus: string, permission: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.render({
+  corpusPermissionsPath(corpus:string,permission:string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.render({
       corpus: corpus,
       permission: permission,
     });
   }
 
   /**
-   * Parse the corpus from CorpusPermission resource.
+   * Parse the corpus from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the corpus.
    */
-  matchCorpusFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).corpus;
+  matchCorpusFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).corpus;
   }
 
   /**
-   * Parse the permission from CorpusPermission resource.
+   * Parse the permission from CorpusPermissions resource.
    *
-   * @param {string} corpusPermissionName
-   *   A fully-qualified path representing corpus_permission resource.
+   * @param {string} corpusPermissionsName
+   *   A fully-qualified path representing corpus_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(
-      corpusPermissionName
-    ).permission;
+  matchPermissionFromCorpusPermissionsName(corpusPermissionsName: string) {
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).permission;
   }
 
   /**
@@ -661,7 +591,7 @@ export class PredictionServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus: string, document: string) {
+  documentPath(corpus:string,document:string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -696,7 +626,7 @@ export class PredictionServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file: string) {
+  filePath(file:string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -719,7 +649,7 @@ export class PredictionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model: string) {
+  modelPath(model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -742,7 +672,7 @@ export class PredictionServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel: string) {
+  tunedModelPath(tunedModel:string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -756,52 +686,43 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
-      .tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
   }
 
   /**
-   * Return a fully-qualified tunedModelPermission resource name string.
+   * Return a fully-qualified tunedModelPermissions resource name string.
    *
    * @param {string} tuned_model
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionPath(tunedModel: string, permission: string) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.render({
+  tunedModelPermissionsPath(tunedModel:string,permission:string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
     });
   }
 
   /**
-   * Parse the tuned_model from TunedModelPermission resource.
+   * Parse the tuned_model from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).tuned_model;
+  matchTunedModelFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).tuned_model;
   }
 
   /**
-   * Parse the permission from TunedModelPermission resource.
+   * Parse the permission from TunedModelPermissions resource.
    *
-   * @param {string} tunedModelPermissionName
-   *   A fully-qualified path representing tuned_model_permission resource.
+   * @param {string} tunedModelPermissionsName
+   *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionName(
-    tunedModelPermissionName: string
-  ) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
-      tunedModelPermissionName
-    ).permission;
+  matchPermissionFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).permission;
   }
 
   /**
