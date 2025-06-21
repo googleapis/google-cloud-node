@@ -8,7 +8,6 @@
               "nested": {
                 "v3": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Translate.V3",
                     "go_package": "cloud.google.com/go/translate/apiv3/translatepb;translatepb",
                     "java_multiple_files": true,
