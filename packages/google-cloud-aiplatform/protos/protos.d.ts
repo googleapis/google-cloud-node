@@ -21522,6 +21522,13 @@ export namespace google {
                     }
                 }
 
+                /** PSCAutomationState enum. */
+                enum PSCAutomationState {
+                    PSC_AUTOMATION_STATE_UNSPECIFIED = 0,
+                    PSC_AUTOMATION_STATE_SUCCESSFUL = 1,
+                    PSC_AUTOMATION_STATE_FAILED = 2
+                }
+
                 /** Properties of a PSCAutomationConfig. */
                 interface IPSCAutomationConfig {
 
@@ -21530,6 +21537,18 @@ export namespace google {
 
                     /** PSCAutomationConfig network */
                     network?: (string|null);
+
+                    /** PSCAutomationConfig ipAddress */
+                    ipAddress?: (string|null);
+
+                    /** PSCAutomationConfig forwardingRule */
+                    forwardingRule?: (string|null);
+
+                    /** PSCAutomationConfig state */
+                    state?: (google.cloud.aiplatform.v1.PSCAutomationState|keyof typeof google.cloud.aiplatform.v1.PSCAutomationState|null);
+
+                    /** PSCAutomationConfig errorMessage */
+                    errorMessage?: (string|null);
                 }
 
                 /** Represents a PSCAutomationConfig. */
@@ -21546,6 +21565,18 @@ export namespace google {
 
                     /** PSCAutomationConfig network. */
                     public network: string;
+
+                    /** PSCAutomationConfig ipAddress. */
+                    public ipAddress: string;
+
+                    /** PSCAutomationConfig forwardingRule. */
+                    public forwardingRule: string;
+
+                    /** PSCAutomationConfig state. */
+                    public state: (google.cloud.aiplatform.v1.PSCAutomationState|keyof typeof google.cloud.aiplatform.v1.PSCAutomationState);
+
+                    /** PSCAutomationConfig errorMessage. */
+                    public errorMessage: string;
 
                     /**
                      * Creates a new PSCAutomationConfig instance using the specified properties.
@@ -21634,6 +21665,9 @@ export namespace google {
                     /** PrivateServiceConnectConfig projectAllowlist */
                     projectAllowlist?: (string[]|null);
 
+                    /** PrivateServiceConnectConfig pscAutomationConfigs */
+                    pscAutomationConfigs?: (google.cloud.aiplatform.v1.IPSCAutomationConfig[]|null);
+
                     /** PrivateServiceConnectConfig serviceAttachment */
                     serviceAttachment?: (string|null);
                 }
@@ -21652,6 +21686,9 @@ export namespace google {
 
                     /** PrivateServiceConnectConfig projectAllowlist. */
                     public projectAllowlist: string[];
+
+                    /** PrivateServiceConnectConfig pscAutomationConfigs. */
+                    public pscAutomationConfigs: google.cloud.aiplatform.v1.IPSCAutomationConfig[];
 
                     /** PrivateServiceConnectConfig serviceAttachment. */
                     public serviceAttachment: string;
@@ -29476,6 +29513,9 @@ export namespace google {
 
                     /** Endpoint satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** Endpoint genAiAdvancedFeaturesConfig */
+                    genAiAdvancedFeaturesConfig?: (google.cloud.aiplatform.v1.IGenAiAdvancedFeaturesConfig|null);
                 }
 
                 /** Represents an Endpoint. */
@@ -29546,6 +29586,9 @@ export namespace google {
 
                     /** Endpoint satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** Endpoint genAiAdvancedFeaturesConfig. */
+                    public genAiAdvancedFeaturesConfig?: (google.cloud.aiplatform.v1.IGenAiAdvancedFeaturesConfig|null);
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -30361,6 +30404,203 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenAiAdvancedFeaturesConfig. */
+                interface IGenAiAdvancedFeaturesConfig {
+
+                    /** GenAiAdvancedFeaturesConfig ragConfig */
+                    ragConfig?: (google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.IRagConfig|null);
+                }
+
+                /** Represents a GenAiAdvancedFeaturesConfig. */
+                class GenAiAdvancedFeaturesConfig implements IGenAiAdvancedFeaturesConfig {
+
+                    /**
+                     * Constructs a new GenAiAdvancedFeaturesConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGenAiAdvancedFeaturesConfig);
+
+                    /** GenAiAdvancedFeaturesConfig ragConfig. */
+                    public ragConfig?: (google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.IRagConfig|null);
+
+                    /**
+                     * Creates a new GenAiAdvancedFeaturesConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenAiAdvancedFeaturesConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGenAiAdvancedFeaturesConfig): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Encodes the specified GenAiAdvancedFeaturesConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.verify|verify} messages.
+                     * @param message GenAiAdvancedFeaturesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGenAiAdvancedFeaturesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenAiAdvancedFeaturesConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.verify|verify} messages.
+                     * @param message GenAiAdvancedFeaturesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGenAiAdvancedFeaturesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenAiAdvancedFeaturesConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenAiAdvancedFeaturesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Decodes a GenAiAdvancedFeaturesConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenAiAdvancedFeaturesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Verifies a GenAiAdvancedFeaturesConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenAiAdvancedFeaturesConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenAiAdvancedFeaturesConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Creates a plain object from a GenAiAdvancedFeaturesConfig message. Also converts values to other types if specified.
+                     * @param message GenAiAdvancedFeaturesConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenAiAdvancedFeaturesConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenAiAdvancedFeaturesConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenAiAdvancedFeaturesConfig {
+
+                    /** Properties of a RagConfig. */
+                    interface IRagConfig {
+
+                        /** RagConfig enableRag */
+                        enableRag?: (boolean|null);
+                    }
+
+                    /** Represents a RagConfig. */
+                    class RagConfig implements IRagConfig {
+
+                        /**
+                         * Constructs a new RagConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.IRagConfig);
+
+                        /** RagConfig enableRag. */
+                        public enableRag: boolean;
+
+                        /**
+                         * Creates a new RagConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RagConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.IRagConfig): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Encodes the specified RagConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.RagConfig.verify|verify} messages.
+                         * @param message RagConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.IRagConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RagConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.RagConfig.verify|verify} messages.
+                         * @param message RagConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.IRagConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RagConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RagConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Decodes a RagConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RagConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Verifies a RagConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RagConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RagConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Creates a plain object from a RagConfig message. Also converts values to other types if specified.
+                         * @param message RagConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.GenAiAdvancedFeaturesConfig.RagConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RagConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RagConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a SpeculativeDecodingSpec. */
@@ -164571,6 +164811,13 @@ export namespace google {
                     }
                 }
 
+                /** PSCAutomationState enum. */
+                enum PSCAutomationState {
+                    PSC_AUTOMATION_STATE_UNSPECIFIED = 0,
+                    PSC_AUTOMATION_STATE_SUCCESSFUL = 1,
+                    PSC_AUTOMATION_STATE_FAILED = 2
+                }
+
                 /** Properties of a PSCAutomationConfig. */
                 interface IPSCAutomationConfig {
 
@@ -164579,6 +164826,18 @@ export namespace google {
 
                     /** PSCAutomationConfig network */
                     network?: (string|null);
+
+                    /** PSCAutomationConfig ipAddress */
+                    ipAddress?: (string|null);
+
+                    /** PSCAutomationConfig forwardingRule */
+                    forwardingRule?: (string|null);
+
+                    /** PSCAutomationConfig state */
+                    state?: (google.cloud.aiplatform.v1beta1.PSCAutomationState|keyof typeof google.cloud.aiplatform.v1beta1.PSCAutomationState|null);
+
+                    /** PSCAutomationConfig errorMessage */
+                    errorMessage?: (string|null);
                 }
 
                 /** Represents a PSCAutomationConfig. */
@@ -164595,6 +164854,18 @@ export namespace google {
 
                     /** PSCAutomationConfig network. */
                     public network: string;
+
+                    /** PSCAutomationConfig ipAddress. */
+                    public ipAddress: string;
+
+                    /** PSCAutomationConfig forwardingRule. */
+                    public forwardingRule: string;
+
+                    /** PSCAutomationConfig state. */
+                    public state: (google.cloud.aiplatform.v1beta1.PSCAutomationState|keyof typeof google.cloud.aiplatform.v1beta1.PSCAutomationState);
+
+                    /** PSCAutomationConfig errorMessage. */
+                    public errorMessage: string;
 
                     /**
                      * Creates a new PSCAutomationConfig instance using the specified properties.
@@ -164683,6 +164954,9 @@ export namespace google {
                     /** PrivateServiceConnectConfig projectAllowlist */
                     projectAllowlist?: (string[]|null);
 
+                    /** PrivateServiceConnectConfig pscAutomationConfigs */
+                    pscAutomationConfigs?: (google.cloud.aiplatform.v1beta1.IPSCAutomationConfig[]|null);
+
                     /** PrivateServiceConnectConfig enableSecurePrivateServiceConnect */
                     enableSecurePrivateServiceConnect?: (boolean|null);
 
@@ -164704,6 +164978,9 @@ export namespace google {
 
                     /** PrivateServiceConnectConfig projectAllowlist. */
                     public projectAllowlist: string[];
+
+                    /** PrivateServiceConnectConfig pscAutomationConfigs. */
+                    public pscAutomationConfigs: google.cloud.aiplatform.v1beta1.IPSCAutomationConfig[];
 
                     /** PrivateServiceConnectConfig enableSecurePrivateServiceConnect. */
                     public enableSecurePrivateServiceConnect: boolean;
@@ -174255,6 +174532,9 @@ export namespace google {
 
                     /** Endpoint satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** Endpoint genAiAdvancedFeaturesConfig */
+                    genAiAdvancedFeaturesConfig?: (google.cloud.aiplatform.v1beta1.IGenAiAdvancedFeaturesConfig|null);
                 }
 
                 /** Represents an Endpoint. */
@@ -174325,6 +174605,9 @@ export namespace google {
 
                     /** Endpoint satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** Endpoint genAiAdvancedFeaturesConfig. */
+                    public genAiAdvancedFeaturesConfig?: (google.cloud.aiplatform.v1beta1.IGenAiAdvancedFeaturesConfig|null);
 
                     /**
                      * Creates a new Endpoint instance using the specified properties.
@@ -174463,6 +174746,9 @@ export namespace google {
 
                     /** DeployedModel checkpointId */
                     checkpointId?: (string|null);
+
+                    /** DeployedModel speculativeDecodingSpec */
+                    speculativeDecodingSpec?: (google.cloud.aiplatform.v1beta1.ISpeculativeDecodingSpec|null);
                 }
 
                 /** Represents a DeployedModel. */
@@ -174530,6 +174816,9 @@ export namespace google {
 
                     /** DeployedModel checkpointId. */
                     public checkpointId: string;
+
+                    /** DeployedModel speculativeDecodingSpec. */
+                    public speculativeDecodingSpec?: (google.cloud.aiplatform.v1beta1.ISpeculativeDecodingSpec|null);
 
                     /** DeployedModel predictionResources. */
                     public predictionResources?: ("dedicatedResources"|"automaticResources"|"sharedResources");
@@ -175382,6 +175671,512 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenAiAdvancedFeaturesConfig. */
+                interface IGenAiAdvancedFeaturesConfig {
+
+                    /** GenAiAdvancedFeaturesConfig ragConfig */
+                    ragConfig?: (google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.IRagConfig|null);
+                }
+
+                /** Represents a GenAiAdvancedFeaturesConfig. */
+                class GenAiAdvancedFeaturesConfig implements IGenAiAdvancedFeaturesConfig {
+
+                    /**
+                     * Constructs a new GenAiAdvancedFeaturesConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGenAiAdvancedFeaturesConfig);
+
+                    /** GenAiAdvancedFeaturesConfig ragConfig. */
+                    public ragConfig?: (google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.IRagConfig|null);
+
+                    /**
+                     * Creates a new GenAiAdvancedFeaturesConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenAiAdvancedFeaturesConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGenAiAdvancedFeaturesConfig): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Encodes the specified GenAiAdvancedFeaturesConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.verify|verify} messages.
+                     * @param message GenAiAdvancedFeaturesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGenAiAdvancedFeaturesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenAiAdvancedFeaturesConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.verify|verify} messages.
+                     * @param message GenAiAdvancedFeaturesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGenAiAdvancedFeaturesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenAiAdvancedFeaturesConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenAiAdvancedFeaturesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Decodes a GenAiAdvancedFeaturesConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenAiAdvancedFeaturesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Verifies a GenAiAdvancedFeaturesConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenAiAdvancedFeaturesConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenAiAdvancedFeaturesConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig;
+
+                    /**
+                     * Creates a plain object from a GenAiAdvancedFeaturesConfig message. Also converts values to other types if specified.
+                     * @param message GenAiAdvancedFeaturesConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenAiAdvancedFeaturesConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenAiAdvancedFeaturesConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenAiAdvancedFeaturesConfig {
+
+                    /** Properties of a RagConfig. */
+                    interface IRagConfig {
+
+                        /** RagConfig enableRag */
+                        enableRag?: (boolean|null);
+                    }
+
+                    /** Represents a RagConfig. */
+                    class RagConfig implements IRagConfig {
+
+                        /**
+                         * Constructs a new RagConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.IRagConfig);
+
+                        /** RagConfig enableRag. */
+                        public enableRag: boolean;
+
+                        /**
+                         * Creates a new RagConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RagConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.IRagConfig): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Encodes the specified RagConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.RagConfig.verify|verify} messages.
+                         * @param message RagConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.IRagConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RagConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.RagConfig.verify|verify} messages.
+                         * @param message RagConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.IRagConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RagConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RagConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Decodes a RagConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RagConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Verifies a RagConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RagConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RagConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.RagConfig;
+
+                        /**
+                         * Creates a plain object from a RagConfig message. Also converts values to other types if specified.
+                         * @param message RagConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.GenAiAdvancedFeaturesConfig.RagConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RagConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RagConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SpeculativeDecodingSpec. */
+                interface ISpeculativeDecodingSpec {
+
+                    /** SpeculativeDecodingSpec draftModelSpeculation */
+                    draftModelSpeculation?: (google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.IDraftModelSpeculation|null);
+
+                    /** SpeculativeDecodingSpec ngramSpeculation */
+                    ngramSpeculation?: (google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.INgramSpeculation|null);
+
+                    /** SpeculativeDecodingSpec speculativeTokenCount */
+                    speculativeTokenCount?: (number|null);
+                }
+
+                /** Represents a SpeculativeDecodingSpec. */
+                class SpeculativeDecodingSpec implements ISpeculativeDecodingSpec {
+
+                    /**
+                     * Constructs a new SpeculativeDecodingSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ISpeculativeDecodingSpec);
+
+                    /** SpeculativeDecodingSpec draftModelSpeculation. */
+                    public draftModelSpeculation?: (google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.IDraftModelSpeculation|null);
+
+                    /** SpeculativeDecodingSpec ngramSpeculation. */
+                    public ngramSpeculation?: (google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.INgramSpeculation|null);
+
+                    /** SpeculativeDecodingSpec speculativeTokenCount. */
+                    public speculativeTokenCount: number;
+
+                    /** SpeculativeDecodingSpec speculation. */
+                    public speculation?: ("draftModelSpeculation"|"ngramSpeculation");
+
+                    /**
+                     * Creates a new SpeculativeDecodingSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeculativeDecodingSpec instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ISpeculativeDecodingSpec): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec;
+
+                    /**
+                     * Encodes the specified SpeculativeDecodingSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.verify|verify} messages.
+                     * @param message SpeculativeDecodingSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ISpeculativeDecodingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeculativeDecodingSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.verify|verify} messages.
+                     * @param message SpeculativeDecodingSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ISpeculativeDecodingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeculativeDecodingSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeculativeDecodingSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec;
+
+                    /**
+                     * Decodes a SpeculativeDecodingSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeculativeDecodingSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec;
+
+                    /**
+                     * Verifies a SpeculativeDecodingSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeculativeDecodingSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeculativeDecodingSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec;
+
+                    /**
+                     * Creates a plain object from a SpeculativeDecodingSpec message. Also converts values to other types if specified.
+                     * @param message SpeculativeDecodingSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeculativeDecodingSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpeculativeDecodingSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SpeculativeDecodingSpec {
+
+                    /** Properties of a DraftModelSpeculation. */
+                    interface IDraftModelSpeculation {
+
+                        /** DraftModelSpeculation draftModel */
+                        draftModel?: (string|null);
+                    }
+
+                    /** Represents a DraftModelSpeculation. */
+                    class DraftModelSpeculation implements IDraftModelSpeculation {
+
+                        /**
+                         * Constructs a new DraftModelSpeculation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.IDraftModelSpeculation);
+
+                        /** DraftModelSpeculation draftModel. */
+                        public draftModel: string;
+
+                        /**
+                         * Creates a new DraftModelSpeculation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DraftModelSpeculation instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.IDraftModelSpeculation): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.DraftModelSpeculation;
+
+                        /**
+                         * Encodes the specified DraftModelSpeculation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.DraftModelSpeculation.verify|verify} messages.
+                         * @param message DraftModelSpeculation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.IDraftModelSpeculation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DraftModelSpeculation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.DraftModelSpeculation.verify|verify} messages.
+                         * @param message DraftModelSpeculation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.IDraftModelSpeculation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DraftModelSpeculation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DraftModelSpeculation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.DraftModelSpeculation;
+
+                        /**
+                         * Decodes a DraftModelSpeculation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DraftModelSpeculation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.DraftModelSpeculation;
+
+                        /**
+                         * Verifies a DraftModelSpeculation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DraftModelSpeculation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DraftModelSpeculation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.DraftModelSpeculation;
+
+                        /**
+                         * Creates a plain object from a DraftModelSpeculation message. Also converts values to other types if specified.
+                         * @param message DraftModelSpeculation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.DraftModelSpeculation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DraftModelSpeculation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DraftModelSpeculation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NgramSpeculation. */
+                    interface INgramSpeculation {
+
+                        /** NgramSpeculation ngramSize */
+                        ngramSize?: (number|null);
+                    }
+
+                    /** Represents a NgramSpeculation. */
+                    class NgramSpeculation implements INgramSpeculation {
+
+                        /**
+                         * Constructs a new NgramSpeculation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.INgramSpeculation);
+
+                        /** NgramSpeculation ngramSize. */
+                        public ngramSize: number;
+
+                        /**
+                         * Creates a new NgramSpeculation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NgramSpeculation instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.INgramSpeculation): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.NgramSpeculation;
+
+                        /**
+                         * Encodes the specified NgramSpeculation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.NgramSpeculation.verify|verify} messages.
+                         * @param message NgramSpeculation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.INgramSpeculation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NgramSpeculation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.NgramSpeculation.verify|verify} messages.
+                         * @param message NgramSpeculation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.INgramSpeculation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NgramSpeculation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NgramSpeculation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.NgramSpeculation;
+
+                        /**
+                         * Decodes a NgramSpeculation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NgramSpeculation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.NgramSpeculation;
+
+                        /**
+                         * Verifies a NgramSpeculation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NgramSpeculation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NgramSpeculation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.NgramSpeculation;
+
+                        /**
+                         * Creates a plain object from a NgramSpeculation message. Also converts values to other types if specified.
+                         * @param message NgramSpeculation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.SpeculativeDecodingSpec.NgramSpeculation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NgramSpeculation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NgramSpeculation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Represents an EndpointService */

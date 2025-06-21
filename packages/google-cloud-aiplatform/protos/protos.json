@@ -5774,6 +5774,13 @@
                         }
                       }
                     },
+                    "PSCAutomationState": {
+                      "values": {
+                        "PSC_AUTOMATION_STATE_UNSPECIFIED": 0,
+                        "PSC_AUTOMATION_STATE_SUCCESSFUL": 1,
+                        "PSC_AUTOMATION_STATE_FAILED": 2
+                      }
+                    },
                     "PSCAutomationConfig": {
                       "fields": {
                         "projectId": {
@@ -5788,6 +5795,34 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "forwardingRule": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "PSCAutomationState",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -5805,6 +5840,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        },
+                        "pscAutomationConfigs": {
+                          "rule": "repeated",
+                          "type": "PSCAutomationConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "serviceAttachment": {
                           "type": "string",
@@ -8173,6 +8216,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "genAiAdvancedFeaturesConfig": {
+                          "type": "GenAiAdvancedFeaturesConfig",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8213,7 +8263,6 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
                           }
                         },
@@ -8379,6 +8428,24 @@
                         "fastTryoutEnabled": {
                           "type": "bool",
                           "id": 2
+                        }
+                      }
+                    },
+                    "GenAiAdvancedFeaturesConfig": {
+                      "fields": {
+                        "ragConfig": {
+                          "type": "RagConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "RagConfig": {
+                          "fields": {
+                            "enableRag": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -44030,6 +44097,13 @@
                         }
                       }
                     },
+                    "PSCAutomationState": {
+                      "values": {
+                        "PSC_AUTOMATION_STATE_UNSPECIFIED": 0,
+                        "PSC_AUTOMATION_STATE_SUCCESSFUL": 1,
+                        "PSC_AUTOMATION_STATE_FAILED": 2
+                      }
+                    },
                     "PSCAutomationConfig": {
                       "fields": {
                         "projectId": {
@@ -44044,6 +44118,34 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "forwardingRule": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "PSCAutomationState",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -44061,6 +44163,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        },
+                        "pscAutomationConfigs": {
+                          "rule": "repeated",
+                          "type": "PSCAutomationConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableSecurePrivateServiceConnect": {
                           "type": "bool",
@@ -46840,6 +46950,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "genAiAdvancedFeaturesConfig": {
+                          "type": "GenAiAdvancedFeaturesConfig",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -46880,7 +46997,6 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
                           }
                         },
@@ -46952,6 +47068,13 @@
                         "checkpointId": {
                           "type": "string",
                           "id": 29
+                        },
+                        "speculativeDecodingSpec": {
+                          "type": "SpeculativeDecodingSpec",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -47106,6 +47229,70 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GenAiAdvancedFeaturesConfig": {
+                      "fields": {
+                        "ragConfig": {
+                          "type": "RagConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "RagConfig": {
+                          "fields": {
+                            "enableRag": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SpeculativeDecodingSpec": {
+                      "oneofs": {
+                        "speculation": {
+                          "oneof": [
+                            "draftModelSpeculation",
+                            "ngramSpeculation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "draftModelSpeculation": {
+                          "type": "DraftModelSpeculation",
+                          "id": 2
+                        },
+                        "ngramSpeculation": {
+                          "type": "NgramSpeculation",
+                          "id": 3
+                        },
+                        "speculativeTokenCount": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "DraftModelSpeculation": {
+                          "fields": {
+                            "draftModel": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                              }
+                            }
+                          }
+                        },
+                        "NgramSpeculation": {
+                          "fields": {
+                            "ngramSize": {
+                              "type": "int32",
+                              "id": 1
+                            }
                           }
                         }
                       }
