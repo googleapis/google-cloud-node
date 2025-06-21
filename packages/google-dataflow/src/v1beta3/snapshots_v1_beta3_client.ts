@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -104,41 +99,20 @@ export class SnapshotsV1Beta3Client {
    *     const client = new SnapshotsV1Beta3Client({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SnapshotsV1Beta3Client;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataflow.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -164,7 +138,7 @@ export class SnapshotsV1Beta3Client {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -178,7 +152,10 @@ export class SnapshotsV1Beta3Client {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -197,11 +174,8 @@ export class SnapshotsV1Beta3Client {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.dataflow.v1beta3.SnapshotsV1Beta3',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.dataflow.v1beta3.SnapshotsV1Beta3', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -232,39 +206,31 @@ export class SnapshotsV1Beta3Client {
     // Put together the "service stub" for
     // google.dataflow.v1beta3.SnapshotsV1Beta3.
     this.snapshotsV1Beta3Stub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.dataflow.v1beta3.SnapshotsV1Beta3'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.dataflow.v1beta3.SnapshotsV1Beta3') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.dataflow.v1beta3.SnapshotsV1Beta3,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const snapshotsV1Beta3StubMethods = [
-      'getSnapshot',
-      'deleteSnapshot',
-      'listSnapshots',
-    ];
+    const snapshotsV1Beta3StubMethods =
+        ['getSnapshot', 'deleteSnapshot', 'listSnapshots'];
     for (const methodName of snapshotsV1Beta3StubMethods) {
       const callPromise = this.snapshotsV1Beta3Stub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -284,14 +250,8 @@ export class SnapshotsV1Beta3Client {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataflow.googleapis.com';
   }
@@ -302,14 +262,8 @@ export class SnapshotsV1Beta3Client {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataflow.googleapis.com';
   }
@@ -342,7 +296,7 @@ export class SnapshotsV1Beta3Client {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/compute',
+      'https://www.googleapis.com/auth/compute'
     ];
   }
 
@@ -352,9 +306,8 @@ export class SnapshotsV1Beta3Client {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -365,356 +318,307 @@ export class SnapshotsV1Beta3Client {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets information about a snapshot.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   The ID of the Cloud Platform project that the snapshot belongs to.
-   * @param {string} request.snapshotId
-   *   The ID of the snapshot.
-   * @param {string} request.location
-   *   The location that contains this snapshot.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.Snapshot|Snapshot}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js</caption>
-   * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_GetSnapshot_async
-   */
+/**
+ * Gets information about a snapshot.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   The ID of the Cloud Platform project that the snapshot belongs to.
+ * @param {string} request.snapshotId
+ *   The ID of the snapshot.
+ * @param {string} request.location
+ *   The location that contains this snapshot.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.Snapshot|Snapshot}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js</caption>
+ * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_GetSnapshot_async
+ */
   getSnapshot(
-    request?: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.ISnapshot,
-      protos.google.dataflow.v1beta3.IGetSnapshotRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.dataflow.v1beta3.ISnapshot,
+        protos.google.dataflow.v1beta3.IGetSnapshotRequest|undefined, {}|undefined
+      ]>;
   getSnapshot(
-    request: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.ISnapshot,
-      protos.google.dataflow.v1beta3.IGetSnapshotRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSnapshot(
-    request: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.ISnapshot,
-      protos.google.dataflow.v1beta3.IGetSnapshotRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSnapshot(
-    request?: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.dataflow.v1beta3.ISnapshot,
-          protos.google.dataflow.v1beta3.IGetSnapshotRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.dataflow.v1beta3.ISnapshot,
-      protos.google.dataflow.v1beta3.IGetSnapshotRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.ISnapshot,
-      protos.google.dataflow.v1beta3.IGetSnapshotRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.dataflow.v1beta3.IGetSnapshotRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSnapshot(
+      request: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
+      callback: Callback<
+          protos.google.dataflow.v1beta3.ISnapshot,
+          protos.google.dataflow.v1beta3.IGetSnapshotRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSnapshot(
+      request?: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.dataflow.v1beta3.ISnapshot,
+          protos.google.dataflow.v1beta3.IGetSnapshotRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.dataflow.v1beta3.ISnapshot,
+          protos.google.dataflow.v1beta3.IGetSnapshotRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.dataflow.v1beta3.ISnapshot,
+        protos.google.dataflow.v1beta3.IGetSnapshotRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        snapshot_id: request.snapshotId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'snapshot_id': request.snapshotId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getSnapshot request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.dataflow.v1beta3.ISnapshot,
-          protos.google.dataflow.v1beta3.IGetSnapshotRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.dataflow.v1beta3.ISnapshot,
+        protos.google.dataflow.v1beta3.IGetSnapshotRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSnapshot response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getSnapshot(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.dataflow.v1beta3.ISnapshot,
-          protos.google.dataflow.v1beta3.IGetSnapshotRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getSnapshot response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getSnapshot(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.dataflow.v1beta3.ISnapshot,
+        protos.google.dataflow.v1beta3.IGetSnapshotRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSnapshot response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a snapshot.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   The ID of the Cloud Platform project that the snapshot belongs to.
-   * @param {string} request.snapshotId
-   *   The ID of the snapshot.
-   * @param {string} request.location
-   *   The location that contains this snapshot.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.DeleteSnapshotResponse|DeleteSnapshotResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js</caption>
-   * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_DeleteSnapshot_async
-   */
+/**
+ * Deletes a snapshot.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   The ID of the Cloud Platform project that the snapshot belongs to.
+ * @param {string} request.snapshotId
+ *   The ID of the snapshot.
+ * @param {string} request.location
+ *   The location that contains this snapshot.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.DeleteSnapshotResponse|DeleteSnapshotResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js</caption>
+ * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_DeleteSnapshot_async
+ */
   deleteSnapshot(
-    request?: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-      protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
+        protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|undefined, {}|undefined
+      ]>;
   deleteSnapshot(
-    request: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-      protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSnapshot(
-    request: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-      protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSnapshot(
-    request?: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-          | protos.google.dataflow.v1beta3.IDeleteSnapshotRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-      protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-      protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSnapshot(
+      request: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
+      callback: Callback<
+          protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
+          protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSnapshot(
+      request?: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
+          protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
+          protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
+        protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        snapshot_id: request.snapshotId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'snapshot_id': request.snapshotId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteSnapshot request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-          | protos.google.dataflow.v1beta3.IDeleteSnapshotRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
+        protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSnapshot response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteSnapshot(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
-          protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteSnapshot response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteSnapshot(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
+        protos.google.dataflow.v1beta3.IDeleteSnapshotRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteSnapshot response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists snapshots.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   The project ID to list snapshots for.
-   * @param {string} request.jobId
-   *   If specified, list snapshots created from this job.
-   * @param {string} request.location
-   *   The location to list snapshots in.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.ListSnapshotsResponse|ListSnapshotsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js</caption>
-   * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_ListSnapshots_async
-   */
+/**
+ * Lists snapshots.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   The project ID to list snapshots for.
+ * @param {string} request.jobId
+ *   If specified, list snapshots created from this job.
+ * @param {string} request.location
+ *   The location to list snapshots in.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.ListSnapshotsResponse|ListSnapshotsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js</caption>
+ * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_ListSnapshots_async
+ */
   listSnapshots(
-    request?: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-      protos.google.dataflow.v1beta3.IListSnapshotsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.dataflow.v1beta3.IListSnapshotsResponse,
+        protos.google.dataflow.v1beta3.IListSnapshotsRequest|undefined, {}|undefined
+      ]>;
   listSnapshots(
-    request: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-      protos.google.dataflow.v1beta3.IListSnapshotsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listSnapshots(
-    request: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-      protos.google.dataflow.v1beta3.IListSnapshotsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listSnapshots(
-    request?: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-          | protos.google.dataflow.v1beta3.IListSnapshotsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-      protos.google.dataflow.v1beta3.IListSnapshotsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-      protos.google.dataflow.v1beta3.IListSnapshotsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.dataflow.v1beta3.IListSnapshotsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listSnapshots(
+      request: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
+      callback: Callback<
+          protos.google.dataflow.v1beta3.IListSnapshotsResponse,
+          protos.google.dataflow.v1beta3.IListSnapshotsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listSnapshots(
+      request?: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.dataflow.v1beta3.IListSnapshotsResponse,
+          protos.google.dataflow.v1beta3.IListSnapshotsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.dataflow.v1beta3.IListSnapshotsResponse,
+          protos.google.dataflow.v1beta3.IListSnapshotsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.dataflow.v1beta3.IListSnapshotsResponse,
+        protos.google.dataflow.v1beta3.IListSnapshotsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listSnapshots request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-          | protos.google.dataflow.v1beta3.IListSnapshotsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.dataflow.v1beta3.IListSnapshotsResponse,
+        protos.google.dataflow.v1beta3.IListSnapshotsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listSnapshots response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listSnapshots(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.dataflow.v1beta3.IListSnapshotsResponse,
-          protos.google.dataflow.v1beta3.IListSnapshotsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listSnapshots response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listSnapshots(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.dataflow.v1beta3.IListSnapshotsResponse,
+        protos.google.dataflow.v1beta3.IListSnapshotsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listSnapshots response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

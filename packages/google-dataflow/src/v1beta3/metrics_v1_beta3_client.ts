@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class MetricsV1Beta3Client {
    *     const client = new MetricsV1Beta3Client({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MetricsV1Beta3Client;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataflow.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class MetricsV1Beta3Client {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class MetricsV1Beta3Client {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -202,25 +177,16 @@ export class MetricsV1Beta3Client {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      getJobExecutionDetails: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'stages'
-      ),
-      getStageExecutionDetails: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workers'
-      ),
+      getJobExecutionDetails:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'stages'),
+      getStageExecutionDetails:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workers')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.dataflow.v1beta3.MetricsV1Beta3',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.dataflow.v1beta3.MetricsV1Beta3', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -251,39 +217,32 @@ export class MetricsV1Beta3Client {
     // Put together the "service stub" for
     // google.dataflow.v1beta3.MetricsV1Beta3.
     this.metricsV1Beta3Stub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.dataflow.v1beta3.MetricsV1Beta3'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.dataflow.v1beta3.MetricsV1Beta3') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.dataflow.v1beta3.MetricsV1Beta3,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const metricsV1Beta3StubMethods = [
-      'getJobMetrics',
-      'getJobExecutionDetails',
-      'getStageExecutionDetails',
-    ];
+    const metricsV1Beta3StubMethods =
+        ['getJobMetrics', 'getJobExecutionDetails', 'getStageExecutionDetails'];
     for (const methodName of metricsV1Beta3StubMethods) {
       const callPromise = this.metricsV1Beta3Stub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -303,14 +262,8 @@ export class MetricsV1Beta3Client {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataflow.googleapis.com';
   }
@@ -321,14 +274,8 @@ export class MetricsV1Beta3Client {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataflow.googleapis.com';
   }
@@ -361,7 +308,7 @@ export class MetricsV1Beta3Client {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/compute',
+      'https://www.googleapis.com/auth/compute'
     ];
   }
 
@@ -371,9 +318,8 @@ export class MetricsV1Beta3Client {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -384,250 +330,213 @@ export class MetricsV1Beta3Client {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Request the job status.
-   *
-   * To request the status of a job, we recommend using
-   * `projects.locations.jobs.getMetrics` with a [regional endpoint]
-   * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
-   * `projects.jobs.getMetrics` is not recommended, as you can only request the
-   * status of jobs that are running in `us-central1`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   A project id.
-   * @param {string} request.jobId
-   *   The job to get metrics for.
-   * @param {google.protobuf.Timestamp} request.startTime
-   *   Return only metric data that has changed since this time.
-   *   Default is to return all information about all metrics for the job.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
-   *   contains the job specified by job_id.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.JobMetrics|JobMetrics}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/metrics_v1_beta3.get_job_metrics.js</caption>
-   * region_tag:dataflow_v1beta3_generated_MetricsV1Beta3_GetJobMetrics_async
-   */
+/**
+ * Request the job status.
+ *
+ * To request the status of a job, we recommend using
+ * `projects.locations.jobs.getMetrics` with a [regional endpoint]
+ * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+ * `projects.jobs.getMetrics` is not recommended, as you can only request the
+ * status of jobs that are running in `us-central1`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   A project id.
+ * @param {string} request.jobId
+ *   The job to get metrics for.
+ * @param {google.protobuf.Timestamp} request.startTime
+ *   Return only metric data that has changed since this time.
+ *   Default is to return all information about all metrics for the job.
+ * @param {string} request.location
+ *   The [regional endpoint]
+ *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+ *   contains the job specified by job_id.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.JobMetrics|JobMetrics}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/metrics_v1_beta3.get_job_metrics.js</caption>
+ * region_tag:dataflow_v1beta3_generated_MetricsV1Beta3_GetJobMetrics_async
+ */
   getJobMetrics(
-    request?: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IJobMetrics,
-      protos.google.dataflow.v1beta3.IGetJobMetricsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.dataflow.v1beta3.IJobMetrics,
+        protos.google.dataflow.v1beta3.IGetJobMetricsRequest|undefined, {}|undefined
+      ]>;
   getJobMetrics(
-    request: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.IJobMetrics,
-      protos.google.dataflow.v1beta3.IGetJobMetricsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJobMetrics(
-    request: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.IJobMetrics,
-      protos.google.dataflow.v1beta3.IGetJobMetricsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJobMetrics(
-    request?: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.dataflow.v1beta3.IJobMetrics,
-          | protos.google.dataflow.v1beta3.IGetJobMetricsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.dataflow.v1beta3.IJobMetrics,
-      protos.google.dataflow.v1beta3.IGetJobMetricsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IJobMetrics,
-      protos.google.dataflow.v1beta3.IGetJobMetricsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.dataflow.v1beta3.IGetJobMetricsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJobMetrics(
+      request: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
+      callback: Callback<
+          protos.google.dataflow.v1beta3.IJobMetrics,
+          protos.google.dataflow.v1beta3.IGetJobMetricsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getJobMetrics(
+      request?: protos.google.dataflow.v1beta3.IGetJobMetricsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.dataflow.v1beta3.IJobMetrics,
+          protos.google.dataflow.v1beta3.IGetJobMetricsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.dataflow.v1beta3.IJobMetrics,
+          protos.google.dataflow.v1beta3.IGetJobMetricsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.dataflow.v1beta3.IJobMetrics,
+        protos.google.dataflow.v1beta3.IGetJobMetricsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getJobMetrics request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.dataflow.v1beta3.IJobMetrics,
-          | protos.google.dataflow.v1beta3.IGetJobMetricsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.dataflow.v1beta3.IJobMetrics,
+        protos.google.dataflow.v1beta3.IGetJobMetricsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getJobMetrics response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getJobMetrics(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.dataflow.v1beta3.IJobMetrics,
-          protos.google.dataflow.v1beta3.IGetJobMetricsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getJobMetrics response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getJobMetrics(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.dataflow.v1beta3.IJobMetrics,
+        protos.google.dataflow.v1beta3.IGetJobMetricsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getJobMetrics response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Request detailed information about the execution status of the job.
-   *
-   * EXPERIMENTAL.  This API is subject to change or removal without notice.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   A project id.
-   * @param {string} request.jobId
-   *   The job to get execution details for.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
-   *   contains the job specified by job_id.
-   * @param {number} request.pageSize
-   *   If specified, determines the maximum number of stages to
-   *   return.  If unspecified, the service may choose an appropriate
-   *   default, or may return an arbitrarily large number of results.
-   * @param {string} request.pageToken
-   *   If supplied, this should be the value of next_page_token returned
-   *   by an earlier call. This will cause the next page of results to
-   *   be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.dataflow.v1beta3.StageSummary|StageSummary}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `getJobExecutionDetailsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Request detailed information about the execution status of the job.
+ *
+ * EXPERIMENTAL.  This API is subject to change or removal without notice.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   A project id.
+ * @param {string} request.jobId
+ *   The job to get execution details for.
+ * @param {string} request.location
+ *   The [regional endpoint]
+ *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+ *   contains the job specified by job_id.
+ * @param {number} request.pageSize
+ *   If specified, determines the maximum number of stages to
+ *   return.  If unspecified, the service may choose an appropriate
+ *   default, or may return an arbitrarily large number of results.
+ * @param {string} request.pageToken
+ *   If supplied, this should be the value of next_page_token returned
+ *   by an earlier call. This will cause the next page of results to
+ *   be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.dataflow.v1beta3.StageSummary|StageSummary}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `getJobExecutionDetailsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   getJobExecutionDetails(
-    request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IStageSummary[],
-      protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IJobExecutionDetails,
-    ]
-  >;
+      request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.dataflow.v1beta3.IStageSummary[],
+        protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest|null,
+        protos.google.dataflow.v1beta3.IJobExecutionDetails
+      ]>;
   getJobExecutionDetails(
-    request: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-      protos.google.dataflow.v1beta3.IJobExecutionDetails | null | undefined,
-      protos.google.dataflow.v1beta3.IStageSummary
-    >
-  ): void;
-  getJobExecutionDetails(
-    request: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-    callback: PaginationCallback<
-      protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-      protos.google.dataflow.v1beta3.IJobExecutionDetails | null | undefined,
-      protos.google.dataflow.v1beta3.IStageSummary
-    >
-  ): void;
-  getJobExecutionDetails(
-    request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-          | protos.google.dataflow.v1beta3.IJobExecutionDetails
-          | null
-          | undefined,
-          protos.google.dataflow.v1beta3.IStageSummary
-        >,
-    callback?: PaginationCallback<
-      protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-      protos.google.dataflow.v1beta3.IJobExecutionDetails | null | undefined,
-      protos.google.dataflow.v1beta3.IStageSummary
-    >
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IStageSummary[],
-      protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IJobExecutionDetails,
-    ]
-  > | void {
+          protos.google.dataflow.v1beta3.IJobExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IStageSummary>): void;
+  getJobExecutionDetails(
+      request: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+      callback: PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+          protos.google.dataflow.v1beta3.IJobExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IStageSummary>): void;
+  getJobExecutionDetails(
+      request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+          protos.google.dataflow.v1beta3.IJobExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IStageSummary>,
+      callback?: PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+          protos.google.dataflow.v1beta3.IJobExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IStageSummary>):
+      Promise<[
+        protos.google.dataflow.v1beta3.IStageSummary[],
+        protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest|null,
+        protos.google.dataflow.v1beta3.IJobExecutionDetails
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-          | protos.google.dataflow.v1beta3.IJobExecutionDetails
-          | null
-          | undefined,
-          protos.google.dataflow.v1beta3.IStageSummary
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+      protos.google.dataflow.v1beta3.IJobExecutionDetails|null|undefined,
+      protos.google.dataflow.v1beta3.IStageSummary>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('getJobExecutionDetails values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -636,68 +545,65 @@ export class MetricsV1Beta3Client {
     this._log.info('getJobExecutionDetails request %j', request);
     return this.innerApiCalls
       .getJobExecutionDetails(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.dataflow.v1beta3.IStageSummary[],
-          protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest | null,
-          protos.google.dataflow.v1beta3.IJobExecutionDetails,
-        ]) => {
-          this._log.info('getJobExecutionDetails values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.dataflow.v1beta3.IStageSummary[],
+        protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest|null,
+        protos.google.dataflow.v1beta3.IJobExecutionDetails
+      ]) => {
+        this._log.info('getJobExecutionDetails values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `getJobExecutionDetails`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   A project id.
-   * @param {string} request.jobId
-   *   The job to get execution details for.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
-   *   contains the job specified by job_id.
-   * @param {number} request.pageSize
-   *   If specified, determines the maximum number of stages to
-   *   return.  If unspecified, the service may choose an appropriate
-   *   default, or may return an arbitrarily large number of results.
-   * @param {string} request.pageToken
-   *   If supplied, this should be the value of next_page_token returned
-   *   by an earlier call. This will cause the next page of results to
-   *   be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.dataflow.v1beta3.StageSummary|StageSummary} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `getJobExecutionDetailsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `getJobExecutionDetails`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   A project id.
+ * @param {string} request.jobId
+ *   The job to get execution details for.
+ * @param {string} request.location
+ *   The [regional endpoint]
+ *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+ *   contains the job specified by job_id.
+ * @param {number} request.pageSize
+ *   If specified, determines the maximum number of stages to
+ *   return.  If unspecified, the service may choose an appropriate
+ *   default, or may return an arbitrarily large number of results.
+ * @param {string} request.pageToken
+ *   If supplied, this should be the value of next_page_token returned
+ *   by an earlier call. This will cause the next page of results to
+ *   be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.dataflow.v1beta3.StageSummary|StageSummary} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `getJobExecutionDetailsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   getJobExecutionDetailsStream(
-    request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
+    });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getJobExecutionDetails stream %j', request);
     return this.descriptors.page.getJobExecutionDetails.createStream(
       this.innerApiCalls.getJobExecutionDetails as GaxCall,
@@ -706,59 +612,58 @@ export class MetricsV1Beta3Client {
     );
   }
 
-  /**
-   * Equivalent to `getJobExecutionDetails`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   A project id.
-   * @param {string} request.jobId
-   *   The job to get execution details for.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
-   *   contains the job specified by job_id.
-   * @param {number} request.pageSize
-   *   If specified, determines the maximum number of stages to
-   *   return.  If unspecified, the service may choose an appropriate
-   *   default, or may return an arbitrarily large number of results.
-   * @param {string} request.pageToken
-   *   If supplied, this should be the value of next_page_token returned
-   *   by an earlier call. This will cause the next page of results to
-   *   be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.dataflow.v1beta3.StageSummary|StageSummary}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/metrics_v1_beta3.get_job_execution_details.js</caption>
-   * region_tag:dataflow_v1beta3_generated_MetricsV1Beta3_GetJobExecutionDetails_async
-   */
+/**
+ * Equivalent to `getJobExecutionDetails`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   A project id.
+ * @param {string} request.jobId
+ *   The job to get execution details for.
+ * @param {string} request.location
+ *   The [regional endpoint]
+ *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+ *   contains the job specified by job_id.
+ * @param {number} request.pageSize
+ *   If specified, determines the maximum number of stages to
+ *   return.  If unspecified, the service may choose an appropriate
+ *   default, or may return an arbitrarily large number of results.
+ * @param {string} request.pageToken
+ *   If supplied, this should be the value of next_page_token returned
+ *   by an earlier call. This will cause the next page of results to
+ *   be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.dataflow.v1beta3.StageSummary|StageSummary}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/metrics_v1_beta3.get_job_execution_details.js</caption>
+ * region_tag:dataflow_v1beta3_generated_MetricsV1Beta3_GetJobExecutionDetails_async
+ */
   getJobExecutionDetailsAsync(
-    request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.dataflow.v1beta3.IStageSummary> {
+      request?: protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.dataflow.v1beta3.IStageSummary>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
+    });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getJobExecutionDetails iterate %j', request);
     return this.descriptors.page.getJobExecutionDetails.asyncIterate(
       this.innerApiCalls['getJobExecutionDetails'] as GaxCall,
@@ -766,128 +671,109 @@ export class MetricsV1Beta3Client {
       callSettings
     ) as AsyncIterable<protos.google.dataflow.v1beta3.IStageSummary>;
   }
-  /**
-   * Request detailed information about the execution status of a stage of the
-   * job.
-   *
-   * EXPERIMENTAL.  This API is subject to change or removal without notice.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   A project id.
-   * @param {string} request.jobId
-   *   The job to get execution details for.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
-   *   contains the job specified by job_id.
-   * @param {string} request.stageId
-   *   The stage for which to fetch information.
-   * @param {number} request.pageSize
-   *   If specified, determines the maximum number of work items to
-   *   return.  If unspecified, the service may choose an appropriate
-   *   default, or may return an arbitrarily large number of results.
-   * @param {string} request.pageToken
-   *   If supplied, this should be the value of next_page_token returned
-   *   by an earlier call. This will cause the next page of results to
-   *   be returned.
-   * @param {google.protobuf.Timestamp} request.startTime
-   *   Lower time bound of work items to include, by start time.
-   * @param {google.protobuf.Timestamp} request.endTime
-   *   Upper time bound of work items to include, by start time.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.dataflow.v1beta3.WorkerDetails|WorkerDetails}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `getStageExecutionDetailsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Request detailed information about the execution status of a stage of the
+ * job.
+ *
+ * EXPERIMENTAL.  This API is subject to change or removal without notice.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   A project id.
+ * @param {string} request.jobId
+ *   The job to get execution details for.
+ * @param {string} request.location
+ *   The [regional endpoint]
+ *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+ *   contains the job specified by job_id.
+ * @param {string} request.stageId
+ *   The stage for which to fetch information.
+ * @param {number} request.pageSize
+ *   If specified, determines the maximum number of work items to
+ *   return.  If unspecified, the service may choose an appropriate
+ *   default, or may return an arbitrarily large number of results.
+ * @param {string} request.pageToken
+ *   If supplied, this should be the value of next_page_token returned
+ *   by an earlier call. This will cause the next page of results to
+ *   be returned.
+ * @param {google.protobuf.Timestamp} request.startTime
+ *   Lower time bound of work items to include, by start time.
+ * @param {google.protobuf.Timestamp} request.endTime
+ *   Upper time bound of work items to include, by start time.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.dataflow.v1beta3.WorkerDetails|WorkerDetails}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `getStageExecutionDetailsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   getStageExecutionDetails(
-    request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IWorkerDetails[],
-      protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IStageExecutionDetails,
-    ]
-  >;
+      request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.dataflow.v1beta3.IWorkerDetails[],
+        protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest|null,
+        protos.google.dataflow.v1beta3.IStageExecutionDetails
+      ]>;
   getStageExecutionDetails(
-    request: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-      protos.google.dataflow.v1beta3.IStageExecutionDetails | null | undefined,
-      protos.google.dataflow.v1beta3.IWorkerDetails
-    >
-  ): void;
-  getStageExecutionDetails(
-    request: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-    callback: PaginationCallback<
-      protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-      protos.google.dataflow.v1beta3.IStageExecutionDetails | null | undefined,
-      protos.google.dataflow.v1beta3.IWorkerDetails
-    >
-  ): void;
-  getStageExecutionDetails(
-    request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-          | protos.google.dataflow.v1beta3.IStageExecutionDetails
-          | null
-          | undefined,
-          protos.google.dataflow.v1beta3.IWorkerDetails
-        >,
-    callback?: PaginationCallback<
-      protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-      protos.google.dataflow.v1beta3.IStageExecutionDetails | null | undefined,
-      protos.google.dataflow.v1beta3.IWorkerDetails
-    >
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IWorkerDetails[],
-      protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest | null,
-      protos.google.dataflow.v1beta3.IStageExecutionDetails,
-    ]
-  > | void {
+          protos.google.dataflow.v1beta3.IStageExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IWorkerDetails>): void;
+  getStageExecutionDetails(
+      request: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+      callback: PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+          protos.google.dataflow.v1beta3.IStageExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IWorkerDetails>): void;
+  getStageExecutionDetails(
+      request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+          protos.google.dataflow.v1beta3.IStageExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IWorkerDetails>,
+      callback?: PaginationCallback<
+          protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+          protos.google.dataflow.v1beta3.IStageExecutionDetails|null|undefined,
+          protos.google.dataflow.v1beta3.IWorkerDetails>):
+      Promise<[
+        protos.google.dataflow.v1beta3.IWorkerDetails[],
+        protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest|null,
+        protos.google.dataflow.v1beta3.IStageExecutionDetails
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-        stage_id: request.stageId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
+      'stage_id': request.stageId ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-          | protos.google.dataflow.v1beta3.IStageExecutionDetails
-          | null
-          | undefined,
-          protos.google.dataflow.v1beta3.IWorkerDetails
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+      protos.google.dataflow.v1beta3.IStageExecutionDetails|null|undefined,
+      protos.google.dataflow.v1beta3.IWorkerDetails>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('getStageExecutionDetails values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -896,75 +782,72 @@ export class MetricsV1Beta3Client {
     this._log.info('getStageExecutionDetails request %j', request);
     return this.innerApiCalls
       .getStageExecutionDetails(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.dataflow.v1beta3.IWorkerDetails[],
-          protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest | null,
-          protos.google.dataflow.v1beta3.IStageExecutionDetails,
-        ]) => {
-          this._log.info('getStageExecutionDetails values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.dataflow.v1beta3.IWorkerDetails[],
+        protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest|null,
+        protos.google.dataflow.v1beta3.IStageExecutionDetails
+      ]) => {
+        this._log.info('getStageExecutionDetails values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `getStageExecutionDetails`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   A project id.
-   * @param {string} request.jobId
-   *   The job to get execution details for.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
-   *   contains the job specified by job_id.
-   * @param {string} request.stageId
-   *   The stage for which to fetch information.
-   * @param {number} request.pageSize
-   *   If specified, determines the maximum number of work items to
-   *   return.  If unspecified, the service may choose an appropriate
-   *   default, or may return an arbitrarily large number of results.
-   * @param {string} request.pageToken
-   *   If supplied, this should be the value of next_page_token returned
-   *   by an earlier call. This will cause the next page of results to
-   *   be returned.
-   * @param {google.protobuf.Timestamp} request.startTime
-   *   Lower time bound of work items to include, by start time.
-   * @param {google.protobuf.Timestamp} request.endTime
-   *   Upper time bound of work items to include, by start time.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.dataflow.v1beta3.WorkerDetails|WorkerDetails} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `getStageExecutionDetailsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `getStageExecutionDetails`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   A project id.
+ * @param {string} request.jobId
+ *   The job to get execution details for.
+ * @param {string} request.location
+ *   The [regional endpoint]
+ *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+ *   contains the job specified by job_id.
+ * @param {string} request.stageId
+ *   The stage for which to fetch information.
+ * @param {number} request.pageSize
+ *   If specified, determines the maximum number of work items to
+ *   return.  If unspecified, the service may choose an appropriate
+ *   default, or may return an arbitrarily large number of results.
+ * @param {string} request.pageToken
+ *   If supplied, this should be the value of next_page_token returned
+ *   by an earlier call. This will cause the next page of results to
+ *   be returned.
+ * @param {google.protobuf.Timestamp} request.startTime
+ *   Lower time bound of work items to include, by start time.
+ * @param {google.protobuf.Timestamp} request.endTime
+ *   Upper time bound of work items to include, by start time.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.dataflow.v1beta3.WorkerDetails|WorkerDetails} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `getStageExecutionDetailsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   getStageExecutionDetailsStream(
-    request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-        stage_id: request.stageId ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
+      'stage_id': request.stageId ?? '',
+    });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getStageExecutionDetails stream %j', request);
     return this.descriptors.page.getStageExecutionDetails.createStream(
       this.innerApiCalls.getStageExecutionDetails as GaxCall,
@@ -973,66 +856,65 @@ export class MetricsV1Beta3Client {
     );
   }
 
-  /**
-   * Equivalent to `getStageExecutionDetails`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   A project id.
-   * @param {string} request.jobId
-   *   The job to get execution details for.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
-   *   contains the job specified by job_id.
-   * @param {string} request.stageId
-   *   The stage for which to fetch information.
-   * @param {number} request.pageSize
-   *   If specified, determines the maximum number of work items to
-   *   return.  If unspecified, the service may choose an appropriate
-   *   default, or may return an arbitrarily large number of results.
-   * @param {string} request.pageToken
-   *   If supplied, this should be the value of next_page_token returned
-   *   by an earlier call. This will cause the next page of results to
-   *   be returned.
-   * @param {google.protobuf.Timestamp} request.startTime
-   *   Lower time bound of work items to include, by start time.
-   * @param {google.protobuf.Timestamp} request.endTime
-   *   Upper time bound of work items to include, by start time.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.dataflow.v1beta3.WorkerDetails|WorkerDetails}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/metrics_v1_beta3.get_stage_execution_details.js</caption>
-   * region_tag:dataflow_v1beta3_generated_MetricsV1Beta3_GetStageExecutionDetails_async
-   */
+/**
+ * Equivalent to `getStageExecutionDetails`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.projectId
+ *   A project id.
+ * @param {string} request.jobId
+ *   The job to get execution details for.
+ * @param {string} request.location
+ *   The [regional endpoint]
+ *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+ *   contains the job specified by job_id.
+ * @param {string} request.stageId
+ *   The stage for which to fetch information.
+ * @param {number} request.pageSize
+ *   If specified, determines the maximum number of work items to
+ *   return.  If unspecified, the service may choose an appropriate
+ *   default, or may return an arbitrarily large number of results.
+ * @param {string} request.pageToken
+ *   If supplied, this should be the value of next_page_token returned
+ *   by an earlier call. This will cause the next page of results to
+ *   be returned.
+ * @param {google.protobuf.Timestamp} request.startTime
+ *   Lower time bound of work items to include, by start time.
+ * @param {google.protobuf.Timestamp} request.endTime
+ *   Upper time bound of work items to include, by start time.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.dataflow.v1beta3.WorkerDetails|WorkerDetails}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/metrics_v1_beta3.get_stage_execution_details.js</caption>
+ * region_tag:dataflow_v1beta3_generated_MetricsV1Beta3_GetStageExecutionDetails_async
+ */
   getStageExecutionDetailsAsync(
-    request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.dataflow.v1beta3.IWorkerDetails> {
+      request?: protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.dataflow.v1beta3.IWorkerDetails>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId ?? '',
-        location: request.location ?? '',
-        job_id: request.jobId ?? '',
-        stage_id: request.stageId ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_id': request.projectId ?? '',
+      'location': request.location ?? '',
+      'job_id': request.jobId ?? '',
+      'stage_id': request.stageId ?? '',
+    });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getStageExecutionDetails iterate %j', request);
     return this.descriptors.page.getStageExecutionDetails.asyncIterate(
       this.innerApiCalls['getStageExecutionDetails'] as GaxCall,
