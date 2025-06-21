@@ -29,7622 +29,5780 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.VideoStitcherServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'videostitcher.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          videostitcherserviceModule.v1.VideoStitcherServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'videostitcher.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          videostitcherserviceModule.v1.VideoStitcherServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'videostitcher.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'videostitcher.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'videostitcher.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new videostitcherserviceModule.v1.VideoStitcherServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'videostitcher.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'videostitcher.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = videostitcherserviceModule.v1.VideoStitcherServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'videostitcher.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'videostitcher.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        videostitcherserviceModule.v1.VideoStitcherServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.videoStitcherServiceStub, undefined);
-      await client.initialize();
-      assert(client.videoStitcherServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.videoStitcherServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.videoStitcherServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getCdnKey', () => {
-    it('invokes getCdnKey without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CdnKey()
-      );
-      client.innerApiCalls.getCdnKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.getCdnKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCdnKey without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CdnKey()
-      );
-      client.innerApiCalls.getCdnKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCdnKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ICdnKey | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCdnKey with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCdnKey = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getCdnKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCdnKey with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getCdnKey(request), expectedError);
-    });
-  });
-
-  describe('createVodSession', () => {
-    it('invokes createVodSession without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodSession()
-      );
-      client.innerApiCalls.createVodSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.createVodSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVodSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVodSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVodSession without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodSession()
-      );
-      client.innerApiCalls.createVodSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createVodSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.IVodSession | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVodSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVodSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVodSession with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createVodSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createVodSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createVodSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVodSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVodSession with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createVodSession(request), expectedError);
-    });
-  });
-
-  describe('getVodSession', () => {
-    it('invokes getVodSession without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodSession()
-      );
-      client.innerApiCalls.getVodSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVodSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodSession without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodSession()
-      );
-      client.innerApiCalls.getVodSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVodSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.IVodSession | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodSession with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVodSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVodSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVodSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodSession with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVodSession(request), expectedError);
-    });
-  });
-
-  describe('getVodStitchDetail', () => {
-    it('invokes getVodStitchDetail without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-      );
-      client.innerApiCalls.getVodStitchDetail =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getVodStitchDetail(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodStitchDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodStitchDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodStitchDetail without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-      );
-      client.innerApiCalls.getVodStitchDetail =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVodStitchDetail(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.IVodStitchDetail | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodStitchDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodStitchDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodStitchDetail with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVodStitchDetail = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVodStitchDetail(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVodStitchDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodStitchDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodStitchDetail with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVodStitchDetail(request), expectedError);
-    });
-  });
-
-  describe('getVodAdTagDetail', () => {
-    it('invokes getVodAdTagDetail without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-      );
-      client.innerApiCalls.getVodAdTagDetail = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVodAdTagDetail(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodAdTagDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodAdTagDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodAdTagDetail without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-      );
-      client.innerApiCalls.getVodAdTagDetail =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVodAdTagDetail(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.IVodAdTagDetail | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodAdTagDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodAdTagDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodAdTagDetail with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVodAdTagDetail = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVodAdTagDetail(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVodAdTagDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodAdTagDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodAdTagDetail with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVodAdTagDetail(request), expectedError);
-    });
-  });
-
-  describe('getLiveAdTagDetail', () => {
-    it('invokes getLiveAdTagDetail without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-      );
-      client.innerApiCalls.getLiveAdTagDetail =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getLiveAdTagDetail(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLiveAdTagDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveAdTagDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveAdTagDetail without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-      );
-      client.innerApiCalls.getLiveAdTagDetail =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLiveAdTagDetail(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLiveAdTagDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveAdTagDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveAdTagDetail with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLiveAdTagDetail = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getLiveAdTagDetail(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getLiveAdTagDetail as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveAdTagDetail as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveAdTagDetail with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getLiveAdTagDetail(request), expectedError);
-    });
-  });
-
-  describe('getSlate', () => {
-    it('invokes getSlate without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.Slate()
-      );
-      client.innerApiCalls.getSlate = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSlate(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSlate without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.Slate()
-      );
-      client.innerApiCalls.getSlate =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getSlate(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ISlate | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSlate with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getSlate = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSlate(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getSlate with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getSlate(request), expectedError);
-    });
-  });
-
-  describe('createLiveSession', () => {
-    it('invokes createLiveSession without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveSession()
-      );
-      client.innerApiCalls.createLiveSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.createLiveSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLiveSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLiveSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLiveSession without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveSession()
-      );
-      client.innerApiCalls.createLiveSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createLiveSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ILiveSession | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLiveSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLiveSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLiveSession with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLiveSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createLiveSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLiveSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLiveSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLiveSession with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createLiveSession(request), expectedError);
-    });
-  });
-
-  describe('getLiveSession', () => {
-    it('invokes getLiveSession without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveSession()
-      );
-      client.innerApiCalls.getLiveSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.getLiveSession(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLiveSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveSession without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveSession()
-      );
-      client.innerApiCalls.getLiveSession =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLiveSession(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ILiveSession | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLiveSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveSession with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLiveSession = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getLiveSession(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getLiveSession as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveSession as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveSession with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getLiveSession(request), expectedError);
-    });
-  });
-
-  describe('getLiveConfig', () => {
-    it('invokes getLiveConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveConfig()
-      );
-      client.innerApiCalls.getLiveConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getLiveConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.LiveConfig()
-      );
-      client.innerApiCalls.getLiveConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLiveConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ILiveConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveConfig with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLiveConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getLiveConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLiveConfig with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getLiveConfig(request), expectedError);
-    });
-  });
-
-  describe('getVodConfig', () => {
-    it('invokes getVodConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodConfig()
-      );
-      client.innerApiCalls.getVodConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVodConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.VodConfig()
-      );
-      client.innerApiCalls.getVodConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVodConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.IVodConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodConfig with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVodConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVodConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVodConfig with closed client', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.GetVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVodConfig(request), expectedError);
-    });
-  });
-
-  describe('createCdnKey', () => {
-    it('invokes createCdnKey without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCdnKey = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createCdnKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCdnKey without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createCdnKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createCdnKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.ICdnKey,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCdnKey with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCdnKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createCdnKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createCdnKey with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createCdnKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createCdnKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateCdnKeyProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateCdnKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateCdnKeyProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateCdnKeyProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteCdnKey', () => {
-    it('invokes deleteCdnKey without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCdnKey = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteCdnKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCdnKey without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteCdnKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteCdnKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCdnKey with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCdnKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteCdnKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteCdnKey with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteCdnKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteCdnKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteCdnKeyProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteCdnKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteCdnKeyProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteCdnKeyProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateCdnKey', () => {
-    it('invokes updateCdnKey without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
-      );
-      request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
-        ['cdnKey', 'name']
-      );
-      request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCdnKey = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateCdnKey(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCdnKey without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
-      );
-      request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
-        ['cdnKey', 'name']
-      );
-      request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateCdnKey =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateCdnKey(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.ICdnKey,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCdnKey with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
-      );
-      request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
-        ['cdnKey', 'name']
-      );
-      request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCdnKey = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateCdnKey(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateCdnKey with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
-      );
-      request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
-        ['cdnKey', 'name']
-      );
-      request.cdnKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateCdnKey = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateCdnKey(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateCdnKey as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateCdnKeyProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateCdnKeyProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateCdnKeyProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateCdnKeyProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createSlate', () => {
-    it('invokes createSlate without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSlate = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createSlate(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSlate without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSlate =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSlate(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.ISlate,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSlate with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSlate = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSlate(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSlate with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSlate = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createSlate(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateSlateProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateSlateProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateSlateProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateSlateProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateSlate', () => {
-    it('invokes updateSlate without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
-      );
-      request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
-        ['slate', 'name']
-      );
-      request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSlate = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateSlate(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSlate without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
-      );
-      request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
-        ['slate', 'name']
-      );
-      request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSlate =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSlate(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.ISlate,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSlate with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
-      );
-      request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
-        ['slate', 'name']
-      );
-      request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSlate = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSlate(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSlate with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
-      );
-      request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
-        ['slate', 'name']
-      );
-      request.slate.name = defaultValue1;
-      const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSlate = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateSlate(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateSlateProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateSlateProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateSlateProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateSlateProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteSlate', () => {
-    it('invokes deleteSlate without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSlate = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteSlate(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSlate without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSlate =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSlate(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSlate with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSlate = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSlate(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSlate with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSlate = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteSlate(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSlate as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteSlateProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteSlateProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteSlateProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteSlateProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createLiveConfig', () => {
-    it('invokes createLiveConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLiveConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createLiveConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLiveConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createLiveConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createLiveConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.ILiveConfig,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLiveConfig with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLiveConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createLiveConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLiveConfig with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateLiveConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLiveConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createLiveConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateLiveConfigProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateLiveConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateLiveConfigProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateLiveConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteLiveConfig', () => {
-    it('invokes deleteLiveConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLiveConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteLiveConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLiveConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteLiveConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteLiveConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLiveConfig with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLiveConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteLiveConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLiveConfig with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLiveConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteLiveConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteLiveConfigProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteLiveConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteLiveConfigProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteLiveConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateLiveConfig', () => {
-    it('invokes updateLiveConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
-      );
-      request.liveConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest',
-        ['liveConfig', 'name']
-      );
-      request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLiveConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateLiveConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLiveConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
-      );
-      request.liveConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest',
-        ['liveConfig', 'name']
-      );
-      request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateLiveConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateLiveConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.ILiveConfig,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLiveConfig with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
-      );
-      request.liveConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest',
-        ['liveConfig', 'name']
-      );
-      request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLiveConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateLiveConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLiveConfig with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
-      );
-      request.liveConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest',
-        ['liveConfig', 'name']
-      );
-      request.liveConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLiveConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateLiveConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateLiveConfigProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateLiveConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateLiveConfigProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateLiveConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createVodConfig', () => {
-    it('invokes createVodConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createVodConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createVodConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVodConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createVodConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createVodConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.IVodConfig,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.IVodConfig,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVodConfig with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createVodConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createVodConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createVodConfig with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.CreateVodConfigRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createVodConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createVodConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateVodConfigProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateVodConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateVodConfigProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateVodConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteVodConfig', () => {
-    it('invokes deleteVodConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteVodConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteVodConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVodConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteVodConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteVodConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVodConfig with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteVodConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteVodConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteVodConfig with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.DeleteVodConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteVodConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteVodConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteVodConfigProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteVodConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteVodConfigProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteVodConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateVodConfig', () => {
-    it('invokes updateVodConfig without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
-      );
-      request.vodConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateVodConfigRequest',
-        ['vodConfig', 'name']
-      );
-      request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateVodConfig =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateVodConfig(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateVodConfig without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
-      );
-      request.vodConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateVodConfigRequest',
-        ['vodConfig', 'name']
-      );
-      request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateVodConfig =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateVodConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.video.stitcher.v1.IVodConfig,
-              protos.google.cloud.video.stitcher.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.video.stitcher.v1.IVodConfig,
-        protos.google.cloud.video.stitcher.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateVodConfig with call error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
-      );
-      request.vodConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateVodConfigRequest',
-        ['vodConfig', 'name']
-      );
-      request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateVodConfig = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateVodConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateVodConfig with LRO error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
-      );
-      request.vodConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.UpdateVodConfigRequest',
-        ['vodConfig', 'name']
-      );
-      request.vodConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateVodConfig = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateVodConfig(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateVodConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateVodConfigProgress without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateVodConfigProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateVodConfigProgress with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateVodConfigProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listCdnKeys', () => {
-    it('invokes listCdnKeys without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-      ];
-      client.innerApiCalls.listCdnKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.listCdnKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCdnKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCdnKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCdnKeys without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-      ];
-      client.innerApiCalls.listCdnKeys =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listCdnKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ICdnKey[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCdnKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCdnKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCdnKeys with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listCdnKeys = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listCdnKeys(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listCdnKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCdnKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCdnKeysStream without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-      ];
-      client.descriptors.page.listCdnKeys.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCdnKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.CdnKey[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.CdnKey) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listCdnKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCdnKeys, request)
-      );
-      assert(
-        (client.descriptors.page.listCdnKeys.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listCdnKeysStream with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCdnKeys.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listCdnKeysStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.CdnKey[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.CdnKey) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listCdnKeys.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCdnKeys, request)
-      );
-      assert(
-        (client.descriptors.page.listCdnKeys.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listCdnKeys without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.CdnKey()
-        ),
-      ];
-      client.descriptors.page.listCdnKeys.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.stitcher.v1.ICdnKey[] = [];
-      const iterable = client.listCdnKeysAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listCdnKeys with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCdnKeys.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listCdnKeysAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.stitcher.v1.ICdnKey[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = videostitcherserviceModule.v1.VideoStitcherServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'videostitcher.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'videostitcher.example.com');
+        });
 
-  describe('listVodStitchDetails', () => {
-    it('invokes listVodStitchDetails without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'videostitcher.example.com');
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-      ];
-      client.innerApiCalls.listVodStitchDetails =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listVodStitchDetails(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVodStitchDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodStitchDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listVodStitchDetails without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-      ];
-      client.innerApiCalls.listVodStitchDetails =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVodStitchDetails(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.video.stitcher.v1.IVodStitchDetail[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVodStitchDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodStitchDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'videostitcher.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('invokes listVodStitchDetails with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVodStitchDetails = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVodStitchDetails(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVodStitchDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodStitchDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVodStitchDetailsStream without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-      ];
-      client.descriptors.page.listVodStitchDetails.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVodStitchDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.VodStitchDetail[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.VodStitchDetail) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVodStitchDetails, request)
-      );
-      assert(
-        (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listVodStitchDetailsStream with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVodStitchDetails.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listVodStitchDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.VodStitchDetail[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.VodStitchDetail) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVodStitchDetails, request)
-      );
-      assert(
-        (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listVodStitchDetails without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
-        ),
-      ];
-      client.descriptors.page.listVodStitchDetails.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.stitcher.v1.IVodStitchDetail[] =
-        [];
-      const iterable = client.listVodStitchDetailsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listVodStitchDetails with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVodStitchDetails.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listVodStitchDetailsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.stitcher.v1.IVodStitchDetail[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'videostitcher.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listVodAdTagDetails', () => {
-    it('invokes listVodAdTagDetails without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new videostitcherserviceModule.v1.VideoStitcherServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-      ];
-      client.innerApiCalls.listVodAdTagDetails =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listVodAdTagDetails(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVodAdTagDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodAdTagDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+
+        it('has port', () => {
+            const port = videostitcherserviceModule.v1.VideoStitcherServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.videoStitcherServiceStub, undefined);
+            await client.initialize();
+            assert(client.videoStitcherServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.videoStitcherServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.videoStitcherServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listVodAdTagDetails without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getCdnKey', () => {
+        it('invokes getCdnKey without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CdnKey()
+            );
+            client.innerApiCalls.getCdnKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCdnKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-      ];
-      client.innerApiCalls.listVodAdTagDetails =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVodAdTagDetails(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+        it('invokes getCdnKey without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CdnKey()
+            );
+            client.innerApiCalls.getCdnKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCdnKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ICdnKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCdnKey with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCdnKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCdnKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getCdnKey with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCdnKey(request), expectedError);
+        });
+    });
+
+    describe('createVodSession', () => {
+        it('invokes createVodSession without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodSession()
+            );
+            client.innerApiCalls.createVodSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.createVodSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVodSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVodSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVodSession without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodSession()
+            );
+            client.innerApiCalls.createVodSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createVodSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodSession|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVodSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVodSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVodSession with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createVodSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createVodSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createVodSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVodSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVodSession with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createVodSession(request), expectedError);
+        });
+    });
+
+    describe('getVodSession', () => {
+        it('invokes getVodSession without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodSession()
+            );
+            client.innerApiCalls.getVodSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVodSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodSession without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodSession()
+            );
+            client.innerApiCalls.getVodSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVodSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodSession|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodSession with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVodSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVodSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVodSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodSession with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVodSession(request), expectedError);
+        });
+    });
+
+    describe('getVodStitchDetail', () => {
+        it('invokes getVodStitchDetail without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
+            );
+            client.innerApiCalls.getVodStitchDetail = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVodStitchDetail(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodStitchDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodStitchDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodStitchDetail without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodStitchDetail()
+            );
+            client.innerApiCalls.getVodStitchDetail = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVodStitchDetail(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodStitchDetail|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodStitchDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodStitchDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodStitchDetail with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVodStitchDetail = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVodStitchDetail(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVodStitchDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodStitchDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodStitchDetail with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVodStitchDetail(request), expectedError);
+        });
+    });
+
+    describe('getVodAdTagDetail', () => {
+        it('invokes getVodAdTagDetail without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
+            );
+            client.innerApiCalls.getVodAdTagDetail = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVodAdTagDetail(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodAdTagDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodAdTagDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodAdTagDetail without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
+            );
+            client.innerApiCalls.getVodAdTagDetail = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVodAdTagDetail(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodAdTagDetail|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodAdTagDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodAdTagDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodAdTagDetail with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVodAdTagDetail = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVodAdTagDetail(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVodAdTagDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodAdTagDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodAdTagDetail with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVodAdTagDetail(request), expectedError);
+        });
+    });
+
+    describe('getLiveAdTagDetail', () => {
+        it('invokes getLiveAdTagDetail without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
+            );
+            client.innerApiCalls.getLiveAdTagDetail = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLiveAdTagDetail(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLiveAdTagDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveAdTagDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveAdTagDetail without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
+            );
+            client.innerApiCalls.getLiveAdTagDetail = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLiveAdTagDetail(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLiveAdTagDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveAdTagDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveAdTagDetail with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLiveAdTagDetail = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLiveAdTagDetail(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLiveAdTagDetail as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveAdTagDetail as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveAdTagDetail with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLiveAdTagDetail(request), expectedError);
+        });
+    });
+
+    describe('getSlate', () => {
+        it('invokes getSlate without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.Slate()
+            );
+            client.innerApiCalls.getSlate = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSlate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSlate without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.Slate()
+            );
+            client.innerApiCalls.getSlate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSlate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ISlate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSlate with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSlate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSlate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSlate with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSlate(request), expectedError);
+        });
+    });
+
+    describe('createLiveSession', () => {
+        it('invokes createLiveSession without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveSession()
+            );
+            client.innerApiCalls.createLiveSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.createLiveSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLiveSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLiveSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLiveSession without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveSession()
+            );
+            client.innerApiCalls.createLiveSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createLiveSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ILiveSession|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLiveSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLiveSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLiveSession with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLiveSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createLiveSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createLiveSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLiveSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLiveSession with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveSessionRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createLiveSession(request), expectedError);
+        });
+    });
+
+    describe('getLiveSession', () => {
+        it('invokes getLiveSession without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveSession()
+            );
+            client.innerApiCalls.getLiveSession = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLiveSession(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLiveSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveSession without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveSession()
+            );
+            client.innerApiCalls.getLiveSession = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLiveSession(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ILiveSession|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLiveSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveSession with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLiveSession = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLiveSession(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLiveSession as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveSession as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveSession with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveSessionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLiveSession(request), expectedError);
+        });
+    });
+
+    describe('getLiveConfig', () => {
+        it('invokes getLiveConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveConfig()
+            );
+            client.innerApiCalls.getLiveConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLiveConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.LiveConfig()
+            );
+            client.innerApiCalls.getLiveConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLiveConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ILiveConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveConfig with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLiveConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLiveConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLiveConfig with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLiveConfig(request), expectedError);
+        });
+    });
+
+    describe('getVodConfig', () => {
+        it('invokes getVodConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodConfig()
+            );
+            client.innerApiCalls.getVodConfig = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVodConfig(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.VodConfig()
+            );
+            client.innerApiCalls.getVodConfig = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVodConfig(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodConfig|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodConfig with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVodConfig = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVodConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVodConfig with closed client', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.GetVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVodConfig(request), expectedError);
+        });
+    });
+
+    describe('createCdnKey', () => {
+        it('invokes createCdnKey without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateCdnKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCdnKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createCdnKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCdnKey without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateCdnKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createCdnKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCdnKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.ICdnKey, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.ICdnKey, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCdnKey with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateCdnKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCdnKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createCdnKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCdnKey with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateCdnKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCdnKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createCdnKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateCdnKeyProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateCdnKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateCdnKeyProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateCdnKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteCdnKey', () => {
+        it('invokes deleteCdnKey without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCdnKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteCdnKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCdnKey without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteCdnKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteCdnKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCdnKey with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCdnKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteCdnKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteCdnKey with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteCdnKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteCdnKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteCdnKeyProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteCdnKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteCdnKeyProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteCdnKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateCdnKey', () => {
+        it('invokes updateCdnKey without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
+            );
+            request.cdnKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest', ['cdnKey', 'name']);
+            request.cdnKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCdnKey = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateCdnKey(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCdnKey without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
+            );
+            request.cdnKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest', ['cdnKey', 'name']);
+            request.cdnKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateCdnKey = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCdnKey(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.ICdnKey, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.ICdnKey, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCdnKey with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
+            );
+            request.cdnKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest', ['cdnKey', 'name']);
+            request.cdnKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCdnKey = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateCdnKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCdnKey with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
+            );
+            request.cdnKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest', ['cdnKey', 'name']);
+            request.cdnKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCdnKey = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateCdnKey(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCdnKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateCdnKeyProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateCdnKeyProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateCdnKeyProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateCdnKeyProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createSlate', () => {
+        it('invokes createSlate without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateSlateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createSlate = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createSlate(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSlate without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateSlateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createSlate = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createSlate(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.ISlate, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.ISlate, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSlate with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateSlateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSlate = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createSlate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createSlate with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateSlateRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createSlate = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createSlate(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateSlateProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateSlateProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateSlateProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateSlateProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateSlate', () => {
+        it('invokes updateSlate without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
+            );
+            request.slate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateSlateRequest', ['slate', 'name']);
+            request.slate.name = defaultValue1;
+            const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSlate = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateSlate(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSlate without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
+            );
+            request.slate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateSlateRequest', ['slate', 'name']);
+            request.slate.name = defaultValue1;
+            const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateSlate = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateSlate(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.ISlate, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.ISlate, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSlate with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
+            );
+            request.slate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateSlateRequest', ['slate', 'name']);
+            request.slate.name = defaultValue1;
+            const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSlate = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateSlate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateSlate with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
+            );
+            request.slate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateSlateRequest', ['slate', 'name']);
+            request.slate.name = defaultValue1;
+            const expectedHeaderRequestParams = `slate.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateSlate = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateSlate(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateSlateProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateSlateProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateSlateProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateSlateProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteSlate', () => {
+        it('invokes deleteSlate without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteSlate = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteSlate(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSlate without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteSlate = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteSlate(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSlate with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSlate = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteSlate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteSlate with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteSlateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteSlate = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteSlate(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteSlate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteSlateProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteSlateProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteSlateProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteSlateProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createLiveConfig', () => {
+        it('invokes createLiveConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLiveConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createLiveConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLiveConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createLiveConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createLiveConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.ILiveConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.ILiveConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLiveConfig with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLiveConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createLiveConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLiveConfig with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateLiveConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLiveConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createLiveConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateLiveConfigProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateLiveConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateLiveConfigProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateLiveConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteLiveConfig', () => {
+        it('invokes deleteLiveConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLiveConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteLiveConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLiveConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteLiveConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteLiveConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLiveConfig with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLiveConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteLiveConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLiveConfig with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLiveConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteLiveConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteLiveConfigProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteLiveConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteLiveConfigProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteLiveConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateLiveConfig', () => {
+        it('invokes updateLiveConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
+            );
+            request.liveConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest', ['liveConfig', 'name']);
+            request.liveConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLiveConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateLiveConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLiveConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
+            );
+            request.liveConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest', ['liveConfig', 'name']);
+            request.liveConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateLiveConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateLiveConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.ILiveConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.ILiveConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLiveConfig with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
+            );
+            request.liveConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest', ['liveConfig', 'name']);
+            request.liveConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLiveConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateLiveConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateLiveConfig with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
+            );
+            request.liveConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest', ['liveConfig', 'name']);
+            request.liveConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `live_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLiveConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateLiveConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLiveConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateLiveConfigProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateLiveConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateLiveConfigProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateLiveConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createVodConfig', () => {
+        it('invokes createVodConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createVodConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createVodConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVodConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createVodConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createVodConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.IVodConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.IVodConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVodConfig with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createVodConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createVodConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createVodConfig with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.CreateVodConfigRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createVodConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createVodConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateVodConfigProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateVodConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateVodConfigProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateVodConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteVodConfig', () => {
+        it('invokes deleteVodConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteVodConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteVodConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVodConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteVodConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteVodConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVodConfig with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteVodConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteVodConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteVodConfig with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.DeleteVodConfigRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteVodConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteVodConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteVodConfigProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteVodConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteVodConfigProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteVodConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateVodConfig', () => {
+        it('invokes updateVodConfig without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
+            );
+            request.vodConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateVodConfigRequest', ['vodConfig', 'name']);
+            request.vodConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateVodConfig = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateVodConfig(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateVodConfig without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
+            );
+            request.vodConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateVodConfigRequest', ['vodConfig', 'name']);
+            request.vodConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateVodConfig = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateVodConfig(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.video.stitcher.v1.IVodConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.video.stitcher.v1.IVodConfig, protos.google.cloud.video.stitcher.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateVodConfig with call error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
+            );
+            request.vodConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateVodConfigRequest', ['vodConfig', 'name']);
+            request.vodConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateVodConfig = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateVodConfig(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateVodConfig with LRO error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
+            );
+            request.vodConfig ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.UpdateVodConfigRequest', ['vodConfig', 'name']);
+            request.vodConfig.name = defaultValue1;
+            const expectedHeaderRequestParams = `vod_config.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateVodConfig = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateVodConfig(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateVodConfig as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateVodConfigProgress without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateVodConfigProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateVodConfigProgress with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateVodConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listCdnKeys', () => {
+        it('invokes listCdnKeys without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListCdnKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+            ];
+            client.innerApiCalls.listCdnKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.listCdnKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCdnKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCdnKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listCdnKeys without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListCdnKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+            ];
+            client.innerApiCalls.listCdnKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listCdnKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ICdnKey[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCdnKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCdnKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listCdnKeys with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListCdnKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listCdnKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listCdnKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listCdnKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCdnKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listCdnKeysStream without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListCdnKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+            ];
+            client.descriptors.page.listCdnKeys.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCdnKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.CdnKey[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.CdnKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listCdnKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCdnKeys, request));
+            assert(
+                (client.descriptors.page.listCdnKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listCdnKeysStream with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListCdnKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCdnKeys.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCdnKeysStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.CdnKey[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.CdnKey) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listCdnKeys.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCdnKeys, request));
+            assert(
+                (client.descriptors.page.listCdnKeys.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listCdnKeys without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListCdnKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.CdnKey()),
+            ];
+            client.descriptors.page.listCdnKeys.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.stitcher.v1.ICdnKey[] = [];
+            const iterable = client.listCdnKeysAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVodAdTagDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodAdTagDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listCdnKeys with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListCdnKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCdnKeys.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCdnKeysAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.stitcher.v1.ICdnKey[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCdnKeys.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listVodAdTagDetails with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listVodStitchDetails', () => {
+        it('invokes listVodStitchDetails without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+            ];
+            client.innerApiCalls.listVodStitchDetails = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVodStitchDetails(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVodStitchDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodStitchDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVodAdTagDetails = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVodAdTagDetails(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVodAdTagDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodAdTagDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listVodAdTagDetailsStream without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodStitchDetails without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+            ];
+            client.innerApiCalls.listVodStitchDetails = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVodStitchDetails(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodStitchDetail[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVodStitchDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodStitchDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-      ];
-      client.descriptors.page.listVodAdTagDetails.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVodAdTagDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.VodAdTagDetail[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.VodAdTagDetail) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVodAdTagDetails, request)
-      );
-      assert(
-        (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listVodAdTagDetailsStream with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodStitchDetails with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVodStitchDetails = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVodStitchDetails(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVodStitchDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodStitchDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVodAdTagDetails.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listVodAdTagDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.VodAdTagDetail[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.VodAdTagDetail) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVodAdTagDetails, request)
-      );
-      assert(
-        (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVodAdTagDetails without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodStitchDetailsStream without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+            ];
+            client.descriptors.page.listVodStitchDetails.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVodStitchDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.VodStitchDetail[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.VodStitchDetail) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVodStitchDetails, request));
+            assert(
+                (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()
-        ),
-      ];
-      client.descriptors.page.listVodAdTagDetails.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[] =
-        [];
-      const iterable = client.listVodAdTagDetailsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVodAdTagDetails with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodStitchDetailsStream with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVodStitchDetails.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVodStitchDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.VodStitchDetail[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.VodStitchDetail) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVodStitchDetails, request));
+            assert(
+                (client.descriptors.page.listVodStitchDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVodAdTagDetails.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listVodAdTagDetailsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
 
-  describe('listLiveAdTagDetails', () => {
-    it('invokes listLiveAdTagDetails without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-      ];
-      client.innerApiCalls.listLiveAdTagDetails =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listLiveAdTagDetails(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLiveAdTagDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLiveAdTagDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLiveAdTagDetails without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-      ];
-      client.innerApiCalls.listLiveAdTagDetails =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLiveAdTagDetails(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listVodStitchDetails without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodStitchDetail()),
+            ];
+            client.descriptors.page.listVodStitchDetails.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.stitcher.v1.IVodStitchDetail[] = [];
+            const iterable = client.listVodStitchDetailsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLiveAdTagDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLiveAdTagDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listVodStitchDetails with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVodStitchDetails.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVodStitchDetailsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.stitcher.v1.IVodStitchDetail[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVodStitchDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listLiveAdTagDetails with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listVodAdTagDetails', () => {
+        it('invokes listVodAdTagDetails without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+            ];
+            client.innerApiCalls.listVodAdTagDetails = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVodAdTagDetails(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVodAdTagDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodAdTagDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLiveAdTagDetails = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listLiveAdTagDetails(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listLiveAdTagDetails as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLiveAdTagDetails as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listLiveAdTagDetailsStream without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodAdTagDetails without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+            ];
+            client.innerApiCalls.listVodAdTagDetails = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVodAdTagDetails(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVodAdTagDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodAdTagDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-      ];
-      client.descriptors.page.listLiveAdTagDetails.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLiveAdTagDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLiveAdTagDetails, request)
-      );
-      assert(
-        (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listLiveAdTagDetailsStream with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodAdTagDetails with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVodAdTagDetails = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVodAdTagDetails(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVodAdTagDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodAdTagDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLiveAdTagDetails.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listLiveAdTagDetailsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLiveAdTagDetails, request)
-      );
-      assert(
-        (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listLiveAdTagDetails without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodAdTagDetailsStream without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+            ];
+            client.descriptors.page.listVodAdTagDetails.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVodAdTagDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.VodAdTagDetail[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.VodAdTagDetail) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVodAdTagDetails, request));
+            assert(
+                (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()
-        ),
-      ];
-      client.descriptors.page.listLiveAdTagDetails.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[] =
-        [];
-      const iterable = client.listLiveAdTagDetailsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listLiveAdTagDetails with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listVodAdTagDetailsStream with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVodAdTagDetails.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVodAdTagDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.VodAdTagDetail[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.VodAdTagDetail) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVodAdTagDetails, request));
+            assert(
+                (client.descriptors.page.listVodAdTagDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLiveAdTagDetails.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLiveAdTagDetailsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
 
-  describe('listSlates', () => {
-    it('invokes listSlates without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-      ];
-      client.innerApiCalls.listSlates = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSlates(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSlates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSlates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSlates without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-      ];
-      client.innerApiCalls.listSlates =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSlates(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ISlate[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listVodAdTagDetails without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodAdTagDetail()),
+            ];
+            client.descriptors.page.listVodAdTagDetails.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[] = [];
+            const iterable = client.listVodAdTagDetailsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSlates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSlates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listVodAdTagDetails with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVodAdTagDetails.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVodAdTagDetailsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVodAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listSlates with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listLiveAdTagDetails', () => {
+        it('invokes listLiveAdTagDetails without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+            ];
+            client.innerApiCalls.listLiveAdTagDetails = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLiveAdTagDetails(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLiveAdTagDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLiveAdTagDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSlates = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSlates(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSlates as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSlates as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listSlatesStream without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveAdTagDetails without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+            ];
+            client.innerApiCalls.listLiveAdTagDetails = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLiveAdTagDetails(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLiveAdTagDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLiveAdTagDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-      ];
-      client.descriptors.page.listSlates.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSlatesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.Slate[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.Slate) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSlates.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSlates, request)
-      );
-      assert(
-        (client.descriptors.page.listSlates.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listSlatesStream with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveAdTagDetails with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLiveAdTagDetails = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLiveAdTagDetails(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLiveAdTagDetails as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLiveAdTagDetails as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSlates.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSlatesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.Slate[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.Slate) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSlates.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSlates, request)
-      );
-      assert(
-        (client.descriptors.page.listSlates.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listSlates without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveAdTagDetailsStream without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+            ];
+            client.descriptors.page.listLiveAdTagDetails.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLiveAdTagDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLiveAdTagDetails, request));
+            assert(
+                (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.Slate()
-        ),
-      ];
-      client.descriptors.page.listSlates.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.stitcher.v1.ISlate[] = [];
-      const iterable = client.listSlatesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSlates.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSlates.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listSlates with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveAdTagDetailsStream with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLiveAdTagDetails.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLiveAdTagDetailsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.LiveAdTagDetail) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLiveAdTagDetails, request));
+            assert(
+                (client.descriptors.page.listLiveAdTagDetails.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSlates.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSlatesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.stitcher.v1.ISlate[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSlates.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSlates.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
 
-  describe('listLiveConfigs', () => {
-    it('invokes listLiveConfigs without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-      ];
-      client.innerApiCalls.listLiveConfigs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listLiveConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLiveConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLiveConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLiveConfigs without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-      ];
-      client.innerApiCalls.listLiveConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLiveConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.ILiveConfig[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listLiveAdTagDetails without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveAdTagDetail()),
+            ];
+            client.descriptors.page.listLiveAdTagDetails.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[] = [];
+            const iterable = client.listLiveAdTagDetailsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLiveConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLiveConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listLiveAdTagDetails with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLiveAdTagDetails.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLiveAdTagDetailsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLiveAdTagDetails.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listLiveConfigs with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listSlates', () => {
+        it('invokes listSlates without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListSlatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+            ];
+            client.innerApiCalls.listSlates = stubSimpleCall(expectedResponse);
+            const [response] = await client.listSlates(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSlates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSlates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLiveConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listLiveConfigs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listLiveConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLiveConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listLiveConfigsStream without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSlates without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListSlatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+            ];
+            client.innerApiCalls.listSlates = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listSlates(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ISlate[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listSlates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSlates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-      ];
-      client.descriptors.page.listLiveConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLiveConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.LiveConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.LiveConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLiveConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listLiveConfigsStream with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSlates with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListSlatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listSlates = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listSlates(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listSlates as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listSlates as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLiveConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listLiveConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.LiveConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.LiveConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLiveConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listLiveConfigs without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSlatesStream without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListSlatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+            ];
+            client.descriptors.page.listSlates.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listSlatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.Slate[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.Slate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listSlates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSlates, request));
+            assert(
+                (client.descriptors.page.listSlates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.LiveConfig()
-        ),
-      ];
-      client.descriptors.page.listLiveConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.stitcher.v1.ILiveConfig[] = [];
-      const iterable = client.listLiveConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listLiveConfigs with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listSlatesStream with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListSlatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSlates.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listSlatesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.Slate[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.Slate) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listSlates.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listSlates, request));
+            assert(
+                (client.descriptors.page.listSlates.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListLiveConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLiveConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLiveConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.stitcher.v1.ILiveConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
 
-  describe('listVodConfigs', () => {
-    it('invokes listVodConfigs without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-      ];
-      client.innerApiCalls.listVodConfigs = stubSimpleCall(expectedResponse);
-      const [response] = await client.listVodConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVodConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVodConfigs without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-      ];
-      client.innerApiCalls.listVodConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVodConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.video.stitcher.v1.IVodConfig[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listSlates without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListSlatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.Slate()),
+            ];
+            client.descriptors.page.listSlates.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.stitcher.v1.ISlate[] = [];
+            const iterable = client.listSlatesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVodConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSlates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSlates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listSlates with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListSlatesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listSlates.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listSlatesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.stitcher.v1.ISlate[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listSlates.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listSlates.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('invokes listVodConfigs with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('listLiveConfigs', () => {
+        it('invokes listLiveConfigs without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+            ];
+            client.innerApiCalls.listLiveConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLiveConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLiveConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLiveConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVodConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVodConfigs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVodConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVodConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
 
-    it('invokes listVodConfigsStream without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveConfigs without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+            ];
+            client.innerApiCalls.listLiveConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLiveConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.ILiveConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLiveConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLiveConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-      ];
-      client.descriptors.page.listVodConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVodConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.VodConfig[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.VodConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVodConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVodConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listVodConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listVodConfigsStream with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveConfigs with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLiveConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLiveConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLiveConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLiveConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVodConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listVodConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.video.stitcher.v1.VodConfig[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.video.stitcher.v1.VodConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVodConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVodConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listVodConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVodConfigs without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveConfigsStream without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+            ];
+            client.descriptors.page.listLiveConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLiveConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.LiveConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.LiveConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLiveConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLiveConfigs, request));
+            assert(
+                (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.video.stitcher.v1.VodConfig()
-        ),
-      ];
-      client.descriptors.page.listVodConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.video.stitcher.v1.IVodConfig[] = [];
-      const iterable = client.listVodConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVodConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVodConfigs with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('invokes listLiveConfigsStream with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLiveConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLiveConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.LiveConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.LiveConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLiveConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLiveConfigs, request));
+            assert(
+                (client.descriptors.page.listLiveConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.video.stitcher.v1.ListVodConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVodConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listVodConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.video.stitcher.v1.IVodConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVodConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+        it('uses async iteration with listLiveConfigs without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.LiveConfig()),
+            ];
+            client.descriptors.page.listLiveConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.stitcher.v1.ILiveConfig[] = [];
+            const iterable = client.listLiveConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listLiveConfigs with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListLiveConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLiveConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLiveConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.stitcher.v1.ILiveConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLiveConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('listVodConfigs', () => {
+        it('invokes listVodConfigs without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+            ];
+            client.innerApiCalls.listVodConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVodConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVodConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+        it('invokes listVodConfigs without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+            ];
+            client.innerApiCalls.listVodConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVodConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.video.stitcher.v1.IVodConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVodConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVodConfigs with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVodConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVodConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVodConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVodConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVodConfigsStream without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+            ];
+            client.descriptors.page.listVodConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVodConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.VodConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.VodConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVodConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVodConfigs, request));
+            assert(
+                (client.descriptors.page.listVodConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listVodConfigsStream with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVodConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVodConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.video.stitcher.v1.VodConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.video.stitcher.v1.VodConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVodConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVodConfigs, request));
+            assert(
+                (client.descriptors.page.listVodConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listVodConfigs without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+              generateSampleMessage(new protos.google.cloud.video.stitcher.v1.VodConfig()),
+            ];
+            client.descriptors.page.listVodConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.video.stitcher.v1.IVodConfig[] = [];
+            const iterable = client.listVodConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+        it('uses async iteration with listVodConfigs with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.video.stitcher.v1.ListVodConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVodConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVodConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.video.stitcher.v1.IVodConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVodConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes getOperation without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
     });
-    it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+
+    describe('Path templates', () => {
+
+        describe('cdnKey', async () => {
+            const fakePath = "/rendered/path/cdnKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cdn_key: "cdnKeyValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cdnKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cdnKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cdnKeyPath', () => {
+                const result = client.cdnKeyPath("projectValue", "locationValue", "cdnKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cdnKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCdnKeyName', () => {
+                const result = client.matchProjectFromCdnKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cdnKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCdnKeyName', () => {
+                const result = client.matchLocationFromCdnKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cdnKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCdnKeyFromCdnKeyName', () => {
+                const result = client.matchCdnKeyFromCdnKeyName(fakePath);
+                assert.strictEqual(result, "cdnKeyValue");
+                assert((client.pathTemplates.cdnKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
-  describe('Path templates', () => {
-    describe('cdnKey', async () => {
-      const fakePath = '/rendered/path/cdnKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        cdn_key: 'cdnKeyValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        describe('liveAdTagDetail', async () => {
+            const fakePath = "/rendered/path/liveAdTagDetail";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                live_session: "liveSessionValue",
+                live_ad_tag_detail: "liveAdTagDetailValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.liveAdTagDetailPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.liveAdTagDetailPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('liveAdTagDetailPath', () => {
+                const result = client.liveAdTagDetailPath("projectValue", "locationValue", "liveSessionValue", "liveAdTagDetailValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.liveAdTagDetailPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLiveAdTagDetailName', () => {
+                const result = client.matchProjectFromLiveAdTagDetailName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLiveAdTagDetailName', () => {
+                const result = client.matchLocationFromLiveAdTagDetailName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLiveSessionFromLiveAdTagDetailName', () => {
+                const result = client.matchLiveSessionFromLiveAdTagDetailName(fakePath);
+                assert.strictEqual(result, "liveSessionValue");
+                assert((client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLiveAdTagDetailFromLiveAdTagDetailName', () => {
+                const result = client.matchLiveAdTagDetailFromLiveAdTagDetailName(fakePath);
+                assert.strictEqual(result, "liveAdTagDetailValue");
+                assert((client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.cdnKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cdnKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('cdnKeyPath', () => {
-        const result = client.cdnKeyPath(
-          'projectValue',
-          'locationValue',
-          'cdnKeyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cdnKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('liveConfig', async () => {
+            const fakePath = "/rendered/path/liveConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                live_config: "liveConfigValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.liveConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.liveConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromCdnKeyName', () => {
-        const result = client.matchProjectFromCdnKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cdnKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('liveConfigPath', () => {
+                const result = client.liveConfigPath("projectValue", "locationValue", "liveConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.liveConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromCdnKeyName', () => {
-        const result = client.matchLocationFromCdnKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cdnKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromLiveConfigName', () => {
+                const result = client.matchProjectFromLiveConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.liveConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchCdnKeyFromCdnKeyName', () => {
-        const result = client.matchCdnKeyFromCdnKeyName(fakePath);
-        assert.strictEqual(result, 'cdnKeyValue');
-        assert(
-          (client.pathTemplates.cdnKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchLocationFromLiveConfigName', () => {
+                const result = client.matchLocationFromLiveConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.liveConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('liveAdTagDetail', async () => {
-      const fakePath = '/rendered/path/liveAdTagDetail';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        live_session: 'liveSessionValue',
-        live_ad_tag_detail: 'liveAdTagDetailValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchLiveConfigFromLiveConfigName', () => {
+                const result = client.matchLiveConfigFromLiveConfigName(fakePath);
+                assert.strictEqual(result, "liveConfigValue");
+                assert((client.pathTemplates.liveConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.liveAdTagDetailPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.liveAdTagDetailPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('liveAdTagDetailPath', () => {
-        const result = client.liveAdTagDetailPath(
-          'projectValue',
-          'locationValue',
-          'liveSessionValue',
-          'liveAdTagDetailValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.liveAdTagDetailPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('liveSession', async () => {
+            const fakePath = "/rendered/path/liveSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                live_session: "liveSessionValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.liveSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.liveSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLiveAdTagDetailName', () => {
-        const result = client.matchProjectFromLiveAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('liveSessionPath', () => {
+                const result = client.liveSessionPath("projectValue", "locationValue", "liveSessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.liveSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLiveAdTagDetailName', () => {
-        const result = client.matchLocationFromLiveAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromLiveSessionName', () => {
+                const result = client.matchProjectFromLiveSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.liveSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchLiveSessionFromLiveAdTagDetailName', () => {
-        const result = client.matchLiveSessionFromLiveAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'liveSessionValue');
-        assert(
-          (client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromLiveSessionName', () => {
+                const result = client.matchLocationFromLiveSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.liveSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchLiveAdTagDetailFromLiveAdTagDetailName', () => {
-        const result =
-          client.matchLiveAdTagDetailFromLiveAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'liveAdTagDetailValue');
-        assert(
-          (client.pathTemplates.liveAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('liveConfig', async () => {
-      const fakePath = '/rendered/path/liveConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        live_config: 'liveConfigValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchLiveSessionFromLiveSessionName', () => {
+                const result = client.matchLiveSessionFromLiveSessionName(fakePath);
+                assert.strictEqual(result, "liveSessionValue");
+                assert((client.pathTemplates.liveSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.liveConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.liveConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('liveConfigPath', () => {
-        const result = client.liveConfigPath(
-          'projectValue',
-          'locationValue',
-          'liveConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.liveConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLiveConfigName', () => {
-        const result = client.matchProjectFromLiveConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.liveConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLiveConfigName', () => {
-        const result = client.matchLocationFromLiveConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.liveConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchLiveConfigFromLiveConfigName', () => {
-        const result = client.matchLiveConfigFromLiveConfigName(fakePath);
-        assert.strictEqual(result, 'liveConfigValue');
-        assert(
-          (client.pathTemplates.liveConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('liveSession', async () => {
-      const fakePath = '/rendered/path/liveSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        live_session: 'liveSessionValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.liveSessionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.liveSessionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('liveSessionPath', () => {
-        const result = client.liveSessionPath(
-          'projectValue',
-          'locationValue',
-          'liveSessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.liveSessionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLiveSessionName', () => {
-        const result = client.matchProjectFromLiveSessionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.liveSessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLiveSessionName', () => {
-        const result = client.matchLocationFromLiveSessionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.liveSessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLiveSessionFromLiveSessionName', () => {
-        const result = client.matchLiveSessionFromLiveSessionName(fakePath);
-        assert.strictEqual(result, 'liveSessionValue');
-        assert(
-          (client.pathTemplates.liveSessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('slate', async () => {
+            const fakePath = "/rendered/path/slate";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                slate: "slateValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.slatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.slatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('slatePath', () => {
+                const result = client.slatePath("projectValue", "locationValue", "slateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.slatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchProjectFromSlateName', () => {
+                const result = client.matchProjectFromSlateName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.slatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchLocationFromSlateName', () => {
+                const result = client.matchLocationFromSlateName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.slatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSlateFromSlateName', () => {
+                const result = client.matchSlateFromSlateName(fakePath);
+                assert.strictEqual(result, "slateValue");
+                assert((client.pathTemplates.slatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('vodAdTagDetail', async () => {
+            const fakePath = "/rendered/path/vodAdTagDetail";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                vod_session: "vodSessionValue",
+                vod_ad_tag_detail: "vodAdTagDetailValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.vodAdTagDetailPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.vodAdTagDetailPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('vodAdTagDetailPath', () => {
+                const result = client.vodAdTagDetailPath("projectValue", "locationValue", "vodSessionValue", "vodAdTagDetailValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.vodAdTagDetailPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-    describe('slate', async () => {
-      const fakePath = '/rendered/path/slate';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        slate: 'slateValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchProjectFromVodAdTagDetailName', () => {
+                const result = client.matchProjectFromVodAdTagDetailName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVodAdTagDetailName', () => {
+                const result = client.matchLocationFromVodAdTagDetailName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVodSessionFromVodAdTagDetailName', () => {
+                const result = client.matchVodSessionFromVodAdTagDetailName(fakePath);
+                assert.strictEqual(result, "vodSessionValue");
+                assert((client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVodAdTagDetailFromVodAdTagDetailName', () => {
+                const result = client.matchVodAdTagDetailFromVodAdTagDetailName(fakePath);
+                assert.strictEqual(result, "vodAdTagDetailValue");
+                assert((client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.slatePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.slatePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('slatePath', () => {
-        const result = client.slatePath(
-          'projectValue',
-          'locationValue',
-          'slateValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.slatePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('vodConfig', async () => {
+            const fakePath = "/rendered/path/vodConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                vod_config: "vodConfigValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.vodConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.vodConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromSlateName', () => {
-        const result = client.matchProjectFromSlateName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.slatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('vodConfigPath', () => {
+                const result = client.vodConfigPath("projectValue", "locationValue", "vodConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.vodConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromSlateName', () => {
-        const result = client.matchLocationFromSlateName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.slatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromVodConfigName', () => {
+                const result = client.matchProjectFromVodConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.vodConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchSlateFromSlateName', () => {
-        const result = client.matchSlateFromSlateName(fakePath);
-        assert.strictEqual(result, 'slateValue');
-        assert(
-          (client.pathTemplates.slatePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchLocationFromVodConfigName', () => {
+                const result = client.matchLocationFromVodConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.vodConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('vodAdTagDetail', async () => {
-      const fakePath = '/rendered/path/vodAdTagDetail';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        vod_session: 'vodSessionValue',
-        vod_ad_tag_detail: 'vodAdTagDetailValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchVodConfigFromVodConfigName', () => {
+                const result = client.matchVodConfigFromVodConfigName(fakePath);
+                assert.strictEqual(result, "vodConfigValue");
+                assert((client.pathTemplates.vodConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.vodAdTagDetailPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.vodAdTagDetailPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('vodAdTagDetailPath', () => {
-        const result = client.vodAdTagDetailPath(
-          'projectValue',
-          'locationValue',
-          'vodSessionValue',
-          'vodAdTagDetailValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.vodAdTagDetailPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('vodSession', async () => {
+            const fakePath = "/rendered/path/vodSession";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                vod_session: "vodSessionValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.vodSessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.vodSessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromVodAdTagDetailName', () => {
-        const result = client.matchProjectFromVodAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('vodSessionPath', () => {
+                const result = client.vodSessionPath("projectValue", "locationValue", "vodSessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.vodSessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromVodAdTagDetailName', () => {
-        const result = client.matchLocationFromVodAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromVodSessionName', () => {
+                const result = client.matchProjectFromVodSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.vodSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchVodSessionFromVodAdTagDetailName', () => {
-        const result = client.matchVodSessionFromVodAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'vodSessionValue');
-        assert(
-          (client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromVodSessionName', () => {
+                const result = client.matchLocationFromVodSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.vodSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchVodAdTagDetailFromVodAdTagDetailName', () => {
-        const result =
-          client.matchVodAdTagDetailFromVodAdTagDetailName(fakePath);
-        assert.strictEqual(result, 'vodAdTagDetailValue');
-        assert(
-          (client.pathTemplates.vodAdTagDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('vodConfig', async () => {
-      const fakePath = '/rendered/path/vodConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        vod_config: 'vodConfigValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchVodSessionFromVodSessionName', () => {
+                const result = client.matchVodSessionFromVodSessionName(fakePath);
+                assert.strictEqual(result, "vodSessionValue");
+                assert((client.pathTemplates.vodSessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.vodConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.vodConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('vodConfigPath', () => {
-        const result = client.vodConfigPath(
-          'projectValue',
-          'locationValue',
-          'vodConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.vodConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('vodStitchDetail', async () => {
+            const fakePath = "/rendered/path/vodStitchDetail";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                vod_session: "vodSessionValue",
+                vod_stitch_detail: "vodStitchDetailValue",
+            };
+            const client = new videostitcherserviceModule.v1.VideoStitcherServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.vodStitchDetailPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.vodStitchDetailPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromVodConfigName', () => {
-        const result = client.matchProjectFromVodConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.vodConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('vodStitchDetailPath', () => {
+                const result = client.vodStitchDetailPath("projectValue", "locationValue", "vodSessionValue", "vodStitchDetailValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.vodStitchDetailPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromVodConfigName', () => {
-        const result = client.matchLocationFromVodConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.vodConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromVodStitchDetailName', () => {
+                const result = client.matchProjectFromVodStitchDetailName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchVodConfigFromVodConfigName', () => {
-        const result = client.matchVodConfigFromVodConfigName(fakePath);
-        assert.strictEqual(result, 'vodConfigValue');
-        assert(
-          (client.pathTemplates.vodConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+            it('matchLocationFromVodStitchDetailName', () => {
+                const result = client.matchLocationFromVodStitchDetailName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-    describe('vodSession', async () => {
-      const fakePath = '/rendered/path/vodSession';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        vod_session: 'vodSessionValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+            it('matchVodSessionFromVodStitchDetailName', () => {
+                const result = client.matchVodSessionFromVodStitchDetailName(fakePath);
+                assert.strictEqual(result, "vodSessionValue");
+                assert((client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVodStitchDetailFromVodStitchDetailName', () => {
+                const result = client.matchVodStitchDetailFromVodStitchDetailName(fakePath);
+                assert.strictEqual(result, "vodStitchDetailValue");
+                assert((client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
-      await client.initialize();
-      client.pathTemplates.vodSessionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.vodSessionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('vodSessionPath', () => {
-        const result = client.vodSessionPath(
-          'projectValue',
-          'locationValue',
-          'vodSessionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.vodSessionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVodSessionName', () => {
-        const result = client.matchProjectFromVodSessionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.vodSessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVodSessionName', () => {
-        const result = client.matchLocationFromVodSessionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.vodSessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVodSessionFromVodSessionName', () => {
-        const result = client.matchVodSessionFromVodSessionName(fakePath);
-        assert.strictEqual(result, 'vodSessionValue');
-        assert(
-          (client.pathTemplates.vodSessionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
     });
-
-    describe('vodStitchDetail', async () => {
-      const fakePath = '/rendered/path/vodStitchDetail';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        vod_session: 'vodSessionValue',
-        vod_stitch_detail: 'vodStitchDetailValue',
-      };
-      const client =
-        new videostitcherserviceModule.v1.VideoStitcherServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.vodStitchDetailPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.vodStitchDetailPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('vodStitchDetailPath', () => {
-        const result = client.vodStitchDetailPath(
-          'projectValue',
-          'locationValue',
-          'vodSessionValue',
-          'vodStitchDetailValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.vodStitchDetailPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVodStitchDetailName', () => {
-        const result = client.matchProjectFromVodStitchDetailName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVodStitchDetailName', () => {
-        const result = client.matchLocationFromVodStitchDetailName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVodSessionFromVodStitchDetailName', () => {
-        const result = client.matchVodSessionFromVodStitchDetailName(fakePath);
-        assert.strictEqual(result, 'vodSessionValue');
-        assert(
-          (client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVodStitchDetailFromVodStitchDetailName', () => {
-        const result =
-          client.matchVodStitchDetailFromVodStitchDetailName(fakePath);
-        assert.strictEqual(result, 'vodStitchDetailValue');
-        assert(
-          (client.pathTemplates.vodStitchDetailPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });
