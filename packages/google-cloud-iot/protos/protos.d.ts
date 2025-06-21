@@ -1825,7 +1825,7 @@ export namespace google {
                     versionToUpdate?: (number|Long|string|null);
 
                     /** ModifyCloudToDeviceConfigRequest binaryData */
-                    binaryData?: (Uint8Array|string|null);
+                    binaryData?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ModifyCloudToDeviceConfigRequest. */
@@ -1844,7 +1844,7 @@ export namespace google {
                     public versionToUpdate: (number|Long|string);
 
                     /** ModifyCloudToDeviceConfigRequest binaryData. */
-                    public binaryData: (Uint8Array|string);
+                    public binaryData: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ModifyCloudToDeviceConfigRequest instance using the specified properties.
@@ -2331,7 +2331,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** SendCommandToDeviceRequest binaryData */
-                    binaryData?: (Uint8Array|string|null);
+                    binaryData?: (Uint8Array|Buffer|string|null);
 
                     /** SendCommandToDeviceRequest subfolder */
                     subfolder?: (string|null);
@@ -2350,7 +2350,7 @@ export namespace google {
                     public name: string;
 
                     /** SendCommandToDeviceRequest binaryData. */
-                    public binaryData: (Uint8Array|string);
+                    public binaryData: (Uint8Array|Buffer|string);
 
                     /** SendCommandToDeviceRequest subfolder. */
                     public subfolder: string;
@@ -4376,7 +4376,7 @@ export namespace google {
                     deviceAckTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceConfig binaryData */
-                    binaryData?: (Uint8Array|string|null);
+                    binaryData?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a DeviceConfig. */
@@ -4398,7 +4398,7 @@ export namespace google {
                     public deviceAckTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceConfig binaryData. */
-                    public binaryData: (Uint8Array|string);
+                    public binaryData: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new DeviceConfig instance using the specified properties.
@@ -4485,7 +4485,7 @@ export namespace google {
                     updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceState binaryData */
-                    binaryData?: (Uint8Array|string|null);
+                    binaryData?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a DeviceState. */
@@ -4501,7 +4501,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceState binaryData. */
-                    public binaryData: (Uint8Array|string);
+                    public binaryData: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new DeviceState instance using the specified properties.
@@ -5239,6 +5239,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -5279,6 +5282,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -9497,6 +9503,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -9745,7 +9754,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -9776,7 +9785,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -11018,7 +11027,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -11034,7 +11043,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -12031,7 +12040,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|string|null);
+                etag?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Policy. */
@@ -12053,7 +12062,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|string);
+                public etag: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.
