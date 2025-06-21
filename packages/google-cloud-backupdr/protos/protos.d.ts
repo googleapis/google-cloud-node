@@ -1310,12 +1310,6 @@ export namespace google {
                     /** ListManagementServersRequest orderBy. */
                     public orderBy?: (string|null);
 
-                    /** ListManagementServersRequest _filter. */
-                    public _filter?: "filter";
-
-                    /** ListManagementServersRequest _orderBy. */
-                    public _orderBy?: "orderBy";
-
                     /**
                      * Creates a new ListManagementServersRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4407,27 +4401,6 @@ export namespace google {
                     /** BackupVault accessRestriction. */
                     public accessRestriction: (google.cloud.backupdr.v1.BackupVault.AccessRestriction|keyof typeof google.cloud.backupdr.v1.BackupVault.AccessRestriction);
 
-                    /** BackupVault _description. */
-                    public _description?: "description";
-
-                    /** BackupVault _createTime. */
-                    public _createTime?: "createTime";
-
-                    /** BackupVault _updateTime. */
-                    public _updateTime?: "updateTime";
-
-                    /** BackupVault _backupMinimumEnforcedRetentionDuration. */
-                    public _backupMinimumEnforcedRetentionDuration?: "backupMinimumEnforcedRetentionDuration";
-
-                    /** BackupVault _deletable. */
-                    public _deletable?: "deletable";
-
-                    /** BackupVault _etag. */
-                    public _etag?: "etag";
-
-                    /** BackupVault _effectiveTime. */
-                    public _effectiveTime?: "effectiveTime";
-
                     /**
                      * Creates a new BackupVault instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4611,21 +4584,6 @@ export namespace google {
 
                     /** DataSource dataSourceBackupApplianceApplication. */
                     public dataSourceBackupApplianceApplication?: (google.cloud.backupdr.v1.IDataSourceBackupApplianceApplication|null);
-
-                    /** DataSource _createTime. */
-                    public _createTime?: "createTime";
-
-                    /** DataSource _updateTime. */
-                    public _updateTime?: "updateTime";
-
-                    /** DataSource _backupCount. */
-                    public _backupCount?: "backupCount";
-
-                    /** DataSource _etag. */
-                    public _etag?: "etag";
-
-                    /** DataSource _totalStoredBytes. */
-                    public _totalStoredBytes?: "totalStoredBytes";
 
                     /** DataSource sourceResource. */
                     public sourceResource?: ("dataSourceGcpResource"|"dataSourceBackupApplianceApplication");
@@ -5808,27 +5766,6 @@ export namespace google {
 
                     /** Backup resourceSizeBytes. */
                     public resourceSizeBytes: (number|Long|string);
-
-                    /** Backup _description. */
-                    public _description?: "description";
-
-                    /** Backup _createTime. */
-                    public _createTime?: "createTime";
-
-                    /** Backup _updateTime. */
-                    public _updateTime?: "updateTime";
-
-                    /** Backup _enforcedRetentionEndTime. */
-                    public _enforcedRetentionEndTime?: "enforcedRetentionEndTime";
-
-                    /** Backup _expireTime. */
-                    public _expireTime?: "expireTime";
-
-                    /** Backup _consistencyTime. */
-                    public _consistencyTime?: "consistencyTime";
-
-                    /** Backup _etag. */
-                    public _etag?: "etag";
 
                     /** Backup backupProperties. */
                     public backupProperties?: ("computeInstanceBackupProperties"|"backupApplianceBackupProperties");
@@ -8458,18 +8395,6 @@ export namespace google {
                     /** BackupApplianceBackupProperties recoveryRangeEndTime. */
                     public recoveryRangeEndTime?: (google.protobuf.ITimestamp|null);
 
-                    /** BackupApplianceBackupProperties _generationId. */
-                    public _generationId?: "generationId";
-
-                    /** BackupApplianceBackupProperties _finalizeTime. */
-                    public _finalizeTime?: "finalizeTime";
-
-                    /** BackupApplianceBackupProperties _recoveryRangeStartTime. */
-                    public _recoveryRangeStartTime?: "recoveryRangeStartTime";
-
-                    /** BackupApplianceBackupProperties _recoveryRangeEndTime. */
-                    public _recoveryRangeEndTime?: "recoveryRangeEndTime";
-
                     /**
                      * Creates a new BackupApplianceBackupProperties instance using the specified properties.
                      * @param [properties] Properties to set
@@ -8644,33 +8569,6 @@ export namespace google {
 
                     /** ComputeInstanceBackupProperties labels. */
                     public labels: { [k: string]: string };
-
-                    /** ComputeInstanceBackupProperties _description. */
-                    public _description?: "description";
-
-                    /** ComputeInstanceBackupProperties _tags. */
-                    public _tags?: "tags";
-
-                    /** ComputeInstanceBackupProperties _machineType. */
-                    public _machineType?: "machineType";
-
-                    /** ComputeInstanceBackupProperties _canIpForward. */
-                    public _canIpForward?: "canIpForward";
-
-                    /** ComputeInstanceBackupProperties _metadata. */
-                    public _metadata?: "metadata";
-
-                    /** ComputeInstanceBackupProperties _scheduling. */
-                    public _scheduling?: "scheduling";
-
-                    /** ComputeInstanceBackupProperties _minCpuPlatform. */
-                    public _minCpuPlatform?: "minCpuPlatform";
-
-                    /** ComputeInstanceBackupProperties _keyRevocationActionType. */
-                    public _keyRevocationActionType?: "keyRevocationActionType";
-
-                    /** ComputeInstanceBackupProperties _sourceInstance. */
-                    public _sourceInstance?: "sourceInstance";
 
                     /**
                      * Creates a new ComputeInstanceBackupProperties instance using the specified properties.
@@ -8912,63 +8810,6 @@ export namespace google {
 
                     /** ComputeInstanceRestoreProperties tags. */
                     public tags?: (google.cloud.backupdr.v1.ITags|null);
-
-                    /** ComputeInstanceRestoreProperties _name. */
-                    public _name?: "name";
-
-                    /** ComputeInstanceRestoreProperties _advancedMachineFeatures. */
-                    public _advancedMachineFeatures?: "advancedMachineFeatures";
-
-                    /** ComputeInstanceRestoreProperties _canIpForward. */
-                    public _canIpForward?: "canIpForward";
-
-                    /** ComputeInstanceRestoreProperties _confidentialInstanceConfig. */
-                    public _confidentialInstanceConfig?: "confidentialInstanceConfig";
-
-                    /** ComputeInstanceRestoreProperties _deletionProtection. */
-                    public _deletionProtection?: "deletionProtection";
-
-                    /** ComputeInstanceRestoreProperties _description. */
-                    public _description?: "description";
-
-                    /** ComputeInstanceRestoreProperties _displayDevice. */
-                    public _displayDevice?: "displayDevice";
-
-                    /** ComputeInstanceRestoreProperties _hostname. */
-                    public _hostname?: "hostname";
-
-                    /** ComputeInstanceRestoreProperties _instanceEncryptionKey. */
-                    public _instanceEncryptionKey?: "instanceEncryptionKey";
-
-                    /** ComputeInstanceRestoreProperties _keyRevocationActionType. */
-                    public _keyRevocationActionType?: "keyRevocationActionType";
-
-                    /** ComputeInstanceRestoreProperties _machineType. */
-                    public _machineType?: "machineType";
-
-                    /** ComputeInstanceRestoreProperties _metadata. */
-                    public _metadata?: "metadata";
-
-                    /** ComputeInstanceRestoreProperties _minCpuPlatform. */
-                    public _minCpuPlatform?: "minCpuPlatform";
-
-                    /** ComputeInstanceRestoreProperties _networkPerformanceConfig. */
-                    public _networkPerformanceConfig?: "networkPerformanceConfig";
-
-                    /** ComputeInstanceRestoreProperties _params. */
-                    public _params?: "params";
-
-                    /** ComputeInstanceRestoreProperties _privateIpv6GoogleAccess. */
-                    public _privateIpv6GoogleAccess?: "privateIpv6GoogleAccess";
-
-                    /** ComputeInstanceRestoreProperties _allocationAffinity. */
-                    public _allocationAffinity?: "allocationAffinity";
-
-                    /** ComputeInstanceRestoreProperties _scheduling. */
-                    public _scheduling?: "scheduling";
-
-                    /** ComputeInstanceRestoreProperties _tags. */
-                    public _tags?: "tags";
 
                     /**
                      * Creates a new ComputeInstanceRestoreProperties instance using the specified properties.
@@ -9320,18 +9161,6 @@ export namespace google {
                     /** AdvancedMachineFeatures enableUefiNetworking. */
                     public enableUefiNetworking?: (boolean|null);
 
-                    /** AdvancedMachineFeatures _enableNestedVirtualization. */
-                    public _enableNestedVirtualization?: "enableNestedVirtualization";
-
-                    /** AdvancedMachineFeatures _threadsPerCore. */
-                    public _threadsPerCore?: "threadsPerCore";
-
-                    /** AdvancedMachineFeatures _visibleCoreCount. */
-                    public _visibleCoreCount?: "visibleCoreCount";
-
-                    /** AdvancedMachineFeatures _enableUefiNetworking. */
-                    public _enableUefiNetworking?: "enableUefiNetworking";
-
                     /**
                      * Creates a new AdvancedMachineFeatures instance using the specified properties.
                      * @param [properties] Properties to set
@@ -9429,9 +9258,6 @@ export namespace google {
                     /** ConfidentialInstanceConfig enableConfidentialCompute. */
                     public enableConfidentialCompute?: (boolean|null);
 
-                    /** ConfidentialInstanceConfig _enableConfidentialCompute. */
-                    public _enableConfidentialCompute?: "enableConfidentialCompute";
-
                     /**
                      * Creates a new ConfidentialInstanceConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -9528,9 +9354,6 @@ export namespace google {
 
                     /** DisplayDevice enableDisplay. */
                     public enableDisplay?: (boolean|null);
-
-                    /** DisplayDevice _enableDisplay. */
-                    public _enableDisplay?: "enableDisplay";
 
                     /**
                      * Creates a new DisplayDevice instance using the specified properties.
@@ -9634,12 +9457,6 @@ export namespace google {
 
                     /** AcceleratorConfig acceleratorCount. */
                     public acceleratorCount?: (number|null);
-
-                    /** AcceleratorConfig _acceleratorType. */
-                    public _acceleratorType?: "acceleratorType";
-
-                    /** AcceleratorConfig _acceleratorCount. */
-                    public _acceleratorCount?: "acceleratorCount";
 
                     /**
                      * Creates a new AcceleratorConfig instance using the specified properties.
@@ -9759,9 +9576,6 @@ export namespace google {
                     /** CustomerEncryptionKey key. */
                     public key?: ("rawKey"|"rsaEncryptedKey"|"kmsKeyName");
 
-                    /** CustomerEncryptionKey _kmsKeyServiceAccount. */
-                    public _kmsKeyServiceAccount?: "kmsKeyServiceAccount";
-
                     /**
                      * Creates a new CustomerEncryptionKey instance using the specified properties.
                      * @param [properties] Properties to set
@@ -9864,12 +9678,6 @@ export namespace google {
 
                     /** Entry value. */
                     public value?: (string|null);
-
-                    /** Entry _key. */
-                    public _key?: "key";
-
-                    /** Entry _value. */
-                    public _value?: "value";
 
                     /**
                      * Creates a new Entry instance using the specified properties.
@@ -10143,39 +9951,6 @@ export namespace google {
                     /** NetworkInterface networkAttachment. */
                     public networkAttachment?: (string|null);
 
-                    /** NetworkInterface _network. */
-                    public _network?: "network";
-
-                    /** NetworkInterface _subnetwork. */
-                    public _subnetwork?: "subnetwork";
-
-                    /** NetworkInterface _ipAddress. */
-                    public _ipAddress?: "ipAddress";
-
-                    /** NetworkInterface _ipv6Address. */
-                    public _ipv6Address?: "ipv6Address";
-
-                    /** NetworkInterface _internalIpv6PrefixLength. */
-                    public _internalIpv6PrefixLength?: "internalIpv6PrefixLength";
-
-                    /** NetworkInterface _name. */
-                    public _name?: "name";
-
-                    /** NetworkInterface _stackType. */
-                    public _stackType?: "stackType";
-
-                    /** NetworkInterface _ipv6AccessType. */
-                    public _ipv6AccessType?: "ipv6AccessType";
-
-                    /** NetworkInterface _queueCount. */
-                    public _queueCount?: "queueCount";
-
-                    /** NetworkInterface _nicType. */
-                    public _nicType?: "nicType";
-
-                    /** NetworkInterface _networkAttachment. */
-                    public _networkAttachment?: "networkAttachment";
-
                     /**
                      * Creates a new NetworkInterface instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10296,9 +10071,6 @@ export namespace google {
 
                     /** NetworkPerformanceConfig totalEgressBandwidthTier. */
                     public totalEgressBandwidthTier?: (google.cloud.backupdr.v1.NetworkPerformanceConfig.Tier|keyof typeof google.cloud.backupdr.v1.NetworkPerformanceConfig.Tier|null);
-
-                    /** NetworkPerformanceConfig _totalEgressBandwidthTier. */
-                    public _totalEgressBandwidthTier?: "totalEgressBandwidthTier";
 
                     /**
                      * Creates a new NetworkPerformanceConfig instance using the specified properties.
@@ -10449,30 +10221,6 @@ export namespace google {
                     /** AccessConfig networkTier. */
                     public networkTier?: (google.cloud.backupdr.v1.AccessConfig.NetworkTier|keyof typeof google.cloud.backupdr.v1.AccessConfig.NetworkTier|null);
 
-                    /** AccessConfig _type. */
-                    public _type?: "type";
-
-                    /** AccessConfig _name. */
-                    public _name?: "name";
-
-                    /** AccessConfig _externalIp. */
-                    public _externalIp?: "externalIp";
-
-                    /** AccessConfig _externalIpv6. */
-                    public _externalIpv6?: "externalIpv6";
-
-                    /** AccessConfig _externalIpv6PrefixLength. */
-                    public _externalIpv6PrefixLength?: "externalIpv6PrefixLength";
-
-                    /** AccessConfig _setPublicPtr. */
-                    public _setPublicPtr?: "setPublicPtr";
-
-                    /** AccessConfig _publicPtrDomainName. */
-                    public _publicPtrDomainName?: "publicPtrDomainName";
-
-                    /** AccessConfig _networkTier. */
-                    public _networkTier?: "networkTier";
-
                     /**
                      * Creates a new AccessConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10592,12 +10340,6 @@ export namespace google {
 
                     /** AliasIpRange subnetworkRangeName. */
                     public subnetworkRangeName?: (string|null);
-
-                    /** AliasIpRange _ipCidrRange. */
-                    public _ipCidrRange?: "ipCidrRange";
-
-                    /** AliasIpRange _subnetworkRangeName. */
-                    public _subnetworkRangeName?: "subnetworkRangeName";
 
                     /**
                      * Creates a new AliasIpRange instance using the specified properties.
@@ -10805,12 +10547,6 @@ export namespace google {
                     /** AllocationAffinity values. */
                     public values: string[];
 
-                    /** AllocationAffinity _consumeAllocationType. */
-                    public _consumeAllocationType?: "consumeAllocationType";
-
-                    /** AllocationAffinity _key. */
-                    public _key?: "key";
-
                     /**
                      * Creates a new AllocationAffinity instance using the specified properties.
                      * @param [properties] Properties to set
@@ -10961,27 +10697,6 @@ export namespace google {
                     /** Scheduling localSsdRecoveryTimeout. */
                     public localSsdRecoveryTimeout?: (google.cloud.backupdr.v1.ISchedulingDuration|null);
 
-                    /** Scheduling _onHostMaintenance. */
-                    public _onHostMaintenance?: "onHostMaintenance";
-
-                    /** Scheduling _automaticRestart. */
-                    public _automaticRestart?: "automaticRestart";
-
-                    /** Scheduling _preemptible. */
-                    public _preemptible?: "preemptible";
-
-                    /** Scheduling _minNodeCpus. */
-                    public _minNodeCpus?: "minNodeCpus";
-
-                    /** Scheduling _provisioningModel. */
-                    public _provisioningModel?: "provisioningModel";
-
-                    /** Scheduling _instanceTerminationAction. */
-                    public _instanceTerminationAction?: "instanceTerminationAction";
-
-                    /** Scheduling _localSsdRecoveryTimeout. */
-                    public _localSsdRecoveryTimeout?: "localSsdRecoveryTimeout";
-
                     /**
                      * Creates a new Scheduling instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11099,12 +10814,6 @@ export namespace google {
 
                         /** NodeAffinity values. */
                         public values: string[];
-
-                        /** NodeAffinity _key. */
-                        public _key?: "key";
-
-                        /** NodeAffinity _operator. */
-                        public _operator?: "operator";
 
                         /**
                          * Creates a new NodeAffinity instance using the specified properties.
@@ -11234,12 +10943,6 @@ export namespace google {
                     /** SchedulingDuration nanos. */
                     public nanos?: (number|null);
 
-                    /** SchedulingDuration _seconds. */
-                    public _seconds?: "seconds";
-
-                    /** SchedulingDuration _nanos. */
-                    public _nanos?: "nanos";
-
                     /**
                      * Creates a new SchedulingDuration instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11342,9 +11045,6 @@ export namespace google {
 
                     /** ServiceAccount scopes. */
                     public scopes: string[];
-
-                    /** ServiceAccount _email. */
-                    public _email?: "email";
 
                     /**
                      * Creates a new ServiceAccount instance using the specified properties.
@@ -11636,51 +11336,6 @@ export namespace google {
                     /** AttachedDisk type. */
                     public type?: (google.cloud.backupdr.v1.AttachedDisk.DiskType|keyof typeof google.cloud.backupdr.v1.AttachedDisk.DiskType|null);
 
-                    /** AttachedDisk _initializeParams. */
-                    public _initializeParams?: "initializeParams";
-
-                    /** AttachedDisk _deviceName. */
-                    public _deviceName?: "deviceName";
-
-                    /** AttachedDisk _kind. */
-                    public _kind?: "kind";
-
-                    /** AttachedDisk _diskTypeDeprecated. */
-                    public _diskTypeDeprecated?: "diskTypeDeprecated";
-
-                    /** AttachedDisk _mode. */
-                    public _mode?: "mode";
-
-                    /** AttachedDisk _source. */
-                    public _source?: "source";
-
-                    /** AttachedDisk _index. */
-                    public _index?: "index";
-
-                    /** AttachedDisk _boot. */
-                    public _boot?: "boot";
-
-                    /** AttachedDisk _autoDelete. */
-                    public _autoDelete?: "autoDelete";
-
-                    /** AttachedDisk _diskInterface. */
-                    public _diskInterface?: "diskInterface";
-
-                    /** AttachedDisk _diskEncryptionKey. */
-                    public _diskEncryptionKey?: "diskEncryptionKey";
-
-                    /** AttachedDisk _diskSizeGb. */
-                    public _diskSizeGb?: "diskSizeGb";
-
-                    /** AttachedDisk _savedState. */
-                    public _savedState?: "savedState";
-
-                    /** AttachedDisk _diskType. */
-                    public _diskType?: "diskType";
-
-                    /** AttachedDisk _type. */
-                    public _type?: "type";
-
                     /**
                      * Creates a new AttachedDisk instance using the specified properties.
                      * @param [properties] Properties to set
@@ -11785,9 +11440,6 @@ export namespace google {
 
                         /** InitializeParams replicaZones. */
                         public replicaZones: string[];
-
-                        /** InitializeParams _diskName. */
-                        public _diskName?: "diskName";
 
                         /**
                          * Creates a new InitializeParams instance using the specified properties.
@@ -11916,9 +11568,6 @@ export namespace google {
 
                     /** GuestOsFeature type. */
                     public type?: (google.cloud.backupdr.v1.GuestOsFeature.FeatureType|keyof typeof google.cloud.backupdr.v1.GuestOsFeature.FeatureType|null);
-
-                    /** GuestOsFeature _type. */
-                    public _type?: "type";
 
                     /**
                      * Creates a new GuestOsFeature instance using the specified properties.
@@ -12685,6 +12334,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -12725,6 +12377,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -17055,6 +16710,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -17306,7 +16964,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -17337,7 +16995,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -18579,7 +18237,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -18595,7 +18253,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -19643,7 +19301,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -19656,7 +19314,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

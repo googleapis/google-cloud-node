@@ -59,6 +59,14 @@
         "DeleteRagFile": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "UpdateRagEngineConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetRagEngineConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

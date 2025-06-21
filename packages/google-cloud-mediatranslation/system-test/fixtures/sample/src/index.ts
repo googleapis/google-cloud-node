@@ -19,9 +19,7 @@
 import {SpeechTranslationServiceClient} from '@google-cloud/media-translation';
 
 // check that the client class type name can be used
-function doStuffWithSpeechTranslationServiceClient(
-  client: SpeechTranslationServiceClient
-) {
+function doStuffWithSpeechTranslationServiceClient(client: SpeechTranslationServiceClient) {
   client.close();
 }
 

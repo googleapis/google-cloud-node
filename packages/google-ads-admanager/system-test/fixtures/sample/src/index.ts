@@ -16,21 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  AdUnitServiceClient,
-  CompanyServiceClient,
-  CustomFieldServiceClient,
-  CustomTargetingKeyServiceClient,
-  CustomTargetingValueServiceClient,
-  EntitySignalsMappingServiceClient,
-  NetworkServiceClient,
-  OrderServiceClient,
-  PlacementServiceClient,
-  ReportServiceClient,
-  RoleServiceClient,
-  TaxonomyCategoryServiceClient,
-  UserServiceClient,
-} from '@google-ads/admanager';
+import {AdUnitServiceClient, CompanyServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, EntitySignalsMappingServiceClient, NetworkServiceClient, OrderServiceClient, PlacementServiceClient, ReportServiceClient, RoleServiceClient, TaxonomyCategoryServiceClient, UserServiceClient} from '@google-ads/admanager';
 
 // check that the client class type name can be used
 function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
@@ -42,19 +28,13 @@ function doStuffWithCompanyServiceClient(client: CompanyServiceClient) {
 function doStuffWithCustomFieldServiceClient(client: CustomFieldServiceClient) {
   client.close();
 }
-function doStuffWithCustomTargetingKeyServiceClient(
-  client: CustomTargetingKeyServiceClient
-) {
+function doStuffWithCustomTargetingKeyServiceClient(client: CustomTargetingKeyServiceClient) {
   client.close();
 }
-function doStuffWithCustomTargetingValueServiceClient(
-  client: CustomTargetingValueServiceClient
-) {
+function doStuffWithCustomTargetingValueServiceClient(client: CustomTargetingValueServiceClient) {
   client.close();
 }
-function doStuffWithEntitySignalsMappingServiceClient(
-  client: EntitySignalsMappingServiceClient
-) {
+function doStuffWithEntitySignalsMappingServiceClient(client: EntitySignalsMappingServiceClient) {
   client.close();
 }
 function doStuffWithNetworkServiceClient(client: NetworkServiceClient) {
@@ -72,9 +52,7 @@ function doStuffWithReportServiceClient(client: ReportServiceClient) {
 function doStuffWithRoleServiceClient(client: RoleServiceClient) {
   client.close();
 }
-function doStuffWithTaxonomyCategoryServiceClient(
-  client: TaxonomyCategoryServiceClient
-) {
+function doStuffWithTaxonomyCategoryServiceClient(client: TaxonomyCategoryServiceClient) {
   client.close();
 }
 function doStuffWithUserServiceClient(client: UserServiceClient) {
@@ -95,17 +73,11 @@ function main() {
   const customTargetingKeyServiceClient = new CustomTargetingKeyServiceClient();
   doStuffWithCustomTargetingKeyServiceClient(customTargetingKeyServiceClient);
   // check that the client instance can be created
-  const customTargetingValueServiceClient =
-    new CustomTargetingValueServiceClient();
-  doStuffWithCustomTargetingValueServiceClient(
-    customTargetingValueServiceClient
-  );
+  const customTargetingValueServiceClient = new CustomTargetingValueServiceClient();
+  doStuffWithCustomTargetingValueServiceClient(customTargetingValueServiceClient);
   // check that the client instance can be created
-  const entitySignalsMappingServiceClient =
-    new EntitySignalsMappingServiceClient();
-  doStuffWithEntitySignalsMappingServiceClient(
-    entitySignalsMappingServiceClient
-  );
+  const entitySignalsMappingServiceClient = new EntitySignalsMappingServiceClient();
+  doStuffWithEntitySignalsMappingServiceClient(entitySignalsMappingServiceClient);
   // check that the client instance can be created
   const networkServiceClient = new NetworkServiceClient();
   doStuffWithNetworkServiceClient(networkServiceClient);

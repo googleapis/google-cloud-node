@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -111,42 +102,20 @@ export class WorkflowsServiceV2BetaClient {
    *     const client = new WorkflowsServiceV2BetaClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof WorkflowsServiceV2BetaClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof WorkflowsServiceV2BetaClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'lifesciences.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -172,7 +141,7 @@ export class WorkflowsServiceV2BetaClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,9 +157,13 @@ export class WorkflowsServiceV2BetaClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -207,65 +180,35 @@ export class WorkflowsServiceV2BetaClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v2beta/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v2beta/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v2beta/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2beta/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2beta/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v2beta/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v2beta/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v2beta/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v2beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v2beta/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const runPipelineResponse = protoFilesRoot.lookup(
-      '.google.cloud.lifesciences.v2beta.RunPipelineResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.lifesciences.v2beta.RunPipelineResponse') as gax.protobuf.Type;
     const runPipelineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.lifesciences.v2beta.Metadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.lifesciences.v2beta.Metadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       runPipeline: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runPipelineResponse.decode.bind(runPipelineResponse),
-        runPipelineMetadata.decode.bind(runPipelineMetadata)
-      ),
+        runPipelineMetadata.decode.bind(runPipelineMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.lifesciences.v2beta.WorkflowsServiceV2Beta',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.lifesciences.v2beta.WorkflowsServiceV2Beta', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -296,36 +239,32 @@ export class WorkflowsServiceV2BetaClient {
     // Put together the "service stub" for
     // google.cloud.lifesciences.v2beta.WorkflowsServiceV2Beta.
     this.workflowsServiceV2BetaStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.lifesciences.v2beta.WorkflowsServiceV2Beta'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.lifesciences.v2beta
-            .WorkflowsServiceV2Beta,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.lifesciences.v2beta.WorkflowsServiceV2Beta') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.lifesciences.v2beta.WorkflowsServiceV2Beta,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const workflowsServiceV2BetaStubMethods = ['runPipeline'];
+    const workflowsServiceV2BetaStubMethods =
+        ['runPipeline'];
     for (const methodName of workflowsServiceV2BetaStubMethods) {
       const callPromise = this.workflowsServiceV2BetaStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -345,14 +284,8 @@ export class WorkflowsServiceV2BetaClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'lifesciences.googleapis.com';
   }
@@ -363,14 +296,8 @@ export class WorkflowsServiceV2BetaClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'lifesciences.googleapis.com';
   }
@@ -401,7 +328,9 @@ export class WorkflowsServiceV2BetaClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -410,9 +339,8 @@ export class WorkflowsServiceV2BetaClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -424,206 +352,144 @@ export class WorkflowsServiceV2BetaClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Runs a pipeline.  The returned Operation's [metadata]
-   * [google.longrunning.Operation.metadata] field will contain a
-   * {@link protos.google.cloud.lifesciences.v2beta.Metadata|google.cloud.lifesciences.v2beta.Metadata}
-   * object describing the status of the pipeline execution. The
-   * {@link protos.google.longrunning.Operation.response|response} field will contain a
-   * {@link protos.google.cloud.lifesciences.v2beta.RunPipelineResponse|google.cloud.lifesciences.v2beta.RunPipelineResponse}
-   * object if the pipeline completes successfully.
-   *
-   * **Note:** Before you can use this method, the *Life Sciences Service Agent*
-   * must have access to your project. This is done automatically when the
-   * Cloud Life Sciences API is first enabled, but if you delete this permission
-   * you must disable and re-enable the API to grant the Life Sciences
-   * Service Agent the required permissions.
-   * Authorization requires the following [Google
-   * IAM](https://cloud.google.com/iam/) permission:
-   *
-   * * `lifesciences.workflows.run`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The project and location that this request should be executed against.
-   * @param {google.cloud.lifesciences.v2beta.Pipeline} request.pipeline
-   *   Required. The description of the pipeline to run.
-   * @param {number[]} request.labels
-   *   User-defined labels to associate with the returned operation. These
-   *   labels are not propagated to any Google Cloud Platform resources used by
-   *   the operation, and can be modified at any time.
-   *
-   *   To associate labels with resources created while executing the operation,
-   *   see the appropriate resource message (for example, `VirtualMachine`).
-   * @param {string} request.pubSubTopic
-   *   The name of an existing Pub/Sub topic.  The server will publish
-   *   messages to this topic whenever the status of the operation changes.
-   *   The Life Sciences Service Agent account must have publisher permissions to
-   *   the specified topic or notifications will not be sent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
-   * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
-   */
+/**
+ * Runs a pipeline.  The returned Operation's [metadata]
+ * [google.longrunning.Operation.metadata] field will contain a
+ * {@link protos.google.cloud.lifesciences.v2beta.Metadata|google.cloud.lifesciences.v2beta.Metadata}
+ * object describing the status of the pipeline execution. The
+ * {@link protos.google.longrunning.Operation.response|response} field will contain a
+ * {@link protos.google.cloud.lifesciences.v2beta.RunPipelineResponse|google.cloud.lifesciences.v2beta.RunPipelineResponse}
+ * object if the pipeline completes successfully.
+ *
+ * **Note:** Before you can use this method, the *Life Sciences Service Agent*
+ * must have access to your project. This is done automatically when the
+ * Cloud Life Sciences API is first enabled, but if you delete this permission
+ * you must disable and re-enable the API to grant the Life Sciences
+ * Service Agent the required permissions.
+ * Authorization requires the following [Google
+ * IAM](https://cloud.google.com/iam/) permission:
+ *
+ * * `lifesciences.workflows.run`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The project and location that this request should be executed against.
+ * @param {google.cloud.lifesciences.v2beta.Pipeline} request.pipeline
+ *   Required. The description of the pipeline to run.
+ * @param {number[]} request.labels
+ *   User-defined labels to associate with the returned operation. These
+ *   labels are not propagated to any Google Cloud Platform resources used by
+ *   the operation, and can be modified at any time.
+ *
+ *   To associate labels with resources created while executing the operation,
+ *   see the appropriate resource message (for example, `VirtualMachine`).
+ * @param {string} request.pubSubTopic
+ *   The name of an existing Pub/Sub topic.  The server will publish
+ *   messages to this topic whenever the status of the operation changes.
+ *   The Life Sciences Service Agent account must have publisher permissions to
+ *   the specified topic or notifications will not be sent.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
+ * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
+ */
   runPipeline(
-    request?: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   runPipeline(
-    request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runPipeline(
-    request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runPipeline(
-    request?: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-            protos.google.cloud.lifesciences.v2beta.IMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-            protos.google.cloud.lifesciences.v2beta.IMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('runPipeline response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('runPipeline request %j', request);
-    return this.innerApiCalls
-      .runPipeline(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-            protos.google.cloud.lifesciences.v2beta.IMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('runPipeline response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.runPipeline(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse, protos.google.cloud.lifesciences.v2beta.IMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('runPipeline response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `runPipeline()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
-   * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
-   */
-  async checkRunPipelineProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.lifesciences.v2beta.RunPipelineResponse,
-      protos.google.cloud.lifesciences.v2beta.Metadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `runPipeline()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
+ * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
+ */
+  async checkRunPipelineProgress(name: string): Promise<LROperation<protos.google.cloud.lifesciences.v2beta.RunPipelineResponse, protos.google.cloud.lifesciences.v2beta.Metadata>>{
     this._log.info('runPipeline long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.runPipeline,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.lifesciences.v2beta.RunPipelineResponse,
-      protos.google.cloud.lifesciences.v2beta.Metadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.runPipeline, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.lifesciences.v2beta.RunPipelineResponse, protos.google.cloud.lifesciences.v2beta.Metadata>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -663,7 +529,7 @@ export class WorkflowsServiceV2BetaClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -701,7 +567,7 @@ export class WorkflowsServiceV2BetaClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -746,20 +612,20 @@ export class WorkflowsServiceV2BetaClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -796,13 +662,13 @@ export class WorkflowsServiceV2BetaClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -836,7 +702,7 @@ export class WorkflowsServiceV2BetaClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -851,20 +717,20 @@ export class WorkflowsServiceV2BetaClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -908,22 +774,23 @@ export class WorkflowsServiceV2BetaClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -937,9 +804,7 @@ export class WorkflowsServiceV2BetaClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

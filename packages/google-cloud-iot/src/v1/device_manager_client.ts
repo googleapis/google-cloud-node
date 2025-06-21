@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class DeviceManagerClient {
    *     const client = new DeviceManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DeviceManagerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudiot.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class DeviceManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class DeviceManagerClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -217,25 +192,16 @@ export class DeviceManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDeviceRegistries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'deviceRegistries'
-      ),
-      listDevices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'devices'
-      ),
+      listDeviceRegistries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deviceRegistries'),
+      listDevices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'devices')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.iot.v1.DeviceManager',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.iot.v1.DeviceManager', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -266,55 +232,32 @@ export class DeviceManagerClient {
     // Put together the "service stub" for
     // google.cloud.iot.v1.DeviceManager.
     this.deviceManagerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.iot.v1.DeviceManager'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.iot.v1.DeviceManager') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.iot.v1.DeviceManager,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const deviceManagerStubMethods = [
-      'createDeviceRegistry',
-      'getDeviceRegistry',
-      'updateDeviceRegistry',
-      'deleteDeviceRegistry',
-      'listDeviceRegistries',
-      'createDevice',
-      'getDevice',
-      'updateDevice',
-      'deleteDevice',
-      'listDevices',
-      'modifyCloudToDeviceConfig',
-      'listDeviceConfigVersions',
-      'listDeviceStates',
-      'setIamPolicy',
-      'getIamPolicy',
-      'testIamPermissions',
-      'sendCommandToDevice',
-      'bindDeviceToGateway',
-      'unbindDeviceFromGateway',
-    ];
+    const deviceManagerStubMethods =
+        ['createDeviceRegistry', 'getDeviceRegistry', 'updateDeviceRegistry', 'deleteDeviceRegistry', 'listDeviceRegistries', 'createDevice', 'getDevice', 'updateDevice', 'deleteDevice', 'listDevices', 'modifyCloudToDeviceConfig', 'listDeviceConfigVersions', 'listDeviceStates', 'setIamPolicy', 'getIamPolicy', 'testIamPermissions', 'sendCommandToDevice', 'bindDeviceToGateway', 'unbindDeviceFromGateway'];
     for (const methodName of deviceManagerStubMethods) {
       const callPromise = this.deviceManagerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -334,14 +277,8 @@ export class DeviceManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudiot.googleapis.com';
   }
@@ -352,14 +289,8 @@ export class DeviceManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudiot.googleapis.com';
   }
@@ -392,7 +323,7 @@ export class DeviceManagerClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloudiot',
+      'https://www.googleapis.com/auth/cloudiot'
     ];
   }
 
@@ -402,9 +333,8 @@ export class DeviceManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -415,2168 +345,1820 @@ export class DeviceManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a device registry that contains devices.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and cloud region where this device registry must be created.
-   *   For example, `projects/example-project/locations/us-central1`.
-   * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
-   *   Required. The device registry. The field `name` must be empty. The server will
-   *   generate that field from the device registry `id` provided and the
-   *   `parent` field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.create_device_registry.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_CreateDeviceRegistry_async
-   */
+/**
+ * Creates a device registry that contains devices.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and cloud region where this device registry must be created.
+ *   For example, `projects/example-project/locations/us-central1`.
+ * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
+ *   Required. The device registry. The field `name` must be empty. The server will
+ *   generate that field from the device registry `id` provided and the
+ *   `parent` field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.create_device_registry.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_CreateDeviceRegistry_async
+ */
   createDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|undefined, {}|undefined
+      ]>;
   createDeviceRegistry(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeviceRegistry(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IDeviceRegistry,
-          | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeviceRegistry(
+      request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeviceRegistry(
+      request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDeviceRegistry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IDeviceRegistry,
-          | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDeviceRegistry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDeviceRegistry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IDeviceRegistry,
-          protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDeviceRegistry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDeviceRegistry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDeviceRegistry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a device registry configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.get_device_registry.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_GetDeviceRegistry_async
-   */
+/**
+ * Gets a device registry configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device registry. For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.get_device_registry.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_GetDeviceRegistry_async
+ */
   getDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|undefined, {}|undefined
+      ]>;
   getDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IDeviceRegistry,
-          | protos.google.cloud.iot.v1.IGetDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeviceRegistry(
+      request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeviceRegistry(
+      request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDeviceRegistry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IDeviceRegistry,
-          | protos.google.cloud.iot.v1.IGetDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDeviceRegistry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDeviceRegistry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IDeviceRegistry,
-          protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getDeviceRegistry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDeviceRegistry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IGetDeviceRegistryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeviceRegistry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a device registry configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
-   *   Required. The new values for the device registry. The `id` field must be empty, and
-   *   the `name` field must indicate the path of the resource. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Only updates the `device_registry` fields indicated by this mask.
-   *   The field mask must not be empty, and it must not contain fields that
-   *   are immutable or only set by the server.
-   *   Mutable top-level fields: `event_notification_config`, `http_config`,
-   *   `mqtt_config`, and `state_notification_config`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.update_device_registry.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_async
-   */
+/**
+ * Updates a device registry configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
+ *   Required. The new values for the device registry. The `id` field must be empty, and
+ *   the `name` field must indicate the path of the resource. For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Only updates the `device_registry` fields indicated by this mask.
+ *   The field mask must not be empty, and it must not contain fields that
+ *   are immutable or only set by the server.
+ *   Mutable top-level fields: `event_notification_config`, `http_config`,
+ *   `mqtt_config`, and `state_notification_config`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.update_device_registry.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_async
+ */
   updateDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|undefined, {}|undefined
+      ]>;
   updateDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IDeviceRegistry,
-          | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry,
-      protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeviceRegistry(
+      request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeviceRegistry(
+      request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'device_registry.name': request.deviceRegistry!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'device_registry.name': request.deviceRegistry!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDeviceRegistry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IDeviceRegistry,
-          | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDeviceRegistry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDeviceRegistry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IDeviceRegistry,
-          protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDeviceRegistry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDeviceRegistry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IDeviceRegistry,
+        protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDeviceRegistry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a device registry configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.delete_device_registry.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_async
-   */
+/**
+ * Deletes a device registry configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device registry. For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.delete_device_registry.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_async
+ */
   deleteDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|undefined, {}|undefined
+      ]>;
   deleteDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDeviceRegistry(
-    request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDeviceRegistry(
+      request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDeviceRegistry(
+      request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDeviceRegistry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDeviceRegistry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDeviceRegistry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDeviceRegistry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDeviceRegistry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDeviceRegistry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a device in a device registry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the device registry where this device should be created.
-   *   For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {google.cloud.iot.v1.Device} request.device
-   *   Required. The device registration details. The field `name` must be empty. The server
-   *   generates `name` from the device registry `id` and the
-   *   `parent` field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.Device|Device}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.create_device.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_CreateDevice_async
-   */
+/**
+ * Creates a device in a device registry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the device registry where this device should be created.
+ *   For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ * @param {google.cloud.iot.v1.Device} request.device
+ *   Required. The device registration details. The field `name` must be empty. The server
+ *   generates `name` from the device registry `id` and the
+ *   `parent` field.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.Device|Device}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.create_device.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_CreateDevice_async
+ */
   createDevice(
-    request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.ICreateDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.ICreateDeviceRequest|undefined, {}|undefined
+      ]>;
   createDevice(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDevice(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDevice(
-    request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.ICreateDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.ICreateDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDevice(
+      request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.ICreateDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDevice(
+      request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.ICreateDeviceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.ICreateDeviceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.ICreateDeviceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDevice request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.ICreateDeviceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDevice(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.ICreateDeviceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDevice response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDevice(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.ICreateDeviceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDevice response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details about a device.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   The fields of the `Device` resource to be returned in the response. If the
-   *   field mask is unset or empty, all fields are returned. Fields have to be
-   *   provided in snake_case format, for example: `last_heartbeat_time`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.Device|Device}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.get_device.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_GetDevice_async
-   */
+/**
+ * Gets details about a device.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ * @param {google.protobuf.FieldMask} request.fieldMask
+ *   The fields of the `Device` resource to be returned in the response. If the
+ *   field mask is unset or empty, all fields are returned. Fields have to be
+ *   provided in snake_case format, for example: `last_heartbeat_time`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.Device|Device}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.get_device.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_GetDevice_async
+ */
   getDevice(
-    request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IGetDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IGetDeviceRequest|undefined, {}|undefined
+      ]>;
   getDevice(
-    request: protos.google.cloud.iot.v1.IGetDeviceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDevice(
-    request: protos.google.cloud.iot.v1.IGetDeviceRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDevice(
-    request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IGetDeviceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IGetDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IGetDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDevice(
+      request: protos.google.cloud.iot.v1.IGetDeviceRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IGetDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDevice(
+      request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IGetDeviceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IGetDeviceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IGetDeviceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDevice request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IGetDeviceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDevice(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.IGetDeviceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getDevice response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDevice(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IGetDeviceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDevice response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a device.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.iot.v1.Device} request.device
-   *   Required. The new values for the device. The `id` and `num_id` fields must
-   *   be empty, and the field `name` must specify the name path. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Only updates the `device` fields indicated by this mask.
-   *   The field mask must not be empty, and it must not contain fields that
-   *   are immutable or only set by the server.
-   *   Mutable top-level fields: `credentials`, `blocked`, and `metadata`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.Device|Device}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.update_device.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_UpdateDevice_async
-   */
+/**
+ * Updates a device.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.iot.v1.Device} request.device
+ *   Required. The new values for the device. The `id` and `num_id` fields must
+ *   be empty, and the field `name` must specify the name path. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Only updates the `device` fields indicated by this mask.
+ *   The field mask must not be empty, and it must not contain fields that
+ *   are immutable or only set by the server.
+ *   Mutable top-level fields: `credentials`, `blocked`, and `metadata`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.Device|Device}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.update_device.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_UpdateDevice_async
+ */
   updateDevice(
-    request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IUpdateDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IUpdateDeviceRequest|undefined, {}|undefined
+      ]>;
   updateDevice(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDevice(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDevice(
-    request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice,
-      protos.google.cloud.iot.v1.IUpdateDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IUpdateDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDevice(
+      request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IUpdateDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDevice(
+      request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IUpdateDeviceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IUpdateDeviceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IUpdateDeviceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'device.name': request.device!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'device.name': request.device!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDevice request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IUpdateDeviceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDevice(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IDevice,
-          protos.google.cloud.iot.v1.IUpdateDeviceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDevice response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDevice(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IDevice,
+        protos.google.cloud.iot.v1.IUpdateDeviceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDevice response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a device.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.delete_device.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_DeleteDevice_async
-   */
+/**
+ * Deletes a device.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.delete_device.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_DeleteDevice_async
+ */
   deleteDevice(
-    request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iot.v1.IDeleteDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRequest|undefined, {}|undefined
+      ]>;
   deleteDevice(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDevice(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDevice(
-    request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.iot.v1.IDeleteDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IDeleteDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDevice(
+      request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDevice(
+      request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDevice request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDevice(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.iot.v1.IDeleteDeviceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDevice response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDevice(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.iot.v1.IDeleteDeviceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDevice response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Modifies the configuration for the device, which is eventually sent from
-   * the Cloud IoT Core servers. Returns the modified configuration version and
-   * its metadata.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {number} request.versionToUpdate
-   *   The version number to update. If this value is zero, it will not check the
-   *   version number of the server and will always update the current version;
-   *   otherwise, this update will fail if the version number found on the server
-   *   does not match this version number. This is used to support multiple
-   *   simultaneous updates without losing data.
-   * @param {Buffer} request.binaryData
-   *   Required. The configuration data for the device.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceConfig|DeviceConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.modify_cloud_to_device_config.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_ModifyCloudToDeviceConfig_async
-   */
+/**
+ * Modifies the configuration for the device, which is eventually sent from
+ * the Cloud IoT Core servers. Returns the modified configuration version and
+ * its metadata.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ * @param {number} request.versionToUpdate
+ *   The version number to update. If this value is zero, it will not check the
+ *   version number of the server and will always update the current version;
+ *   otherwise, this update will fail if the version number found on the server
+ *   does not match this version number. This is used to support multiple
+ *   simultaneous updates without losing data.
+ * @param {Buffer} request.binaryData
+ *   Required. The configuration data for the device.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.DeviceConfig|DeviceConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.modify_cloud_to_device_config.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_ModifyCloudToDeviceConfig_async
+ */
   modifyCloudToDeviceConfig(
-    request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceConfig,
-      protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceConfig,
+        protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|undefined, {}|undefined
+      ]>;
   modifyCloudToDeviceConfig(
-    request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceConfig,
-      | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  modifyCloudToDeviceConfig(
-    request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IDeviceConfig,
-      | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  modifyCloudToDeviceConfig(
-    request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IDeviceConfig,
-          | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IDeviceConfig,
-      | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceConfig,
-      protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  modifyCloudToDeviceConfig(
+      request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IDeviceConfig,
+          protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  modifyCloudToDeviceConfig(
+      request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IDeviceConfig,
+          protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IDeviceConfig,
+          protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceConfig,
+        protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('modifyCloudToDeviceConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IDeviceConfig,
-          | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IDeviceConfig,
+        protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('modifyCloudToDeviceConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .modifyCloudToDeviceConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IDeviceConfig,
-          (
-            | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('modifyCloudToDeviceConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.modifyCloudToDeviceConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IDeviceConfig,
+        protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('modifyCloudToDeviceConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists the last few versions of the device configuration in descending
-   * order (i.e.: newest first).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {number} request.numVersions
-   *   The number of versions to list. Versions are listed in decreasing order of
-   *   the version number. The maximum number of versions retained is 10. If this
-   *   value is zero, it will return all the versions available.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse|ListDeviceConfigVersionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.list_device_config_versions.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceConfigVersions_async
-   */
+/**
+ * Lists the last few versions of the device configuration in descending
+ * order (i.e.: newest first).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ * @param {number} request.numVersions
+ *   The number of versions to list. Versions are listed in decreasing order of
+ *   the version number. The maximum number of versions retained is 10. If this
+ *   value is zero, it will return all the versions available.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse|ListDeviceConfigVersionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.list_device_config_versions.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceConfigVersions_async
+ */
   listDeviceConfigVersions(
-    request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-      protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|undefined, {}|undefined
+      ]>;
   listDeviceConfigVersions(
-    request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-      | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listDeviceConfigVersions(
-    request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-      | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listDeviceConfigVersions(
-    request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-          | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-      | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-      protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listDeviceConfigVersions(
+      request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  listDeviceConfigVersions(
+      request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeviceConfigVersions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-          | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listDeviceConfigVersions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listDeviceConfigVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
-          (
-            | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('listDeviceConfigVersions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listDeviceConfigVersions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+        protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listDeviceConfigVersions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lists the last few versions of the device state in descending order (i.e.:
-   * newest first).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {number} request.numStates
-   *   The number of states to list. States are listed in descending order of
-   *   update time. The maximum number of states retained is 10. If this
-   *   value is zero, it will return all the states available.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.ListDeviceStatesResponse|ListDeviceStatesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.list_device_states.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceStates_async
-   */
+/**
+ * Lists the last few versions of the device state in descending order (i.e.:
+ * newest first).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ * @param {number} request.numStates
+ *   The number of states to list. States are listed in descending order of
+ *   update time. The maximum number of states retained is 10. If this
+ *   value is zero, it will return all the states available.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.ListDeviceStatesResponse|ListDeviceStatesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.list_device_states.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceStates_async
+ */
   listDeviceStates(
-    request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-      protos.google.cloud.iot.v1.IListDeviceStatesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+        protos.google.cloud.iot.v1.IListDeviceStatesRequest|undefined, {}|undefined
+      ]>;
   listDeviceStates(
-    request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-      protos.google.cloud.iot.v1.IListDeviceStatesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listDeviceStates(
-    request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-      protos.google.cloud.iot.v1.IListDeviceStatesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listDeviceStates(
-    request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-          | protos.google.cloud.iot.v1.IListDeviceStatesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-      protos.google.cloud.iot.v1.IListDeviceStatesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-      protos.google.cloud.iot.v1.IListDeviceStatesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IListDeviceStatesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listDeviceStates(
+      request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+          protos.google.cloud.iot.v1.IListDeviceStatesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listDeviceStates(
+      request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+          protos.google.cloud.iot.v1.IListDeviceStatesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+          protos.google.cloud.iot.v1.IListDeviceStatesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+        protos.google.cloud.iot.v1.IListDeviceStatesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeviceStates request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-          | protos.google.cloud.iot.v1.IListDeviceStatesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+        protos.google.cloud.iot.v1.IListDeviceStatesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listDeviceStates response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listDeviceStates(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IListDeviceStatesResponse,
-          protos.google.cloud.iot.v1.IListDeviceStatesRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('listDeviceStates response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listDeviceStates(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+        protos.google.cloud.iot.v1.IListDeviceStatesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listDeviceStates response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the access control policy on the specified resource. Replaces any
-   * existing policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.set_iam_policy.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on the specified resource. Replaces any
+ * existing policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.set_iam_policy.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the access control policy for a resource.
-   * Returns an empty policy if the resource exists and does not have a policy
-   * set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.get_iam_policy.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy for a resource.
+ * Returns an empty policy if the resource exists and does not have a policy
+ * set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.get_iam_policy.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   * If the resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.test_iam_permissions.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_TestIamPermissions_async
-   */
+/**
+ * Returns permissions that a caller has on the specified resource.
+ * If the resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.test_iam_permissions.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sends a command to the specified device. In order for a device to be able
-   * to receive commands, it must:
-   * 1) be connected to Cloud IoT Core using the MQTT protocol, and
-   * 2) be subscribed to the group of MQTT topics specified by
-   *    /devices/{device-id}/commands/#. This subscription will receive commands
-   *    at the top-level topic /devices/{device-id}/commands as well as commands
-   *    for subfolders, like /devices/{device-id}/commands/subfolder.
-   *    Note that subscribing to specific subfolders is not supported.
-   * If the command could not be delivered to the device, this method will
-   * return an error; in particular, if the device is not subscribed, this
-   * method will return FAILED_PRECONDITION. Otherwise, this method will
-   * return OK. If the subscription is QoS 1, at least once delivery will be
-   * guaranteed; for QoS 0, no acknowledgment will be expected from the device.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {Buffer} request.binaryData
-   *   Required. The command data to send to the device.
-   * @param {string} request.subfolder
-   *   Optional subfolder for the command. If empty, the command will be delivered
-   *   to the /devices/{device-id}/commands topic, otherwise it will be delivered
-   *   to the /devices/{device-id}/commands/{subfolder} topic. Multi-level
-   *   subfolders are allowed. This field must not have more than 256 characters,
-   *   and must not contain any MQTT wildcards ("+" or "#") or null characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.SendCommandToDeviceResponse|SendCommandToDeviceResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.send_command_to_device.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_SendCommandToDevice_async
-   */
+/**
+ * Sends a command to the specified device. In order for a device to be able
+ * to receive commands, it must:
+ * 1) be connected to Cloud IoT Core using the MQTT protocol, and
+ * 2) be subscribed to the group of MQTT topics specified by
+ *    /devices/{device-id}/commands/#. This subscription will receive commands
+ *    at the top-level topic /devices/{device-id}/commands as well as commands
+ *    for subfolders, like /devices/{device-id}/commands/subfolder.
+ *    Note that subscribing to specific subfolders is not supported.
+ * If the command could not be delivered to the device, this method will
+ * return an error; in particular, if the device is not subscribed, this
+ * method will return FAILED_PRECONDITION. Otherwise, this method will
+ * return OK. If the subscription is QoS 1, at least once delivery will be
+ * guaranteed; for QoS 0, no acknowledgment will be expected from the device.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the device. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ * @param {Buffer} request.binaryData
+ *   Required. The command data to send to the device.
+ * @param {string} request.subfolder
+ *   Optional subfolder for the command. If empty, the command will be delivered
+ *   to the /devices/{device-id}/commands topic, otherwise it will be delivered
+ *   to the /devices/{device-id}/commands/{subfolder} topic. Multi-level
+ *   subfolders are allowed. This field must not have more than 256 characters,
+ *   and must not contain any MQTT wildcards ("+" or "#") or null characters.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.SendCommandToDeviceResponse|SendCommandToDeviceResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.send_command_to_device.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_SendCommandToDevice_async
+ */
   sendCommandToDevice(
-    request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+        protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|undefined, {}|undefined
+      ]>;
   sendCommandToDevice(
-    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendCommandToDevice(
-    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendCommandToDevice(
-    request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-          | protos.google.cloud.iot.v1.ISendCommandToDeviceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendCommandToDevice(
+      request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+          protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendCommandToDevice(
+      request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+          protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+          protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+        protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('sendCommandToDevice request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-          | protos.google.cloud.iot.v1.ISendCommandToDeviceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+        protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('sendCommandToDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .sendCommandToDevice(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-          protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('sendCommandToDevice response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.sendCommandToDevice(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+        protos.google.cloud.iot.v1.ISendCommandToDeviceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('sendCommandToDevice response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Associates the device with the gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {string} request.gatewayId
-   *   Required. The value of `gateway_id` can be either the device numeric ID or the
-   *   user-defined device identifier.
-   * @param {string} request.deviceId
-   *   Required. The device to associate with the specified gateway. The value of
-   *   `device_id` can be either the device numeric ID or the user-defined device
-   *   identifier.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.BindDeviceToGatewayResponse|BindDeviceToGatewayResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.bind_device_to_gateway.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_BindDeviceToGateway_async
-   */
+/**
+ * Associates the device with the gateway.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the registry. For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ * @param {string} request.gatewayId
+ *   Required. The value of `gateway_id` can be either the device numeric ID or the
+ *   user-defined device identifier.
+ * @param {string} request.deviceId
+ *   Required. The device to associate with the specified gateway. The value of
+ *   `device_id` can be either the device numeric ID or the user-defined device
+ *   identifier.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.BindDeviceToGatewayResponse|BindDeviceToGatewayResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.bind_device_to_gateway.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_BindDeviceToGateway_async
+ */
   bindDeviceToGateway(
-    request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|undefined, {}|undefined
+      ]>;
   bindDeviceToGateway(
-    request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  bindDeviceToGateway(
-    request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  bindDeviceToGateway(
-    request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-          | protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-      protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|null|undefined,
+          {}|null|undefined>): void;
+  bindDeviceToGateway(
+      request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|null|undefined,
+          {}|null|undefined>): void;
+  bindDeviceToGateway(
+      request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('bindDeviceToGateway request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-          | protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('bindDeviceToGateway response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .bindDeviceToGateway(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
-          protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('bindDeviceToGateway response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.bindDeviceToGateway(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+        protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('bindDeviceToGateway response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the association between the device and the gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {string} request.gatewayId
-   *   Required. The value of `gateway_id` can be either the device numeric ID or the
-   *   user-defined device identifier.
-   * @param {string} request.deviceId
-   *   Required. The device to disassociate from the specified gateway. The value of
-   *   `device_id` can be either the device numeric ID or the user-defined device
-   *   identifier.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse|UnbindDeviceFromGatewayResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.unbind_device_from_gateway.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_UnbindDeviceFromGateway_async
-   */
+/**
+ * Deletes the association between the device and the gateway.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the registry. For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ * @param {string} request.gatewayId
+ *   Required. The value of `gateway_id` can be either the device numeric ID or the
+ *   user-defined device identifier.
+ * @param {string} request.deviceId
+ *   Required. The device to disassociate from the specified gateway. The value of
+ *   `device_id` can be either the device numeric ID or the user-defined device
+ *   identifier.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse|UnbindDeviceFromGatewayResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.unbind_device_from_gateway.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_UnbindDeviceFromGateway_async
+ */
   unbindDeviceFromGateway(
-    request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-      protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|undefined, {}|undefined
+      ]>;
   unbindDeviceFromGateway(
-    request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-      | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  unbindDeviceFromGateway(
-    request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-      | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  unbindDeviceFromGateway(
-    request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-          | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-      | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-      protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|null|undefined,
+          {}|null|undefined>): void;
+  unbindDeviceFromGateway(
+      request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
+      callback: Callback<
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|null|undefined,
+          {}|null|undefined>): void;
+  unbindDeviceFromGateway(
+      request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('unbindDeviceFromGateway request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-          | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('unbindDeviceFromGateway response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .unbindDeviceFromGateway(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
-          (
-            | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('unbindDeviceFromGateway response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.unbindDeviceFromGateway(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+        protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('unbindDeviceFromGateway response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists device registries.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and cloud region path. For example,
-   *   `projects/example-project/locations/us-central1`.
-   * @param {number} request.pageSize
-   *   The maximum number of registries to return in the response. If this value
-   *   is zero, the service will select a default size. A call may return fewer
-   *   objects than requested. A non-empty `next_page_token` in the response
-   *   indicates that more data is available.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
-   *   that this is a continuation of a prior `ListDeviceRegistries` call and
-   *   the system should return the next page of data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDeviceRegistriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists device registries.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and cloud region path. For example,
+ *   `projects/example-project/locations/us-central1`.
+ * @param {number} request.pageSize
+ *   The maximum number of registries to return in the response. If this value
+ *   is zero, the service will select a default size. A call may return fewer
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
+ *   that this is a continuation of a prior `ListDeviceRegistries` call and
+ *   the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeviceRegistriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeviceRegistries(
-    request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry[],
-      protos.google.cloud.iot.v1.IListDeviceRegistriesRequest | null,
-      protos.google.cloud.iot.v1.IListDeviceRegistriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry[],
+        protos.google.cloud.iot.v1.IListDeviceRegistriesRequest|null,
+        protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
+      ]>;
   listDeviceRegistries(
-    request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-      | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.iot.v1.IDeviceRegistry
-    >
-  ): void;
-  listDeviceRegistries(
-    request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-      | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.iot.v1.IDeviceRegistry
-    >
-  ): void;
-  listDeviceRegistries(
-    request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-          | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.iot.v1.IDeviceRegistry
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-      | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.iot.v1.IDeviceRegistry
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDeviceRegistry[],
-      protos.google.cloud.iot.v1.IListDeviceRegistriesRequest | null,
-      protos.google.cloud.iot.v1.IListDeviceRegistriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IListDeviceRegistriesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDeviceRegistry>): void;
+  listDeviceRegistries(
+      request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+          protos.google.cloud.iot.v1.IListDeviceRegistriesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDeviceRegistry>): void;
+  listDeviceRegistries(
+      request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+          protos.google.cloud.iot.v1.IListDeviceRegistriesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDeviceRegistry>,
+      callback?: PaginationCallback<
+          protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+          protos.google.cloud.iot.v1.IListDeviceRegistriesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDeviceRegistry>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDeviceRegistry[],
+        protos.google.cloud.iot.v1.IListDeviceRegistriesRequest|null,
+        protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-          | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.iot.v1.IDeviceRegistry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+      protos.google.cloud.iot.v1.IListDeviceRegistriesResponse|null|undefined,
+      protos.google.cloud.iot.v1.IDeviceRegistry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeviceRegistries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2585,62 +2167,59 @@ export class DeviceManagerClient {
     this._log.info('listDeviceRegistries request %j', request);
     return this.innerApiCalls
       .listDeviceRegistries(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.iot.v1.IDeviceRegistry[],
-          protos.google.cloud.iot.v1.IListDeviceRegistriesRequest | null,
-          protos.google.cloud.iot.v1.IListDeviceRegistriesResponse,
-        ]) => {
-          this._log.info('listDeviceRegistries values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.iot.v1.IDeviceRegistry[],
+        protos.google.cloud.iot.v1.IListDeviceRegistriesRequest|null,
+        protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
+      ]) => {
+        this._log.info('listDeviceRegistries values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDeviceRegistries`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and cloud region path. For example,
-   *   `projects/example-project/locations/us-central1`.
-   * @param {number} request.pageSize
-   *   The maximum number of registries to return in the response. If this value
-   *   is zero, the service will select a default size. A call may return fewer
-   *   objects than requested. A non-empty `next_page_token` in the response
-   *   indicates that more data is available.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
-   *   that this is a continuation of a prior `ListDeviceRegistries` call and
-   *   the system should return the next page of data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDeviceRegistriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDeviceRegistries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and cloud region path. For example,
+ *   `projects/example-project/locations/us-central1`.
+ * @param {number} request.pageSize
+ *   The maximum number of registries to return in the response. If this value
+ *   is zero, the service will select a default size. A call may return fewer
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
+ *   that this is a continuation of a prior `ListDeviceRegistries` call and
+ *   the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeviceRegistriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeviceRegistriesStream(
-    request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeviceRegistries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeviceRegistries stream %j', request);
     return this.descriptors.page.listDeviceRegistries.createStream(
       this.innerApiCalls.listDeviceRegistries as GaxCall,
@@ -2649,53 +2228,52 @@ export class DeviceManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listDeviceRegistries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and cloud region path. For example,
-   *   `projects/example-project/locations/us-central1`.
-   * @param {number} request.pageSize
-   *   The maximum number of registries to return in the response. If this value
-   *   is zero, the service will select a default size. A call may return fewer
-   *   objects than requested. A non-empty `next_page_token` in the response
-   *   indicates that more data is available.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
-   *   that this is a continuation of a prior `ListDeviceRegistries` call and
-   *   the system should return the next page of data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.list_device_registries.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceRegistries_async
-   */
+/**
+ * Equivalent to `listDeviceRegistries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and cloud region path. For example,
+ *   `projects/example-project/locations/us-central1`.
+ * @param {number} request.pageSize
+ *   The maximum number of registries to return in the response. If this value
+ *   is zero, the service will select a default size. A call may return fewer
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
+ *   that this is a continuation of a prior `ListDeviceRegistries` call and
+ *   the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.iot.v1.DeviceRegistry|DeviceRegistry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.list_device_registries.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceRegistries_async
+ */
   listDeviceRegistriesAsync(
-    request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.iot.v1.IDeviceRegistry> {
+      request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.iot.v1.IDeviceRegistry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeviceRegistries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeviceRegistries iterate %j', request);
     return this.descriptors.page.listDeviceRegistries.asyncIterate(
       this.innerApiCalls['listDeviceRegistries'] as GaxCall,
@@ -2703,121 +2281,106 @@ export class DeviceManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.iot.v1.IDeviceRegistry>;
   }
-  /**
-   * List devices in a device registry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The device registry path. Required. For example,
-   *   `projects/my-project/locations/us-central1/registries/my-registry`.
-   * @param {number[]} request.deviceNumIds
-   *   A list of device numeric IDs. If empty, this field is ignored. Maximum
-   *   IDs: 10,000.
-   * @param {string[]} request.deviceIds
-   *   A list of device string IDs. For example, `['device0', 'device12']`.
-   *   If empty, this field is ignored. Maximum IDs: 10,000
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   The fields of the `Device` resource to be returned in the response. The
-   *   fields `id` and `num_id` are always returned, along with any
-   *   other fields specified in snake_case format, for example:
-   *   `last_heartbeat_time`.
-   * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
-   *   Options related to gateways.
-   * @param {number} request.pageSize
-   *   The maximum number of devices to return in the response. If this value
-   *   is zero, the service will select a default size. A call may return fewer
-   *   objects than requested. A non-empty `next_page_token` in the response
-   *   indicates that more data is available.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDevicesResponse`; indicates
-   *   that this is a continuation of a prior `ListDevices` call and
-   *   the system should return the next page of data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.iot.v1.Device|Device}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDevicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List devices in a device registry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The device registry path. Required. For example,
+ *   `projects/my-project/locations/us-central1/registries/my-registry`.
+ * @param {number[]} request.deviceNumIds
+ *   A list of device numeric IDs. If empty, this field is ignored. Maximum
+ *   IDs: 10,000.
+ * @param {string[]} request.deviceIds
+ *   A list of device string IDs. For example, `['device0', 'device12']`.
+ *   If empty, this field is ignored. Maximum IDs: 10,000
+ * @param {google.protobuf.FieldMask} request.fieldMask
+ *   The fields of the `Device` resource to be returned in the response. The
+ *   fields `id` and `num_id` are always returned, along with any
+ *   other fields specified in snake_case format, for example:
+ *   `last_heartbeat_time`.
+ * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
+ *   Options related to gateways.
+ * @param {number} request.pageSize
+ *   The maximum number of devices to return in the response. If this value
+ *   is zero, the service will select a default size. A call may return fewer
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDevicesResponse`; indicates
+ *   that this is a continuation of a prior `ListDevices` call and
+ *   the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.iot.v1.Device|Device}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDevicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDevices(
-    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice[],
-      protos.google.cloud.iot.v1.IListDevicesRequest | null,
-      protos.google.cloud.iot.v1.IListDevicesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.iot.v1.IListDevicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice[],
+        protos.google.cloud.iot.v1.IListDevicesRequest|null,
+        protos.google.cloud.iot.v1.IListDevicesResponse
+      ]>;
   listDevices(
-    request: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDevicesRequest,
-      protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
-      protos.google.cloud.iot.v1.IDevice
-    >
-  ): void;
-  listDevices(
-    request: protos.google.cloud.iot.v1.IListDevicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDevicesRequest,
-      protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
-      protos.google.cloud.iot.v1.IDevice
-    >
-  ): void;
-  listDevices(
-    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.iot.v1.IListDevicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.iot.v1.IListDevicesRequest,
-          protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
-          protos.google.cloud.iot.v1.IDevice
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDevicesRequest,
-      protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
-      protos.google.cloud.iot.v1.IDevice
-    >
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice[],
-      protos.google.cloud.iot.v1.IListDevicesRequest | null,
-      protos.google.cloud.iot.v1.IListDevicesResponse,
-    ]
-  > | void {
+          protos.google.cloud.iot.v1.IListDevicesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDevice>): void;
+  listDevices(
+      request: protos.google.cloud.iot.v1.IListDevicesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.iot.v1.IListDevicesRequest,
+          protos.google.cloud.iot.v1.IListDevicesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDevice>): void;
+  listDevices(
+      request?: protos.google.cloud.iot.v1.IListDevicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.iot.v1.IListDevicesRequest,
+          protos.google.cloud.iot.v1.IListDevicesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDevice>,
+      callback?: PaginationCallback<
+          protos.google.cloud.iot.v1.IListDevicesRequest,
+          protos.google.cloud.iot.v1.IListDevicesResponse|null|undefined,
+          protos.google.cloud.iot.v1.IDevice>):
+      Promise<[
+        protos.google.cloud.iot.v1.IDevice[],
+        protos.google.cloud.iot.v1.IListDevicesRequest|null,
+        protos.google.cloud.iot.v1.IListDevicesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.iot.v1.IListDevicesRequest,
-          protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
-          protos.google.cloud.iot.v1.IDevice
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.iot.v1.IListDevicesRequest,
+      protos.google.cloud.iot.v1.IListDevicesResponse|null|undefined,
+      protos.google.cloud.iot.v1.IDevice>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDevices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2826,75 +2389,72 @@ export class DeviceManagerClient {
     this._log.info('listDevices request %j', request);
     return this.innerApiCalls
       .listDevices(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.iot.v1.IDevice[],
-          protos.google.cloud.iot.v1.IListDevicesRequest | null,
-          protos.google.cloud.iot.v1.IListDevicesResponse,
-        ]) => {
-          this._log.info('listDevices values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.iot.v1.IDevice[],
+        protos.google.cloud.iot.v1.IListDevicesRequest|null,
+        protos.google.cloud.iot.v1.IListDevicesResponse
+      ]) => {
+        this._log.info('listDevices values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDevices`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The device registry path. Required. For example,
-   *   `projects/my-project/locations/us-central1/registries/my-registry`.
-   * @param {number[]} request.deviceNumIds
-   *   A list of device numeric IDs. If empty, this field is ignored. Maximum
-   *   IDs: 10,000.
-   * @param {string[]} request.deviceIds
-   *   A list of device string IDs. For example, `['device0', 'device12']`.
-   *   If empty, this field is ignored. Maximum IDs: 10,000
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   The fields of the `Device` resource to be returned in the response. The
-   *   fields `id` and `num_id` are always returned, along with any
-   *   other fields specified in snake_case format, for example:
-   *   `last_heartbeat_time`.
-   * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
-   *   Options related to gateways.
-   * @param {number} request.pageSize
-   *   The maximum number of devices to return in the response. If this value
-   *   is zero, the service will select a default size. A call may return fewer
-   *   objects than requested. A non-empty `next_page_token` in the response
-   *   indicates that more data is available.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDevicesResponse`; indicates
-   *   that this is a continuation of a prior `ListDevices` call and
-   *   the system should return the next page of data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.iot.v1.Device|Device} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDevicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDevices`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The device registry path. Required. For example,
+ *   `projects/my-project/locations/us-central1/registries/my-registry`.
+ * @param {number[]} request.deviceNumIds
+ *   A list of device numeric IDs. If empty, this field is ignored. Maximum
+ *   IDs: 10,000.
+ * @param {string[]} request.deviceIds
+ *   A list of device string IDs. For example, `['device0', 'device12']`.
+ *   If empty, this field is ignored. Maximum IDs: 10,000
+ * @param {google.protobuf.FieldMask} request.fieldMask
+ *   The fields of the `Device` resource to be returned in the response. The
+ *   fields `id` and `num_id` are always returned, along with any
+ *   other fields specified in snake_case format, for example:
+ *   `last_heartbeat_time`.
+ * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
+ *   Options related to gateways.
+ * @param {number} request.pageSize
+ *   The maximum number of devices to return in the response. If this value
+ *   is zero, the service will select a default size. A call may return fewer
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDevicesResponse`; indicates
+ *   that this is a continuation of a prior `ListDevices` call and
+ *   the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.iot.v1.Device|Device} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDevicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDevicesStream(
-    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.iot.v1.IListDevicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDevices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDevices stream %j', request);
     return this.descriptors.page.listDevices.createStream(
       this.innerApiCalls.listDevices as GaxCall,
@@ -2903,66 +2463,65 @@ export class DeviceManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listDevices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The device registry path. Required. For example,
-   *   `projects/my-project/locations/us-central1/registries/my-registry`.
-   * @param {number[]} request.deviceNumIds
-   *   A list of device numeric IDs. If empty, this field is ignored. Maximum
-   *   IDs: 10,000.
-   * @param {string[]} request.deviceIds
-   *   A list of device string IDs. For example, `['device0', 'device12']`.
-   *   If empty, this field is ignored. Maximum IDs: 10,000
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   The fields of the `Device` resource to be returned in the response. The
-   *   fields `id` and `num_id` are always returned, along with any
-   *   other fields specified in snake_case format, for example:
-   *   `last_heartbeat_time`.
-   * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
-   *   Options related to gateways.
-   * @param {number} request.pageSize
-   *   The maximum number of devices to return in the response. If this value
-   *   is zero, the service will select a default size. A call may return fewer
-   *   objects than requested. A non-empty `next_page_token` in the response
-   *   indicates that more data is available.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDevicesResponse`; indicates
-   *   that this is a continuation of a prior `ListDevices` call and
-   *   the system should return the next page of data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.iot.v1.Device|Device}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/device_manager.list_devices.js</caption>
-   * region_tag:cloudiot_v1_generated_DeviceManager_ListDevices_async
-   */
+/**
+ * Equivalent to `listDevices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The device registry path. Required. For example,
+ *   `projects/my-project/locations/us-central1/registries/my-registry`.
+ * @param {number[]} request.deviceNumIds
+ *   A list of device numeric IDs. If empty, this field is ignored. Maximum
+ *   IDs: 10,000.
+ * @param {string[]} request.deviceIds
+ *   A list of device string IDs. For example, `['device0', 'device12']`.
+ *   If empty, this field is ignored. Maximum IDs: 10,000
+ * @param {google.protobuf.FieldMask} request.fieldMask
+ *   The fields of the `Device` resource to be returned in the response. The
+ *   fields `id` and `num_id` are always returned, along with any
+ *   other fields specified in snake_case format, for example:
+ *   `last_heartbeat_time`.
+ * @param {google.cloud.iot.v1.GatewayListOptions} request.gatewayListOptions
+ *   Options related to gateways.
+ * @param {number} request.pageSize
+ *   The maximum number of devices to return in the response. If this value
+ *   is zero, the service will select a default size. A call may return fewer
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDevicesResponse`; indicates
+ *   that this is a continuation of a prior `ListDevices` call and
+ *   the system should return the next page of data.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.iot.v1.Device|Device}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/device_manager.list_devices.js</caption>
+ * region_tag:cloudiot_v1_generated_DeviceManager_ListDevices_async
+ */
   listDevicesAsync(
-    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.iot.v1.IDevice> {
+      request?: protos.google.cloud.iot.v1.IListDevicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.iot.v1.IDevice>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDevices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDevices iterate %j', request);
     return this.descriptors.page.listDevices.asyncIterate(
       this.innerApiCalls['listDevices'] as GaxCall,
@@ -2983,12 +2542,7 @@ export class DeviceManagerClient {
    * @param {string} device
    * @returns {string} Resource name string.
    */
-  devicePath(
-    project: string,
-    location: string,
-    registry: string,
-    device: string
-  ) {
+  devicePath(project:string,location:string,registry:string,device:string) {
     return this.pathTemplates.devicePathTemplate.render({
       project: project,
       location: location,
@@ -3048,7 +2602,7 @@ export class DeviceManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3085,7 +2639,7 @@ export class DeviceManagerClient {
    * @param {string} registry
    * @returns {string} Resource name string.
    */
-  registryPath(project: string, location: string, registry: string) {
+  registryPath(project:string,location:string,registry:string) {
     return this.pathTemplates.registryPathTemplate.render({
       project: project,
       location: location,

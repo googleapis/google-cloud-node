@@ -1348,7 +1348,7 @@ export namespace google {
                     format?: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|null);
 
                     /** KeyOperationAttestation content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** KeyOperationAttestation certChains */
                     certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -1367,7 +1367,7 @@ export namespace google {
                     public format: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat);
 
                     /** KeyOperationAttestation content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** KeyOperationAttestation certChains. */
                     public certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -1826,7 +1826,7 @@ export namespace google {
                 interface IChecksummedData {
 
                     /** ChecksummedData data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** ChecksummedData crc32cChecksum */
                     crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -1842,7 +1842,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IChecksummedData);
 
                     /** ChecksummedData data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** ChecksummedData crc32cChecksum. */
                     public crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -3221,6 +3221,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -3261,6 +3264,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -7479,6 +7485,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -7727,7 +7736,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7758,7 +7767,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -9773,7 +9782,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -9786,7 +9795,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

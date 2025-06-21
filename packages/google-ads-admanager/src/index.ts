@@ -45,37 +45,7 @@ type TaxonomyCategoryServiceClient = v1.TaxonomyCategoryServiceClient;
 const UserServiceClient = v1.UserServiceClient;
 type UserServiceClient = v1.UserServiceClient;
 
-export {
-  v1,
-  AdUnitServiceClient,
-  CompanyServiceClient,
-  CustomFieldServiceClient,
-  CustomTargetingKeyServiceClient,
-  CustomTargetingValueServiceClient,
-  EntitySignalsMappingServiceClient,
-  NetworkServiceClient,
-  OrderServiceClient,
-  PlacementServiceClient,
-  ReportServiceClient,
-  RoleServiceClient,
-  TaxonomyCategoryServiceClient,
-  UserServiceClient,
-};
-export default {
-  v1,
-  AdUnitServiceClient,
-  CompanyServiceClient,
-  CustomFieldServiceClient,
-  CustomTargetingKeyServiceClient,
-  CustomTargetingValueServiceClient,
-  EntitySignalsMappingServiceClient,
-  NetworkServiceClient,
-  OrderServiceClient,
-  PlacementServiceClient,
-  ReportServiceClient,
-  RoleServiceClient,
-  TaxonomyCategoryServiceClient,
-  UserServiceClient,
-};
+export {v1, AdUnitServiceClient, CompanyServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, EntitySignalsMappingServiceClient, NetworkServiceClient, OrderServiceClient, PlacementServiceClient, ReportServiceClient, RoleServiceClient, TaxonomyCategoryServiceClient, UserServiceClient};
+export default {v1, AdUnitServiceClient, CompanyServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, EntitySignalsMappingServiceClient, NetworkServiceClient, OrderServiceClient, PlacementServiceClient, ReportServiceClient, RoleServiceClient, TaxonomyCategoryServiceClient, UserServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

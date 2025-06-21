@@ -16,15 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ApiHubClient,
-  ApiHubDependenciesClient,
-  ApiHubPluginClient,
-  HostProjectRegistrationServiceClient,
-  LintingServiceClient,
-  ProvisioningClient,
-  RuntimeProjectAttachmentServiceClient,
-} from '@google-cloud/apihub';
+import {ApiHubClient, ApiHubDependenciesClient, ApiHubPluginClient, HostProjectRegistrationServiceClient, LintingServiceClient, ProvisioningClient, RuntimeProjectAttachmentServiceClient} from '@google-cloud/apihub';
 
 // check that the client class type name can be used
 function doStuffWithApiHubClient(client: ApiHubClient) {
@@ -36,9 +28,7 @@ function doStuffWithApiHubDependenciesClient(client: ApiHubDependenciesClient) {
 function doStuffWithApiHubPluginClient(client: ApiHubPluginClient) {
   client.close();
 }
-function doStuffWithHostProjectRegistrationServiceClient(
-  client: HostProjectRegistrationServiceClient
-) {
+function doStuffWithHostProjectRegistrationServiceClient(client: HostProjectRegistrationServiceClient) {
   client.close();
 }
 function doStuffWithLintingServiceClient(client: LintingServiceClient) {
@@ -47,9 +37,7 @@ function doStuffWithLintingServiceClient(client: LintingServiceClient) {
 function doStuffWithProvisioningClient(client: ProvisioningClient) {
   client.close();
 }
-function doStuffWithRuntimeProjectAttachmentServiceClient(
-  client: RuntimeProjectAttachmentServiceClient
-) {
+function doStuffWithRuntimeProjectAttachmentServiceClient(client: RuntimeProjectAttachmentServiceClient) {
   client.close();
 }
 
@@ -64,11 +52,8 @@ function main() {
   const apiHubPluginClient = new ApiHubPluginClient();
   doStuffWithApiHubPluginClient(apiHubPluginClient);
   // check that the client instance can be created
-  const hostProjectRegistrationServiceClient =
-    new HostProjectRegistrationServiceClient();
-  doStuffWithHostProjectRegistrationServiceClient(
-    hostProjectRegistrationServiceClient
-  );
+  const hostProjectRegistrationServiceClient = new HostProjectRegistrationServiceClient();
+  doStuffWithHostProjectRegistrationServiceClient(hostProjectRegistrationServiceClient);
   // check that the client instance can be created
   const lintingServiceClient = new LintingServiceClient();
   doStuffWithLintingServiceClient(lintingServiceClient);
@@ -76,11 +61,8 @@ function main() {
   const provisioningClient = new ProvisioningClient();
   doStuffWithProvisioningClient(provisioningClient);
   // check that the client instance can be created
-  const runtimeProjectAttachmentServiceClient =
-    new RuntimeProjectAttachmentServiceClient();
-  doStuffWithRuntimeProjectAttachmentServiceClient(
-    runtimeProjectAttachmentServiceClient
-  );
+  const runtimeProjectAttachmentServiceClient = new RuntimeProjectAttachmentServiceClient();
+  doStuffWithRuntimeProjectAttachmentServiceClient(runtimeProjectAttachmentServiceClient);
 }
 
 main();
