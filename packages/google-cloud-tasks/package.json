@@ -93,7 +93,7 @@
     "gapic-tools": "^1.0.1",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
