@@ -25,5811 +25,4328 @@ import * as dataprocmetastoreModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  IamProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta.DataprocMetastoreClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          dataprocmetastoreModule.v1beta.DataprocMetastoreClient.servicePath;
-        assert.strictEqual(servicePath, 'metastore.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          dataprocmetastoreModule.v1beta.DataprocMetastoreClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {universeDomain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'metastore.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {universe_domain: 'example.com'}
-      );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'metastore.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'metastore.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = dataprocmetastoreModule.v1beta.DataprocMetastoreClient.servicePath;
+                assert.strictEqual(servicePath, 'metastore.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'metastore.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = dataprocmetastoreModule.v1beta.DataprocMetastoreClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'metastore.example.com');
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'metastore.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = dataprocmetastoreModule.v1beta.DataprocMetastoreClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'metastore.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with no option', () => {
-      const client =
-        new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          fallback: true,
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'metastore.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      );
-      assert(client);
-    });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.dataprocMetastoreStub, undefined);
-      await client.initialize();
-      assert(client.dataprocMetastoreStub);
-    });
+        it('has port', () => {
+            const port = dataprocmetastoreModule.v1beta.DataprocMetastoreClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.dataprocMetastoreStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataprocMetastoreStub, undefined);
+            await client.initialize();
+            assert(client.dataprocMetastoreStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.dataprocMetastoreStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataprocMetastoreStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.dataprocMetastoreStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('getService', () => {
+        it('invokes getService without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.Service()
+            );
+            client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
+            const [response] = await client.getService(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.Service()
+            );
+            client.innerApiCalls.getService = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getService(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.metastore.v1beta.IService|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getService = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getService with closed client', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getService(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('getMetadataImport', () => {
+        it('invokes getMetadataImport without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetMetadataImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.MetadataImport()
+            );
+            client.innerApiCalls.getMetadataImport = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMetadataImport(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('getService', () => {
-    it('invokes getService without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.Service()
-      );
-      client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
-      const [response] = await client.getService(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.Service()
-      );
-      client.innerApiCalls.getService =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getService(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.metastore.v1beta.IService | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getService = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getService with closed client', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getService(request), expectedError);
-    });
-  });
-
-  describe('getMetadataImport', () => {
-    it('invokes getMetadataImport without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetMetadataImportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.MetadataImport()
-      );
-      client.innerApiCalls.getMetadataImport = stubSimpleCall(expectedResponse);
-      const [response] = await client.getMetadataImport(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMetadataImport without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetMetadataImportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.MetadataImport()
-      );
-      client.innerApiCalls.getMetadataImport =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getMetadataImport(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.metastore.v1beta.IMetadataImport | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMetadataImport with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetMetadataImportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getMetadataImport = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getMetadataImport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getMetadataImport with closed client', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetMetadataImportRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getMetadataImport(request), expectedError);
-    });
-  });
-
-  describe('getBackup', () => {
-    it('invokes getBackup without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.Backup()
-      );
-      client.innerApiCalls.getBackup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.Backup()
-      );
-      client.innerApiCalls.getBackup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.metastore.v1beta.IBackup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup with closed client', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBackup(request), expectedError);
-    });
-  });
-
-  describe('removeIamPolicy', () => {
-    it('invokes removeIamPolicy without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RemoveIamPolicyResponse()
-      );
-      client.innerApiCalls.removeIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.removeIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeIamPolicy without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RemoveIamPolicyResponse()
-      );
-      client.innerApiCalls.removeIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeIamPolicy with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.removeIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeIamPolicy with closed client', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.removeIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('createService', () => {
-    it('invokes createService without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createService =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createService(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createService without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createService =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createService(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IService,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createService with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createService = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createService with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateServiceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createService = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createService(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateServiceProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateServiceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateServiceProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateServiceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateService', () => {
-    it('invokes updateService without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateService =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateService(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateService without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateService =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateService(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IService,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IService,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateService with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateService = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateService with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
-      );
-      request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateServiceRequest',
-        ['service', 'name']
-      );
-      request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateService = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateService(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateServiceProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateServiceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateServiceProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateServiceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteService', () => {
-    it('invokes deleteService without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteService =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteService(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteService without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteService =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteService(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteService with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteService = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteService with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteServiceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteService = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteService(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteServiceProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteServiceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteServiceProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteServiceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createMetadataImport', () => {
-    it('invokes createMetadataImport without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateMetadataImportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createMetadataImport =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createMetadataImport(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMetadataImport without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateMetadataImportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createMetadataImport =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createMetadataImport(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IMetadataImport,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMetadataImport with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateMetadataImportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createMetadataImport = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createMetadataImport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createMetadataImport with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateMetadataImportRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createMetadataImport = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createMetadataImport(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateMetadataImportProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateMetadataImportProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateMetadataImportProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateMetadataImportProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateMetadataImport', () => {
-    it('invokes updateMetadataImport without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
-      );
-      request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateMetadataImportRequest',
-        ['metadataImport', 'name']
-      );
-      request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateMetadataImport =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateMetadataImport(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMetadataImport without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
-      );
-      request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateMetadataImportRequest',
-        ['metadataImport', 'name']
-      );
-      request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateMetadataImport =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateMetadataImport(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IMetadataImport,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataImport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMetadataImport with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
-      );
-      request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateMetadataImportRequest',
-        ['metadataImport', 'name']
-      );
-      request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateMetadataImport = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateMetadataImport(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateMetadataImport with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
-      );
-      request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.UpdateMetadataImportRequest',
-        ['metadataImport', 'name']
-      );
-      request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateMetadataImport = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateMetadataImport(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateMetadataImport as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateMetadataImportProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateMetadataImportProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateMetadataImportProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateMetadataImportProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('exportMetadata', () => {
-    it('invokes exportMetadata without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ExportMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportMetadata =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportMetadata(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportMetadata without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ExportMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.exportMetadata =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.exportMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IMetadataExport,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IMetadataExport,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportMetadata with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ExportMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportMetadata = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.exportMetadata(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes exportMetadata with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ExportMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.exportMetadata = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.exportMetadata(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.exportMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkExportMetadataProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportMetadataProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkExportMetadataProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkExportMetadataProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('restoreService', () => {
-    it('invokes restoreService without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RestoreServiceRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restoreService =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.restoreService(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restoreService without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RestoreServiceRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restoreService =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.restoreService(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IRestore,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IRestore,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restoreService with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RestoreServiceRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restoreService = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.restoreService(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restoreService with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.RestoreServiceRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restoreService = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.restoreService(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restoreService as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRestoreServiceProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRestoreServiceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRestoreServiceProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRestoreServiceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createBackup', () => {
-    it('invokes createBackup without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createBackup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackup without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IBackup,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IBackup,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackup with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackup with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createBackup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateBackupProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateBackupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateBackupProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateBackupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteBackup', () => {
-    it('invokes deleteBackup without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteBackup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteBackup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteBackupProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteBackupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteBackupProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteBackupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('queryMetadata', () => {
-    it('invokes queryMetadata without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.QueryMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.queryMetadata =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.queryMetadata(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes queryMetadata without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.QueryMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.queryMetadata =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.queryMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IQueryMetadataResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes queryMetadata with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.QueryMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.queryMetadata = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.queryMetadata(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes queryMetadata with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.QueryMetadataRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.queryMetadata = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.queryMetadata(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.queryMetadata as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkQueryMetadataProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkQueryMetadataProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkQueryMetadataProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkQueryMetadataProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('moveTableToDatabase', () => {
-    it('invokes moveTableToDatabase without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.moveTableToDatabase =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.moveTableToDatabase(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveTableToDatabase without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.moveTableToDatabase =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.moveTableToDatabase(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveTableToDatabase with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.moveTableToDatabase(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes moveTableToDatabase with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.moveTableToDatabase(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.moveTableToDatabase as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkMoveTableToDatabaseProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkMoveTableToDatabaseProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkMoveTableToDatabaseProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkMoveTableToDatabaseProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('alterMetadataResourceLocation', () => {
-    it('invokes alterMetadataResourceLocation without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.alterMetadataResourceLocation =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.alterMetadataResourceLocation(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes alterMetadataResourceLocation without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.alterMetadataResourceLocation =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.alterMetadataResourceLocation(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-              protos.google.cloud.metastore.v1beta.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse,
-        protos.google.cloud.metastore.v1beta.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes alterMetadataResourceLocation with call error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.alterMetadataResourceLocation(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes alterMetadataResourceLocation with LRO error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest',
-        ['service']
-      );
-      request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.alterMetadataResourceLocation(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.alterMetadataResourceLocation as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkAlterMetadataResourceLocationProgress without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkAlterMetadataResourceLocationProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkAlterMetadataResourceLocationProgress with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkAlterMetadataResourceLocationProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listServices', () => {
-    it('invokes listServices without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-      ];
-      client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
-      const [response] = await client.listServices(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServices without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-      ];
-      client.innerApiCalls.listServices =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listServices(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.metastore.v1beta.IService[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServices with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listServices = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listServices(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServices as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServicesStream without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-      ];
-      client.descriptors.page.listServices.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listServicesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.Service[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.metastore.v1beta.Service) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes getMetadataImport without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetMetadataImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.MetadataImport()
+            );
+            client.innerApiCalls.getMetadataImport = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMetadataImport(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.metastore.v1beta.IMetadataImport|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes getMetadataImport with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetMetadataImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMetadataImport = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMetadataImport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServices, request)
-      );
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listServicesStream with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listServicesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.Service[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.metastore.v1beta.Service) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes getMetadataImport with closed client', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetMetadataImportRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMetadataImport(request), expectedError);
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+    });
+
+    describe('getBackup', () => {
+        it('invokes getBackup without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.Backup()
+            );
+            client.innerApiCalls.getBackup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServices, request)
-      );
-      assert(
-        (client.descriptors.page.listServices.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes getBackup without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.Backup()
+            );
+            client.innerApiCalls.getBackup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.metastore.v1beta.IBackup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup with closed client', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackup(request), expectedError);
+        });
     });
 
-    it('uses async iteration with listServices without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Service()
-        ),
-      ];
-      client.descriptors.page.listServices.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.metastore.v1beta.IService[] = [];
-      const iterable = client.listServicesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServices.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('removeIamPolicy', () => {
+        it('invokes removeIamPolicy without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RemoveIamPolicyResponse()
+            );
+            client.innerApiCalls.removeIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.removeIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeIamPolicy without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RemoveIamPolicyResponse()
+            );
+            client.innerApiCalls.removeIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.metastore.v1beta.IRemoveIamPolicyResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeIamPolicy with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.removeIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeIamPolicy with closed client', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.removeIamPolicy(request), expectedError);
+        });
     });
 
-    it('uses async iteration with listServices with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListServicesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListServicesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listServicesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.metastore.v1beta.IService[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServices.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+    describe('createService', () => {
+        it('invokes createService without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createService = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createService(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-  describe('listMetadataImports', () => {
-    it('invokes listMetadataImports without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListMetadataImportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-      ];
-      client.innerApiCalls.listMetadataImports =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listMetadataImports(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMetadataImports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMetadataImports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('invokes createService without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createService = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createService(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createService with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createService = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createService with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateServiceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createService = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createService(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateServiceProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateServiceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateServiceProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateServiceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
     });
 
-    it('invokes listMetadataImports without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListMetadataImportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-      ];
-      client.innerApiCalls.listMetadataImports =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listMetadataImports(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.metastore.v1beta.IMetadataImport[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('updateService', () => {
+        it('invokes updateService without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateService = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateService(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateService without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateService = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateService(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IService, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateService with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateService = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateService with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
+            );
+            request.service ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateServiceRequest', ['service', 'name']);
+            request.service.name = defaultValue1;
+            const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateService = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateService(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateServiceProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateServiceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateServiceProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateServiceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteService', () => {
+        it('invokes deleteService without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteService = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteService(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteService without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteService = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteService(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteService with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteService = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteService with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteServiceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteService = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteService(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteServiceProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteServiceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteServiceProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteServiceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createMetadataImport', () => {
+        it('invokes createMetadataImport without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateMetadataImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMetadataImport = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createMetadataImport(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetadataImport without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateMetadataImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMetadataImport = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createMetadataImport(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetadataImport with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateMetadataImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMetadataImport = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createMetadataImport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMetadataImport with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateMetadataImportRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMetadataImport = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createMetadataImport(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateMetadataImportProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateMetadataImportProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateMetadataImportProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateMetadataImportProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateMetadataImport', () => {
+        it('invokes updateMetadataImport without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
+            );
+            request.metadataImport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateMetadataImportRequest', ['metadataImport', 'name']);
+            request.metadataImport.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMetadataImport = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateMetadataImport(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMetadataImport without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
+            );
+            request.metadataImport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateMetadataImportRequest', ['metadataImport', 'name']);
+            request.metadataImport.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMetadataImport = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateMetadataImport(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IMetadataImport, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMetadataImport with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
+            );
+            request.metadataImport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateMetadataImportRequest', ['metadataImport', 'name']);
+            request.metadataImport.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMetadataImport = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateMetadataImport(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMetadataImport with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
+            );
+            request.metadataImport ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.UpdateMetadataImportRequest', ['metadataImport', 'name']);
+            request.metadataImport.name = defaultValue1;
+            const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMetadataImport = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateMetadataImport(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMetadataImport as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateMetadataImportProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateMetadataImportProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateMetadataImportProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateMetadataImportProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('exportMetadata', () => {
+        it('invokes exportMetadata without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ExportMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportMetadata = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportMetadata(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportMetadata without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ExportMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportMetadata = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportMetadata(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IMetadataExport, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportMetadata with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ExportMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportMetadata = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportMetadata(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportMetadata with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ExportMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportMetadata = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportMetadata(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportMetadataProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportMetadataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportMetadataProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportMetadataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('restoreService', () => {
+        it('invokes restoreService without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RestoreServiceRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restoreService = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.restoreService(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreService without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RestoreServiceRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restoreService = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.restoreService(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IRestore, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreService with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RestoreServiceRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restoreService = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.restoreService(request), expectedError);
+            const actualRequest = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restoreService with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.RestoreServiceRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restoreService = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.restoreService(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restoreService as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRestoreServiceProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRestoreServiceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRestoreServiceProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRestoreServiceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createBackup', () => {
+        it('invokes createBackup without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createBackup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackup without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBackup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IBackup, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackup with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackup with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createBackup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateBackupProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateBackupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateBackupProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateBackupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteBackup', () => {
+        it('invokes deleteBackup without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteBackup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBackup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteBackup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteBackupProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteBackupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteBackupProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteBackupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('queryMetadata', () => {
+        it('invokes queryMetadata without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.QueryMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.queryMetadata = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.queryMetadata(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryMetadata without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.QueryMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.queryMetadata = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.queryMetadata(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IQueryMetadataResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryMetadata with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.QueryMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.queryMetadata = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.queryMetadata(request), expectedError);
+            const actualRequest = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryMetadata with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.QueryMetadataRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.queryMetadata = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.queryMetadata(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryMetadata as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkQueryMetadataProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkQueryMetadataProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkQueryMetadataProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkQueryMetadataProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('moveTableToDatabase', () => {
+        it('invokes moveTableToDatabase without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.moveTableToDatabase(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveTableToDatabase without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.moveTableToDatabase = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.moveTableToDatabase(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IMoveTableToDatabaseResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveTableToDatabase with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.moveTableToDatabase(request), expectedError);
+            const actualRequest = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes moveTableToDatabase with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.moveTableToDatabase(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.moveTableToDatabase as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkMoveTableToDatabaseProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkMoveTableToDatabaseProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkMoveTableToDatabaseProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkMoveTableToDatabaseProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('alterMetadataResourceLocation', () => {
+        it('invokes alterMetadataResourceLocation without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.alterMetadataResourceLocation(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes alterMetadataResourceLocation without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.alterMetadataResourceLocation(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.metastore.v1beta.IAlterMetadataResourceLocationResponse, protos.google.cloud.metastore.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes alterMetadataResourceLocation with call error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.alterMetadataResourceLocation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes alterMetadataResourceLocation with LRO error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest', ['service']);
+            request.service = defaultValue1;
+            const expectedHeaderRequestParams = `service=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.alterMetadataResourceLocation(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.alterMetadataResourceLocation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAlterMetadataResourceLocationProgress without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkAlterMetadataResourceLocationProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkAlterMetadataResourceLocationProgress with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkAlterMetadataResourceLocationProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listServices', () => {
+        it('invokes listServices without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+            ];
+            client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
+            const [response] = await client.listServices(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServices without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+            ];
+            client.innerApiCalls.listServices = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listServices(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.metastore.v1beta.IService[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServices with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listServices = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listServices(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listServicesStream without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+            ];
+            client.descriptors.page.listServices.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listServicesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.metastore.v1beta.Service[] = [];
+                stream.on('data', (response: protos.google.cloud.metastore.v1beta.Service) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listServices.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert(
+                (client.descriptors.page.listServices.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listServicesStream with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServices.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listServicesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.metastore.v1beta.Service[] = [];
+                stream.on('data', (response: protos.google.cloud.metastore.v1beta.Service) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listServices.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert(
+                (client.descriptors.page.listServices.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listServices without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Service()),
+            ];
+            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.metastore.v1beta.IService[] = [];
+            const iterable = client.listServicesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listMetadataImports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMetadataImports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMetadataImports with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListMetadataImportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listMetadataImports = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listMetadataImports(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listMetadataImports as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listMetadataImports as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listMetadataImportsStream without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListMetadataImportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-      ];
-      client.descriptors.page.listMetadataImports.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listMetadataImportsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.metastore.v1beta.MetadataImport) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listServices with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListServicesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListServicesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listServicesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.metastore.v1beta.IService[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listMetadataImports.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMetadataImports, request)
-      );
-      assert(
-        (client.descriptors.page.listMetadataImports.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listMetadataImportsStream with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListMetadataImportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataImports.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listMetadataImportsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.metastore.v1beta.MetadataImport) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listMetadataImports', () => {
+        it('invokes listMetadataImports without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListMetadataImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+            ];
+            client.innerApiCalls.listMetadataImports = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMetadataImports(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMetadataImports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetadataImports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listMetadataImports without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListMetadataImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+            ];
+            client.innerApiCalls.listMetadataImports = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMetadataImports(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.metastore.v1beta.IMetadataImport[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMetadataImports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetadataImports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listMetadataImports.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listMetadataImports, request)
-      );
-      assert(
-        (client.descriptors.page.listMetadataImports.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listMetadataImports without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListMetadataImportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.MetadataImport()
-        ),
-      ];
-      client.descriptors.page.listMetadataImports.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] =
-        [];
-      const iterable = client.listMetadataImportsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMetadataImports.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listMetadataImports with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListMetadataImportsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataImports.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listMetadataImportsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listMetadataImports.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listBackups', () => {
-    it('invokes listBackups without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-      ];
-      client.innerApiCalls.listBackups = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBackups(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackups without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-      ];
-      client.innerApiCalls.listBackups =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBackups(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.metastore.v1beta.IBackup[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackups with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBackups = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBackups(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupsStream without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-      ];
-      client.descriptors.page.listBackups.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.Backup[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.metastore.v1beta.Backup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes listMetadataImports with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListMetadataImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMetadataImports = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMetadataImports(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMetadataImports as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMetadataImports as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listMetadataImportsStream without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListMetadataImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+            ];
+            client.descriptors.page.listMetadataImports.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMetadataImportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] = [];
+                stream.on('data', (response: protos.google.cloud.metastore.v1beta.MetadataImport) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMetadataImports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMetadataImports, request));
+            assert(
+                (client.descriptors.page.listMetadataImports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listBackupsStream with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.metastore.v1beta.Backup[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.metastore.v1beta.Backup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes listMetadataImportsStream with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListMetadataImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMetadataImports.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMetadataImportsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.metastore.v1beta.MetadataImport[] = [];
+                stream.on('data', (response: protos.google.cloud.metastore.v1beta.MetadataImport) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMetadataImports.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMetadataImports, request));
+            assert(
+                (client.descriptors.page.listMetadataImports.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listMetadataImports without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListMetadataImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.MetadataImport()),
+            ];
+            client.descriptors.page.listMetadataImports.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] = [];
+            const iterable = client.listMetadataImportsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('uses async iteration with listMetadataImports with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListMetadataImportsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMetadataImports.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMetadataImportsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.metastore.v1beta.IMetadataImport[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listBackups without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.metastore.v1beta.Backup()
-        ),
-      ];
-      client.descriptors.page.listBackups.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.metastore.v1beta.IBackup[] = [];
-      const iterable = client.listBackupsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+    describe('listBackups', () => {
+        it('invokes listBackups without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+            ];
+            client.innerApiCalls.listBackups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listBackups with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.metastore.v1beta.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listBackupsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.metastore.v1beta.IBackup[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.getIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .getIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes listBackups without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+            ];
+            client.innerApiCalls.listBackups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.metastore.v1beta.IBackup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackups with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackupsStream without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+            ];
+            client.descriptors.page.listBackups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.metastore.v1beta.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.metastore.v1beta.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackups, request));
+            assert(
+                (client.descriptors.page.listBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBackupsStream with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.metastore.v1beta.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.metastore.v1beta.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackups, request));
+            assert(
+                (client.descriptors.page.listBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBackups without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+              generateSampleMessage(new protos.google.cloud.metastore.v1beta.Backup()),
+            ];
+            client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.metastore.v1beta.IBackup[] = [];
+            const iterable = client.listBackupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listBackups with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.metastore.v1beta.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.metastore.v1beta.IBackup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getIamPolicy with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.getIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.getIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getIamPolicy with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.setIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.setIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes setIamPolicy with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .setIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+            const response = await client.testIamPermissions(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0));
+        });
+        it('invokes testIamPermissions with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes setIamPolicy with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.setIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-      const response = await client.testIamPermissions(
-        request,
-        expectedOptions
-      );
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .testIamPermissions(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
-    });
-    it('invokes testIamPermissions with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.testIamPermissions(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('backup', async () => {
-      const fakePath = '/rendered/path/backup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        backup: 'backupValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.backupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('backupPath', () => {
-        const result = client.backupPath(
-          'projectValue',
-          'locationValue',
-          'serviceValue',
-          'backupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.backupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBackupName', () => {
-        const result = client.matchProjectFromBackupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBackupName', () => {
-        const result = client.matchLocationFromBackupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromBackupName', () => {
-        const result = client.matchServiceFromBackupName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupFromBackupName', () => {
-        const result = client.matchBackupFromBackupName(fakePath);
-        assert.strictEqual(result, 'backupValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('federation', async () => {
-      const fakePath = '/rendered/path/federation';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        federation: 'federationValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.federationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.federationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('federationPath', () => {
-        const result = client.federationPath(
-          'projectValue',
-          'locationValue',
-          'federationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.federationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('backup', async () => {
+            const fakePath = "/rendered/path/backup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service: "serviceValue",
+                backup: "backupValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromFederationName', () => {
-        const result = client.matchProjectFromFederationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.federationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('backupPath', () => {
+                const result = client.backupPath("projectValue", "locationValue", "serviceValue", "backupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromFederationName', () => {
-        const result = client.matchLocationFromFederationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.federationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromBackupName', () => {
+                const result = client.matchProjectFromBackupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchFederationFromFederationName', () => {
-        const result = client.matchFederationFromFederationName(fakePath);
-        assert.strictEqual(result, 'federationValue');
-        assert(
-          (client.pathTemplates.federationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromBackupName', () => {
+                const result = client.matchLocationFromBackupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromBackupName', () => {
+                const result = client.matchServiceFromBackupName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupFromBackupName', () => {
+                const result = client.matchBackupFromBackupName(fakePath);
+                assert.strictEqual(result, "backupValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('federation', async () => {
+            const fakePath = "/rendered/path/federation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                federation: "federationValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.federationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.federationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('federationPath', () => {
+                const result = client.federationPath("projectValue", "locationValue", "federationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.federationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromFederationName', () => {
+                const result = client.matchProjectFromFederationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.federationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFederationName', () => {
+                const result = client.matchLocationFromFederationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.federationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFederationFromFederationName', () => {
+                const result = client.matchFederationFromFederationName(fakePath);
+                assert.strictEqual(result, "federationValue");
+                assert((client.pathTemplates.federationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lake', async () => {
+            const fakePath = "/rendered/path/lake";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lake: "lakeValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lakePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lakePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lakePath', () => {
+                const result = client.lakePath("projectValue", "locationValue", "lakeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lakePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLakeName', () => {
+                const result = client.matchProjectFromLakeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lakePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLakeName', () => {
+                const result = client.matchLocationFromLakeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lakePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLakeFromLakeName', () => {
+                const result = client.matchLakeFromLakeName(fakePath);
+                assert.strictEqual(result, "lakeValue");
+                assert((client.pathTemplates.lakePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('metadataImport', async () => {
+            const fakePath = "/rendered/path/metadataImport";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service: "serviceValue",
+                metadata_import: "metadataImportValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.metadataImportPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.metadataImportPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('metadataImportPath', () => {
+                const result = client.metadataImportPath("projectValue", "locationValue", "serviceValue", "metadataImportValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.metadataImportPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMetadataImportName', () => {
+                const result = client.matchProjectFromMetadataImportName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMetadataImportName', () => {
+                const result = client.matchLocationFromMetadataImportName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromMetadataImportName', () => {
+                const result = client.matchServiceFromMetadataImportName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMetadataImportFromMetadataImportName', () => {
+                const result = client.matchMetadataImportFromMetadataImportName(fakePath);
+                assert.strictEqual(result, "metadataImportValue");
+                assert((client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('network', async () => {
+            const fakePath = "/rendered/path/network";
+            const expectedParameters = {
+                project: "projectValue",
+                network: "networkValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.networkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.networkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('networkPath', () => {
+                const result = client.networkPath("projectValue", "networkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.networkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNetworkName', () => {
+                const result = client.matchProjectFromNetworkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNetworkFromNetworkName', () => {
+                const result = client.matchNetworkFromNetworkName(fakePath);
+                assert.strictEqual(result, "networkValue");
+                assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('service', async () => {
+            const fakePath = "/rendered/path/service";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                service: "serviceValue",
+            };
+            const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.servicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.servicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('servicePath', () => {
+                const result = client.servicePath("projectValue", "locationValue", "serviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.servicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromServiceName', () => {
+                const result = client.matchProjectFromServiceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromServiceName', () => {
+                const result = client.matchLocationFromServiceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchServiceFromServiceName', () => {
+                const result = client.matchServiceFromServiceName(fakePath);
+                assert.strictEqual(result, "serviceValue");
+                assert((client.pathTemplates.servicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('lake', async () => {
-      const fakePath = '/rendered/path/lake';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        lake: 'lakeValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.lakePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.lakePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('lakePath', () => {
-        const result = client.lakePath(
-          'projectValue',
-          'locationValue',
-          'lakeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.lakePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLakeName', () => {
-        const result = client.matchProjectFromLakeName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.lakePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLakeName', () => {
-        const result = client.matchLocationFromLakeName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.lakePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLakeFromLakeName', () => {
-        const result = client.matchLakeFromLakeName(fakePath);
-        assert.strictEqual(result, 'lakeValue');
-        assert(
-          (client.pathTemplates.lakePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('metadataImport', async () => {
-      const fakePath = '/rendered/path/metadataImport';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-        metadata_import: 'metadataImportValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.metadataImportPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.metadataImportPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('metadataImportPath', () => {
-        const result = client.metadataImportPath(
-          'projectValue',
-          'locationValue',
-          'serviceValue',
-          'metadataImportValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.metadataImportPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromMetadataImportName', () => {
-        const result = client.matchProjectFromMetadataImportName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromMetadataImportName', () => {
-        const result = client.matchLocationFromMetadataImportName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromMetadataImportName', () => {
-        const result = client.matchServiceFromMetadataImportName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchMetadataImportFromMetadataImportName', () => {
-        const result =
-          client.matchMetadataImportFromMetadataImportName(fakePath);
-        assert.strictEqual(result, 'metadataImportValue');
-        assert(
-          (client.pathTemplates.metadataImportPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('network', async () => {
-      const fakePath = '/rendered/path/network';
-      const expectedParameters = {
-        project: 'projectValue',
-        network: 'networkValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.networkPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.networkPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('networkPath', () => {
-        const result = client.networkPath('projectValue', 'networkValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.networkPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNetworkName', () => {
-        const result = client.matchProjectFromNetworkName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNetworkFromNetworkName', () => {
-        const result = client.matchNetworkFromNetworkName(fakePath);
-        assert.strictEqual(result, 'networkValue');
-        assert(
-          (client.pathTemplates.networkPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('service', async () => {
-      const fakePath = '/rendered/path/service';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        service: 'serviceValue',
-      };
-      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      await client.initialize();
-      client.pathTemplates.servicePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.servicePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('servicePath', () => {
-        const result = client.servicePath(
-          'projectValue',
-          'locationValue',
-          'serviceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.servicePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromServiceName', () => {
-        const result = client.matchProjectFromServiceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromServiceName', () => {
-        const result = client.matchLocationFromServiceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchServiceFromServiceName', () => {
-        const result = client.matchServiceFromServiceName(fakePath);
-        assert.strictEqual(result, 'serviceValue');
-        assert(
-          (client.pathTemplates.servicePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

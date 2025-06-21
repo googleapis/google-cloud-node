@@ -16,13 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const metastore = require('@google-cloud/dataproc-metastore');
 
 function main() {
   const dataprocMetastoreClient = new metastore.DataprocMetastoreClient();
-  const dataprocMetastoreFederationClient =
-    new metastore.DataprocMetastoreFederationClient();
+  const dataprocMetastoreFederationClient = new metastore.DataprocMetastoreFederationClient();
 }
 
 main();

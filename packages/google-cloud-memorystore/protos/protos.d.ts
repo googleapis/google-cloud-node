@@ -567,21 +567,6 @@ export namespace google {
                     /** Instance importSources. */
                     public importSources?: ("gcsSource"|"managedBackupSource");
 
-                    /** Instance _replicaCount. */
-                    public _replicaCount?: "replicaCount";
-
-                    /** Instance _deletionProtectionEnabled. */
-                    public _deletionProtectionEnabled?: "deletionProtectionEnabled";
-
-                    /** Instance _ondemandMaintenance. */
-                    public _ondemandMaintenance?: "ondemandMaintenance";
-
-                    /** Instance _asyncInstanceEndpointsDeletionEnabled. */
-                    public _asyncInstanceEndpointsDeletionEnabled?: "asyncInstanceEndpointsDeletionEnabled";
-
-                    /** Instance _backupCollection. */
-                    public _backupCollection?: "backupCollection";
-
                     /**
                      * Creates a new Instance instance using the specified properties.
                      * @param [properties] Properties to set
@@ -800,18 +785,6 @@ export namespace google {
 
                             /** UpdateInfo targetNodeType. */
                             public targetNodeType?: (google.cloud.memorystore.v1.Instance.NodeType|keyof typeof google.cloud.memorystore.v1.Instance.NodeType|null);
-
-                            /** UpdateInfo _targetShardCount. */
-                            public _targetShardCount?: "targetShardCount";
-
-                            /** UpdateInfo _targetReplicaCount. */
-                            public _targetReplicaCount?: "targetReplicaCount";
-
-                            /** UpdateInfo _targetEngineVersion. */
-                            public _targetEngineVersion?: "targetEngineVersion";
-
-                            /** UpdateInfo _targetNodeType. */
-                            public _targetNodeType?: "targetNodeType";
 
                             /**
                              * Creates a new UpdateInfo instance using the specified properties.
@@ -5336,9 +5309,6 @@ export namespace google {
                     /** BackupInstanceRequest backupId. */
                     public backupId?: (string|null);
 
-                    /** BackupInstanceRequest _backupId. */
-                    public _backupId?: "backupId";
-
                     /**
                      * Creates a new BackupInstanceRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6267,12 +6237,6 @@ export namespace google {
                     /** Instance mode. */
                     public mode: (google.cloud.memorystore.v1beta.Instance.Mode|keyof typeof google.cloud.memorystore.v1beta.Instance.Mode);
 
-                    /** Instance _replicaCount. */
-                    public _replicaCount?: "replicaCount";
-
-                    /** Instance _deletionProtectionEnabled. */
-                    public _deletionProtectionEnabled?: "deletionProtectionEnabled";
-
                     /**
                      * Creates a new Instance instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6479,12 +6443,6 @@ export namespace google {
 
                             /** UpdateInfo targetReplicaCount. */
                             public targetReplicaCount?: (number|null);
-
-                            /** UpdateInfo _targetShardCount. */
-                            public _targetShardCount?: "targetShardCount";
-
-                            /** UpdateInfo _targetReplicaCount. */
-                            public _targetReplicaCount?: "targetReplicaCount";
 
                             /**
                              * Creates a new UpdateInfo instance using the specified properties.
@@ -9606,6 +9564,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -9646,6 +9607,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -13976,6 +13940,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -14227,7 +14194,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -14258,7 +14225,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -15397,7 +15364,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -15413,7 +15380,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
