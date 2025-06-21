@@ -407,12 +407,14 @@ export class TranslationServiceClient {
  * @param {string} [request.sourceLanguageCode]
  *   Optional. The BCP-47 language code of the input text if
  *   known, for example, "en-US" or "sr-Latn". Supported language codes are
- *   listed in Language Support. If the source language isn't specified, the API
- *   attempts to identify the source language automatically and returns the
- *   source language within the response.
+ *   listed in [Language
+ *   Support](https://cloud.google.com/translate/docs/languages). If the source
+ *   language isn't specified, the API attempts to identify the source language
+ *   automatically and returns the source language within the response.
  * @param {string} request.targetLanguageCode
  *   Required. The BCP-47 language code to use for translation of the input
- *   text, set to one of the language codes listed in Language Support.
+ *   text, set to one of the language codes listed in [Language
+ *   Support](https://cloud.google.com/translate/docs/languages).
  * @param {string} request.parent
  *   Required. Project or location to make a call. Must refer to a caller's
  *   project.
@@ -817,13 +819,15 @@ export class TranslationServiceClient {
  * @param {string} [request.sourceLanguageCode]
  *   Optional. The BCP-47 language code of the input document if known, for
  *   example, "en-US" or "sr-Latn". Supported language codes are listed in
- *   Language Support. If the source language isn't specified, the API attempts
- *   to identify the source language automatically and returns the source
- *   language within the response. Source language must be specified if the
- *   request contains a glossary or a custom model.
+ *   [Language Support](https://cloud.google.com/translate/docs/languages). If
+ *   the source language isn't specified, the API attempts to identify the
+ *   source language automatically and returns the source language within the
+ *   response. Source language must be specified if the request contains a
+ *   glossary or a custom model.
  * @param {string} request.targetLanguageCode
  *   Required. The BCP-47 language code to use for translation of the input
- *   document, set to one of the language codes listed in Language Support.
+ *   document, set to one of the language codes listed in [Language
+ *   Support](https://cloud.google.com/translate/docs/languages).
  * @param {google.cloud.translation.v3beta1.DocumentInputConfig} request.documentInputConfig
  *   Required. Input configurations.
  * @param {google.cloud.translation.v3beta1.DocumentOutputConfig} [request.documentOutputConfig]
@@ -1081,9 +1085,13 @@ export class TranslationServiceClient {
  *   the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
  *   error is returned.
  * @param {string} request.sourceLanguageCode
- *   Required. Source language code.
+ *   Required. Source language code. Supported language codes are listed in
+ *   [Language
+ *   Support](https://cloud.google.com/translate/docs/languages).
  * @param {string[]} request.targetLanguageCodes
- *   Required. Specify up to 10 language codes here.
+ *   Required. Specify up to 10 language codes here. Supported language codes
+ *   are listed in [Language
+ *   Support](https://cloud.google.com/translate/docs/languages).
  * @param {number[]} [request.models]
  *   Optional. The models to use for translation. Map's key is target language
  *   code. Map's value is model name. Value can be a built-in general model,
@@ -1248,7 +1256,9 @@ export class TranslationServiceClient {
  *   [Language Support](https://cloud.google.com/translate/docs/languages).
  * @param {string[]} request.targetLanguageCodes
  *   Required. The BCP-47 language code to use for translation of the input
- *   document. Specify up to 10 language codes here.
+ *   document. Specify up to 10 language codes here. Supported language codes
+ *   are listed in [Language
+ *   Support](https://cloud.google.com/translate/docs/languages).
  * @param {number[]} request.inputConfigs
  *   Required. Input configurations.
  *   The total number of files matched should be <= 100.

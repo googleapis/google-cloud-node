@@ -45,7 +45,9 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
   // const sourceLanguageCode = 'abc123'
   /**
    *  Required. The BCP-47 language code to use for translation of the input
-   *  document. Specify up to 10 language codes here.
+   *  document. Specify up to 10 language codes here. Supported language codes
+   *  are listed in Language
+   *  Support (https://cloud.google.com/translate/docs/languages).
    */
   // const targetLanguageCodes = ['abc','def']
   /**
