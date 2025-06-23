@@ -31,23 +31,7 @@ type SnapshotsV1Beta3Client = v1beta3.SnapshotsV1Beta3Client;
 const TemplatesServiceClient = v1beta3.TemplatesServiceClient;
 type TemplatesServiceClient = v1beta3.TemplatesServiceClient;
 
-export {
-  v1beta3,
-  FlexTemplatesServiceClient,
-  JobsV1Beta3Client,
-  MessagesV1Beta3Client,
-  MetricsV1Beta3Client,
-  SnapshotsV1Beta3Client,
-  TemplatesServiceClient,
-};
-export default {
-  v1beta3,
-  FlexTemplatesServiceClient,
-  JobsV1Beta3Client,
-  MessagesV1Beta3Client,
-  MetricsV1Beta3Client,
-  SnapshotsV1Beta3Client,
-  TemplatesServiceClient,
-};
+export {v1beta3, FlexTemplatesServiceClient, JobsV1Beta3Client, MessagesV1Beta3Client, MetricsV1Beta3Client, SnapshotsV1Beta3Client, TemplatesServiceClient};
+export default {v1beta3, FlexTemplatesServiceClient, JobsV1Beta3Client, MessagesV1Beta3Client, MetricsV1Beta3Client, SnapshotsV1Beta3Client, TemplatesServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

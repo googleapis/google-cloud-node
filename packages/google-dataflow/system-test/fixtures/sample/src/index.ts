@@ -16,19 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  FlexTemplatesServiceClient,
-  JobsV1Beta3Client,
-  MessagesV1Beta3Client,
-  MetricsV1Beta3Client,
-  SnapshotsV1Beta3Client,
-  TemplatesServiceClient,
-} from '@google-cloud/dataflow';
+import {FlexTemplatesServiceClient, JobsV1Beta3Client, MessagesV1Beta3Client, MetricsV1Beta3Client, SnapshotsV1Beta3Client, TemplatesServiceClient} from '@google-cloud/dataflow';
 
 // check that the client class type name can be used
-function doStuffWithFlexTemplatesServiceClient(
-  client: FlexTemplatesServiceClient
-) {
+function doStuffWithFlexTemplatesServiceClient(client: FlexTemplatesServiceClient) {
   client.close();
 }
 function doStuffWithJobsV1Beta3Client(client: JobsV1Beta3Client) {
