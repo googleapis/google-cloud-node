@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -105,41 +100,20 @@ export class TextToSpeechClient {
    *     const client = new TextToSpeechClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TextToSpeechClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'texttospeech.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -165,7 +139,7 @@ export class TextToSpeechClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -179,7 +153,10 @@ export class TextToSpeechClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -208,20 +185,13 @@ export class TextToSpeechClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      streamingSynthesize: new this._gaxModule.StreamDescriptor(
-        this._gaxModule.StreamType.BIDI_STREAMING,
-        !!opts.fallback,
-        !!opts.gaxServerStreamingRetries
-      ),
+      streamingSynthesize: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.texttospeech.v1beta1.TextToSpeech',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.texttospeech.v1beta1.TextToSpeech', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -252,51 +222,39 @@ export class TextToSpeechClient {
     // Put together the "service stub" for
     // google.cloud.texttospeech.v1beta1.TextToSpeech.
     this.textToSpeechStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.texttospeech.v1beta1.TextToSpeech'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.texttospeech.v1beta1.TextToSpeech') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.texttospeech.v1beta1.TextToSpeech,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const textToSpeechStubMethods = [
-      'listVoices',
-      'synthesizeSpeech',
-      'streamingSynthesize',
-    ];
+    const textToSpeechStubMethods =
+        ['listVoices', 'synthesizeSpeech', 'streamingSynthesize'];
     for (const methodName of textToSpeechStubMethods) {
       const callPromise = this.textToSpeechStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({objectMode: true});
-                setImmediate(() => {
-                  stream.emit(
-                    'error',
-                    new this._gaxModule.GoogleError(
-                      'The client has already been closed.'
-                    )
-                  );
-                });
-                return stream;
-              }
-              return Promise.reject('The client has already been closed.');
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
             }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.stream[methodName] || undefined;
+      const descriptor =
+        this.descriptors.stream[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -316,14 +274,8 @@ export class TextToSpeechClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'texttospeech.googleapis.com';
   }
@@ -334,14 +286,8 @@ export class TextToSpeechClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'texttospeech.googleapis.com';
   }
@@ -372,7 +318,9 @@ export class TextToSpeechClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -381,9 +329,8 @@ export class TextToSpeechClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -394,282 +341,220 @@ export class TextToSpeechClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns a list of Voice supported for synthesis.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} [request.languageCode]
-   *   Optional. Recommended.
-   *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
-   *   If not specified, the API will return all supported voices.
-   *   If specified, the ListVoices call will only return voices that can be used
-   *   to synthesize this language_code. For example, if you specify `"en-NZ"`,
-   *   all `"en-NZ"` voices will be returned. If you specify `"no"`, both
-   *   `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices will be
-   *   returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.texttospeech.v1beta1.ListVoicesResponse|ListVoicesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/text_to_speech.list_voices.js</caption>
-   * region_tag:texttospeech_v1beta1_generated_TextToSpeech_ListVoices_async
-   */
+/**
+ * Returns a list of Voice supported for synthesis.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} [request.languageCode]
+ *   Optional. Recommended.
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+ *   If not specified, the API will return all supported voices.
+ *   If specified, the ListVoices call will only return voices that can be used
+ *   to synthesize this language_code. For example, if you specify `"en-NZ"`,
+ *   all `"en-NZ"` voices will be returned. If you specify `"no"`, both
+ *   `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices will be
+ *   returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.texttospeech.v1beta1.ListVoicesResponse|ListVoicesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/text_to_speech.list_voices.js</caption>
+ * region_tag:texttospeech_v1beta1_generated_TextToSpeech_ListVoices_async
+ */
   listVoices(
-    request?: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-      protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|undefined, {}|undefined
+      ]>;
   listVoices(
-    request: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-      | protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listVoices(
-    request: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
-    callback: Callback<
-      protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-      | protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listVoices(
-    request?: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-          | protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-      | protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-      protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listVoices(
+      request: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
+      callback: Callback<
+          protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
+          protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|null|undefined,
+          {}|null|undefined>): void;
+  listVoices(
+      request?: protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
+          protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
+          protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listVoices request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-          | protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listVoices response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listVoices(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-          (
-            | protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('listVoices response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.listVoices(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
+        protos.google.cloud.texttospeech.v1beta1.IListVoicesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listVoices response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Synthesizes speech synchronously: receive results after all text input
-   * has been processed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.texttospeech.v1beta1.SynthesisInput} request.input
-   *   Required. The Synthesizer requires either plain text or SSML as input.
-   * @param {google.cloud.texttospeech.v1beta1.VoiceSelectionParams} request.voice
-   *   Required. The desired voice of the synthesized audio.
-   * @param {google.cloud.texttospeech.v1beta1.AudioConfig} request.audioConfig
-   *   Required. The configuration of the synthesized audio.
-   * @param {number[]} request.enableTimePointing
-   *   Whether and what timepoints are returned in the response.
-   * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions} request.advancedVoiceOptions
-   *   Advanced voice options.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse|SynthesizeSpeechResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/text_to_speech.synthesize_speech.js</caption>
-   * region_tag:texttospeech_v1beta1_generated_TextToSpeech_SynthesizeSpeech_async
-   */
+/**
+ * Synthesizes speech synchronously: receive results after all text input
+ * has been processed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.texttospeech.v1beta1.SynthesisInput} request.input
+ *   Required. The Synthesizer requires either plain text or SSML as input.
+ * @param {google.cloud.texttospeech.v1beta1.VoiceSelectionParams} request.voice
+ *   Required. The desired voice of the synthesized audio.
+ * @param {google.cloud.texttospeech.v1beta1.AudioConfig} request.audioConfig
+ *   Required. The configuration of the synthesized audio.
+ * @param {number[]} request.enableTimePointing
+ *   Whether and what timepoints are returned in the response.
+ * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions} request.advancedVoiceOptions
+ *   Advanced voice options.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse|SynthesizeSpeechResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/text_to_speech.synthesize_speech.js</caption>
+ * region_tag:texttospeech_v1beta1_generated_TextToSpeech_SynthesizeSpeech_async
+ */
   synthesizeSpeech(
-    request?: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-      (
-        | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|undefined, {}|undefined
+      ]>;
   synthesizeSpeech(
-    request: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-      | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  synthesizeSpeech(
-    request: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
-    callback: Callback<
-      protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-      | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  synthesizeSpeech(
-    request?: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-          | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-      | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-      (
-        | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|null|undefined,
+          {}|null|undefined>): void;
+  synthesizeSpeech(
+      request: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
+      callback: Callback<
+          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
+          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|null|undefined,
+          {}|null|undefined>): void;
+  synthesizeSpeech(
+      request?: protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
+          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
+          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('synthesizeSpeech request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-          | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('synthesizeSpeech response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .synthesizeSpeech(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-          (
-            | protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('synthesizeSpeech response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.synthesizeSpeech(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
+        protos.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('synthesizeSpeech response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Performs bidirectional streaming speech synthesis: receive audio while
-   * sending text.
-   *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link protos.google.cloud.texttospeech.v1beta1.StreamingSynthesizeRequest|StreamingSynthesizeRequest} for write() method, and
-   *   will emit objects representing {@link protos.google.cloud.texttospeech.v1beta1.StreamingSynthesizeResponse|StreamingSynthesizeResponse} on 'data' event asynchronously.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/text_to_speech.streaming_synthesize.js</caption>
-   * region_tag:texttospeech_v1beta1_generated_TextToSpeech_StreamingSynthesize_async
-   */
-  streamingSynthesize(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
-      throw err;
-    });
+/**
+ * Performs bidirectional streaming speech synthesis: receive audio while
+ * sending text.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.texttospeech.v1beta1.StreamingSynthesizeRequest|StreamingSynthesizeRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.texttospeech.v1beta1.StreamingSynthesizeResponse|StreamingSynthesizeResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/text_to_speech.streaming_synthesize.js</caption>
+ * region_tag:texttospeech_v1beta1_generated_TextToSpeech_StreamingSynthesize_async
+ */
+  streamingSynthesize(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize().catch(err => {throw err});
     this._log.info('streamingSynthesize stream %j', options);
     return this.innerApiCalls.streamingSynthesize(null, options);
   }
@@ -686,7 +571,7 @@ export class TextToSpeechClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, model: string) {
+  modelPath(project:string,location:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,

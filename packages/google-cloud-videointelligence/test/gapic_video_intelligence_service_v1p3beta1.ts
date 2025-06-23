@@ -27,440 +27,314 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'videointelligence.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          videointelligenceserviceModule.v1p3beta1
-            .VideoIntelligenceServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'videointelligence.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          videointelligenceserviceModule.v1p3beta1
-            .VideoIntelligenceServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'videointelligence.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {universeDomain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'videointelligence.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {universe_domain: 'example.com'}
-        );
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'videointelligence.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'videointelligence.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'videointelligence.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-              {universeDomain: 'configured.example.com'}
+        it('has universeDomain', () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'videointelligence.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'videointelligence.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'videointelligence.example.com');
+        });
+
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'videointelligence.example.com');
+        });
+
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'videointelligence.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'videointelligence.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
+
+        it('has port', () => {
+            const port = videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
+            await client.initialize();
+            assert(client.videoIntelligenceServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.videoIntelligenceServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
+    });
+
+    describe('annotateVideo', () => {
+        it('invokes annotateVideo without error', async () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
             );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'videointelligence.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.annotateVideo = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.annotateVideo(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient
-          .port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('invokes annotateVideo without error using callback', async () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.annotateVideo = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.annotateVideo(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoProgress>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoResponse, protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoProgress>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+        });
 
-    it('should create a client with no option', () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient();
-      assert(client);
-    });
+        it('invokes annotateVideo with call error', async () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.annotateVideo = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.annotateVideo(request), expectedError);
+        });
 
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            fallback: true,
-          }
-        );
-      assert(client);
-    });
+        it('invokes annotateVideo with LRO error', async () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.annotateVideo = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.annotateVideo(request);
+            await assert.rejects(operation.promise(), expectedError);
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
-      await client.initialize();
-      assert(client.videoIntelligenceServiceStub);
-    });
+        it('invokes checkAnnotateVideoProgress without error', async () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
 
-    it('has close method for the initialized client', done => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.videoIntelligenceServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkAnnotateVideoProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkAnnotateVideoProgress with error', async () => {
+            const client = new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkAnnotateVideoProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
         });
     });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('annotateVideo', () => {
-    it('invokes annotateVideo without error', async () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.annotateVideo =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.annotateVideo(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes annotateVideo without error using callback', async () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.annotateVideo =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.annotateVideo(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoResponse,
-              protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoProgress
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1p3beta1.IAnnotateVideoProgress
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes annotateVideo with call error', async () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.annotateVideo = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.annotateVideo(request), expectedError);
-    });
-
-    it('invokes annotateVideo with LRO error', async () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.annotateVideo = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.annotateVideo(request);
-      await assert.rejects(operation.promise(), expectedError);
-    });
-
-    it('invokes checkAnnotateVideoProgress without error', async () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkAnnotateVideoProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkAnnotateVideoProgress with error', async () => {
-      const client =
-        new videointelligenceserviceModule.v1p3beta1.VideoIntelligenceServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkAnnotateVideoProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
 });
