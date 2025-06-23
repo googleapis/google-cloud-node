@@ -19,10 +19,12 @@
 import * as v2 from './v2';
 import * as v3 from './v3';
 
-const PoliciesClient = v2.PoliciesClient;
-type PoliciesClient = v2.PoliciesClient;
+const PolicyBindingsClient = v3.PolicyBindingsClient;
+type PolicyBindingsClient = v3.PolicyBindingsClient;
+const PrincipalAccessBoundaryPoliciesClient = v3.PrincipalAccessBoundaryPoliciesClient;
+type PrincipalAccessBoundaryPoliciesClient = v3.PrincipalAccessBoundaryPoliciesClient;
 
-export {v2, v3, PoliciesClient};
-export default {v2, v3, PoliciesClient};
+export {v2, v3, PolicyBindingsClient, PrincipalAccessBoundaryPoliciesClient};
+export default {v2, v3, PolicyBindingsClient, PrincipalAccessBoundaryPoliciesClient};
 import * as protos from '../protos/protos';
 export {protos};
